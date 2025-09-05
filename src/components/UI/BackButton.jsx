@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import iconBackWebp from "../../../public/icons/icon-go-back/icon-go-back.png";
-import iconBackAvif from "../../../public/icons/icon-go-back/icon-go-back.webp";
-import iconBackPng from "../../../public/icons/icon-go-back/icon-go-back.avif";
+import iconBackWebp from "../../assets/icons/icon-go-back/icon-go-back.webp";
+import iconBackAvif from "../../assets/icons/icon-go-back/icon-go-back.png";
+import iconBackPng from "../../assets/icons/icon-go-back/icon-go-back.avif";
 
 const defaultImage = (
 	<picture className="flex flex-1 justify-center items-center">

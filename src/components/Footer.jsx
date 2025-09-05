@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { LanguageContext } from "../contexts/LanguageContext";
+import { ThemeButton } from "./UI/ThemeButton";
 
 export const Footer = () => {
 	const { lang, languages, handleLang } = useContext(LanguageContext);
@@ -7,6 +8,9 @@ export const Footer = () => {
 	return (
 		<footer className="flex flex-col py-6 bg-orange-200">
 			<div className="flex justify-between items-center">
+				<div>
+					<ThemeButton/>
+				</div>
 				<small>Elementos Footer</small>
 				<label htmlFor="lang">
 					<select name="lang" id="lang" value={lang} onChange={(event) => handleLang(event.target.value)}>

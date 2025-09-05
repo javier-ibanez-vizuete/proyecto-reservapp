@@ -3,41 +3,37 @@
 html,
 body,
 #root {
-	height: 100%;
+    height: 100%;
 }
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-	margin: 0;
-	font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
 }
 
 @theme {
-	--font-title: ;
-	--font-sans: ;
+    --font-title: ;
+    --font-sans: ;
 
-	--text-h1: ;
-	--text-h2: ;
-	--text-h3: ;
-	--text-h4: ;
-	--text-h5: ;
-	--text-h6: ;
+    --text-h1: ;
+    --text-h2: ;
+    --text-h3: ;
+    --text-h4: ;
+    --text-h5: ;
+    --text-h6: ;
 
-	/* 🎨 Color primario */
-	--color-primary: ;
-	--color-primary-hover: ;
-	--color-primary-pressed: ;
+    /* 🎨 Color primario */
+    --color-primary: ;
+    --color-primary-hover: ;
+    --color-primary-pressed: ;
 
-	--spacing-xs: ;
-	--spacing-sm: ;
-	--spacing-md: ;
-	--spacing-lg: ;
-	--spacing-xl: ;
-	--spacing-2xl: ;
-	--spacing-3xl: ;
+    --breakpoin-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1440px;
 }
 
 /* h1 {
@@ -66,3 +62,36 @@ p {
 .elevantion {
 	@apply hover:translate-y-[-4px] transition;
 } */
+
+@layer components {
+    @keyframes tb-rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes tb-tilt {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        75% {
+            transform: rotate(10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .tb-sun svg {
+        animation: tb-rotate 15s linear infinite;
+    }
+    .tb-moon svg {
+        fill: #73c0fc;
+        animation: tb-tilt 5s linear infinite;
+    }
+}
