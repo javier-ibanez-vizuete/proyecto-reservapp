@@ -435,19 +435,6 @@
             }
         },
         {
-            "productId": "fish-of-the-day",
-            "productName": "Fish of the Day",
-            "productDescription": "Fresh fish selection depending on the market.",
-            "productCategory": "mains",
-            "productPrice": 12.5,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/fish-of-the-day/fish-of-the-day.jpg",
-                "webp": "/src/assets/pictures/products/fish-of-the-day/fish-of-the-day.webp",
-                "avif": "/src/assets/pictures/products/fish-of-the-day/fish-of-the-day.avif"
-            }
-        },
-        {
             "productId": "seafood-paella",
             "productName": "Seafood Paella",
             "productDescription": "Traditional paella with a variety of seafood.",
@@ -500,16 +487,16 @@
             }
         },
         {
-            "productId": "beef-steak",
-            "productName": "Beef Steak",
-            "productDescription": "Grilled beef steak with garnish.",
+            "productId": "steak-tartare",
+            "productName": "Steak Tartare",
+            "productDescription": "Steak Tartare with egg yolk and smoked with chocolate wood.",
             "productCategory": "mains",
             "productPrice": 13.0,
             "productTax": 0.21,
             "productImage": {
-                "default": "/src/assets/pictures/products/beef-steak/beef-steak.jpg",
-                "webp": "/src/assets/pictures/products/beef-steak/beef-steak.webp",
-                "avif": "/src/assets/pictures/products/beef-steak/beef-steak.avif"
+                "default": "/src/assets/pictures/products/steak-tartare/steak-tartare.jpg",
+                "webp": "/src/assets/pictures/products/steak-tartare/steak-tartare.webp",
+                "avif": "/src/assets/pictures/products/steak-tartare/steak-tartare.avif"
             }
         },
         {
@@ -525,19 +512,7 @@
                 "avif": "/src/assets/pictures/products/cheesecake/cheesecake.avif"
             }
         },
-        {
-            "productId": "coffee-ice-cream",
-            "productName": "Coffee Ice Cream",
-            "productDescription": "Cup of coffee-flavored ice cream (2 scoops).",
-            "productCategory": "desserts",
-            "productPrice": 3.5,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/coffee-ice-cream/coffee-ice-cream.jpg",
-                "webp": "/src/assets/pictures/products/coffee-ice-cream/coffee-ice-cream.webp",
-                "avif": "/src/assets/pictures/products/coffee-ice-cream/coffee-ice-cream.avif"
-            }
-        },
+
         {
             "productId": "crema-catalana",
             "productName": "Crema Catalana",
@@ -564,23 +539,11 @@
                 "avif": "/src/assets/pictures/products/chocolate-brownie/chocolate-brownie.avif"
             }
         },
-        {
-            "productId": "fresh-fruit",
-            "productName": "Fresh Fruit",
-            "productDescription": "Portion of seasonal fresh fruit.",
-            "productCategory": "desserts",
-            "productPrice": 3.0,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/fresh-fruit/fresh-fruit.jpg",
-                "webp": "/src/assets/pictures/products/fresh-fruit/fresh-fruit.webp",
-                "avif": "/src/assets/pictures/products/fresh-fruit/fresh-fruit.avif"
-            }
-        },
+
         {
             "productId": "egg-flan",
             "productName": "Egg Flan",
-            "productDescription": "Homemade flan with liquid caramel.",
+            "productDescription": "Homemade flan with liquid caramel and Napolitana biscuit.",
             "productCategory": "desserts",
             "productPrice": 3.5,
             "productTax": 0.21,
@@ -603,19 +566,7 @@
                 "avif": "/src/assets/pictures/products/panna-cotta/panna-cotta.avif"
             }
         },
-        {
-            "productId": "chocolate-cake",
-            "productName": "Chocolate Cake",
-            "productDescription": "Intense chocolate cake with warm sauce.",
-            "productCategory": "desserts",
-            "productPrice": 5.5,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/chocolate-cake/chocolate-cake.jpg",
-                "webp": "/src/assets/pictures/products/chocolate-cake/chocolate-cake.webp",
-                "avif": "/src/assets/pictures/products/chocolate-cake/chocolate-cake.avif"
-            }
-        },
+
         {
             "productId": "french-fries",
             "productName": "French Fries",
@@ -629,19 +580,7 @@
                 "avif": "/src/assets/pictures/products/french-fries/french-fries.avif"
             }
         },
-        {
-            "productId": "white-rice",
-            "productName": "White Rice",
-            "productDescription": "Side of fluffy white rice.",
-            "productCategory": "sides",
-            "productPrice": 2.0,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/white-rice/white-rice.jpg",
-                "webp": "/src/assets/pictures/products/white-rice/white-rice.webp",
-                "avif": "/src/assets/pictures/products/white-rice/white-rice.avif"
-            }
-        },
+
         {
             "productId": "small-salad",
             "productName": "Small Salad",
@@ -655,19 +594,7 @@
                 "avif": "/src/assets/pictures/products/small-salad/small-salad.avif"
             }
         },
-        {
-            "productId": "roasted-vegetables",
-            "productName": "Roasted Vegetables",
-            "productDescription": "Mix of roasted vegetables with olive oil.",
-            "productCategory": "sides",
-            "productPrice": 3.5,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/roasted-vegetables/roasted-vegetables.jpg",
-                "webp": "/src/assets/pictures/products/roasted-vegetables/roasted-vegetables.webp",
-                "avif": "/src/assets/pictures/products/roasted-vegetables/roasted-vegetables.avif"
-            }
-        },
+
         {
             "productId": "garlic-bread",
             "productName": "Garlic Bread",
@@ -679,32 +606,6 @@
                 "default": "/src/assets/pictures/products/garlic-bread/garlic-bread.jpg",
                 "webp": "/src/assets/pictures/products/garlic-bread/garlic-bread.webp",
                 "avif": "/src/assets/pictures/products/garlic-bread/garlic-bread.avif"
-            }
-        },
-        {
-            "productId": "coleslaw",
-            "productName": "Coleslaw",
-            "productDescription": "Cabbage and carrot salad with creamy dressing.",
-            "productCategory": "sides",
-            "productPrice": 3.0,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/coleslaw/coleslaw.jpg",
-                "webp": "/src/assets/pictures/products/coleslaw/coleslaw.webp",
-                "avif": "/src/assets/pictures/products/coleslaw/coleslaw.avif"
-            }
-        },
-        {
-            "productId": "mashed-potatoes",
-            "productName": "Mashed Potatoes",
-            "productDescription": "Creamy homemade mashed potatoes.",
-            "productCategory": "sides",
-            "productPrice": 3.5,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/mashed-potatoes/mashed-potatoes.jpg",
-                "webp": "/src/assets/pictures/products/mashed-potatoes/mashed-potatoes.webp",
-                "avif": "/src/assets/pictures/products/mashed-potatoes/mashed-potatoes.avif"
             }
         }
     ],
