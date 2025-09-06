@@ -255,7 +255,7 @@
         {
             "productId": "patatas-bravas",
             "productName": "Patatas Bravas",
-            "productDescription": "Fried potatoes with spicy brava sauce and aioli.",
+            "productDescription": "Fried potatoes with spicy brava sauce and alioli.",
             "productCategory": "starters",
             "productPrice": 4.5,
             "productTax": 0.21,
@@ -276,19 +276,6 @@
                 "default": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.jpg",
                 "webp": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.webp",
                 "avif": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.avif"
-            }
-        },
-        {
-            "productId": "mixed-tapas-4u",
-            "productName": "Mixed Tapas (4 pcs)",
-            "productDescription": "Selection of the house's tapas to share.",
-            "productCategory": "starters",
-            "productPrice": 7.0,
-            "productTax": 0.21,
-            "productImage": {
-                "default": "/src/assets/pictures/products/mixed-tapas-4u/mixed-tapas-4u.jpg",
-                "webp": "/src/assets/pictures/products/mixed-tapas-4u/mixed-tapas-4u.webp",
-                "avif": "/src/assets/pictures/products/mixed-tapas-4u/mixed-tapas-4u.avif"
             }
         },
         {
@@ -346,7 +333,7 @@
         {
             "productId": "classic-burger",
             "productName": "Classic Beef Burger",
-            "productDescription": "Beef burger with cheese and lettuce.",
+            "productDescription": "Beef burger with cheese, tomato and lettuce.",
             "productCategory": "mains",
             "productPrice": 9.0,
             "productTax": 0.21,
