@@ -6,7 +6,7 @@ export const Footer = () => {
 	const { lang, languages, handleLang } = useContext(LanguageContext);
 
 	return (
-		<footer className="flex flex-col py-6 bg-orange-200">
+		<footer className="flex flex-col py-6">
 			<div className="flex justify-between items-center">
 				<div>
 					<ThemeButton/>
