@@ -28,7 +28,7 @@ const BurgerButton = ({ openMobileNav, handleClick }) => {
             aria-controls="mobile-nav"
         >
             <span
-                className="absolute left-0 w-[45px] h-[7px] bg-[#3AD6A1] rounded-full transition-all duration-300 ease-in-out"
+                className="absolute left-0 w-[45px] h-[7px] bg-accent-color rounded-full transition-all duration-300 ease-in-out"
                 style={{
                     top: openMobileNav ? 0 : 0,
                     transform: openMobileNav ? "rotate(45deg)" : "rotate(0deg)",
@@ -38,7 +38,7 @@ const BurgerButton = ({ openMobileNav, handleClick }) => {
                 }}
             />
             <span
-                className="absolute left-0 w-[45px] h-[7px] bg-[#3AD6A1] rounded-full transition-all duration-300 ease-in-out"
+                className="absolute left-0 w-[45px] h-[7px] bg-accent-color rounded-full transition-all duration-300 ease-in-out"
                 style={{
                     top: "17px",
                     transform: openMobileNav ? "translateX(-20px)" : "translateX(0px)",
@@ -46,13 +46,13 @@ const BurgerButton = ({ openMobileNav, handleClick }) => {
                 }}
             />
             <span
-                className="absolute left-0 w-[45px] h-[7px] bg-[#3AD6A1] rounded-full transition-all duration-300 ease-in-out"
+                className="absolute left-0 w-[45px] h-[7px] bg-accent-color rounded-full transition-all duration-300 ease-in-out"
                 style={{
                     bottom: openMobileNav ? 0 : 0,
                     transform: openMobileNav ? "rotate(-45deg)" : "rotate(0deg)",
                     transformOrigin: "bottom left",
                     width: openMobileNav ? "50px" : "45px",
-                    boxShadow: openMobileNav ? "0 0 10px #144938" : "none",
+                    boxShadow: openMobileNav ? "0 0 10px #898c23" : "none",
                     left: openMobileNav ? "5px" : "0px",
                 }}
             />

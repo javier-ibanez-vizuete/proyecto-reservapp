@@ -44,7 +44,11 @@ body {
     --color-secondary-hover: #c2c732;
     --color-secondary-pressed: #c2c732;
 
-    --color-accent-color: #daf222;
+    --color-accent-color: #898c23;
+    --color-accent-color-dark: #232608;
+
+    --color-background-color-dark: #232608;
+    --color-text-color-dark: #d9cdbf;
 
     --breakpoin-md: 768px;
     --breakpoint-lg: 1024px;
@@ -72,12 +76,12 @@ h6 {
 }
 
 p {
-	@apply font-sans text-base/[125%] font-normal md:text-md/[125%];
+    @apply font-sans text-base/[125%] font-normal md:text-md/[125%];
 }
 
 .elevantion {
-	@apply hover:translate-y-[-4px] transition;
-} 
+    @apply hover:translate-y-[-4px] transition;
+}
 
 @layer components {
     @keyframes tb-rotate {

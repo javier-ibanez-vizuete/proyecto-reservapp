@@ -44,7 +44,7 @@ export const ThemeButton = () => {
             {/* Slider */}
             <span
                 className={`absolute inset-0 rounded-full transition-colors duration-300 ${
-                    theme === "dark" ? "bg-[#183153]" : "bg-[#73C0FC]"
+                    theme === "dark" ? "bg-accent-color-dark" : "bg-accent-color"
                 }`}
                 aria-hidden
             >
