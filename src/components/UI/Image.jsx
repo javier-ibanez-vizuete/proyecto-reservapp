@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Image = ({ imageData = {}, alt = "", className = "" }) => {
     const [dataImage, setDataImage] = useState(() => imageData || {});
+
+    useEffect(() => {
+        setDataImage({ ...imageData });
+    }, [imageData]);
 
     return (
         <>

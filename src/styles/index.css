@@ -12,56 +12,72 @@ body,
 
 body {
     margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    font-family: "Montserrat", Roboto, sans-serif, ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial;
 }
 
 @theme {
-    --font-title: ;
-    --font-sans: ;
+    --font-title: "Montserrat", sans-serif;
+    --font-sans: Roboto, sans-serif;
 
-    --text-h1: ;
-    --text-h2: ;
-    --text-h3: ;
-    --text-h4: ;
-    --text-h5: ;
-    --text-h6: ;
+    --text-2xs: 12px;
+    --text-xs: 14px;
+    --text-base: 14px;
+    --text-sm: 15px;
+    --text-md: 16px;
+    --text-lg: 20px;
+    --text-xl: 24px;
+    --text-2xl: 30px;
+    --text-3xl: 40px;
+    --text-4xl: 50px;
+    --text-5xl: 60px;
+    --text-6xl: 70px;
 
     /* 🎨 Color primario */
-    --color-primary: ;
-    --color-primary-hover: ;
-    --color-primary-pressed: ;
+    --color-background-color: #d9cdbf;
+    --color-text-color: #232608;
+
+    --color-primary: #f2e635;
+    --color-primary-hover: #d5ca2f;
+    --color-primary-pressed: #d5ca2f;
+
+    --color-secondary: #898c23;
+    --color-secondary-hover: #c2c732;
+    --color-secondary-pressed: #c2c732;
+
+    --color-accent-color: #daf222;
 
     --breakpoin-md: 768px;
     --breakpoint-lg: 1024px;
     --breakpoint-xl: 1440px;
+    --breakpoint-2xl: 1800px;
 }
 
-/* h1 {
-	@apply font-title font-semibold text-h1/[125%];
+h1 {
+    @apply font-title font-semibold text-xl/[125%] md:text-6xl/[125%];
 }
 h2 {
-	@apply font-title font-semibold text-h2/[125%];
+    @apply font-title font-semibold text-lg/[125%] md:text-4xl/[125%];
 }
 h3 {
-	@apply font-title font-semibold text-h3/[125%];
+    @apply font-title font-semibold text-lg/[125%] md:text-4xl/[125%];
 }
 h4 {
-	@apply font-title font-semibold text-h4/[125%];
+    @apply font-title font-semibold text-md/[125%] md:text-2xl/[125%];
 }
 h5 {
-	@apply font-title font-semibold text-h5/[125%];
+    @apply font-title font-semibold text-md/[125%] md:text-2xl/[125%];
 }
 h6 {
-	@apply font-title font-semibold text-h6/[125%];
+    @apply font-title font-semibold text-sm/[125%] md:text-lg/[125%];
 }
 
 p {
-	@apply font-sans text-base/[150%] font-normal;
+	@apply font-sans text-base/[125%] font-normal md:text-md/[125%];
 }
 
 .elevantion {
 	@apply hover:translate-y-[-4px] transition;
-} */
+} 
 
 @layer components {
     @keyframes tb-rotate {
@@ -71,6 +87,10 @@ p {
         to {
             transform: rotate(360deg);
         }
+    }
+
+    .tb-sun svg {
+        animation: tb-rotate 15s linear infinite;
     }
 
     @keyframes tb-tilt {
@@ -87,11 +107,53 @@ p {
             transform: rotate(0deg);
         }
     }
-    .tb-sun svg {
-        animation: tb-rotate 15s linear infinite;
-    }
+
     .tb-moon svg {
         fill: #73c0fc;
         animation: tb-tilt 5s linear infinite;
+    }
+
+    @keyframes spin-and-zoom {
+        0% {
+            transform: rotate(0deg) scale(1);
+        }
+        25% {
+            transform: rotate(90deg) scale(1.1);
+        }
+        50% {
+            transform: rotate(180deg) scale(1.2);
+        }
+        75% {
+            transform: rotate(270deg) scale(1.1);
+        }
+        100% {
+            transform: rotate(360deg) scale(1);
+        }
+    }
+
+    .spin-and-zoom {
+        animation: spin-and-zoom 4s linear infinite;
+    }
+
+    @keyframes zooming {
+        0% {
+            transform: scale(1);
+        }
+        25% {
+            transform: scale(1.1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        75% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .zooming {
+        animation: zooming 4s linear infinite;
     }
 }
