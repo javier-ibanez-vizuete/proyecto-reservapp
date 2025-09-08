@@ -36,13 +36,13 @@ body {
     --color-background-color: #d9cdbf;
     --color-text-color: #232608;
 
-    --color-primary: #f2e635;
-    --color-primary-hover: #d5ca2f;
-    --color-primary-pressed: #d5ca2f;
+    --color-primary: #C6C013;
+    --color-primary-hover: #A7A211;
+    --color-primary-pressed: #A7A211;
 
     --color-secondary: #898c23;
-    --color-secondary-hover: #c2c732;
-    --color-secondary-pressed: #c2c732;
+    --color-secondary-hover: #6f721d;
+    --color-secondary-pressed: #6f721d;
 
     --color-accent-color: #898c23;
     --color-accent-color-dark: #232608;
@@ -54,6 +54,15 @@ body {
     --breakpoint-lg: 1024px;
     --breakpoint-xl: 1440px;
     --breakpoint-2xl: 1800px;
+
+    --spacing-2xs: 4px;
+    --spacing-xs: 6px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
+    --spacing-4xs: 64px;
 }
 
 h1 {
@@ -81,6 +90,18 @@ p {
 
 .elevantion {
     @apply hover:translate-y-[-4px] transition;
+}
+
+.btn {
+    @apply py-sm px-lg rounded-lg transition-colors duration-300 ease-in-out;
+}
+
+.btn-primary {
+    @apply bg-primary active:bg-primary-pressed md:hover:bg-primary-hover
+}
+
+.btn-secondary {
+    @apply bg-secondary active:bg-secondary-pressed md:hover:bg-secondary-hover
 }
 
 @layer components {

@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import { LanguageContext } from "../contexts/LanguageContext";
 
-import { ImageSpinner } from "../components/ImageSpinner";
-
 export const HomePage = () => {
     const { getText } = useContext(LanguageContext);
 
