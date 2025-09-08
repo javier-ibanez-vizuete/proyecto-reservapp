@@ -44,14 +44,14 @@ export const ThemeButton = () => {
             {/* Slider */}
             <span
                 className={`absolute inset-0 rounded-full transition-colors duration-300 ${
-                    theme === "dark" ? "bg-[#183153]" : "bg-[#73C0FC]"
+                    theme === "dark" ? "bg-background-color" : "bg-accent-color"
                 }`}
                 aria-hidden
             >
                 {/* Knob: usamos un span interno para poder transformar con translate */}
                 <span
-                    className={`absolute left-0 bottom-0 m-[2px] h-7 w-7 rounded-[20px] bg-gray-200 z-20 transform transition-transform duration-200 ${
-                        theme === "dark" ? "translate-x-8" : ""
+                    className={`absolute left-[2px] bottom-[2px] m-[2px] h-6 w-6 rounded-[20px] z-20 transform transition-transform duration-200 ${
+                        theme === "dark" ? "translate-x-8 bg-background-color-dark" : "bg-background-color"
                     }`}
                 />
             </span>
