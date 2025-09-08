@@ -62,10 +62,17 @@ const BurgerButton = ({ openMobileNav, handleClick }) => {
 const getNavLinksClasses = ({ isActive, isPending, isTransitioning }) => {
     const { theme } = useContext(ThemeContext);
 
-    const base =
-        `p-sm rounded-lg ${ theme === "light" ? "hover:bg-background-color-dark/50 hover:text-text-color-dark" : "hover:bg-background-color/50 hover:text-text-color"}  transition-all duration-300 ease-in-out`;
+    const base = `py-sm p-lg rounded-lg ${
+        theme === "light"
+            ? "hover:bg-background-color-dark/50 hover:text-text-color-dark"
+            : "hover:bg-background-color/50 hover:text-text-color"
+    }  transition-all duration-300 ease-in-out`;
     const normal = `${theme === "light" ? "bg-background-color-dark/15" : "bg-background-color/15"}`;
-    const active = `${theme === "light" ? "bg-background-color-dark/65 text-text-color-dark" : "bg-background-color/65 text-text-color"}`;
+    const active = `${
+        theme === "light"
+            ? "bg-background-color-dark/65 text-text-color-dark"
+            : "bg-background-color/65 text-text-color"
+    }`;
     const pending = "";
     const transitioning = "";
 
@@ -111,8 +118,11 @@ const NavbarLinks = () => {
 
 export const NavBar = () => {
     const [openMobileNav, setOpenMobileNav] = useState(false);
+
     const { userActive, logout } = useContext(AuthContext);
     const { getText } = useContext(LanguageContext);
+    const { theme } = useContext(ThemeContext);
+
     const { pathname } = useLocation();
     const contentRef = useRef();
 
@@ -147,13 +157,21 @@ export const NavBar = () => {
                         <NavbarLinks />
                     </div>
 
-                    <div className="hidden md:flex md:gap-2">
+                    <div className="hidden md:flex md:gap-lg">
                         {!userActive?.id && (
                             <>
-                                <Link className="btn btn-primary" to={"/register"}>
+                                <Link
+                                    className={`btn btn-primary ${theme === "dark" ? "text-text-color" : ""}`}
+                                    to={"/register"}
+                                >
                                     {getText("signUpButton")}
                                 </Link>
-                                <Link className="btn btn-secondary" to={"/login"}>
+                                <Link
+                                    className={`btn btn-secondary ${
+                                        theme === "dark" ? "text-text-color" : ""
+                                    }`}
+                                    to={"/login"}
+                                >
                                     {getText("logInButton")}
                                 </Link>
                             </>
@@ -171,14 +189,22 @@ export const NavBar = () => {
                         "md:hidden flex flex-col overflow-hidden max-h-0 transition-[max-height] duration-300 ease-in-out"
                     )}
                 >
-                    <div className="flex flex-col gap-lg">
+                    <div className="flex flex-col items-start gap-lg">
                         <NavbarLinks />
                         {!userActive?.id && (
                             <>
-                                <Link className="btn btn-primary" to={"/register"}>
+                                <Link
+                                    className={`btn btn-primary ${theme === "dark" ? "text-text-color" : ""}`}
+                                    to={"/register"}
+                                >
                                     {getText("signUpButton")}
                                 </Link>
-                                <Link className="btn btn-secondary" to={"/login"}>
+                                <Link
+                                    className={`btn btn-secondary ${
+                                        theme === "dark" ? "text-text-color" : ""
+                                    }`}
+                                    to={"/login"}
+                                >
                                     {getText("logInButton")}
                                 </Link>
                             </>
