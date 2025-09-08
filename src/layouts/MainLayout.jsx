@@ -3,9 +3,9 @@ import { NavBar } from "../components/Navbar";
 
 export const MainLayout = ({ children }) => {
 	return (
-		<div className="flex flex-col h-full">
+		<div className="flex flex-col h-full text-text-color">
 			<NavBar />
-			<main className="flex-1 flex flex-col bg-red-300 p-7">{children}</main>
+			<main className="flex-1 flex flex-col">{children}</main>
 			<Footer />
 		</div>
 	);
