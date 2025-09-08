@@ -142,8 +142,8 @@ export const NavBar = () => {
     return (
         <nav className="flex font-semibold">
             <Container
-                className={`flex-1 py-md md:py-lg transition-all duration-300 ease-in-out ${
-                    openMobileNav ? "gap-lg" : ""
+                className={`flex-1 py-md md:py-lg transition-all duration-400 ease-in-out ${
+                    openMobileNav ? "gap-lg" : "gap-0"
                 }`}
             >
                 <div className="flex items-center justify-between">

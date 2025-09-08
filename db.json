@@ -71,7 +71,7 @@
 
     "products": [
         {
-            "productId": "coca-cola-35cl",
+            "productId": 1,
             "productName": "Coca-Cola",
             "productDescription": "Coca-Cola bottle (35cl).",
             "productCategory": "drinks",
@@ -80,11 +80,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/coca-cola/coca-cola.jpg",
                 "webp": "/src/assets/pictures/products/coca-cola/coca-cola.webp",
-                "avif": "/src/assets/pictures/products/coca-cola/coca-cola.avif"
+                "avif": "/src/assets/pictures/products/coca-cola/coca-cola.avif",
+                "alt": "Coca-Cola bottle 35cl"
             }
         },
         {
-            "productId": "mineral-water-500ml",
+            "productId": 2,
             "productName": "Mineral Water (500ml)",
             "productDescription": "Natural mineral water in a 500ml bottle.",
             "productCategory": "drinks",
@@ -93,11 +94,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/mineral-water-500ml/mineral-water-500ml.jpg",
                 "webp": "/src/assets/pictures/products/mineral-water-500ml/mineral-water-500ml.webp",
-                "avif": "/src/assets/pictures/products/mineral-water-500ml/mineral-water-500ml.avif"
+                "avif": "/src/assets/pictures/products/mineral-water-500ml/mineral-water-500ml.avif",
+                "alt": "Natural mineral water bottle 500ml"
             }
         },
         {
-            "productId": "fanta-orange-330ml",
+            "productId": 3,
             "productName": "Fanta Orange (330ml)",
             "productDescription": "330ml can of Fanta orange.",
             "productCategory": "drinks",
@@ -106,11 +108,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/fanta-orange-330ml/fanta-orange-330ml.jpg",
                 "webp": "/src/assets/pictures/products/fanta-orange-330ml/fanta-orange-330ml.webp",
-                "avif": "/src/assets/pictures/products/fanta-orange-330ml/fanta-orange-330ml.avif"
+                "avif": "/src/assets/pictures/products/fanta-orange-330ml/fanta-orange-330ml.avif",
+                "alt": "Fanta Orange can 330ml"
             }
         },
         {
-            "productId": "orange-juice-250ml",
+            "productId": 4,
             "productName": "Fresh Squeezed Orange Juice (250ml)",
             "productDescription": "Freshly squeezed orange juice, 250ml.",
             "productCategory": "drinks",
@@ -119,11 +122,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/orange-juice-250ml/orange-juice-250ml.jpg",
                 "webp": "/src/assets/pictures/products/orange-juice-250ml/orange-juice-250ml.webp",
-                "avif": "/src/assets/pictures/products/orange-juice-250ml/orange-juice-250ml.avif"
+                "avif": "/src/assets/pictures/products/orange-juice-250ml/orange-juice-250ml.avif",
+                "alt": "Fresh squeezed orange juice 250ml"
             }
         },
         {
-            "productId": "beer-330ml",
+            "productId": 5,
             "productName": "Beer (330ml)",
             "productDescription": "Beer bottle or can (330ml).",
             "productCategory": "drinks",
@@ -132,11 +136,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/beer-330ml/beer-330ml.jpg",
                 "webp": "/src/assets/pictures/products/beer-330ml/beer-330ml.webp",
-                "avif": "/src/assets/pictures/products/beer-330ml/beer-330ml.avif"
+                "avif": "/src/assets/pictures/products/beer-330ml/beer-330ml.avif",
+                "alt": "Beer bottle 330ml"
             }
         },
         {
-            "productId": "lemon-soda-330ml",
+            "productId": 6,
             "productName": "Lemon Soda (330ml)",
             "productDescription": "330ml lemon-flavored soft drink.",
             "productCategory": "drinks",
@@ -145,11 +150,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/lemon-soda-330ml/lemon-soda-330ml.jpg",
                 "webp": "/src/assets/pictures/products/lemon-soda-330ml/lemon-soda-330ml.webp",
-                "avif": "/src/assets/pictures/products/lemon-soda-330ml/lemon-soda-330ml.avif"
+                "avif": "/src/assets/pictures/products/lemon-soda-330ml/lemon-soda-330ml.avif",
+                "alt": "Lemon flavored soft drink 330ml"
             }
         },
         {
-            "productId": "espresso",
+            "productId": 7,
             "productName": "Espresso Coffee",
             "productDescription": "Short espresso; option for single or double.",
             "productCategory": "drinks",
@@ -158,11 +164,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/espresso/espresso.jpg",
                 "webp": "/src/assets/pictures/products/espresso/espresso.webp",
-                "avif": "/src/assets/pictures/products/espresso/espresso.avif"
+                "avif": "/src/assets/pictures/products/espresso/espresso.avif",
+                "alt": "Espresso coffee cup"
             }
         },
         {
-            "productId": "red-wine-glass",
+            "productId": 8,
             "productName": "Glass of Red Wine",
             "productDescription": "House red wine (125ml).",
             "productCategory": "drinks",
@@ -171,11 +178,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/red-wine-glass/red-wine-glass.jpg",
                 "webp": "/src/assets/pictures/products/red-wine-glass/red-wine-glass.webp",
-                "avif": "/src/assets/pictures/products/red-wine-glass/red-wine-glass.avif"
+                "avif": "/src/assets/pictures/products/red-wine-glass/red-wine-glass.avif",
+                "alt": "Glass of house red wine 125ml"
             }
         },
         {
-            "productId": "white-wine-glass",
+            "productId": 9,
             "productName": "Glass of White Wine",
             "productDescription": "House white wine (125ml).",
             "productCategory": "drinks",
@@ -184,11 +192,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/white-wine-glass/white-wine-glass.jpg",
                 "webp": "/src/assets/pictures/products/white-wine-glass/white-wine-glass.webp",
-                "avif": "/src/assets/pictures/products/white-wine-glass/white-wine-glass.avif"
+                "avif": "/src/assets/pictures/products/white-wine-glass/white-wine-glass.avif",
+                "alt": "Glass of house white wine 125ml"
             }
         },
         {
-            "productId": "sparkling-water-500ml",
+            "productId": 10,
             "productName": "Sparkling Water (500ml)",
             "productDescription": "Sparkling water in a 500ml bottle.",
             "productCategory": "drinks",
@@ -197,11 +206,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/sparkling-water-500ml/sparkling-water-500ml.jpg",
                 "webp": "/src/assets/pictures/products/sparkling-water-500ml/sparkling-water-500ml.webp",
-                "avif": "/src/assets/pictures/products/sparkling-water-500ml/sparkling-water-500ml.avif"
+                "avif": "/src/assets/pictures/products/sparkling-water-500ml/sparkling-water-500ml.avif",
+                "alt": "Sparkling water bottle 500ml"
             }
         },
         {
-            "productId": "mixed-salad",
+            "productId": 11,
             "productName": "Mixed Salad",
             "productDescription": "Lettuce, tomato, onion, olives and dressing.",
             "productCategory": "starters",
@@ -210,11 +220,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/mixed-salad/mixed-salad.jpg",
                 "webp": "/src/assets/pictures/products/mixed-salad/mixed-salad.webp",
-                "avif": "/src/assets/pictures/products/mixed-salad/mixed-salad.avif"
+                "avif": "/src/assets/pictures/products/mixed-salad/mixed-salad.avif",
+                "alt": "Mixed salad with lettuce, tomato, onion, olives and dressing"
             }
         },
         {
-            "productId": "tomato-bruschetta",
+            "productId": 12,
             "productName": "Tomato Bruschetta",
             "productDescription": "Toasted bread with tomato, garlic and olive oil.",
             "productCategory": "starters",
@@ -223,11 +234,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/tomato-bruschetta/tomato-bruschetta.jpg",
                 "webp": "/src/assets/pictures/products/tomato-bruschetta/tomato-bruschetta.webp",
-                "avif": "/src/assets/pictures/products/tomato-bruschetta/tomato-bruschetta.avif"
+                "avif": "/src/assets/pictures/products/tomato-bruschetta/tomato-bruschetta.avif",
+                "alt": "Tomato bruschetta with toasted bread, garlic and olive oil"
             }
         },
         {
-            "productId": "homemade-croquettes-6u",
+            "productId": 13,
             "productName": "Homemade Croquettes (6pcs)",
             "productDescription": "Homemade ham croquettes, 6 pieces.",
             "productCategory": "starters",
@@ -236,11 +248,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.jpg",
                 "webp": "/src/assets/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.webp",
-                "avif": "/src/assets/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.avif"
+                "avif": "/src/assets/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.avif",
+                "alt": "Homemade ham croquettes, 6 pieces"
             }
         },
         {
-            "productId": "fried-calamari",
+            "productId": 14,
             "productName": "Fried Calamari",
             "productDescription": "Battered calamari rings, served with lemon.",
             "productCategory": "starters",
@@ -249,11 +262,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/fried-calamari/fried-calamari.jpg",
                 "webp": "/src/assets/pictures/products/fried-calamari/fried-calamari.webp",
-                "avif": "/src/assets/pictures/products/fried-calamari/fried-calamari.avif"
+                "avif": "/src/assets/pictures/products/fried-calamari/fried-calamari.avif",
+                "alt": "Fried calamari rings served with lemon"
             }
         },
         {
-            "productId": "patatas-bravas",
+            "productId": 15,
             "productName": "Patatas Bravas",
             "productDescription": "Fried potatoes with spicy brava sauce and alioli.",
             "productCategory": "starters",
@@ -262,11 +276,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/patatas-bravas/patatas-bravas.jpg",
                 "webp": "/src/assets/pictures/products/patatas-bravas/patatas-bravas.webp",
-                "avif": "/src/assets/pictures/products/patatas-bravas/patatas-bravas.avif"
+                "avif": "/src/assets/pictures/products/patatas-bravas/patatas-bravas.avif",
+                "alt": "Patatas bravas with spicy brava sauce and alioli"
             }
         },
         {
-            "productId": "soup-of-the-day",
+            "productId": 16,
             "productName": "Soup of the Day",
             "productDescription": "Homemade soup according to the day's recipe.",
             "productCategory": "starters",
@@ -275,11 +290,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.jpg",
                 "webp": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.webp",
-                "avif": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.avif"
+                "avif": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.avif",
+                "alt": "Homemade soup of the day"
             }
         },
         {
-            "productId": "iberian-ham",
+            "productId": 17,
             "productName": "Iberian Ham (portion)",
             "productDescription": "Portion of thinly sliced Iberian ham.",
             "productCategory": "starters",
@@ -288,11 +304,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/iberian-ham/iberian-ham.jpg",
                 "webp": "/src/assets/pictures/products/iberian-ham/iberian-ham.webp",
-                "avif": "/src/assets/pictures/products/iberian-ham/iberian-ham.avif"
+                "avif": "/src/assets/pictures/products/iberian-ham/iberian-ham.avif",
+                "alt": "Portion of thinly sliced Iberian ham"
             }
         },
         {
-            "productId": "cheese-board",
+            "productId": 18,
             "productName": "Cheese Board",
             "productDescription": "Selection of national cheeses with accompaniments.",
             "productCategory": "starters",
@@ -301,11 +318,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/cheese-board/cheese-board.jpg",
                 "webp": "/src/assets/pictures/products/cheese-board/cheese-board.webp",
-                "avif": "/src/assets/pictures/products/cheese-board/cheese-board.avif"
+                "avif": "/src/assets/pictures/products/cheese-board/cheese-board.avif",
+                "alt": "Cheese board with selection of national cheeses and accompaniments"
             }
         },
         {
-            "productId": "mussels-mariniere",
+            "productId": 19,
             "productName": "Mussels Marinière",
             "productDescription": "Mussels cooked in a marinara-style sauce.",
             "productCategory": "starters",
@@ -314,11 +332,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/mussels-mariniere/mussels-mariniere.jpg",
                 "webp": "/src/assets/pictures/products/mussels-mariniere/mussels-mariniere.webp",
-                "avif": "/src/assets/pictures/products/mussels-mariniere/mussels-mariniere.avif"
+                "avif": "/src/assets/pictures/products/mussels-mariniere/mussels-mariniere.avif",
+                "alt": "Mussels marinière cooked in marinara-style sauce"
             }
         },
         {
-            "productId": "pizza-margherita",
+            "productId": 20,
             "productName": "Margherita Pizza",
             "productDescription": "Tomato base, mozzarella and basil.",
             "productCategory": "mains",
@@ -327,11 +346,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/pizza-margherita/pizza-margherita.jpg",
                 "webp": "/src/assets/pictures/products/pizza-margherita/pizza-margherita.webp",
-                "avif": "/src/assets/pictures/products/pizza-margherita/pizza-margherita.avif"
+                "avif": "/src/assets/pictures/products/pizza-margherita/pizza-margherita.avif",
+                "alt": "Margherita pizza with tomato base, mozzarella and basil"
             }
         },
         {
-            "productId": "classic-burger",
+            "productId": 21,
             "productName": "Classic Beef Burger",
             "productDescription": "Beef burger with cheese, tomato and lettuce.",
             "productCategory": "mains",
@@ -340,11 +360,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/classic-burger/classic-burger.jpg",
                 "webp": "/src/assets/pictures/products/classic-burger/classic-burger.webp",
-                "avif": "/src/assets/pictures/products/classic-burger/classic-burger.avif"
+                "avif": "/src/assets/pictures/products/classic-burger/classic-burger.avif",
+                "alt": "Classic beef burger with cheese, tomato and lettuce"
             }
         },
         {
-            "productId": "lasagna-bolognese",
+            "productId": 22,
             "productName": "Bolognese Lasagna",
             "productDescription": "Homemade lasagna with Bolognese sauce and béchamel.",
             "productCategory": "mains",
@@ -353,11 +374,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/lasagna-bolognese/lasagna-bolognese.jpg",
                 "webp": "/src/assets/pictures/products/lasagna-bolognese/lasagna-bolognese.webp",
-                "avif": "/src/assets/pictures/products/lasagna-bolognese/lasagna-bolognese.avif"
+                "avif": "/src/assets/pictures/products/lasagna-bolognese/lasagna-bolognese.avif",
+                "alt": "Homemade Bolognese lasagna with béchamel sauce"
             }
         },
         {
-            "productId": "chicken-tacos-3u",
+            "productId": 23,
             "productName": "Chicken Tacos (3 pcs)",
             "productDescription": "Tacos with marinated chicken, sauce and pico de gallo.",
             "productCategory": "mains",
@@ -366,11 +388,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/chicken-tacos-3u/chicken-tacos-3u.jpg",
                 "webp": "/src/assets/pictures/products/chicken-tacos-3u/chicken-tacos-3u.webp",
-                "avif": "/src/assets/pictures/products/chicken-tacos-3u/chicken-tacos-3u.avif"
+                "avif": "/src/assets/pictures/products/chicken-tacos-3u/chicken-tacos-3u.avif",
+                "alt": "Three chicken tacos with marinated chicken, sauce and pico de gallo"
             }
         },
         {
-            "productId": "roast-chicken",
+            "productId": 24,
             "productName": "Roast Chicken (portion)",
             "productDescription": "Oven-roasted chicken with herbs.",
             "productCategory": "mains",
@@ -379,11 +402,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/roast-chicken/roast-chicken.jpg",
                 "webp": "/src/assets/pictures/products/roast-chicken/roast-chicken.webp",
-                "avif": "/src/assets/pictures/products/roast-chicken/roast-chicken.avif"
+                "avif": "/src/assets/pictures/products/roast-chicken/roast-chicken.avif",
+                "alt": "Oven-roasted chicken portion with herbs"
             }
         },
         {
-            "productId": "pork-steak",
+            "productId": 25,
             "productName": "Pork Steak",
             "productDescription": "Grilled pork steak with optional sauce.",
             "productCategory": "mains",
@@ -392,11 +416,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/pork-steak/pork-steak.jpg",
                 "webp": "/src/assets/pictures/products/pork-steak/pork-steak.webp",
-                "avif": "/src/assets/pictures/products/pork-steak/pork-steak.avif"
+                "avif": "/src/assets/pictures/products/pork-steak/pork-steak.avif",
+                "alt": "Grilled pork steak"
             }
         },
         {
-            "productId": "spaghetti-carbonara",
+            "productId": 26,
             "productName": "Spaghetti Carbonara",
             "productDescription": "Pasta with traditional carbonara sauce.",
             "productCategory": "mains",
@@ -405,11 +430,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/spaghetti-carbonara/spaghetti-carbonara.jpg",
                 "webp": "/src/assets/pictures/products/spaghetti-carbonara/spaghetti-carbonara.webp",
-                "avif": "/src/assets/pictures/products/spaghetti-carbonara/spaghetti-carbonara.avif"
+                "avif": "/src/assets/pictures/products/spaghetti-carbonara/spaghetti-carbonara.avif",
+                "alt": "Spaghetti carbonara with traditional sauce"
             }
         },
         {
-            "productId": "mushroom-risotto",
+            "productId": 27,
             "productName": "Mushroom Risotto",
             "productDescription": "Creamy risotto with a variety of mushrooms.",
             "productCategory": "mains",
@@ -418,11 +444,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/mushroom-risotto/mushroom-risotto.jpg",
                 "webp": "/src/assets/pictures/products/mushroom-risotto/mushroom-risotto.webp",
-                "avif": "/src/assets/pictures/products/mushroom-risotto/mushroom-risotto.avif"
+                "avif": "/src/assets/pictures/products/mushroom-risotto/mushroom-risotto.avif",
+                "alt": "Creamy mushroom risotto with variety of mushrooms"
             }
         },
         {
-            "productId": "grilled-salmon",
+            "productId": 28,
             "productName": "Grilled Salmon",
             "productDescription": "Fresh salmon fillet grilled to perfection.",
             "productCategory": "mains",
@@ -431,11 +458,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/grilled-salmon/grilled-salmon.jpg",
                 "webp": "/src/assets/pictures/products/grilled-salmon/grilled-salmon.webp",
-                "avif": "/src/assets/pictures/products/grilled-salmon/grilled-salmon.avif"
+                "avif": "/src/assets/pictures/products/grilled-salmon/grilled-salmon.avif",
+                "alt": "Fresh grilled salmon fillet"
             }
         },
         {
-            "productId": "seafood-paella",
+            "productId": 29,
             "productName": "Seafood Paella",
             "productDescription": "Traditional paella with a variety of seafood.",
             "productCategory": "mains",
@@ -444,11 +472,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/seafood-paella/seafood-paella.jpg",
                 "webp": "/src/assets/pictures/products/seafood-paella/seafood-paella.webp",
-                "avif": "/src/assets/pictures/products/seafood-paella/seafood-paella.avif"
+                "avif": "/src/assets/pictures/products/seafood-paella/seafood-paella.avif",
+                "alt": "Traditional seafood paella with variety of seafood"
             }
         },
         {
-            "productId": "veggie-burger",
+            "productId": 30,
             "productName": "Veggie Burger",
             "productDescription": "Plant-based burger with artisanal bun.",
             "productCategory": "mains",
@@ -457,11 +486,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/veggie-burger/veggie-burger.jpg",
                 "webp": "/src/assets/pictures/products/veggie-burger/veggie-burger.webp",
-                "avif": "/src/assets/pictures/products/veggie-burger/veggie-burger.avif"
+                "avif": "/src/assets/pictures/products/veggie-burger/veggie-burger.avif",
+                "alt": "Plant-based veggie burger with artisanal bun"
             }
         },
         {
-            "productId": "entrecote-200g",
+            "productId": 31,
             "productName": "Entrecote 200g",
             "productDescription": "Grilled beef entrecote (200g).",
             "productCategory": "mains",
@@ -470,11 +500,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/entrecote-200g/entrecote-200g.jpg",
                 "webp": "/src/assets/pictures/products/entrecote-200g/entrecote-200g.webp",
-                "avif": "/src/assets/pictures/products/entrecote-200g/entrecote-200g.avif"
+                "avif": "/src/assets/pictures/products/entrecote-200g/entrecote-200g.avif",
+                "alt": "Grilled beef entrecote 200g"
             }
         },
         {
-            "productId": "oxtail-stew",
+            "productId": 32,
             "productName": "Oxtail Stew",
             "productDescription": "Slow-cooked oxtail stew.",
             "productCategory": "mains",
@@ -483,11 +514,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/oxtail-stew/oxtail-stew.jpg",
                 "webp": "/src/assets/pictures/products/oxtail-stew/oxtail-stew.webp",
-                "avif": "/src/assets/pictures/products/oxtail-stew/oxtail-stew.avif"
+                "avif": "/src/assets/pictures/products/oxtail-stew/oxtail-stew.avif",
+                "alt": "Slow-cooked oxtail stew"
             }
         },
         {
-            "productId": "steak-tartare",
+            "productId": 33,
             "productName": "Steak Tartare",
             "productDescription": "Steak Tartare with egg yolk and smoked with chocolate wood.",
             "productCategory": "mains",
@@ -496,11 +528,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/steak-tartare/steak-tartare.jpg",
                 "webp": "/src/assets/pictures/products/steak-tartare/steak-tartare.webp",
-                "avif": "/src/assets/pictures/products/steak-tartare/steak-tartare.avif"
+                "avif": "/src/assets/pictures/products/steak-tartare/steak-tartare.avif",
+                "alt": "Steak tartare with egg yolk smoked with chocolate wood"
             }
         },
         {
-            "productId": "cheesecake",
+            "productId": 34,
             "productName": "Cheesecake",
             "productDescription": "Creamy cheesecake with a crunchy base.",
             "productCategory": "desserts",
@@ -509,12 +542,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/cheesecake/cheesecake.jpg",
                 "webp": "/src/assets/pictures/products/cheesecake/cheesecake.webp",
-                "avif": "/src/assets/pictures/products/cheesecake/cheesecake.avif"
+                "avif": "/src/assets/pictures/products/cheesecake/cheesecake.avif",
+                "alt": "Creamy cheesecake with crunchy base"
             }
         },
-
         {
-            "productId": "crema-catalana",
+            "productId": 35,
             "productName": "Crema Catalana",
             "productDescription": "Traditional dessert with caramelized sugar.",
             "productCategory": "desserts",
@@ -523,11 +556,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/crema-catalana/crema-catalana.jpg",
                 "webp": "/src/assets/pictures/products/crema-catalana/crema-catalana.webp",
-                "avif": "/src/assets/pictures/products/crema-catalana/crema-catalana.avif"
+                "avif": "/src/assets/pictures/products/crema-catalana/crema-catalana.avif",
+                "alt": "Traditional crema catalana with caramelized sugar"
             }
         },
         {
-            "productId": "chocolate-brownie",
+            "productId": 36,
             "productName": "Chocolate Brownie",
             "productDescription": "Warm brownie with vanilla ice cream.",
             "productCategory": "desserts",
@@ -536,12 +570,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/chocolate-brownie/chocolate-brownie.jpg",
                 "webp": "/src/assets/pictures/products/chocolate-brownie/chocolate-brownie.webp",
-                "avif": "/src/assets/pictures/products/chocolate-brownie/chocolate-brownie.avif"
+                "avif": "/src/assets/pictures/products/chocolate-brownie/chocolate-brownie.avif",
+                "alt": "Warm chocolate brownie with vanilla ice cream"
             }
         },
-
         {
-            "productId": "egg-flan",
+            "productId": 37,
             "productName": "Egg Flan",
             "productDescription": "Homemade flan with liquid caramel and Napolitana biscuit.",
             "productCategory": "desserts",
@@ -550,11 +584,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/egg-flan/egg-flan.jpg",
                 "webp": "/src/assets/pictures/products/egg-flan/egg-flan.webp",
-                "avif": "/src/assets/pictures/products/egg-flan/egg-flan.avif"
+                "avif": "/src/assets/pictures/products/egg-flan/egg-flan.avif",
+                "alt": "Homemade egg flan with liquid caramel and Napolitana biscuit"
             }
         },
         {
-            "productId": "panna-cotta",
+            "productId": 38,
             "productName": "Panna Cotta",
             "productDescription": "Panna cotta with red fruit coulis.",
             "productCategory": "desserts",
@@ -563,12 +598,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/panna-cotta/panna-cotta.jpg",
                 "webp": "/src/assets/pictures/products/panna-cotta/panna-cotta.webp",
-                "avif": "/src/assets/pictures/products/panna-cotta/panna-cotta.avif"
+                "avif": "/src/assets/pictures/products/panna-cotta/panna-cotta.avif",
+                "alt": "Panna cotta with red fruit coulis"
             }
         },
-
         {
-            "productId": "french-fries",
+            "productId": 39,
             "productName": "French Fries",
             "productDescription": "Portion of homemade fried potatoes.",
             "productCategory": "sides",
@@ -577,12 +612,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/french-fries/french-fries.jpg",
                 "webp": "/src/assets/pictures/products/french-fries/french-fries.webp",
-                "avif": "/src/assets/pictures/products/french-fries/french-fries.avif"
+                "avif": "/src/assets/pictures/products/french-fries/french-fries.avif",
+                "alt": "Portion of homemade French fries"
             }
         },
-
         {
-            "productId": "small-salad",
+            "productId": 40,
             "productName": "Small Salad",
             "productDescription": "Small side salad.",
             "productCategory": "sides",
@@ -591,12 +626,12 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/small-salad/small-salad.jpg",
                 "webp": "/src/assets/pictures/products/small-salad/small-salad.webp",
-                "avif": "/src/assets/pictures/products/small-salad/small-salad.avif"
+                "avif": "/src/assets/pictures/products/small-salad/small-salad.avif",
+                "alt": "Small side salad"
             }
         },
-
         {
-            "productId": "garlic-bread",
+            "productId": 41,
             "productName": "Garlic Bread",
             "productDescription": "Slices of bread with butter and garlic.",
             "productCategory": "sides",
@@ -605,7 +640,8 @@
             "productImage": {
                 "default": "/src/assets/pictures/products/garlic-bread/garlic-bread.jpg",
                 "webp": "/src/assets/pictures/products/garlic-bread/garlic-bread.webp",
-                "avif": "/src/assets/pictures/products/garlic-bread/garlic-bread.avif"
+                "avif": "/src/assets/pictures/products/garlic-bread/garlic-bread.avif",
+                "alt": "Garlic bread slices with butter and garlic"
             }
         }
     ],

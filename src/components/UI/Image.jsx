@@ -5,7 +5,7 @@ export const Image = ({ imageData = {}, alt = "", className = "" }) => {
 
     useEffect(() => {
         setDataImage({ ...imageData });
-    }, [imageData]);
+    }, []);
 
     return (
         <>

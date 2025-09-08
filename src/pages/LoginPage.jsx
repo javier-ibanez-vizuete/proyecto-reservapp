@@ -44,7 +44,7 @@ export const LoginPage = () => {
 	};
 
 	return (
-		<section className="flex flex-1 flex-col gap-4">
+		<div className="flex flex-1 flex-col gap-4">
 			<BackButton />
 
 			<h1>LOG IN</h1>
@@ -90,6 +90,6 @@ export const LoginPage = () => {
 					</div>
 				</div>
 			</form>
-		</section>
+		</div>
 	);
 };

@@ -65,7 +65,7 @@ export const RegisterPage = () => {
 	};
 
 	return (
-		<section className="flex flex-1 flex-col gap-4">
+		<div className="flex flex-1 flex-col gap-4">
 			<BackButton />
 
 			<h1 className="text-xl font-bold">FORMULARIO REGISTRO</h1>
@@ -146,6 +146,6 @@ export const RegisterPage = () => {
 					</div>
 				</div>
 			</form>
-		</section>
+		</div>
 	);
 };
