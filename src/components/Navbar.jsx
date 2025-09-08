@@ -9,6 +9,7 @@ import { Container } from "./Container.jsx";
 import logoReservappPng from "../assets/logos/reservapp-logo/logo-reservapp.png";
 import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.webp";
 import logoReservappAvif from "../assets/logos/reservapp-logo/logo-reservapp.avif";
+import { ThemeContext } from "../contexts/ThemeContext.jsx";
 
 const LOGO_IMAGES = {
     default: logoReservappPng,
@@ -59,10 +60,12 @@ const BurgerButton = ({ openMobileNav, handleClick }) => {
 };
 
 const getNavLinksClasses = ({ isActive, isPending, isTransitioning }) => {
+    const { theme } = useContext(ThemeContext);
+
     const base =
-        "p-sm rounded-lg hover:bg-[#161a04]/30 hover:text-text-color-dark transition-all duration-300 ease-in-out";
-    const normal = "bg-[#23260833]";
-    const active = "bg-[#161a04]/50 text-text-color-dark";
+        `p-sm rounded-lg ${ theme === "light" ? "hover:bg-background-color-dark/50 hover:text-text-color-dark" : "hover:bg-background-color/50 hover:text-text-color"}  transition-all duration-300 ease-in-out`;
+    const normal = `${theme === "light" ? "bg-background-color-dark/15" : "bg-background-color/15"}`;
+    const active = `${theme === "light" ? "bg-background-color-dark/65 text-text-color-dark" : "bg-background-color/65 text-text-color"}`;
     const pending = "";
     const transitioning = "";
 
