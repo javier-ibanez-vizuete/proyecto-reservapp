@@ -1,95 +1,102 @@
 import { useContext, useState } from "react";
-import { BackButton } from "../components/UI/BackButton";
-import { LanguageContext } from "../contexts/LanguageContext";
-import { AuthContext } from "../contexts/AuthContext";
-import { usePassWordVisibility } from "../hooks/usePasswordVisibility";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { CustomInput } from "../components/CustomInput";
+import { Container } from "../components/Container";
+import { FormInput } from "../components/FormInput";
+import { Button } from "../components/UI/Button";
+import { ThemeContext } from "../contexts/ThemeContext";
+import { useAuth } from "../core/auth/useAuth";
+import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 
-const INITIAL_LOGIN_DATA = {
-	email: "",
-	password: "",
-};
+const INITIAL_FORM = { email: "", password: "" };
+
+const LOGIN_FIELDS = [
+    {
+        containerClass: "flex flex-col gap-2",
+        input: {
+            name: "email",
+            type: "email",
+            placeholder: "admin@admin.com",
+            label: "Email",
+            required: true,
+            className: "flex-1",
+        },
+        label: {
+            text: "Email",
+            className: "",
+        },
+    },
+    {
+        containerClass: "flex flex-col gap-2",
+        input: {
+            name: "password",
+            type: "password",
+            placeholder: "1234",
+            required: true,
+            className: "rounded-r-none flex-1",
+        },
+        label: {
+            text: "Contraseña",
+            className: "",
+        },
+    },
+];
 
 export const LoginPage = () => {
-	const [loginData, setLoginData] = useState(INITIAL_LOGIN_DATA);
-	const [errorKey, setErrorKey] = useState("");
+    const [form, setForm] = useState(INITIAL_FORM);
+    const { login } = useAuth();
+    const { theme } = useContext(ThemeContext);
+    const { visible, toggleVisible } = usePasswordVisibility();
 
-	const { getText } = useContext(LanguageContext);
-	const { userLogin } = useContext(AuthContext);
+    const onInputChange = (event) => {
+        const { name, value } = event.target;
 
-	const passwordView = usePassWordVisibility();
-	const navigate = useNavigate();
+        setForm({ ...form, [name]: value });
+    };
 
-	const { email, password } = loginData;
+    const onLoginSubmit = async (event) => {
+        event.preventDefault();
+        await login(form);
+        setForm(INITIAL_FORM);
+    };
 
-	const onInputChange = (event) => {
-		const { name, value } = event.target;
+    return (
+        <Container className="perfect-center flex-1">
+            <div className={`flex flex-col gap-md bg-accent-color rounded-2xl shadow-landing-lg p-8`}>
+                <h2 className={`${theme === "light" ? "text-text-color" : "text-text-color-dark"}`}>
+                    Iniciar sesión
+                </h2>
 
-		setErrorKey("");
-		setLoginData((prevValue) => ({ ...prevValue, [name]: value }));
-	};
+                <form className="flex flex-col gap-5" onSubmit={onLoginSubmit}>
+                    {LOGIN_FIELDS.map(({ label, input, containerClass }) => {
+                        const inputText = visible && input.name === "password" ? "text" : input.type;
 
-	const onFormSubmit = (event) => {
-		event.preventDefault();
+                        return (
+                            <FormInput
+                                key={input.name}
+                                containerClass={containerClass}
+                                input={{
+                                    name: input.name,
+                                    type: inputText,
+                                    placeholder: input.placeholder,
+                                    value: form[input.name],
+                                    onChange: onInputChange,
+                                    required: input.required,
+                                    className: input.className,
+                                }}
+                                label={{
+                                    text: label.text,
+                                    className: label.className,
+                                }}
+                                onClick={toggleVisible}
+                                isPasswordVisible={visible}
+                            />
+                        );
+                    })}
 
-		const { email, password } = loginData;
-
-		if (!email) return setErrorKey("noEmailField");
-		if (!password) return setErrorKey("nopasswordField");
-
-		const loginUser = userLogin(loginData);
-		if (!loginUser) return setErrorKey("emailOrPasswordError");
-		return navigate("/");
-	};
-
-	return (
-		<div className="flex flex-1 flex-col gap-4">
-			<BackButton />
-
-			<h1>LOG IN</h1>
-
-			<form action="#" method="get" onSubmit={onFormSubmit}>
-				<CustomInput inputName={"email"} labelName={"LABELINPUTEMAIL"}>
-					<input
-						type="email"
-						name="email"
-						id="email"
-						value={email}
-						onChange={onInputChange}
-						placeholder="PlaceholderINPUTEMAIL"
-						className="p-2 rounded-sm text-sm placeholder:opacity-70"
-					/>
-				</CustomInput>
-				<CustomInput inputName={"password"} labelName={"LABELINPUTPASSWORD"}>
-					<div className="flex items-center">
-						<input
-							type={passwordView.visible ? "text" : "password"}
-							name="password"
-							id="password"
-							value={password}
-							onChange={onInputChange}
-							placeholder="PLACEHOLDER inputPassword"
-							className="flex-1 p-2 rounded-sm text-sm placeholder:opacity-70"
-						/>
-					</div>
-				</CustomInput>
-				<div className="flex flex-col gap-2">
-					{errorKey && <small className="text-sm text-red-600 italic opacity-50">MENSAJE DE ERROR</small>}
-					<button
-						className="p-2 bg-blue-500 rounded-md shadow-md cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition"
-						type="submit"
-					>
-						BOTON INICIAR SESION
-					</button>
-					<div>
-						¿No tienes cuenta?{" "}
-						<Link className="cursor-pointer text-blue-500" to={"/register"}>
-							Registrarse
-						</Link>
-					</div>
-				</div>
-			</form>
-		</div>
-	);
+                    <Button type="submit" className="justify-center rounded-full">
+                        Entrar
+                    </Button>
+                </form>
+            </div>
+        </Container>
+    );
 };

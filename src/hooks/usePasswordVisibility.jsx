@@ -1,7 +1,7 @@
 import { useToggle } from "./useToggle";
 
-export const usePassWordVisibility = (option = false) => {
-	const [visible, toggleVisible] = useToggle(option);
+export const usePasswordVisibility = (option = false) => {
+    const [visible, toggleVisible] = useToggle(option);
 
-	return { visible, toggleVisible };
+    return { visible, toggleVisible };
 };

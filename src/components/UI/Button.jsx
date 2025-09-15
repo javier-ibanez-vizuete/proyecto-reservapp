@@ -1,13 +1,16 @@
-export const Button = ({ children, onClick, className = "" }) => {
-    const handleKeyDown = (event) => {
-        const enterKey = event.key === "Enter";
-        if (!enterKey) return;
+import classNames from "classnames";
 
-        onClick();
-    };
+export const Button = ({ className = "", children, onClick, variant = "normal", ...props }) => {
+    const baseClasses =
+        "inline-flex lg:py-landing-sm py-landing-xs lg:px-6 px-4 rounded cursor-pointer elevation transition-colors duration-200";
 
+    const normal = "bg-primary text-white border border-primary";
+
+    const outline = "bg-transparent text-primary border border-primary";
+
+    const variantClasses = variant === "outline" ? outline : normal;
     return (
-        <button className={`btn ${className}`} onClick={onClick} onKeyDown={handleKeyDown}>
+        <button className={classNames(baseClasses, variantClasses, className)} onClick={onClick} {...props}>
             {children}
         </button>
     );
