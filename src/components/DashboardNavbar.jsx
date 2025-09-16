@@ -62,14 +62,13 @@ export const DashboardNavbar = ({ isLoggedIn = false, user = null }) => {
     const handleHomeClick = () => {
         closeMobileMenu();
         console.log(`NAVIGANDO A /HOME o /DASHBOARD`);
-        return user && user?.role === "admin" ? "/dashboard" : "/home";
     };
 
     return (
         <nav className="navbar">
             <div className="navbar-content">
                 <div className="navbar-inner">
-                    <Link className="navbar-logo" to={handleHomeClick}>
+                    <Link className="navbar-logo" to={"/"} onClick={handleHomeClick}>
                         <ImageContainer className="flex-1 logo-icon">
                             <Image imageData={LOGO_IMAGES} alt="Logo ReservApp" />
                         </ImageContainer>

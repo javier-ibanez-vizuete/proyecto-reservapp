@@ -3,6 +3,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import { useImageFallback } from "./hooks/useImageFallback";
 import { AdminLayout } from "./layouts/AdminLayout";
 import { MainLayout } from "./layouts/MainLayout";
+import { AdminRouter } from "./routes/AdminRouter";
 import { AppRouter } from "./routes/AppRouter";
 
 export const App = () => {
@@ -13,7 +14,7 @@ export const App = () => {
     if (user?.role === "admin")
         return (
             <AdminLayout>
-                <AppRouter />
+                <AdminRouter />
             </AdminLayout>
         );
 
