@@ -70,26 +70,6 @@ body {
     --spacing-4xs: 64px;
 }
 
-.elevantion {
-    @apply hover:translate-y-[-4px] transition;
-}
-
-.btn {
-    @apply cursor-pointer py-sm px-lg rounded-lg transition-colors duration-300 ease-in-out;
-}
-
-.btn-primary {
-    @apply bg-primary active:bg-primary-pressed md:hover:bg-primary-hover;
-}
-
-.btn-secondary {
-    @apply bg-secondary active:bg-secondary-pressed md:hover:bg-secondary-hover;
-}
-
-.perfect-center {
-    @apply flex justify-center items-center;
-}
-
 @layer components {
     h1 {
         @apply font-title font-semibold text-xl/[125%] md:text-6xl/[125%];
@@ -112,6 +92,42 @@ body {
 
     p {
         @apply font-sans text-base/[125%] font-normal md:text-md/[125%];
+    }
+
+    .elevantion {
+        @apply hover:translate-y-[-4px] transition;
+    }
+
+    .btn {
+        @apply cursor-pointer py-sm px-lg rounded-lg transition-colors duration-300 ease-in-out;
+    }
+
+    .btn-primary {
+        @apply bg-primary active:bg-primary-pressed md:hover:bg-primary-hover;
+    }
+
+    .btn-secondary {
+        @apply bg-secondary active:bg-secondary-pressed md:hover:bg-secondary-hover;
+    }
+
+    .perfect-center {
+        @apply flex justify-center items-center;
+    }
+
+    .navbar {
+        @apply flex bg-accent-color;
+    }
+
+    .navbar-content {
+        @apply flex flex-1 flex-col max-w-7xl md:mx-auto px-4 sm:px-6 lg:px-8 bg-blue-200;
+    }
+
+    .navbar-inner {
+        @apply flex justify-between items-center h-16;
+    }
+
+    .navbar-logo {
+        @apply flex justify-center items-center cursor-pointer transition-transform duration-300 gap-2 hover:scale-105;
     }
 
     @keyframes tb-rotate {
