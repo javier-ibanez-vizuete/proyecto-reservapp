@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { ThemeContext } from "../contexts/ThemeContext";
 import { Input } from "./UI/Input";
 
 import { Image } from "./UI/Image";
@@ -9,8 +7,6 @@ import iconClosedEye from "../assets/icons/icon-closed-eye.svg";
 import iconEye from "../assets/icons/icon-eye.svg";
 
 export const FormInput = ({ containerClass, input, label, onClick, ...props }) => {
-    const { theme } = useContext(ThemeContext);
-
     return (
         <div className={containerClass}>
             <label htmlFor={input.name} className={`${label.className}`}>
@@ -31,10 +27,18 @@ export const FormInput = ({ containerClass, input, label, onClick, ...props }) =
                     <button
                         type="button"
                         className={`py-md px-xl rounded-r-xl border-0 -ml-0.5 perfect-center rounded-l-none bg-white`}
-                        onClick={() => {
-                            console.log("Haciendo Click");
-                            onClick();
-                        }}
+                        onClick={onClick}
+                    >
+                        <ImageContainer className="w-xl">
+                            <Image imgSrc={props.isPasswordVisible ? iconEye : iconClosedEye} />
+                        </ImageContainer>
+                    </button>
+                )}
+                {input?.name === "repassword" && (
+                    <button
+                        type="button"
+                        className={`py-md px-xl rounded-r-xl border-0 -ml-0.5 perfect-center rounded-l-none bg-white`}
+                        onClick={onClick}
                     >
                         <ImageContainer className="w-xl">
                             <Image imgSrc={props.isPasswordVisible ? iconEye : iconClosedEye} />

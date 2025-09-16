@@ -1,15 +1,16 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { ImageContainer } from "./UI/ImageContainer";
-import { Image } from "./UI/Image";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { Container } from "./Container.jsx";
+import { Image } from "./UI/Image";
+import { ImageContainer } from "./UI/ImageContainer";
 
+import logoReservappAvif from "../assets/logos/reservapp-logo/logo-reservapp.avif";
 import logoReservappPng from "../assets/logos/reservapp-logo/logo-reservapp.png";
 import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.webp";
-import logoReservappAvif from "../assets/logos/reservapp-logo/logo-reservapp.avif";
 import { ThemeContext } from "../contexts/ThemeContext.jsx";
+import { useAuth } from "../core/auth/useAuth.jsx";
 
 const LOGO_IMAGES = {
     default: logoReservappPng,
@@ -119,9 +120,10 @@ const NavbarLinks = () => {
 export const NavBar = () => {
     const [openMobileNav, setOpenMobileNav] = useState(false);
 
-    const { userActive, logout } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const { getText } = useContext(LanguageContext);
     const { theme } = useContext(ThemeContext);
+    const { logout } = useAuth();
 
     const { pathname } = useLocation();
     const contentRef = useRef();
@@ -158,7 +160,7 @@ export const NavBar = () => {
                     </div>
 
                     <div className="hidden md:flex md:gap-lg">
-                        {!userActive?.id && (
+                        {!user?.id && (
                             <>
                                 <Link
                                     className={`btn btn-primary ${theme === "dark" ? "text-text-color" : ""}`}
@@ -176,7 +178,7 @@ export const NavBar = () => {
                                 </Link>
                             </>
                         )}
-                        {userActive?.id && <button onClick={logout}>{getText("logOutButton")}</button>}
+                        {user?.id && <button onClick={logout}>{getText("logOutButton")}</button>}
                     </div>
 
                     <BurgerButton openMobileNav={openMobileNav} handleClick={handleClick} />
@@ -191,7 +193,7 @@ export const NavBar = () => {
                 >
                     <div className="flex flex-col items-start gap-lg">
                         <NavbarLinks />
-                        {!userActive?.id && (
+                        {!user?.id && (
                             <>
                                 <Link
                                     className={`btn btn-primary ${theme === "dark" ? "text-text-color" : ""}`}
@@ -209,7 +211,7 @@ export const NavBar = () => {
                                 </Link>
                             </>
                         )}
-                        {userActive?.id && <button onClick={logout}>{getText("logOutButton")}</button>}
+                        {user?.id && <button onClick={logout}>{getText("logOutButton")}</button>}
                     </div>
                     <div className="flex flex-col bg-red-500"></div>
                 </div>
