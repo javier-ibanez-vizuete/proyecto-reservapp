@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-export const Image = ({ imageData = {}, alt = "", className = "" }) => {
+export const Image = ({ imageData = {}, alt = "", className = "", imgSrc = "" }) => {
     const [dataImage, setDataImage] = useState(() => imageData || {});
 
     useEffect(() => {
         setDataImage({ ...imageData });
-    }, [imageData]);
+    }, []);
 
     return (
         <>
@@ -18,7 +18,7 @@ export const Image = ({ imageData = {}, alt = "", className = "" }) => {
                     alt={alt ? alt : dataImage?.alt || ""}
                 />
             ) : (
-                <img className={`w-full ${className}`} src="#" alt="Picture is not working" />
+                <img className={`w-full ${className}`} src={imgSrc} alt="Picture is not working" />
             )}
         </>
     );

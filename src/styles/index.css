@@ -6,6 +6,11 @@ body,
     height: 100%;
 }
 
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -36,9 +41,9 @@ body {
     --color-background-color: #d9cdbf;
     --color-text-color: #232608;
 
-    --color-primary: #C6C013;
-    --color-primary-hover: #A7A211;
-    --color-primary-pressed: #A7A211;
+    --color-primary: #c6c013;
+    --color-primary-hover: #a7a211;
+    --color-primary-pressed: #a7a211;
 
     --color-secondary: #898c23;
     --color-secondary-hover: #6f721d;
@@ -65,46 +70,50 @@ body {
     --spacing-4xs: 64px;
 }
 
-h1 {
-    @apply font-title font-semibold text-xl/[125%] md:text-6xl/[125%];
-}
-h2 {
-    @apply font-title font-semibold text-lg/[125%] md:text-4xl/[125%];
-}
-h3 {
-    @apply font-title font-semibold text-lg/[125%] md:text-4xl/[125%];
-}
-h4 {
-    @apply font-title font-semibold text-md/[125%] md:text-2xl/[125%];
-}
-h5 {
-    @apply font-title font-semibold text-md/[125%] md:text-2xl/[125%];
-}
-h6 {
-    @apply font-title font-semibold text-sm/[125%] md:text-lg/[125%];
-}
-
-p {
-    @apply font-sans text-base/[125%] font-normal md:text-md/[125%];
-}
-
 .elevantion {
     @apply hover:translate-y-[-4px] transition;
 }
 
 .btn {
-    @apply py-sm px-lg rounded-lg transition-colors duration-300 ease-in-out;
+    @apply cursor-pointer py-sm px-lg rounded-lg transition-colors duration-300 ease-in-out;
 }
 
 .btn-primary {
-    @apply bg-primary active:bg-primary-pressed md:hover:bg-primary-hover
+    @apply bg-primary active:bg-primary-pressed md:hover:bg-primary-hover;
 }
 
 .btn-secondary {
-    @apply bg-secondary active:bg-secondary-pressed md:hover:bg-secondary-hover
+    @apply bg-secondary active:bg-secondary-pressed md:hover:bg-secondary-hover;
+}
+
+.perfect-center {
+    @apply flex justify-center items-center;
 }
 
 @layer components {
+    h1 {
+        @apply font-title font-semibold text-xl/[125%] md:text-6xl/[125%];
+    }
+    h2 {
+        @apply font-title font-semibold text-lg/[125%] md:text-4xl/[125%];
+    }
+    h3 {
+        @apply font-title font-semibold text-lg/[125%] md:text-4xl/[125%];
+    }
+    h4 {
+        @apply font-title font-semibold text-md/[125%] md:text-2xl/[125%];
+    }
+    h5 {
+        @apply font-title font-semibold text-md/[125%] md:text-2xl/[125%];
+    }
+    h6 {
+        @apply font-title font-semibold text-sm/[125%] md:text-lg/[125%];
+    }
+
+    p {
+        @apply font-sans text-base/[125%] font-normal md:text-md/[125%];
+    }
+
     @keyframes tb-rotate {
         from {
             transform: rotate(0deg);

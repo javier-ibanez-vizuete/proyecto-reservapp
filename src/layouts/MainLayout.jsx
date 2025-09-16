@@ -8,7 +8,7 @@ export const MainLayout = ({ children }) => {
 
     return (
         <div
-            className={`flex flex-col h-full divide-y ${
+            className={`flex flex-col flex-1 divide-y ${
                 theme === "light"
                     ? "bg-background-color text-text-color divide-text-color/50"
                     : "bg-background-color-dark text-text-color-dark divide-text-color-dark/50"
