@@ -55,11 +55,6 @@ body {
     --color-background-color-dark: #232608;
     --color-text-color-dark: #d9cdbf;
 
-    --breakpoin-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1440px;
-    --breakpoint-2xl: 1800px;
-
     --spacing-2xs: 4px;
     --spacing-xs: 6px;
     --spacing-sm: 8px;
@@ -68,6 +63,11 @@ body {
     --spacing-xl: 24px;
     --spacing-2xl: 32px;
     --spacing-4xs: 64px;
+
+    --breakpoin-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1440px;
+    --breakpoint-2xl: 1800px;
 }
 
 @layer components {
@@ -123,11 +123,72 @@ body {
     }
 
     .navbar-inner {
-        @apply flex justify-between items-center h-16;
+        @apply flex justify-between items-center h-16 gap-2;
     }
 
     .navbar-logo {
         @apply flex justify-center items-center cursor-pointer transition-transform duration-300 gap-2 hover:scale-105;
+    }
+
+    .logo-icon {
+        @apply w-8 md:w-9;
+    }
+
+    @media (max-width: 768px) {
+        .logo-icon {
+            @apply w-7;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .logo-icon {
+            @apply w-6;
+        }
+    }
+
+    .logo-text {
+        @apply font-bold text-lg text-gray-900 transition-colors duration-300;
+    }
+
+    @media (max-width: 768px) {
+        .logo-text {
+            @apply text-md;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .logo-text {
+            @apply text-sm;
+        }
+    }
+
+    .navbar-menu {
+        @apply hidden lg:flex items-center gap-8;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .navbar-menu {
+            @apply flex gap-4;
+        }
+    }
+
+    .navbar-link {
+        @apply flex-1 text-sm rounded-md font-medium px-md py-sm transition-all duration-300
+            relative overflow-hidden bg-amber-200 text-accent-color/60 hover:text-accent-color hover:scale-105;
+    }
+
+    .navbar-link.active {
+        @apply bg-accent-color;
+    }
+
+    .navbar-link::before {
+        content: "";
+        @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-amber-800
+            transition-all duration-300 -translate-x-1/2;
+    }
+
+    .navbar-link:hover::before {
+        @apply w-full;
     }
 
     @keyframes tb-rotate {

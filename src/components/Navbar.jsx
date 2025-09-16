@@ -84,7 +84,7 @@ const getNavLinksClasses = ({ isActive, isPending, isTransitioning }) => {
 };
 
 const NavbarLinks = () => {
-    const { userActive } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const { getText } = useContext(LanguageContext);
 
     const NAV_LINKS = [
@@ -104,7 +104,7 @@ const NavbarLinks = () => {
                     </NavLink>
                 </li>
             ))}
-            {userActive?.id && (
+            {user?.id && (
                 <>
                     <li className="flex">
                         <NavLink className={(state) => getNavLinksClasses(state)} to={"/user"}>

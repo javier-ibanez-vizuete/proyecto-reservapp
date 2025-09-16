@@ -6,6 +6,7 @@ import { ImageContainer } from "./UI/ImageContainer";
 import logoReservappAvif from "../assets/logos/reservapp-logo/logo-reservapp.avif";
 import logoReservappPng from "../assets/logos/reservapp-logo/logo-reservapp.png";
 import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.webp";
+import { NavbarLinks } from "./NavbarLinks";
 
 const LOGO_IMAGES = {
     default: logoReservappPng,
@@ -69,12 +70,12 @@ export const DashboardNavbar = ({ isLoggedIn = false, user = null }) => {
             <div className="navbar-content">
                 <div className="navbar-inner">
                     <Link className="navbar-logo" to={handleHomeClick}>
-                        <ImageContainer className="flex-1 w-10">
+                        <ImageContainer className="flex-1 logo-icon">
                             <Image imageData={LOGO_IMAGES} alt="Logo ReservApp" />
                         </ImageContainer>
-                        <span>ReservApp</span>
+                        <span className="logo-text">ReservApp</span>
                     </Link>
-                    <div>DESKTOP NAVIGATION</div>
+                    <NavbarLinks handleLinkClick={handleLinkClick} />
                     <div>USER ACTIONS</div>
                 </div>
                 <div>MOBILE MENU</div>
