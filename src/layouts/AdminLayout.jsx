@@ -1,9 +1,9 @@
-import { DashboardNavbar } from "../components/DashboardNavbar";
+import { Navbar } from "../components/Navbar";
 
 export const AdminLayout = ({ children }) => {
     return (
-        <div className="flex flex-col bg-amber-300">
-            <DashboardNavbar />
+        <div className="admin-layout">
+            <Navbar />
             <aside>ASIDE DEL DASHBOARD</aside>
             <main>{children}</main>
             <footer>FOOTER DEL DASHBOARD</footer>

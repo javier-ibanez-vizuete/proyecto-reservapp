@@ -9,12 +9,12 @@ export const NavbarLinks = ({ handleLinkClick }) => {
         { to: "/home", label: getText("homePageNavLabel") },
         { to: "/booking", label: getText("bookingPageNavLabel") },
         { to: "/orders", label: getText("ordersPageNavLabel") },
-        { to: "/menus", label: getText("menusPageNavLabel") },
+        { to: "/menu", label: getText("menusPageNavLabel") },
         { to: "/cart", label: getText("cartPageNavLabel") },
     ];
 
     return (
-        <ul className="navbar-menu">
+        <ul className="flex flex-col gap-2 lg:flex-row lg:gap-3">
             {NAV_LINKS.map((link) => (
                 <li key={link.to} className="flex justify-center items-center">
                     <NavLink

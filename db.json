@@ -19,7 +19,6 @@
                     },
                     "productsAdded": [
                         {
-                            "javisProducts": true,
                             "id": "cocacola-1",
                             "name": "Coca Cola",
                             "description": "Botella de Coca Cola (2L)",
@@ -33,7 +32,6 @@
                             "couponId": "d1-2025-09-04",
                             "itemsIncluded": [
                                 {
-                                    "javisProducts": true,
                                     "id": "cocacola-1",
                                     "productQty": 2
                                 }
@@ -73,13 +71,11 @@
 
     "products": [
         {
-            "javisProducts": true,
-            "id": 1,
             "name": "Coca-Cola",
             "description": "Coca-Cola bottle (35cl).",
             "category": "drinks",
             "price": 1.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/coca-cola/coca-cola.jpg",
                 "webp": "/src/assets/pictures/products/coca-cola/coca-cola.webp",
                 "avif": "/src/assets/pictures/products/coca-cola/coca-cola.avif",
@@ -87,13 +83,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 2,
             "name": "Mineral Water (500ml)",
             "description": "Natural mineral water in a 500ml bottle.",
             "category": "drinks",
             "price": 1.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/mineral-water-500ml/mineral-water-500ml.jpg",
                 "webp": "/src/assets/pictures/products/mineral-water-500ml/mineral-water-500ml.webp",
                 "avif": "/src/assets/pictures/products/mineral-water-500ml/mineral-water-500ml.avif",
@@ -101,13 +95,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 3,
             "name": "Fanta Orange (330ml)",
             "description": "330ml can of Fanta orange.",
             "category": "drinks",
             "price": 1.8,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/fanta-orange-330ml/fanta-orange-330ml.jpg",
                 "webp": "/src/assets/pictures/products/fanta-orange-330ml/fanta-orange-330ml.webp",
                 "avif": "/src/assets/pictures/products/fanta-orange-330ml/fanta-orange-330ml.avif",
@@ -115,13 +107,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 4,
             "name": "Fresh Squeezed Orange Juice (250ml)",
             "description": "Freshly squeezed orange juice, 250ml.",
             "category": "drinks",
             "price": 2.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/orange-juice-250ml/orange-juice-250ml.jpg",
                 "webp": "/src/assets/pictures/products/orange-juice-250ml/orange-juice-250ml.webp",
                 "avif": "/src/assets/pictures/products/orange-juice-250ml/orange-juice-250ml.avif",
@@ -129,13 +119,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 5,
             "name": "Beer (330ml)",
             "description": "Beer bottle or can (330ml).",
             "category": "drinks",
             "price": 2.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/beer-330ml/beer-330ml.jpg",
                 "webp": "/src/assets/pictures/products/beer-330ml/beer-330ml.webp",
                 "avif": "/src/assets/pictures/products/beer-330ml/beer-330ml.avif",
@@ -143,13 +131,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 6,
             "name": "Lemon Soda (330ml)",
             "description": "330ml lemon-flavored soft drink.",
             "category": "drinks",
             "price": 2.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/lemon-soda-330ml/lemon-soda-330ml.jpg",
                 "webp": "/src/assets/pictures/products/lemon-soda-330ml/lemon-soda-330ml.webp",
                 "avif": "/src/assets/pictures/products/lemon-soda-330ml/lemon-soda-330ml.avif",
@@ -157,13 +143,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 7,
             "name": "Espresso Coffee",
             "description": "Short espresso; option for single or double.",
             "category": "drinks",
             "price": 1.8,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/espresso/espresso.jpg",
                 "webp": "/src/assets/pictures/products/espresso/espresso.webp",
                 "avif": "/src/assets/pictures/products/espresso/espresso.avif",
@@ -171,13 +155,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 8,
             "name": "Glass of Red Wine",
             "description": "House red wine (125ml).",
             "category": "drinks",
             "price": 3.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/red-wine-glass/red-wine-glass.jpg",
                 "webp": "/src/assets/pictures/products/red-wine-glass/red-wine-glass.webp",
                 "avif": "/src/assets/pictures/products/red-wine-glass/red-wine-glass.avif",
@@ -185,13 +167,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 9,
             "name": "Glass of White Wine",
             "description": "House white wine (125ml).",
             "category": "drinks",
             "price": 3.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/white-wine-glass/white-wine-glass.jpg",
                 "webp": "/src/assets/pictures/products/white-wine-glass/white-wine-glass.webp",
                 "avif": "/src/assets/pictures/products/white-wine-glass/white-wine-glass.avif",
@@ -199,13 +179,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 10,
             "name": "Sparkling Water (500ml)",
             "description": "Sparkling water in a 500ml bottle.",
             "category": "drinks",
             "price": 2.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/sparkling-water-500ml/sparkling-water-500ml.jpg",
                 "webp": "/src/assets/pictures/products/sparkling-water-500ml/sparkling-water-500ml.webp",
                 "avif": "/src/assets/pictures/products/sparkling-water-500ml/sparkling-water-500ml.avif",
@@ -213,13 +191,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 11,
             "name": "Mixed Salad",
             "description": "Lettuce, tomato, onion, olives and dressing.",
             "category": "starters",
             "price": 4.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/mixed-salad/mixed-salad.jpg",
                 "webp": "/src/assets/pictures/products/mixed-salad/mixed-salad.webp",
                 "avif": "/src/assets/pictures/products/mixed-salad/mixed-salad.avif",
@@ -227,13 +203,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 12,
             "name": "Tomato Bruschetta",
             "description": "Toasted bread with tomato, garlic and olive oil.",
             "category": "starters",
             "price": 4.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/tomato-bruschetta/tomato-bruschetta.jpg",
                 "webp": "/src/assets/pictures/products/tomato-bruschetta/tomato-bruschetta.webp",
                 "avif": "/src/assets/pictures/products/tomato-bruschetta/tomato-bruschetta.avif",
@@ -241,13 +215,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 13,
             "name": "Homemade Croquettes (6pcs)",
             "description": "Homemade ham croquettes, 6 pieces.",
             "category": "starters",
             "price": 5.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.jpg",
                 "webp": "/src/assets/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.webp",
                 "avif": "/src/assets/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.avif",
@@ -255,13 +227,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 14,
             "name": "Fried Calamari",
             "description": "Battered calamari rings, served with lemon.",
             "category": "starters",
             "price": 6.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/fried-calamari/fried-calamari.jpg",
                 "webp": "/src/assets/pictures/products/fried-calamari/fried-calamari.webp",
                 "avif": "/src/assets/pictures/products/fried-calamari/fried-calamari.avif",
@@ -269,13 +239,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 15,
             "name": "Patatas Bravas",
             "description": "Fried potatoes with spicy brava sauce and alioli.",
             "category": "starters",
             "price": 4.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/patatas-bravas/patatas-bravas.jpg",
                 "webp": "/src/assets/pictures/products/patatas-bravas/patatas-bravas.webp",
                 "avif": "/src/assets/pictures/products/patatas-bravas/patatas-bravas.avif",
@@ -283,13 +251,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 16,
             "name": "Soup of the Day",
             "description": "Homemade soup according to the day's recipe.",
             "category": "starters",
             "price": 4.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.jpg",
                 "webp": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.webp",
                 "avif": "/src/assets/pictures/products/soup-of-the-day/soup-of-the-day.avif",
@@ -297,13 +263,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 17,
             "name": "Iberian Ham (portion)",
             "description": "Portion of thinly sliced Iberian ham.",
             "category": "starters",
             "price": 8.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/iberian-ham/iberian-ham.jpg",
                 "webp": "/src/assets/pictures/products/iberian-ham/iberian-ham.webp",
                 "avif": "/src/assets/pictures/products/iberian-ham/iberian-ham.avif",
@@ -311,13 +275,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 18,
             "name": "Cheese Board",
             "description": "Selection of national cheeses with accompaniments.",
             "category": "starters",
             "price": 7.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/cheese-board/cheese-board.jpg",
                 "webp": "/src/assets/pictures/products/cheese-board/cheese-board.webp",
                 "avif": "/src/assets/pictures/products/cheese-board/cheese-board.avif",
@@ -325,13 +287,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 19,
             "name": "Mussels Marinière",
             "description": "Mussels cooked in a marinara-style sauce.",
             "category": "starters",
             "price": 6.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/mussels-mariniere/mussels-mariniere.jpg",
                 "webp": "/src/assets/pictures/products/mussels-mariniere/mussels-mariniere.webp",
                 "avif": "/src/assets/pictures/products/mussels-mariniere/mussels-mariniere.avif",
@@ -339,13 +299,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 20,
             "name": "Margherita Pizza",
             "description": "Tomato base, mozzarella and basil.",
             "category": "mains",
             "price": 8.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/pizza-margherita/pizza-margherita.jpg",
                 "webp": "/src/assets/pictures/products/pizza-margherita/pizza-margherita.webp",
                 "avif": "/src/assets/pictures/products/pizza-margherita/pizza-margherita.avif",
@@ -353,13 +311,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 21,
             "name": "Classic Beef Burger",
             "description": "Beef burger with cheese, tomato and lettuce.",
             "category": "mains",
             "price": 9.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/classic-burger/classic-burger.jpg",
                 "webp": "/src/assets/pictures/products/classic-burger/classic-burger.webp",
                 "avif": "/src/assets/pictures/products/classic-burger/classic-burger.avif",
@@ -367,13 +323,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 22,
             "name": "Bolognese Lasagna",
             "description": "Homemade lasagna with Bolognese sauce and béchamel.",
             "category": "mains",
             "price": 9.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/lasagna-bolognese/lasagna-bolognese.jpg",
                 "webp": "/src/assets/pictures/products/lasagna-bolognese/lasagna-bolognese.webp",
                 "avif": "/src/assets/pictures/products/lasagna-bolognese/lasagna-bolognese.avif",
@@ -381,13 +335,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 23,
             "name": "Chicken Tacos (3 pcs)",
             "description": "Tacos with marinated chicken, sauce and pico de gallo.",
             "category": "mains",
             "price": 9.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/chicken-tacos-3u/chicken-tacos-3u.jpg",
                 "webp": "/src/assets/pictures/products/chicken-tacos-3u/chicken-tacos-3u.webp",
                 "avif": "/src/assets/pictures/products/chicken-tacos-3u/chicken-tacos-3u.avif",
@@ -395,13 +347,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 24,
             "name": "Roast Chicken (portion)",
             "description": "Oven-roasted chicken with herbs.",
             "category": "mains",
             "price": 10.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/roast-chicken/roast-chicken.jpg",
                 "webp": "/src/assets/pictures/products/roast-chicken/roast-chicken.webp",
                 "avif": "/src/assets/pictures/products/roast-chicken/roast-chicken.avif",
@@ -409,13 +359,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 25,
             "name": "Pork Steak",
             "description": "Grilled pork steak with optional sauce.",
             "category": "mains",
             "price": 10.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/pork-steak/pork-steak.jpg",
                 "webp": "/src/assets/pictures/products/pork-steak/pork-steak.webp",
                 "avif": "/src/assets/pictures/products/pork-steak/pork-steak.avif",
@@ -423,13 +371,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 26,
             "name": "Spaghetti Carbonara",
             "description": "Pasta with traditional carbonara sauce.",
             "category": "mains",
             "price": 11.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/spaghetti-carbonara/spaghetti-carbonara.jpg",
                 "webp": "/src/assets/pictures/products/spaghetti-carbonara/spaghetti-carbonara.webp",
                 "avif": "/src/assets/pictures/products/spaghetti-carbonara/spaghetti-carbonara.avif",
@@ -437,13 +383,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 27,
             "name": "Mushroom Risotto",
             "description": "Creamy risotto with a variety of mushrooms.",
             "category": "mains",
             "price": 11.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/mushroom-risotto/mushroom-risotto.jpg",
                 "webp": "/src/assets/pictures/products/mushroom-risotto/mushroom-risotto.webp",
                 "avif": "/src/assets/pictures/products/mushroom-risotto/mushroom-risotto.avif",
@@ -451,13 +395,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 28,
             "name": "Grilled Salmon",
             "description": "Fresh salmon fillet grilled to perfection.",
             "category": "mains",
             "price": 12.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/grilled-salmon/grilled-salmon.jpg",
                 "webp": "/src/assets/pictures/products/grilled-salmon/grilled-salmon.webp",
                 "avif": "/src/assets/pictures/products/grilled-salmon/grilled-salmon.avif",
@@ -465,13 +407,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 29,
             "name": "Seafood Paella",
             "description": "Traditional paella with a variety of seafood.",
             "category": "mains",
             "price": 13.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/seafood-paella/seafood-paella.jpg",
                 "webp": "/src/assets/pictures/products/seafood-paella/seafood-paella.webp",
                 "avif": "/src/assets/pictures/products/seafood-paella/seafood-paella.avif",
@@ -479,13 +419,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 30,
             "name": "Veggie Burger",
             "description": "Plant-based burger with artisanal bun.",
             "category": "mains",
             "price": 9.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/veggie-burger/veggie-burger.jpg",
                 "webp": "/src/assets/pictures/products/veggie-burger/veggie-burger.webp",
                 "avif": "/src/assets/pictures/products/veggie-burger/veggie-burger.avif",
@@ -493,13 +431,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 31,
             "name": "Entrecote 200g",
             "description": "Grilled beef entrecote (200g).",
             "category": "mains",
             "price": 15.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/entrecote-200g/entrecote-200g.jpg",
                 "webp": "/src/assets/pictures/products/entrecote-200g/entrecote-200g.webp",
                 "avif": "/src/assets/pictures/products/entrecote-200g/entrecote-200g.avif",
@@ -507,13 +443,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 32,
             "name": "Oxtail Stew",
             "description": "Slow-cooked oxtail stew.",
             "category": "mains",
             "price": 14.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/oxtail-stew/oxtail-stew.jpg",
                 "webp": "/src/assets/pictures/products/oxtail-stew/oxtail-stew.webp",
                 "avif": "/src/assets/pictures/products/oxtail-stew/oxtail-stew.avif",
@@ -521,13 +455,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 33,
             "name": "Steak Tartare",
             "description": "Steak Tartare with egg yolk and smoked with chocolate wood.",
             "category": "mains",
             "price": 13.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/steak-tartare/steak-tartare.jpg",
                 "webp": "/src/assets/pictures/products/steak-tartare/steak-tartare.webp",
                 "avif": "/src/assets/pictures/products/steak-tartare/steak-tartare.avif",
@@ -535,13 +467,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 34,
             "name": "Cheesecake",
             "description": "Creamy cheesecake with a crunchy base.",
             "category": "desserts",
             "price": 4.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/cheesecake/cheesecake.jpg",
                 "webp": "/src/assets/pictures/products/cheesecake/cheesecake.webp",
                 "avif": "/src/assets/pictures/products/cheesecake/cheesecake.avif",
@@ -549,13 +479,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 35,
             "name": "Crema Catalana",
             "description": "Traditional dessert with caramelized sugar.",
             "category": "desserts",
             "price": 4.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/crema-catalana/crema-catalana.jpg",
                 "webp": "/src/assets/pictures/products/crema-catalana/crema-catalana.webp",
                 "avif": "/src/assets/pictures/products/crema-catalana/crema-catalana.avif",
@@ -563,13 +491,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 36,
             "name": "Chocolate Brownie",
             "description": "Warm brownie with vanilla ice cream.",
             "category": "desserts",
             "price": 5.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/chocolate-brownie/chocolate-brownie.jpg",
                 "webp": "/src/assets/pictures/products/chocolate-brownie/chocolate-brownie.webp",
                 "avif": "/src/assets/pictures/products/chocolate-brownie/chocolate-brownie.avif",
@@ -577,13 +503,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 37,
             "name": "Egg Flan",
             "description": "Homemade flan with liquid caramel and Napolitana biscuit.",
             "category": "desserts",
             "price": 3.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/egg-flan/egg-flan.jpg",
                 "webp": "/src/assets/pictures/products/egg-flan/egg-flan.webp",
                 "avif": "/src/assets/pictures/products/egg-flan/egg-flan.avif",
@@ -591,13 +515,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 38,
             "name": "Panna Cotta",
             "description": "Panna cotta with red fruit coulis.",
             "category": "desserts",
             "price": 4.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/panna-cotta/panna-cotta.jpg",
                 "webp": "/src/assets/pictures/products/panna-cotta/panna-cotta.webp",
                 "avif": "/src/assets/pictures/products/panna-cotta/panna-cotta.avif",
@@ -605,13 +527,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 39,
             "name": "French Fries",
             "description": "Portion of homemade fried potatoes.",
             "category": "sides",
             "price": 2.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/french-fries/french-fries.jpg",
                 "webp": "/src/assets/pictures/products/french-fries/french-fries.webp",
                 "avif": "/src/assets/pictures/products/french-fries/french-fries.avif",
@@ -619,13 +539,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 40,
             "name": "Small Salad",
             "description": "Small side salad.",
             "category": "sides",
             "price": 3.0,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/small-salad/small-salad.jpg",
                 "webp": "/src/assets/pictures/products/small-salad/small-salad.webp",
                 "avif": "/src/assets/pictures/products/small-salad/small-salad.avif",
@@ -633,13 +551,11 @@
             }
         },
         {
-            "javisProducts": true,
-            "id": 41,
             "name": "Garlic Bread",
             "description": "Slices of bread with butter and garlic.",
             "category": "sides",
             "price": 2.5,
-            "image": {
+            "images": {
                 "default": "/src/assets/pictures/products/garlic-bread/garlic-bread.jpg",
                 "webp": "/src/assets/pictures/products/garlic-bread/garlic-bread.webp",
                 "avif": "/src/assets/pictures/products/garlic-bread/garlic-bread.avif",
@@ -653,7 +569,6 @@
             "id": "d1-2025-09-04",
             "itemsIncluded": [
                 {
-                    "javisProducts": true,
                     "id": "cocacola-1",
                     "productQty": 2
                 }
@@ -669,7 +584,6 @@
         "userId": 1,
         "productsAdded": [
             {
-                "javisProducts": true,
                 "id": "cocacola-1",
                 "name": "Coca Cola",
                 "description": "Botella de Coca Cola (2L)",
@@ -683,7 +597,6 @@
                 "id": "d1-2025-09-04",
                 "itemsIncluded": [
                     {
-                        "javisProducts": true,
                         "id": "cocacola-1",
                         "qty": 2
                     }

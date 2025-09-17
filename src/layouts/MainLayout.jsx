@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { Footer } from "../components/Footer";
-import { NavBar } from "../components/Navbar";
+import { Navbar } from "../components/Navbar";
+import { AuthContext } from "../contexts/AuthContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 export const MainLayout = ({ children }) => {
     const { theme } = useContext(ThemeContext);
+    const { user } = useContext(AuthContext);
 
     return (
         <div
@@ -14,7 +16,7 @@ export const MainLayout = ({ children }) => {
                     : "bg-background-color-dark text-text-color-dark divide-text-color-dark/50"
             }`}
         >
-            <NavBar />
+            <Navbar isLoggedIn={user ? true : false} user={user} />
             <main className="flex-1 flex flex-col">{children}</main>
             <Footer />
         </div>

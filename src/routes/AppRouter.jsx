@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { AuthContext } from "../contexts/AuthContext";
+import { BookingPage } from "../pages/BookingPage";
+import { CartPage } from "../pages/CartPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
+import { MenuPage } from "../pages/MenuPage";
 import { OrdersPage } from "../pages/OrdersPage";
 import { RegisterPage } from "../pages/RegisterPage";
 
@@ -25,7 +28,9 @@ export const AppRouter = () => {
             />
             <Route path="/home" element={<HomePage />} />
 
-            <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/booking" element={<BookingPage />} />
+            <Route path="/menu" element={<MenuPage />} />
+            <Route path="/cart" element={<CartPage />} />
 
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -33,9 +38,10 @@ export const AppRouter = () => {
             <Route element={<PrivateRoute />}>
                 <Route path="/user" element={<h1>RUTA PRIVADA</h1>} />
                 <Route path="/dashboard/*" element={<DashboardPage />} />
+                <Route path="/orders" element={<OrdersPage />} />
             </Route>
 
-            <Route path="*" element={<h1>RUTA NO ENCONTRADA</h1>} />
+            <Route path="/*" element={<h1>RUTA NO ENCONTRADA</h1>} />
         </Routes>
     );
 };

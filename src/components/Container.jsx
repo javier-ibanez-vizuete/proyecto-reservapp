@@ -1,6 +1,6 @@
 export const Container = ({ children, className = "" }) => {
     return (
-        <div className={`flex flex-col px-md md:max-w-[1290px] md:mx-auto md:px-xl ${className}`}>
+        <div className={`flex flex-col px-md max-w-[1490px] xl:w-[1290px] xl:mx-auto ${className}`}>
             {children}
         </div>
     );
