@@ -1,7 +1,9 @@
+import { Navbar } from "../components/Navbar";
+
 export const AdminLayout = ({ children }) => {
     return (
-        <div>
-            <header>HEADER DEL DASHBOARD</header>
+        <div className="admin-layout">
+            <Navbar />
             <aside>ASIDE DEL DASHBOARD</aside>
             <main>{children}</main>
             <footer>FOOTER DEL DASHBOARD</footer>

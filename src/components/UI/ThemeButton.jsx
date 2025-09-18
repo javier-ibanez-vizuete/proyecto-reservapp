@@ -1,60 +1,145 @@
-// ThemeButton.jsx
-// Componente React (JSX) que reproduce el switch 'sun / moon' usando Tailwind CSS
-// - Usa clases de Tailwind para la mayor parte del estilo
-// - Añade un pequeño bloque <style> para definir keyframes (rotación / inclinación)
-// - El input es "uncontrolled" por simplicidad; si quieres controlarlo desde React
-//   exporta el estado (onChange / checked) o conéctalo a contexto.
-
+import classNames from "classnames";
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
-export const ThemeButton = () => {
+/**
+ * ThemeButton Component - Simple button for switching between light and dark themes
+ *
+ * This component automatically subscribes to ThemeContext and manages theme state.
+ * Shows sun icon for light theme and moon icon for dark theme.
+ *
+ * @component
+ * @example
+ * // Basic usage (automatically connects to ThemeContext)
+ * <ThemeButton />
+ *
+ * @example
+ * // With additional styling
+ * <ThemeButton className="fixed top-4 right-4" />
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.className=''] - Additional CSS classes for customization
+ * @param {Object} [props...rest] - Additional HTML button element props
+ *
+ * @requires ThemeContext - Must be wrapped within a ThemeProvider
+ * @requires ThemeContext.theme - Current theme state ('light' | 'dark')
+ * @requires ThemeContext.onToggleTheme - Function to toggle theme state
+ */
+export const ThemeButton = ({ className = "", ...props }) => {
     const { theme, onToggleTheme } = useContext(ThemeContext);
 
+    const handleClick = () => {
+        onToggleTheme?.();
+    };
+
+    const isDarkTheme = theme === "dark";
+
     return (
-        <label
-            htmlFor="theme-toggle"
-            className="block relative w-16 h-8 text-[17px] shadow-2xs rounded-4xl cursor-pointer"
-        >
-            <span className="tb-sun pointer-events-none absolute top-1 left-9 z-10 w-6 h-6">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-full h-full">
-                    <g fill="#ffd43b">
-                        <circle r="5" cy="12" cx="12"></circle>
-                        <path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path>
-                    </g>
-                </svg>
-            </span>
-
-            <span className="tb-moon pointer-events-none absolute top-1 left-1 z-10 w-6 h-6">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="w-full h-full">
-                    <path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path>
-                </svg>
-            </span>
-
-            {/* Input checkbox (hidden) - usamos `peer` para estados basados en checked */}
-            <input
-                id="theme-toggle"
-                type="checkbox"
-                onChange={onToggleTheme}
-                className="sr-only"
-                checked={theme === "dark" ? true : false}
-                aria-label="Button to toggle Theme"
-            />
-
-            {/* Slider */}
-            <span
-                className={`absolute inset-0 rounded-full transition-colors duration-300 ${
-                    theme === "dark" ? "bg-background-color" : "bg-accent-color"
-                }`}
-                aria-hidden
+        <div className={getContainerClasses(className, theme)}>
+            <button
+                className={getButtonClasses()}
+                onClick={handleClick}
+                aria-label={getAriaLabel(theme, isDarkTheme)}
+                title={`Currently ${theme} theme. Click to toggle.`}
+                {...props}
             >
-                {/* Knob: usamos un span interno para poder transformar con translate */}
-                <span
-                    className={`absolute left-[2px] bottom-[2px] m-[2px] h-6 w-6 rounded-[20px] z-20 transform transition-transform duration-200 ${
-                        theme === "dark" ? "translate-x-8 bg-background-color-dark" : "bg-background-color"
-                    }`}
-                />
-            </span>
-        </label>
+                {renderThemeIcon(isDarkTheme)}
+            </button>
+        </div>
     );
+};
+
+// Helper functions extracted to avoid nested logic
+const getContainerClasses = (className, theme) => {
+    return classNames(
+        `relative rounded-full border ${theme === "light" ? "border-amber-500" : "border-gray-500"}`,
+        "backdrop-blur-[15px]",
+        "shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)]",
+        "w-6 h-6 perfect-center",
+        className
+    );
+};
+
+const getButtonClasses = () => {
+    return classNames("perfect-center outline-none", "focus:outline-none rounded-full");
+};
+
+const getAriaLabel = (theme, isDarkTheme) => {
+    const targetTheme = isDarkTheme ? "light" : "dark";
+    return `Switch theme from ${theme} to ${targetTheme}`;
+};
+
+const renderThemeIcon = (isDarkTheme) => {
+    if (isDarkTheme) {
+        return renderMoonIcon();
+    }
+
+    return renderSunIcon();
+};
+
+const renderMoonIcon = () => {
+    return (
+        <span
+            className={classNames(
+                "relative z-10 rounded-full transition-colors duration-300 outline-none",
+                "w-[14px] h-[14px] bg-gray-500",
+                // Moon shape using pseudo-element
+                'before:content-[""] before:w-[11px] before:h-[11px] before:rounded-full',
+                "before:bg-accent-background-dark before:absolute before:top-[0px] before:-right-[1px]"
+            )}
+        />
+    );
+};
+
+const renderSunIcon = () => {
+    return (
+        <>
+            {renderSunCenter()}
+            {renderSunRays()}
+        </>
+    );
+};
+
+const renderSunCenter = () => {
+    return (
+        <span
+            className={classNames(
+                "relative z-10 rounded-full transition-colors duration-300 outline-none",
+                "w-[8px] h-[8px] bg-amber-500"
+            )}
+        />
+    );
+};
+
+const renderSunRays = () => {
+    return (
+        <div className="absolute w-[17px] h-[17px]">
+            {Array.from({ length: 8 }, (_, index) => (
+                <span key={index} className={getSunRayClasses(index)} />
+            ))}
+        </div>
+    );
+};
+
+const getSunRayClasses = (rayIndex) => {
+    const baseClasses =
+        "absolute w-[1.5px] h-[2.5px] rounded-full bg-amber-400 transition-colors duration-300 outline-none";
+    const positionClasses = getSunRayPosition(rayIndex);
+
+    return classNames(baseClasses, positionClasses);
+};
+
+const getSunRayPosition = (index) => {
+    const positions = {
+        0: "top-0 left-1/2 -translate-x-1/2", // Top
+        1: "bottom-0 left-1/2 -translate-x-1/2", // Bottom
+        2: "top-1/2 left-0 rotate-90 -translate-y-1/2", // Left
+        3: "top-1/2 right-0 rotate-90 -translate-y-1/2", // Right
+        4: "top-1/8 right-1/8 rotate-45", // Top-right
+        5: "top-1/8 left-1/8 -rotate-45", // Top-left
+        6: "bottom-1/8 left-1/8 rotate-45", // Bottom-left
+        7: "bottom-1/8 right-1/8 -rotate-45", // Bottom-right
+    };
+
+    return positions[index];
 };
