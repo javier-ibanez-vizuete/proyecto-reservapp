@@ -123,7 +123,7 @@ export const Avatar = ({
     );
 
     const getFallbackText = () => {
-        if (fallback) return fallback.toUpperCase();
+        if (fallback) return fallback.charAt(0).toUpperCase();
         if (alt) return alt.charAt(0).toUpperCase();
         return "?";
     };

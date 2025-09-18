@@ -111,6 +111,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                     alt="Avatar"
                                     online={user && true}
                                     onClick={handleProfile}
+                                    fallback={user?.name}
                                 />
                                 {!isMobile && !isTablet && (
                                     <Button onClick={handleLogout} variant="danger" size={isMobile && "sm"}>
