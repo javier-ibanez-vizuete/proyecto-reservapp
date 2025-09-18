@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { replace, useNavigate } from "react-router-dom";
+import { replace, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getProfileApi, loginApi, logoutApi, registerApi } from "./auth.api";
 import {
@@ -12,6 +12,7 @@ import {
 export const useAuth = () => {
     const { setUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const login = async ({ email, password }) => {
         // Enviar a la API de autenticación
@@ -23,7 +24,8 @@ export const useAuth = () => {
             saveTokenInLocalStorage(authData.token);
             saveUserInLocalStorage(authData.user);
             setUser(authData.user);
-            navigate("/", replace);
+
+            navigate("/home", { state: { fromLogin: true }, replace });
         }
 
         // Si la API nos dice error, mostramos un mensaje de error
@@ -46,18 +48,20 @@ export const useAuth = () => {
 
     const register = async (user) => {
         // Enviar a la API de autenticación
-        console.log(`Registrando al usuario: ${user.email} y password: ${user.password}`);
+        try {
+            console.log(`Registrando al usuario: ${user.email} y password: ${user.password}`);
 
-        // return;
-        const authData = await registerApi(user);
+            const authData = await registerApi(user);
 
-        if (authData) {
-            saveTokenInLocalStorage(authData.token);
-            saveUserInLocalStorage(authData.user);
-            setUser(authData.user);
-            navigate("/", replace);
+            if (authData) {
+                saveTokenInLocalStorage(authData.token);
+                saveUserInLocalStorage(authData.user);
+                setUser(authData.user);
+                navigate("/", replace);
+            }
+        } catch (error) {
+            console.log("ERROR", error);
         }
-
         // Si la API nos dice error, mostramos un mensaje de error
     };
 

@@ -1,11 +1,14 @@
 import { useContext, useState } from "react";
 import { Container } from "../components/Container";
 import { FormInput } from "../components/FormInput";
-import { Button } from "../components/UI/Button";
+import { LoadingButton } from "../components/Spinner/LoadingButton";
+import { ToastContainer } from "../components/ToastContainer";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { LoginVerificationFields } from "../helpers/FieldsVerificator";
+import { useDevice } from "../hooks/useDevice";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
+import { useToast } from "../hooks/useToast";
 
 const INITIAL_FORM = { email: "", password: "" };
 
@@ -15,7 +18,7 @@ const LOGIN_FIELDS = [
         input: {
             name: "email",
             type: "email",
-            placeholder: "admin@admin.com",
+            placeholder: "email@example.com",
             label: "Email",
             required: true,
             className: "flex-1",
@@ -30,7 +33,7 @@ const LOGIN_FIELDS = [
         input: {
             name: "password",
             type: "password",
-            placeholder: "1234",
+            placeholder: "passwordexample1",
             required: true,
             className: "rounded-r-none flex-1",
         },
@@ -44,9 +47,12 @@ const LOGIN_FIELDS = [
 export const LoginPage = () => {
     const [form, setForm] = useState(INITIAL_FORM);
     const [error, setError] = useState("");
+    const [isLoading, setIsloading] = useState(false);
 
+    const toast = useToast();
     const { login } = useAuth();
     const { theme } = useContext(ThemeContext);
+    const { isMobile } = useDevice();
     const { visible, toggleVisible } = usePasswordVisibility();
 
     const onInputChange = (event) => {
@@ -57,13 +63,21 @@ export const LoginPage = () => {
     };
 
     const onLoginSubmit = async (event) => {
-        event.preventDefault();
+        try {
+            event.preventDefault();
 
-        const isError = LoginVerificationFields(form);
-        if (isError) return setError(isError);
+            const isError = LoginVerificationFields(form);
+            if (isError) return setError(isError);
+            setIsloading(true);
 
-        await login(form);
-        setForm(INITIAL_FORM);
+            await login(form);
+            setForm(INITIAL_FORM);
+        } catch (error) {
+            setForm(INITIAL_FORM);
+            toast.showToast("Algo ha salido Mal", "error", 3000, "top-right");
+        } finally {
+            setIsloading(false);
+        }
     };
 
     return (
@@ -71,7 +85,7 @@ export const LoginPage = () => {
             <div
                 className={`flex flex-col gap-md ${
                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
-                } rounded-2xl shadow-landing-lg p-8`}
+                } rounded-2xl shadow-landing-lg xs:p-4 2xs:py-4 2xs:px-1 sm:p-8 md:p-10`}
             >
                 <h2 className={`${theme === "light" ? "text-text-color" : "text-text-color-dark"}`}>
                     Iniciar sesión
@@ -105,11 +119,21 @@ export const LoginPage = () => {
                     })}
                     {error && <span className="italic font-semibold text-error-600">{error}</span>}
 
-                    <Button type="submit" className="justify-center rounded-full" disabled={error && true}>
+                    {/* <Button type="submit" className="justify-center rounded-full" disabled={error && true}>
                         Entrar
-                    </Button>
+                    </Button> */}
+                    <LoadingButton
+                        loading={isLoading}
+                        type="submit"
+                        variant="default"
+                        size={isMobile ? "sm" : "md"}
+                    >
+                        Iniciar Sesion
+                    </LoadingButton>
                 </form>
             </div>
+
+            <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
         </Container>
     );
 };

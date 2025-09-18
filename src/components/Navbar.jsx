@@ -119,7 +119,11 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                     fallback={user?.name}
                                 />
                                 {!isMobile && !isTablet && (
-                                    <Button onClick={handleLogout} variant="danger" size={isMobile && "sm"}>
+                                    <Button
+                                        onClick={handleLogout}
+                                        variant="danger"
+                                        size={isMobile ? "sm" : "md"}
+                                    >
                                         Logout
                                     </Button>
                                 )}
@@ -127,10 +131,14 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         )}
                         {!isLoggedIn && (
                             <div className="perfect-center gap-2">
-                                <Button onClick={handleLogin} size={isMobile && "sm"} variant="outline">
+                                <Button onClick={handleLogin} size={isMobile ? "sm" : "md"} variant="outline">
                                     LOGIN
                                 </Button>
-                                <Button onClick={handleRegister} size={isMobile && "sm"} variant="secondary">
+                                <Button
+                                    onClick={handleRegister}
+                                    size={isMobile ? "sm" : "md"}
+                                    variant="secondary"
+                                >
                                     REGISTER
                                 </Button>
                             </div>
