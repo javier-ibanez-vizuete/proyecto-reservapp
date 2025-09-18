@@ -157,7 +157,7 @@ export const RegisterPage = () => {
     };
 
     const handleAvatarClick = (avatar) => {
-        setForm((prev) => ({ ...prev, avatar: { url: avatar.url }, alt: avatar.alt }));
+        setForm((prev) => ({ ...prev, avatar: { url: avatar.url, alt: avatar.alt } }));
     };
 
     return (
@@ -176,7 +176,7 @@ export const RegisterPage = () => {
                                 <Image className="rounded-xl" imgSrc={form?.avatar?.url} />
                             </ImageContainer>
                             <Button variant={"ghost"} className="flex-1">
-                                Avatar
+                                {form?.avatar?.alt ? form.avatar.alt : "Avatar"}
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu className="w-full">
