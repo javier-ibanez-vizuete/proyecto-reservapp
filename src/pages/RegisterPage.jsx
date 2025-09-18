@@ -1,151 +1,176 @@
-import { useContext, useState } from "react";
-import { LanguageContext } from "../contexts/LanguageContext";
-import { AuthContext } from "../contexts/AuthContext";
-import { usePassWordVisibility } from "../hooks/usePasswordVisibility";
-import { CustomInput } from "../components/CustomInput";
-import { BackButton } from "../components/UI/BackButton";
-import { Link } from "react-router-dom";
-const INITIAL_REGISTER_FORM_DATA = {
-	name: "",
-	email: "",
-	password: "",
-	repassword: "",
+import { useState } from "react";
+import { Container } from "../components/Container";
+import { FormInput } from "../components/FormInput";
+import { Button } from "../components/UI/Button";
+import { useAuth } from "../core/auth/useAuth";
+import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
+
+const INITIAL_FORM_DATA = {
+    name: "",
+    email: "",
+    address: "",
+    password: "",
+    repassword: "",
 };
 
+const REGISTER_FORM_FIELDS = [
+    {
+        containerClass: "flex flex-col gap-2",
+        input: {
+            id: "name",
+            name: "name",
+            type: "text",
+            placeholder: "Nombre Completo",
+            label: "Campo nombre completo",
+            required: true,
+            className: "flex-1",
+        },
+        label: {
+            text: "Nombre Completo",
+            className: "",
+        },
+    },
+    {
+        containerClass: "flex flex-col gap-2",
+        input: {
+            id: "email",
+            name: "email",
+            type: "email",
+            placeholder: "usuario@usuario.com",
+            label: "Campo Correo Electrónico",
+            required: true,
+            className: "flex-1",
+        },
+        label: {
+            text: "Email",
+            className: "",
+        },
+    },
+    {
+        containerClass: "flex flex-col gap-2",
+        input: {
+            id: "address",
+            name: "address",
+            type: "text",
+            placeholder: "Calle Inventada, 12 Ciudad",
+            label: "Campo Direccion Personal",
+            required: true,
+            className: "flex-1",
+        },
+        label: {
+            text: "Dirección",
+            className: "",
+        },
+    },
+    {
+        containerClass: "flex flex-col gap-2",
+        input: {
+            id: "password",
+            name: "password",
+            type: "password",
+            placeholder: "123456789",
+            label: "Campo contraseña",
+            required: true,
+            className: "rounded-r-none flex-1",
+        },
+        label: {
+            text: "Contraseña",
+            className: "",
+        },
+    },
+    {
+        containerClass: "flex flex-col gap-2",
+        input: {
+            id: "repassword",
+            name: "repassword",
+            type: "password",
+            placeholder: "123456789",
+            label: "Campo Confirmar Contraseña",
+            required: true,
+            className: "rounded-r-none flex-1",
+        },
+        label: {
+            text: "Confirmar Contraseña",
+            className: "",
+        },
+    },
+];
+
 export const RegisterPage = () => {
-	const [formData, setFormData] = useState(INITIAL_REGISTER_FORM_DATA);
-	const [errorKey, setErrorKey] = useState("");
+    const [form, setForm] = useState(INITIAL_FORM_DATA);
+    const [error, setError] = useState("");
+    const { register } = useAuth();
 
-	const { getText } = useContext(LanguageContext);
-	const { userValidate, userCreate } = useContext(AuthContext);
+    const visibility1 = usePasswordVisibility();
+    const visibility2 = usePasswordVisibility();
 
-	const passwordView = usePassWordVisibility();
-	const rePasswordView = usePassWordVisibility();
+    const onInputChange = (event) => {
+        const { name, value } = event.target;
+        setError("");
 
-	const { name, email, password, repassword } = formData;
+        setForm((prevValue) => ({ ...prevValue, [name]: value }));
+    };
 
-	const onInputChange = (event) => {
-		const { name, value } = event.target;
+    const onRegisterSubmit = async (event) => {
+        event.preventDefault();
 
-		setErrorKey("");
-		setFormData((prev) => ({ ...prev, [name]: value }));
-	};
+        const isError = RegisterVerificationFields(form);
+        if (isError) return setError(isError);
+        const { repassword, ...restForm } = form;
 
-	const onFormSubmit = (event) => {
-		event.preventDefault();
+        console.log("Esto es el formulario acabado ", restForm);
 
-		const { name, email, password, repassword } = formData;
+        // await register(restForm);
+        // setForm(INITIAL_FORM_DATA);
+    };
 
-		if (!name) return setErrorKey("noNameField");
-		if (name.length < 2) return setErrorKey("nameFieldShorter");
-		if (name.length > 20) return setErrorKey("nameFieldLonger");
-		if (!email) return setErrorKey("noEmailField");
-		if (!email.includes("@")) return setErrorKey("emailNotValid");
-		if (!email.includes(".")) return setErrorKey("emailNotValid");
-		if (email.length < 4) return setErrorKey("emailShorter");
-		if (!password) return setErrorKey("noPasswordField");
-		if (password.length < 8) return setErrorKey("passwordShorter");
-		if (password.length > 20) return setErrorKey("passwordLonger");
-		if (!repassword) return setErrorKey("noRePasswordField");
-		if (password !== repassword) return setErrorKey("passwordNotEqual");
+    return (
+        <Container className="perfect-center flex-1">
+            <div className="flex flex-col gap-md bg-accent-color rounded-2xl p-md">
+                <h2 className="">Registro</h2>
 
-		const newUserData = { name, email, password };
+                <form className="flex flex-col gap-md" onSubmit={onRegisterSubmit}>
+                    {REGISTER_FORM_FIELDS.map(({ containerClass, input, label }) => {
+                        const password1 = visibility1.visible && input.name === "password";
+                        const password2 = visibility2.visible && input.name === "repassword";
+                        const typeText = password1 || password2 ? "text" : input.type;
 
-		const userExist = userValidate(newUserData);
-		if (userExist) return setErrorKey("emailExistAlert");
+                        return (
+                            <FormInput
+                                key={input.id}
+                                containerClass={containerClass}
+                                input={{
+                                    id: input.id,
+                                    name: input.name,
+                                    type: typeText,
+                                    placeholder: input.placeholder,
+                                    value: form[input.name],
+                                    onChange: onInputChange,
+                                    required: input.required,
+                                    className: input.className,
+                                }}
+                                label={{
+                                    text: label.text,
+                                    className: label.className,
+                                }}
+                                onClick={
+                                    input.name === "password"
+                                        ? visibility1.toggleVisible
+                                        : visibility2.toggleVisible
+                                }
+                                isPasswordVisible={
+                                    input.name === "password" ? visibility1.visible : visibility2.visible
+                                }
+                            />
+                        );
+                    })}
+                    {error && <h3>{error}</h3>}
 
-		userCreate(newUserData);
-		setFormData(INITIAL_REGISTER_FORM_DATA);
-		setErrorKey("");
-	};
-
-	const onFormReset = () => {
-		setFormData(INITIAL_REGISTER_FORM_DATA);
-		setErrorKey("");
-	};
-
-	return (
-		<section className="flex flex-1 flex-col gap-4">
-			<BackButton />
-
-			<h1 className="text-xl font-bold">FORMULARIO REGISTRO</h1>
-			<form action="#" method="get" onSubmit={onFormSubmit} onReset={onFormReset} className="flex flex-col gap-6">
-				<CustomInput inputName={"name"} labelName={"LABELINPUTNAME"}>
-					<input
-						type="text"
-						name="name"
-						id="name"
-						value={name}
-						onChange={onInputChange}
-						placeholder="PlaceholderINPUTNAME"
-						className="p-2 rounded-sm text-sm placeholder:opacity-70"
-					/>
-				</CustomInput>
-				<CustomInput inputName={"email"} labelName={"LABELINPUTEMAIL"}>
-					<input
-						type="email"
-						name="email"
-						id="email"
-						value={email}
-						onChange={onInputChange}
-						placeholder="PlaceholderINPUTEMAIL"
-						className="p-2 rounded-sm text-sm placeholder:opacity-70"
-					/>
-				</CustomInput>
-				<CustomInput inputName={"password"} labelName={"LABELINPUTPASSWORD"}>
-					<div className="flex items-center">
-						<input
-							type={passwordView.visible ? "text" : "password"}
-							name="password"
-							id="password"
-							value={password}
-							onChange={onInputChange}
-							placeholder="PlaceholderINPUTPASSWORD"
-							className="flex-1 p-2 rounded-sm text-sm placeholder:opacity-70"
-						/>
-						<button type="button" onClick={passwordView.toggleVisible}>
-							{passwordView.visible ? "VISIBLE" : "NO VISIBLE"}
-						</button>
-					</div>
-				</CustomInput>
-				<CustomInput inputName={"repassword"} labelName={"LABELINPUTREPASSWORD"}>
-					<div className="flex items-center">
-						<input
-							type={rePasswordView.visible ? "text" : "password"}
-							name="repassword"
-							id="repassword"
-							value={repassword}
-							onChange={onInputChange}
-							placeholder="PlaceholderINPUTREPASSWORD"
-							className="flex-1 p-2 rounded-sm text-sm placeholder:opacity-70"
-						/>
-						<button type="button" onClick={rePasswordView.toggleVisible}>
-							{rePasswordView.visible ? "VISIBLE" : "NO VISIBLE"}
-						</button>
-					</div>
-				</CustomInput>
-				<div className="flex flex-col gap-2">
-					{errorKey && <small className="text-sm text-red-600 italic opacity-50">MENSAJE DE ERROR</small>}
-					<button
-						className="p-2 bg-blue-500 rounded-md shadow-md cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition"
-						type="submit"
-					>
-						BOTON REGISTRARSE
-					</button>
-					<button
-						className="p-2 bg-blue-500 rounded-md shadow-md cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition"
-						type="reset"
-					>
-						BOTON RESETEAR FORMULARIO
-					</button>
-					<div>
-						¿Ya tienes Cuenta?{" "}
-						<Link className="cursor-pointer text-blue-500" to={"/login"}>
-							Inicia sesion
-						</Link>
-					</div>
-				</div>
-			</form>
-		</section>
-	);
+                    <Button type="submit" className="justify-center rounded-full py-sm px-md">
+                        Registrarse
+                    </Button>
+                </form>
+            </div>
+        </Container>
+    );
 };

@@ -1,144 +1,177 @@
 import { useContext, useEffect, useState } from "react";
-import { LanguageContext } from "../contexts/LanguageContext";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Image } from "./UI/Image";
+import { ImageContainer } from "./UI/ImageContainer";
 
-const cn = (...classes) => classes.filter(Boolean).join(" ");
+import logoReservappAvif from "../assets/logos/reservapp-logo/logo-reservapp.avif";
+import logoReservappPng from "../assets/logos/reservapp-logo/logo-reservapp.png";
+import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.webp";
+import { ThemeContext } from "../contexts/ThemeContext";
+import { useAuth } from "../core/auth/useAuth";
+import { useDevice } from "../hooks/useDevice";
+import { Avatar } from "./Avatar";
+import { BurgerButton } from "./BurgerButton";
+import { Container } from "./Container";
+import { NavbarLinks } from "./NavbarLinks";
+import { Button } from "./UI/Button";
+import { ThemeButton } from "./UI/ThemeButton";
 
-const BurgerButton = ({ openMobileNav, handleClick }) => {
-	return (
-		<button
-			type="button"
-			className="relative md:hidden block w-[50px] h-[40px] cursor-pointer"
-			onClick={handleClick}
-			aria-label="Open Menu"
-			aria-expanded={openMobileNav}
-			aria-controls="mobile-nav"
-		>
-			<span
-				className="absolute left-0 w-[45px] h-[7px] bg-amber-800 rounded-full transition-all duration-300 ease-in-out"
-				style={{
-					top: openMobileNav ? 0 : 0,
-					transform: openMobileNav ? "rotate(45deg)" : "rotate(0deg)",
-					transformOrigin: "top left",
-					width: openMobileNav ? "50px" : "45px",
-					left: openMobileNav ? "5px" : "0px",
-				}}
-			/>
-			<span
-				className="absolute left-0 w-[45px] h-[7px] bg-amber-800 rounded-full transition-all duration-300 ease-in-out"
-				style={{
-					top: "17px",
-					transform: openMobileNav ? "translateX(-20px)" : "translateX(0px)",
-					opacity: openMobileNav ? 0 : 1,
-				}}
-			/>
-			<span
-				className="absolute left-0 w-[45px] h-[7px] bg-amber-800 rounded-full transition-all duration-300 ease-in-out"
-				style={{
-					bottom: openMobileNav ? 0 : 0,
-					transform: openMobileNav ? "rotate(-45deg)" : "rotate(0deg)",
-					transformOrigin: "bottom left",
-					width: openMobileNav ? "50px" : "45px",
-					boxShadow: openMobileNav ? "0 0 10px #495057" : "none",
-					left: openMobileNav ? "5px" : "0px",
-				}}
-			/>
-		</button>
-	);
+const LOGO_IMAGES = {
+    default: logoReservappPng,
+    webp: logoReservappWebp,
+    avif: logoReservappAvif,
 };
+export const Navbar = ({ isLoggedIn = false, user = null }) => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { isMobile, isTablet } = useDevice();
+    const { logout } = useAuth();
 
-const getNavLinksClasses = ({ isActive, isPending, isTransitioning }) => {
-	const base = "BASE STYLE";
-	const normal = "NORMAL STYLE";
-	const active = "ACTIVE STYLE";
-	const pending = "PENDING STYLE";
-	const transitioning = "TRANSITIONING STYLE";
+    const Navigate = useNavigate();
+    const { pathname } = useLocation();
 
-	if (isActive) return cn(base, active);
-	if (isPending) return cn(base, pending);
-	if (isTransitioning) return cn(base, transitioning);
-	return cn(base, normal);
-};
+    const { theme } = useContext(ThemeContext);
+    // const contentMobileRef = useRef();
 
-const NavbarLinks = () => {
-	const { userActive, logout } = useContext(AuthContext);
-	const { getText } = useContext(LanguageContext);
+    useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
-	const NAV_LINKS = [
-		{ to: "/home", label: getText("homePageNavLabel") },
-		{ to: "/aqui-la-ruta", label: "EnlacesDelNAV" },
-	];
+    // useEffect(() => {
+    //     const mobileMenuContainer = contentMobileRef.current;
+    //     if (!mobileMenuContainer) return;
 
-	return (
-		<ul className="flex flex-col gap-2 md:flex-row md:items-center">
-			{NAV_LINKS.map((link) => (
-				<li key={link.to}>
-					<NavLink to={link.to} className={(state) => getNavLinksClasses(state)}>
-						{link.label}
-					</NavLink>
-				</li>
-			))}
-			{userActive?.id && (
-				<>
-					<li>
-						<NavLink to={"/user"}>{getText("userNavLabel")}</NavLink>
-					</li>
-				</>
-			)}
-		</ul>
-	);
-};
+    //     mobileMenuContainer.style.maxHeight = isMobileMenuOpen
+    //         ? `${mobileMenuContainer.scrollHeight}px`
+    //         : "0px";
+    // }, [isMobileMenuOpen]);
 
-export const NavBar = () => {
-	const [openMobileNav, setOpenMobileNav] = useState(false);
-	const { userActive, logout } = useContext(AuthContext);
-	const { pathname } = useLocation();
+    // FUNCIONES UTILITARIAS
+    const getUserInitial = () => {
+        return user?.name ? user.name.charAt(0).toUpperCase() : "U";
+    };
 
-	useEffect(() => {
-		setOpenMobileNav(false);
-	}, [pathname]);
+    const getUserDisplayName = () => {
+        return user?.name || "User";
+    };
 
-	const handleClick = () => setOpenMobileNav((prevValue) => !prevValue);
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
 
-	return (
-		<nav className="flex flex-col p-7 bg-amber-200">
-			<div className="flex items-center justify-between">
-				<Link to={"/"} className="text-xl font-bold">
-					TITULO PAGINA
-				</Link>
+    // HANDLER EVENTS
+    const handleLogout = () => {
+        console.log("LOGOUT CLICKED");
+        logout();
+    };
 
-				<div className="hidden md:block">
-					<NavbarLinks />
-				</div>
+    const handleLogin = () => {
+        console.log("Login clicked");
+        Navigate("/login");
+        //AQUI PONER NAVIGATE TO PAGINA LOGIN
+    };
 
-				<div className="hidden md:flex md:gap-2">
-					{!userActive?.id && (
-						<>
-							<Link to={"/register"}>SIGN UP</Link>
-							<Link to={"/login"}>LOG IN</Link>
-						</>
-					)}
-					{userActive?.id && <button onClick={logout}>LOG OUT</button>}
-				</div>
+    const handleRegister = () => {
+        console.log("Register Clicked");
+        //AQUI PONER NAVIGATE TO PAGINA REGISTER
+    };
 
-				<BurgerButton openMobileNav={openMobileNav} handleClick={handleClick} />
-			</div>
+    const handleProfile = () => {
+        console.log("Profile Clicked");
+        // AQUI PONER NAVIGATE TO PAGINA PROFILE
+    };
 
-			<div id="mobile-nav" className={cn("md:hidden", openMobileNav ? "block" : "hidden")}>
-				<div className="flex bg-amber-200">
-					<NavbarLinks />
-				</div>
-				<div className="flex flex-col bg-red-500">
-					{!userActive?.id && (
-						<>
-							<Link to={"/register"}>SIGN UP</Link>
-							<Link to={"/login"}>LOG IN</Link>
-						</>
-					)}
-					{userActive?.id && <button onClick={logout}>LOG OUT</button>}
-				</div>
-			</div>
-		</nav>
-	);
+    const handleLinkClick = (linkName) => {
+        console.log(`Navigating to ${linkName}`);
+        return linkName;
+    };
+
+    const handleHomeClick = () => {
+        console.log(`NAVIGANDO A /HOME o /DASHBOARD`);
+    };
+
+    return (
+        <nav className={`navbar ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}>
+            <Container className="navbar-content">
+                <div className="navbar-inner">
+                    <Link className="navbar-logo" to={"/"} onClick={handleHomeClick}>
+                        <ImageContainer className="flex-1 logo-icon">
+                            <Image imageData={LOGO_IMAGES} alt="Logo ReservApp" />
+                        </ImageContainer>
+                        {isLoggedIn && <span className="logo-text text-text-color">ReservApp</span>}
+                    </Link>
+                    <div className="navbar-menu-container">
+                        <NavbarLinks handleLinkClick={handleLinkClick} />
+                    </div>
+                    <div className="navbar-actions">
+                        {isLoggedIn && (
+                            <div className="navbar-user-profile">
+                                {/* Cambiar por un DropDown */}
+                                <ThemeButton />
+
+                                <Avatar
+                                    src={user?.src}
+                                    alt="Avatar"
+                                    online={user && true}
+                                    onClick={handleProfile}
+                                    fallback={user?.name}
+                                />
+                                {!isMobile && !isTablet && (
+                                    <Button onClick={handleLogout} variant="danger" size={isMobile && "sm"}>
+                                        Logout
+                                    </Button>
+                                )}
+                            </div>
+                        )}
+                        {!isLoggedIn && (
+                            <div className="perfect-center gap-2">
+                                <Button onClick={handleLogin} size={isMobile && "sm"} variant="outline">
+                                    LOGIN
+                                </Button>
+                                <Button onClick={handleRegister} size={isMobile && "sm"} variant="secondary">
+                                    REGISTER
+                                </Button>
+                            </div>
+                        )}
+                        <div className="flex justify-center h-10 w-10">
+                            <BurgerButton
+                                isMobileMenuOpen={isMobileMenuOpen}
+                                toggleMobileMenu={toggleMobileMenu}
+                            />
+                        </div>
+                    </div>
+                </div>
+                {isMobileMenuOpen && (
+                    <div
+                        className={`${isMobile || isTablet ? "" : "hidden"} mobile-menu`}
+                        // ref={contentMobileRef}
+                    >
+                        <Container
+                            className={`${
+                                theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+                            } py-3 gap-2`}
+                        >
+                            <NavbarLinks handleLinkClick={handleLinkClick} />
+                            {isLoggedIn && (
+                                <div className="flex flex-col gap-2">
+                                    <Button
+                                        onClick={handleProfile}
+                                        className="justify-start"
+                                        variant="outline"
+                                    >
+                                        Perfil
+                                    </Button>
+                                    <Button onClick={handleLogout} className="justify-start" variant="danger">
+                                        Logout
+                                    </Button>
+                                </div>
+                            )}
+                            {!isLoggedIn && (
+                                <div className="flex items-center gap-3">
+                                    <ThemeButton />
+                                </div>
+                            )}
+                        </Container>
+                    </div>
+                )}
+            </Container>
+        </nav>
+    );
 };

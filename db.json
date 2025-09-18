@@ -19,14 +19,12 @@
                     },
                     "productsAdded": [
                         {
-                            "productId": "cocacola-1",
-                            "productName": "Coca Cola",
-                            "productDescription": "Botella de Coca Cola (2L)",
-                            "productQty": 2,
-                            "productPrice": 1.5,
-                            "productSubtotal": 3,
-                            "productTax": 0.25,
-                            "productTotal": ""
+                            "id": "cocacola-1",
+                            "name": "Coca Cola",
+                            "description": "Botella de Coca Cola (2L)",
+                            "qty": 2,
+                            "price": 1.5,
+                            "total": 3
                         }
                     ],
                     "discounts": [
@@ -34,7 +32,7 @@
                             "couponId": "d1-2025-09-04",
                             "itemsIncluded": [
                                 {
-                                    "productId": "cocacola-1",
+                                    "id": "cocacola-1",
                                     "productQty": 2
                                 }
                             ],
@@ -44,6 +42,7 @@
                         }
                     ],
                     "Subtotal": 3,
+                    "tax": 0.25,
                     "total": 2.25
                 }
             ],
@@ -65,70 +64,601 @@
                     },
                     "cancelledTime": ""
                 }
-            ]
+            ],
+            "javisUsers": true
         }
     ],
+
     "products": [
         {
-            "productId": "cocacola-1",
-            "productName": "Coca Cola",
-            "productDescription": "Botella de Coca Cola (2L)",
-            "productPrice": 1.5,
-            "productTax": 0.25
+            "name": "Coca-Cola",
+            "description": "Coca-Cola bottle (35cl).",
+            "categories": ["drinks"],
+            "price": 1.5,
+            "deliveryPrice": 1.8,
+            "images": {
+                "default": "/pictures/products/coca-cola/coca-cola.jpg",
+                "webp": "/pictures/products/coca-cola/coca-cola.webp",
+                "avif": "/pictures/products/coca-cola/coca-cola.avif",
+                "alt": "Coca-Cola bottle 35cl"
+            }
+        },
+        {
+            "name": "Mineral Water (500ml)",
+            "description": "Natural mineral water in a 500ml bottle.",
+            "categories": ["drinks"],
+            "price": 1.5,
+            "deliveryPrice": 1.8,
+            "images": {
+                "default": "/pictures/products/mineral-water-500ml/mineral-water-500ml.jpg",
+                "webp": "/pictures/products/mineral-water-500ml/mineral-water-500ml.webp",
+                "avif": "/pictures/products/mineral-water-500ml/mineral-water-500ml.avif",
+                "alt": "Natural mineral water bottle 500ml"
+            }
+        },
+        {
+            "name": "Fanta Orange (330ml)",
+            "description": "330ml can of Fanta orange.",
+            "categories": ["drinks"],
+            "price": 1.8,
+            "deliveryPrice": 2.16,
+            "images": {
+                "default": "/pictures/products/fanta-orange-330ml/fanta-orange-330ml.jpg",
+                "webp": "/pictures/products/fanta-orange-330ml/fanta-orange-330ml.webp",
+                "avif": "/pictures/products/fanta-orange-330ml/fanta-orange-330ml.avif",
+                "alt": "Fanta Orange can 330ml"
+            }
+        },
+        {
+            "name": "Fresh Squeezed Orange Juice (250ml)",
+            "description": "Freshly squeezed orange juice, 250ml.",
+            "categories": ["drinks"],
+            "price": 2.0,
+            "deliveryPrice": 2.4,
+            "images": {
+                "default": "/pictures/products/orange-juice-250ml/orange-juice-250ml.jpg",
+                "webp": "/pictures/products/orange-juice-250ml/orange-juice-250ml.webp",
+                "avif": "/pictures/products/orange-juice-250ml/orange-juice-250ml.avif",
+                "alt": "Fresh squeezed orange juice 250ml"
+            }
+        },
+        {
+            "name": "Beer (330ml)",
+            "description": "Beer bottle or can (330ml).",
+            "categories": ["drinks"],
+            "price": 2.5,
+            "deliveryPrice": 3.0,
+            "images": {
+                "default": "/pictures/products/beer-330ml/beer-330ml.jpg",
+                "webp": "/pictures/products/beer-330ml/beer-330ml.webp",
+                "avif": "/pictures/products/beer-330ml/beer-330ml.avif",
+                "alt": "Beer bottle 330ml"
+            }
+        },
+        {
+            "name": "Lemon Soda (330ml)",
+            "description": "330ml lemon-flavored soft drink.",
+            "categories": ["drinks"],
+            "price": 2.5,
+            "deliveryPrice": 3.0,
+            "images": {
+                "default": "/pictures/products/lemon-soda-330ml/lemon-soda-330ml.jpg",
+                "webp": "/pictures/products/lemon-soda-330ml/lemon-soda-330ml.webp",
+                "avif": "/pictures/products/lemon-soda-330ml/lemon-soda-330ml.avif",
+                "alt": "Lemon flavored soft drink 330ml"
+            }
+        },
+        {
+            "name": "Espresso Coffee",
+            "description": "Short espresso; option for single or double.",
+            "categories": ["drinks"],
+            "price": 1.8,
+            "deliveryPrice": 2.16,
+            "images": {
+                "default": "/pictures/products/espresso/espresso.jpg",
+                "webp": "/pictures/products/espresso/espresso.webp",
+                "avif": "/pictures/products/espresso/espresso.avif",
+                "alt": "Espresso coffee cup"
+            }
+        },
+        {
+            "name": "Glass of Red Wine",
+            "description": "House red wine (125ml).",
+            "categories": ["drinks"],
+            "price": 3.0,
+            "deliveryPrice": 3.6,
+            "images": {
+                "default": "/pictures/products/red-wine-glass/red-wine-glass.jpg",
+                "webp": "/pictures/products/red-wine-glass/red-wine-glass.webp",
+                "avif": "/pictures/products/red-wine-glass/red-wine-glass.avif",
+                "alt": "Glass of house red wine 125ml"
+            }
+        },
+        {
+            "name": "Glass of White Wine",
+            "description": "House white wine (125ml).",
+            "categories": ["drinks"],
+            "price": 3.5,
+            "deliveryPrice": 4.2,
+            "images": {
+                "default": "/pictures/products/white-wine-glass/white-wine-glass.jpg",
+                "webp": "/pictures/products/white-wine-glass/white-wine-glass.webp",
+                "avif": "/pictures/products/white-wine-glass/white-wine-glass.avif",
+                "alt": "Glass of house white wine 125ml"
+            }
+        },
+        {
+            "name": "Sparkling Water (500ml)",
+            "description": "Sparkling water in a 500ml bottle.",
+            "categories": ["drinks"],
+            "price": 2.0,
+            "deliveryPrice": 2.4,
+            "images": {
+                "default": "/pictures/products/sparkling-water-500ml/sparkling-water-500ml.jpg",
+                "webp": "/pictures/products/sparkling-water-500ml/sparkling-water-500ml.webp",
+                "avif": "/pictures/products/sparkling-water-500ml/sparkling-water-500ml.avif",
+                "alt": "Sparkling water bottle 500ml"
+            }
+        },
+        {
+            "name": "Mixed Salad",
+            "description": "Lettuce, tomato, onion, olives and dressing.",
+            "categories": ["starters"],
+            "price": 4.0,
+            "deliveryPrice": 4.8,
+            "images": {
+                "default": "/pictures/products/mixed-salad/mixed-salad.jpg",
+                "webp": "/pictures/products/mixed-salad/mixed-salad.webp",
+                "avif": "/pictures/products/mixed-salad/mixed-salad.avif",
+                "alt": "Mixed salad with lettuce, tomato, onion, olives and dressing"
+            }
+        },
+        {
+            "name": "Tomato Bruschetta",
+            "description": "Toasted bread with tomato, garlic and olive oil.",
+            "categories": ["starters"],
+            "price": 4.5,
+            "deliveryPrice": 5.4,
+            "images": {
+                "default": "/pictures/products/tomato-bruschetta/tomato-bruschetta.jpg",
+                "webp": "/pictures/products/tomato-bruschetta/tomato-bruschetta.webp",
+                "avif": "/pictures/products/tomato-bruschetta/tomato-bruschetta.avif",
+                "alt": "Tomato bruschetta with toasted bread, garlic and olive oil"
+            }
+        },
+        {
+            "name": "Homemade Croquettes (6pcs)",
+            "description": "Homemade ham croquettes, 6 pieces.",
+            "categories": ["starters"],
+            "price": 5.0,
+            "deliveryPrice": 6.0,
+            "images": {
+                "default": "/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.jpg",
+                "webp": "/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.webp",
+                "avif": "/pictures/products/homemade-croquettes-6u/homemade-croquettes-6u.avif",
+                "alt": "Homemade ham croquettes, 6 pieces"
+            }
+        },
+        {
+            "name": "Fried Calamari",
+            "description": "Battered calamari rings, served with lemon.",
+            "categories": ["starters"],
+            "price": 6.0,
+            "deliveryPrice": 7.2,
+            "images": {
+                "default": "/pictures/products/fried-calamari/fried-calamari.jpg",
+                "webp": "/pictures/products/fried-calamari/fried-calamari.webp",
+                "avif": "/pictures/products/fried-calamari/fried-calamari.avif",
+                "alt": "Fried calamari rings served with lemon"
+            }
+        },
+        {
+            "name": "Patatas Bravas",
+            "description": "Fried potatoes with spicy brava sauce and alioli.",
+            "categories": ["starters"],
+            "price": 4.5,
+            "deliveryPrice": 5.4,
+            "images": {
+                "default": "/pictures/products/patatas-bravas/patatas-bravas.jpg",
+                "webp": "/pictures/products/patatas-bravas/patatas-bravas.webp",
+                "avif": "/pictures/products/patatas-bravas/patatas-bravas.avif",
+                "alt": "Patatas bravas with spicy brava sauce and alioli"
+            }
+        },
+        {
+            "name": "Soup of the Day",
+            "description": "Homemade soup according to the day's recipe.",
+            "categories": ["starters"],
+            "price": 4.0,
+            "deliveryPrice": 4.8,
+            "images": {
+                "default": "/pictures/products/soup-of-the-day/soup-of-the-day.jpg",
+                "webp": "/pictures/products/soup-of-the-day/soup-of-the-day.webp",
+                "avif": "/pictures/products/soup-of-the-day/soup-of-the-day.avif",
+                "alt": "Homemade soup of the day"
+            }
+        },
+        {
+            "name": "Iberian Ham (portion)",
+            "description": "Portion of thinly sliced Iberian ham.",
+            "categories": ["starters"],
+            "price": 8.0,
+            "deliveryPrice": 9.6,
+            "images": {
+                "default": "/pictures/products/iberian-ham/iberian-ham.jpg",
+                "webp": "/pictures/products/iberian-ham/iberian-ham.webp",
+                "avif": "/pictures/products/iberian-ham/iberian-ham.avif",
+                "alt": "Portion of thinly sliced Iberian ham"
+            }
+        },
+        {
+            "name": "Cheese Board",
+            "description": "Selection of national cheeses with accompaniments.",
+            "categories": ["starters"],
+            "price": 7.5,
+            "deliveryPrice": 9.0,
+            "images": {
+                "default": "/pictures/products/cheese-board/cheese-board.jpg",
+                "webp": "/pictures/products/cheese-board/cheese-board.webp",
+                "avif": "/pictures/products/cheese-board/cheese-board.avif",
+                "alt": "Cheese board with selection of national cheeses and accompaniments"
+            }
+        },
+        {
+            "name": "Mussels Marinière",
+            "description": "Mussels cooked in a marinara-style sauce.",
+            "categories": ["starters"],
+            "price": 6.5,
+            "deliveryPrice": 7.8,
+            "images": {
+                "default": "/pictures/products/mussels-mariniere/mussels-mariniere.jpg",
+                "webp": "/pictures/products/mussels-mariniere/mussels-mariniere.webp",
+                "avif": "/pictures/products/mussels-mariniere/mussels-mariniere.avif",
+                "alt": "Mussels marinière cooked in marinara-style sauce"
+            }
+        },
+        {
+            "name": "Margherita Pizza",
+            "description": "Tomato base, mozzarella and basil.",
+            "categories": ["mains"],
+            "price": 8.5,
+            "deliveryPrice": 10.2,
+            "images": {
+                "default": "/pictures/products/pizza-margherita/pizza-margherita.jpg",
+                "webp": "/pictures/products/pizza-margherita/pizza-margherita.webp",
+                "avif": "/pictures/products/pizza-margherita/pizza-margherita.avif",
+                "alt": "Margherita pizza with tomato base, mozzarella and basil"
+            }
+        },
+        {
+            "name": "Classic Beef Burger",
+            "description": "Beef burger with cheese, tomato and lettuce.",
+            "categories": ["mains"],
+            "price": 9.0,
+            "deliveryPrice": 10.8,
+            "images": {
+                "default": "/pictures/products/classic-burger/classic-burger.jpg",
+                "webp": "/pictures/products/classic-burger/classic-burger.webp",
+                "avif": "/pictures/products/classic-burger/classic-burger.avif",
+                "alt": "Classic beef burger with cheese, tomato and lettuce"
+            }
+        },
+        {
+            "name": "Bolognese Lasagna",
+            "description": "Homemade lasagna with Bolognese sauce and béchamel.",
+            "categories": ["mains"],
+            "price": 9.5,
+            "deliveryPrice": 11.4,
+            "images": {
+                "default": "/pictures/products/lasagna-bolognese/lasagna-bolognese.jpg",
+                "webp": "/pictures/products/lasagna-bolognese/lasagna-bolognese.webp",
+                "avif": "/pictures/products/lasagna-bolognese/lasagna-bolognese.avif",
+                "alt": "Homemade Bolognese lasagna with béchamel sauce"
+            }
+        },
+        {
+            "name": "Chicken Tacos (3 pcs)",
+            "description": "Tacos with marinated chicken, sauce and pico de gallo.",
+            "categories": ["mains"],
+            "price": 9.0,
+            "deliveryPrice": 10.8,
+            "images": {
+                "default": "/pictures/products/chicken-tacos-3u/chicken-tacos-3u.jpg",
+                "webp": "/pictures/products/chicken-tacos-3u/chicken-tacos-3u.webp",
+                "avif": "/pictures/products/chicken-tacos-3u/chicken-tacos-3u.avif",
+                "alt": "Three chicken tacos with marinated chicken, sauce and pico de gallo"
+            }
+        },
+        {
+            "name": "Roast Chicken (portion)",
+            "description": "Oven-roasted chicken with herbs.",
+            "categories": ["mains"],
+            "price": 10.0,
+            "deliveryPrice": 12.0,
+            "images": {
+                "default": "/pictures/products/roast-chicken/roast-chicken.jpg",
+                "webp": "/pictures/products/roast-chicken/roast-chicken.webp",
+                "avif": "/pictures/products/roast-chicken/roast-chicken.avif",
+                "alt": "Oven-roasted chicken portion with herbs"
+            }
+        },
+        {
+            "name": "Pork Steak",
+            "description": "Grilled pork steak with optional sauce.",
+            "categories": ["mains"],
+            "price": 10.5,
+            "deliveryPrice": 12.6,
+            "images": {
+                "default": "/pictures/products/pork-steak/pork-steak.jpg",
+                "webp": "/pictures/products/pork-steak/pork-steak.webp",
+                "avif": "/pictures/products/pork-steak/pork-steak.avif",
+                "alt": "Grilled pork steak"
+            }
+        },
+        {
+            "name": "Spaghetti Carbonara",
+            "description": "Pasta with traditional carbonara sauce.",
+            "categories": ["mains"],
+            "price": 11.0,
+            "deliveryPrice": 13.2,
+            "images": {
+                "default": "/pictures/products/spaghetti-carbonara/spaghetti-carbonara.jpg",
+                "webp": "/pictures/products/spaghetti-carbonara/spaghetti-carbonara.webp",
+                "avif": "/pictures/products/spaghetti-carbonara/spaghetti-carbonara.avif",
+                "alt": "Spaghetti carbonara with traditional sauce"
+            }
+        },
+        {
+            "name": "Mushroom Risotto",
+            "description": "Creamy risotto with a variety of mushrooms.",
+            "categories": ["mains"],
+            "price": 11.5,
+            "deliveryPrice": 13.8,
+            "images": {
+                "default": "/pictures/products/mushroom-risotto/mushroom-risotto.jpg",
+                "webp": "/pictures/products/mushroom-risotto/mushroom-risotto.webp",
+                "avif": "/pictures/products/mushroom-risotto/mushroom-risotto.avif",
+                "alt": "Creamy mushroom risotto with variety of mushrooms"
+            }
+        },
+        {
+            "name": "Grilled Salmon",
+            "description": "Fresh salmon fillet grilled to perfection.",
+            "categories": ["mains"],
+            "price": 12.0,
+            "deliveryPrice": 14.4,
+            "images": {
+                "default": "/pictures/products/grilled-salmon/grilled-salmon.jpg",
+                "webp": "/pictures/products/grilled-salmon/grilled-salmon.webp",
+                "avif": "/pictures/products/grilled-salmon/grilled-salmon.avif",
+                "alt": "Fresh grilled salmon fillet"
+            }
+        },
+        {
+            "name": "Seafood Paella",
+            "description": "Traditional paella with a variety of seafood.",
+            "categories": ["mains"],
+            "price": 13.5,
+            "deliveryPrice": 16.2,
+            "images": {
+                "default": "/pictures/products/seafood-paella/seafood-paella.jpg",
+                "webp": "/pictures/products/seafood-paella/seafood-paella.webp",
+                "avif": "/pictures/products/seafood-paella/seafood-paella.avif",
+                "alt": "Traditional seafood paella with variety of seafood"
+            }
+        },
+        {
+            "name": "Veggie Burger",
+            "description": "Plant-based burger with artisanal bun.",
+            "categories": ["mains"],
+            "price": 9.5,
+            "deliveryPrice": 11.4,
+            "images": {
+                "default": "/pictures/products/veggie-burger/veggie-burger.jpg",
+                "webp": "/pictures/products/veggie-burger/veggie-burger.webp",
+                "avif": "/pictures/products/veggie-burger/veggie-burger.avif",
+                "alt": "Plant-based veggie burger with artisanal bun"
+            }
+        },
+        {
+            "name": "Entrecote 200g",
+            "description": "Grilled beef entrecote (200g).",
+            "categories": ["mains"],
+            "price": 15.0,
+            "deliveryPrice": 18.0,
+            "images": {
+                "default": "/pictures/products/entrecote-200g/entrecote-200g.jpg",
+                "webp": "/pictures/products/entrecote-200g/entrecote-200g.webp",
+                "avif": "/pictures/products/entrecote-200g/entrecote-200g.avif",
+                "alt": "Grilled beef entrecote 200g"
+            }
+        },
+        {
+            "name": "Oxtail Stew",
+            "description": "Slow-cooked oxtail stew.",
+            "categories": ["mains"],
+            "price": 14.0,
+            "deliveryPrice": 16.8,
+            "images": {
+                "default": "/pictures/products/oxtail-stew/oxtail-stew.jpg",
+                "webp": "/pictures/products/oxtail-stew/oxtail-stew.webp",
+                "avif": "/pictures/products/oxtail-stew/oxtail-stew.avif",
+                "alt": "Slow-cooked oxtail stew"
+            }
+        },
+        {
+            "name": "Steak Tartare",
+            "description": "Steak Tartare with egg yolk and smoked with chocolate wood.",
+            "categories": ["mains"],
+            "price": 13.0,
+            "deliveryPrice": 15.6,
+            "images": {
+                "default": "/pictures/products/steak-tartare/steak-tartare.jpg",
+                "webp": "/pictures/products/steak-tartare/steak-tartare.webp",
+                "avif": "/pictures/products/steak-tartare/steak-tartare.avif",
+                "alt": "Steak tartare with egg yolk smoked with chocolate wood"
+            }
+        },
+        {
+            "name": "Cheesecake",
+            "description": "Creamy cheesecake with a crunchy base.",
+            "categories": ["desserts"],
+            "price": 4.0,
+            "deliveryPrice": 4.8,
+            "images": {
+                "default": "/pictures/products/cheesecake/cheesecake.jpg",
+                "webp": "/pictures/products/cheesecake/cheesecake.webp",
+                "avif": "/pictures/products/cheesecake/cheesecake.avif",
+                "alt": "Creamy cheesecake with crunchy base"
+            }
+        },
+        {
+            "name": "Crema Catalana",
+            "description": "Traditional dessert with caramelized sugar.",
+            "categories": ["desserts"],
+            "price": 4.5,
+            "deliveryPrice": 5.4,
+            "images": {
+                "default": "/pictures/products/crema-catalana/crema-catalana.jpg",
+                "webp": "/pictures/products/crema-catalana/crema-catalana.webp",
+                "avif": "/pictures/products/crema-catalana/crema-catalana.avif",
+                "alt": "Traditional crema catalana with caramelized sugar"
+            }
+        },
+        {
+            "name": "Chocolate Brownie",
+            "description": "Warm brownie with vanilla ice cream.",
+            "categories": ["desserts"],
+            "price": 5.0,
+            "deliveryPrice": 6.0,
+            "images": {
+                "default": "/pictures/products/chocolate-brownie/chocolate-brownie.jpg",
+                "webp": "/pictures/products/chocolate-brownie/chocolate-brownie.webp",
+                "avif": "/pictures/products/chocolate-brownie/chocolate-brownie.avif",
+                "alt": "Warm chocolate brownie with vanilla ice cream"
+            }
+        },
+        {
+            "name": "Egg Flan",
+            "description": "Homemade flan with liquid caramel and Napolitana biscuit.",
+            "categories": ["desserts"],
+            "price": 3.5,
+            "deliveryPrice": 4.2,
+            "images": {
+                "default": "/pictures/products/egg-flan/egg-flan.jpg",
+                "webp": "/pictures/products/egg-flan/egg-flan.webp",
+                "avif": "/pictures/products/egg-flan/egg-flan.avif",
+                "alt": "Homemade egg flan with liquid caramel and Napolitana biscuit"
+            }
+        },
+        {
+            "name": "Panna Cotta",
+            "description": "Panna cotta with red fruit coulis.",
+            "categories": ["desserts"],
+            "price": 4.0,
+            "deliveryPrice": 4.8,
+            "images": {
+                "default": "/pictures/products/panna-cotta/panna-cotta.jpg",
+                "webp": "/pictures/products/panna-cotta/panna-cotta.webp",
+                "avif": "/pictures/products/panna-cotta/panna-cotta.avif",
+                "alt": "Panna cotta with red fruit coulis"
+            }
+        },
+        {
+            "name": "French Fries",
+            "description": "Portion of homemade fried potatoes.",
+            "categories": ["sides"],
+            "price": 2.5,
+            "deliveryPrice": 3.0,
+            "images": {
+                "default": "/pictures/products/french-fries/french-fries.jpg",
+                "webp": "/pictures/products/french-fries/french-fries.webp",
+                "avif": "/pictures/products/french-fries/french-fries.avif",
+                "alt": "Portion of homemade French fries"
+            }
+        },
+        {
+            "name": "Small Salad",
+            "description": "Small side salad.",
+            "categories": ["sides"],
+            "price": 3.0,
+            "deliveryPrice": 3.6,
+            "images": {
+                "default": "/pictures/products/small-salad/small-salad.jpg",
+                "webp": "/pictures/products/small-salad/small-salad.webp",
+                "avif": "/pictures/products/small-salad/small-salad.avif",
+                "alt": "Small side salad"
+            }
+        },
+        {
+            "name": "Garlic Bread",
+            "description": "Slices of bread with butter and garlic.",
+            "categories": ["sides"],
+            "price": 2.5,
+            "deliveryPrice": 3.0,
+            "images": {
+                "default": "/pictures/products/garlic-bread/garlic-bread.jpg",
+                "webp": "/pictures/products/garlic-bread/garlic-bread.webp",
+                "avif": "/pictures/products/garlic-bread/garlic-bread.avif",
+                "alt": "Garlic bread slices with butter and garlic"
+            }
         }
     ],
+
     "coupons": [
         {
-            "couponId": "d1-2025-09-04",
+            "id": "d1-2025-09-04",
             "itemsIncluded": [
                 {
-                    "productId": "cocacola-1",
+                    "id": "cocacola-1",
                     "productQty": 2
                 }
             ],
-            "discountType": "percentage",
-            "discountValue": 15,
+            "type": "percentage",
+            "value": 15,
             "validTo": "2025-09-04"
         }
     ],
-    "trolly": {
-        "orderId": "admin-1",
+
+    "cart": {
+        "id": "admin-1",
+        "userId": 1,
         "productsAdded": [
             {
-                "productId": "cocacola-1",
-                "productName": "Coca Cola",
-                "productDescription": "Botella de Coca Cola (2L)",
-                "productQty": 2,
-                "productPrice": 1.5,
-                "productSubtotal": 3,
-                "productTax": 0.25,
-                "productTotal": ""
+                "id": "cocacola-1",
+                "name": "Coca Cola",
+                "description": "Botella de Coca Cola (2L)",
+                "qty": 2,
+                "price": 1.5,
+                "total": 3
             }
         ],
         "discounts": [
             {
-                "couponId": "d1-2025-09-04",
+                "id": "d1-2025-09-04",
                 "itemsIncluded": [
                     {
-                        "productId": "cocacola-1",
-                        "productQty": 2
+                        "id": "cocacola-1",
+                        "qty": 2
                     }
                 ],
-                "discountType": "percentage",
-                "discountValue": 15,
+                "type": "percentage",
+                "value": 15,
                 "validTo": "2025-09-04"
             }
         ],
         "subtotal": 3,
+        "tax": 0.25,
         "total": 2.25
     },
+
     "booking": {
-        "bookingDate": "2025-09-28",
-        "bookingTime": "13:30",
+        "date": "2025-09-28",
+        "time": "13:30",
         "customersNumber": 4,
-        "tableid": "hall-1",
-        "bookingMadeDate": "2025-09-04",
-        "bookingMadeTime": "19:13",
+        "tableid": 1,
+        "madeDate": "2025-09-04",
+        "madeTime": "19:13",
         "state": {
             "pending": false,
             "cancelled": false,
@@ -137,12 +667,13 @@
         "xtras": {
             "trona": false
         },
+        "booking-message": "I would like to brind candles for my husband's birthday",
         "cancelledTime": ""
     },
     "tables": [
         {
-            "tableId": "hall-1",
-            "tableCapacity": 4,
+            "id": 1,
+            "capacity": 4,
             "isBooked": false
         }
     ]
