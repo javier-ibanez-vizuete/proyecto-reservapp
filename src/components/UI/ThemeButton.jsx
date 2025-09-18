@@ -25,11 +25,12 @@ import { ThemeContext } from "../../contexts/ThemeContext";
  * @requires ThemeContext.theme - Current theme state ('light' | 'dark')
  * @requires ThemeContext.onToggleTheme - Function to toggle theme state
  */
-export const ThemeButton = ({ className = "", ...props }) => {
+export const ThemeButton = ({ className = "", handleCloseMobileMenu = () => {}, ...props }) => {
     const { theme, onToggleTheme } = useContext(ThemeContext);
 
     const handleClick = () => {
         onToggleTheme?.();
+        handleCloseMobileMenu();
     };
 
     const isDarkTheme = theme === "dark";

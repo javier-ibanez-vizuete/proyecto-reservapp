@@ -17,7 +17,7 @@ import { Button } from "./UI/Button";
 import { ThemeButton } from "./UI/ThemeButton";
 
 const LOGO_IMAGES = {
-    default: logoReservappPng,
+    url: logoReservappPng,
     webp: logoReservappWebp,
     avif: logoReservappAvif,
 };
@@ -52,6 +52,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         return user?.name || "User";
     };
 
+    const handleCloseMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+    };
+
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
@@ -70,6 +74,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
 
     const handleRegister = () => {
         console.log("Register Clicked");
+        Navigate("register");
         //AQUI PONER NAVIGATE TO PAGINA REGISTER
     };
 
@@ -107,7 +112,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                 <ThemeButton />
 
                                 <Avatar
-                                    src={user?.src}
+                                    avatar={user?.avatar}
                                     alt="Avatar"
                                     online={user && true}
                                     onClick={handleProfile}
@@ -165,7 +170,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                             )}
                             {!isLoggedIn && (
                                 <div className="flex items-center gap-3">
-                                    <ThemeButton />
+                                    <ThemeButton handleCloseMobileMenu={handleCloseMobileMenu} />
                                 </div>
                             )}
                         </Container>

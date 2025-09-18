@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
  * - Maneja automáticamente la conversión y validación
  */
 export const Avatar = ({
-    src,
+    avatar = {},
     alt = "",
     size = "md",
     variant = "circle",
@@ -78,29 +78,29 @@ export const Avatar = ({
     };
 
     // Función para procesar la imagen (URL normal o Base64)
-    const processImageSrc = (srcInput) => {
-        if (!srcInput) return null;
+    const processImageSrc = (url) => {
+        if (!url) return null;
 
         // Si ya tiene el prefijo data:image, devolverlo tal como está
-        if (srcInput.startsWith("data:image/")) {
-            return srcInput;
+        if (url.startsWith("data:image/")) {
+            return url;
         }
 
         // Si parece ser Base64 sin prefijo, agregarlo
-        if (srcInput.length > 100 && !srcInput.startsWith("http") && !srcInput.startsWith("/")) {
-            return `data:image/jpeg;base64,${srcInput}`;
+        if (url.length > 100 && !url.startsWith("http") && !url.startsWith("/")) {
+            return `data:image/jpeg;base64,${url}`;
         }
 
         // Si es una URL normal, devolverla tal como está
-        return srcInput;
+        return url;
     };
 
     // Efecto para procesar el src cuando cambie
     useEffect(() => {
         setImageError(false);
-        const processedSrc = processImageSrc(src);
+        const processedSrc = processImageSrc(avatar?.url);
         setImageSrc(processedSrc);
-    }, [src]);
+    }, [avatar?.url]);
 
     const baseClasses =
         "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 text-gray-600 font-medium";
