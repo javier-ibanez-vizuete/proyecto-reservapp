@@ -143,7 +143,11 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         className={`${isMobile || isTablet ? "" : "hidden"} mobile-menu`}
                         // ref={contentMobileRef}
                     >
-                        <Container className="bg-accent-background py-3 gap-2">
+                        <Container
+                            className={`${
+                                theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+                            } py-3 gap-2`}
+                        >
                             <NavbarLinks handleLinkClick={handleLinkClick} />
                             {isLoggedIn && (
                                 <div className="flex flex-col gap-2">
@@ -157,6 +161,11 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                     <Button onClick={handleLogout} className="justify-start" variant="danger">
                                         Logout
                                     </Button>
+                                </div>
+                            )}
+                            {!isLoggedIn && (
+                                <div className="flex items-center gap-3">
+                                    <ThemeButton />
                                 </div>
                             )}
                         </Container>

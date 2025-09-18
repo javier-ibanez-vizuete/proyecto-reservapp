@@ -55,7 +55,7 @@ const getContainerClasses = (className, theme) => {
         `relative rounded-full border ${theme === "light" ? "border-amber-500" : "border-gray-500"}`,
         "backdrop-blur-[15px]",
         "shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)]",
-        "w-10 h-10 perfect-center",
+        "w-6 h-6 perfect-center",
         className
     );
 };
@@ -82,10 +82,10 @@ const renderMoonIcon = () => {
         <span
             className={classNames(
                 "relative z-10 rounded-full transition-colors duration-300 outline-none",
-                "w-[20px] h-[20px] bg-gray-500",
+                "w-[14px] h-[14px] bg-gray-500",
                 // Moon shape using pseudo-element
-                'before:content-[""] before:w-4.5 before:h-4.5 before:rounded-full',
-                "before:bg-accent-background-dark before:absolute before:-top-[3px] before:-right-[5px]"
+                'before:content-[""] before:w-[11px] before:h-[11px] before:rounded-full',
+                "before:bg-accent-background-dark before:absolute before:top-[0px] before:-right-[1px]"
             )}
         />
     );
@@ -105,7 +105,7 @@ const renderSunCenter = () => {
         <span
             className={classNames(
                 "relative z-10 rounded-full transition-colors duration-300 outline-none",
-                "w-[7px] h-[7px] bg-amber-500"
+                "w-[8px] h-[8px] bg-amber-500"
             )}
         />
     );
@@ -113,7 +113,7 @@ const renderSunCenter = () => {
 
 const renderSunRays = () => {
     return (
-        <div className="absolute w-[22px] h-[22px]">
+        <div className="absolute w-[17px] h-[17px]">
             {Array.from({ length: 8 }, (_, index) => (
                 <span key={index} className={getSunRayClasses(index)} />
             ))}
@@ -123,7 +123,7 @@ const renderSunRays = () => {
 
 const getSunRayClasses = (rayIndex) => {
     const baseClasses =
-        "absolute w-0.5 h-1 rounded-full bg-amber-400 transition-colors duration-300 outline-none";
+        "absolute w-[1.5px] h-[2.5px] rounded-full bg-amber-400 transition-colors duration-300 outline-none";
     const positionClasses = getSunRayPosition(rayIndex);
 
     return classNames(baseClasses, positionClasses);

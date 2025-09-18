@@ -144,7 +144,7 @@ body {
     }
 
     .navbar-inner {
-        @apply flex justify-between items-center h-16;
+        @apply flex justify-between items-center h-16 py-3;
     }
 
     .navbar-logo {
@@ -152,7 +152,7 @@ body {
     }
 
     .logo-icon {
-        @apply w-8 lg:w-12 hover:scale-105 transition-transform duration-300;
+        @apply max-w-8 lg:w-12 hover:scale-105 transition-transform duration-300;
     }
 
     .logo-text {
