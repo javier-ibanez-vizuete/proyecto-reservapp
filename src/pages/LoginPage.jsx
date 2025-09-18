@@ -4,6 +4,7 @@ import { FormInput } from "../components/FormInput";
 import { Button } from "../components/UI/Button";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
+import { LoginVerificationFields } from "../helpers/FieldsVerificator";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 
 const INITIAL_FORM = { email: "", password: "" };
@@ -42,25 +43,36 @@ const LOGIN_FIELDS = [
 
 export const LoginPage = () => {
     const [form, setForm] = useState(INITIAL_FORM);
+    const [error, setError] = useState("");
+
     const { login } = useAuth();
     const { theme } = useContext(ThemeContext);
     const { visible, toggleVisible } = usePasswordVisibility();
 
     const onInputChange = (event) => {
         const { name, value } = event.target;
+        setError("");
 
         setForm({ ...form, [name]: value });
     };
 
     const onLoginSubmit = async (event) => {
         event.preventDefault();
+
+        const isError = LoginVerificationFields(form);
+        if (isError) return setError(isError);
+
         await login(form);
         setForm(INITIAL_FORM);
     };
 
     return (
         <Container className="perfect-center flex-1">
-            <div className={`flex flex-col gap-md bg-accent-color rounded-2xl shadow-landing-lg p-8`}>
+            <div
+                className={`flex flex-col gap-md ${
+                    theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+                } rounded-2xl shadow-landing-lg p-8`}
+            >
                 <h2 className={`${theme === "light" ? "text-text-color" : "text-text-color-dark"}`}>
                     Iniciar sesión
                 </h2>
@@ -91,8 +103,9 @@ export const LoginPage = () => {
                             />
                         );
                     })}
+                    {error && <span className="italic font-semibold text-error-600">{error}</span>}
 
-                    <Button type="submit" className="justify-center rounded-full">
+                    <Button type="submit" className="justify-center rounded-full" disabled={error && true}>
                         Entrar
                     </Button>
                 </form>

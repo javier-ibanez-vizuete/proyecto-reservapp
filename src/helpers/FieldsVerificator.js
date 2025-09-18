@@ -4,7 +4,7 @@ export const LoginVerificationFields = ({ email, password }) => {
     if (!email.includes(".")) return "Email not Valid ('.' missing)";
 
     if (!password) return "Password Field is Required";
-    if (password.length < 9) return "The Given password is too Short (min. 9 Characters)";
+    if (password.length < 9) return "Password is too Short (min. 9 Characters)";
 };
 
 export const RegisterVerificationFields = ({ name, email, address, password, repassword }, setError) => {
