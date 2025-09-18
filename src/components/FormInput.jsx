@@ -28,6 +28,7 @@ export const FormInput = ({ containerClass, input, label, onClick, ...props }) =
                         type="button"
                         className={`py-md px-xl rounded-r-xl border-0 -ml-0.5 perfect-center rounded-l-none bg-white`}
                         onClick={onClick}
+                        disabled={!input?.value}
                     >
                         <ImageContainer className="w-xl">
                             <Image imgSrc={props.isPasswordVisible ? iconEye : iconClosedEye} />
@@ -39,6 +40,7 @@ export const FormInput = ({ containerClass, input, label, onClick, ...props }) =
                         type="button"
                         className={`py-md px-xl rounded-r-xl border-0 -ml-0.5 perfect-center rounded-l-none bg-white`}
                         onClick={onClick}
+                        disabled={!input?.value}
                     >
                         <ImageContainer className="w-xl">
                             <Image imgSrc={props.isPasswordVisible ? iconEye : iconClosedEye} />

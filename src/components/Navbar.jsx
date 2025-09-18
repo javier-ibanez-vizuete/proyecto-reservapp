@@ -17,7 +17,7 @@ import { Button } from "./UI/Button";
 import { ThemeButton } from "./UI/ThemeButton";
 
 const LOGO_IMAGES = {
-    default: logoReservappPng,
+    url: logoReservappPng,
     webp: logoReservappWebp,
     avif: logoReservappAvif,
 };
@@ -50,6 +50,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
 
     const getUserDisplayName = () => {
         return user?.name || "User";
+    };
+
+    const handleCloseMobileMenu = () => {
+        setIsMobileMenuOpen(false);
     };
 
     const toggleMobileMenu = () => {
@@ -166,7 +170,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                             )}
                             {!isLoggedIn && (
                                 <div className="flex items-center gap-3">
-                                    <ThemeButton />
+                                    <ThemeButton handleCloseMobileMenu={handleCloseMobileMenu} />
                                 </div>
                             )}
                         </Container>
