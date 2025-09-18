@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "../hooks/useFetch";
 import { ProductCard } from "../components/UI/ProductCard";
+import { useFetch } from "../hooks/useFetch";
 
 export const OrdersSection = () => {
     const { data, loading, error } = useFetch(`http://localhost:3000/products`);
     const [products, setProducts] = useState(data || []);
     const [filter, setFilter] = useState("");
 
-    useEffect(() => {
-        if (!data?.length) return;
-        setProducts(data);
-    }, [data]);
+    useEffect(() => {}, []);
 
     const handleIncreaseProduct = (id) => {
         const productSelected = products.find((product) => product?.productId === id);

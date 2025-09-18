@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getProfileApi, loginApi, logoutApi, registerApi } from "./auth.api";
 import {
@@ -23,7 +23,7 @@ export const useAuth = () => {
             saveTokenInLocalStorage(authData.token);
             saveUserInLocalStorage(authData.user);
             setUser(authData.user);
-            navigate("/");
+            navigate("/", replace);
         }
 
         // Si la API nos dice error, mostramos un mensaje de error

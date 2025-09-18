@@ -70,6 +70,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
 
     const handleRegister = () => {
         console.log("Register Clicked");
+        Navigate("register");
         //AQUI PONER NAVIGATE TO PAGINA REGISTER
     };
 
