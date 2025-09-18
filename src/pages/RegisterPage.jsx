@@ -10,6 +10,7 @@ import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
+import { RegisterVerificationFields } from "../helpers/FieldsVerificator";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 
 const INITIAL_FORM_DATA = {
@@ -152,8 +153,8 @@ export const RegisterPage = () => {
 
         console.log("Esto es el formulario acabado ", restForm);
 
-        // await register(restForm);
-        // setForm(INITIAL_FORM_DATA);
+        await register(restForm);
+        setForm(INITIAL_FORM_DATA);
     };
 
     const handleAvatarClick = (avatar) => {
@@ -163,13 +164,13 @@ export const RegisterPage = () => {
     return (
         <Container className="perfect-center flex-1 py-4">
             <div
-                className={`flex flex-col gap-md rounded-2xl p-md ${
+                className={`flex flex-col gap-md rounded-2xl p-md lg:p-lg ${
                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                 }`}
             >
                 <h1 className="">Registro</h1>
 
-                <form className="flex flex-col gap-md" onSubmit={onRegisterSubmit}>
+                <form className="flex flex-col gap-sm" onSubmit={onRegisterSubmit}>
                     <Dropdown placement="bottom-start">
                         <DropdownTrigger className={"flex justify-start gap-2 p-0"}>
                             <ImageContainer className="w-14 ">
@@ -228,7 +229,7 @@ export const RegisterPage = () => {
                             />
                         );
                     })}
-                    {error && <h3>{error}</h3>}
+                    {error && <span className="italic font-semibold text-error-600">{error}</span>}
 
                     <Button type="submit" className="justify-center rounded-full py-sm px-md mt-2">
                         Registrarse

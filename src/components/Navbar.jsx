@@ -112,7 +112,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                 <ThemeButton />
 
                                 <Avatar
-                                    src={user?.src}
+                                    avatar={user?.avatar}
                                     alt="Avatar"
                                     online={user && true}
                                     onClick={handleProfile}
