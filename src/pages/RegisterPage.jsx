@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Container } from "../components/Container";
+import { Dropdown } from "../components/Dropdown/Dropdown";
+import { DropdownItem } from "../components/Dropdown/DropdownItem";
+import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
+import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { FormInput } from "../components/FormInput";
+import { LoadingButton } from "../components/Spinner/LoadingButton";
+import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
+import { Image } from "../components/UI/Image";
+import { ImageContainer } from "../components/UI/ImageContainer";
+import { AuthContext } from "../contexts/AuthContext";
+import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
+import { RegisterVerificationFields } from "../helpers/FieldsVerificator";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
+import { useToast } from "../hooks/useToast";
 
 const INITIAL_FORM_DATA = {
     name: "",
@@ -11,7 +24,30 @@ const INITIAL_FORM_DATA = {
     address: "",
     password: "",
     repassword: "",
+    avatar: {
+        url: "/public/pictures/avatars/avatar-default.png",
+        alt: "Avatar Desconocido",
+    },
 };
+
+const AVATARS_OPTIONS = [
+    {
+        url: "/public/pictures/avatars/avatar-default.png",
+        alt: "Avatar Desconocido",
+    },
+    {
+        url: "/pictures/avatars/avatar-chef.png",
+        alt: "Avatar Chef",
+    },
+    {
+        url: "/pictures/avatars/avatar-spiderman.png",
+        alt: "Avatar Spiderman",
+    },
+    {
+        url: "/public/pictures/avatars/avatar-gaming.png",
+        alt: "Avatar Developer",
+    },
+];
 
 const REGISTER_FORM_FIELDS = [
     {
@@ -99,12 +135,19 @@ const REGISTER_FORM_FIELDS = [
 export const RegisterPage = () => {
     const [form, setForm] = useState(INITIAL_FORM_DATA);
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
     const { register } = useAuth();
+    const toast = useToast();
+
+    const { user } = useContext(AuthContext);
+    const { theme } = useContext(ThemeContext);
 
     const visibility1 = usePasswordVisibility();
     const visibility2 = usePasswordVisibility();
 
     const onInputChange = (event) => {
+        if (isLoading) return;
         const { name, value } = event.target;
         setError("");
 
@@ -112,24 +155,68 @@ export const RegisterPage = () => {
     };
 
     const onRegisterSubmit = async (event) => {
-        event.preventDefault();
+        try {
+            event.preventDefault();
 
-        const isError = RegisterVerificationFields(form);
-        if (isError) return setError(isError);
-        const { repassword, ...restForm } = form;
+            const isError = RegisterVerificationFields(form);
+            if (isError) return setError(isError);
+            setIsLoading(true);
+            const { repassword, ...restForm } = form;
 
-        console.log("Esto es el formulario acabado ", restForm);
+            console.log("Esto es el formulario acabado ", restForm);
 
-        // await register(restForm);
-        // setForm(INITIAL_FORM_DATA);
+            await register(restForm);
+            setForm(INITIAL_FORM_DATA);
+        } catch (err) {
+            setForm(INITIAL_FORM_DATA);
+            toast.showToast("Algo ha salido mal", "error", 4000, "top-right");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    return (
-        <Container className="perfect-center flex-1">
-            <div className="flex flex-col gap-md bg-accent-color rounded-2xl p-md">
-                <h2 className="">Registro</h2>
+    const handleAvatarClick = (avatar) => {
+        setForm((prev) => ({ ...prev, avatar: { url: avatar.url, alt: avatar.alt } }));
+    };
 
-                <form className="flex flex-col gap-md" onSubmit={onRegisterSubmit}>
+    if (user) {
+        return <Navigate to={"/home"} replace />;
+    }
+
+    return (
+        <Container className="perfect-center flex-1 py-4">
+            <div
+                className={`flex flex-col gap-md rounded-2xl p-md lg:p-lg ${
+                    theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+                }`}
+            >
+                <h1 className="">Registro</h1>
+
+                <form className="flex flex-col gap-sm" onSubmit={onRegisterSubmit}>
+                    <Dropdown placement="bottom-start">
+                        <DropdownTrigger className={"flex justify-start gap-2 p-0"}>
+                            <ImageContainer className="w-14 ">
+                                <Image className="rounded-xl" imgSrc={form?.avatar?.url} />
+                            </ImageContainer>
+                            <Button variant={"ghost"} className="flex-1">
+                                {form?.avatar?.alt ? form.avatar.alt : "Avatar"}
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu className="w-full">
+                            {AVATARS_OPTIONS.map((avatar) => (
+                                <DropdownItem
+                                    key={avatar.url}
+                                    className="flex items-center gap-3"
+                                    onClick={() => handleAvatarClick(avatar)}
+                                >
+                                    <ImageContainer className="w-20">
+                                        <Image imgSrc={avatar.url} />
+                                    </ImageContainer>
+                                    <span>{avatar.alt}</span>
+                                </DropdownItem>
+                            ))}
+                        </DropdownMenu>
+                    </Dropdown>
                     {REGISTER_FORM_FIELDS.map(({ containerClass, input, label }) => {
                         const password1 = visibility1.visible && input.name === "password";
                         const password2 = visibility2.visible && input.name === "repassword";
@@ -164,13 +251,19 @@ export const RegisterPage = () => {
                             />
                         );
                     })}
-                    {error && <h3>{error}</h3>}
+                    {error && <span className="italic font-semibold text-error-600">{error}</span>}
 
-                    <Button type="submit" className="justify-center rounded-full py-sm px-md">
+                    <LoadingButton
+                        type="submit"
+                        loading={isLoading}
+                        variant={"secondary"}
+                        className="justify-center rounded-full py-sm px-md mt-2"
+                    >
                         Registrarse
-                    </Button>
+                    </LoadingButton>
                 </form>
             </div>
+            <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
         </Container>
     );
 };

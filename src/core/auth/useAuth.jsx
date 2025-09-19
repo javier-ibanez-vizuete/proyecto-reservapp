@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { replace, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { saveDataInSessionStorage } from "../../helpers/storage";
 import { getProfileApi, loginApi, logoutApi, registerApi } from "./auth.api";
 import {
     removeTokenFromLocalStorage,
@@ -12,18 +13,24 @@ import {
 export const useAuth = () => {
     const { setUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const login = async ({ email, password }) => {
         // Enviar a la API de autenticación
-        console.log(`Iniciando sesión con email: ${email} y password: ${password}`);
+        try {
+            const authData = await loginApi({ email, password });
 
-        const authData = await loginApi({ email, password });
+            if (authData) {
+                saveTokenInLocalStorage(authData.token);
+                saveUserInLocalStorage(authData.user);
+                setUser(authData.user);
 
-        if (authData) {
-            saveTokenInLocalStorage(authData.token);
-            saveUserInLocalStorage(authData.user);
-            setUser(authData.user);
-            navigate("/");
+                console.log("Estoy llegando a navigate");
+                navigate("/home", { state: { fromLogin: true } });
+                saveDataInSessionStorage("fromLogin", true);
+            }
+        } catch (err) {
+            console.log("El login no ha podido Completarse 'useAuth-login()'", err);
         }
 
         // Si la API nos dice error, mostramos un mensaje de error
@@ -31,32 +38,39 @@ export const useAuth = () => {
 
     const logout = async () => {
         // Lógica de cierre de sesión
-        console.log("Cerrando sesión");
+        try {
+            console.log("Cerrando sesión");
 
-        const logoutResponse = await logoutApi();
+            const logoutResponse = await logoutApi();
 
-        if (logoutResponse?.logout) {
-            console.log("logout del hook", logoutResponse);
-            removeUserFromLocalStorage();
-            removeTokenFromLocalStorage();
-            setUser(null);
-            navigate("/");
+            if (logoutResponse?.logout) {
+                removeUserFromLocalStorage();
+                removeTokenFromLocalStorage();
+                setUser(null);
+                navigate("/", { state: { logoutSucces: true } });
+            }
+        } catch (err) {
+            console.log("El Logout no ha podido completarse", err);
         }
     };
 
     const register = async (user) => {
         // Enviar a la API de autenticación
-        console.log(`Registrando al usuario: ${user.email} y password: ${user.password}`);
+        try {
+            console.log(`Registrando al usuario: ${user.email} y password: ${user.password}`);
 
-        const authData = await registerApi(user);
+            const authData = await registerApi(user);
 
-        if (authData) {
-            saveTokenInLocalStorage(authData.token);
-            saveUserInLocalStorage(authData.user);
-            setUser(authData.user);
-            navigate("/");
+            if (authData) {
+                saveTokenInLocalStorage(authData.token);
+                saveUserInLocalStorage(authData.user);
+                setUser(authData.user);
+                navigate("/", { state: { fromRegister: true } }, replace);
+                saveDataInSessionStorage("fromRegister", true);
+            }
+        } catch (error) {
+            console.log("ERROR", error);
         }
-
         // Si la API nos dice error, mostramos un mensaje de error
     };
 

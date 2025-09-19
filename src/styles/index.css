@@ -45,7 +45,7 @@ body {
     --text-6xl: 70px;
 
     /* 🎨 COLORES PRINCIPALES */
-    --color-background: #fbfcfd;
+    --color-background: #e4ebf1;
     --color-background-dark: #2b3b45;
 
     --color-accent-background: #e6f5fa;
@@ -78,6 +78,9 @@ body {
     --spacing-2xl: 32px;
     --spacing-4xs: 64px;
 
+    --breakpoint-2xs: 320px;
+    --breakpoint-xs: 375px;
+    --breakpoint-sm: 425px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 1024px;
     --breakpoint-xl: 1440px;

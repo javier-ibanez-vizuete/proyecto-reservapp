@@ -9,7 +9,20 @@ export const Image = ({ imageData = {}, alt = "", className = "", imgSrc = "" })
 
     return (
         <>
-            {dataImage?.avif && <source srcSet={dataImage.avif} type="image/avif" />}
+            {imageData?.url && (
+                <>
+                    <source srcSet={dataImage.avif} type="image/avif" />
+                    <source srcSet={dataImage.webp} type="image/webp" />
+                    <img
+                        className={`w-full ${className}`}
+                        src={dataImage?.default}
+                        alt={alt ? alt : dataImage?.alt || ""}
+                    />
+                </>
+            )}
+            {imgSrc && <img className={`w-full ${className}`} src={imgSrc} alt="Picture is not working" />}
+
+            {/* {dataImage?.avif && <source srcSet={dataImage.avif} type="image/avif" />}
             {dataImage?.webp && <source srcSet={dataImage.avif} type="image/webp" />}
             {dataImage?.default ? (
                 <img
@@ -19,7 +32,7 @@ export const Image = ({ imageData = {}, alt = "", className = "", imgSrc = "" })
                 />
             ) : (
                 <img className={`w-full ${className}`} src={imgSrc} alt="Picture is not working" />
-            )}
+            )} */}
         </>
     );
 };

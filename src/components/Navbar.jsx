@@ -9,39 +9,37 @@ import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.web
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { useDevice } from "../hooks/useDevice";
+import { useToast } from "../hooks/useToast";
 import { Avatar } from "./Avatar";
 import { BurgerButton } from "./BurgerButton";
 import { Container } from "./Container";
+import { LanguagesSelector } from "./LanguagesSelector";
 import { NavbarLinks } from "./NavbarLinks";
+import { LoadingButton } from "./Spinner/LoadingButton";
+import { ToastContainer } from "./ToastContainer";
 import { Button } from "./UI/Button";
 import { ThemeButton } from "./UI/ThemeButton";
 
 const LOGO_IMAGES = {
-    default: logoReservappPng,
+    url: logoReservappPng,
     webp: logoReservappWebp,
     avif: logoReservappAvif,
 };
 export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     const { isMobile, isTablet } = useDevice();
     const { logout } = useAuth();
 
     const Navigate = useNavigate();
     const { pathname } = useLocation();
 
+    const toast = useToast();
     const { theme } = useContext(ThemeContext);
     // const contentMobileRef = useRef();
 
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
-
-    // useEffect(() => {
-    //     const mobileMenuContainer = contentMobileRef.current;
-    //     if (!mobileMenuContainer) return;
-
-    //     mobileMenuContainer.style.maxHeight = isMobileMenuOpen
-    //         ? `${mobileMenuContainer.scrollHeight}px`
-    //         : "0px";
-    // }, [isMobileMenuOpen]);
 
     // FUNCIONES UTILITARIAS
     const getUserInitial = () => {
@@ -52,24 +50,35 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         return user?.name || "User";
     };
 
+    const handleCloseMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+    };
+
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     // HANDLER EVENTS
-    const handleLogout = () => {
-        console.log("LOGOUT CLICKED");
-        logout();
+    const handleLogout = async () => {
+        setIsLoading(true);
+        try {
+            await logout();
+        } catch (err) {
+            console.log("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
+            toast.showToast("Ups!... No hemos podido Cerrar la sesion", "error");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleLogin = () => {
-        console.log("Login clicked");
         Navigate("/login");
         //AQUI PONER NAVIGATE TO PAGINA LOGIN
     };
 
     const handleRegister = () => {
         console.log("Register Clicked");
+        Navigate("register");
         //AQUI PONER NAVIGATE TO PAGINA REGISTER
     };
 
@@ -79,19 +88,18 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     };
 
     const handleLinkClick = (linkName) => {
-        console.log(`Navigating to ${linkName}`);
         return linkName;
     };
 
     const handleHomeClick = () => {
-        console.log(`NAVIGANDO A /HOME o /DASHBOARD`);
+        console.log("Navegacion a Home");
     };
 
     return (
         <nav className={`navbar ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}>
             <Container className="navbar-content">
                 <div className="navbar-inner">
-                    <Link className="navbar-logo" to={"/"} onClick={handleHomeClick}>
+                    <Link className="navbar-logo" to={isLoading ? null : "/home"} onClick={handleHomeClick}>
                         <ImageContainer className="flex-1 logo-icon">
                             <Image imageData={LOGO_IMAGES} alt="Logo ReservApp" />
                         </ImageContainer>
@@ -103,29 +111,39 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                     <div className="navbar-actions">
                         {isLoggedIn && (
                             <div className="navbar-user-profile">
-                                {/* Cambiar por un DropDown */}
                                 <ThemeButton />
+                                <LanguagesSelector />
 
                                 <Avatar
-                                    src={user?.src}
+                                    avatar={user?.avatar}
                                     alt="Avatar"
                                     online={user && true}
                                     onClick={handleProfile}
                                     fallback={user?.name}
                                 />
                                 {!isMobile && !isTablet && (
-                                    <Button onClick={handleLogout} variant="danger" size={isMobile && "sm"}>
+                                    <LoadingButton
+                                        loading={isLoading}
+                                        onClick={handleLogout}
+                                        className="justify-start"
+                                        variant="danger"
+                                        loadingText="Closing Profile..."
+                                    >
                                         Logout
-                                    </Button>
+                                    </LoadingButton>
                                 )}
                             </div>
                         )}
                         {!isLoggedIn && (
                             <div className="perfect-center gap-2">
-                                <Button onClick={handleLogin} size={isMobile && "sm"} variant="outline">
+                                <Button onClick={handleLogin} size={isMobile ? "sm" : "md"} variant="primary">
                                     LOGIN
                                 </Button>
-                                <Button onClick={handleRegister} size={isMobile && "sm"} variant="secondary">
+                                <Button
+                                    onClick={handleRegister}
+                                    size={isMobile ? "sm" : "md"}
+                                    variant="secondary"
+                                >
                                     REGISTER
                                 </Button>
                             </div>
@@ -158,19 +176,26 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                     >
                                         Perfil
                                     </Button>
-                                    <Button onClick={handleLogout} className="justify-start" variant="danger">
+                                    <LoadingButton
+                                        loading={isLoading}
+                                        onClick={handleLogout}
+                                        className="justify-start"
+                                        variant="danger"
+                                        loadingText="Closing Profile..."
+                                    >
                                         Logout
-                                    </Button>
+                                    </LoadingButton>
                                 </div>
                             )}
                             {!isLoggedIn && (
                                 <div className="flex items-center gap-3">
-                                    <ThemeButton />
+                                    <ThemeButton handleCloseMobileMenu={handleCloseMobileMenu} />
                                 </div>
                             )}
                         </Container>
                     </div>
                 )}
+                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
             </Container>
         </nav>
     );
