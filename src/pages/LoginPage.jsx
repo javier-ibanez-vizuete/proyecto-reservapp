@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Container } from "../components/Container";
 import { FormInput } from "../components/FormInput";
 import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { ToastContainer } from "../components/ToastContainer";
+import { AuthContext } from "../contexts/AuthContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { LoginVerificationFields } from "../helpers/FieldsVerificator";
@@ -49,6 +51,7 @@ export const LoginPage = () => {
     const [error, setError] = useState("");
     const [isLoading, setIsloading] = useState(false);
 
+    const { user } = useContext(AuthContext);
     const toast = useToast();
     const { login } = useAuth();
     const { theme } = useContext(ThemeContext);
@@ -56,6 +59,7 @@ export const LoginPage = () => {
     const { visible, toggleVisible } = usePasswordVisibility();
 
     const onInputChange = (event) => {
+        if (isLoading) return;
         const { name, value } = event.target;
         setError("");
 
@@ -74,11 +78,15 @@ export const LoginPage = () => {
             setForm(INITIAL_FORM);
         } catch (error) {
             setForm(INITIAL_FORM);
-            toast.showToast("Algo ha salido Mal", "error", 3000, "top-right");
+            toast.showToast("Algo ha salido mal", "error", 4000, "top-right");
         } finally {
             setIsloading(false);
         }
     };
+
+    if (user) {
+        return <Navigate to={"/"} replace />;
+    }
 
     return (
         <Container className="perfect-center flex-1">
@@ -125,8 +133,9 @@ export const LoginPage = () => {
                     <LoadingButton
                         loading={isLoading}
                         type="submit"
-                        variant="default"
+                        variant="primary"
                         size={isMobile ? "sm" : "md"}
+                        loadingText="Login in..."
                     >
                         Iniciar Sesion
                     </LoadingButton>

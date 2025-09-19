@@ -1,17 +1,22 @@
 import { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
 import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
 import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { FormInput } from "../components/FormInput";
+import { LoadingButton } from "../components/Spinner/LoadingButton";
+import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
+import { AuthContext } from "../contexts/AuthContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { RegisterVerificationFields } from "../helpers/FieldsVerificator";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
+import { useToast } from "../hooks/useToast";
 
 const INITIAL_FORM_DATA = {
     name: "",
@@ -130,14 +135,19 @@ const REGISTER_FORM_FIELDS = [
 export const RegisterPage = () => {
     const [form, setForm] = useState(INITIAL_FORM_DATA);
     const [error, setError] = useState("");
-    const { register } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
 
+    const { register } = useAuth();
+    const toast = useToast();
+
+    const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
 
     const visibility1 = usePasswordVisibility();
     const visibility2 = usePasswordVisibility();
 
     const onInputChange = (event) => {
+        if (isLoading) return;
         const { name, value } = event.target;
         setError("");
 
@@ -145,21 +155,33 @@ export const RegisterPage = () => {
     };
 
     const onRegisterSubmit = async (event) => {
-        event.preventDefault();
+        try {
+            event.preventDefault();
 
-        const isError = RegisterVerificationFields(form);
-        if (isError) return setError(isError);
-        const { repassword, ...restForm } = form;
+            const isError = RegisterVerificationFields(form);
+            if (isError) return setError(isError);
+            setIsLoading(true);
+            const { repassword, ...restForm } = form;
 
-        console.log("Esto es el formulario acabado ", restForm);
+            console.log("Esto es el formulario acabado ", restForm);
 
-        await register(restForm);
-        setForm(INITIAL_FORM_DATA);
+            await register(restForm);
+            setForm(INITIAL_FORM_DATA);
+        } catch (err) {
+            setForm(INITIAL_FORM_DATA);
+            toast.showToast("Algo ha salido mal", "error", 4000, "top-right");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleAvatarClick = (avatar) => {
         setForm((prev) => ({ ...prev, avatar: { url: avatar.url, alt: avatar.alt } }));
     };
+
+    if (user) {
+        return <Navigate to={"/home"} replace />;
+    }
 
     return (
         <Container className="perfect-center flex-1 py-4">
@@ -231,11 +253,17 @@ export const RegisterPage = () => {
                     })}
                     {error && <span className="italic font-semibold text-error-600">{error}</span>}
 
-                    <Button type="submit" className="justify-center rounded-full py-sm px-md mt-2">
+                    <LoadingButton
+                        type="submit"
+                        loading={isLoading}
+                        variant={"secondary"}
+                        className="justify-center rounded-full py-sm px-md mt-2"
+                    >
                         Registrarse
-                    </Button>
+                    </LoadingButton>
                 </form>
             </div>
+            <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
         </Container>
     );
 };

@@ -1,5 +1,5 @@
 export const getPositionStyle = (position) => {
-    const base = "fixed flex flex-col gap-4 p-4";
+    const base = "fixed flex flex-col z-1000 gap-4 p-4";
     const positions = {
         "top-full": `${base} top-0 left-0 right-0 items-center`,
         "top-left": `${base} top-0 left-0 items-start`,

@@ -2,9 +2,7 @@ import { api } from "../http/axios";
 
 export const loginApi = async (user) => {
     try {
-        console.log(`loginApi: ${user.email} y password: ${user.password}`);
         const response = await api.post("/auth/login", user);
-        console.log("respuesta de la api", response);
 
         return response.data;
     } catch (error) {
@@ -30,9 +28,7 @@ export const registerApi = async (user) => {
 
 export const logoutApi = async () => {
     try {
-        console.log("logoutApi");
         const response = await api.post("/auth/logout");
-        console.log("respuesta de la api", response);
 
         return response.data;
     } catch (error) {

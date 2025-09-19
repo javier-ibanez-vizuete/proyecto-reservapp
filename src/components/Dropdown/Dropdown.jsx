@@ -229,7 +229,7 @@ export const Dropdown = ({
      */
     const dropdownClasses = classnames(
         // Clases base del dropdown
-        "relative inline-block text-left",
+        "relative inline-flex text-left",
 
         // Estado deshabilitado
         {

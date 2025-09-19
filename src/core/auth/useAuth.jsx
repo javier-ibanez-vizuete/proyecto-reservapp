@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { replace, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { saveDataInSessionStorage } from "../../helpers/storage";
 import { getProfileApi, loginApi, logoutApi, registerApi } from "./auth.api";
 import {
     removeTokenFromLocalStorage,
@@ -16,16 +17,20 @@ export const useAuth = () => {
 
     const login = async ({ email, password }) => {
         // Enviar a la API de autenticación
-        console.log(`Iniciando sesión con email: ${email} y password: ${password}`);
+        try {
+            const authData = await loginApi({ email, password });
 
-        const authData = await loginApi({ email, password });
+            if (authData) {
+                saveTokenInLocalStorage(authData.token);
+                saveUserInLocalStorage(authData.user);
+                setUser(authData.user);
 
-        if (authData) {
-            saveTokenInLocalStorage(authData.token);
-            saveUserInLocalStorage(authData.user);
-            setUser(authData.user);
-
-            navigate("/home", { state: { fromLogin: true }, replace });
+                console.log("Estoy llegando a navigate");
+                navigate("/home", { state: { fromLogin: true } });
+                saveDataInSessionStorage("fromLogin", true);
+            }
+        } catch (err) {
+            console.log("El login no ha podido Completarse 'useAuth-login()'", err);
         }
 
         // Si la API nos dice error, mostramos un mensaje de error
@@ -33,16 +38,19 @@ export const useAuth = () => {
 
     const logout = async () => {
         // Lógica de cierre de sesión
-        console.log("Cerrando sesión");
+        try {
+            console.log("Cerrando sesión");
 
-        const logoutResponse = await logoutApi();
+            const logoutResponse = await logoutApi();
 
-        if (logoutResponse?.logout) {
-            console.log("logout del hook", logoutResponse);
-            removeUserFromLocalStorage();
-            removeTokenFromLocalStorage();
-            setUser(null);
-            navigate("/");
+            if (logoutResponse?.logout) {
+                removeUserFromLocalStorage();
+                removeTokenFromLocalStorage();
+                setUser(null);
+                navigate("/", { state: { logoutSucces: true } });
+            }
+        } catch (err) {
+            console.log("El Logout no ha podido completarse", err);
         }
     };
 
@@ -57,7 +65,8 @@ export const useAuth = () => {
                 saveTokenInLocalStorage(authData.token);
                 saveUserInLocalStorage(authData.user);
                 setUser(authData.user);
-                navigate("/", replace);
+                navigate("/", { state: { fromRegister: true } }, replace);
+                saveDataInSessionStorage("fromRegister", true);
             }
         } catch (error) {
             console.log("ERROR", error);
