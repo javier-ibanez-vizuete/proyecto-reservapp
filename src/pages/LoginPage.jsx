@@ -1,10 +1,16 @@
 import { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Container } from "../components/Container";
 import { FormInput } from "../components/FormInput";
-import { Button } from "../components/UI/Button";
+import { LoadingButton } from "../components/Spinner/LoadingButton";
+import { ToastContainer } from "../components/ToastContainer";
+import { AuthContext } from "../contexts/AuthContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
+import { LoginVerificationFields } from "../helpers/FieldsVerificator";
+import { useDevice } from "../hooks/useDevice";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
+import { useToast } from "../hooks/useToast";
 
 const INITIAL_FORM = { email: "", password: "" };
 
@@ -14,7 +20,7 @@ const LOGIN_FIELDS = [
         input: {
             name: "email",
             type: "email",
-            placeholder: "admin@admin.com",
+            placeholder: "email@example.com",
             label: "Email",
             required: true,
             className: "flex-1",
@@ -29,7 +35,7 @@ const LOGIN_FIELDS = [
         input: {
             name: "password",
             type: "password",
-            placeholder: "1234",
+            placeholder: "passwordexample1",
             required: true,
             className: "rounded-r-none flex-1",
         },
@@ -42,25 +48,53 @@ const LOGIN_FIELDS = [
 
 export const LoginPage = () => {
     const [form, setForm] = useState(INITIAL_FORM);
+    const [error, setError] = useState("");
+    const [isLoading, setIsloading] = useState(false);
+
+    const { user } = useContext(AuthContext);
+    const toast = useToast();
     const { login } = useAuth();
     const { theme } = useContext(ThemeContext);
+    const { isMobile } = useDevice();
     const { visible, toggleVisible } = usePasswordVisibility();
 
     const onInputChange = (event) => {
+        if (isLoading) return;
         const { name, value } = event.target;
+        setError("");
 
         setForm({ ...form, [name]: value });
     };
 
     const onLoginSubmit = async (event) => {
-        event.preventDefault();
-        await login(form);
-        setForm(INITIAL_FORM);
+        try {
+            event.preventDefault();
+
+            const isError = LoginVerificationFields(form);
+            if (isError) return setError(isError);
+            setIsloading(true);
+
+            await login(form);
+            setForm(INITIAL_FORM);
+        } catch (error) {
+            setForm(INITIAL_FORM);
+            toast.showToast("Algo ha salido mal", "error", 4000, "top-right");
+        } finally {
+            setIsloading(false);
+        }
     };
+
+    if (user) {
+        return <Navigate to={"/"} replace />;
+    }
 
     return (
         <Container className="perfect-center flex-1">
-            <div className={`flex flex-col gap-md bg-accent-color rounded-2xl shadow-landing-lg p-8`}>
+            <div
+                className={`flex flex-col gap-md ${
+                    theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+                } rounded-2xl shadow-landing-lg xs:p-4 2xs:py-4 2xs:px-1 sm:p-8 md:p-10`}
+            >
                 <h2 className={`${theme === "light" ? "text-text-color" : "text-text-color-dark"}`}>
                     Iniciar sesión
                 </h2>
@@ -91,12 +125,24 @@ export const LoginPage = () => {
                             />
                         );
                     })}
+                    {error && <span className="italic font-semibold text-error-600">{error}</span>}
 
-                    <Button type="submit" className="justify-center rounded-full">
+                    {/* <Button type="submit" className="justify-center rounded-full" disabled={error && true}>
                         Entrar
-                    </Button>
+                    </Button> */}
+                    <LoadingButton
+                        loading={isLoading}
+                        type="submit"
+                        variant="primary"
+                        size={isMobile ? "sm" : "md"}
+                        loadingText="Login in..."
+                    >
+                        Iniciar Sesion
+                    </LoadingButton>
                 </form>
             </div>
+
+            <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
         </Container>
     );
 };

@@ -7,6 +7,8 @@ import { DashboardPage } from "../pages/DashboardPage";
 export const AdminRouter = () => {
     const { user } = useContext(AuthContext);
 
+    console.log("Estoy pasando por aqui");
+
     return (
         <Routes>
             <Route
@@ -24,7 +26,7 @@ export const AdminRouter = () => {
                 <Route path="/dashboard/*" element={<DashboardPage />} />
             </Route>
 
-            <Route path="*" element={<h1>RUTA NO ENCONTRADA DASHBOARD</h1>} />
+            <Route path="*" element={<DashboardPage />} />
         </Routes>
     );
 };

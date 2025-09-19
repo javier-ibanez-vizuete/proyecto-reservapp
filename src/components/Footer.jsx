@@ -3,6 +3,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Container } from "./Container";
+import { LanguagesSelector } from "./LanguagesSelector";
 import { ThemeButton } from "./UI/ThemeButton";
 
 export const Footer = () => {
@@ -24,22 +25,7 @@ export const Footer = () => {
                         </div>
                     )}
                     <small>Elementos Footer</small>
-                    <label htmlFor="lang">
-                        <select
-                            name="lang"
-                            id="lang"
-                            value={lang}
-                            onChange={(event) => handleLang(event.target.value)}
-                        >
-                            {Object.entries(languages).map(([langCode, langValue]) => {
-                                return (
-                                    <option key={langCode} value={langCode}>
-                                        {langValue}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                    </label>
+                    <LanguagesSelector />
                 </div>
                 <div className="flex flex-1 justify-center items-center text-center text-sm text-gray-500">
                     <p>© {new Date().getFullYear()} Tipico Footer. All rights reserved</p>

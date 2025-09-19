@@ -133,7 +133,7 @@ export const Avatar = ({
     };
 
     return (
-        <div className="relative inline-block">
+        <div className="relative inline-flex">
             <div className={avatarClasses} {...props}>
                 {/* Imagen del avatar */}
                 {imageSrc && !imageError && (
