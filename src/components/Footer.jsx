@@ -25,7 +25,7 @@ export const Footer = () => {
                         </div>
                     )}
                     <small>Elementos Footer</small>
-                    <LanguagesSelector />
+                    <LanguagesSelector placement="top-end" />
                 </div>
                 <div className="flex flex-1 justify-center items-center text-center text-sm text-gray-500">
                     <p>© {new Date().getFullYear()} Tipico Footer. All rights reserved</p>

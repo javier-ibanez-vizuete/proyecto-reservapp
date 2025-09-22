@@ -14,8 +14,8 @@ export const LanguagesSelector = ({ placement = "bottom-start" }) => {
 
     return (
         <Dropdown placement={placement} className={"rounded-full"}>
-            <DropdownTrigger>
-                <ImageContainer className="w-6">
+            <DropdownTrigger hasIcon={false} btnStyle={false}>
+                <ImageContainer className="w-11">
                     <Image imgSrc={iconLanguages} />
                 </ImageContainer>
             </DropdownTrigger>

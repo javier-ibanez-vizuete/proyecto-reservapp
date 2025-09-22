@@ -28,14 +28,14 @@ export const AppRouter = () => {
             />
             <Route path="/home" element={<HomePage />} />
 
-            <Route path="/booking" element={<BookingPage />} />
             <Route path="/menu" element={<MenuPage />} />
-            <Route path="/cart" element={<CartPage />} />
 
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
 
             <Route element={<PrivateRoute />}>
+                <Route path="/booking" element={<BookingPage />} />
+                <Route path="/cart" element={<CartPage />} />
                 <Route path="/user" element={<h1>RUTA PRIVADA</h1>} />
                 <Route path="/dashboard/*" element={<DashboardPage />} />
                 <Route path="/orders" element={<OrdersPage />} />

@@ -32,16 +32,18 @@ export const Spinner = ({ size = "md", color = "primary", className = "", ...pro
         md: "w-6 h-6",
         lg: "w-8 h-8",
         xl: "w-12 h-12",
+        xxl: "w-18 h-18",
+        xxxl: "w-24 h-24",
     };
 
     const colorClasses = {
         primary: "text-primary-color",
-        secondary: "text-secondary",
+        secondary: "text-secondary-color",
         white: "text-white",
         gray: "text-gray-500",
-        success: "text-success-500",
-        warning: "text-warning-500",
-        error: "text-error-500",
+        success: "text-green-500",
+        warning: "text-amber-500",
+        error: "text-red-500",
     };
 
     const spinnerClasses = classNames("animate-spin", sizeClasses[size], colorClasses[color], className);
