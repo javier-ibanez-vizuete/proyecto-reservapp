@@ -102,7 +102,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         <nav className={`navbar ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}>
             <Container className="navbar-content">
                 <div className="navbar-inner">
-                    <Link className="navbar-logo" to={isLoading ? null : "/home"} onClick={handleHomeClick}>
+                    <Link className="navbar-logo" to={isLoading ? null : "/"} onClick={handleHomeClick}>
                         <ImageContainer className="flex-1 logo-icon">
                             <Image imageData={LOGO_IMAGES} alt="Logo ReservApp" />
                         </ImageContainer>
