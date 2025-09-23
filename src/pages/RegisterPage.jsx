@@ -32,7 +32,7 @@ const INITIAL_FORM_DATA = {
 
 const AVATARS_OPTIONS = [
     {
-        url: "/public/pictures/avatars/avatar-default.png",
+        url: "/pictures/avatars/avatar-default.png",
         alt: "Avatar Desconocido",
     },
     {
@@ -44,7 +44,7 @@ const AVATARS_OPTIONS = [
         alt: "Avatar Spiderman",
     },
     {
-        url: "/public/pictures/avatars/avatar-gaming.png",
+        url: "/pictures/avatars/avatar-gaming.png",
         alt: "Avatar Developer",
     },
 ];
@@ -194,8 +194,8 @@ export const RegisterPage = () => {
 
                 <form className="flex flex-col gap-sm" onSubmit={onRegisterSubmit}>
                     <Dropdown placement="bottom-start">
-                        <DropdownTrigger className={"flex justify-start gap-2 p-0"}>
-                            <ImageContainer className="w-14 ">
+                        <DropdownTrigger className={"flex justify-start gap-2 p-0 flex-1"}>
+                            <ImageContainer className="w-14">
                                 <Image className="rounded-xl" imgSrc={form?.avatar?.url} />
                             </ImageContainer>
                             <Button variant={"ghost"} className="flex-1">

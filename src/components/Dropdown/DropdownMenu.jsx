@@ -1,12 +1,17 @@
 import classnames from "classnames";
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import { DropdownItem } from "./DropdownItem";
 
 export const DropdownMenu = ({ children, isOpen, onClose, placement, className = "", ...props }) => {
+    const { theme } = useContext(ThemeContext);
+
     if (!isOpen) return null;
 
     const menuClasses = classnames(
-        "absolute z-50 w-56 bg-white border border-gray-200 rounded-lg shadow-lg ring-1 ring-black/5 focus:outline-none animate-in fade-in-0 zoom-in-95 duration-200",
+        `absolute z-50 w-auto min-w-40 ${
+            theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+        } border border-gray-200 rounded-lg shadow-lg ring-1 ring-black/5 focus:outline-none animate-in fade-in-0 zoom-in-95 duration-200`,
         placement,
         className
     );
