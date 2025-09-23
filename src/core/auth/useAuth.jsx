@@ -46,7 +46,7 @@ export const useAuth = () => {
             if (logoutResponse?.logout) {
                 removeUserFromLocalStorage();
                 removeTokenFromLocalStorage();
-                setUser(null);
+                setUser(false);
                 navigate("/", { state: { logoutSucces: true } });
             }
         } catch (err) {

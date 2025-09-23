@@ -5,7 +5,9 @@ import { AuthContext } from "../contexts/AuthContext";
 export const PrivateRoute = () => {
     const { user } = useContext(AuthContext);
 
-    if (!user) return <Navigate to={"/"} state={{ isUser: "No Existe Usuario" }} />;
+    if (user === null) return <div>Cargando</div>;
+
+    if (user === false) return <Navigate to={"/"} state={{ isUser: "No Existe Usuario" }} />;
 
     return <Outlet />;
 };
