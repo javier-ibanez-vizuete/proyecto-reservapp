@@ -4,7 +4,7 @@ import { Toast } from "./Toast";
 export const ToastContainer = ({ toasts = [], onClose = () => {}, className = "" }) => {
     if (toasts?.length === 0) return null;
 
-    const position = toasts[0]?.position || "top-right";
+    const position = toasts[0]?.position || "top-center";
 
     return (
         <div className={`${className}${getPositionStyle(position)}`}>

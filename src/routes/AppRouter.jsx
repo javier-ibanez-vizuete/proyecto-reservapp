@@ -19,7 +19,7 @@ export const AppRouter = () => {
             <Route
                 path="/"
                 element={
-                    user?.role === "admin" ? (
+                    user && user?.role === "admin" ? (
                         <Navigate to={"/dashboard"} replace />
                     ) : (
                         <Navigate to={"/home"} />
