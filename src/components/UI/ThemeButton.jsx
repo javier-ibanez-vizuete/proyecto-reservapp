@@ -55,8 +55,8 @@ const getContainerClasses = (className, theme) => {
     return classNames(
         `relative rounded-full border ${theme === "light" ? "border-amber-500" : "border-gray-500"}`,
         "backdrop-blur-[15px]",
-        "shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)]",
-        "w-6 h-6 perfect-center",
+        "shadow-[0px_0px_0px_1px_rgba(0,0,0,0.01)]",
+        "w-9 h-9 perfect-center",
         className
     );
 };

@@ -68,6 +68,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
             toast.showToast("Ups!... No hemos podido Cerrar la sesion", "error");
         } finally {
             setIsLoading(false);
+            toast.showToast("Sesion cerrada", "success");
         }
     };
 
@@ -103,7 +104,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         <ImageContainer className="flex-1 logo-icon">
                             <Image imageData={LOGO_IMAGES} alt="Logo ReservApp" />
                         </ImageContainer>
-                        {isLoggedIn && <span className="logo-text text-text-color">ReservApp</span>}
+                        {isLoggedIn && !isMobile && <h2 className="logo-text">ReservApp</h2>}
                     </Link>
                     <div className="navbar-menu-container">
                         <NavbarLinks handleLinkClick={handleLinkClick} />
@@ -112,7 +113,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         {isLoggedIn && (
                             <div className="navbar-user-profile">
                                 <ThemeButton />
-                                <LanguagesSelector />
+                                <LanguagesSelector placement="bottom-end" />
 
                                 <Avatar
                                     avatar={user?.avatar}

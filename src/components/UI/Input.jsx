@@ -15,7 +15,7 @@ export const Input = ({ ...props }) => {
     return (
         <input
             {...props}
-            className={`bg-white focus-visible:outline-hidden outline-hidden placeholder:text-text-color/50 rounded-xl py-md px-6 border-0 focus:outline-none transition ${props.className}`}
+            className={`bg-white focus-visible:outline-hidden outline-hidden text-text-color placeholder:text-text-color/50 rounded-xl py-md px-6 border-0 focus:outline-none transition ${props.className}`}
         />
     );
 };
