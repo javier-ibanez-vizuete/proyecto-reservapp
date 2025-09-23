@@ -7,6 +7,7 @@ import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { ProductItem } from "../components/Products/ProductItem";
 import { ProductsContainer } from "../components/Products/ProductsContainer";
 import { Spinner } from "../components/Spinner/Spinner";
+import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Button } from "../components/UI/Button";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {
@@ -15,7 +16,6 @@ import {
     saveDataInSessionStorage,
     saveDataInStorage,
 } from "../helpers/storage";
-import { useScroll } from "../hooks/useScroll";
 
 export const MenuPage = () => {
     const [productsAPI, setProductsAPI] = useState(() => {
@@ -32,7 +32,6 @@ export const MenuPage = () => {
     const [error, setError] = useState(null);
 
     const { theme } = useContext(ThemeContext);
-    const { scroll, scrollToTop } = useScroll();
 
     const categories = useMemo(() => {
         if (!productsAPI.length) return [];
@@ -98,11 +97,14 @@ export const MenuPage = () => {
     return (
         <div className="flex flex-col flex-1 py-4">
             <Container className="flex-1 gap-4">
-                {scroll > 1000 && (
-                    <Button onClick={scrollToTop} variant="danger" size="sm md:lg" className="btn-scroll">
-                        TOP
-                    </Button>
-                )}
+                <BackToTopButton
+                    size="sm"
+                    rounded="lg"
+                    showAt={1000}
+                    placement="top-right"
+                    variant="secondary"
+                />
+
                 <div className="lg:flex lg:justify-center">
                     <h1>CARTA</h1>
                 </div>
@@ -123,8 +125,8 @@ export const MenuPage = () => {
 
                 {!isLoading && (
                     <>
-                        <div className="flex flex-col gap-4">
-                            <div className="perfect-center gap-6">
+                        <div className="flex justify-between gap-4 lg:justify-center 2xl:flex-col ">
+                            <div className="flex items-center gap-6 2xl:justify-center">
                                 <Dropdown>
                                     <DropdownTrigger
                                         btnStyle={false}
