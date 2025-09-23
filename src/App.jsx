@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import { useImageFallback } from "./hooks/useImageFallback";
 import { AdminLayout } from "./layouts/AdminLayout";
@@ -8,6 +8,8 @@ import { AppRouter } from "./routes/AppRouter";
 
 export const App = () => {
     const { user } = useContext(AuthContext);
+
+    useEffect(() => {}, []);
 
     useImageFallback();
 

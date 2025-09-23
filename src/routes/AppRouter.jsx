@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { AuthContext } from "../contexts/AuthContext";
 import { BookingPage } from "../pages/BookingPage";
@@ -13,20 +13,23 @@ import { RegisterPage } from "../pages/RegisterPage";
 
 export const AppRouter = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    if (user && user?.role === "admin") return navigate("/dashboard", { replace: true });
 
     return (
         <Routes>
-            <Route
+            {/* <Route
                 path="/"
                 element={
                     user && user?.role === "admin" ? (
                         <Navigate to={"/dashboard"} replace />
                     ) : (
-                        <Navigate to={"/home"} />
+                        <Navigate to={"/"} />
                     )
                 }
-            />
-            <Route path="/home" element={<HomePage />} />
+            /> */}
+            <Route path="/" element={<HomePage />} />
 
             <Route path="/menu" element={<MenuPage />} />
 
