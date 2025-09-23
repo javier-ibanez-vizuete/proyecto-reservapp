@@ -10,6 +10,7 @@ import { Spinner } from "../components/Spinner/Spinner";
 import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Button } from "../components/UI/Button";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { api } from "../core/http/axios";
 import {
     getDataFromSessionStorage,
     getDataFromStorage,
@@ -57,7 +58,7 @@ export const MenuPage = () => {
         setError(null);
 
         try {
-            const response = api.get("/products");
+            const response = await api.get("/products");
             const data = response?.data;
 
             if (!Array.isArray(data)) throw new Error("INVALID DATA FORMAT");
