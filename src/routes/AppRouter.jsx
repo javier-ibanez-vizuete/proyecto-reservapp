@@ -8,7 +8,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { MenuPage } from "../pages/MenuPage";
-import { OrdersPage } from "../pages/OrdersPage";
+import { OrderPage } from "../pages/OrdersPage";
 import { RegisterPage } from "../pages/RegisterPage";
 
 export const AppRouter = () => {
@@ -41,7 +41,7 @@ export const AppRouter = () => {
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/user" element={<h1>RUTA PRIVADA</h1>} />
                 <Route path="/dashboard/*" element={<DashboardPage />} />
-                <Route path="/orders" element={<OrdersPage />} />
+                <Route path="/orders" element={<OrderPage />} />
             </Route>
 
             <Route path="/*" element={<h1>RUTA NO ENCONTRADA</h1>} />
