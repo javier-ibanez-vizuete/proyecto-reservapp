@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-export const useToast = (defaultDuration = 3000, defaultPosition = "top-right") => {
+export const useToast = (defaultDuration = 3000, defaultPosition = "top-center") => {
     const [toasts, setToasts] = useState([]);
 
     const showToast = useCallback((message, type, duration = defaultDuration, position = defaultPosition) => {
