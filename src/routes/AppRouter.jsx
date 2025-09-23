@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { AuthContext } from "../contexts/AuthContext";
 import { BookingPage } from "../pages/BookingPage";
@@ -8,25 +8,28 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { MenuPage } from "../pages/MenuPage";
-import { OrdersPage } from "../pages/OrdersPage";
+import { OrderPage } from "../pages/OrdersPage";
 import { RegisterPage } from "../pages/RegisterPage";
 
 export const AppRouter = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    if (user && user?.role === "admin") return navigate("/dashboard", { replace: true });
 
     return (
         <Routes>
-            <Route
+            {/* <Route
                 path="/"
                 element={
-                    user?.role === "admin" ? (
+                    user && user?.role === "admin" ? (
                         <Navigate to={"/dashboard"} replace />
                     ) : (
-                        <Navigate to={"/home"} />
+                        <Navigate to={"/"} />
                     )
                 }
-            />
-            <Route path="/home" element={<HomePage />} />
+            /> */}
+            <Route path="/" element={<HomePage />} />
 
             <Route path="/menu" element={<MenuPage />} />
 
@@ -38,7 +41,7 @@ export const AppRouter = () => {
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/user" element={<h1>RUTA PRIVADA</h1>} />
                 <Route path="/dashboard/*" element={<DashboardPage />} />
-                <Route path="/orders" element={<OrdersPage />} />
+                <Route path="/orders" element={<OrderPage />} />
             </Route>
 
             <Route path="/*" element={<h1>RUTA NO ENCONTRADA</h1>} />

@@ -6,6 +6,7 @@ import { ImageContainer } from "./UI/ImageContainer";
 import logoReservappAvif from "../assets/logos/reservapp-logo/logo-reservapp.avif";
 import logoReservappPng from "../assets/logos/reservapp-logo/logo-reservapp.png";
 import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.webp";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { useDevice } from "../hooks/useDevice";
@@ -37,6 +38,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
 
     const toast = useToast();
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
     // const contentMobileRef = useRef();
 
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
@@ -47,7 +49,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     };
 
     const getUserDisplayName = () => {
-        return user?.name || "User";
+        return user?.name || getText("userReplaceName");
     };
 
     const handleCloseMobileMenu = () => {
@@ -65,10 +67,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
             await logout();
         } catch (err) {
             console.log("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
-            toast.showToast("Ups!... No hemos podido Cerrar la sesion", "error");
+            toast.showToast(getText("toastLogoutError"), "error");
         } finally {
             setIsLoading(false);
-            toast.showToast("Sesion cerrada", "success");
+            toast.showToast(getText("toastLogoutSuccess"), "success");
         }
     };
 
@@ -100,7 +102,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         <nav className={`navbar ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}>
             <Container className="navbar-content">
                 <div className="navbar-inner">
-                    <Link className="navbar-logo" to={isLoading ? null : "/home"} onClick={handleHomeClick}>
+                    <Link className="navbar-logo" to={isLoading ? null : "/"} onClick={handleHomeClick}>
                         <ImageContainer className="flex-1 logo-icon">
                             <Image imageData={LOGO_IMAGES} alt="Logo ReservApp" />
                         </ImageContainer>
@@ -116,7 +118,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                 <LanguagesSelector placement="bottom-end" />
 
                                 <Avatar
-                                    avatar={user?.avatar}
+                                    avatar={user.avatar}
                                     alt="Avatar"
                                     online={user && true}
                                     onClick={handleProfile}
@@ -128,9 +130,9 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                         onClick={handleLogout}
                                         className="justify-start"
                                         variant="danger"
-                                        loadingText="Closing Profile..."
+                                        loadingText={getText("lodingTextLogoutUser")}
                                     >
-                                        Logout
+                                        {getText("logoutButton")}
                                     </LoadingButton>
                                 )}
                             </div>
@@ -138,18 +140,18 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         {!isLoggedIn && (
                             <div className="perfect-center gap-2">
                                 <Button onClick={handleLogin} size={isMobile ? "sm" : "md"} variant="primary">
-                                    LOGIN
+                                    {getText("loginButton")}
                                 </Button>
                                 <Button
                                     onClick={handleRegister}
                                     size={isMobile ? "sm" : "md"}
                                     variant="secondary"
                                 >
-                                    REGISTER
+                                    {getText("registerButton")}
                                 </Button>
                             </div>
                         )}
-                        <div className="flex justify-center h-10 w-10">
+                        <div className="flex lg:hidden justify-center h-10 w-10">
                             <BurgerButton
                                 isMobileMenuOpen={isMobileMenuOpen}
                                 toggleMobileMenu={toggleMobileMenu}
@@ -175,7 +177,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                         className="justify-start"
                                         variant="outline"
                                     >
-                                        Perfil
+                                        {getText("profilePageButton")}
                                     </Button>
                                     <LoadingButton
                                         loading={isLoading}
@@ -184,7 +186,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                         variant="danger"
                                         loadingText="Closing Profile..."
                                     >
-                                        Logout
+                                        {getText("logoutButton")}
                                     </LoadingButton>
                                 </div>
                             )}

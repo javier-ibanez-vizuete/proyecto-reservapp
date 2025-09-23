@@ -23,12 +23,17 @@ export const HomePage = () => {
         if (!fromLogin && !fromRegister) return;
 
         if (fromLogin) {
-            toast.showToast("Sesion iniciada con Exito", "success");
+            toast.showToast(getText("toastLoginSuccess"), "success", 3000, "top-center");
             navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromLogin");
         }
         if (fromRegister) {
-            toast.showToast(`Welcome ${user?.name || "User"}.`, "success", 4000, "top-right");
+            toast.showToast(
+                `${getText("toastWelcomeRegister")} ${user?.name || getText("userReplaceName")}.`,
+                "success",
+                4000,
+                "top-center"
+            );
             navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromRegister");
         }

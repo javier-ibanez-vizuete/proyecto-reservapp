@@ -7,9 +7,9 @@ import { LanguagesSelector } from "./LanguagesSelector";
 import { ThemeButton } from "./UI/ThemeButton";
 
 export const Footer = () => {
-    const { lang, languages, handleLang } = useContext(LanguageContext);
     const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     return (
         <footer
@@ -18,17 +18,17 @@ export const Footer = () => {
             }`}
         >
             <Container className="gap-2">
-                <div className="flex justify-between items-center">
+                <div className="flex justify-end items-center">
                     {!user && (
-                        <div>
+                        <div className="perfect-center">
                             <ThemeButton />
                         </div>
                     )}
-                    <small>Elementos Footer</small>
-                    <LanguagesSelector placement="top-end" />
                 </div>
                 <div className="flex flex-1 justify-center items-center text-center text-sm text-gray-500">
-                    <p>© {new Date().getFullYear()} Tipico Footer. All rights reserved</p>
+                    <p>
+                        © {new Date().getFullYear()} {getText("copyrightText")}
+                    </p>
                 </div>
             </Container>
         </footer>

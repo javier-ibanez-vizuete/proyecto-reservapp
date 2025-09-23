@@ -9,6 +9,7 @@ import { ProductsContainer } from "../components/Products/ProductsContainer";
 import { Spinner } from "../components/Spinner/Spinner";
 import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Button } from "../components/UI/Button";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { api } from "../core/http/axios";
 import {
@@ -21,18 +22,19 @@ import {
 export const MenuPage = () => {
     const [productsAPI, setProductsAPI] = useState(() => {
         const savedProducts = getDataFromStorage("productsData");
-        return savedProducts || [];
+        return savedProducts ?? [];
     });
 
     const [categorySelected, setCategorySelected] = useState(() => {
         const savedCategory = getDataFromSessionStorage("categorySelected");
-        return savedCategory || "all";
+        return savedCategory ?? "all";
     });
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     const categories = useMemo(() => {
         if (!productsAPI.length) return [];
@@ -61,24 +63,23 @@ export const MenuPage = () => {
             const response = await api.get("/products");
             const data = response?.data;
 
-            if (!Array.isArray(data)) throw new Error("INVALID DATA FORMAT");
-
+            if (!Array.isArray(data)) throw new Error("INVALID FORM DATA");
             setProductsAPI(data);
             saveDataInStorage("productsData", data);
         } catch (err) {
             console.error("Error Fetching Products:", err);
-            setError("Error al Cargar Los Products. Por favor, intentalo de nuevo.");
+            setError(getText("fetchMessageError"));
         } finally {
             setIsLoading(false);
         }
     };
 
     useEffect(() => {
-        if (!productsAPI.length) return fetchProducts();
+        if (!productsAPI.length) fetchProducts();
     }, []);
 
     useEffect(() => {
-        if (categorySelected) return saveDataInSessionStorage("categorySelected", categorySelected);
+        if (categorySelected) saveDataInSessionStorage("categorySelected", categorySelected);
     }, [categorySelected]);
 
     const handleCategoryChange = (category) => setCategorySelected(category);
@@ -91,7 +92,7 @@ export const MenuPage = () => {
     };
 
     const displayCategoryName = () => {
-        if (!categorySelected || categorySelected === "all") return "Todas las Categorias";
+        if (!categorySelected || categorySelected === "all") return getText("allCategoriesFilter");
         return categorySelected;
     };
 
@@ -107,16 +108,19 @@ export const MenuPage = () => {
                 />
 
                 <div className="lg:flex lg:justify-center">
-                    <h1>CARTA</h1>
+                    <h1>{getText("h1MenuPage")}</h1>
                 </div>
 
-                {error ||
-                    (!productsAPI.length && (
-                        <div className="flex flex-col gap-4">
-                            <span>{error}</span>
-                            <Button>{isLoading ? "Refrescando" : "Actualizar"}</Button>
-                        </div>
-                    ))}
+                {error && !productsAPI.length && (
+                    <div className="flex flex-col justify-center items-center gap-4">
+                        <span>{error}</span>
+                        <Button variant="danger" size="lg">
+                            {isLoading
+                                ? getText("loadingTextRefreshProductsButton")
+                                : getText("textRefreshProductsButton")}
+                        </Button>
+                    </div>
+                )}
 
                 {isLoading && (
                     <div className="perfect-center flex-1 self-center">
@@ -146,7 +150,9 @@ export const MenuPage = () => {
                                                 onClick={() => handleCategoryChange(category)}
                                                 className={categorySelected === category ? "font-bold" : ""}
                                             >
-                                                {category === "all" ? "Todas Las Categorias" : category}
+                                                {category === "all"
+                                                    ? getText("allCategoriesFilter")
+                                                    : category}
                                             </DropdownItem>
                                         ))}
                                     </DropdownMenu>
@@ -166,7 +172,7 @@ export const MenuPage = () => {
                                     variant="danger"
                                     size="sm"
                                 >
-                                    Clear Filter
+                                    {getText("clearFilterButton")}
                                 </Button>
                             )}
                         </div>
