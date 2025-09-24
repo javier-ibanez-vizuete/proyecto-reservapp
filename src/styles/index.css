@@ -213,6 +213,65 @@ body {
         @apply flex flex-col duration-900 ease-in-out overflow-hidden transition-all z-50 absolute top-0 right-0 left-0 mt-16;
     }
 
+    /* Estilos base del calendario */
+    .react-calendar {
+        @apply flex flex-col gap-2 rounded-lg shadow-lg p-4;
+    }
+    .light.react-calendar {
+        @apply bg-accent-background rounded-lg shadow-lg p-4;
+    }
+    .dark.react-calendar {
+        @apply bg-accent-background-dark rounded-lg shadow-lg p-4;
+    }
+
+    /* Botones de navegación */
+    .react-calendar__navigation {
+        @apply flex gap-4;
+    }
+
+    .react-calendar__navigation__arrow {
+        @apply text-2xl;
+    }
+
+    .react-calendar__navigation__prev2-button,
+    .react-calendar__navigation__next2-button {
+        @apply text-secondary-color;
+    }
+
+    .react-calendar__navigation__prev-button,
+    .react-calendar__navigation__next-button {
+        @apply text-primary-color;
+    }
+
+    .react-calendar__navigation__label {
+        @apply font-bold;
+    }
+
+    /* Día seleccionado */
+    .react-calendar__tile--active {
+        @apply bg-blue-900 text-red-500 rounded;
+    }
+
+    /* Día actual */
+    .react-calendar__tile--now {
+        @apply bg-primary-color/70;
+    }
+
+    /* Fines de semana - clase personalizada */
+    .fin-de-semana {
+        @apply text-red-500 font-bold;
+    }
+
+    /* Fechas importantes - clase personalizada */
+    .fecha-importante {
+        @apply bg-green-200 text-green-900 font-bold rounded;
+    }
+
+    /* Hover en días */
+    .react-calendar__tile:hover {
+        @apply bg-gray-100;
+    }
+
     @keyframes tb-rotate {
         from {
             transform: rotate(0deg);

@@ -16,5 +16,6 @@ export const getCategoriesApi = async () => {
         return response.data;
     } catch (err) {
         console.error("Error al Obtener Categorias", err);
+        throw err;
     }
 };
