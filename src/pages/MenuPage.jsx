@@ -23,7 +23,7 @@ export const MenuPage = () => {
 
     const [categorySelected, setCategorySelected] = useState(() => {
         const savedCategory = getDataFromSessionStorage("categorySelected");
-        return savedCategory ?? "all";
+        return savedCategory ?? "All Categories";
     });
 
     const filteredProducts = useMemo(() => {
@@ -48,7 +48,7 @@ export const MenuPage = () => {
     };
 
     const displayCategoryName = () => {
-        if (!categorySelected || categorySelected === "All Categories") return getText("allCategoriesFilter");
+        if (!categorySelected || categorySelected === "All Categories") return "All Categories";
         return categorySelected;
     };
 
@@ -91,8 +91,9 @@ export const MenuPage = () => {
                                         onClick={() => {
                                             handleCategoryChange("All Categories");
                                         }}
+                                        className={categorySelected === "All Categories" ? "font-bold" : ""}
                                     >
-                                        {getText("allCategoriesFilter")}
+                                        All Categories
                                     </DropdownItem>
                                     {categories.map((category) => (
                                         <DropdownItem
@@ -100,7 +101,7 @@ export const MenuPage = () => {
                                             onClick={() => handleCategoryChange(category)}
                                             className={categorySelected === category ? "font-bold" : ""}
                                         >
-                                            {category === "all" ? getText("allCategoriesFilter") : category}
+                                            {category === "all" ? "All Categories" : category}
                                         </DropdownItem>
                                     ))}
                                 </DropdownMenu>
