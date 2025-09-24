@@ -10,7 +10,7 @@ import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Button } from "../components/UI/Button";
 import { LanguageContext } from "../contexts/LanguageContext";
-import { ProductsContext } from "../contexts/productsContext";
+import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
 import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/storage";

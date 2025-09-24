@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
-import { ProductsContext } from "./contexts/productsContext";
+import { ProductsContext } from "./contexts/ProductsContext";
 import { useProducts } from "./core/products/useProducts";
 import { useImageFallback } from "./hooks/useImageFallback";
 import { AdminLayout } from "./layouts/AdminLayout";

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ProductsContext } from "../../contexts/productsContext";
+import { ProductsContext } from "../../contexts/ProductsContext";
 import { getCategoriesApi, getProductsApi } from "./products.api";
 import { saveCategoriesInLocalStorage, saveProductsInLocalStorage } from "./Products.service";
 
