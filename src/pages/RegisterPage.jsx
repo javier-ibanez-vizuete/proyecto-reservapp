@@ -25,7 +25,7 @@ const INITIAL_FORM_DATA = {
     password: "",
     repassword: "",
     avatar: {
-        url: "/public/pictures/avatars/avatar-default.png",
+        url: "/pictures/avatars/avatar-default.png",
         alt: "Avatar Desconocido",
     },
 };

@@ -6,77 +6,34 @@ import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
 import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { ProductItem } from "../components/Products/ProductItem";
 import { ProductsContainer } from "../components/Products/ProductsContainer";
-import { Spinner } from "../components/Spinner/Spinner";
+import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Button } from "../components/UI/Button";
 import { LanguageContext } from "../contexts/LanguageContext";
+import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { api } from "../core/http/axios";
-import {
-    getDataFromSessionStorage,
-    getDataFromStorage,
-    saveDataInSessionStorage,
-    saveDataInStorage,
-} from "../helpers/storage";
+import { useProducts } from "../core/products/useProducts";
+import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/storage";
 
 export const MenuPage = () => {
-    const [productsAPI, setProductsAPI] = useState(() => {
-        const savedProducts = getDataFromStorage("productsData");
-        return savedProducts ?? [];
-    });
-
-    const [categorySelected, setCategorySelected] = useState(() => {
-        const savedCategory = getDataFromSessionStorage("categorySelected");
-        return savedCategory ?? "all";
-    });
-
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const { products, categories } = useContext(ProductsContext);
 
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
+    const { getProducts, loadingProducts } = useProducts();
 
-    const categories = useMemo(() => {
-        if (!productsAPI.length) return [];
-
-        const uniqueCategories = new Set();
-        productsAPI.forEach((product) => {
-            if (!product.categories && !Array.isArray(productsAPI.categories)) return;
-            product.categories.forEach((category) => uniqueCategories.add(category));
-        });
-        return ["all", ...Array.from(uniqueCategories)];
-    }, [productsAPI]);
+    const [categorySelected, setCategorySelected] = useState(() => {
+        const savedCategory = getDataFromSessionStorage("categorySelected");
+        return savedCategory ?? "All Categories";
+    });
 
     const filteredProducts = useMemo(() => {
-        if (!categorySelected || categorySelected === "all") return productsAPI;
+        if (!categorySelected || categorySelected === "All Categories") return products;
 
-        return productsAPI.filter(
+        return products.filter(
             (product) => product.categories && product.categories.includes(categorySelected)
         );
-    }, [productsAPI, categorySelected]);
-
-    const fetchProducts = async () => {
-        setIsLoading(true);
-        setError(null);
-
-        try {
-            const response = await api.get("/products");
-            const data = response?.data;
-
-            if (!Array.isArray(data)) throw new Error("INVALID FORM DATA");
-            setProductsAPI(data);
-            saveDataInStorage("productsData", data);
-        } catch (err) {
-            console.error("Error Fetching Products:", err);
-            setError(getText("fetchMessageError"));
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        if (!productsAPI.length) fetchProducts();
-    }, []);
+    }, [products, categorySelected]);
 
     useEffect(() => {
         if (categorySelected) saveDataInSessionStorage("categorySelected", categorySelected);
@@ -84,17 +41,23 @@ export const MenuPage = () => {
 
     const handleCategoryChange = (category) => setCategorySelected(category);
 
-    const handleRefreshProduct = () => fetchProducts();
+    const handleRefreshProduct = () => getProducts();
 
     const clearFilters = () => {
-        setCategorySelected("all");
-        saveDataInSessionStorage("categorySelected", "all");
+        setCategorySelected("All Categories");
+        saveDataInSessionStorage("categorySelected", "All Categories");
     };
 
     const displayCategoryName = () => {
-        if (!categorySelected || categorySelected === "all") return getText("allCategoriesFilter");
+        if (!categorySelected || categorySelected === "All Categories") return "All Categories";
         return categorySelected;
     };
+
+    if (loadingProducts)
+        return (
+            <h1>MENU ESKELETON</h1>
+            // UTILIZAR SKELETON PARA RELLENAR LA WEB MIENTRAS CARGAN LOS PRODUCTOS
+        );
 
     return (
         <div className="flex flex-col flex-1 py-4">
@@ -106,29 +69,25 @@ export const MenuPage = () => {
                     placement="top-right"
                     variant="secondary"
                 />
-
                 <div className="lg:flex lg:justify-center">
                     <h1>{getText("h1MenuPage")}</h1>
                 </div>
-
-                {error && !productsAPI.length && (
+                {!loadingProducts && !products.length && (
                     <div className="flex flex-col justify-center items-center gap-4">
-                        <span>{error}</span>
-                        <Button variant="danger" size="lg">
-                            {isLoading
-                                ? getText("loadingTextRefreshProductsButton")
-                                : getText("textRefreshProductsButton")}
-                        </Button>
+                        <LoadingButton
+                            variant="danger"
+                            size="lg"
+                            loading={loadingProducts}
+                            loadingText={getText("loadingTextRefreshProductsButton")}
+                            onClick={handleRefreshProduct}
+                        >
+                            {getText("textRefreshProductsButton")}
+                        </LoadingButton>
+                        <h2 className="text-error-500">Error Al Cargar Products</h2>
                     </div>
                 )}
 
-                {isLoading && (
-                    <div className="perfect-center flex-1 self-center">
-                        <Spinner className="" size="xxl" color="primary" />
-                    </div>
-                )}
-
-                {!isLoading && (
+                {!loadingProducts && (
                     <>
                         <div className="flex justify-between gap-4 lg:justify-center 2xl:flex-col ">
                             <div className="flex items-center gap-6 2xl:justify-center">
@@ -144,28 +103,36 @@ export const MenuPage = () => {
                                         {displayCategoryName()}
                                     </DropdownTrigger>
                                     <DropdownMenu>
+                                        <DropdownItem
+                                            onClick={() => {
+                                                handleCategoryChange("All Categories");
+                                            }}
+                                            className={
+                                                categorySelected === "All Categories" ? "font-bold" : ""
+                                            }
+                                        >
+                                            All Categories
+                                        </DropdownItem>
                                         {categories.map((category) => (
                                             <DropdownItem
                                                 key={category}
                                                 onClick={() => handleCategoryChange(category)}
                                                 className={categorySelected === category ? "font-bold" : ""}
                                             >
-                                                {category === "all"
-                                                    ? getText("allCategoriesFilter")
-                                                    : category}
+                                                {category === "all" ? "All Categories" : category}
                                             </DropdownItem>
                                         ))}
                                     </DropdownMenu>
                                 </Dropdown>
 
-                                {productsAPI.length && filteredProducts.length && (
+                                {products.length && filteredProducts.length && (
                                     <span>
-                                        {filteredProducts.length}/{productsAPI.length}
+                                        {filteredProducts.length}/{products.length}
                                     </span>
                                 )}
                             </div>
 
-                            {categorySelected !== "all" && (
+                            {categorySelected !== "All Categories" && (
                                 <Button
                                     onClick={clearFilters}
                                     className="self-center"

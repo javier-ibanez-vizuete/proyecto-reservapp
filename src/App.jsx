@@ -1,5 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
+import { ProductsContext } from "./contexts/ProductsContext";
+import { useProducts } from "./core/products/useProducts";
 import { useImageFallback } from "./hooks/useImageFallback";
 import { AdminLayout } from "./layouts/AdminLayout";
 import { MainLayout } from "./layouts/MainLayout";
@@ -8,8 +10,13 @@ import { AppRouter } from "./routes/AppRouter";
 
 export const App = () => {
     const { user } = useContext(AuthContext);
+    const { products, categories } = useContext(ProductsContext);
+    const { getProducts, getCategories } = useProducts();
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        if (!products?.length) getProducts();
+        if (!categories?.length) getCategories();
+    }, []);
 
     useImageFallback();
 
