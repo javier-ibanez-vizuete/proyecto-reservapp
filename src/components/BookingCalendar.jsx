@@ -5,8 +5,6 @@ import { ThemeContext } from "../contexts/ThemeContext";
 export const BookingCalendar = ({ onChange, className = "", selectedDate }) => {
     const { theme } = useContext(ThemeContext);
 
-    console.log(new Date(2025, 7, 15));
-
     const currentDate = {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
@@ -18,7 +16,7 @@ export const BookingCalendar = ({ onChange, className = "", selectedDate }) => {
     };
 
     return (
-        <div className="perfect-center lg:w-[700px] ">
+        <div className="">
             <Calendar
                 className={`${theme} ${className}`}
                 minDetail="month"

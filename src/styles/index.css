@@ -28,7 +28,7 @@ body {
 
 @theme {
     --font-title: "Montserrat", sans-serif;
-    --font-sans: Roboto, sans-serif;
+    --font-sans: "Montserrat", sans-serif;
 
     --text-2xs: 12px;
     --text-xs: 14px;
@@ -95,7 +95,7 @@ body {
 
 @layer components {
     h1 {
-        @apply font-title font-semibold text-3xl/[125%] md:text-6xl/[125%];
+        @apply font-title font-semibold text-3xl/[125%] md:text-6xl/[125%] lg:text-center;
     }
     h2 {
         @apply font-title font-semibold text-lg/[125%] md:text-4xl/[125%];
