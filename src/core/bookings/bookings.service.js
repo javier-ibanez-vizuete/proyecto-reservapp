@@ -11,3 +11,15 @@ export const getBookingsFromLocalStorage = () => {
 export const removeBookingsFromLocalStorage = () => {
     removeFromStorage("bookings");
 };
+
+export const saveBookingFormInLocalStorage = (booking) => {
+    saveDataInStorage("booking", booking);
+};
+
+export const getBookingFormFromLocalStorage = () => {
+    return getDataFromStorage("booking");
+};
+
+export const removeBookingFormFromLocalStorage = () => {
+    removeFromStorage("booking");
+};

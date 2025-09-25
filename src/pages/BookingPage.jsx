@@ -7,9 +7,17 @@ import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
 import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { BookingsContext } from "../contexts/BookingsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { saveBookingsInLocalStorage } from "../core/bookings/bookings.service";
+import {
+    getBookingFormFromLocalStorage,
+    saveBookingFormInLocalStorage,
+} from "../core/bookings/bookings.service";
 import { useBookings } from "../core/bookings/useBookings";
 import { TABLES } from "../data/tables";
+import {
+    getDataFromSessionStorage,
+    removeFromSessionStorage,
+    saveDataInSessionStorage,
+} from "../helpers/storage";
 import { useDevice } from "../hooks/useDevice";
 
 const INITIAL_BOOKING_DATA = {
@@ -37,7 +45,15 @@ const DATE_TIMES_POSIBILITIES = [
 ];
 
 export const BookingPage = () => {
-    const [form, setForm] = useState(INITIAL_BOOKING_DATA);
+    const [form, setForm] = useState(() => {
+        const formFromStorage = getBookingFormFromLocalStorage();
+        return formFromStorage || INITIAL_BOOKING_DATA;
+    });
+
+    const [selectedDate, setSelectedDate] = useState(() => {
+        const selectedDateFromStorage = getDataFromSessionStorage("selectedDate");
+        return selectedDateFromStorage || null;
+    });
 
     const { bookings } = useContext(BookingsContext);
     const { postBookings, isLoading } = useBookings();
@@ -56,16 +72,18 @@ export const BookingPage = () => {
 
         setForm((prevValue) => {
             const newBookingValue = { ...prevValue, date: dateChange };
-            saveBookingsInLocalStorage(newBookingValue);
+            saveBookingFormInLocalStorage(newBookingValue);
             return newBookingValue;
         });
-        console.log("Dia Seleccionado ", dateChange);
+
+        setSelectedDate(dateChange);
+        saveDataInSessionStorage("selectedDate", dateChange);
     };
 
     const onChangeTime = (time) => {
         setForm((prevValue) => {
             const newBookingValue = { ...prevValue, time: time };
-            saveBookingsInLocalStorage(newBookingValue);
+            saveBookingFormInLocalStorage(newBookingValue);
             return newBookingValue;
         });
         console.log("Hora seleccionada", time);
@@ -74,10 +92,17 @@ export const BookingPage = () => {
     const onChangeCustomer = (customers) => {
         setForm((prevValue) => {
             const newBookingValue = { ...prevValue, partySize: customers };
-            saveBookingsInLocalStorage(newBookingValue);
+            saveBookingFormInLocalStorage(newBookingValue);
             return newBookingValue;
         });
         console.log("Comensales deseados", customers);
+    };
+
+    const resetForm = () => {
+        setForm(INITIAL_BOOKING_DATA);
+        saveBookingFormInLocalStorage(INITIAL_BOOKING_DATA);
+        setSelectedDate(null);
+        removeFromSessionStorage("selectedDate");
     };
 
     return (
@@ -86,7 +111,11 @@ export const BookingPage = () => {
                 <h1>RESERVAR</h1>
 
                 <div className="perfect-center">
-                    <BookingCalendar className="shadow-lg" onChange={onChangeDate} />
+                    <BookingCalendar
+                        className="shadow-lg"
+                        onChange={onChangeDate}
+                        selectedDate={selectedDate}
+                    />
                 </div>
 
                 <div className="flex gap-4 md:justify-center">
@@ -150,6 +179,7 @@ export const BookingPage = () => {
                             </DropdownMenu>
                         </Dropdown>
                     </div>
+                    <button onClick={resetForm}>RESETEAR</button>
                 </div>
                 <div className="flex flex-col lg:items-center">
                     {TABLES.map((table) => (
