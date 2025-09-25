@@ -246,6 +246,7 @@ body {
         @apply font-bold;
     }
 
+    /* Nombres de la semana  */
     .react-calendar__month-view__weekdays {
         @apply flex justify-center items-center;
     }
@@ -258,13 +259,18 @@ body {
         @apply no-underline font-medium;
     }
 
+    /* botones de dias del mes */
     .react-calendar__month-view__days {
         @apply gap-y-0.5;
     }
 
     /* Día seleccionado */
     .react-calendar__tile {
-        @apply bg-gray-300/50 rounded-sm;
+        @apply bg-gray-200/50 rounded-sm;
+    }
+
+    .react-calendar__month-view__days__day--neighboringMonth {
+        @apply opacity-40;
     }
 
     .light .react-calendar__tile:disabled {
