@@ -17,7 +17,6 @@ body,
     flex-direction: column;
     flex: 1;
 }
-
 * {
     box-sizing: border-box;
 }
@@ -226,7 +225,7 @@ body {
 
     /* Botones de navegación */
     .react-calendar__navigation {
-        @apply flex gap-4;
+        @apply flex items-center gap-4;
     }
 
     .react-calendar__navigation__arrow {
@@ -247,29 +246,41 @@ body {
         @apply font-bold;
     }
 
+    .react-calendar__month-view__weekdays {
+        @apply flex justify-center items-center;
+    }
+
+    .react-calendar__month-view__weekdays * {
+        @apply flex justify-center items-center;
+    }
+
+    .react-calendar__month-view__weekdays abbr {
+        @apply no-underline font-medium;
+    }
+
+    .react-calendar__month-view__days {
+        @apply gap-y-0.5;
+    }
+
     /* Día seleccionado */
+    .react-calendar__tile {
+        @apply bg-gray-300/50 rounded-sm;
+    }
+
+    .light .react-calendar__tile:disabled {
+        @apply bg-error-300/50;
+    }
+    .dark .react-calendar__tile:disabled {
+        @apply bg-error-300/50 text-text-color;
+    }
+
     .react-calendar__tile--active {
-        @apply bg-blue-900 text-red-500 rounded;
+        @apply bg-primary-color;
     }
 
     /* Día actual */
     .react-calendar__tile--now {
-        @apply bg-primary-color/70;
-    }
-
-    /* Fines de semana - clase personalizada */
-    .fin-de-semana {
-        @apply text-red-500 font-bold;
-    }
-
-    /* Fechas importantes - clase personalizada */
-    .fecha-importante {
-        @apply bg-green-200 text-green-900 font-bold rounded;
-    }
-
-    /* Hover en días */
-    .react-calendar__tile:hover {
-        @apply bg-gray-100;
+        @apply bg-secondary-color;
     }
 
     @keyframes tb-rotate {

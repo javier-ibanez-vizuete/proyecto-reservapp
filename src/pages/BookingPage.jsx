@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import Calendar from "react-calendar";
+import { BookingCalendar } from "../components/BookingCalendar";
 import { Container } from "../components/Container";
 import { BookingsContext } from "../contexts/BookingsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -33,13 +33,11 @@ export const BookingPage = () => {
     const onSubmitBooking = () => {};
 
     const onChangeDate = (selectedDate) => {
-        const date = selectedDate.toISOString().split("T")[0];
-        setForm((prev) => ({ ...prev, date: date }));
-        console.log(date);
-    };
-
-    const unvalidDates = ({ date }) => {
-        return date.getDay() === 0;
+        const year = selectedDate.getFullYear();
+        const month = selectedDate.getMonth();
+        const day = selectedDate.getDate();
+        const bookingDate = `${year}-${month}-${day}`;
+        console.log("Fecha Seleccionada", bookingDate);
     };
 
     return (
@@ -47,15 +45,10 @@ export const BookingPage = () => {
             <Container className="flex-1">
                 <h1>RESERVAR</h1>
 
-                <Calendar
-                    className={`${theme}`}
-                    onChange={onChangeDate}
-                    value={form.date}
-                    locale={`es-ES`}
-                    tileDisabled={unvalidDates}
-                    minDate={new Date()}
-                    maxDate={new Date(2026, 12, 31)}
-                />
+                <div className="perfect-center">
+                    <BookingCalendar onChange={onChangeDate} />
+                </div>
+
                 <button onClick={onSubmitBooking}>ENVIAR</button>
             </Container>
         </div>
