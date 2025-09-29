@@ -9,7 +9,7 @@ import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
 import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "../components/Modal";
 import { LoadingButton } from "../components/Spinner/LoadingButton";
-import { TableCard } from "../components/tableCard";
+import { TableCard } from "../components/TableCard";
 import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
 import { LanguageContext } from "../contexts/LanguageContext";
