@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+
 const TEXTS = {
     en: {
         // BARRA DE NAVEGACION
@@ -32,8 +33,49 @@ const TEXTS = {
         textRefreshProductsButton: "Refresh",
         clearFilterButton: "Clear Filter",
 
+        // BOOKING PAGE
+        h1BookingPage: "BOOKING",
+
+        confirmBookingTitle: "Review and Confirm",
+        dateConfirmText: "Date",
+        timeConfirmText: "Time",
+        customersConfirmText: "Customers",
+        highChairConfirmText: "High Chair?",
+        aditionalMessageConfirmText: "Aditional Message",
+        confirmButtonModal: "Confirm",
+        loadingTextConfirmButtonModal: "Booking...",
+
+        bookingTimeText: "Time",
+        bookingTimePlaceholder: "Select Time",
+        bookingCustomersText: "Customers",
+        bookingCustomersPlaceholder: "Select Customers",
+
+        bookingHighChairTitle: "Add High Chair",
+        bookingHighChairDescription: "Free of charge",
+
+        bookingAditionalMessagePlaceholder: "Any special requests?",
+
+        bookingMaxCapacityTableTitle: "Max. Capacity:",
+        bookingTableTypeTitle: "Table Type:",
+
+        squareTableForm: "Square Table",
+        roundTableForm: "Round Table",
+        rectangularTableForm: "Rectangular Table",
+
+        bookingTableWifiText: "Wifi:",
+
+        bookingSelectTableButton: "Select Table",
+
+        toastBookingSuccess: "Booking Completed",
+        toastBookingUnavailable: "Booking Failed: This table is already reserved.",
+        toastBookingError: "Booking Failed. Try Again",
+
         // Footer
         copyrightText: "ReservApp. All Rights reserved",
+
+        // Mensajes Generales
+        affirmationText: "Yes",
+        NegationText: "No",
     },
 
     es: {
@@ -68,12 +110,53 @@ const TEXTS = {
         textRefreshProductsButton: "Actualizar",
         clearFilterButton: "Borrar filtro",
 
+        // BOOKING PAGE
+        h1BookingPage: "RESERVA",
+
+        confirmBookingTitle: "Revisar y confirmar",
+        dateConfirmText: "Fecha",
+        timeConfirmText: "Hora",
+        customersConfirmText: "Comensales",
+        highChairConfirmText: "¿Trona?",
+        aditionalMessageConfirmText: "Mensaje adicional",
+        confirmButtonModal: "Confirmar",
+        loadingTextConfirmButtonModal: "Reservando...",
+
+        bookingTimeText: "Hora",
+        bookingTimePlaceholder: "Selecciona hora",
+        bookingCustomersText: "Comensales",
+        bookingCustomersPlaceholder: "Selecciona número de comensales",
+
+        bookingHighChairTitle: "Añadir trona",
+        bookingHighChairDescription: "Sin coste adicional",
+
+        bookingAditionalMessagePlaceholder: "¿Alguna petición especial?",
+
+        bookingMaxCapacityTableTitle: "Capacidad máx.:",
+        bookingTableTypeTitle: "Tipo de mesa:",
+
+        squareTableForm: "Mesa cuadrada",
+        roundTableForm: "Mesa redonda",
+        rectangularTableForm: "Mesa rectangular",
+
+        bookingTableWifiText: "Wifi:",
+
+        bookingSelectTableButton: "Seleccionar mesa",
+
+        toastBookingSuccess: "Reserva completada",
+        toastBookingUnavailable: "Error al reservar: esta mesa ya está reservada.",
+        toastBookingError: "Error en la reserva. Inténtalo de nuevo",
+
         // Footer
         copyrightText: "ReservApp. Todos los derechos reservados",
+
+        // Mensajes Generales
+        affirmationText: "Sí",
+        NegationText: "No",
     },
 
     fr: {
-        // BARRA DE NAVEGACION
+        // BARRA DE NAVIGATION
         userReplaceName: "Utilisateur",
         toastLogoutError: "Oups ! Une erreur est survenue.",
         toastLogoutSuccess: "Déconnexion terminée",
@@ -104,12 +187,53 @@ const TEXTS = {
         textRefreshProductsButton: "Rafraîchir",
         clearFilterButton: "Effacer le filtre",
 
+        // BOOKING PAGE
+        h1BookingPage: "RÉSERVATION",
+
+        confirmBookingTitle: "Vérifier et confirmer",
+        dateConfirmText: "Date",
+        timeConfirmText: "Heure",
+        customersConfirmText: "Personnes",
+        highChairConfirmText: "Chaise bébé ?",
+        aditionalMessageConfirmText: "Message additionnel",
+        confirmButtonModal: "Confirmer",
+        loadingTextConfirmButtonModal: "Réservation...",
+
+        bookingTimeText: "Heure",
+        bookingTimePlaceholder: "Sélectionner l'heure",
+        bookingCustomersText: "Personnes",
+        bookingCustomersPlaceholder: "Sélectionner le nombre",
+
+        bookingHighChairTitle: "Ajouter chaise bébé",
+        bookingHighChairDescription: "Sans frais supplémentaires",
+
+        bookingAditionalMessagePlaceholder: "Des demandes particulières ?",
+
+        bookingMaxCapacityTableTitle: "Capacité max :",
+        bookingTableTypeTitle: "Type de table :",
+
+        squareTableForm: "Table carrée",
+        roundTableForm: "Table ronde",
+        rectangularTableForm: "Table rectangulaire",
+
+        bookingTableWifiText: "Wifi :",
+
+        bookingSelectTableButton: "Sélectionner la table",
+
+        toastBookingSuccess: "Réservation effectuée",
+        toastBookingUnavailable: "Échec de la réservation : cette table est déjà réservée.",
+        toastBookingError: "Échec de la réservation. Réessayez",
+
         // Footer
         copyrightText: "ReservApp. Tous droits réservés",
+
+        // Mensajes Generales
+        affirmationText: "Oui",
+        NegationText: "Non",
     },
 
     it: {
-        // BARRA DE NAVEGACION
+        // BARRA DI NAVIGAZIONE
         userReplaceName: "Utente",
         toastLogoutError: "Ops! Qualcosa è andato storto.",
         toastLogoutSuccess: "Disconnessione completata",
@@ -140,12 +264,53 @@ const TEXTS = {
         textRefreshProductsButton: "Aggiorna",
         clearFilterButton: "Cancella filtro",
 
+        // BOOKING PAGE
+        h1BookingPage: "PRENOTAZIONE",
+
+        confirmBookingTitle: "Rivedi e conferma",
+        dateConfirmText: "Data",
+        timeConfirmText: "Ora",
+        customersConfirmText: "Coperti",
+        highChairConfirmText: "Seggiolone?",
+        aditionalMessageConfirmText: "Messaggio aggiuntivo",
+        confirmButtonModal: "Conferma",
+        loadingTextConfirmButtonModal: "Prenotazione...",
+
+        bookingTimeText: "Ora",
+        bookingTimePlaceholder: "Seleziona l'ora",
+        bookingCustomersText: "Coperti",
+        bookingCustomersPlaceholder: "Seleziona il numero",
+
+        bookingHighChairTitle: "Aggiungi seggiolone",
+        bookingHighChairDescription: "Senza costi aggiuntivi",
+
+        bookingAditionalMessagePlaceholder: "Richieste particolari?",
+
+        bookingMaxCapacityTableTitle: "Capacità max:",
+        bookingTableTypeTitle: "Tipo di tavolo:",
+
+        squareTableForm: "Tavolo quadrato",
+        roundTableForm: "Tavolo rotondo",
+        rectangularTableForm: "Tavolo rettangolare",
+
+        bookingTableWifiText: "Wifi:",
+
+        bookingSelectTableButton: "Seleziona tavolo",
+
+        toastBookingSuccess: "Prenotazione completata",
+        toastBookingUnavailable: "Prenotazione fallita: questo tavolo è già prenotato.",
+        toastBookingError: "Prenotazione fallita. Riprova",
+
         // Footer
         copyrightText: "ReservApp. Tutti i diritti riservati",
+
+        // Mensajes Generales
+        affirmationText: "Sì",
+        NegationText: "No",
     },
 
     de: {
-        // BARRA DE NAVEGACION
+        // NAVIGATION
         userReplaceName: "Benutzer",
         toastLogoutError: "Ups! Etwas ist schiefgelaufen.",
         toastLogoutSuccess: "Abmeldung abgeschlossen",
@@ -176,12 +341,53 @@ const TEXTS = {
         textRefreshProductsButton: "Aktualisieren",
         clearFilterButton: "Filter löschen",
 
+        // BOOKING PAGE
+        h1BookingPage: "RESERVIERUNG",
+
+        confirmBookingTitle: "Überprüfen und bestätigen",
+        dateConfirmText: "Datum",
+        timeConfirmText: "Uhrzeit",
+        customersConfirmText: "Gäste",
+        highChairConfirmText: "Hochstuhl?",
+        aditionalMessageConfirmText: "Zusätzliche Nachricht",
+        confirmButtonModal: "Bestätigen",
+        loadingTextConfirmButtonModal: "Reservierung...",
+
+        bookingTimeText: "Uhrzeit",
+        bookingTimePlaceholder: "Uhrzeit auswählen",
+        bookingCustomersText: "Gäste",
+        bookingCustomersPlaceholder: "Anzahl auswählen",
+
+        bookingHighChairTitle: "Hochstuhl hinzufügen",
+        bookingHighChairDescription: "Kostenlos",
+
+        bookingAditionalMessagePlaceholder: "Besondere Wünsche?",
+
+        bookingMaxCapacityTableTitle: "Max. Kapazität:",
+        bookingTableTypeTitle: "Tischtyp:",
+
+        squareTableForm: "Quadratischer Tisch",
+        roundTableForm: "Runder Tisch",
+        rectangularTableForm: "Rechteckiger Tisch",
+
+        bookingTableWifiText: "Wifi:",
+
+        bookingSelectTableButton: "Tisch auswählen",
+
+        toastBookingSuccess: "Reservierung abgeschlossen",
+        toastBookingUnavailable: "Reservierung fehlgeschlagen: Dieser Tisch ist bereits reserviert.",
+        toastBookingError: "Reservierung fehlgeschlagen. Versuchen Sie es erneut",
+
         // Footer
         copyrightText: "ReservApp. Alle Rechte vorbehalten",
+
+        // Mensajes Generales
+        affirmationText: "Ja",
+        NegationText: "Nein",
     },
 
     zh: {
-        // BARRA DE NAVEGACION
+        // 导航栏
         userReplaceName: "用户",
         toastLogoutError: "哎呀！出现了错误。",
         toastLogoutSuccess: "退出成功",
@@ -198,12 +404,12 @@ const TEXTS = {
 
         profilePageButton: "个人资料",
 
-        // HOME PAGE
+        // 主页
         toastWelcomeRegister: "欢迎",
         toastLoginSuccess: "登录成功",
         h1HomePage: "主页",
 
-        // MENUPAGE
+        // 菜单页
         fetchMessageError: "加载产品时出错。请重试。",
         allCategoriesFilter: "所有分类",
         h1MenuPage: "菜单",
@@ -212,8 +418,49 @@ const TEXTS = {
         textRefreshProductsButton: "刷新",
         clearFilterButton: "清除筛选",
 
-        // Footer
+        // 预订页
+        h1BookingPage: "预订",
+
+        confirmBookingTitle: "查看并确认",
+        dateConfirmText: "日期",
+        timeConfirmText: "时间",
+        customersConfirmText: "人数",
+        highChairConfirmText: "婴儿座椅？",
+        aditionalMessageConfirmText: "附加信息",
+        confirmButtonModal: "确认",
+        loadingTextConfirmButtonModal: "预订中...",
+
+        bookingTimeText: "时间",
+        bookingTimePlaceholder: "选择时间",
+        bookingCustomersText: "人数",
+        bookingCustomersPlaceholder: "选择人数",
+
+        bookingHighChairTitle: "添加婴儿座椅",
+        bookingHighChairDescription: "免费",
+
+        bookingAditionalMessagePlaceholder: "有特殊要求吗？",
+
+        bookingMaxCapacityTableTitle: "最大容量：",
+        bookingTableTypeTitle: "桌型：",
+
+        squareTableForm: "方桌",
+        roundTableForm: "圆桌",
+        rectangularTableForm: "长方桌",
+
+        bookingTableWifiText: "Wifi：",
+
+        bookingSelectTableButton: "选择桌子",
+
+        toastBookingSuccess: "预订成功",
+        toastBookingUnavailable: "预订失败：该桌已被预订。",
+        toastBookingError: "预订失败。请重试",
+
+        // 页脚
         copyrightText: "ReservApp. 版权所有",
+
+        // 通用文案
+        affirmationText: "是",
+        NegationText: "否",
     },
 };
 

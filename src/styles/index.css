@@ -17,7 +17,6 @@ body,
     flex-direction: column;
     flex: 1;
 }
-
 * {
     box-sizing: border-box;
 }
@@ -29,7 +28,7 @@ body {
 
 @theme {
     --font-title: "Montserrat", sans-serif;
-    --font-sans: Roboto, sans-serif;
+    --font-sans: "Montserrat", sans-serif;
 
     --text-2xs: 12px;
     --text-xs: 14px;
@@ -69,14 +68,14 @@ body {
     --color-error-800: #991b1b;
     --color-error-900: #7f1d1d;
 
-    --spacing-2xs: 4px;
-    --spacing-xs: 6px;
+    --spacing-xs: 4px;
     --spacing-sm: 8px;
-    --spacing-md: 10px;
-    --spacing-lg: 16px;
-    --spacing-xl: 24px;
-    --spacing-2xl: 32px;
-    --spacing-4xs: 64px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --spacing-4xl: 96px;
 
     --breakpoint-2xs: 320px;
     --breakpoint-xs: 375px;
@@ -92,11 +91,33 @@ body {
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    --max-width-xs: 320px;
+    --max-width-sm: 384px;
+    --max-width-md: 448px;
+    --max-width-lg: 512px;
+    --max-width-xl: 576px;
+    --max-width-2xl: 672px;
+    --max-width-3xl: 768px;
+    --max-width-4xl: 896px;
+    --max-width-5xl: 1024px;
+    --max-width-6xl: 1152px;
+    --max-width-7xl: 1280px;
+    --max-width-full: 100%;
+    --max-width-min: min-content;
+    --max-width-max: max-content;
+    --max-width-fit: fit-content;
+    --max-width-prose: 65ch;
+    --max-width-screen-sm: 640px;
+    --max-width-screen-md: 768px;
+    --max-width-screen-lg: 1024px;
+    --max-width-screen-xl: 1280px;
+    --max-width-screen-2xl: 1536px;
 }
 
 @layer components {
     h1 {
-        @apply font-title font-semibold text-3xl/[125%] md:text-6xl/[125%];
+        @apply font-title font-semibold text-3xl/[125%] md:text-6xl/[125%] lg:text-center;
     }
     h2 {
         @apply font-title font-semibold text-lg/[125%] md:text-4xl/[125%];
@@ -211,6 +232,83 @@ body {
 
     .mobile-menu {
         @apply flex flex-col duration-900 ease-in-out overflow-hidden transition-all z-50 absolute top-0 right-0 left-0 mt-16;
+    }
+
+    /* Estilos base del calendario */
+    .react-calendar {
+        @apply flex flex-col gap-2 rounded-lg shadow-lg p-4;
+    }
+    .light.react-calendar {
+        @apply bg-accent-background rounded-lg shadow-lg p-4;
+    }
+    .dark.react-calendar {
+        @apply bg-accent-background-dark rounded-lg shadow-lg p-4;
+    }
+
+    /* Botones de navegación */
+    .react-calendar__navigation {
+        @apply flex items-center gap-4;
+    }
+
+    .react-calendar__navigation__arrow {
+        @apply text-2xl;
+    }
+
+    .react-calendar__navigation__prev2-button,
+    .react-calendar__navigation__next2-button {
+        @apply text-secondary-color;
+    }
+
+    .react-calendar__navigation__prev-button,
+    .react-calendar__navigation__next-button {
+        @apply text-primary-color;
+    }
+
+    .react-calendar__navigation__label {
+        @apply font-bold;
+    }
+
+    /* Nombres de la semana  */
+    .react-calendar__month-view__weekdays {
+        @apply flex justify-center items-center;
+    }
+
+    .react-calendar__month-view__weekdays * {
+        @apply flex justify-center items-center;
+    }
+
+    .react-calendar__month-view__weekdays abbr {
+        @apply no-underline font-medium;
+    }
+
+    /* botones de dias del mes */
+    .react-calendar__month-view__days {
+        @apply gap-y-0.5;
+    }
+
+    /* Día seleccionado */
+    .react-calendar__tile {
+        @apply bg-gray-200/50 rounded-sm;
+    }
+
+    .react-calendar__month-view__days__day--neighboringMonth {
+        @apply opacity-40;
+    }
+
+    .light .react-calendar__tile:disabled {
+        @apply bg-error-300/50;
+    }
+    .dark .react-calendar__tile:disabled {
+        @apply bg-error-300/50 text-text-color;
+    }
+
+    .react-calendar__tile--active {
+        @apply bg-primary-color;
+    }
+
+    /* Día actual */
+    .react-calendar__tile--now {
+        @apply bg-secondary-color;
     }
 
     @keyframes tb-rotate {

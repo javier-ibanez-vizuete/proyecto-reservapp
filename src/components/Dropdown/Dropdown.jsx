@@ -214,6 +214,8 @@ export const Dropdown = ({
      * Mapeo de posiciones a clases CSS
      */
     const placementClasses = {
+        "right-center": "left-full ml-2 -translate-y-1/2",
+        "left-center": "right-full mr-2 -translate-y-1/2",
         "top-start": "bottom-full left-0 mb-2",
         "top-end": "bottom-full right-0 mb-2",
         "bottom-start": "top-full left-0 mt-2",

@@ -33,3 +33,10 @@ export const RegisterVerificationFields = ({ name, email, address, password, rep
 
     return null;
 };
+
+export const BookingVerificationSubmit = ({ tableId, date, time, partySize }) => {
+    if (!date) return "You must to chose a Booking Date";
+    if (!time) return "Time Field is Required";
+    if (!partySize) return "Customer Field is Required";
+    if (!tableId) return "You must chose a Table";
+};
