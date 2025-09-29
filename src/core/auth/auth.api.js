@@ -13,11 +13,7 @@ export const loginApi = async (user) => {
 
 export const registerApi = async (user) => {
     try {
-        console.log(
-            `registerApi: ${user.email} y password: ${user.password}, nombre: ${user.name} role: ${user.role}`
-        );
         const response = await api.post("/auth/register", user);
-        console.log("respuesta de la api", response);
 
         return response.data;
     } catch (error) {
@@ -39,13 +35,28 @@ export const logoutApi = async () => {
 
 export const getProfileApi = async () => {
     try {
-        console.log("getProfileApi");
         const response = await api.get("/auth/me");
-        console.log("respuesta de la api", response);
 
         return response.data;
     } catch (error) {
         console.error("Error al obtener el usuario:", error);
         throw error;
+    }
+};
+
+export const patchUserBookingApi = async (newBooking) => {
+    try {
+        const userId = newBooking?.userId;
+        if (!userId) return;
+
+        const userResponse = await api.get("/auth/me");
+        const userBookings = userResponse.data.bookings || [];
+
+        const updatedBookings = [newBooking, ...userBookings];
+        const updatedUser = await api.patch(`/users/${userId}`, { bookings: updatedBookings });
+        return updatedUser.data;
+    } catch (err) {
+        console.error("Error Adding Booking to User");
+        throw err;
     }
 };

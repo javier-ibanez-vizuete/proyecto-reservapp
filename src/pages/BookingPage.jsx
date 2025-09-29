@@ -12,8 +12,10 @@ import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { TableCard } from "../components/TableCard";
 import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
+import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { saveUserInLocalStorage } from "../core/auth/auth.service";
 import {
     getBookingFormFromLocalStorage,
     saveBookingFormInLocalStorage,
@@ -72,6 +74,7 @@ export const BookingPage = () => {
 
     const { postBookings, isLoading } = useBookings();
 
+    const { user, setUser } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
     const toast = useToast();
@@ -160,8 +163,15 @@ export const BookingPage = () => {
 
     const onConfirmSubmit = async () => {
         try {
-            const booked = await postBookings(form);
+            const newFormValue = { ...form, userId: user?.id };
+            const booked = await postBookings(newFormValue);
             if (booked) {
+                const userBookings = user?.bookings || [];
+                const updatedBookings = [booked, ...userBookings];
+                const newUser = { ...user, bookings: updatedBookings };
+                setUser(newUser);
+                saveUserInLocalStorage(newUser);
+
                 resetForm();
                 toast.showToast(getText("toastBookingSuccess"), "success");
             }
@@ -197,6 +207,10 @@ export const BookingPage = () => {
                     <ModalHeader>{getText("confirmBookingTitle")}</ModalHeader>
                     <ModalBody>
                         <ul className="flex flex-col gap-3">
+                            <li className="flex flex-col gap-1">
+                                <p>{getText("userNameConfirmText")}:</p>
+                                <h6>{user?.name}</h6>
+                            </li>
                             <li className="flex flex-col gap-1">
                                 <p>{getText("dateConfirmText")}:</p>
                                 <h6>{form.date}</h6>

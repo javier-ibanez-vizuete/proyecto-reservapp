@@ -37,6 +37,7 @@ const TEXTS = {
         h1BookingPage: "BOOKING",
 
         confirmBookingTitle: "Review and Confirm",
+        userNameConfirmText: "Reservation Name",
         dateConfirmText: "Date",
         timeConfirmText: "Time",
         customersConfirmText: "Customers",

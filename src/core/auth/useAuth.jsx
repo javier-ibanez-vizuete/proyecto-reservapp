@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { replace, useLocation, useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { saveDataInSessionStorage } from "../../helpers/storage";
 import { getProfileApi, loginApi, logoutApi, registerApi } from "./auth.api";
@@ -11,9 +11,8 @@ import {
 } from "./auth.service";
 
 export const useAuth = () => {
-    const { setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
-    const location = useLocation();
 
     const login = async ({ email, password }) => {
         // Enviar a la API de autenticación
@@ -77,14 +76,15 @@ export const useAuth = () => {
     const getProfile = async () => {
         // Lógica para obtener el usuario actual
         console.log("Obteniendo usuario actual");
+        try {
+            const { user } = await getProfileApi();
 
-        const { user } = await getProfileApi();
-
-        if (user) {
-            console.log("La api dice que hay usuario", user);
-        } else {
-            console.log("NO hay usuario");
-        }
+            if (user) {
+                console.log("La api dice que hay usuario", user);
+            } else {
+                console.log("NO hay usuario");
+            }
+        } catch (err) {}
     };
 
     return { login, logout, register, getProfile };
