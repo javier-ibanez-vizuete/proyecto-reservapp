@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useDevice } from "../hooks/useDevice";
 
 export const CustomCheckbox = ({ checked, title = "", description = "", onChange }) => {
     const { theme } = useContext(ThemeContext);
+    const { isMobile } = useDevice();
 
     return (
         <div className={`flex`}>
@@ -35,7 +37,7 @@ export const CustomCheckbox = ({ checked, title = "", description = "", onChange
                     </div>
                     <div className="flex-1">
                         <p>{title}</p>
-                        {description && <small>{description}</small>}
+                        {description && isMobile && <small>{description}</small>}
                     </div>
                 </div>
             </label>

@@ -8,7 +8,7 @@ export const Toast = ({ message, type = "info", onClose }) => {
     const toastType = OPTIONS[type] || OPTIONS.info;
 
     return (
-        <div className={`p-4 rounded-sm shadow-md ${toastType}`}>
+        <div className={`p-4 rounded-sm shadow-lg ${toastType}`}>
             <div className="flex justify-between items-center">
                 <span>{message}</span>
                 <button onClick={onClose} className="ml-2 font-bold">

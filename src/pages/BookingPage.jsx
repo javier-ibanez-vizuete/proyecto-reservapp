@@ -7,10 +7,12 @@ import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
 import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
 import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
-import { ModalContainer } from "../components/Modal/ModalContainer";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "../components/Modal";
+import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { TableCard } from "../components/tableCard";
+import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
-import { BookingsContext } from "../contexts/BookingsContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {
     getBookingFormFromLocalStorage,
@@ -24,6 +26,7 @@ import {
     removeFromSessionStorage,
     saveDataInSessionStorage,
 } from "../helpers/storage";
+import { useToast } from "../hooks/useToast";
 
 const INITIAL_BOOKING_DATA = {
     tableId: "",
@@ -67,10 +70,11 @@ export const BookingPage = () => {
     const [showModal, setShowModal] = useState(false);
     const [error, setError] = useState("");
 
-    const { bookings } = useContext(BookingsContext);
     const { postBookings, isLoading } = useBookings();
 
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
+    const toast = useToast();
 
     const onChangeDate = (selectedDate) => {
         setError("");
@@ -97,7 +101,6 @@ export const BookingPage = () => {
             saveBookingFormInLocalStorage(newBookingValue);
             return newBookingValue;
         });
-        console.log("Hora seleccionada", time);
     };
 
     const onChangeCustomer = (customers) => {
@@ -107,7 +110,6 @@ export const BookingPage = () => {
             saveBookingFormInLocalStorage(newBookingValue);
             return newBookingValue;
         });
-        console.log("Comensales deseados", customers);
     };
 
     const onChangeTable = (id) => {
@@ -140,8 +142,6 @@ export const BookingPage = () => {
 
         if (isTextArea) {
             const { name, value } = event.target;
-            console.log("Que vale name", name);
-            console.log("Que vale Value", value);
 
             setForm((prevValue) => {
                 const newValue = { ...prevValue, [name]: value };
@@ -158,6 +158,22 @@ export const BookingPage = () => {
         setShowModal(true);
     };
 
+    const onConfirmSubmit = async () => {
+        try {
+            const booked = await postBookings(form);
+            if (booked) {
+                resetForm();
+                toast.showToast(getText("toastBookingSuccess"), "success");
+            }
+        } catch (err) {
+            if (err?.status === 409) {
+                resetForm();
+                return toast.showToast(getText("toastBookingUnavailable"), "error");
+            }
+            toast.showToast(getText("toastBookingError"), "error");
+        }
+    };
+
     const resetForm = () => {
         setForm(INITIAL_BOOKING_DATA);
         saveBookingFormInLocalStorage(INITIAL_BOOKING_DATA);
@@ -171,72 +187,66 @@ export const BookingPage = () => {
     return (
         <div className="flex flex-1 flex-col py-4">
             <Container className="flex-1 gap-2">
-                <ModalContainer isOpen={showModal} onClose={resetForm}>
-                    <article>
-                        <h3>Confirmar Reserva</h3>
-                        <ul className="flex flex-col">
-                            <li>
-                                <p>Fecha de la Reserva</p>
-                                <small>{form.date}</small>
+                <h1>{getText("h1BookingPage")}</h1>
+                <Modal
+                    isOpen={showModal}
+                    size="lg"
+                    onClose={() => setShowModal(false)}
+                    className={theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}
+                >
+                    <ModalHeader>{getText("confirmBookingTitle")}</ModalHeader>
+                    <ModalBody>
+                        <ul className="flex flex-col gap-3">
+                            <li className="flex flex-col gap-1">
+                                <p>{getText("dateConfirmText")}:</p>
+                                <h6>{form.date}</h6>
                             </li>
-                            <li>
-                                <p>Hora de la Reserva</p>
-                                <small>{form.time}</small>
+                            <li className="flex flex-col gap-1">
+                                <p>{getText("timeConfirmText")}:</p>
+                                <h6>{form.time}</h6>
                             </li>
-                            <li>
-                                <p>Numero de comensales</p>
-                                <small>{form.partySize}</small>
+                            <li className="flex flex-col gap-1">
+                                <p>{getText("customersConfirmText")}:</p>
+                                <h6>{form.partySize}</h6>
                             </li>
-                            {form.notes && (
-                                <li>
-                                    <p>Mensaje Adicional</p>
-                                    <small>{form.notes}</small>
+                            {form.extras?.highChair && (
+                                <li className="flex flex-col gap-1">
+                                    <p>{getText("highChairConfirmText")}</p>
+                                    <h6>
+                                        {form.extras.highChair
+                                            ? getText("affirmationText")
+                                            : getText("NegationText")}
+                                    </h6>
                                 </li>
                             )}
-                            <li>
-                                <input
-                                    type="checkbox"
-                                    readOnly
-                                    checked={form.extras?.highChair}
-                                    className="sr-only"
-                                />
-                                <div
-                                    className={`w-6 h-6 border-2 rounded-md transition-all duration-200 flex items-center justify-center ${
-                                        form.extras?.highChair
-                                            ? "bg-primary-color border-primary-color"
-                                            : "border-gray-500"
-                                    }`}
-                                >
-                                    {form.extras?.highChair && (
-                                        <svg
-                                            className="w-4 h-4 text-white"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                clipRule="evenodd"
-                                            />
-                                        </svg>
-                                    )}
-                                </div>
-                                <small>Highchair</small>
-                            </li>
+                            {form.notes && (
+                                <li className="flex flex-col gap-1">
+                                    <p>{getText("aditionalMessageConfirmText")}:</p>
+                                    <h6 className="break-all">{form.notes}</h6>
+                                </li>
+                            )}
                         </ul>
-                    </article>
-                </ModalContainer>
-                <h1>RESERVAR</h1>
-
-                <div className="">
+                    </ModalBody>
+                    <ModalFooter>
+                        <LoadingButton
+                            variant="primary"
+                            onClick={onConfirmSubmit}
+                            loading={isLoading}
+                            loadingText={getText("loadingTextConfirmButtonModal")}
+                            disabled={isLoading ? true : false}
+                        >
+                            {getText("confirmButtonModal")}
+                        </LoadingButton>
+                    </ModalFooter>
+                </Modal>
+                <div>
                     <BookingCalendar
                         className="shadow-lg"
                         onChange={onChangeDate}
                         selectedDate={selectedDate}
                     />
                 </div>
-
-                <div className="flex flex-col gap-4 md:flex-row md:justify-center md:items-start">
+                <div className="flex flex-col gap-4 md:flex-row md:justify-center md:items-stretch">
                     <div className="flex">
                         <Dropdown placement={"right-center"}>
                             <DropdownTrigger
@@ -245,9 +255,10 @@ export const BookingPage = () => {
                                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                                 }`}
                             >
-                                {form?.time || "Hora"}
+                                {(form?.time && `${getText("bookingTimeText")}: ${form?.time}`) ||
+                                    getText("bookingTimeText")}
                             </DropdownTrigger>
-                            <DropdownMenu className="">
+                            <DropdownMenu>
                                 <DropdownItem
                                     key={"Hora"}
                                     defaultStyles={false}
@@ -256,7 +267,7 @@ export const BookingPage = () => {
                                     }`}
                                     onClick={() => onChangeTime("")}
                                 >
-                                    Hora
+                                    {getText("bookingTimePlaceholder")}
                                 </DropdownItem>
                                 {DATE_TIMES_POSIBILITIES.map((time) => {
                                     const currentDate = new Date().toISOString().split("T")[0];
@@ -283,15 +294,18 @@ export const BookingPage = () => {
                             </DropdownMenu>
                         </Dropdown>
                     </div>
+
                     <div className="flex">
                         <Dropdown placement={"right-center"}>
                             <DropdownTrigger
                                 btnStyle={false}
-                                className={`shadow-lg px-4 py-2.5   border-gray-300 rounded-lg hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring-primary-color focus:border-primary-color ${
+                                className={`shadow-lg px-4 py-2.5 border-gray-300 rounded-lg hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring-primary-color focus:border-primary-color ${
                                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                                 }`}
                             >
-                                {form?.partySize || "Comensales"}
+                                {(form?.partySize &&
+                                    `${getText("bookingCustomersText")}: ${form?.partySize}`) ||
+                                    getText("bookingCustomersText")}
                             </DropdownTrigger>
                             <DropdownMenu>
                                 <DropdownItem
@@ -302,7 +316,7 @@ export const BookingPage = () => {
                                     key={"defaultOption"}
                                     onClick={() => onChangeCustomer("")}
                                 >
-                                    Comensales
+                                    {getText("bookingCustomersPlaceholder")}
                                 </DropdownItem>
                                 {Array.from({ length: 8 }, (_, index) => (
                                     <DropdownItem
@@ -319,18 +333,14 @@ export const BookingPage = () => {
                             </DropdownMenu>
                         </Dropdown>
                     </div>
-                    <div className="flex -order-1">
+
+                    <div className="flex md:-order-1">
                         <CustomCheckbox
                             onChange={onInputChange}
                             checked={form.extras.highChair}
-                            title="Añadir Trona"
-                            description="Sin coste Adicional"
+                            title={getText("bookingHighChairTitle")}
+                            description={getText("bookingHighChairDescription")}
                         />
-                    </div>
-                    <div className="flex">
-                        <Button onClick={resetForm} size="md" variant="danger">
-                            resetear Form
-                        </Button>
                     </div>
                 </div>
                 <div
@@ -343,16 +353,15 @@ export const BookingPage = () => {
                             name="notes"
                             id="notes"
                             cols={10}
-                            rows={1}
+                            rows={3}
                             className={`bg-white rounded-lg p-2 focus:outline-primary-color focus-visible:ring-primary-color text-text-color placeholder:text-text-color/50`}
-                            placeholder="¿Algo que añadir?"
-                            maxLength={200}
+                            placeholder={getText("bookingAditionalMessagePlaceholder")}
+                            maxLength={100}
                             value={form.notes}
                             onChange={(event) => onInputChange(event)}
                         ></textarea>
                     </CustomInput>
                 </div>
-
                 {form.partySize && (
                     <div className="flex flex-col gap-4 lg:grid lg:grid-cols-4 lg:self-center">
                         {TABLES.filter((table) => table.maxCapacity >= form.partySize).map((table) => (
@@ -370,7 +379,15 @@ export const BookingPage = () => {
                         <h5 className="text-error-600/60 font-bold italic">{error}</h5>
                     </div>
                 )}
-                <button onClick={onBookingSubmit}>ENVIAR</button>
+                <div className="flex flex-col gap-2 md:flex-row lg:justify-center lg:gap-4">
+                    <Button onClick={onBookingSubmit} variant="primary" className="flex-1 lg:flex-none">
+                        Reservar
+                    </Button>
+                    <Button onClick={resetForm} variant="danger" className="flex-1 lg:flex-none">
+                        resetear Form
+                    </Button>
+                </div>
+                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
             </Container>
         </div>
     );

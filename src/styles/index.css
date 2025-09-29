@@ -68,14 +68,14 @@ body {
     --color-error-800: #991b1b;
     --color-error-900: #7f1d1d;
 
-    --spacing-2xs: 4px;
-    --spacing-xs: 6px;
+    --spacing-xs: 4px;
     --spacing-sm: 8px;
-    --spacing-md: 10px;
-    --spacing-lg: 16px;
-    --spacing-xl: 24px;
-    --spacing-2xl: 32px;
-    --spacing-4xs: 64px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --spacing-4xl: 96px;
 
     --breakpoint-2xs: 320px;
     --breakpoint-xs: 375px;
@@ -91,6 +91,28 @@ body {
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    --max-width-xs: 320px;
+    --max-width-sm: 384px;
+    --max-width-md: 448px;
+    --max-width-lg: 512px;
+    --max-width-xl: 576px;
+    --max-width-2xl: 672px;
+    --max-width-3xl: 768px;
+    --max-width-4xl: 896px;
+    --max-width-5xl: 1024px;
+    --max-width-6xl: 1152px;
+    --max-width-7xl: 1280px;
+    --max-width-full: 100%;
+    --max-width-min: min-content;
+    --max-width-max: max-content;
+    --max-width-fit: fit-content;
+    --max-width-prose: 65ch;
+    --max-width-screen-sm: 640px;
+    --max-width-screen-md: 768px;
+    --max-width-screen-lg: 1024px;
+    --max-width-screen-xl: 1280px;
+    --max-width-screen-2xl: 1536px;
 }
 
 @layer components {

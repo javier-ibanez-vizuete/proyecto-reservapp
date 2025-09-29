@@ -3,11 +3,13 @@ import { ImageContainer } from "./UI/ImageContainer";
 
 import { useContext } from "react";
 import iconWifi from "../assets/icons/icon-wifi.webp";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Button } from "./UI/Button";
 
 export const TableCard = ({ tableData, onClick, selectedTable }) => {
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     return (
         <div
@@ -26,15 +28,15 @@ export const TableCard = ({ tableData, onClick, selectedTable }) => {
                 <div className="flex flex-col flex-1 gap-2">
                     <div className="flex flex-col flex-1">
                         <small>
-                            Capacidad maxima: <span>{tableData.maxCapacity}</span>
+                            {getText("bookingMaxCapacityTableTitle")} <span>{tableData.maxCapacity}</span>
                         </small>
                         <small>
-                            tipo de mesa: <span>{tableData.tableForm}</span>
+                            {getText("bookingTableTypeTitle")} <span>{getText(tableData.tableForm)}</span>
                         </small>
                     </div>
                     {tableData.hasWifi && (
                         <div className="flex items-center gap-4">
-                            <small>Wifi:</small>
+                            <small>{getText("bookingTableWifiText")}</small>
                             <ImageContainer className="w-8">
                                 <Image imgSrc={iconWifi} />
                             </ImageContainer>
@@ -43,7 +45,7 @@ export const TableCard = ({ tableData, onClick, selectedTable }) => {
                 </div>
                 <div className="perfect-center">
                     <Button size="sm" variant={"secondary"} onClick={onClick}>
-                        Seleccionar Mesa
+                        {getText("bookingSelectTableButton")}
                     </Button>
                 </div>
             </div>

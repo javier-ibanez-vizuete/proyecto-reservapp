@@ -1,14 +1,12 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { BookingsContext } from "../../contexts/BookingsContext";
-import { postBookingApi } from "./bookings.api";
+import { getBookingsByDateApi, postBookingApi } from "./bookings.api";
 import { saveBookingsInLocalStorage } from "./bookings.service";
 
 export const useBookings = () => {
     const [loadingBookings, setLoadingBookings] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { setBookings } = useContext(BookingsContext);
-    const navigate = useNavigate();
 
     const defaultDate = new Date().toISOString().split("T")[0];
 
@@ -33,15 +31,24 @@ export const useBookings = () => {
         try {
             console.log("postBookings");
             const booking = await postBookingApi(bookingData);
-            console.log("booking", booking);
             setBookings((prev) => {
-                return [booking, ...prev];
-                saveBookingsInLocalStorage([booking, ...prev]);
+                if (prev.length) {
+                    const newValue = [...prev, booking];
+                    saveBookingsInLocalStorage(newValue);
+                    return newValue;
+                }
+                if (!prev.length) {
+                    const newValue = [booking];
+                    saveBookingsInLocalStorage([booking]);
+                    return newValue;
+                }
             });
 
             if (!booking) console.log("NO SE HA POSTEADO LA RESERVA");
+            return booking;
         } catch (err) {
             console.error("Algo ha salido mal en postBookings(useBookings):", err);
+            throw err;
         } finally {
             setIsLoading(false);
         }
