@@ -20,7 +20,7 @@ export const useProducts = () => {
             }
             if (!products.length) console.log("NO HAY PRODUCTOS");
         } catch (err) {
-            console.log("Algo ha salido mal en getProducts(useProducts)", err);
+            console.error("Algo ha salido mal en getProducts(useProducts)", err);
         } finally {
             setLoadingProducts(false);
         }
