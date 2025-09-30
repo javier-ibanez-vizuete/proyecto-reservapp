@@ -11,15 +11,26 @@ import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { DeliveryProductItem } from "../components/Products/DeliveryProductItem";
 import { ProductsContainer } from "../components/Products/ProductsContainer";
 import { SkeletonCard, SkeletonText } from "../components/Skeleton";
+import { ToastContainer } from "../components/ToastContainer";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
+import { AuthContext } from "../contexts/AuthContext";
+import { CartsContext } from "../contexts/CartsContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useCarts } from "../core/carts/useCarts";
 import { useProducts } from "../core/products/useProducts";
+import { useDevice } from "../hooks/useDevice";
+import { useToast } from "../hooks/useToast";
 
 export const OrderPage = () => {
+    const { user } = useContext(AuthContext);
+
     const { products, categories } = useContext(ProductsContext);
-    const { getProducts, loadingProducts } = useProducts();
+    const { loadingProducts } = useProducts();
+
+    const { carts } = useContext(CartsContext);
+    const { postCartsItem, patchCartsItem, deleteCartsItem, isLoading } = useCarts();
 
     const [categorySelected, setCategorySelected] = useState(null);
     const [productSearch, setProductSearch] = useState("");
@@ -27,7 +38,9 @@ export const OrderPage = () => {
     const [showInput, setShowInput] = useState(false);
     const inputRef = useRef(null);
 
+    const toast = useToast();
     const { theme } = useContext(ThemeContext);
+    const { isMobile } = useDevice();
 
     useEffect(() => {
         const handleEscapeKey = (event) => {
@@ -63,7 +76,6 @@ export const OrderPage = () => {
     const onInputChange = (event) => {
         const { value } = event.target;
         setProductSearch(value);
-        console.log("Value de input", value);
     };
 
     const handleCategorySelected = (category) => {
@@ -77,13 +89,60 @@ export const OrderPage = () => {
                 (product) => product.categories && product.categories.includes(categorySelected)
             );
         if (productSearch && !categorySelected)
-            return products.filter((product) => productSearch.name.contains(productSearch.trim()));
+            return products.filter((product) =>
+                product.name.toLowerCase().includes(productSearch.toLowerCase().trim())
+            );
         return products.filter((product) => {
             const sameCategory = product.categories && product.categories.includes(categorySelected);
-            const sameName = product.name.contains(productSearch);
+            const sameName = product.name.toLowerCase().includes(productSearch.toLowerCase().trim());
             return sameCategory && sameName;
         });
     }, [productSearch, categorySelected]);
+
+    const handleAddProduct = async (productData) => {
+        try {
+            const productValue = {
+                productId: productData?.id,
+                qty: 1,
+            };
+            const hasProduct = carts?.items?.some((item) => item.productId === productData.id);
+            if (hasProduct) return console.error("El producto ya existe");
+
+            const updatedCart = await postCartsItem(carts.id, productValue);
+            if (updatedCart) return toast.showToast("Product Añadido", "success", 1500);
+        } catch (err) {
+            console.error("No se ha añadido el producto", err);
+        }
+    };
+
+    const handleDecreaseProduct = async (productId, productQty) => {
+        console.log("Haciendo click");
+
+        try {
+            if (productQty === 1) {
+                const updatedCart = await deleteCartsItem(carts.id, productId);
+                if (updatedCart) return toast.showToast("Product Eliminado", "error", 2000);
+            }
+            if (productQty !== 1) {
+                const newQty = { qty: productQty - 1 };
+                const updatedCart = await patchCartsItem(carts.id, productId, newQty);
+                if (updatedCart) return toast.showToast("Cantidad Modificada", "info", 2000);
+            }
+        } catch (err) {
+            console.error("No se ha Modificado el producto", err);
+        }
+    };
+
+    const handleIncreaseProduct = async (productsId, productQty) => {
+        console.log("Haciendo Click");
+        try {
+            const newQty = { qty: productQty + 1 };
+            const updatedCart = await patchCartsItem(carts.id, productsId, newQty);
+            if (updatedCart) return toast.showToast("Cantidad Modificada", "info", 2000);
+        } catch (err) {
+            console.error("no se ha modificado el producto", err);
+        }
+    };
 
     if (loadingProducts)
         return (
@@ -162,7 +221,7 @@ export const OrderPage = () => {
                         </div>
                     </div>
                     <div>
-                        <Dropdown placement="right-start">
+                        <Dropdown placement={isMobile ? "bottom-start" : "right-start"}>
                             <DropdownTrigger
                                 btnStyle={false}
                                 className={`px-6 py-3 rounded-lg shadow-lg ${
@@ -194,11 +253,31 @@ export const OrderPage = () => {
                     </div>
                 </div>
 
-                <ProductsContainer className="grid grid-cols-1">
-                    {filteredProducts.map((product) => (
-                        <DeliveryProductItem key={product?.id} productData={product} />
-                    ))}
+                <ProductsContainer className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+                    {filteredProducts.map((product) => {
+                        if (!carts) return;
+                        console.log("que es carts", carts);
+
+                        const isCartItem = carts.items.find((item) => item.productId === product.id);
+                        const productQty = isCartItem ? isCartItem.qty : null;
+
+                        return (
+                            <DeliveryProductItem
+                                key={product?.id}
+                                productData={product}
+                                className="gap-4"
+                                imgSize="w-full"
+                                qty={productQty}
+                                isLoading={isLoading}
+                                onClick={() => handleAddProduct(product)}
+                                handleDecrease={() => handleDecreaseProduct(product.id, productQty)}
+                                handleIncrease={() => handleIncreaseProduct(product.id, productQty)}
+                            />
+                        );
+                    })}
                 </ProductsContainer>
+
+                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
             </Container>
         </div>
     );
