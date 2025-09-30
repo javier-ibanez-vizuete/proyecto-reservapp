@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { CartsContext } from "../../contexts/CartsContext";
 import { saveDataInSessionStorage } from "../../helpers/storage";
+import { removeCartFromLocalStorage } from "../cart/cart.service";
+import { useCart } from "../cart/useCart";
 import { getProfileApi, loginApi, logoutApi, registerApi } from "./auth.api";
 import {
     removeTokenFromLocalStorage,
@@ -11,7 +14,10 @@ import {
 } from "./auth.service";
 
 export const useAuth = () => {
-    const { user, setUser } = useContext(AuthContext);
+    const { setUser } = useContext(AuthContext);
+    const { setCart } = useContext(CartsContext);
+    const { getCartMe } = useCart();
+
     const navigate = useNavigate();
 
     const login = async ({ email, password }) => {
@@ -23,9 +29,10 @@ export const useAuth = () => {
                 saveTokenInLocalStorage(authData.token);
                 saveUserInLocalStorage(authData.user);
                 setUser(authData.user);
+                await getCartMe(authData.user.id);
 
                 console.log("Estoy llegando a navigate");
-                navigate("/home", { state: { fromLogin: true } });
+                navigate("/", { state: { fromLogin: true } });
                 saveDataInSessionStorage("fromLogin", true);
             }
         } catch (err) {
@@ -46,6 +53,8 @@ export const useAuth = () => {
                 removeUserFromLocalStorage();
                 removeTokenFromLocalStorage();
                 setUser(false);
+                setCart(null);
+                removeCartFromLocalStorage();
                 navigate("/", { state: { logoutSucces: true } });
             }
         } catch (err) {
@@ -64,6 +73,7 @@ export const useAuth = () => {
                 saveTokenInLocalStorage(authData.token);
                 saveUserInLocalStorage(authData.user);
                 setUser(authData.user);
+                await getCartMe(authData.user.id);
                 navigate("/", { state: { fromRegister: true } }, replace);
                 saveDataInSessionStorage("fromRegister", true);
             }

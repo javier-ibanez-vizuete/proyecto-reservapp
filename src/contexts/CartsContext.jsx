@@ -1,15 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-import { getCartsFromLocalStorage } from "../core/carts/carts.service";
+import { getCartFromLocalStorage } from "../core/cart/cart.service";
 
 export const CartsContext = createContext(null);
 
 export const CartsProvider = ({ children }) => {
-    const [carts, setCarts] = useState(null);
+    const [cart, setCart] = useState(null);
 
     useEffect(() => {
-        const cartsFromStorage = getCartsFromLocalStorage();
-        if (cartsFromStorage) setCarts(carts);
+        const cartFromStorage = getCartFromLocalStorage();
+        console.log("Tenemos algo en localStorage?", cartFromStorage);
+        if (cartFromStorage) setCart(cartFromStorage);
     }, []);
 
-    return <CartsContext value={{ carts, setCarts }}>{children}</CartsContext>;
+    return <CartsContext value={{ cart, setCart }}>{children}</CartsContext>;
 };

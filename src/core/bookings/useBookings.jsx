@@ -44,14 +44,6 @@ export const useBookings = () => {
                     return newValue;
                 }
             });
-
-            // const newUser = await patchUserBookingApi(booking);
-            // if (!newUser) return console.log("Error Adding Booking to User");
-            // console.log("Los datos del nuevo usuario", newUser);
-
-            // setUser(newUser);
-            // saveUserInLocalStorage(newUser);
-
             return booking;
         } catch (err) {
             console.error("Algo ha salido mal en postBookings(useBookings):", err);

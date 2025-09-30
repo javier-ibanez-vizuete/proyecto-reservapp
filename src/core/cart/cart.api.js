@@ -1,12 +1,22 @@
 import { api } from "../http/axios";
 
-export const getCartsApi = async () => {
+// export const getCartsApi = async () => {
+//     try {
+//         const response = await api.get("/carts");
+//         return response.data;
+//     } catch (err) {
+//         console.error("Error al Obtener Carrito", err);
+//         throw err;
+//     }
+// };
+
+export const getCartMeApi = async () => {
     try {
-        const response = await api.get("/carts");
+        const response = await api.get("/carts/me");
+        console.log("Que vale response", response);
         return response.data;
     } catch (err) {
-        console.error("Error al Obtener Carrito", err);
-        throw err;
+        throw err.status;
     }
 };
 
@@ -20,7 +30,7 @@ export const getCartsByIdApi = async (id) => {
     }
 };
 
-export const postCartsApi = async (userId) => {
+export const postCartApi = async (userId) => {
     try {
         const created = await api.post("/carts", { userId: userId });
         return created.data;
@@ -30,7 +40,7 @@ export const postCartsApi = async (userId) => {
     }
 };
 
-export const postCartsItemApi = async (cartId, newProduct) => {
+export const postCartItemApi = async (cartId, newProduct) => {
     try {
         const updated = await api.post(`/carts/${cartId}/items`, newProduct);
         return updated.data;
@@ -40,7 +50,7 @@ export const postCartsItemApi = async (cartId, newProduct) => {
     }
 };
 
-export const patchCartsItemApi = async (cartId, productId, newProductData) => {
+export const patchCartItemApi = async (cartId, productId, newProductData) => {
     try {
         const updated = await api.patch(`/carts/${cartId}/items/${productId}`, newProductData);
         return updated.data;
@@ -50,7 +60,7 @@ export const patchCartsItemApi = async (cartId, productId, newProductData) => {
     }
 };
 
-export const deleteCartsItemApi = async (cartId, productId) => {
+export const deleteCartItemApi = async (cartId, productId) => {
     try {
         const updated = await api.delete(`/carts/${cartId}/items/${productId}`);
         return updated.data;

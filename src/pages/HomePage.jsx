@@ -23,7 +23,7 @@ export const HomePage = () => {
         if (!fromLogin && !fromRegister) return;
 
         if (fromLogin) {
-            toast.showToast(getText("toastLoginSuccess"), "success", 3000, "top-center");
+            toast.showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
             navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromLogin");
         }
@@ -31,7 +31,7 @@ export const HomePage = () => {
             toast.showToast(
                 `${getText("toastWelcomeRegister")} ${user?.name || getText("userReplaceName")}.`,
                 "success",
-                4000,
+                2000,
                 "top-center"
             );
             navigate(location.pathname, { replace: true, state: {} });

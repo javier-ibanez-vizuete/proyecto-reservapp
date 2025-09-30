@@ -15,7 +15,6 @@ import { Button } from "../components/UI/Button";
 import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { saveUserInLocalStorage } from "../core/auth/auth.service";
 import {
     getBookingFormFromLocalStorage,
     saveBookingFormInLocalStorage,
@@ -166,12 +165,6 @@ export const BookingPage = () => {
             const newFormValue = { ...form, userId: user?.id };
             const booked = await postBookings(newFormValue);
             if (booked) {
-                const userBookings = user?.bookings || [];
-                const updatedBookings = [booked, ...userBookings];
-                const newUser = { ...user, bookings: updatedBookings };
-                setUser(newUser);
-                saveUserInLocalStorage(newUser);
-
                 resetForm();
                 toast.showToast(getText("toastBookingSuccess"), "success");
             }
@@ -330,7 +323,7 @@ export const BookingPage = () => {
                                     key={"defaultOption"}
                                     onClick={() => onChangeCustomer("")}
                                 >
-                                    {getText("bookingCustomersPlaceholder")}
+                                    <span className="text-sm">{getText("bookingCustomersPlaceholder")}</span>
                                 </DropdownItem>
                                 {Array.from({ length: 8 }, (_, index) => (
                                     <DropdownItem

@@ -30,6 +30,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
+    const { scroll } = useScroll();
     const { isMobile, isTablet } = useDevice();
     const { logout } = useAuth();
 
@@ -39,7 +40,6 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const toast = useToast();
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
-    // const contentMobileRef = useRef();
 
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
@@ -76,6 +76,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
 
     const handleLogin = () => {
         Navigate("/login");
+        handleCloseMobileMenu();
         //AQUI PONER NAVIGATE TO PAGINA LOGIN
     };
 
@@ -91,12 +92,15 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     };
 
     const handleLinkClick = (linkName) => {
+        handleCloseMobileMenu();
         return linkName;
     };
 
     const handleHomeClick = () => {
         console.log("Navegacion a Home");
     };
+
+    console.log("useScroll", useScroll);
 
     return (
         <nav className={`navbar ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}>

@@ -11,26 +11,22 @@ import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { DeliveryProductItem } from "../components/Products/DeliveryProductItem";
 import { ProductsContainer } from "../components/Products/ProductsContainer";
 import { SkeletonCard, SkeletonText } from "../components/Skeleton";
-import { ToastContainer } from "../components/ToastContainer";
+import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
-import { AuthContext } from "../contexts/AuthContext";
 import { CartsContext } from "../contexts/CartsContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useCarts } from "../core/carts/useCarts";
 import { useProducts } from "../core/products/useProducts";
 import { useDevice } from "../hooks/useDevice";
-import { useToast } from "../hooks/useToast";
 
 export const OrderPage = () => {
-    const { user } = useContext(AuthContext);
-
     const { products, categories } = useContext(ProductsContext);
     const { loadingProducts } = useProducts();
 
-    const { carts } = useContext(CartsContext);
-    const { postCartsItem, patchCartsItem, deleteCartsItem, isLoading } = useCarts();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { cart } = useContext(CartsContext);
 
     const [categorySelected, setCategorySelected] = useState(null);
     const [productSearch, setProductSearch] = useState("");
@@ -38,7 +34,6 @@ export const OrderPage = () => {
     const [showInput, setShowInput] = useState(false);
     const inputRef = useRef(null);
 
-    const toast = useToast();
     const { theme } = useContext(ThemeContext);
     const { isMobile } = useDevice();
 
@@ -99,51 +94,6 @@ export const OrderPage = () => {
         });
     }, [productSearch, categorySelected]);
 
-    const handleAddProduct = async (productData) => {
-        try {
-            const productValue = {
-                productId: productData?.id,
-                qty: 1,
-            };
-            const hasProduct = carts?.items?.some((item) => item.productId === productData.id);
-            if (hasProduct) return console.error("El producto ya existe");
-
-            const updatedCart = await postCartsItem(carts.id, productValue);
-            if (updatedCart) return toast.showToast("Product Añadido", "success", 1500);
-        } catch (err) {
-            console.error("No se ha añadido el producto", err);
-        }
-    };
-
-    const handleDecreaseProduct = async (productId, productQty) => {
-        console.log("Haciendo click");
-
-        try {
-            if (productQty === 1) {
-                const updatedCart = await deleteCartsItem(carts.id, productId);
-                if (updatedCart) return toast.showToast("Product Eliminado", "error", 2000);
-            }
-            if (productQty !== 1) {
-                const newQty = { qty: productQty - 1 };
-                const updatedCart = await patchCartsItem(carts.id, productId, newQty);
-                if (updatedCart) return toast.showToast("Cantidad Modificada", "info", 2000);
-            }
-        } catch (err) {
-            console.error("No se ha Modificado el producto", err);
-        }
-    };
-
-    const handleIncreaseProduct = async (productsId, productQty) => {
-        console.log("Haciendo Click");
-        try {
-            const newQty = { qty: productQty + 1 };
-            const updatedCart = await patchCartsItem(carts.id, productsId, newQty);
-            if (updatedCart) return toast.showToast("Cantidad Modificada", "info", 2000);
-        } catch (err) {
-            console.error("no se ha modificado el producto", err);
-        }
-    };
-
     if (loadingProducts)
         return (
             <Container className="flex flex-col gap-6 py-6">
@@ -165,6 +115,14 @@ export const OrderPage = () => {
     return (
         <div className="flex flex-1 flex-col py-6">
             <Container className="gap-4">
+                <BackToTopButton
+                    size="sm"
+                    rounded="lg"
+                    showAt={1000}
+                    placement="top-right"
+                    variant="secondary"
+                />
+
                 <div className="flex flex-col">
                     <h1>PEDIDOS</h1>
                     <small>No te quedes con hambre</small>
@@ -172,12 +130,12 @@ export const OrderPage = () => {
 
                 <div className="flex flex-col items-start gap-2">
                     <div
-                        className={`flex items-center py-3 px-6 rounded-lg shadow-xl ${
-                            showInput ? "self-stretch space-x-2" : ""
+                        className={`flex items-center py-3 px-6 transition-all duration-200 ease-in-out rounded-lg shadow-xl ${
+                            showInput ? "self-stretch md:max-w-3/5 xl:max-w-2/5 space-x-2" : ""
                         } ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
                     >
                         <div
-                            className={`perfect-center flex-1 overflow-hidden transition-all duration-100 ease-in-out ${
+                            className={`perfect-center flex-1 overflow-hidden transition-all duration-200 ease-in-out ${
                                 showInput ? "max-w-full" : "max-w-0"
                             }`}
                         >
@@ -195,7 +153,7 @@ export const OrderPage = () => {
                             />
                         </div>
                         <div
-                            className={`perfect-center overflow-hidden transition-all duration-100 ease-in-out`}
+                            className={`perfect-center overflow-hidden transition-all duration-200 ease-in-out`}
                             onClick={handleShowInput}
                         >
                             {showInput && theme === "light" && (
@@ -253,12 +211,9 @@ export const OrderPage = () => {
                     </div>
                 </div>
 
-                <ProductsContainer className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+                <ProductsContainer className="grid  gap-2 md:grid-cols-2 lg:grid-cols-3">
                     {filteredProducts.map((product) => {
-                        if (!carts) return;
-                        console.log("que es carts", carts);
-
-                        const isCartItem = carts.items.find((item) => item.productId === product.id);
+                        const isCartItem = cart?.items?.find((item) => item.productId === product.id);
                         const productQty = isCartItem ? isCartItem.qty : null;
 
                         return (
@@ -269,15 +224,13 @@ export const OrderPage = () => {
                                 imgSize="w-full"
                                 qty={productQty}
                                 isLoading={isLoading}
-                                onClick={() => handleAddProduct(product)}
-                                handleDecrease={() => handleDecreaseProduct(product.id, productQty)}
-                                handleIncrease={() => handleIncreaseProduct(product.id, productQty)}
                             />
                         );
                     })}
+                    {!filteredProducts.length && (
+                        <h3 className="text-gray-400">No existen Productos con ese nombre</h3>
+                    )}
                 </ProductsContainer>
-
-                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
             </Container>
         </div>
     );
