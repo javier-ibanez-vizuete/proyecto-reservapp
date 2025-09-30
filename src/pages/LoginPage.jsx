@@ -89,11 +89,11 @@ export const LoginPage = () => {
     }
 
     return (
-        <Container className="perfect-center flex-1">
+        <Container className="flex flex-col justify-center flex-1">
             <div
                 className={`flex flex-col gap-md ${
                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
-                } rounded-2xl shadow-landing-lg xs:p-4 2xs:py-4 2xs:px-1 sm:p-8 md:p-10`}
+                } rounded-2xl shadow-landing-lg xs:p-6 2xs:py-6 2xs:px-2 sm:p-8 md:p-10`}
             >
                 <h2 className={`${theme === "light" ? "text-text-color" : "text-text-color-dark"}`}>
                     Iniciar sesión
@@ -127,14 +127,11 @@ export const LoginPage = () => {
                     })}
                     {error && <span className="italic font-semibold text-error-600">{error}</span>}
 
-                    {/* <Button type="submit" className="justify-center rounded-full" disabled={error && true}>
-                        Entrar
-                    </Button> */}
                     <LoadingButton
                         loading={isLoading}
                         type="submit"
                         variant="primary"
-                        size={isMobile ? "sm" : "md"}
+                        size={isMobile ? "md" : "lg"}
                         loadingText="Login in..."
                     >
                         Iniciar Sesion

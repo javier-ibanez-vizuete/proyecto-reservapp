@@ -125,13 +125,56 @@ export const OrderPage = () => {
 
                 <div className="flex flex-col">
                     <h1>PEDIDOS</h1>
-                    <small>No te quedes con hambre</small>
+                    <small className="lg:self-center">No te quedes con hambre</small>
                 </div>
 
-                <div className="flex flex-col items-start gap-2">
+                {products?.length > 0 && filteredProducts?.length > 0 && (
+                    <span className=" self-start bg-transparent p-2 rounded-lg text-text-color border border-gray-700">
+                        {filteredProducts?.length}/{products?.length}
+                    </span>
+                )}
+
+                {products?.length && filteredProducts?.length <= 0 && (
+                    <span className=" self-start bg-transparent p-2 rounded-lg text-text-color border border-gray-700">
+                        0/{products?.length}
+                    </span>
+                )}
+
+                <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-stretch">
+                    <div className="flex">
+                        <Dropdown placement={isMobile ? "bottom-start" : "right-start"}>
+                            <DropdownTrigger
+                                btnStyle={false}
+                                className={`px-6 py-3 rounded-lg shadow-lg ${
+                                    theme === "light"
+                                        ? "bg-accent-background text-text-color"
+                                        : "bg-accent-background-dark text-text-color-dark"
+                                }`}
+                            >
+                                <span>{categorySelected ? categorySelected : "Categories"}</span>
+                            </DropdownTrigger>
+                            <DropdownMenu>
+                                <DropdownItem
+                                    className={categorySelected === "All Cateogies" ? "font-bold" : ""}
+                                    onClick={() => handleCategorySelected("")}
+                                >
+                                    All Categories
+                                </DropdownItem>
+                                {categories.map((category) => (
+                                    <DropdownItem
+                                        key={category}
+                                        onClick={() => handleCategorySelected(category)}
+                                        className={categorySelected === category ? "font-bold" : ""}
+                                    >
+                                        {category}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
                     <div
                         className={`flex items-center py-3 px-6 transition-all duration-200 ease-in-out rounded-lg shadow-xl ${
-                            showInput ? "self-stretch md:max-w-3/5 xl:max-w-2/5 space-x-2" : ""
+                            showInput ? "self-stretch md:max-w-4/5 lg:flex-1 space-x-2" : ""
                         } ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
                     >
                         <div
@@ -177,37 +220,6 @@ export const OrderPage = () => {
                                 </ImageContainer>
                             )}
                         </div>
-                    </div>
-                    <div>
-                        <Dropdown placement={isMobile ? "bottom-start" : "right-start"}>
-                            <DropdownTrigger
-                                btnStyle={false}
-                                className={`px-6 py-3 rounded-lg shadow-lg ${
-                                    theme === "light"
-                                        ? "bg-accent-background text-text-color"
-                                        : "bg-accent-background-dark text-text-color-dark"
-                                }`}
-                            >
-                                <span>{categorySelected ? categorySelected : "Categories"}</span>
-                            </DropdownTrigger>
-                            <DropdownMenu>
-                                <DropdownItem
-                                    className={categorySelected === "All Cateogies" ? "font-bold" : ""}
-                                    onClick={() => handleCategorySelected("")}
-                                >
-                                    All Categories
-                                </DropdownItem>
-                                {categories.map((category) => (
-                                    <DropdownItem
-                                        key={category}
-                                        onClick={() => handleCategorySelected(category)}
-                                        className={categorySelected === category ? "font-bold" : ""}
-                                    >
-                                        {category}
-                                    </DropdownItem>
-                                ))}
-                            </DropdownMenu>
-                        </Dropdown>
                     </div>
                 </div>
 

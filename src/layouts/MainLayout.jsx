@@ -18,7 +18,7 @@ export const MainLayout = ({ children }) => {
         >
             <Navbar isLoggedIn={user ? true : false} user={user} />
             <main
-                className={`flex-1 flex flex-col ${
+                className={`mt-16 flex-1 flex flex-col ${
                     theme === "light" ? "bg-background" : "bg-background-dark"
                 }`}
             >

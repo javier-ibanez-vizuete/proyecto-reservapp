@@ -30,7 +30,6 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { scroll } = useScroll();
     const { isMobile, isTablet } = useDevice();
     const { logout } = useAuth();
 
@@ -67,10 +66,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
             await logout();
         } catch (err) {
             console.log("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
-            toast.showToast(getText("toastLogoutError"), "error");
+            toast.showToast(getText("toastLogoutError"), "error", 2000);
         } finally {
             setIsLoading(false);
-            toast.showToast(getText("toastLogoutSuccess"), "success");
+            toast.showToast(getText("toastLogoutSuccess"), "success", 2000);
         }
     };
 
@@ -100,10 +99,12 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         console.log("Navegacion a Home");
     };
 
-    console.log("useScroll", useScroll);
-
     return (
-        <nav className={`navbar ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}>
+        <nav
+            className={`navbar transition-all duration-1000 ease-in-out fixed top-0 w-full z-10 shadow-lg ${
+                theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+            }`}
+        >
             <Container className="navbar-content">
                 <div className="navbar-inner">
                     <Link className="navbar-logo" to={isLoading ? null : "/"} onClick={handleHomeClick}>
