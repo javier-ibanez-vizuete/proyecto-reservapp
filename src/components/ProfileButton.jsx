@@ -41,7 +41,11 @@ export const ProfileButton = () => {
 
     return (
         <Dropdown placement="bottom-end" className="flex">
-            <DropdownTrigger btnStyle={false} hasIcon={false}>
+            <DropdownTrigger
+                btnStyle={false}
+                hasIcon={false}
+                className={"transition-scale duration-500 ease-in-out lg:hover:scale-105"}
+            >
                 <Avatar
                     avatar={user?.avatar}
                     alt="Avatar"

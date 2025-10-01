@@ -25,21 +25,19 @@ import { ThemeContext } from "../../contexts/ThemeContext";
  * @requires ThemeContext.theme - Current theme state ('light' | 'dark')
  * @requires ThemeContext.onToggleTheme - Function to toggle theme state
  */
-export const ThemeButton = ({ className = "", handleCloseMobileMenu = () => {}, ...props }) => {
+export const ThemeButton = ({ className = "", ...props }) => {
     const { theme, onToggleTheme } = useContext(ThemeContext);
 
     const handleClick = () => {
         onToggleTheme?.();
-        handleCloseMobileMenu();
     };
 
     const isDarkTheme = theme === "dark";
 
     return (
-        <div className={getContainerClasses(className, theme)}>
+        <div className={getContainerClasses(className, theme)} onClick={handleClick} role="button">
             <button
                 className={getButtonClasses()}
-                onClick={handleClick}
                 aria-label={getAriaLabel(theme, isDarkTheme)}
                 title={`Currently ${theme} theme. Click to toggle.`}
                 {...props}
@@ -53,7 +51,9 @@ export const ThemeButton = ({ className = "", handleCloseMobileMenu = () => {}, 
 // Helper functions extracted to avoid nested logic
 const getContainerClasses = (className, theme) => {
     return classNames(
-        `relative rounded-full border ${theme === "light" ? "border-amber-500" : "border-gray-500"}`,
+        `relative rounded-full cursor-pointer border ${
+            theme === "light" ? "border-amber-500" : "border-gray-500"
+        }`,
         "backdrop-blur-[15px]",
         "shadow-[0px_0px_0px_1px_rgba(0,0,0,0.01)]",
         "w-9 h-9 perfect-center",
@@ -62,7 +62,7 @@ const getContainerClasses = (className, theme) => {
 };
 
 const getButtonClasses = () => {
-    return classNames("perfect-center outline-none", "focus:outline-none rounded-full");
+    return classNames("perfect-center cursor-pointer outline-none", "focus:outline-none rounded-full");
 };
 
 const getAriaLabel = (theme, isDarkTheme) => {
