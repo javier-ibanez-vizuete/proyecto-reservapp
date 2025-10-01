@@ -9,16 +9,12 @@ import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.web
 import { CartsContext } from "../contexts/CartsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useAuth } from "../core/auth/useAuth";
 import { useDevice } from "../hooks/useDevice";
-import { useToast } from "../hooks/useToast";
-import { Avatar } from "./Avatar";
 import { BurgerButton } from "./BurgerButton";
 import { Container } from "./Container";
 import { LanguagesSelector } from "./LanguagesSelector";
 import { NavbarLinks } from "./NavbarLinks";
-import { LoadingButton } from "./Spinner/LoadingButton";
-import { ToastContainer } from "./ToastContainer";
+import { ProfileButton } from "./ProfileButton";
 import { TrollyButton } from "./TrollyButton";
 import { Button } from "./UI/Button";
 import { ThemeButton } from "./UI/ThemeButton";
@@ -33,12 +29,9 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const { isMobile, isTablet } = useDevice();
-    const { logout } = useAuth();
 
     const Navigate = useNavigate();
     const { pathname } = useLocation();
-
-    const { toasts, showToast, dismissToast } = useToast();
 
     const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
@@ -64,18 +57,6 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     };
 
     // HANDLER EVENTS
-    const handleLogout = async () => {
-        setIsLoading(true);
-        try {
-            await logout();
-        } catch (err) {
-            console.log("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
-            showToast(getText("toastLogoutError"), "error", 2000);
-        } finally {
-            setIsLoading(false);
-            showToast(getText("toastLogoutSuccess"), "success", 2000);
-        }
-    };
 
     const handleLogin = () => {
         Navigate("/login");
@@ -89,11 +70,6 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         //AQUI PONER NAVIGATE TO PAGINA REGISTER
     };
 
-    const handleProfile = () => {
-        console.log("Profile Clicked");
-        // AQUI PONER NAVIGATE TO PAGINA PROFILE
-    };
-
     const handleLinkClick = (linkName) => {
         handleCloseMobileMenu();
         return linkName;
@@ -105,7 +81,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
 
     return (
         <nav
-            className={`navbar transition-all duration-1000 ease-in-out fixed top-0 w-full z-10 shadow-lg ${
+            className={`navbar transition-all duration-1000 ease-in-out fixed top-0 w-full z-10 shadow-xl ${
                 theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
             }`}
         >
@@ -125,29 +101,11 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                             <div className="navbar-user-profile">
                                 <ThemeButton />
                                 <LanguagesSelector placement="bottom-end" />
-
-                                <Avatar
-                                    avatar={user.avatar}
-                                    alt="Avatar"
-                                    online={user && true}
-                                    onClick={handleProfile}
-                                    fallback={user?.name}
-                                />
+                                <ProfileButton />
                                 {cart &&
                                     cart?.items &&
                                     cart.items?.length > 0 &&
                                     !pathname.includes("/cart") && <TrollyButton />}
-                                {!isMobile && !isTablet && (
-                                    <LoadingButton
-                                        loading={isLoading}
-                                        onClick={handleLogout}
-                                        className="justify-start"
-                                        variant="danger"
-                                        loadingText={getText("lodingTextLogoutUser")}
-                                    >
-                                        {getText("logoutButton")}
-                                    </LoadingButton>
-                                )}
                             </div>
                         )}
                         {!isLoggedIn && (
@@ -173,45 +131,16 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                     </div>
                 </div>
                 {isMobileMenuOpen && (
-                    <div
-                        className={`${isMobile || isTablet ? "" : "hidden"} mobile-menu`}
-                        // ref={contentMobileRef}
-                    >
+                    <div className={`${isMobile || isTablet ? "" : "hidden"} mobile-menu`}>
                         <Container
                             className={`${
                                 theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                             } py-3 gap-2`}
                         >
                             <NavbarLinks handleLinkClick={handleLinkClick} />
-                            {isLoggedIn && (
-                                <div className="flex flex-col gap-2">
-                                    <Button
-                                        onClick={handleProfile}
-                                        className="justify-start"
-                                        variant="outline"
-                                    >
-                                        {getText("profilePageButton")}
-                                    </Button>
-                                    <LoadingButton
-                                        loading={isLoading}
-                                        onClick={handleLogout}
-                                        className="justify-start"
-                                        variant="danger"
-                                        loadingText="Closing Profile..."
-                                    >
-                                        {getText("logoutButton")}
-                                    </LoadingButton>
-                                </div>
-                            )}
-                            {!isLoggedIn && (
-                                <div className="flex items-center gap-3">
-                                    <ThemeButton handleCloseMobileMenu={handleCloseMobileMenu} />
-                                </div>
-                            )}
                         </Container>
                     </div>
                 )}
-                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </nav>
     );

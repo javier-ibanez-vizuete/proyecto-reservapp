@@ -4,8 +4,7 @@ const TEXTS = {
     en: {
         // BARRA DE NAVIGATION
         userReplaceName: "User",
-        toastLogoutError: "Ups! Something went Wrong.",
-        toastLogoutSuccess: "Logout Completed",
+        toastLogoutError: "Logout failed.",
 
         bookingPageNavLabel: "BOOKINGS",
         ordersPageNavLabel: "ORDERS",
@@ -14,14 +13,19 @@ const TEXTS = {
 
         lodingTextLogoutUser: "Closing Profile...",
         logoutButton: "Logout",
+        loadingTextLogoutButton: "Logging out...",
         loginButton: "LogIn",
         registerButton: "Register",
+
+        toastErrorLogout: "Logout failed",
 
         profilePageButton: "Profile",
 
         // HOME PAGE
         toastWelcomeRegister: "Welcome",
-        toastLoginSuccess: "Login successful",
+        toastLoginSuccess: "Logged In successfully ✔",
+        toastLogoutSuccess: "Logged out Succesfully ✔",
+
         h1HomePage: "Home Page",
 
         // MENUPAGE

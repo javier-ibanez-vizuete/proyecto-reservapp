@@ -55,7 +55,8 @@ export const useAuth = () => {
                 setUser(false);
                 setCart(null);
                 removeCartFromLocalStorage();
-                navigate("/", { state: { logoutSucces: true } });
+                navigate("/", { state: { logoutSuccess: true } });
+                saveDataInSessionStorage("logoutSuccess", true);
             }
         } catch (err) {
             console.log("El Logout no ha podido completarse", err);

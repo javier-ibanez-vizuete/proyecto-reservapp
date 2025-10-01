@@ -8,7 +8,6 @@ export const CartsProvider = ({ children }) => {
 
     useEffect(() => {
         const cartFromStorage = getCartFromLocalStorage();
-        console.log("Tenemos algo en localStorage?", cartFromStorage);
         if (cartFromStorage) setCart(cartFromStorage);
     }, []);
 
