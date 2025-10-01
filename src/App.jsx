@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
+import { CartsContext } from "./contexts/CartsContext";
 import { ProductsContext } from "./contexts/ProductsContext";
 import { useProducts } from "./core/products/useProducts";
 import { useImageFallback } from "./hooks/useImageFallback";
@@ -12,11 +13,12 @@ export const App = () => {
     const { user } = useContext(AuthContext);
     const { products, categories } = useContext(ProductsContext);
     const { getProducts, getCategories } = useProducts();
+    const { carts, setUserCart } = useContext(CartsContext);
 
     useEffect(() => {
         if (!products?.length) getProducts();
         if (!categories?.length) getCategories();
-    }, []);
+    }, [user]);
 
     useImageFallback();
 

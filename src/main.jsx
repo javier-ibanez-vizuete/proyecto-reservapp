@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./App.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { BookingsProvider } from "./contexts/BookingsContext.jsx";
+import { CartsProvider } from "./contexts/CartsContext.jsx";
 import { LanguageProvider } from "./contexts/LanguageContext.jsx";
 import { ProductsProvider } from "./contexts/ProductsContext.jsx";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
@@ -14,9 +15,11 @@ createRoot(document.getElementById("root")).render(
             <AuthProvider>
                 <BookingsProvider>
                     <ProductsProvider>
-                        <ThemeProvider>
-                            <App />
-                        </ThemeProvider>
+                        <CartsProvider>
+                            <ThemeProvider>
+                                <App />
+                            </ThemeProvider>
+                        </CartsProvider>
                     </ProductsProvider>
                 </BookingsProvider>
             </AuthProvider>

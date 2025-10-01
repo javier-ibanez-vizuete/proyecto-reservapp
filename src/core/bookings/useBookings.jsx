@@ -31,6 +31,7 @@ export const useBookings = () => {
         try {
             console.log("postBookings");
             const booking = await postBookingApi(bookingData);
+            if (!booking) return console.log("NO SE HA POSTEADO LA RESERVA");
             setBookings((prev) => {
                 if (prev.length) {
                     const newValue = [...prev, booking];
@@ -43,8 +44,6 @@ export const useBookings = () => {
                     return newValue;
                 }
             });
-
-            if (!booking) console.log("NO SE HA POSTEADO LA RESERVA");
             return booking;
         } catch (err) {
             console.error("Algo ha salido mal en postBookings(useBookings):", err);

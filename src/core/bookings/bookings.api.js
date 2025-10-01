@@ -12,8 +12,6 @@ export const getBookingsByDateApi = async (date) => {
 
 export const postBookingApi = async (bookingData) => {
     try {
-        console.log("postBookingApi");
-        console.log("DatosEnviados", bookingData);
         const created = await api.post("/bookings", bookingData);
         console.log("Respuesta", created);
         return created.data;

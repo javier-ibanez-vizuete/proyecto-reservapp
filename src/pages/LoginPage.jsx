@@ -52,7 +52,7 @@ export const LoginPage = () => {
     const [isLoading, setIsloading] = useState(false);
 
     const { user } = useContext(AuthContext);
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
     const { login } = useAuth();
     const { theme } = useContext(ThemeContext);
     const { isMobile } = useDevice();
@@ -78,7 +78,7 @@ export const LoginPage = () => {
             setForm(INITIAL_FORM);
         } catch (error) {
             setForm(INITIAL_FORM);
-            toast.showToast("Algo ha salido mal", "error", 4000, "top-right");
+            showToast("Algo ha salido mal", "error", 4000, "top-right");
         } finally {
             setIsloading(false);
         }
@@ -89,11 +89,11 @@ export const LoginPage = () => {
     }
 
     return (
-        <Container className="perfect-center flex-1">
+        <Container className="flex flex-col justify-center flex-1">
             <div
                 className={`flex flex-col gap-md ${
                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
-                } rounded-2xl shadow-landing-lg xs:p-4 2xs:py-4 2xs:px-1 sm:p-8 md:p-10`}
+                } rounded-2xl shadow-landing-lg xs:p-6 2xs:py-6 2xs:px-2 sm:p-8 md:p-10`}
             >
                 <h2 className={`${theme === "light" ? "text-text-color" : "text-text-color-dark"}`}>
                     Iniciar sesión
@@ -127,14 +127,11 @@ export const LoginPage = () => {
                     })}
                     {error && <span className="italic font-semibold text-error-600">{error}</span>}
 
-                    {/* <Button type="submit" className="justify-center rounded-full" disabled={error && true}>
-                        Entrar
-                    </Button> */}
                     <LoadingButton
                         loading={isLoading}
                         type="submit"
                         variant="primary"
-                        size={isMobile ? "sm" : "md"}
+                        size={isMobile ? "md" : "lg"}
                         loadingText="Login in..."
                     >
                         Iniciar Sesion
@@ -142,7 +139,7 @@ export const LoginPage = () => {
                 </form>
             </div>
 
-            <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+            <ToastContainer toasts={toasts} onClose={dismissToast} />
         </Container>
     );
 };

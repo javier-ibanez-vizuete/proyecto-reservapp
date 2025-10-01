@@ -12,6 +12,7 @@ import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { TableCard } from "../components/TableCard";
 import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
+import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {
@@ -72,9 +73,10 @@ export const BookingPage = () => {
 
     const { postBookings, isLoading } = useBookings();
 
+    const { user, setUser } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
 
     const onChangeDate = (selectedDate) => {
         setError("");
@@ -160,17 +162,18 @@ export const BookingPage = () => {
 
     const onConfirmSubmit = async () => {
         try {
-            const booked = await postBookings(form);
+            const newFormValue = { ...form, userId: user?.id };
+            const booked = await postBookings(newFormValue);
             if (booked) {
                 resetForm();
-                toast.showToast(getText("toastBookingSuccess"), "success");
+                showToast(getText("toastBookingSuccess"), "success");
             }
         } catch (err) {
             if (err?.status === 409) {
                 resetForm();
-                return toast.showToast(getText("toastBookingUnavailable"), "error");
+                return showToast(getText("toastBookingUnavailable"), "error");
             }
-            toast.showToast(getText("toastBookingError"), "error");
+            showToast(getText("toastBookingError"), "error");
         }
     };
 
@@ -197,6 +200,10 @@ export const BookingPage = () => {
                     <ModalHeader>{getText("confirmBookingTitle")}</ModalHeader>
                     <ModalBody>
                         <ul className="flex flex-col gap-3">
+                            <li className="flex flex-col gap-1">
+                                <p>{getText("userNameConfirmText")}:</p>
+                                <h6>{user?.name}</h6>
+                            </li>
                             <li className="flex flex-col gap-1">
                                 <p>{getText("dateConfirmText")}:</p>
                                 <h6>{form.date}</h6>
@@ -316,7 +323,7 @@ export const BookingPage = () => {
                                     key={"defaultOption"}
                                     onClick={() => onChangeCustomer("")}
                                 >
-                                    {getText("bookingCustomersPlaceholder")}
+                                    <span className="text-sm">{getText("bookingCustomersPlaceholder")}</span>
                                 </DropdownItem>
                                 {Array.from({ length: 8 }, (_, index) => (
                                     <DropdownItem
@@ -387,7 +394,7 @@ export const BookingPage = () => {
                         resetear Form
                     </Button>
                 </div>
-                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </div>
     );

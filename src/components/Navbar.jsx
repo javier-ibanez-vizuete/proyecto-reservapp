@@ -6,6 +6,7 @@ import { ImageContainer } from "./UI/ImageContainer";
 import logoReservappAvif from "../assets/logos/reservapp-logo/logo-reservapp.avif";
 import logoReservappPng from "../assets/logos/reservapp-logo/logo-reservapp.png";
 import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.webp";
+import { CartsContext } from "../contexts/CartsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
@@ -18,6 +19,7 @@ import { LanguagesSelector } from "./LanguagesSelector";
 import { NavbarLinks } from "./NavbarLinks";
 import { LoadingButton } from "./Spinner/LoadingButton";
 import { ToastContainer } from "./ToastContainer";
+import { TrollyButton } from "./TrollyButton";
 import { Button } from "./UI/Button";
 import { ThemeButton } from "./UI/ThemeButton";
 
@@ -36,10 +38,11 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const Navigate = useNavigate();
     const { pathname } = useLocation();
 
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
+
+    const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
-    // const contentMobileRef = useRef();
 
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
@@ -67,15 +70,16 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
             await logout();
         } catch (err) {
             console.log("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
-            toast.showToast(getText("toastLogoutError"), "error");
+            showToast(getText("toastLogoutError"), "error", 2000);
         } finally {
             setIsLoading(false);
-            toast.showToast(getText("toastLogoutSuccess"), "success");
+            showToast(getText("toastLogoutSuccess"), "success", 2000);
         }
     };
 
     const handleLogin = () => {
         Navigate("/login");
+        handleCloseMobileMenu();
         //AQUI PONER NAVIGATE TO PAGINA LOGIN
     };
 
@@ -91,6 +95,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     };
 
     const handleLinkClick = (linkName) => {
+        handleCloseMobileMenu();
         return linkName;
     };
 
@@ -99,7 +104,11 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     };
 
     return (
-        <nav className={`navbar ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}>
+        <nav
+            className={`navbar transition-all duration-1000 ease-in-out fixed top-0 w-full z-10 shadow-lg ${
+                theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+            }`}
+        >
             <Container className="navbar-content">
                 <div className="navbar-inner">
                     <Link className="navbar-logo" to={isLoading ? null : "/"} onClick={handleHomeClick}>
@@ -124,6 +133,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                     onClick={handleProfile}
                                     fallback={user?.name}
                                 />
+                                {cart &&
+                                    cart?.items &&
+                                    cart.items?.length > 0 &&
+                                    !pathname.includes("/cart") && <TrollyButton />}
                                 {!isMobile && !isTablet && (
                                     <LoadingButton
                                         loading={isLoading}
@@ -198,7 +211,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         </Container>
                     </div>
                 )}
-                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </nav>
     );

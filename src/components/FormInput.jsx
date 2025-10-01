@@ -26,7 +26,7 @@ export const FormInput = ({ containerClass, input, label, onClick, ...props }) =
                 {input?.name === "password" && (
                     <button
                         type="button"
-                        className={`py-md px-xl rounded-r-xl border-0 -ml-0.5 perfect-center rounded-l-none bg-white`}
+                        className={`py-md px-md rounded-r-xl border-0 -ml-0.5 perfect-center rounded-l-none bg-white`}
                         onClick={onClick}
                         disabled={!input?.value}
                     >
@@ -38,7 +38,7 @@ export const FormInput = ({ containerClass, input, label, onClick, ...props }) =
                 {input?.name === "repassword" && (
                     <button
                         type="button"
-                        className={`py-md px-xl rounded-r-xl border-0 -ml-0.5 perfect-center rounded-l-none bg-white`}
+                        className={`py-md px-md rounded-r-xl border-0 -ml-0.5 perfect-center rounded-l-none bg-white`}
                         onClick={onClick}
                         disabled={!input?.value}
                     >
