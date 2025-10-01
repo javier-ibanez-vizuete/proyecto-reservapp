@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 const TEXTS = {
     en: {
-        // BARRA DE NAVEGACION
+        // BARRA DE NAVIGATION
         userReplaceName: "User",
         toastLogoutError: "Ups! Something went Wrong.",
         toastLogoutSuccess: "Logout Completed",
@@ -71,6 +71,24 @@ const TEXTS = {
         toastBookingUnavailable: "Booking Failed: This table is already reserved.",
         toastBookingError: "Booking Failed. Try Again",
 
+        // ORDERS PAGE
+        h1OrdersPage: "DELIVERY",
+        smallOrdersPageSubtitle: "Enjoy our menu from the comfort of home.",
+
+        addProductToCartButton: "Add to Cart",
+        removeProductToCartButton: "Remove from Cart",
+        loadingTextAddingProductsToCartButton: "Adding...",
+        loadingTextRemovingProductsFromCartButton: "Removing...",
+        addOneMoreProductToCartButton: "Add one",
+        removeOneMoreProductFromCartButton: "Remove one",
+
+        toastAddedProductToCart: "Added ✔",
+        toastQuantityProductUpdatedToCart: "Cart updated successfully ✔",
+        toastRemovedProductFromCart: "Item removed from cart ✔",
+        toastErrorAddingProductToCart: "Error: Could not add to cart",
+        toastErrorQuantityProductUpdatedToCart: "Error: Quantity update failed",
+        toastErrorRemovingProductFromCart: "Error: Could not remove item from cart",
+
         // Footer
         copyrightText: "ReservApp. All Rights reserved",
 
@@ -80,7 +98,6 @@ const TEXTS = {
     },
 
     es: {
-        // BARRA DE NAVEGACION
         userReplaceName: "Usuario",
         toastLogoutError: "¡Ups! Algo salió mal.",
         toastLogoutSuccess: "Cierre de sesión completado",
@@ -97,12 +114,10 @@ const TEXTS = {
 
         profilePageButton: "Perfil",
 
-        // HOME PAGE
         toastWelcomeRegister: "Bienvenido",
         toastLoginSuccess: "Inicio de sesión exitoso",
         h1HomePage: "Página principal",
 
-        // MENUPAGE
         fetchMessageError: "Error al cargar los productos. Inténtalo de nuevo.",
         allCategoriesFilter: "Todas las categorías",
         h1MenuPage: "CARTA",
@@ -111,7 +126,6 @@ const TEXTS = {
         textRefreshProductsButton: "Actualizar",
         clearFilterButton: "Borrar filtro",
 
-        // BOOKING PAGE
         h1BookingPage: "RESERVA",
 
         confirmBookingTitle: "Revisar y confirmar",
@@ -148,16 +162,30 @@ const TEXTS = {
         toastBookingUnavailable: "Error al reservar: esta mesa ya está reservada.",
         toastBookingError: "Error en la reserva. Inténtalo de nuevo",
 
-        // Footer
+        h1OrdersPage: "PEDIDOS",
+        smallOrdersPageSubtitle: "Disfruta de nuestro menú desde la comodidad de tu hogar.",
+
+        addProductToCartButton: "Añadir al carrito",
+        removeProductToCartButton: "Quitar del carrito",
+        loadingTextAddingProductsToCartButton: "Añadiendo...",
+        loadingTextRemovingProductsFromCartButton: "Quitando...",
+        addOneMoreProductToCartButton: "Añadir uno",
+        removeOneMoreProductFromCartButton: "Quitar uno",
+
+        toastAddedProductToCart: "Añadido ✔",
+        toastQuantityProductUpdatedToCart: "Carrito actualizado ✔",
+        toastRemovedProductFromCart: "Elemento eliminado del carrito ✔",
+        toastErrorAddingProductToCart: "Error: no se pudo añadir al carrito",
+        toastErrorQuantityProductUpdatedToCart: "Error: actualización de cantidad fallida",
+        toastErrorRemovingProductFromCart: "Error: no se pudo eliminar el elemento",
+
         copyrightText: "ReservApp. Todos los derechos reservados",
 
-        // Mensajes Generales
         affirmationText: "Sí",
         NegationText: "No",
     },
 
     fr: {
-        // BARRA DE NAVIGATION
         userReplaceName: "Utilisateur",
         toastLogoutError: "Oups ! Une erreur est survenue.",
         toastLogoutSuccess: "Déconnexion terminée",
@@ -174,12 +202,10 @@ const TEXTS = {
 
         profilePageButton: "Profil",
 
-        // HOME PAGE
         toastWelcomeRegister: "Bienvenue",
         toastLoginSuccess: "Connexion réussie",
         h1HomePage: "Page d’accueil",
 
-        // MENUPAGE
         fetchMessageError: "Erreur lors du chargement des produits. Réessayez.",
         allCategoriesFilter: "Toutes les catégories",
         h1MenuPage: "MENU",
@@ -188,7 +214,6 @@ const TEXTS = {
         textRefreshProductsButton: "Rafraîchir",
         clearFilterButton: "Effacer le filtre",
 
-        // BOOKING PAGE
         h1BookingPage: "RÉSERVATION",
 
         confirmBookingTitle: "Vérifier et confirmer",
@@ -225,16 +250,30 @@ const TEXTS = {
         toastBookingUnavailable: "Échec de la réservation : cette table est déjà réservée.",
         toastBookingError: "Échec de la réservation. Réessayez",
 
-        // Footer
+        h1OrdersPage: "LIVRAISON",
+        smallOrdersPageSubtitle: "Profitez de notre menu depuis le confort de votre maison.",
+
+        addProductToCartButton: "Ajouter au panier",
+        removeProductToCartButton: "Retirer du panier",
+        loadingTextAddingProductsToCartButton: "Ajout...",
+        loadingTextRemovingProductsFromCartButton: "Suppression...",
+        addOneMoreProductToCartButton: "Ajouter un",
+        removeOneMoreProductFromCartButton: "Retirer un",
+
+        toastAddedProductToCart: "Ajouté ✔",
+        toastQuantityProductUpdatedToCart: "Panier mis à jour ✔",
+        toastRemovedProductFromCart: "Élément supprimé ✔",
+        toastErrorAddingProductToCart: "Erreur : impossible d'ajouter au panier",
+        toastErrorQuantityProductUpdatedToCart: "Erreur : mise à jour de la quantité échouée",
+        toastErrorRemovingProductFromCart: "Erreur : impossible de supprimer l'élément",
+
         copyrightText: "ReservApp. Tous droits réservés",
 
-        // Mensajes Generales
         affirmationText: "Oui",
         NegationText: "Non",
     },
 
     it: {
-        // BARRA DI NAVIGAZIONE
         userReplaceName: "Utente",
         toastLogoutError: "Ops! Qualcosa è andato storto.",
         toastLogoutSuccess: "Disconnessione completata",
@@ -251,12 +290,10 @@ const TEXTS = {
 
         profilePageButton: "Profilo",
 
-        // HOME PAGE
         toastWelcomeRegister: "Benvenuto",
         toastLoginSuccess: "Accesso riuscito",
         h1HomePage: "Pagina iniziale",
 
-        // MENUPAGE
         fetchMessageError: "Errore nel caricamento dei prodotti. Riprova.",
         allCategoriesFilter: "Tutte le categorie",
         h1MenuPage: "MENÙ",
@@ -265,7 +302,6 @@ const TEXTS = {
         textRefreshProductsButton: "Aggiorna",
         clearFilterButton: "Cancella filtro",
 
-        // BOOKING PAGE
         h1BookingPage: "PRENOTAZIONE",
 
         confirmBookingTitle: "Rivedi e conferma",
@@ -302,16 +338,30 @@ const TEXTS = {
         toastBookingUnavailable: "Prenotazione fallita: questo tavolo è già prenotato.",
         toastBookingError: "Prenotazione fallita. Riprova",
 
-        // Footer
+        h1OrdersPage: "CONSEGNA",
+        smallOrdersPageSubtitle: "Goditi il nostro menu comodamente a casa.",
+
+        addProductToCartButton: "Aggiungi al carrello",
+        removeProductToCartButton: "Rimuovi dal carrello",
+        loadingTextAddingProductsToCartButton: "Aggiungendo...",
+        loadingTextRemovingProductsFromCartButton: "Rimuovendo...",
+        addOneMoreProductToCartButton: "Aggiungi uno",
+        removeOneMoreProductFromCartButton: "Rimuovi uno",
+
+        toastAddedProductToCart: "Aggiunto ✔",
+        toastQuantityProductUpdatedToCart: "Carrello aggiornato ✔",
+        toastRemovedProductFromCart: "Elemento rimosso dal carrello ✔",
+        toastErrorAddingProductToCart: "Errore: impossibile aggiungere al carrello",
+        toastErrorQuantityProductUpdatedToCart: "Errore: aggiornamento quantità fallito",
+        toastErrorRemovingProductFromCart: "Errore: impossibile rimuovere l'elemento",
+
         copyrightText: "ReservApp. Tutti i diritti riservati",
 
-        // Mensajes Generales
         affirmationText: "Sì",
         NegationText: "No",
     },
 
     de: {
-        // NAVIGATION
         userReplaceName: "Benutzer",
         toastLogoutError: "Ups! Etwas ist schiefgelaufen.",
         toastLogoutSuccess: "Abmeldung abgeschlossen",
@@ -328,12 +378,10 @@ const TEXTS = {
 
         profilePageButton: "Profil",
 
-        // HOME PAGE
         toastWelcomeRegister: "Willkommen",
         toastLoginSuccess: "Login erfolgreich",
         h1HomePage: "Startseite",
 
-        // MENUPAGE
         fetchMessageError: "Fehler beim Laden der Produkte. Versuchen Sie es erneut.",
         allCategoriesFilter: "Alle Kategorien",
         h1MenuPage: "SPEISEKARTE",
@@ -342,7 +390,6 @@ const TEXTS = {
         textRefreshProductsButton: "Aktualisieren",
         clearFilterButton: "Filter löschen",
 
-        // BOOKING PAGE
         h1BookingPage: "RESERVIERUNG",
 
         confirmBookingTitle: "Überprüfen und bestätigen",
@@ -379,16 +426,30 @@ const TEXTS = {
         toastBookingUnavailable: "Reservierung fehlgeschlagen: Dieser Tisch ist bereits reserviert.",
         toastBookingError: "Reservierung fehlgeschlagen. Versuchen Sie es erneut",
 
-        // Footer
+        h1OrdersPage: "LIEFERUNG",
+        smallOrdersPageSubtitle: "Genießen Sie unser Menü bequem von zu Hause.",
+
+        addProductToCartButton: "Zum Warenkorb hinzufügen",
+        removeProductToCartButton: "Aus Warenkorb entfernen",
+        loadingTextAddingProductsToCartButton: "Hinzufügen...",
+        loadingTextRemovingProductsFromCartButton: "Entfernen...",
+        addOneMoreProductToCartButton: "Eins hinzufügen",
+        removeOneMoreProductFromCartButton: "Eins entfernen",
+
+        toastAddedProductToCart: "Hinzugefügt ✔",
+        toastQuantityProductUpdatedToCart: "Warenkorb erfolgreich aktualisiert ✔",
+        toastRemovedProductFromCart: "Artikel aus Warenkorb entfernt ✔",
+        toastErrorAddingProductToCart: "Fehler: konnte nicht zum Warenkorb hinzufügen",
+        toastErrorQuantityProductUpdatedToCart: "Fehler: Mengenaktualisierung fehlgeschlagen",
+        toastErrorRemovingProductFromCart: "Fehler: Artikel konnte nicht entfernt werden",
+
         copyrightText: "ReservApp. Alle Rechte vorbehalten",
 
-        // Mensajes Generales
         affirmationText: "Ja",
         NegationText: "Nein",
     },
 
     zh: {
-        // 导航栏
         userReplaceName: "用户",
         toastLogoutError: "哎呀！出现了错误。",
         toastLogoutSuccess: "退出成功",
@@ -405,12 +466,10 @@ const TEXTS = {
 
         profilePageButton: "个人资料",
 
-        // 主页
         toastWelcomeRegister: "欢迎",
         toastLoginSuccess: "登录成功",
         h1HomePage: "主页",
 
-        // 菜单页
         fetchMessageError: "加载产品时出错。请重试。",
         allCategoriesFilter: "所有分类",
         h1MenuPage: "菜单",
@@ -419,7 +478,6 @@ const TEXTS = {
         textRefreshProductsButton: "刷新",
         clearFilterButton: "清除筛选",
 
-        // 预订页
         h1BookingPage: "预订",
 
         confirmBookingTitle: "查看并确认",
@@ -456,10 +514,25 @@ const TEXTS = {
         toastBookingUnavailable: "预订失败：该桌已被预订。",
         toastBookingError: "预订失败。请重试",
 
-        // 页脚
+        h1OrdersPage: "送餐",
+        smallOrdersPageSubtitle: "在家享用我们的菜单。",
+
+        addProductToCartButton: "加入购物车",
+        removeProductToCartButton: "从购物车移除",
+        loadingTextAddingProductsToCartButton: "添加中...",
+        loadingTextRemovingProductsFromCartButton: "移除中...",
+        addOneMoreProductToCartButton: "再加一个",
+        removeOneMoreProductFromCartButton: "减一个",
+
+        toastAddedProductToCart: "已添加 ✔",
+        toastQuantityProductUpdatedToCart: "购物车已更新 ✔",
+        toastRemovedProductFromCart: "已从购物车移除 ✔",
+        toastErrorAddingProductToCart: "错误：无法加入购物车",
+        toastErrorQuantityProductUpdatedToCart: "错误：数量更新失败",
+        toastErrorRemovingProductFromCart: "错误：无法移除购物车中的项目",
+
         copyrightText: "ReservApp. 版权所有",
 
-        // 通用文案
         affirmationText: "是",
         NegationText: "否",
     },

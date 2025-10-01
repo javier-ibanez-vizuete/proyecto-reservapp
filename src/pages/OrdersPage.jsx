@@ -15,6 +15,7 @@ import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
 import { CartsContext } from "../contexts/CartsContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
@@ -27,6 +28,8 @@ export const OrderPage = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const { cart } = useContext(CartsContext);
+    const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     const [categorySelected, setCategorySelected] = useState(null);
     const [productSearch, setProductSearch] = useState("");
@@ -34,7 +37,6 @@ export const OrderPage = () => {
     const [showInput, setShowInput] = useState(false);
     const inputRef = useRef(null);
 
-    const { theme } = useContext(ThemeContext);
     const { isMobile } = useDevice();
 
     useEffect(() => {
@@ -97,7 +99,7 @@ export const OrderPage = () => {
     if (loadingProducts)
         return (
             <Container className="flex flex-col gap-6 py-6">
-                <h1>PEDIDOS</h1>
+                <h1>{getText("h1OrdersPage")}</h1>
                 <div>
                     <SkeletonText lines={3} className="bg-white p-4" />
                 </div>
@@ -124,8 +126,8 @@ export const OrderPage = () => {
                 />
 
                 <div className="flex flex-col">
-                    <h1>PEDIDOS</h1>
-                    <small className="lg:self-center">No te quedes con hambre</small>
+                    <h1>{getText("h1OrdersPage")}</h1>
+                    <small className="lg:self-center">{getText("smallOrdersPageSubtitle")}</small>
                 </div>
 
                 {products?.length > 0 && filteredProducts?.length > 0 && (
@@ -151,11 +153,13 @@ export const OrderPage = () => {
                                         : "bg-accent-background-dark text-text-color-dark"
                                 }`}
                             >
-                                <span>{categorySelected ? categorySelected : "Categories"}</span>
+                                <span>
+                                    {categorySelected ? categorySelected : getText("allCategoriesFilter")}
+                                </span>
                             </DropdownTrigger>
                             <DropdownMenu>
                                 <DropdownItem
-                                    className={categorySelected === "All Cateogies" ? "font-bold" : ""}
+                                    className={categorySelected === "All Categories" ? "font-bold" : ""}
                                     onClick={() => handleCategorySelected("")}
                                 >
                                     All Categories

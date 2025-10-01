@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { useContext } from "react";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useCart } from "../../core/cart/useCart";
 import { useLoading } from "../../hooks/useLoading";
@@ -17,22 +18,24 @@ export const DeliveryProductItem = ({
     qty = null,
 }) => {
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     const { postCartItem, patchCartItem, deleteCartItem } = useCart();
 
     const loading1 = useLoading();
     const loading2 = useLoading();
 
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
 
     const handleAddProduct = async (productData) => {
         loading1.setIsLoading(true);
         try {
-            console.log("Haciendo click en HandleProduct", productData);
             const updatedCart = await postCartItem(productData.id);
-            if (updatedCart) toast.showToast("Product Añadido", "success", 1500);
+
+            if (updatedCart) showToast(getText("toastAddedProductToCart"), "success", 1000);
         } catch (err) {
             console.error("No se ha añadido el producto", err);
+            showToast(getText("toastErrorAddingProductToCart"), "error");
         } finally {
             loading1.setIsLoading(false);
         }
@@ -43,8 +46,9 @@ export const DeliveryProductItem = ({
         try {
             const newQty = { qty: productQty + 1 };
             const updatedCart = await patchCartItem(productsId, newQty);
-            if (updatedCart) return toast.showToast("Cantidad Modificada", "info", 2000);
+            if (updatedCart) return showToast(getText("toastQuantityProductUpdatedToCart"), "success", 1000);
         } catch (err) {
+            showToast(getText("toastErrorQuantityProductUpdatedToCart"), "error");
             console.error("no se ha modificado el producto", err);
         } finally {
             loading1.setIsLoading(false);
@@ -56,14 +60,17 @@ export const DeliveryProductItem = ({
         try {
             if (productQty === 1) {
                 const updatedCart = await deleteCartItem(productId);
-                if (updatedCart) return toast.showToast("Product Eliminado", "error", 2000);
+                if (updatedCart) return showToast(getText("toastRemovedProductFromCart"), "success", 1000);
             }
             if (productQty !== 1) {
                 const newQty = { qty: productQty - 1 };
                 const updatedCart = await patchCartItem(productId, newQty);
-                if (updatedCart) return toast.showToast("Cantidad Modificada", "info", 2000);
+                if (updatedCart)
+                    return showToast(getText("toastQuantityProductUpdatedToCart"), "success", 1000);
             }
         } catch (err) {
+            if (productQty === 1) showToast(getText("toastErrorRemovingProductFromCart", "error"));
+            if (productQty > 1) showToast(getText("toastErrorQuantityProductUpdatedToCart", "error"));
             console.error("No se ha Modificado el producto", err);
         } finally {
             loading2.setIsLoading(false);
@@ -97,10 +104,10 @@ export const DeliveryProductItem = ({
                             <LoadingButton
                                 variant="secondary"
                                 loading={loading1.isLoading}
-                                loadingText={"Añadiendo..."}
+                                loadingText={getText("loadingTextAddingProductsToCartButton")}
                                 onClick={() => handleAddProduct(productData)}
                             >
-                                Añadir al Carrito
+                                {getText("addProductToCartButton")}
                             </LoadingButton>
                         </div>
                     )}
@@ -112,25 +119,27 @@ export const DeliveryProductItem = ({
                             <LoadingButton
                                 variant="primary"
                                 loading={loading1.isLoading}
-                                loadingText="Agregando..."
+                                loadingText={getText("loadingTextAddingProductsToCartButton")}
                                 onClick={() => handleIncreaseProduct(productData.id, qty)}
                                 className="flex-1"
                             >
-                                Agregar
+                                {getText("addOneMoreProductToCartButton")}
                             </LoadingButton>
                             <LoadingButton
                                 variant="secondary"
                                 loading={loading2.isLoading}
-                                loadingText={qty === 1 ? "Eliminando..." : "Restando..."}
+                                loadingText={getText("loadingTextRemovingProductsFromCartButton")}
                                 onClick={() => handleDecreaseProduct(productData.id, qty)}
                                 className="flex-1"
                             >
-                                {qty === 1 ? "Eliminar" : "Restar"}
+                                {qty === 1
+                                    ? getText("removeProductToCartButton")
+                                    : getText("removeOneMoreProductFromCartButton")}
                             </LoadingButton>
                         </div>
                     )}
                 </div>
-                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </article>
         </li>
     );

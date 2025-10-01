@@ -13,7 +13,7 @@ export const HomePage = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
 
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
     useEffect(() => {
         const fromLogin =
             location.state?.fromLogin === true || getDataFromSessionStorage("fromLogin") === true;
@@ -23,12 +23,12 @@ export const HomePage = () => {
         if (!fromLogin && !fromRegister) return;
 
         if (fromLogin) {
-            toast.showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
+            showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
             navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromLogin");
         }
         if (fromRegister) {
-            toast.showToast(
+            showToast(
                 `${getText("toastWelcomeRegister")} ${user?.name || getText("userReplaceName")}.`,
                 "success",
                 2000,
@@ -44,7 +44,7 @@ export const HomePage = () => {
             <Container className="">
                 <h1>{getText("h1HomePage")}</h1>
 
-                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </div>
     );

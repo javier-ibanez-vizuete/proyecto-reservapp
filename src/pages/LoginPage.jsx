@@ -52,7 +52,7 @@ export const LoginPage = () => {
     const [isLoading, setIsloading] = useState(false);
 
     const { user } = useContext(AuthContext);
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
     const { login } = useAuth();
     const { theme } = useContext(ThemeContext);
     const { isMobile } = useDevice();
@@ -78,7 +78,7 @@ export const LoginPage = () => {
             setForm(INITIAL_FORM);
         } catch (error) {
             setForm(INITIAL_FORM);
-            toast.showToast("Algo ha salido mal", "error", 4000, "top-right");
+            showToast("Algo ha salido mal", "error", 4000, "top-right");
         } finally {
             setIsloading(false);
         }
@@ -139,7 +139,7 @@ export const LoginPage = () => {
                 </form>
             </div>
 
-            <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+            <ToastContainer toasts={toasts} onClose={dismissToast} />
         </Container>
     );
 };

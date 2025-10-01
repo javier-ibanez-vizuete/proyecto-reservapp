@@ -138,7 +138,7 @@ export const RegisterPage = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const { register } = useAuth();
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
 
     const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
@@ -169,7 +169,7 @@ export const RegisterPage = () => {
             setForm(INITIAL_FORM_DATA);
         } catch (err) {
             setForm(INITIAL_FORM_DATA);
-            toast.showToast("Algo ha salido mal", "error", 4000, "top-right");
+            showToast("Algo ha salido mal", "error", 4000, "top-right");
         } finally {
             setIsLoading(false);
         }
@@ -263,7 +263,7 @@ export const RegisterPage = () => {
                     </LoadingButton>
                 </form>
             </div>
-            <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+            <ToastContainer toasts={toasts} onClose={dismissToast} />
         </Container>
     );
 };

@@ -36,7 +36,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const Navigate = useNavigate();
     const { pathname } = useLocation();
 
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
 
@@ -66,10 +66,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
             await logout();
         } catch (err) {
             console.log("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
-            toast.showToast(getText("toastLogoutError"), "error", 2000);
+            showToast(getText("toastLogoutError"), "error", 2000);
         } finally {
             setIsLoading(false);
-            toast.showToast(getText("toastLogoutSuccess"), "success", 2000);
+            showToast(getText("toastLogoutSuccess"), "success", 2000);
         }
     };
 
@@ -203,7 +203,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         </Container>
                     </div>
                 )}
-                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </nav>
     );

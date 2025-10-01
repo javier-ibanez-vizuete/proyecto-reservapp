@@ -76,7 +76,7 @@ export const BookingPage = () => {
     const { user, setUser } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
 
     const onChangeDate = (selectedDate) => {
         setError("");
@@ -166,14 +166,14 @@ export const BookingPage = () => {
             const booked = await postBookings(newFormValue);
             if (booked) {
                 resetForm();
-                toast.showToast(getText("toastBookingSuccess"), "success");
+                showToast(getText("toastBookingSuccess"), "success");
             }
         } catch (err) {
             if (err?.status === 409) {
                 resetForm();
-                return toast.showToast(getText("toastBookingUnavailable"), "error");
+                return showToast(getText("toastBookingUnavailable"), "error");
             }
-            toast.showToast(getText("toastBookingError"), "error");
+            showToast(getText("toastBookingError"), "error");
         }
     };
 
@@ -394,7 +394,7 @@ export const BookingPage = () => {
                         resetear Form
                     </Button>
                 </div>
-                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </div>
     );
