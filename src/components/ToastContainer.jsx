@@ -7,9 +7,13 @@ export const ToastContainer = ({ toasts = [], onClose = () => {}, className = ""
     const position = toasts[0]?.position || "top-center";
 
     return (
-        <div className={`${className}${getPositionStyle(position)}`}>
+        <div className={`${className} ${getPositionStyle(position)}`}>
             {toasts.map((toast) => (
-                <Toast key={toast.id} {...toast} onClose={() => onClose(toast.id)} />
+                <Toast
+                    key={toast.id}
+                    {...toast}
+                    onClose={() => onClose(toast.id)} // onClose debe mapear a dismissToast desde el hook
+                />
             ))}
         </div>
     );

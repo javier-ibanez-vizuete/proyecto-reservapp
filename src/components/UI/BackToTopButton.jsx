@@ -52,10 +52,10 @@ export const BackToTopButton = ({
     };
 
     const placementConfig = {
-        "top-full": ` ${showButton ? "top-2 left-0 right-0" : "-top-full left-0 right-0"}`,
-        "top-left": ` ${showButton ? "top-2 left-2 xl:left-20 2xl:left-100" : "-left-full top-2"}`,
-        "top-center": ` ${showButton ? "top-2 left-1/2 -translate-x-1/2" : "-left-full top-2"}`,
-        "top-right": ` ${showButton ? "top-2 right-2 xl:right-10 2xl:right-100" : "-right-full top-2"}`,
+        "top-full": ` ${showButton ? "top-17 left-0 right-0" : "-top-full left-0 right-0"}`,
+        "top-left": ` ${showButton ? "top-16 left-2 xl:left-20 2xl:left-100" : "-left-full top-16"}`,
+        "top-center": ` ${showButton ? "top-16 left-1/2 -translate-x-1/2" : "-left-full top-16"}`,
+        "top-right": ` ${showButton ? "top-17 right-2 xl:right-10 2xl:right-100" : "-right-full top-17"}`,
         "left-center": ` ${showButton ? "top-1/2 left-2 -translate-y-1/2" : "-top-full left-2"}`,
         "center-center": ` ${
             showButton

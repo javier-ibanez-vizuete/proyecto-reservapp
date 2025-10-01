@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
 import { BookingsContext } from "../../contexts/BookingsContext";
 import { getBookingsByDateApi, postBookingApi } from "./bookings.api";
 import { saveBookingsInLocalStorage } from "./bookings.service";
@@ -8,7 +7,6 @@ export const useBookings = () => {
     const [loadingBookings, setLoadingBookings] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { setBookings } = useContext(BookingsContext);
-    const { user, setUser } = useContext(AuthContext);
 
     const defaultDate = new Date().toISOString().split("T")[0];
 
@@ -46,14 +44,6 @@ export const useBookings = () => {
                     return newValue;
                 }
             });
-
-            // const newUser = await patchUserBookingApi(booking);
-            // if (!newUser) return console.log("Error Adding Booking to User");
-            // console.log("Los datos del nuevo usuario", newUser);
-
-            // setUser(newUser);
-            // saveUserInLocalStorage(newUser);
-
             return booking;
         } catch (err) {
             console.error("Algo ha salido mal en postBookings(useBookings):", err);

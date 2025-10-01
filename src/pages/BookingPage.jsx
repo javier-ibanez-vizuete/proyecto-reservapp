@@ -15,7 +15,6 @@ import { Button } from "../components/UI/Button";
 import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { saveUserInLocalStorage } from "../core/auth/auth.service";
 import {
     getBookingFormFromLocalStorage,
     saveBookingFormInLocalStorage,
@@ -77,7 +76,7 @@ export const BookingPage = () => {
     const { user, setUser } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
-    const toast = useToast();
+    const { toasts, showToast, dismissToast } = useToast();
 
     const onChangeDate = (selectedDate) => {
         setError("");
@@ -166,21 +165,15 @@ export const BookingPage = () => {
             const newFormValue = { ...form, userId: user?.id };
             const booked = await postBookings(newFormValue);
             if (booked) {
-                const userBookings = user?.bookings || [];
-                const updatedBookings = [booked, ...userBookings];
-                const newUser = { ...user, bookings: updatedBookings };
-                setUser(newUser);
-                saveUserInLocalStorage(newUser);
-
                 resetForm();
-                toast.showToast(getText("toastBookingSuccess"), "success");
+                showToast(getText("toastBookingSuccess"), "success");
             }
         } catch (err) {
             if (err?.status === 409) {
                 resetForm();
-                return toast.showToast(getText("toastBookingUnavailable"), "error");
+                return showToast(getText("toastBookingUnavailable"), "error");
             }
-            toast.showToast(getText("toastBookingError"), "error");
+            showToast(getText("toastBookingError"), "error");
         }
     };
 
@@ -330,7 +323,7 @@ export const BookingPage = () => {
                                     key={"defaultOption"}
                                     onClick={() => onChangeCustomer("")}
                                 >
-                                    {getText("bookingCustomersPlaceholder")}
+                                    <span className="text-sm">{getText("bookingCustomersPlaceholder")}</span>
                                 </DropdownItem>
                                 {Array.from({ length: 8 }, (_, index) => (
                                     <DropdownItem
@@ -401,7 +394,7 @@ export const BookingPage = () => {
                         resetear Form
                     </Button>
                 </div>
-                <ToastContainer toasts={toast.toasts} onClose={toast.removeToast} />
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </div>
     );
