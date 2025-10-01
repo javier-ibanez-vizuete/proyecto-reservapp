@@ -6,6 +6,7 @@ import { ImageContainer } from "./UI/ImageContainer";
 import logoReservappAvif from "../assets/logos/reservapp-logo/logo-reservapp.avif";
 import logoReservappPng from "../assets/logos/reservapp-logo/logo-reservapp.png";
 import logoReservappWebp from "../assets/logos/reservapp-logo/logo-reservapp.webp";
+import { CartsContext } from "../contexts/CartsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
@@ -18,6 +19,7 @@ import { LanguagesSelector } from "./LanguagesSelector";
 import { NavbarLinks } from "./NavbarLinks";
 import { LoadingButton } from "./Spinner/LoadingButton";
 import { ToastContainer } from "./ToastContainer";
+import { TrollyButton } from "./TrollyButton";
 import { Button } from "./UI/Button";
 import { ThemeButton } from "./UI/ThemeButton";
 
@@ -37,6 +39,8 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const { pathname } = useLocation();
 
     const { toasts, showToast, dismissToast } = useToast();
+
+    const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
 
@@ -129,6 +133,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                     onClick={handleProfile}
                                     fallback={user?.name}
                                 />
+                                {cart &&
+                                    cart?.items &&
+                                    cart.items?.length > 0 &&
+                                    !pathname.includes("/cart") && <TrollyButton />}
                                 {!isMobile && !isTablet && (
                                     <LoadingButton
                                         loading={isLoading}

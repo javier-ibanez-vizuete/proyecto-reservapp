@@ -219,7 +219,7 @@ body {
     }
 
     .navbar-user-profile {
-        @apply flex items-center transition-all duration-300 gap-3;
+        @apply flex items-center transition-all duration-300 gap-2;
     }
 
     .navbar-user-avatar {
@@ -386,5 +386,19 @@ body {
 
     .zooming {
         animation: zooming 4s linear infinite;
+    }
+
+    @keyframes glowPulse {
+        0%,
+        100% {
+            box-shadow: 0 0 2px rgba(255, 107, 53, 0.8), 0 0 4px rgba(255, 107, 53, 0.6),
+                0 0 6px rgba(255, 107, 53, 0.4);
+            border-color: rgb(255, 107, 53);
+        }
+        50% {
+            box-shadow: 0 0 3px rgba(255, 153, 51, 0.8), 0 0 20px rgba(255, 153, 51, 0.6),
+                0 0 9px rgba(255, 153, 51, 0.4);
+            border-color: rgb(255, 153, 51);
+        }
     }
 }
