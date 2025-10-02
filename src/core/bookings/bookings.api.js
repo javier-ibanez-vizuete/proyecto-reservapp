@@ -13,7 +13,6 @@ export const getBookingsByDateApi = async (date) => {
 export const postBookingApi = async (bookingData) => {
     try {
         const created = await api.post("/bookings", bookingData);
-        console.log("Respuesta", created);
         return created.data;
     } catch (err) {
         console.error("Error al Guardar Reserva");

@@ -19,8 +19,10 @@ export const HomePage = () => {
             location.state?.fromLogin === true || getDataFromSessionStorage("fromLogin") === true;
         const fromRegister =
             location.state?.fromRegister === true || getDataFromSessionStorage("fromRegister") === true;
+        const fromLogout =
+            location?.state?.logoutSuccess === true || getDataFromSessionStorage("logoutSuccess") === true;
 
-        if (!fromLogin && !fromRegister) return;
+        if (!fromLogin && !fromRegister && !fromLogout) return;
 
         if (fromLogin) {
             showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
@@ -36,6 +38,11 @@ export const HomePage = () => {
             );
             navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromRegister");
+        }
+        if (fromLogout) {
+            showToast(getText("toastLogoutSuccess"), "success");
+            navigate(location.pathname, { replace: true, state: {} });
+            removeFromSessionStorage("logoutSuccess");
         }
     }, [location.state]);
 

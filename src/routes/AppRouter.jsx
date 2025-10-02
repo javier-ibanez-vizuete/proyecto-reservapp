@@ -39,7 +39,7 @@ export const AppRouter = () => {
             <Route element={<PrivateRoute />}>
                 <Route path="/booking" element={<BookingPage />} />
                 <Route path="/cart" element={<CartPage />} />
-                <Route path="/user" element={<h1>RUTA PRIVADA</h1>} />
+                <Route path="/user" element={<h1>PAGINA USUARIO</h1>} />
                 <Route path="/dashboard/*" element={<DashboardPage />} />
                 <Route path="/orders" element={<OrderPage />} />
             </Route>

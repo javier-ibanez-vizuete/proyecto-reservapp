@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { DropdownMenu } from "./DropdownMenu";
 import { DropdownTrigger } from "./DropdownTrigger";
 
@@ -132,6 +133,7 @@ export const Dropdown = ({
     // Referencias para los elementos DOM
     const dropdownRef = useRef(null);
     const triggerRef = useRef(null);
+    const { pathname } = useLocation();
 
     /**
      * Effect para manejar eventos globales cuando el dropdown está abierto
@@ -177,6 +179,10 @@ export const Dropdown = ({
             window.removeEventListener("scroll", handleScroll);
         };
     }, [isOpen]);
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname]);
 
     /**
      * Alterna la visibilidad del dropdown

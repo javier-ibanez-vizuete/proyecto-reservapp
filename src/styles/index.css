@@ -7,9 +7,16 @@ body,
     width: 100%;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 #root {
     display: flex;
     flex-direction: column;
+
+    overflow-x: hidden;
 }
 
 .admin-layout {

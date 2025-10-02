@@ -1,31 +1,30 @@
 import { api } from "../http/axios";
 
-// export const getCartsApi = async () => {
-//     try {
-//         const response = await api.get("/carts");
-//         return response.data;
-//     } catch (err) {
-//         console.error("Error al Obtener Carrito", err);
-//         throw err;
-//     }
-// };
-
 export const getCartMeApi = async () => {
     try {
         const response = await api.get("/carts/me");
-        console.log("Que vale response", response);
         return response.data;
     } catch (err) {
         throw err.status;
     }
 };
 
-export const getCartsByIdApi = async (id) => {
+export const getCartByIdApi = async (id) => {
     try {
         const response = await api.get(`/carts/${id}`);
         return response.data;
     } catch (err) {
         console.error("Error al Obtener carrito por ID", err);
+        throw err;
+    }
+};
+
+export const getCartSummaryApi = async () => {
+    try {
+        const response = await api.get("/carts/me/summary");
+        return response.data;
+    } catch (err) {
+        console.error("Error Obteniendo Resumen del pedido", err);
         throw err;
     }
 };
@@ -46,6 +45,15 @@ export const postCartItemApi = async (cartId, newProduct) => {
         return updated.data;
     } catch (err) {
         console.error("Error al Añadir Producto", err);
+        throw err;
+    }
+};
+
+export const postCartCheckoutApi = async (cartId) => {
+    try {
+        const response = await api.post(`/carts/${cartId}/checkout`);
+        return response.data;
+    } catch (err) {
         throw err;
     }
 };
