@@ -17,6 +17,7 @@ import { useAuth } from "../core/auth/useAuth";
 import { RegisterVerificationFields } from "../helpers/FieldsVerificator";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 import { useToast } from "../hooks/useToast";
+import { AVATAR_DATA } from "../utils/AVATAR_DATA";
 
 const INITIAL_FORM_DATA = {
     name: "",
@@ -29,25 +30,6 @@ const INITIAL_FORM_DATA = {
         alt: "Avatar Desconocido",
     },
 };
-
-const AVATARS_OPTIONS = [
-    {
-        url: "/pictures/avatars/avatar-default.png",
-        alt: "Avatar Desconocido",
-    },
-    {
-        url: "/pictures/avatars/avatar-chef.png",
-        alt: "Avatar Chef",
-    },
-    {
-        url: "/pictures/avatars/avatar-spiderman.png",
-        alt: "Avatar Spiderman",
-    },
-    {
-        url: "/pictures/avatars/avatar-gaming.png",
-        alt: "Avatar Developer",
-    },
-];
 
 const REGISTER_FORM_FIELDS = [
     {
@@ -201,7 +183,7 @@ export const RegisterPage = () => {
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu className="w-full">
-                            {AVATARS_OPTIONS.map((avatar) => (
+                            {AVATAR_DATA.map((avatar) => (
                                 <DropdownItem
                                     key={avatar.url}
                                     className="flex items-center gap-3"
