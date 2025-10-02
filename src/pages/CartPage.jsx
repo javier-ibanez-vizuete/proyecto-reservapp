@@ -1,20 +1,34 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AccordionProductsCart } from "../components/AccordionProductsCart";
+import { CartSummaryCard } from "../components/CartSummaryCard";
 import { Container } from "../components/Container";
+import { ConfirmModal } from "../components/Modal/ConfirmModal";
 import { SkeletonCard } from "../components/Skeleton";
+import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
 import { CartsContext } from "../contexts/CartsContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useCart } from "../core/cart/useCart";
 import { useLoading } from "../hooks/useLoading";
+import { useToast } from "../hooks/useToast";
 
 export const CartPage = () => {
-    const { getCartSummary } = useCart();
+    const [showModal, setShowModal] = useState(false);
+    const { getCartSummary, deleteCartItem, postCartCheckout } = useCart();
 
     const { cart, cartSummary } = useContext(CartsContext);
+
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     const { isLoading, setIsLoading } = useLoading();
+    const loadingDelete = useLoading();
+    const isLoading2 = useLoading();
+
+    const { toasts, showToast, dismissToast } = useToast();
+    const Navigate = useNavigate();
 
     const handleGetSummaryCart = async () => {
         setIsLoading(true);
@@ -27,9 +41,47 @@ export const CartPage = () => {
     };
 
     useEffect(() => {
-        if (cart) handleGetSummaryCart();
-        console.log(cartSummary);
-    }, [cart]);
+        if (cart && !loadingDelete.isLoading) handleGetSummaryCart();
+    }, [cart.items]);
+
+    const handleOpenModal = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    const handleDeleteCart = async () => {
+        let productId;
+        loadingDelete.setIsLoading(true);
+        try {
+            if (!cart?.items?.length) return;
+
+            for (const product of cart.items) {
+                productId = product.productId;
+                await deleteCartItem(product.productId);
+            }
+            showToast(getText("toastCartRemovedSuccess"), "success", 1000);
+        } catch (err) {
+            console.error("No se ha podido eliminar el producto con id", productId);
+            showToast(getText("toastCartRemovedError"), "error", 1000);
+        } finally {
+            loadingDelete.setIsLoading(false);
+        }
+    };
+
+    const handleConfirmCart = async () => {
+        isLoading2.setIsLoading(true);
+        try {
+            const confirmedCart = await postCartCheckout();
+            if (!confirmedCart) return;
+            setShowModal(false);
+        } catch (err) {
+        } finally {
+            isLoading2.setIsLoading(false);
+        }
+    };
 
     if (isLoading)
         return (
@@ -52,9 +104,22 @@ export const CartPage = () => {
 
     return (
         <div className="flex flex-col flex-1 py-6">
-            <Container className="flex-1">
+            <Container className="flex-1 gap-3">
+                <ConfirmModal
+                    isOpen={showModal}
+                    onConfirm={handleConfirmCart}
+                    onClose={handleCloseModal}
+                    title={getText("confirmModalCartTitle")}
+                    message={getText("confirmModalCartMessage")}
+                    loadingText={getText("loadingConfirmButtonCartModal")}
+                    confirmText={getText("confirmButtonCartModal")}
+                    cancelText={getText("cancelButtonCartModal")}
+                    variant="primary"
+                    loading={isLoading2.isLoading}
+                    className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
+                />
                 <div>
-                    <h1>CARRITO</h1>
+                    <h1>{getText("h1CartPage")}</h1>
                 </div>
 
                 <div
@@ -66,42 +131,23 @@ export const CartPage = () => {
                 >
                     <AccordionProductsCart products={cart?.items} defaultOpen={null} />
 
-                    {cart?.items?.length && cartSummary && (
-                        <div
-                            className={`flex flex-col gap-4 ${
-                                theme === "light" ? "bg-background" : "bg-background-dark"
-                            } p-4 md:p-6 flex-1 rounded-lg`}
-                        >
-                            <div className="flex flex-1 flex-col gap-2">
-                                <div className="flex items-center gap-2">
-                                    <h6>Total Items</h6>
-                                    <small>{cartSummary.totalItems}</small>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <h6>Subtotal</h6>
-                                    <small>
-                                        {cartSummary.subtotal}
-                                        <span className="ml-2">{cartSummary.currency}</span>
-                                    </small>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <h6>taxRate</h6>
-                                    <small>{cartSummary.taxRate}</small>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <h6>Total</h6>
-                                    <small>
-                                        {cartSummary.total}{" "}
-                                        <span className="ml-2">{cartSummary.currency}</span>
-                                    </small>
-                                </div>
-                            </div>
-                            <div className="flex items-end">
-                                <Button className="min-w-[150px]">Pedir</Button>
-                            </div>
+                    {cart?.items?.length > 0 && cartSummary && (
+                        <CartSummaryCard
+                            cartSummary={cartSummary}
+                            handleOpenModal={handleOpenModal}
+                            handleDeleteCart={handleDeleteCart}
+                            isLoading={loadingDelete.isLoading}
+                        />
+                    )}
+                    {cart?.items?.length <= 0 && (
+                        <div className="flex flex-col md:mx-auto">
+                            <Button onClick={() => Navigate("/orders")}>
+                                {getText("goToOrdersCartButton")}
+                            </Button>
                         </div>
                     )}
                 </div>
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </div>
     );

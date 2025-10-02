@@ -40,7 +40,6 @@ export const HomePage = () => {
             removeFromSessionStorage("fromRegister");
         }
         if (fromLogout) {
-            console.log("Entrando Aqui");
             showToast(getText("toastLogoutSuccess"), "success");
             navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("logoutSuccess");

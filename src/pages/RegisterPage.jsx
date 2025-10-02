@@ -163,8 +163,6 @@ export const RegisterPage = () => {
             setIsLoading(true);
             const { repassword, ...restForm } = form;
 
-            console.log("Esto es el formulario acabado ", restForm);
-
             await register(restForm);
             setForm(INITIAL_FORM_DATA);
         } catch (err) {

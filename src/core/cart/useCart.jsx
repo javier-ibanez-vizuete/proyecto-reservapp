@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import { CartsContext } from "../../contexts/CartsContext";
 import { normalizeIdCart } from "../../helpers/normalizeIdCart";
+import { useOrders } from "../orders/useOrders";
 import {
     deleteCartItemApi,
     getCartByIdApi,
@@ -8,13 +10,16 @@ import {
     getCartSummaryApi,
     patchCartItemApi,
     postCartApi,
+    postCartCheckoutApi,
     postCartItemApi,
 } from "./cart.api";
 import { saveCartInLocalStorage, saveCartSummaryInLocalStorage } from "./cart.service";
 
 export const useCart = () => {
+    const { user } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const { cart, setCart, setCartSummary } = useContext(CartsContext);
+    const { postOrder } = useOrders();
 
     const getCartMe = async (userId) => {
         try {
@@ -30,6 +35,7 @@ export const useCart = () => {
             if (err === 404) {
                 const created = await postCart(userId);
                 if (!created) throw new Error("No se ha podido crear el carrito");
+                return;
             }
             throw new Error("Creacion de carrito no autorizada");
         }
@@ -70,7 +76,6 @@ export const useCart = () => {
         try {
             const cart = await postCartApi(userId);
             if (!cart) return console.error("NO SE HA POSTEADO EL CARRITO");
-            console.log("Esto es lo que estoy guardando", cart);
             setCart(cart);
             saveCartInLocalStorage(cart);
             return cart;
@@ -103,6 +108,21 @@ export const useCart = () => {
         }
     };
 
+    const postCartCheckout = async () => {
+        try {
+            const checkedCart = await postCartCheckoutApi(cart.id);
+            if (!checkedCart.ok) return console.error("Algo ha sucedido mal");
+            const newOrder = { ...checkedCart.cart };
+            const postedOrder = await postOrder(newOrder);
+            if (!postedOrder) throw new Error("Fallo al postear el pedido");
+
+            const newCart = await postCart(user.id);
+            if (newCart) return newCart;
+        } catch (err) {
+            throw err;
+        }
+    };
+
     const patchCartItem = async (productId, newProductData) => {
         setIsLoading(true);
         try {
@@ -121,7 +141,6 @@ export const useCart = () => {
 
     const deleteCartItem = async (productId) => {
         setIsLoading(true);
-        console.log("Eliminado el producto", productId);
 
         try {
             const response = await deleteCartItemApi(cart.id, productId);
@@ -145,6 +164,7 @@ export const useCart = () => {
         getCartSummary,
         postCart,
         postCartItem,
+        postCartCheckout,
         patchCartItem,
         deleteCartItem,
         isLoading,

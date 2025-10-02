@@ -65,7 +65,6 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     };
 
     const handleRegister = () => {
-        console.log("Register Clicked");
         Navigate("register");
         //AQUI PONER NAVIGATE TO PAGINA REGISTER
     };
@@ -73,10 +72,6 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const handleLinkClick = (linkName) => {
         handleCloseMobileMenu();
         return linkName;
-    };
-
-    const handleHomeClick = () => {
-        console.log("Navegacion a Home");
     };
 
     return (
@@ -87,7 +82,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         >
             <Container className="navbar-content">
                 <div className="navbar-inner">
-                    <Link className="navbar-logo" to={isLoading ? null : "/"} onClick={handleHomeClick}>
+                    <Link className="navbar-logo" to={isLoading ? null : "/"}>
                         <ImageContainer className="flex-1 logo-icon">
                             <Image imageData={LOGO_IMAGES} alt="Logo ReservApp" />
                         </ImageContainer>

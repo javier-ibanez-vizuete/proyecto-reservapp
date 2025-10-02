@@ -67,11 +67,11 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
         isLoading1.setIsLoading(true);
         try {
             const product = await getProductsById(id);
-            if (!product) return console.log("No hay producto");
+            if (!product) return console.error("No hay producto");
             const newProduct = { ...product, qty: qty };
             setProduct(newProduct);
         } catch (err) {
-            console.log("Esto trae error", err);
+            console.error("Esto trae error", err);
         } finally {
             isLoading1.setIsLoading(false);
         }
@@ -90,7 +90,6 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
         } finally {
             isLoading2.setIsLoading(false);
         }
-        console.log("Clickando en sumar producto");
     };
 
     const handleDecreaseProduct = async (event) => {
@@ -112,10 +111,8 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
     const handleRemoveProduct = async (event) => {
         event.stopPropagation();
         isLoading4.setIsLoading(true);
-        console.log("Eliminando el producto");
         try {
             const updatedCart = await deleteCartItem(id);
-            console.log("Producto eliminado", updatedCart);
 
             if (updatedCart) return showToast(getText("toastRemovedProductFromCart"), "success", 1000);
         } catch (err) {
@@ -160,18 +157,18 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
             <div className={containerClasses}>
                 <div className="flex flex-col gap-3 min-w-0 overflow-hidden">
                     <div className="flex items-center gap-1">
-                        <h6>Qty:</h6>
+                        <h6>{getText("accordionQtyText")}</h6>
                         <p>{product.qty}</p>
                     </div>
 
                     {!isMobile && (
                         <div className="flex items-center gap-1">
-                            <h6>Description:</h6>
+                            <h6>{getText("accordionDescriptionText")}</h6>
                             <p>{product.description}</p>
                         </div>
                     )}
                     <div className="flex items-center gap-1">
-                        <h6>Price:</h6>
+                        <h6>{getText("accordionPriceText")}</h6>
                         <p>{product.deliveryPrice}</p>
                     </div>
                     <div className="flex flex-col gap-1">
@@ -217,6 +214,8 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
 };
 
 export const AccordionProductsCart = ({ products = [], defaultOpen = 0 }) => {
+    const { getText } = useContext(LanguageContext);
+
     const renderAccordionProductsCartItem = (product, index) => {
         return (
             <AccordionProductsCartItem
@@ -228,7 +227,7 @@ export const AccordionProductsCart = ({ products = [], defaultOpen = 0 }) => {
         );
     };
 
-    if (!products?.length) return <h3 className="text-gray-400">No hay productos</h3>;
+    if (!products?.length) return <h3 className="text-gray-400">{getText("noProductsTitle")}</h3>;
 
     return <div className="flex flex-col gap-3">{products.map(renderAccordionProductsCartItem)}</div>;
 };

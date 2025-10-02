@@ -93,6 +93,25 @@ const TEXTS = {
         toastErrorQuantityProductUpdatedToCart: "Error: Quantity update failed",
         toastErrorRemovingProductFromCart: "Error: Could not remove item from cart",
 
+        // CART PAGE
+        h1CartPage: "YOUR CART",
+        confirmModalCartTitle: "Order Confirmation",
+        confirmModalCartMessage: "You're almost done! Confirm your order to continue",
+
+        confirmButtonCartModal: "Confirm",
+        loadingConfirmButtonCartModal: "Processing...",
+        cancelButtonCartModal: "Back",
+
+        accordionQtyText: "Qty:",
+        accordionDescriptionText: "Description:",
+        accordionPriceText: "Price:",
+
+        noProductsTitle: "Your Cart is empty",
+        goToOrdersCartButton: "Order Now",
+
+        toastCartRemovedSuccess: "Cart cleared ✔",
+        toastCartRemovedError: "Failed to remove all items",
+
         // Footer
         copyrightText: "ReservApp. All Rights reserved",
 

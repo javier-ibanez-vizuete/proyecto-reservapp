@@ -18,7 +18,7 @@ export const useProducts = () => {
                 setProducts(products);
                 saveProductsInLocalStorage(products);
             }
-            if (!products.length) console.log("NO HAY PRODUCTOS");
+            if (!products.length) return;
         } catch (err) {
             console.error("Algo ha salido mal en getProducts(useProducts)", err);
         } finally {
@@ -44,7 +44,7 @@ export const useProducts = () => {
                 setCategories(categories);
                 saveCategoriesInLocalStorage(categories);
             }
-            if (!categories.length) console.log("NO HAY CATEGORIAS");
+            if (!categories.length) return;
         } catch (err) {
             console.error("Algo ha salido mal en getCategories(useProducts)", err);
         } finally {
