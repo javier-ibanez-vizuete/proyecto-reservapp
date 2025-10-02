@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProductsContext } from "../../contexts/ProductsContext";
-import { getCategoriesApi, getProductsApi } from "./products.api";
+import { getCategoriesApi, getProductsApi, getProductsByIdApi } from "./products.api";
 import { saveCategoriesInLocalStorage, saveProductsInLocalStorage } from "./Products.service";
 
 export const useProducts = () => {
@@ -18,11 +18,21 @@ export const useProducts = () => {
                 setProducts(products);
                 saveProductsInLocalStorage(products);
             }
-            if (!products.length) console.log("NO HAY PRODUCTOS");
+            if (!products.length) return;
         } catch (err) {
             console.error("Algo ha salido mal en getProducts(useProducts)", err);
         } finally {
             setLoadingProducts(false);
+        }
+    };
+
+    const getProductsById = async (id) => {
+        try {
+            const product = await getProductsByIdApi(id);
+            if (product) return product;
+        } catch (err) {
+            console.error("No se ha encontrado el producto", err);
+            throw err;
         }
     };
 
@@ -34,7 +44,7 @@ export const useProducts = () => {
                 setCategories(categories);
                 saveCategoriesInLocalStorage(categories);
             }
-            if (!categories.length) console.log("NO HAY CATEGORIAS");
+            if (!categories.length) return;
         } catch (err) {
             console.error("Algo ha salido mal en getCategories(useProducts)", err);
         } finally {
@@ -42,5 +52,5 @@ export const useProducts = () => {
         }
     };
 
-    return { getProducts, getCategories, loadingProducts, loadingCategories };
+    return { getProducts, getProductsById, getCategories, loadingProducts, loadingCategories };
 };

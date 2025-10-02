@@ -5,6 +5,7 @@ import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { BookingsProvider } from "./contexts/BookingsContext.jsx";
 import { CartsProvider } from "./contexts/CartsContext.jsx";
 import { LanguageProvider } from "./contexts/LanguageContext.jsx";
+import { OrdersProvider } from "./contexts/OrdersContext.jsx";
 import { ProductsProvider } from "./contexts/ProductsContext.jsx";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 import "./styles/index.css";
@@ -16,9 +17,11 @@ createRoot(document.getElementById("root")).render(
                 <BookingsProvider>
                     <ProductsProvider>
                         <CartsProvider>
-                            <ThemeProvider>
-                                <App />
-                            </ThemeProvider>
+                            <OrdersProvider>
+                                <ThemeProvider>
+                                    <App />
+                                </ThemeProvider>
+                            </OrdersProvider>
                         </CartsProvider>
                     </ProductsProvider>
                 </BookingsProvider>

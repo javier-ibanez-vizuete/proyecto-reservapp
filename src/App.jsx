@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
-import { CartsContext } from "./contexts/CartsContext";
+import { OrdersContext } from "./contexts/OrdersContext";
 import { ProductsContext } from "./contexts/ProductsContext";
+import { useOrders } from "./core/orders/useOrders";
 import { useProducts } from "./core/products/useProducts";
 import { useImageFallback } from "./hooks/useImageFallback";
 import { AdminLayout } from "./layouts/AdminLayout";
@@ -11,13 +12,18 @@ import { AppRouter } from "./routes/AppRouter";
 
 export const App = () => {
     const { user } = useContext(AuthContext);
+
     const { products, categories } = useContext(ProductsContext);
     const { getProducts, getCategories } = useProducts();
-    const { carts, setUserCart } = useContext(CartsContext);
+
+    const { orders } = useContext(OrdersContext);
+    const { getOrders, getOrdersByUserId } = useOrders();
 
     useEffect(() => {
         if (!products?.length) getProducts();
         if (!categories?.length) getCategories();
+        if (!orders && user?.role === "admin") getOrders();
+        if (!orders && user?.role === "user") getOrdersByUserId();
     }, [user]);
 
     useImageFallback();

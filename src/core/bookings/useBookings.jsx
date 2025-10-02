@@ -20,7 +20,7 @@ export const useBookings = () => {
             }
             if (!bookings?.length) console.error("NO HAY RESERVAS");
         } catch (err) {
-            console.log("Algo ha salido mal en getBookingsByDate(useBookings):", err);
+            console.error("Algo ha salido mal en getBookingsByDate(useBookings):", err);
         } finally {
             setLoadingBookings(false);
         }
@@ -29,9 +29,8 @@ export const useBookings = () => {
     const postBookings = async (bookingData) => {
         setIsLoading(true);
         try {
-            console.log("postBookings");
             const booking = await postBookingApi(bookingData);
-            if (!booking) return console.log("NO SE HA POSTEADO LA RESERVA");
+            if (!booking) return;
             setBookings((prev) => {
                 if (prev.length) {
                     const newValue = [...prev, booking];

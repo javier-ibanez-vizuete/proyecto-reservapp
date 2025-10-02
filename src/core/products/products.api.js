@@ -19,3 +19,13 @@ export const getCategoriesApi = async () => {
         throw err;
     }
 };
+
+export const getProductsByIdApi = async (id) => {
+    try {
+        const response = await api.get(`/products/${id}`);
+        return response.data;
+    } catch (err) {
+        console.error("Error al Obtener Categorias");
+        throw err;
+    }
+};

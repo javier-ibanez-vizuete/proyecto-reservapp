@@ -1,6 +1,7 @@
 import classnames from "classnames";
 import React, { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { Button } from "../UI/Button";
 import { DropdownItem } from "./DropdownItem";
 
 export const DropdownMenu = ({
@@ -10,6 +11,7 @@ export const DropdownMenu = ({
     placement,
     direction = "flex-col",
     className = "",
+    gap = "gap-0.5",
     ...props
 }) => {
     const { theme } = useContext(ThemeContext);
@@ -26,9 +28,9 @@ export const DropdownMenu = ({
 
     return (
         <div className={menuClasses} role="menu" {...props}>
-            <div className={`flex ${direction} gap-0.5`}>
+            <div className={`flex ${direction} ${gap}`}>
                 {React.Children.map(children, (child) => {
-                    if (child.type === DropdownItem) {
+                    if (child.type === DropdownItem || child.type === Button) {
                         return React.cloneElement(child, { onClose });
                     }
                     return child;

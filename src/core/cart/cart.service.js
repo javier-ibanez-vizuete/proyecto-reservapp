@@ -11,3 +11,11 @@ export const getCartFromLocalStorage = () => {
 export const removeCartFromLocalStorage = () => {
     removeFromStorage("cart");
 };
+
+export const saveCartSummaryInLocalStorage = (cartSummary) => {
+    saveDataInStorage("cartSummary", cartSummary);
+};
+
+export const getCartSummaryFromLocalStorage = () => {
+    return getDataFromStorage("cartSummary");
+};

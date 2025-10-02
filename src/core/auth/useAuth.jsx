@@ -31,12 +31,11 @@ export const useAuth = () => {
                 setUser(authData.user);
                 await getCartMe(authData.user.id);
 
-                console.log("Estoy llegando a navigate");
                 navigate("/", { state: { fromLogin: true } });
                 saveDataInSessionStorage("fromLogin", true);
             }
         } catch (err) {
-            console.log("El login no ha podido Completarse 'useAuth-login()'", err);
+            console.error("El login no ha podido Completarse 'useAuth-login()'", err);
         }
 
         // Si la API nos dice error, mostramos un mensaje de error
@@ -45,8 +44,6 @@ export const useAuth = () => {
     const logout = async () => {
         // Lógica de cierre de sesión
         try {
-            console.log("Cerrando sesión");
-
             const logoutResponse = await logoutApi();
 
             if (logoutResponse?.logout) {
@@ -55,18 +52,17 @@ export const useAuth = () => {
                 setUser(false);
                 setCart(null);
                 removeCartFromLocalStorage();
-                navigate("/", { state: { logoutSucces: true } });
+                navigate("/", { state: { logoutSuccess: true } });
+                saveDataInSessionStorage("logoutSuccess", true);
             }
         } catch (err) {
-            console.log("El Logout no ha podido completarse", err);
+            console.error("El Logout no ha podido completarse", err);
         }
     };
 
     const register = async (user) => {
         // Enviar a la API de autenticación
         try {
-            console.log(`Registrando al usuario: ${user.email} y password: ${user.password}`);
-
             const authData = await registerApi(user);
 
             if (authData) {
@@ -77,23 +73,15 @@ export const useAuth = () => {
                 navigate("/", { state: { fromRegister: true } }, replace);
                 saveDataInSessionStorage("fromRegister", true);
             }
-        } catch (error) {
-            console.log("ERROR", error);
+        } catch (err) {
+            console.error("ERROR", err);
         }
-        // Si la API nos dice error, mostramos un mensaje de error
     };
 
     const getProfile = async () => {
-        // Lógica para obtener el usuario actual
-        console.log("Obteniendo usuario actual");
         try {
             const { user } = await getProfileApi();
-
-            if (user) {
-                console.log("La api dice que hay usuario", user);
-            } else {
-                console.log("NO hay usuario");
-            }
+            console.log("METER LOGICA PARA EL PERFIL");
         } catch (err) {}
     };
 
