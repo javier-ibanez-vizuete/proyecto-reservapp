@@ -13,7 +13,7 @@ import { LoadingButton } from "./Spinner/LoadingButton";
 import { ToastContainer } from "./ToastContainer";
 import { Button } from "./UI/Button";
 
-export const ProfileButton = () => {
+export const ProfileButton = ({ onClick }) => {
     const { user } = useContext(AuthContext);
     const { logout } = useAuth();
 
@@ -40,7 +40,7 @@ export const ProfileButton = () => {
     };
 
     return (
-        <Dropdown placement="bottom-end" className="flex">
+        <Dropdown placement="bottom-end" className="flex" onClick={onClick}>
             <DropdownTrigger
                 btnStyle={false}
                 hasIcon={false}

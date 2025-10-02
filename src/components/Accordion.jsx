@@ -79,7 +79,7 @@ const AccordionItem = ({ title, content, defaultOpen = false }) => {
  * ];
  * <Accordion items={items} defaultOpen={0} />
  */
-export const Accordion = ({ items = [], defaultOpen = 0 }) => {
+export const Accordion = ({ items = [], defaultOpen = 0, className = "" }) => {
     const renderAccordionItem = (item, index) => (
         <AccordionItem
             key={index}
@@ -89,5 +89,5 @@ export const Accordion = ({ items = [], defaultOpen = 0 }) => {
         />
     );
 
-    return <div className="flex flex-col gap-lg">{items.map(renderAccordionItem)}</div>;
+    return <div className={`flex flex-col gap-lg ${className}`}>{items.map(renderAccordionItem)}</div>;
 };

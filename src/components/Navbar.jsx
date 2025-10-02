@@ -101,7 +101,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                             <div className="navbar-user-profile">
                                 <ThemeButton />
                                 <LanguagesSelector placement="bottom-end" />
-                                <ProfileButton />
+                                <ProfileButton onClick={handleCloseMobileMenu} />
                                 {cart &&
                                     cart?.items &&
                                     cart.items?.length > 0 &&

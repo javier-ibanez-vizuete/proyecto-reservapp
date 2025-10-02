@@ -1,12 +1,20 @@
 import { useContext, useState } from "react";
 import { CartsContext } from "../../contexts/CartsContext";
 import { normalizeIdCart } from "../../helpers/normalizeIdCart";
-import { deleteCartItemApi, getCartMeApi, patchCartItemApi, postCartApi, postCartItemApi } from "./cart.api";
-import { saveCartInLocalStorage } from "./cart.service";
+import {
+    deleteCartItemApi,
+    getCartByIdApi,
+    getCartMeApi,
+    getCartSummaryApi,
+    patchCartItemApi,
+    postCartApi,
+    postCartItemApi,
+} from "./cart.api";
+import { saveCartInLocalStorage, saveCartSummaryInLocalStorage } from "./cart.service";
 
 export const useCart = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const { cart, setCart } = useContext(CartsContext);
+    const { cart, setCart, setCartSummary } = useContext(CartsContext);
 
     const getCartMe = async (userId) => {
         try {
@@ -41,6 +49,19 @@ export const useCart = () => {
             throw err;
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const getCartSummary = async () => {
+        try {
+            const cartSummary = await getCartSummaryApi();
+            if (cartSummary) {
+                setCartSummary(cartSummary);
+                saveCartSummaryInLocalStorage(cartSummary);
+            }
+        } catch (err) {
+            console.error("No hemos obtenido el resumen del carrito", err);
+            throw err;
         }
     };
 
@@ -100,6 +121,8 @@ export const useCart = () => {
 
     const deleteCartItem = async (productId) => {
         setIsLoading(true);
+        console.log("Eliminado el producto", productId);
+
         try {
             const response = await deleteCartItemApi(cart.id, productId);
             const updatedCart = response.cart;
@@ -119,6 +142,7 @@ export const useCart = () => {
     return {
         getCartMe,
         getCartsById,
+        getCartSummary,
         postCart,
         postCartItem,
         patchCartItem,
