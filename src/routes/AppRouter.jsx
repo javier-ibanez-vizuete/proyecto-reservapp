@@ -10,6 +10,7 @@ import { LoginPage } from "../pages/LoginPage";
 import { MenuPage } from "../pages/MenuPage";
 import { OrderPage } from "../pages/OrdersPage";
 import { RegisterPage } from "../pages/RegisterPage";
+import { UserPage } from "../pages/UserPage";
 
 export const AppRouter = () => {
     const { user } = useContext(AuthContext);
@@ -39,7 +40,7 @@ export const AppRouter = () => {
             <Route element={<PrivateRoute />}>
                 <Route path="/booking" element={<BookingPage />} />
                 <Route path="/cart" element={<CartPage />} />
-                <Route path="/user" element={<h1>PAGINA USUARIO</h1>} />
+                <Route path="/user" element={<UserPage />} />
                 <Route path="/dashboard/*" element={<DashboardPage />} />
                 <Route path="/orders" element={<OrderPage />} />
             </Route>

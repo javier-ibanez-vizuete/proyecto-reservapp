@@ -36,10 +36,8 @@ export const logoutApi = async () => {
 export const getProfileApi = async () => {
     try {
         const response = await api.get("/auth/me");
-
         return response.data;
     } catch (error) {
-        console.error("Error al obtener el usuario:", error);
         throw error;
     }
 };
@@ -57,6 +55,15 @@ export const patchUserBookingApi = async (newBooking) => {
         return updatedUser.data;
     } catch (err) {
         console.error("Error Adding Booking to User");
+        throw err;
+    }
+};
+
+export const patchUserApi = async (userId, newUserData) => {
+    try {
+        const response = await api.patch(`/users/${userId}`, newUserData);
+        return response.data;
+    } catch (err) {
         throw err;
     }
 };

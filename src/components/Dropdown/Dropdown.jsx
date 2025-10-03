@@ -225,6 +225,7 @@ export const Dropdown = ({
         "top-start": "bottom-full left-0 mb-2",
         "top-end": "bottom-full right-0 mb-2",
         "bottom-start": "top-full left-0 mt-2",
+        "bottom-center": "top-full right-1/2 translate-x-1/2",
         "bottom-end": "top-full right-0 mt-2",
         "left-start": "right-full top-0 mr-2",
         "left-end": "right-full bottom-0 mr-2",
@@ -237,7 +238,7 @@ export const Dropdown = ({
      */
     const dropdownClasses = classnames(
         // Clases base del dropdown
-        "relative inline-flex text-left",
+        `relative inline-flex text-left gap-8`,
 
         // Estado deshabilitado
         {

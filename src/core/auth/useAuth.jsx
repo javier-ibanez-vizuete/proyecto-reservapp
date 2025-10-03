@@ -3,9 +3,10 @@ import { replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { CartsContext } from "../../contexts/CartsContext";
 import { saveDataInSessionStorage } from "../../helpers/storage";
+import { useLoading } from "../../hooks/useLoading";
 import { removeCartFromLocalStorage } from "../cart/cart.service";
 import { useCart } from "../cart/useCart";
-import { getProfileApi, loginApi, logoutApi, registerApi } from "./auth.api";
+import { getProfileApi, loginApi, logoutApi, patchUserApi, registerApi } from "./auth.api";
 import {
     removeTokenFromLocalStorage,
     removeUserFromLocalStorage,
@@ -14,9 +15,10 @@ import {
 } from "./auth.service";
 
 export const useAuth = () => {
-    const { setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     const { setCart } = useContext(CartsContext);
     const { getCartMe } = useCart();
+    const loadingUserMe = useLoading();
 
     const navigate = useNavigate();
 
@@ -79,11 +81,33 @@ export const useAuth = () => {
     };
 
     const getProfile = async () => {
+        loadingUserMe.setIsLoading(true);
         try {
-            const { user } = await getProfileApi();
-            console.log("METER LOGICA PARA EL PERFIL");
-        } catch (err) {}
+            const fullUser = await getProfileApi();
+            if (!fullUser) throw new Error("No se ha obtenido user");
+            return fullUser;
+        } catch (err) {
+            throw err;
+        } finally {
+            loadingUserMe.setIsLoading(false);
+        }
     };
 
-    return { login, logout, register, getProfile };
+    const patchUser = async (newUserData) => {
+        try {
+            console.log("que vale user.id", user.id);
+
+            const updatedUser = await patchUserApi(user.id, newUserData);
+            console.log("Que vale UpdateUser", updatedUser);
+
+            if (!updatedUser) throw new Error("Error updating User");
+            setUser(updatedUser);
+            saveUserInLocalStorage(updatedUser);
+            return updatedUser;
+        } catch (err) {
+            throw err;
+        }
+    };
+
+    return { login, logout, register, getProfile, patchUser, loadingUserMe };
 };
