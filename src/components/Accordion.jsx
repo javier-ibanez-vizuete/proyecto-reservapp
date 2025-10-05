@@ -15,7 +15,7 @@ const AccordionItem = ({ title, content, defaultOpen = false }) => {
     const toggleOpen = () => setOpen((prev) => !prev);
 
     const sectionClasses = classNames(
-        "flex flex-col gap-md md:gap-md p-md md:p-lg pb-0!",
+        "flex flex-col gap-md md:gap-md p-4 md:p-6 pb-0!",
         "rounded-2xl bg-brand-bg-darker cursor-pointer"
     );
 

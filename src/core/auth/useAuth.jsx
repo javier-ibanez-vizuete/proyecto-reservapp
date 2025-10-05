@@ -103,6 +103,8 @@ export const useAuth = () => {
             if (!updatedUser) throw new Error("Error updating User");
             setUser(updatedUser);
             saveUserInLocalStorage(updatedUser);
+            navigate("/user", { state: { fromPatchUSer: true } }, replace);
+            saveDataInSessionStorage("fromPatchUser", true);
             return updatedUser;
         } catch (err) {
             throw err;

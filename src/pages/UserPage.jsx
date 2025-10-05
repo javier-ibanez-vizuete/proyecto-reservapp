@@ -11,6 +11,7 @@ import { Spinner } from "../components/Spinner/Spinner";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
 import { AuthContext } from "../contexts/AuthContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { normalizeId } from "../helpers/normalizeId";
@@ -27,17 +28,26 @@ export const UserPage = () => {
     const { user } = useContext(AuthContext);
     const { getProfile, patchUser, loadingUserMe } = useAuth();
 
+    const { getText } = useContext(LanguageContext);
     const { theme } = useContext(ThemeContext);
     const { isMobile, isTablet, isDesktop } = useDevice();
 
-    const USER_DATA = [{ title: "USER DATA", content: <UserDataSection userData={userProfile} /> }];
+    const USER_DATA = [
+        { title: getText("userDataSectionTitle"), content: <UserDataSection userData={userProfile} /> },
+    ];
 
     const BOOKINGS_DATA = [
-        { title: "BOOKINGS", content: <UserBookingsSection userBookingsData={userProfile?.bookings} /> },
+        {
+            title: getText("bookingsDataSectionTitle"),
+            content: <UserBookingsSection userBookingsData={userProfile?.bookings} />,
+        },
     ];
 
     const ORDERS_DATA = [
-        { title: "ORDERS", content: <UserOrdersSection userOrdersData={userProfile?.orders} /> },
+        {
+            title: getText("ordersDataSectionTitle"),
+            content: <UserOrdersSection userOrdersData={userProfile?.orders} />,
+        },
     ];
 
     const avatarClasses = classNames("rounded-full overflow-hidden", {
@@ -70,14 +80,9 @@ export const UserPage = () => {
         setAvatarLoaded(false);
         try {
             const newData = { avatar: { url: avatarData.url, alt: avatarData.alt } };
-            console.log("Que vale newData", newData);
             const updatedUser = await patchUser(newData);
-            console.log("updatedUser", updatedUser);
         } catch (err) {
             console.error("Algo ha salido mal", err);
-        } finally {
-            console.log("Que vale ahora userProfile", userProfile);
-            console.log("que vale user", user);
         }
     };
 
@@ -128,7 +133,7 @@ export const UserPage = () => {
                 </Modal>
 
                 <div>
-                    <h1>PROFILE</h1>
+                    <h1>{`${getText("h1ProfilePage")} ${userProfile.name}`}</h1>
                 </div>
 
                 <div className="flex flex-col items-center gap-1">
@@ -158,7 +163,7 @@ export const UserPage = () => {
                                     theme === "light" ? "btn-outline" : "btn-outline-dark"
                                 } px-3 py-1.5`}
                             >
-                                Cambiar Avatar
+                                {getText("buttonChangeAvatar")}
                             </DropdownTrigger>
                             <DropdownMenu direction="flex-row" className="mt-1 px-3" gap="gap-2">
                                 {AVATAR_DATA.map((avatar) => (
