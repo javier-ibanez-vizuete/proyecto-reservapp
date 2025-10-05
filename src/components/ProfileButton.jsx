@@ -41,11 +41,7 @@ export const ProfileButton = ({ onClick }) => {
 
     return (
         <Dropdown placement="bottom-end" className="flex" onClick={onClick}>
-            <DropdownTrigger
-                btnStyle={false}
-                hasIcon={false}
-                className={"transition-scale duration-500 ease-in-out lg:hover:scale-105"}
-            >
+            <DropdownTrigger btnStyle={false} hasIcon={false} className={""}>
                 <Avatar
                     avatar={user?.avatar}
                     alt="Avatar"

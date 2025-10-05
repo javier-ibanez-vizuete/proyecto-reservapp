@@ -24,8 +24,8 @@ export const ConfirmModal = ({
         success: "bg-success-600 hover:bg-success-700 text-white",
     };
 
-    const handleConfirm = () => {
-        onConfirm?.();
+    const handleConfirm = (event) => {
+        onConfirm?.(event);
     };
 
     return (
