@@ -175,7 +175,7 @@ export const UserPage = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-6 max-w-[600px] mx-auto">
                     <Accordion
                         items={USER_DATA}
                         defaultOpen={false}

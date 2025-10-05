@@ -46,7 +46,7 @@ const AccordionItem = ({ title, content, defaultOpen = false }) => {
     return (
         <section className={sectionClasses} onClick={toggleOpen}>
             <header className="flex w-full items-center justify-between gap-4">
-                <h5 className="font-sans">{title}</h5>
+                <h3>{title}</h3>
 
                 <button
                     type="button"

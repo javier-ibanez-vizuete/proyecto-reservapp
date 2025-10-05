@@ -1,4 +1,6 @@
 import classNames from "classnames";
+import { useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 /**
  * Button Component - Botón versátil del sistema de diseño Eleven Code
@@ -30,6 +32,8 @@ export const Button = ({
     className = "",
     ...props
 }) => {
+    const { theme } = useContext(ThemeContext);
+
     const handleClick = (event) => {
         if (!disabled) {
             onClick?.(event);
@@ -60,8 +64,9 @@ export const Button = ({
             shadowColor: "hover:shadow-secondary-color/25",
         },
         outline: {
-            classes:
-                "bg-transparent text-text-color border border-gray-700 hover:bg-gray-200/50 focus:ring-gray-500",
+            classes: `bg-transparent ${
+                theme === "light" ? "text-text-color border-gray-700" : "text-text-color-dark border-gray-500"
+            } border hover:bg-gray-200/50 focus:ring-gray-500`,
             hasHoverEffects: true,
             shadowColor: null,
         },
