@@ -5,7 +5,7 @@ export const ModalHeader = ({ children, className = "", ...props }) => {
 
     return (
         <div className={headerClasses} {...props}>
-            <h3 className="text-lg font-medium text-gray-900">{children}</h3>
+            <h3 className="text-lg font-medium">{children}</h3>
         </div>
     );
 };
