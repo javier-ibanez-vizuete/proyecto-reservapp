@@ -1,13 +1,23 @@
 import { useContext } from "react";
+import { replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { OrdersContext } from "../../contexts/OrdersContext";
+import { saveDataInSessionStorage } from "../../helpers/storage";
 import { useLoading } from "../../hooks/useLoading";
-import { getOrdersApi, getOrdersByUserIdApi, postOrderApi } from "./orders.api";
+import {
+    getOrdersApi,
+    getOrdersByUserIdApi,
+    patchOrderCancelledApi,
+    patchOrderDeliveredApi,
+    postOrderApi,
+} from "./orders.api";
 import { saveOrdersInLocalStorage } from "./orders.service";
 
 export const useOrders = () => {
     const { user } = useContext(AuthContext);
     const { setOrders } = useContext(OrdersContext);
+
+    const navigate = useNavigate();
 
     const loadingGetOrders = useLoading();
     const loadingPostOrders = useLoading();
@@ -58,5 +68,50 @@ export const useOrders = () => {
         loadingPostOrders.setIsLoading(false);
     };
 
-    return { getOrders, getOrdersByUserId, postOrder, loadingGetOrders, loadingPostOrders };
+    const patchOrderDelivered = async (orderId) => {
+        try {
+            const updatedOrder = await patchOrderDeliveredApi(orderId);
+            if (!updatedOrder) return;
+            setOrders((prevValue) => {
+                const restOrders = prevValue.filter((order) => order.id !== orderId);
+                const newOrders = [...restOrders];
+                saveOrdersInLocalStorage(newOrders);
+                return newOrders;
+            });
+            return updatedOrder;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    };
+
+    const patchOrderCancelled = async (orderId) => {
+        try {
+            const updatedOrder = await patchOrderCancelledApi(orderId);
+            if (!updatedOrder) return;
+            setOrders((prevValue) => {
+                const restOrders = prevValue.filter((order) => order.id !== orderId);
+                const newOrders = [...restOrders];
+                saveOrdersInLocalStorage(newOrders);
+                return newOrders;
+            });
+
+            navigate("/user", { state: { fromCancelOrder: true } }, replace);
+            saveDataInSessionStorage("fromCancelOrder", true);
+            return updatedOrder;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    };
+
+    return {
+        getOrders,
+        getOrdersByUserId,
+        postOrder,
+        patchOrderDelivered,
+        patchOrderCancelled,
+        loadingGetOrders,
+        loadingPostOrders,
+    };
 };

@@ -105,7 +105,7 @@ const renderSunCenter = () => {
     return (
         <span
             className={classNames(
-                "relative z-10 rounded-full transition-colors duration-300 outline-none",
+                "relative z-10 rounded-full transition-colors duration-700 outline-none",
                 "w-[8px] h-[8px] bg-amber-500"
             )}
         />
@@ -124,7 +124,7 @@ const renderSunRays = () => {
 
 const getSunRayClasses = (rayIndex) => {
     const baseClasses =
-        "absolute w-[1.5px] h-[2.5px] rounded-full bg-amber-400 transition-colors duration-300 outline-none";
+        "absolute w-[1.5px] h-[2.5px] rounded-full bg-amber-400 transition-colors duration-700 outline-none";
     const positionClasses = getSunRayPosition(rayIndex);
 
     return classNames(baseClasses, positionClasses);

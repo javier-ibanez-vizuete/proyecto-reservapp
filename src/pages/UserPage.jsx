@@ -13,6 +13,7 @@ import { ImageContainer } from "../components/UI/ImageContainer";
 import { AuthContext } from "../contexts/AuthContext";
 import { BookingsContext } from "../contexts/BookingsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
+import { OrdersContext } from "../contexts/OrdersContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { normalizeId } from "../helpers/normalizeId";
@@ -28,6 +29,7 @@ export const UserPage = () => {
     const [showAvatarModal, setShowAvatarModal] = useState(false);
     const { user } = useContext(AuthContext);
     const { bookings } = useContext(BookingsContext);
+    const { orders } = useContext(OrdersContext);
     const { getProfile, patchUser, loadingUserMe } = useAuth();
 
     const { getText } = useContext(LanguageContext);
@@ -94,7 +96,7 @@ export const UserPage = () => {
 
     useEffect(() => {
         handleGetMeUser();
-    }, [user, bookings]);
+    }, [user, bookings, orders]);
 
     if (loadingUserMe.isLoading)
         return (

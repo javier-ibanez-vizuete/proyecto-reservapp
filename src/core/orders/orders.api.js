@@ -47,7 +47,9 @@ export const patchOrderDeliveredApi = async (orderId) => {
 
 export const patchOrderCancelledApi = async (orderId) => {
     try {
-        const response = await api.patch(`/orders/${orderId}/status`, { status: "delivered" });
+        const response = await api.patch(`/orders/${orderId}/status`, {
+            status: "cancelled",
+        });
         return response.data;
     } catch (err) {
         throw err;
