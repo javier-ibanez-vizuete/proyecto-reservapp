@@ -1,58 +1,58 @@
 export const LoginVerificationFields = ({ email, password }) => {
-    if (!email) return "Email Field is Required";
-    if (!email.includes("@")) return "Email not Valid ('@' missing)";
-    if (!email.includes(".")) return "Email not Valid ('.' missing)";
-    if (email.length < 5) return "Email too Short (min. 5 Characters)";
-    if (email.length > 50) return "Email too Long (max. 50 Characters)";
+    if (!email) return "emailIsRequiredField";
+    if (!email.includes("@")) return "emailNotValidField1";
+    if (!email.includes(".")) return "emailNotValidField2";
+    if (email.length < 5) return "emailTooShortField";
+    if (email.length > 50) return "emailTooLongField";
 
-    if (!password) return "Password Field is Required";
-    if (password.length < 9) return "Password is too Short (min. 9 Characters)";
+    if (!password) return "passwordIsRequiredField";
+    if (password.length < 9) return "passwordTooShortField";
 };
 
 export const RegisterVerificationFields = ({ name, email, address, password, repassword }) => {
-    if (!name) return "Name Field is Required";
-    if (name.length < 4) return "Name too Short (min. 4 Characters)";
-    if (name.length > 30) return "Name too Long (max. 30 Characters)";
+    if (!name) return "nameIsRequiredField";
+    if (name.length < 4) return "nameIsTooShortField";
+    if (name.length > 30) return "nameIsTooLongField";
 
-    if (!email) return "Email Field is Required";
-    if (!email.includes("@")) return "Email not Valid ('@' missing)";
-    if (!email.includes(".")) return "Email not Valid ('.' missing)";
-    if (email.length < 5) return "Email too Short (min. 5 Characters)";
-    if (email.length > 50) return "Email too Long (max. 50 Characters)";
+    if (!email) return "emailIsRequiredField";
+    if (!email.includes("@")) return "emailNotValidField1";
+    if (!email.includes(".")) return "emailNotValidField2";
+    if (email.length < 5) return "emailTooShortField";
+    if (email.length > 50) return "emailTooLongField";
 
-    if (!address) return "Address Field is Required";
-    if (address.length < 6) return "Address too Short (min. 6 Characters)";
-    if (address.length > 60) return "Address too Long (max. 60 Characters)";
+    if (!address) return "addressIsRequiredField";
+    if (address.length < 6) return "addressTooShortField";
+    if (address.length > 60) return "addressTooLongField";
 
-    if (!password) return "Password Field is Required";
-    if (password.length < 9) return "Password too Short (min. 9 Characters)";
-    if (password.length > 30) return "Password too Long (max. 30 Characters)";
+    if (!password) return "passwordIsRequiredField";
+    if (password.length < 9) return "passwordTooShortField";
+    if (password.length > 30) return "passwordTooLongField";
 
-    if (!repassword) return "Confirm Password Field is Required";
-    if (password !== repassword) return "Passwords do not match";
+    if (!repassword) return "confirmPasswordIsRequiredField";
+    if (password !== repassword) return "doNotMatchPasswordsFields";
 
     return null;
 };
 
 export const BookingVerificationSubmit = ({ tableId, date, time, partySize }) => {
-    if (!date) return "You must to chose a Booking Date";
-    if (!time) return "Time Field is Required";
-    if (!partySize) return "Customer Field is Required";
-    if (!tableId) return "You must chose a Table";
+    if (!date) return "bookingDateIsRequiredField";
+    if (!time) return "bookingTimeIsRequiredField";
+    if (!partySize) return "bookingCustomersIsRequiredField";
+    if (!tableId) return "bookingTableIsRequiredField";
 };
 
 export const ProfileDataChangingVerification = ({ name, email, address }) => {
-    if (!name) return "Name field shouldn't be empty";
-    if (name.length < 4) return "Name too Short (min. 4 Characters)";
-    if (name.length > 30) return "Name too Long (max. 30 Characters)";
+    if (!name) return "profileNameNotEmptyField";
+    if (name.length < 4) return "nameIsTooShortField";
+    if (name.length > 30) return "nameIsTooLongField";
 
-    if (!email) return "Email Shouldn't be empty";
-    if (!email.includes("@")) return "Email not Valid ('@' missing)";
-    if (!email.includes(".")) return "Email not Valid ('.' missing)";
-    if (email.length < 5) return "Email too Short (min. 5 Characters)";
-    if (email.length > 50) return "Email too Long (max. 50 Characters)";
+    if (!email) return "profileEmailNotEmptyField";
+    if (!email.includes("@")) return "emailNotValidField1";
+    if (!email.includes(".")) return "emailNotValidField2";
+    if (email.length < 5) return "emailTooShortField";
+    if (email.length > 50) return "emailTooLongField";
 
-    if (!address) return "Address Shouldn't be empty";
-    if (address.length < 6) return "Address too Short (min. 6 Characters)";
-    if (address.length > 60) return "Address too Long (max. 60 Characters)";
+    if (!address) return "profileAddressNotEmptyField";
+    if (address.length < 6) return "addressTooShortField";
+    if (address.length > 60) return "addressTooLongField";
 };

@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 /**
  * AccordionItem - A collapsible section component with animated expansion
@@ -11,6 +12,7 @@ import { useState } from "react";
  */
 const AccordionItem = ({ title, content, defaultOpen = false }) => {
     const [open, setOpen] = useState(!!defaultOpen);
+    const { theme } = useContext(ThemeContext);
 
     const toggleOpen = () => setOpen((prev) => !prev);
 
@@ -23,10 +25,10 @@ const AccordionItem = ({ title, content, defaultOpen = false }) => {
         "relative block h-4 w-4",
         "before:absolute before:inset-x-0 before:top-1/2",
         "before:h-[2px] before:-translate-y-1/2",
-        "before:rounded before:bg-white",
+        `before:rounded ${theme === "light" ? "before:bg-text-color" : "before:bg-text-color-dark"}`,
         "after:absolute after:left-1/2 after:top-0",
         "after:h-4 after:w-[2px] after:-translate-x-1/2",
-        "after:rounded after:bg-white transition",
+        `after:rounded ${theme === "light" ? "after:bg-text-color" : "after:bg-text-color-dark"} transition`,
         {
             "after:opacity-0": open,
             "after:opacity-100": !open,

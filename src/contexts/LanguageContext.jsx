@@ -14,12 +14,32 @@ const TEXTS = {
         lodingTextLogoutUser: "Closing Profile...",
         logoutButton: "Logout",
         loadingTextLogoutButton: "Logging out...",
-        loginButton: "LogIn",
+        loginButton: "Log In",
         registerButton: "Register",
 
         toastErrorLogout: "Logout failed",
 
         profilePageButton: "Profile",
+
+        // LOGIN PAGE
+        h1LoginPage: "Log In",
+
+        toastLoginError: "Login failed",
+        loadingLoginButtonText: "Logging in...",
+
+        // REGISTER PAGE
+        h1RegisterPage: "Join Us",
+
+        registerButtonText: "Sign Up",
+        loadingRegisterButtonText: "Signing up...",
+
+        namePlaceholderFieldText: "Enter your name",
+        emailPlaceholderFieldText: "Enter your email",
+        addressPlaceholderFieldText: "Delivery address",
+        passwordPlaceholderFieldText: "Enter your password",
+        confirmPasswordPlaceholderFieldText: "Re-enter your password",
+
+        toastRegisterError: "Registration failed",
 
         // HOME PAGE
         toastWelcomeRegister: "Welcome",
@@ -122,8 +142,11 @@ const TEXTS = {
 
         //  ----- USER DATA
         nameFieldText: "Name",
+        fullNameFieldText: "Full Name",
         emailFieldText: "Email",
         addressFieldText: "Address",
+        passwordFieldText: "Password",
+        confirmPasswordFieldText: "Confirm Password",
         userDataModalTitle: "Confirm Data Change",
         userDataModalMessage: "Confirm change: ",
         userDataModalMessageNexo: "to",
@@ -131,8 +154,37 @@ const TEXTS = {
         loadingUserDataModalConfirmText: "Changing...",
         userDataModalCancelText: "Cancel",
 
+        userDataEditButtonText: "Edit",
+        userDataChangeButtonText: "Change",
+
         toastUserDataChangeSuccess: "Profile updated successfully ✔",
         toastUserDataChangeError: "Error updating profile",
+
+        //  ------ BOOKING DATA
+        bookingDataTitle1: "Your next bookings",
+        bookingDataTitle2: "Your past visits",
+        bookingDataNoPendingBookingsFound: "You have no pending bookings.",
+        bookingDataNoPastVisitsFound: "You have no past visits",
+
+        buttonBookingDataMakeABook: "Book now",
+        buttonBookingDataCloseModalInfo: "Close",
+        buttonBookingDataCancelReservation: "Cancel reservation",
+
+        bookingDataModalDeletingTitle: "Delete Reservation",
+        bookingDataModalDeletingbutton: "Delete",
+        loadingBookingDataModalDeletingbutton: "Deleting...",
+
+        bookingDataModalInfotitle: "Reservation details",
+        bookingDataModalInfoMessageText1: "Delete your Reservation for ",
+        bookingDataModalInfoMessageCustomer1: "Customer",
+        bookingDataModalInfoMessageCustomer2: "Customers",
+
+        bookingDataModalInfoDateText: "Reservation date:",
+        bookingDataModalInfoTimeText: "Reservation time:",
+        bookingDataModalInfoPartySizeText: "Party size:",
+        bookingDataModalInfoHighChairText: "High chair needed?",
+
+        toastBookingDataDeltingBookingError: "Error deleting reservation",
 
         // Footer
         copyrightText: "ReservApp. All Rights reserved",
@@ -140,6 +192,37 @@ const TEXTS = {
         // Mensajes Generales
         affirmationText: "Yes",
         NegationText: "No",
+
+        // FIELDS VERIFICATOR
+        emailIsRequiredField: "Email Field is Required",
+        emailNotValidField1: "Email not Valid ('@' missing)",
+        emailNotValidField2: "Email not Valid ('.' missing)",
+        emailTooShortField: "Email too Short (min. 5 Characters)",
+        emailTooLongField: "Email too Long (max. 50 Characters)",
+
+        passwordIsRequiredField: "Password Field is Required",
+        passwordTooShortField: "Password is too Short (min. 9 Characters)",
+        passwordTooLongField: "Password too Long (max. 30 Characters)",
+
+        confirmPasswordIsRequiredField: "Confirm Password Field is Required",
+        doNotMatchPasswordsFields: "Passwords do not match",
+
+        nameIsRequiredField: "Name Field is Required",
+        nameIsTooShortField: "Name too Short (min. 4 Characters)",
+        nameIsTooLongField: "Name too Long (max. 30 Characters)",
+
+        addressIsRequiredField: "Address Field is Required",
+        addressTooShortField: "Address too Short (min. 6 Characters)",
+        addressTooLongField: "Address too Long (max. 60 Characters)",
+
+        bookingDateIsRequiredField: "You must to chose a Booking Date",
+        bookingTimeIsRequiredField: "Time Field is Required",
+        bookingCustomersIsRequiredField: "Customer Field is Required",
+        bookingTableIsRequiredField: "You must chose a Table",
+
+        profileNameNotEmptyField: "Name field shouldn't be empty",
+        profileEmailNotEmptyField: "Email Shouldn't be empty",
+        profileAddressNotEmptyField: "Address Shouldn't be empty",
     },
 
     es: {

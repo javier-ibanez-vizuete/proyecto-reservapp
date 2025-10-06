@@ -11,6 +11,7 @@ import { Spinner } from "../components/Spinner/Spinner";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
 import { AuthContext } from "../contexts/AuthContext";
+import { BookingsContext } from "../contexts/BookingsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
@@ -26,6 +27,7 @@ export const UserPage = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false);
     const [showAvatarModal, setShowAvatarModal] = useState(false);
     const { user } = useContext(AuthContext);
+    const { bookings } = useContext(BookingsContext);
     const { getProfile, patchUser, loadingUserMe } = useAuth();
 
     const { getText } = useContext(LanguageContext);
@@ -92,7 +94,7 @@ export const UserPage = () => {
 
     useEffect(() => {
         handleGetMeUser();
-    }, [user]);
+    }, [user, bookings]);
 
     if (loadingUserMe.isLoading)
         return (
@@ -120,7 +122,7 @@ export const UserPage = () => {
 
     if (!userProfile) return null;
     return (
-        <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col py-4">
             <Container className="gap-4">
                 <Modal isOpen={showAvatarModal} onClose={handleShowAvatarModal} closeOnEscape={true}>
                     <ImageContainer>

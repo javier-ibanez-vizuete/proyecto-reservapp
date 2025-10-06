@@ -12,6 +12,7 @@ export const DropdownMenu = ({
     direction = "flex-col",
     className = "",
     gap = "gap-0.5",
+    classNameMenuContainer = "",
     ...props
 }) => {
     const { theme } = useContext(ThemeContext);
@@ -28,7 +29,7 @@ export const DropdownMenu = ({
 
     return (
         <div className={menuClasses} role="menu" {...props}>
-            <div className={`flex ${direction} ${gap}`}>
+            <div className={`flex ${direction} ${gap} ${classNameMenuContainer}`}>
                 {React.Children.map(children, (child) => {
                     if (child.type === DropdownItem || child.type === Button) {
                         return React.cloneElement(child, { onClose });

@@ -12,6 +12,7 @@ import { Button } from "../components/UI/Button";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
 import { AuthContext } from "../contexts/AuthContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { RegisterVerificationFields } from "../helpers/FieldsVerificator";
@@ -31,89 +32,6 @@ const INITIAL_FORM_DATA = {
     },
 };
 
-const REGISTER_FORM_FIELDS = [
-    {
-        containerClass: "flex flex-col gap-2",
-        input: {
-            id: "name",
-            name: "name",
-            type: "text",
-            placeholder: "Nombre Completo",
-            label: "Campo nombre completo",
-            required: true,
-            className: "flex-1",
-        },
-        label: {
-            text: "Nombre Completo",
-            className: "",
-        },
-    },
-    {
-        containerClass: "flex flex-col gap-2",
-        input: {
-            id: "email",
-            name: "email",
-            type: "email",
-            placeholder: "usuario@usuario.com",
-            label: "Campo Correo Electrónico",
-            required: true,
-            className: "flex-1",
-        },
-        label: {
-            text: "Email",
-            className: "",
-        },
-    },
-    {
-        containerClass: "flex flex-col gap-2",
-        input: {
-            id: "address",
-            name: "address",
-            type: "text",
-            placeholder: "Calle Inventada, 12 Ciudad",
-            label: "Campo Direccion Personal",
-            required: true,
-            className: "flex-1",
-        },
-        label: {
-            text: "Dirección",
-            className: "",
-        },
-    },
-    {
-        containerClass: "flex flex-col gap-2",
-        input: {
-            id: "password",
-            name: "password",
-            type: "password",
-            placeholder: "123456789",
-            label: "Campo contraseña",
-            required: true,
-            className: "rounded-r-none flex-1",
-        },
-        label: {
-            text: "Contraseña",
-            className: "",
-        },
-    },
-    {
-        containerClass: "flex flex-col gap-2",
-        input: {
-            id: "repassword",
-            name: "repassword",
-            type: "password",
-            placeholder: "123456789",
-            label: "Campo Confirmar Contraseña",
-            required: true,
-            className: "rounded-r-none flex-1",
-        },
-        label: {
-            text: "Confirmar Contraseña",
-            className: "",
-        },
-    },
-];
-
 export const RegisterPage = () => {
     const [form, setForm] = useState(INITIAL_FORM_DATA);
     const [error, setError] = useState("");
@@ -124,9 +42,93 @@ export const RegisterPage = () => {
 
     const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     const visibility1 = usePasswordVisibility();
     const visibility2 = usePasswordVisibility();
+
+    const REGISTER_FORM_FIELDS = [
+        {
+            containerClass: "flex flex-col gap-2",
+            input: {
+                id: "name",
+                name: "name",
+                type: "text",
+                placeholder: getText("namePlaceholderFieldText"),
+                label: "Campo nombre completo",
+                required: true,
+                className: "flex-1",
+            },
+            label: {
+                text: getText("fullNameFieldText"),
+                className: "",
+            },
+        },
+        {
+            containerClass: "flex flex-col gap-2",
+            input: {
+                id: "email",
+                name: "email",
+                type: "email",
+                placeholder: getText("emailPlaceholderFieldText"),
+                label: "Campo Correo Electrónico",
+                required: true,
+                className: "flex-1",
+            },
+            label: {
+                text: getText("emailFieldText"),
+                className: "",
+            },
+        },
+        {
+            containerClass: "flex flex-col gap-2",
+            input: {
+                id: "address",
+                name: "address",
+                type: "text",
+                placeholder: getText("addressPlaceholderFieldText"),
+                label: "Campo Direccion Personal",
+                required: true,
+                className: "flex-1",
+            },
+            label: {
+                text: getText("addressFieldText"),
+                className: "",
+            },
+        },
+        {
+            containerClass: "flex flex-col gap-2",
+            input: {
+                id: "password",
+                name: "password",
+                type: "password",
+                placeholder: getText("passwordPlaceholderFieldText"),
+                label: "Campo contraseña",
+                required: true,
+                className: "rounded-r-none flex-1",
+            },
+            label: {
+                text: getText("passwordFieldText"),
+                className: "",
+            },
+        },
+        {
+            containerClass: "flex flex-col gap-2",
+            input: {
+                id: "repassword",
+                name: "repassword",
+                type: "password",
+                placeholder: getText("confirmPasswordPlaceholderFieldText"),
+                label: "Campo Confirmar Contraseña",
+                required: true,
+                className: "rounded-r-none flex-1",
+            },
+            label: {
+                text: getText("confirmPasswordFieldText"),
+                className: "",
+            },
+        },
+    ];
 
     const onInputChange = (event) => {
         if (isLoading) return;
@@ -149,7 +151,7 @@ export const RegisterPage = () => {
             setForm(INITIAL_FORM_DATA);
         } catch (err) {
             setForm(INITIAL_FORM_DATA);
-            showToast("Algo ha salido mal", "error", 4000, "top-right");
+            showToast(getText("toastRegisterError"), "error", 1000);
         } finally {
             setIsLoading(false);
         }
@@ -170,7 +172,7 @@ export const RegisterPage = () => {
                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                 }`}
             >
-                <h1 className="">Registro</h1>
+                <h1>{getText("h1RegisterPage")}</h1>
 
                 <form className="flex flex-col gap-sm" onSubmit={onRegisterSubmit}>
                     <Dropdown placement="bottom-start">
@@ -231,15 +233,16 @@ export const RegisterPage = () => {
                             />
                         );
                     })}
-                    {error && <span className="italic font-semibold text-error-600">{error}</span>}
+                    {error && <span className="italic font-semibold text-error-600">{getText(error)}</span>}
 
                     <LoadingButton
                         type="submit"
                         loading={isLoading}
                         variant={"secondary"}
                         className="justify-center rounded-full py-sm px-md mt-2"
+                        loadingText={getText("loadingRegisterButtonText")}
                     >
-                        Registrarse
+                        {getText("registerButtonText")}
                     </LoadingButton>
                 </form>
             </div>

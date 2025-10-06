@@ -1,4 +1,7 @@
+import { useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import { LoadingButton } from "../Spinner/LoadingButton";
+import { Button } from "../UI/Button";
 import { Modal } from "./Modal";
 import { ModalBody } from "./ModalBody";
 import { ModalFooter } from "./ModalFooter";
@@ -13,15 +16,18 @@ export const ConfirmModal = ({
     confirmText = "Confirmar",
     loadingText = "Confirmando...",
     cancelText = "Cancelar",
-    variant = "danger",
+    variant = "accent",
     loading = false,
     className = "",
 }) => {
+    const { theme } = useContext(ThemeContext);
+
     const variantClasses = {
         danger: "bg-error-600 hover:bg-error-700 text-white",
         warning: "bg-brand-600 hover:bg-brand-700 text-white", // Usando brand del tema
-        primary: "bg-primary-color hover:bg-primary-color text-gray-900", // Usando primary del tema
+        primary: "bg-primary-color hover:bg-primary-color", // Usando primary del tema
         success: "bg-success-600 hover:bg-success-700 text-white",
+        accent: `${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`,
     };
 
     const handleConfirm = (event) => {
@@ -32,21 +38,18 @@ export const ConfirmModal = ({
         <Modal isOpen={isOpen} onClose={onClose} size="sm" className={className}>
             <ModalHeader>{title}</ModalHeader>
             <ModalBody>
-                <p className="text-gray-700">{message}</p>
+                <p>{message}</p>
             </ModalBody>
             <ModalFooter>
-                <button
-                    className="px-md py-sm text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 transition-colors"
-                    onClick={onClose}
-                    disabled={loading}
-                >
+                <Button variant="outline" onClick={onClose} disabled={loading}>
                     {cancelText}
-                </button>
+                </Button>
                 <LoadingButton
                     loading={loading}
                     variant={variant}
                     loadingText={loadingText}
                     onClick={handleConfirm}
+                    disabled={loading}
                 >
                     {confirmText}
                 </LoadingButton>
