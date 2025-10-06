@@ -90,7 +90,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
         [showModalInfo, modalInfo]
     );
 
-    const handleRemoveBooking = useCallback(
+    const handleDeleteBooking = useCallback(
         async (bookingId) => {
             setIsLoading(true);
             try {
@@ -146,7 +146,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                 className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
                 isOpen={showModalDelete}
                 onClose={handleShowModal}
-                onConfirm={() => handleRemoveBooking(bookingId)}
+                onConfirm={() => handleDeleteBooking(bookingId)}
                 title={getText("bookingDataModalDeletingTitle")}
                 message={messageModal}
                 confirmText={getText("bookingDataModalDeletingbutton")}
