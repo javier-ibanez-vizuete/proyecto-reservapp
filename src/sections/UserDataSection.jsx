@@ -32,6 +32,8 @@ const EditableField = ({
     handleHideInput,
     handleShowModal,
 }) => {
+    const { getText } = useContext(LanguageContext);
+
     const isEditing = inputShows[fieldName];
     const hasValue = form[fieldName]?.length > 0;
 
@@ -65,7 +67,7 @@ const EditableField = ({
                         size="sm"
                         onClick={(event) => handleShowInput(event, fieldName)}
                     >
-                        Editar
+                        {getText("userDataEditButtonText")}
                     </Button>
                 )}
                 {isEditing && (
@@ -75,7 +77,7 @@ const EditableField = ({
                             variant="outline"
                             onClick={(event) => handleHideInput(event, fieldName)}
                         >
-                            Cancelar
+                            {getText("userDataModalCancelText")}
                         </Button>
                         {hasValue && (
                             <Button
@@ -83,13 +85,13 @@ const EditableField = ({
                                 variant="primary"
                                 onClick={(event) => handleShowModal(event, fieldName)}
                             >
-                                Cambiar
+                                {getText("userDataChangeButtonText")}
                             </Button>
                         )}
                     </>
                 )}
             </div>
-            {error && isEditing && <p className="italic text-error-500/70">{error}</p>}
+            {error && isEditing && <p className="italic text-error-500/70">{getText(error)}</p>}
         </div>
     );
 };

@@ -1,12 +1,15 @@
 import { useContext, useState } from "react";
+import { replace, useNavigate } from "react-router-dom";
 import { BookingsContext } from "../../contexts/BookingsContext";
-import { getBookingsByDateApi, postBookingApi } from "./bookings.api";
+import { saveDataInSessionStorage } from "../../helpers/storage";
+import { deleteBookingByIdApi, getBookingsByDateApi, postBookingApi } from "./bookings.api";
 import { saveBookingsInLocalStorage } from "./bookings.service";
 
 export const useBookings = () => {
     const [loadingBookings, setLoadingBookings] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { setBookings } = useContext(BookingsContext);
+    const navigate = useNavigate();
 
     const defaultDate = new Date().toISOString().split("T")[0];
 
@@ -52,5 +55,27 @@ export const useBookings = () => {
         }
     };
 
-    return { getBookingsByDate, postBookings, loadingBookings, isLoading };
+    const deleteBookingById = async (bookingId) => {
+        try {
+            const removedBooking = await deleteBookingByIdApi(bookingId);
+            if (!removedBooking) return;
+            console.log("que vale removed booking", removedBooking);
+            setBookings((prevValue) => {
+                const filteredBookings = prevValue?.filter(
+                    (booking) => booking.id !== (removedBooking?.removed?.id || removedBooking?.removed?._id)
+                );
+                const newBookings = [...filteredBookings];
+                saveBookingsInLocalStorage(newBookings);
+                return newBookings;
+            });
+            navigate("/user", { state: { fromDeleteBooking: true } }, replace);
+            saveDataInSessionStorage("fromDeleteBooking", true);
+            return removedBooking?.removed;
+        } catch (err) {
+            console.error("Something went wrong deleting the booking", err);
+            throw err;
+        }
+    };
+
+    return { getBookingsByDate, postBookings, deleteBookingById, loadingBookings, isLoading };
 };

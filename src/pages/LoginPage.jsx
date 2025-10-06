@@ -5,6 +5,7 @@ import { FormInput } from "../components/FormInput";
 import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { ToastContainer } from "../components/ToastContainer";
 import { AuthContext } from "../contexts/AuthContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { LoginVerificationFields } from "../helpers/FieldsVerificator";
@@ -13,38 +14,6 @@ import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 import { useToast } from "../hooks/useToast";
 
 const INITIAL_FORM = { email: "", password: "" };
-
-const LOGIN_FIELDS = [
-    {
-        containerClass: "flex flex-col gap-2",
-        input: {
-            name: "email",
-            type: "email",
-            placeholder: "email@example.com",
-            label: "Email",
-            required: true,
-            className: "flex-1",
-        },
-        label: {
-            text: "Email",
-            className: "",
-        },
-    },
-    {
-        containerClass: "flex flex-col gap-2",
-        input: {
-            name: "password",
-            type: "password",
-            placeholder: "passwordexample1",
-            required: true,
-            className: "rounded-r-none flex-1",
-        },
-        label: {
-            text: "Contraseña",
-            className: "",
-        },
-    },
-];
 
 export const LoginPage = () => {
     const [form, setForm] = useState(INITIAL_FORM);
@@ -57,6 +26,39 @@ export const LoginPage = () => {
     const { theme } = useContext(ThemeContext);
     const { isMobile } = useDevice();
     const { visible, toggleVisible } = usePasswordVisibility();
+    const { getText } = useContext(LanguageContext);
+
+    const LOGIN_FIELDS = [
+        {
+            containerClass: "flex flex-col gap-2",
+            input: {
+                name: "email",
+                type: "email",
+                placeholder: getText("emailPlaceholderFieldText"),
+                label: "Email",
+                required: true,
+                className: "flex-1",
+            },
+            label: {
+                text: getText("emailFieldText"),
+                className: "",
+            },
+        },
+        {
+            containerClass: "flex flex-col gap-2",
+            input: {
+                name: "password",
+                type: "password",
+                placeholder: getText("passwordPlaceholderFieldText"),
+                required: true,
+                className: "rounded-r-none flex-1",
+            },
+            label: {
+                text: getText("passwordFieldText"),
+                className: "",
+            },
+        },
+    ];
 
     const onInputChange = (event) => {
         if (isLoading) return;
@@ -78,7 +80,7 @@ export const LoginPage = () => {
             setForm(INITIAL_FORM);
         } catch (error) {
             setForm(INITIAL_FORM);
-            showToast("Algo ha salido mal", "error", 4000, "top-right");
+            showToast(getText("toastLoginError"), "error", 1000);
         } finally {
             setIsloading(false);
         }
@@ -95,9 +97,7 @@ export const LoginPage = () => {
                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                 } rounded-2xl shadow-landing-lg xs:p-6 2xs:py-6 2xs:px-2 sm:p-8 md:p-10`}
             >
-                <h2 className={`${theme === "light" ? "text-text-color" : "text-text-color-dark"}`}>
-                    Iniciar sesión
-                </h2>
+                <h1>{getText("h1LoginPage")}</h1>
 
                 <form className="flex flex-col gap-5" onSubmit={onLoginSubmit}>
                     {LOGIN_FIELDS.map(({ label, input, containerClass }) => {
@@ -125,16 +125,16 @@ export const LoginPage = () => {
                             />
                         );
                     })}
-                    {error && <span className="italic font-semibold text-error-600">{error}</span>}
+                    {error && <span className="italic font-semibold text-error-600">{getText(error)}</span>}
 
                     <LoadingButton
                         loading={isLoading}
                         type="submit"
                         variant="primary"
                         size={isMobile ? "md" : "lg"}
-                        loadingText="Login in..."
+                        loadingText={getText("loadingLoginButtonText")}
                     >
-                        Iniciar Sesion
+                        {getText("loginButton")}
                     </LoadingButton>
                 </form>
             </div>
