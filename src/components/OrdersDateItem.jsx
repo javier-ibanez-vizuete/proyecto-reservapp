@@ -64,7 +64,7 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
 
     const handleShowDeleteModal = useCallback((orderData) => {
         if (orderData) {
-            const newMessage = `Do you want to cancel the order of ${orderData.total}€`;
+            const newMessage = `${getText("ordersDataInfoModalMessage")} ${orderData.total}€`;
             setMessageDeleteModal(newMessage);
             setOrderIdSelected(orderData?.id);
         }
@@ -76,9 +76,6 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
         (orderData) => {
             if (!orderData) setContentInfoModal(INITIAL_MODAL_INFO);
             if (orderData) {
-                console.log("Entrando por aqui");
-                console.log("que vale orderData", orderData);
-
                 const productsInfo = orderData?.items?.map((product) => ({
                     productName: product.name,
                     productPrice: product.price,
@@ -105,7 +102,7 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
         try {
             await patchOrderCancelled(orderIdSelected);
         } catch (err) {
-            showToast("Error al cancelar el pedido", "error", 1000);
+            showToast(getText("toastOrdersDataError"), "error", 1000);
         } finally {
             setIsLoading(false);
             setShowDeleteModal(false);
@@ -119,7 +116,7 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
             getDataFromSessionStorage("fromCancelOrder") === true;
 
         if (fromCancelOrder) {
-            showToast("Reserva Cancelada con Exito", "success", 1000);
+            showToast(getText("toastOrdersDataSuccess"), "success", 1000);
             navigate(location?.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromCancelOrder");
         }
@@ -129,7 +126,7 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
         return (
             <div className="flex flex-col gap-1">
                 <h3>{title}</h3>
-                <p className="opacity-80">No hay pedidos pendientes</p>
+                <p className="opacity-80">{getText("ordersDataNotPendingOrdersText")}</p>
             </div>
         );
 
@@ -137,20 +134,20 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
         return (
             <div className="flex flex-col gap-1">
                 <h3>{title}</h3>
-                <p className="opacity-80">No existen pedidos</p>
+                <p className="opacity-80">{getText("ordersDataNotOrders")}</p>
             </div>
         );
 
     return (
         <div onClick={(event) => event.stopPropagation()}>
             <ConfirmModal
-                title={"Cancel Order"}
+                title={getText("ordersDataCancelModalTitle")}
                 message={messageDeleteModal}
                 isOpen={showDeleteModal}
                 onClose={handleShowDeleteModal}
-                confirmText={"Cancel Order"}
-                cancelText={"Back"}
-                loadingText={"cancelling..."}
+                confirmText={getText("ordersDataCancelModalTitle")}
+                cancelText={getText("ordersDataCancelModalBackButton")}
+                loadingText={getText("loadingOrdersDataCancelButton")}
                 onConfirm={() => handleCancelOrder(orderIdSelected)}
                 loading={isLoading}
                 className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
@@ -163,37 +160,39 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
                 onClose={() => handleShowInfoModal()}
                 className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
             >
-                <ModalHeader>Order Details</ModalHeader>
+                <ModalHeader>{getText("ordersDataInfoModalTitle")}</ModalHeader>
                 <ModalBody className="flex flex-col gap-2">
                     <div className="flex items-center gap-1">
-                        <p>Fecha de Creacion:</p>
+                        <p>{getText("ordersDataInfoModalcreationText")}</p>
                         <p>{contentInfoModal.orderedAt}</p>
                     </div>
                     <ul className="flex flex-col">
                         {contentInfoModal?.products.map((product, index) => (
                             <li key={`${product?.name}-${index}`} className="flex flex-col gap-2">
                                 <div className="flex items-center gap-1">
-                                    <p>Producto:</p>
+                                    <p>{getText("ordersDataInfoModalProductText")}</p>
                                     <p>{product?.productName}</p>
                                 </div>
                                 <div className="flex items-center gap-1">
-                                    <p>Precio:</p>
+                                    <p>{getText("ordersDataInfoModalPriceText")}</p>
                                     <p>{product?.productPrice}€</p>
                                 </div>
                             </li>
                         ))}
                     </ul>
                     <div className="flex items-center gap-1">
-                        <p>Total de products:</p>
+                        <p>{getText("ordersDataInfoModalTotalProductsText")}</p>
                         <p>{contentInfoModal?.totalProducts}</p>
                     </div>
                     <div className="flex items-center gap-1">
-                        <p>Importe Total:</p>
+                        <p>{getText("ordersDataInfoModalTotalCountText")}</p>
                         <p>{contentInfoModal?.total}€</p>
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={() => handleShowInfoModal()}>Cerrar</Button>
+                    <Button onClick={() => handleShowInfoModal()}>
+                        {getText("buttonOrdersDataInfomodalCloseText")}
+                    </Button>
                 </ModalFooter>
             </Modal>
             <h3>{title}</h3>
@@ -218,7 +217,7 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
                                 variant="secondary"
                                 onClick={() => handleShowDeleteModal(order)}
                             >
-                                Cancelar
+                                {getText("buttonOrdersDataInfoCancelText")}
                             </Button>
                         )}
                     </li>

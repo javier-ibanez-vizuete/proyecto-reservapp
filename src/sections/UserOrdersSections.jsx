@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useContext, useEffect, useMemo } from "react";
 import { OrdersDateItem } from "../components/OrdersDateItem";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { useOrders } from "../core/orders/useOrders";
 import { normalizeId } from "../helpers/normalizeId";
 export const UserOrdersSection = ({ userOrdersData = [] }) => {
     const { patchOrderDelivered } = useOrders();
+    const { getText } = useContext(LanguageContext);
 
     const pendingOrders = useMemo(
         () => userOrdersData.filter((order) => order?.status === "pending"),
@@ -14,17 +16,14 @@ export const UserOrdersSection = ({ userOrdersData = [] }) => {
         try {
             for (const order of pendingOrders) {
                 const normalizedOrder = normalizeId(order);
-                console.log("orderId:", normalizedOrder.id);
 
                 const orderDate = new Date(normalizedOrder?.createdAt);
                 const now = new Date();
 
                 const differenceMs = now - orderDate;
-                console.log("diferencia en ms", differenceMs);
                 const oneHourInMs = 60 * 60 * 1000;
-                console.log(oneHourInMs);
+
                 if (differenceMs < oneHourInMs) return;
-                console.log("Paso el cortafuegos", normalizedOrder);
                 await patchOrderDelivered(normalizedOrder.id);
             }
         } catch (err) {
@@ -38,8 +37,16 @@ export const UserOrdersSection = ({ userOrdersData = [] }) => {
 
     return (
         <div className="flex flex-col gap-3">
-            <OrdersDateItem title="Pending Orders" content={pendingOrders} isPendingOrders={true} />
-            <OrdersDateItem title="Pedidos Realizados" content={userOrdersData} isPendingOrders={false} />
+            <OrdersDateItem
+                title={getText("ordersDataTitle1")}
+                content={pendingOrders}
+                isPendingOrders={true}
+            />
+            <OrdersDateItem
+                title={getText("ordersDataTitle2")}
+                content={userOrdersData}
+                isPendingOrders={false}
+            />
         </div>
     );
 };
