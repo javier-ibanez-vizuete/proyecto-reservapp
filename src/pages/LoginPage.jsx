@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { Container } from "../components/Container";
 import { FormInput } from "../components/FormInput";
 import { LoadingButton } from "../components/Spinner/LoadingButton";
@@ -9,6 +9,7 @@ import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { LoginVerificationFields } from "../helpers/FieldsVerificator";
+import { getDataFromSessionStorage } from "../helpers/storage";
 import { useDevice } from "../hooks/useDevice";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 import { useToast } from "../hooks/useToast";
@@ -27,6 +28,9 @@ export const LoginPage = () => {
     const { isMobile } = useDevice();
     const { visible, toggleVisible } = usePasswordVisibility();
     const { getText } = useContext(LanguageContext);
+
+    const location = useLocation();
+    const intentedFromStorage = getDataFromSessionStorage("intendedRoute");
 
     const LOGIN_FIELDS = [
         {
@@ -98,7 +102,6 @@ export const LoginPage = () => {
                 } rounded-2xl shadow-landing-lg xs:p-6 2xs:py-6 2xs:px-2 sm:p-8 md:p-10`}
             >
                 <h1>{getText("h1LoginPage")}</h1>
-
                 <form className="flex flex-col gap-5" onSubmit={onLoginSubmit}>
                     {LOGIN_FIELDS.map(({ label, input, containerClass }) => {
                         const inputText = visible && input.name === "password" ? "text" : input.type;
@@ -137,6 +140,12 @@ export const LoginPage = () => {
                         {getText("loginButton")}
                     </LoadingButton>
                 </form>
+                <div className="flex items-center gap-2">
+                    <small className="text-2xs">¿No tienes cuenta?</small>
+                    <Link to={"/register"} state={location.state || null} className="font-bold text-sm">
+                        Registrate
+                    </Link>
+                </div>
             </div>
 
             <ToastContainer toasts={toasts} onClose={dismissToast} />

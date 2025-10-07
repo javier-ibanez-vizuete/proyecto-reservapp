@@ -92,17 +92,20 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         <NavbarLinks handleLinkClick={handleLinkClick} />
                     </div>
                     <div className="navbar-actions">
-                        {isLoggedIn && (
-                            <div className="navbar-user-profile">
-                                <ThemeButton />
-                                <LanguagesSelector placement="bottom-end" />
-                                {pathname !== "/user" && <ProfileButton onClick={handleCloseMobileMenu} />}
-                                {cart &&
-                                    cart?.items &&
-                                    cart.items?.length > 0 &&
-                                    !pathname.includes("/cart") && <TrollyButton />}
-                            </div>
-                        )}
+                        <div className="navbar-user-profile">
+                            {isLoggedIn && (
+                                <>
+                                    {pathname !== "/user" && (
+                                        <ProfileButton onClick={handleCloseMobileMenu} />
+                                    )}
+                                    {cart &&
+                                        cart?.items &&
+                                        cart.items?.length > 0 &&
+                                        !pathname.includes("/cart") && <TrollyButton />}
+                                </>
+                            )}
+                        </div>
+
                         {!isLoggedIn && (
                             <div className="perfect-center gap-2">
                                 <Button onClick={handleLogin} size={isMobile ? "sm" : "md"} variant="primary">
@@ -117,12 +120,16 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                                 </Button>
                             </div>
                         )}
-                        <div className="flex lg:hidden justify-center h-10 w-10">
-                            <BurgerButton
-                                isMobileMenuOpen={isMobileMenuOpen}
-                                toggleMobileMenu={toggleMobileMenu}
-                            />
-                        </div>
+                        <ThemeButton />
+                        <LanguagesSelector placement="bottom-end" />
+                        {user && (
+                            <div className="flex lg:hidden justify-center h-10 w-10">
+                                <BurgerButton
+                                    isMobileMenuOpen={isMobileMenuOpen}
+                                    toggleMobileMenu={toggleMobileMenu}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
                 {isMobileMenuOpen && (

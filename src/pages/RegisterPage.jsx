@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
@@ -16,6 +16,7 @@ import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { RegisterVerificationFields } from "../helpers/FieldsVerificator";
+import { getDataFromSessionStorage } from "../helpers/storage";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 import { useToast } from "../hooks/useToast";
 import { AVATAR_DATA } from "../utils/AVATAR_DATA";
@@ -46,6 +47,12 @@ export const RegisterPage = () => {
 
     const visibility1 = usePasswordVisibility();
     const visibility2 = usePasswordVisibility();
+
+    const location = useLocation();
+    const intentedFromStorage = getDataFromSessionStorage("intendedRoute");
+
+    console.log("que vale intendedFromStorage en register", intentedFromStorage);
+    console.log("Que vale location state", location.state);
 
     const REGISTER_FORM_FIELDS = [
         {
