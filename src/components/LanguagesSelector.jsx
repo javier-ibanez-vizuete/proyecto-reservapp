@@ -37,7 +37,7 @@ export const LanguagesSelector = ({ placement = "bottom-start" }) => {
             <DropdownMenu>
                 {Object.entries(languages).map(([langCode, langValue]) => (
                     <DropdownItem key={langCode} onClick={() => handleLang(langCode)}>
-                        <div className="flex items-center gap-1">
+                        <div className="flex justify-between items-center">
                             <span>{langValue}</span>
                             <ImageContainer className="w-11">
                                 <Image imgSrc={LANGUAGES_FLAG[langCode]} />
