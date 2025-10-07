@@ -43,7 +43,7 @@ export const UserOrdersSection = ({ userOrdersData = [] }) => {
                 isPendingOrders={true}
             />
             <OrdersDateItem
-                title={getText("ordersDataTitle1")}
+                title={getText("ordersDataTitle2")}
                 content={userOrdersData}
                 isPendingOrders={false}
             />

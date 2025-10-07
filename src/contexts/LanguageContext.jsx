@@ -188,7 +188,7 @@ const TEXTS = {
 
         //  -----ORDERS DATA
         ordersDataTitle1: "Pending Orders",
-        ordersDataTitle1: "Completed Orders",
+        ordersDataTitle2: "Completed Orders",
 
         ordersDataInfoModalMessage: "Do you want to cancel the order of ",
 
