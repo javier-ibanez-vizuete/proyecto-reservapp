@@ -121,7 +121,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                             </div>
                         )}
                         <ThemeButton />
-                        <LanguagesSelector placement="bottom-end" />
+                        <LanguagesSelector placement="bottom-end" onClick={handleCloseMobileMenu} />
                         {user && (
                             <div className="flex lg:hidden justify-center h-10 w-10">
                                 <BurgerButton
