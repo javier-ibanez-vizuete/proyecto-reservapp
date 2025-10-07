@@ -17,7 +17,7 @@ export const NavbarLinks = ({ handleLinkClick }) => {
     return (
         <ul className="flex flex-col gap-2 lg:flex-row lg:gap-3 lg:flex-1 lg:justify-center">
             {NAV_LINKS.map((link) => {
-                if (!user && link.to !== "/menu") return null;
+                if (!user) return null;
                 return (
                     <li key={link.to} className="flex justify-center items-center">
                         <NavLink

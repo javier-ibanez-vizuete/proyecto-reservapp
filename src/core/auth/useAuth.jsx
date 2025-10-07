@@ -2,7 +2,11 @@ import { useContext } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { CartsContext } from "../../contexts/CartsContext";
-import { saveDataInSessionStorage } from "../../helpers/storage";
+import {
+    getDataFromSessionStorage,
+    removeFromSessionStorage,
+    saveDataInSessionStorage,
+} from "../../helpers/storage";
 import { useLoading } from "../../hooks/useLoading";
 import { removeCartFromLocalStorage } from "../cart/cart.service";
 import { useCart } from "../cart/useCart";
@@ -33,8 +37,16 @@ export const useAuth = () => {
                 setUser(authData.user);
                 await getCartMe(authData.user.id);
 
-                navigate("/", { state: { fromLogin: true } });
-                saveDataInSessionStorage("fromLogin", true);
+                const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
+
+                if (intendedFromStorage) {
+                    navigate(intendedFromStorage, { replace: true });
+                    removeFromSessionStorage("intendedRoute");
+                }
+                if (!intendedFromStorage) {
+                    navigate("/", { state: { fromLogin: true } });
+                    saveDataInSessionStorage("fromLogin", true);
+                }
             }
         } catch (err) {
             console.error("El login no ha podido Completarse 'useAuth-login()'", err);
@@ -72,8 +84,17 @@ export const useAuth = () => {
                 saveUserInLocalStorage(authData.user);
                 setUser(authData.user);
                 await getCartMe(authData.user.id);
-                navigate("/", { state: { fromRegister: true } }, replace);
-                saveDataInSessionStorage("fromRegister", true);
+
+                const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
+                if (intendedFromStorage) {
+                    navigate(intendedFromStorage, { replace: true });
+                    removeFromSessionStorage("intendedRoute");
+                }
+
+                if (!intendedFromStorage) {
+                    navigate("/", { state: { fromRegister: true } }, replace);
+                    saveDataInSessionStorage("fromRegister", true);
+                }
             }
         } catch (err) {
             console.error("ERROR", err);

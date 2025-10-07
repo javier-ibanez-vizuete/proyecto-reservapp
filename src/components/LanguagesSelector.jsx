@@ -15,7 +15,7 @@ import iconUkFlag from "../assets/icons/icons-flags/icon-uk-flag.webp";
 import { DropdownItem } from "./Dropdown/DropdownItem";
 import { DropdownMenu } from "./Dropdown/DropdownMenu";
 
-export const LanguagesSelector = ({ placement = "bottom-start" }) => {
+export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => {} }) => {
     const { lang, languages, handleLang } = useContext(LanguageContext);
 
     const LANGUAGES_FLAG = {
@@ -28,7 +28,7 @@ export const LanguagesSelector = ({ placement = "bottom-start" }) => {
     };
 
     return (
-        <Dropdown placement={placement} className={"rounded-full"}>
+        <Dropdown placement={placement} className={"rounded-full"} onClick={onClick}>
             <DropdownTrigger hasIcon={false} btnStyle={false}>
                 <ImageContainer className="w-11">
                     <Image imgSrc={LANGUAGES_FLAG[lang]} alt="Language Flag" />
@@ -37,7 +37,7 @@ export const LanguagesSelector = ({ placement = "bottom-start" }) => {
             <DropdownMenu>
                 {Object.entries(languages).map(([langCode, langValue]) => (
                     <DropdownItem key={langCode} onClick={() => handleLang(langCode)}>
-                        <div className="flex items-center gap-1">
+                        <div className="flex justify-between items-center">
                             <span>{langValue}</span>
                             <ImageContainer className="w-11">
                                 <Image imgSrc={LANGUAGES_FLAG[langCode]} />

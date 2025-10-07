@@ -60,7 +60,7 @@ export const UserPage = () => {
         "w-40": isDesktop,
     });
 
-    const miniAvatarClasses = classNames("rounded-full overflow-hidden", {
+    const miniAvatarClasses = classNames("rounded-full overflow-hidden cursor-pointer", {
         "w-16": isMobile,
         "w-22": isTablet,
         "w-24": isDesktop,
