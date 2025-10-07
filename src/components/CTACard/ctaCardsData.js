@@ -29,7 +29,7 @@ export const ctaCardsData = [
         imageSrc: "/pictures/cta-images/image-cta-bookings.webp",
         imageData: "",
         imageAlt: "",
-        redirectTo: "/bookings",
+        redirectTo: "/booking",
         imagePosition: "left",
     },
     {
