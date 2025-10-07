@@ -1,11 +1,9 @@
 import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Container } from "./Container";
 
 export const Footer = () => {
-    const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
 
