@@ -10,7 +10,7 @@ export const CTACard = ({
     buttonHref = "#",
     imageSrc = "",
     imageAlt = "",
-    imagePosition = "right",
+    imagePosition = "left",
     onButtonClick,
 }) => {
     const { theme } = useContext(ThemeContext);
@@ -21,9 +21,11 @@ export const CTACard = ({
         onButtonClick();
     };
 
+    console.log("que vale imageposition", imagePosition);
+
     const isImageLeft = imagePosition === "left";
-    const contentClass = isImageLeft ? "md:order-2" : "";
-    const imageClass = isImageLeft ? "md:order-1" : "";
+    const contentClass = isImageLeft ? "md:order-2" : "md:-order-2";
+    const imageClass = isImageLeft ? "md:-order-2" : "md:order-2";
 
     return (
         <article

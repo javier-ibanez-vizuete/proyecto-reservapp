@@ -3,8 +3,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Container } from "./Container";
-import { LanguagesSelector } from "./LanguagesSelector";
-import { ThemeButton } from "./UI/ThemeButton";
 
 export const Footer = () => {
     const { user } = useContext(AuthContext);
@@ -17,14 +15,7 @@ export const Footer = () => {
                 theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
             }`}
         >
-            <Container className="gap-2">
-                <div className="flex justify-end items-center">
-                    {!user && (
-                        <div className="perfect-center">
-                            <ThemeButton />
-                        </div>
-                    )}
-                </div>
+            <Container>
                 <div className="flex flex-1 justify-center items-center text-center text-sm text-gray-500">
                     <p>
                         © {new Date().getFullYear()} {getText("copyrightText")}

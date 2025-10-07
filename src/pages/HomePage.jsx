@@ -54,21 +54,15 @@ export const HomePage = () => {
     };
 
     return (
-        <Container className="flex flex-col flex-1 gap-2 py-4">
+        <Container className="flex flex-col flex-1 gap-2 lg:gap-4 py-4">
             <h1>{getText("h1HomePage")}</h1>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 lg:gap-8">
                 {ctaCardsData.map(
-                    ({
-                        id,
-                        title,
-                        description,
-                        buttonText,
-                        imageSrc,
-                        imageAlt,
-                        imagePosition,
-                        redirectTo,
-                    }) => {
+                    (
+                        { id, title, description, buttonText, imageSrc, imageAlt, imagePosition, redirectTo },
+                        index
+                    ) => {
                         if (redirectTo === "/login" && user) return;
 
                         return (
@@ -79,7 +73,7 @@ export const HomePage = () => {
                                 buttonText={buttonText}
                                 imageSrc={imageSrc}
                                 imageAlt={imageAlt}
-                                imagePosition={imagePosition}
+                                imagePosition={index % 2 === 0 ? "left" : "right"}
                                 onButtonClick={() => handleRedirectCTA(redirectTo)}
                                 buttonHref={redirectTo}
                             />
