@@ -132,6 +132,9 @@ const TEXTS = {
         toastCartRemovedSuccess: "Cart cleared ✔",
         toastCartRemovedError: "Failed to remove all items",
 
+        buttonCartPageOpenPaymentModal: "Order",
+        buttonCartPageDeleteCart: "Delete Cart",
+
         // PROFILE PAGE
         h1ProfilePage: "Welcome, ",
         userDataSectionTitle: "Personal Information",
@@ -168,23 +171,23 @@ const TEXTS = {
 
         buttonBookingDataMakeABook: "Book now",
         buttonBookingDataCloseModalInfo: "Close",
-        buttonBookingDataCancelReservation: "Cancel reservation",
+        buttonBookingDataCancelReservation: "Cancel Booking",
 
-        bookingDataModalDeletingTitle: "Delete Reservation",
+        bookingDataModalDeletingTitle: "Delete Booking",
         bookingDataModalDeletingbutton: "Delete",
         loadingBookingDataModalDeletingbutton: "Deleting...",
 
-        bookingDataModalInfotitle: "Reservation details",
-        bookingDataModalInfoMessageText1: "Delete your Reservation for ",
+        bookingDataModalInfotitle: "Booking details",
+        bookingDataModalInfoMessageText1: "Delete your Booking for ",
         bookingDataModalInfoMessageCustomer1: "Customer",
         bookingDataModalInfoMessageCustomer2: "Customers",
 
-        bookingDataModalInfoDateText: "Reservation date:",
-        bookingDataModalInfoTimeText: "Reservation time:",
+        bookingDataModalInfoDateText: "Booking date:",
+        bookingDataModalInfoTimeText: "Booking time:",
         bookingDataModalInfoPartySizeText: "Party size:",
         bookingDataModalInfoHighChairText: "High chair needed?",
 
-        toastBookingDataDeltingBookingError: "Error deleting reservation",
+        toastBookingDataDeltingBookingError: "Error deleting Booking",
 
         //  -----ORDERS DATA
         ordersDataTitle1: "Pending Orders",

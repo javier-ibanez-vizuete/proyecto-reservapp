@@ -31,7 +31,7 @@ export const FormInput = ({ containerClass, input, label, onClick, ...props }) =
                         disabled={!input?.value}
                     >
                         <ImageContainer className="w-xl">
-                            <Image imgSrc={props.isPasswordVisible ? iconEye : iconClosedEye} />
+                            <Image src={props.isPasswordVisible ? iconEye : iconClosedEye} />
                         </ImageContainer>
                     </button>
                 )}
@@ -43,7 +43,7 @@ export const FormInput = ({ containerClass, input, label, onClick, ...props }) =
                         disabled={!input?.value}
                     >
                         <ImageContainer className="w-xl">
-                            <Image imgSrc={props.isPasswordVisible ? iconEye : iconClosedEye} />
+                            <Image src={props.isPasswordVisible ? iconEye : iconClosedEye} />
                         </ImageContainer>
                     </button>
                 )}

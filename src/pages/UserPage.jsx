@@ -129,7 +129,7 @@ export const UserPage = () => {
                 <Modal isOpen={showAvatarModal} onClose={handleShowAvatarModal} closeOnEscape={true}>
                     <ImageContainer>
                         <Image
-                            imgSrc={userProfile?.avatar?.url}
+                            src={userProfile?.avatar?.url}
                             alt={userProfile?.avatar?.alt}
                             className="rounded-lg"
                         />
@@ -145,7 +145,7 @@ export const UserPage = () => {
                         <ImageContainer className={avatarClasses}>
                             <Image
                                 onLoad={() => setAvatarLoaded(true)}
-                                imgSrc={userProfile?.avatar?.url}
+                                src={userProfile?.avatar?.url}
                                 alt={userProfile?.avatar?.alt}
                             />
                         </ImageContainer>
@@ -176,7 +176,7 @@ export const UserPage = () => {
                                         className={miniAvatarClasses}
                                         onClick={() => handleChangeAvatar(avatar)}
                                     >
-                                        <Image imgSrc={avatar.url} alt={avatar.alt} />
+                                        <Image src={avatar.url} alt={avatar.alt} />
                                     </ImageContainer>
                                 ))}
                             </DropdownMenu>

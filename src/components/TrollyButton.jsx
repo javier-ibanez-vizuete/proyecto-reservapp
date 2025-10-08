@@ -90,7 +90,7 @@ export const TrollyButton = ({ size = "md", variant = "circle", className = "" }
                 <ImageContainer>
                     <Image
                         className="object-fill"
-                        imgSrc={theme === "light" ? iconTrolly : iconTrollyWhite}
+                        src={theme === "light" ? iconTrolly : iconTrollyWhite}
                         alt="Icon of Trolly"
                     />
                 </ImageContainer>

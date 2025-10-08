@@ -185,7 +185,7 @@ export const RegisterPage = () => {
                     <Dropdown placement="bottom-start">
                         <DropdownTrigger className={"flex justify-start gap-2 p-0 flex-1"}>
                             <ImageContainer className="w-14">
-                                <Image className="rounded-xl" imgSrc={form?.avatar?.url} />
+                                <Image className="rounded-xl" src={form?.avatar?.url} />
                             </ImageContainer>
                             <Button variant={"ghost"} className="flex-1">
                                 {form?.avatar?.alt ? form.avatar.alt : "Avatar"}
@@ -199,7 +199,7 @@ export const RegisterPage = () => {
                                     onClick={() => handleAvatarClick(avatar)}
                                 >
                                     <ImageContainer className="w-20">
-                                        <Image imgSrc={avatar.url} />
+                                        <Image src={avatar.url} />
                                     </ImageContainer>
                                     <span>{avatar.alt}</span>
                                 </DropdownItem>

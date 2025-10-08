@@ -110,7 +110,7 @@ export const BackToTopButton = ({
             >
                 {children || (
                     <ImageContainer className="w-8">
-                        <Image imgSrc={iconArrow} />
+                        <Image src={iconArrow} />
                     </ImageContainer>
                 )}
             </button>

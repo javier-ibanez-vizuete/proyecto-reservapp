@@ -205,22 +205,22 @@ export const OrderPage = () => {
                         >
                             {showInput && theme === "light" && (
                                 <ImageContainer className="w-4">
-                                    <Image imgSrc={iconClose} />
+                                    <Image src={iconClose} />
                                 </ImageContainer>
                             )}
                             {showInput && theme !== "light" && (
                                 <ImageContainer className="w-4">
-                                    <Image imgSrc={iconCloseWhite} />
+                                    <Image src={iconCloseWhite} />
                                 </ImageContainer>
                             )}
                             {!showInput && theme === "light" && (
                                 <ImageContainer className="w-4">
-                                    <Image imgSrc={iconSearch} />
+                                    <Image src={iconSearch} />
                                 </ImageContainer>
                             )}
                             {!showInput && theme !== "light" && (
                                 <ImageContainer className="w-4">
-                                    <Image imgSrc={iconSearchWhite} />
+                                    <Image src={iconSearchWhite} />
                                 </ImageContainer>
                             )}
                         </div>

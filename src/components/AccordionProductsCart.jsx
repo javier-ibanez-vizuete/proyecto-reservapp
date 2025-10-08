@@ -33,7 +33,7 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
 
-    const handleToggleOpen = (event) => {
+    const handleToggleOpen = () => {
         setIsOpen((prev) => !prev);
     };
 
@@ -148,7 +148,7 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
                 <div className={iconClasses}>
                     <ImageContainer className={isMobileXs ? "w-2" : "w-4"}>
                         <Image
-                            imgSrc={theme === "light" ? iconArrowDownBlack : iconArrowDownWhite}
+                            src={theme === "light" ? iconArrowDownBlack : iconArrowDownWhite}
                             alt="Icon Arrow"
                         />
                     </ImageContainer>

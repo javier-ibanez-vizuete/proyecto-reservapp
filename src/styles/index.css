@@ -357,50 +357,6 @@ body {
         animation: tb-tilt 5s linear infinite;
     }
 
-    @keyframes spin-and-zoom {
-        0% {
-            transform: rotate(0deg) scale(1);
-        }
-        25% {
-            transform: rotate(90deg) scale(1.1);
-        }
-        50% {
-            transform: rotate(180deg) scale(1.2);
-        }
-        75% {
-            transform: rotate(270deg) scale(1.1);
-        }
-        100% {
-            transform: rotate(360deg) scale(1);
-        }
-    }
-
-    .spin-and-zoom {
-        animation: spin-and-zoom 4s linear infinite;
-    }
-
-    @keyframes zooming {
-        0% {
-            transform: scale(1);
-        }
-        25% {
-            transform: scale(1.1);
-        }
-        50% {
-            transform: scale(1.2);
-        }
-        75% {
-            transform: scale(1.1);
-        }
-        100% {
-            transform: scale(1);
-        }
-    }
-
-    .zooming {
-        animation: zooming 4s linear infinite;
-    }
-
     @keyframes glowPulse {
         0%,
         100% {

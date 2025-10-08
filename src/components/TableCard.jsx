@@ -21,7 +21,7 @@ export const TableCard = ({ tableData, onClick, selectedTable }) => {
         >
             <div className="perfect-center">
                 <ImageContainer className={"w-20"}>
-                    <Image imgSrc={tableData.icon} />
+                    <Image src={tableData.icon} />
                 </ImageContainer>
             </div>
             <div className="flex flex-1 flex-col gap-2">
@@ -38,7 +38,7 @@ export const TableCard = ({ tableData, onClick, selectedTable }) => {
                         <div className="flex items-center gap-4">
                             <small>{getText("bookingTableWifiText")}</small>
                             <ImageContainer className="w-8">
-                                <Image imgSrc={iconWifi} />
+                                <Image src={iconWifi} />
                             </ImageContainer>
                         </div>
                     )}

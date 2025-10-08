@@ -31,6 +31,8 @@ export const useAuth = () => {
         try {
             const authData = await loginApi({ email, password });
 
+            console.log("Que vale AuthData", authData);
+
             if (authData) {
                 saveTokenInLocalStorage(authData.token);
                 saveUserInLocalStorage(authData.user);

@@ -39,6 +39,8 @@ export const ProfileButton = ({ onClick }) => {
         }
     };
 
+    console.log("userisActive", user?.isActive);
+
     return (
         <Dropdown placement="bottom-end" className="flex" onClick={onClick}>
             <DropdownTrigger btnStyle={false} hasIcon={false} className={""}>

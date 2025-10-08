@@ -31,7 +31,7 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
         <Dropdown placement={placement} className={"rounded-full"} onClick={onClick}>
             <DropdownTrigger hasIcon={false} btnStyle={false}>
                 <ImageContainer className="w-11">
-                    <Image imgSrc={LANGUAGES_FLAG[lang]} alt="Language Flag" />
+                    <Image src={LANGUAGES_FLAG[lang]} alt="Language Flag" />
                 </ImageContainer>
             </DropdownTrigger>
             <DropdownMenu>
@@ -40,7 +40,7 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
                         <div className="flex justify-between items-center">
                             <span>{langValue}</span>
                             <ImageContainer className="w-11">
-                                <Image imgSrc={LANGUAGES_FLAG[langCode]} />
+                                <Image src={LANGUAGES_FLAG[langCode]} />
                             </ImageContainer>
                         </div>
                     </DropdownItem>

@@ -74,12 +74,11 @@ export const CartPage = () => {
     const handleConfirmCart = async () => {
         isLoading2.setIsLoading(true);
         try {
-            const confirmedCart = await postCartCheckout();
-            if (!confirmedCart) return;
-            setShowModal(false);
+            await postCartCheckout();
         } catch (err) {
         } finally {
             isLoading2.setIsLoading(false);
+            setShowModal(false);
         }
     };
 

@@ -20,16 +20,6 @@ export const AppRouter = () => {
 
     return (
         <Routes>
-            {/* <Route
-                path="/"
-                element={
-                    user && user?.role === "admin" ? (
-                        <Navigate to={"/dashboard"} replace />
-                    ) : (
-                        <Navigate to={"/"} />
-                    )
-                }
-            /> */}
             <Route path="/" element={<HomePage />} />
 
             <Route path="/menu" element={<MenuPage />} />
