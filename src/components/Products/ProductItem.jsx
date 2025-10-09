@@ -13,7 +13,7 @@ export const ProductItem = ({ productData = {}, className = "" }) => {
             } ${className}`}
         >
             {productData?.image && (
-                <ImageContainer>
+                <ImageContainer size="w-full">
                     <Image className="rounded-2xl" imageData={productData?.image} />
                 </ImageContainer>
             )}

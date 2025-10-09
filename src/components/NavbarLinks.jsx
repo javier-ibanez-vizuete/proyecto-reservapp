@@ -19,7 +19,7 @@ export const NavbarLinks = ({ handleLinkClick }) => {
         { to: "/cart", label: getText("cartPageNavLabel") },
     ];
 
-    const linksBaseClasses = `flex-1 relative transition-all  duration-500 ease-in-out active:scale-95 font-medium shadow-lg`;
+    const linksBaseClasses = `flex-1 relative transition-all  duration-500 ease-in-out active:scale-95 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2`;
 
     const linksConfig = useMemo(
         () =>

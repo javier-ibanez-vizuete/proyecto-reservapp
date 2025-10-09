@@ -1,4 +1,4 @@
-export const ImageContainer = ({ children, className = "", size = "w-6", loading = "lazy", onClick }) => {
+export const ImageContainer = ({ children, className = "", size, loading = "lazy", onClick }) => {
     return (
         <picture
             onClick={onClick}

@@ -5,15 +5,9 @@ import { DropdownTrigger } from "./Dropdown/DropdownTrigger";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
 
-import iconChinesseFlag from "../assets/icons/icons-flags/icon-chinesse-flag.webp";
-import iconDeutchFlag from "../assets/icons/icons-flags/icon-deutch-flag.webp";
-import iconFranceFlag from "../assets/icons/icons-flags/icon-france-flag.webp";
-import iconItalyFlag from "../assets/icons/icons-flags/icon-italy-flag.webp";
-import iconSpanishFlag from "../assets/icons/icons-flags/icon-spanish-flag.webp";
-import iconUkFlag from "../assets/icons/icons-flags/icon-uk-flag.webp";
-
 import classNames from "classnames";
 import { useDevice } from "../hooks/useDevice";
+import { FLAGS_URL_DATA } from "../utils/FLAGS_URL_DATA";
 import { DropdownItem } from "./Dropdown/DropdownItem";
 import { DropdownMenu } from "./Dropdown/DropdownMenu";
 
@@ -29,15 +23,6 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
         "w-10": isDesktop,
     });
 
-    const LANGUAGES_FLAG = {
-        en: iconUkFlag,
-        es: iconSpanishFlag,
-        fr: iconFranceFlag,
-        it: iconItalyFlag,
-        de: iconDeutchFlag,
-        zh: iconChinesseFlag,
-    };
-
     return (
         <Dropdown placement={placement} className={"rounded-full"} onClick={onClick}>
             <DropdownTrigger
@@ -46,7 +31,7 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
                 className={"active:scale-95 lg:hover:-translate-y-[2px]"}
             >
                 <ImageContainer size={iconsSizeConfig}>
-                    <Image src={LANGUAGES_FLAG[lang]} alt="Language Flag" />
+                    <Image imageData={FLAGS_URL_DATA[lang]} alt="Language Flag" />
                 </ImageContainer>
             </DropdownTrigger>
             <DropdownMenu>
@@ -55,7 +40,7 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
                         <div className="flex justify-between items-center">
                             <span>{langValue}</span>
                             <ImageContainer size={iconsSizeConfig}>
-                                <Image src={LANGUAGES_FLAG[langCode]} />
+                                <Image imageData={FLAGS_URL_DATA[langCode]} />
                             </ImageContainer>
                         </div>
                     </DropdownItem>
