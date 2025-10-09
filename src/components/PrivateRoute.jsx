@@ -7,8 +7,6 @@ export const PrivateRoute = () => {
     const { user } = useContext(AuthContext);
     const location = useLocation();
 
-    console.log("pasando por aqui");
-
     useEffect(() => {
         if (user === null) {
             saveDataInSessionStorage("intendedRoute", location.pathname);

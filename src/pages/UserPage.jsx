@@ -84,7 +84,7 @@ export const UserPage = () => {
         setAvatarLoaded(false);
         try {
             const newData = { avatar: { url: avatarData.url, alt: avatarData.alt } };
-            const updatedUser = await patchUser(newData);
+            await patchUser(newData);
         } catch (err) {
             console.error("Algo ha salido mal", err);
         }
@@ -169,7 +169,7 @@ export const UserPage = () => {
                             >
                                 {getText("buttonChangeAvatar")}
                             </DropdownTrigger>
-                            <DropdownMenu direction="flex-row" className="mt-1 px-3" gap="gap-2">
+                            <DropdownMenu gap="gap-2">
                                 {AVATAR_DATA.map((avatar) => (
                                     <ImageContainer
                                         key={avatar.url}

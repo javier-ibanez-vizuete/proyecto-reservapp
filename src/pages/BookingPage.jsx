@@ -265,7 +265,7 @@ export const BookingPage = () => {
                                 {(form?.time && `${getText("bookingTimeText")}: ${form?.time}`) ||
                                     getText("bookingTimeText")}
                             </DropdownTrigger>
-                            <DropdownMenu>
+                            <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
                                     key={"Hora"}
                                     defaultStyles={false}
@@ -314,7 +314,7 @@ export const BookingPage = () => {
                                     `${getText("bookingCustomersText")}: ${form?.partySize}`) ||
                                     getText("bookingCustomersText")}
                             </DropdownTrigger>
-                            <DropdownMenu>
+                            <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
                                     defaultStyles={false}
                                     className={`perfect-center py-1.5 px-1.5 hover:scale-120 ${

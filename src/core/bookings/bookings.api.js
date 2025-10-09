@@ -23,7 +23,6 @@ export const postBookingApi = async (bookingData) => {
 export const deleteBookingByIdApi = async (bookingId) => {
     try {
         const removed = await api.delete(`/bookings/${bookingId}`);
-        console.log("Que devuelve removed", removed);
         return removed.data;
     } catch (err) {
         console.error("Error removing booking by id");

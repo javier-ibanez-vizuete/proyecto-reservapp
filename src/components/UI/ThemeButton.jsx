@@ -97,7 +97,6 @@ const renderThemeIcon = (isDarkTheme, sizesDevice) => {
 
 const renderMoonIcon = (sizesDevice) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = sizesDevice;
-    console.log("isMobileSm", isMobileSm);
 
     const iconMoonConfig = classNames({
         "w-3.5 h-3.5 before:h-3 before:w-3 before:-right-0.5 before:top-0": isMobile2Xs,

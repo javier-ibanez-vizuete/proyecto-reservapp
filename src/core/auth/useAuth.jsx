@@ -31,8 +31,6 @@ export const useAuth = () => {
         try {
             const authData = await loginApi({ email, password });
 
-            console.log("Que vale AuthData", authData);
-
             if (authData) {
                 saveTokenInLocalStorage(authData.token);
                 saveUserInLocalStorage(authData.user);
@@ -118,10 +116,7 @@ export const useAuth = () => {
 
     const patchUser = async (newUserData) => {
         try {
-            console.log("que vale user.id", user.id);
-
             const updatedUser = await patchUserApi(user.id, newUserData);
-            console.log("Que vale UpdateUser", updatedUser);
 
             if (!updatedUser) throw new Error("Error updating User");
             setUser(updatedUser);

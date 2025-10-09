@@ -21,8 +21,6 @@ export const CTACard = ({
         onButtonClick();
     };
 
-    console.log("que vale imageposition", imagePosition);
-
     const isImageLeft = imagePosition === "left";
     const contentClass = isImageLeft ? "md:order-2" : "md:-order-2";
     const imageClass = isImageLeft ? "md:-order-2" : "md:order-2";

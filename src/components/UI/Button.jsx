@@ -83,6 +83,12 @@ export const Button = ({
             hasActiveEffects: true,
             shadowColor: "hover:shadow-error-600/25",
         },
+        none: {
+            classes: "",
+            hasHoverEffects: false,
+            hasActiveEffects: true,
+            shadowColor: null,
+        },
     };
 
     const sizeConfig = {

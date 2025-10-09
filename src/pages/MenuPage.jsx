@@ -104,7 +104,7 @@ export const MenuPage = () => {
                                     >
                                         {displayCategoryName()}
                                     </DropdownTrigger>
-                                    <DropdownMenu>
+                                    <DropdownMenu classNameMenuContainer="flex-col">
                                         <DropdownItem
                                             onClick={() => {
                                                 handleCategoryChange("All Categories");

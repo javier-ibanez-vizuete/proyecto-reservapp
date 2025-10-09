@@ -50,7 +50,7 @@ export const ProfileButton = ({ onClick }) => {
                     className={"shadow-lg"}
                 />
             </DropdownTrigger>
-            <DropdownMenu className="px-4" gap="gap-2">
+            <DropdownMenu gap="gap-2" classNameMenuContainer="flex-col">
                 <Button className="flex-1" variant="primary" onClick={handleGoProfile}>
                     {getText("profilePageButton")}
                 </Button>
