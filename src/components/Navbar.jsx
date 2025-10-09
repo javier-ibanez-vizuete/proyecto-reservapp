@@ -92,7 +92,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
 
     return (
         <nav
-            className={`navbar transition-all duration-1000 ease-in-out fixed top-0 w-full z-10 shadow-xl ${
+            className={`navbar transition-all duration-500 ease-in-out fixed top-0 w-full z-10 shadow-xl ${
                 theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
             }`}
         >
@@ -111,23 +111,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         <NavbarLinks handleLinkClick={handleLinkClick} />
                     </div>
                     <div className="navbar-actions">
-                        <div className="navbar-user-profile">
-                            {isLoggedIn && (
-                                <>
-                                    {pathname !== "/user" && (
-                                        <ProfileButton onClick={handleCloseMobileMenu} />
-                                    )}
-                                    {cart &&
-                                        cart?.items &&
-                                        cart.items?.length > 0 &&
-                                        !pathname.includes("/cart") && <TrollyButton />}
-                                </>
-                            )}
-                        </div>
-
+                        {/*    colocar despues de la prueba size={isMobile ? "sm" : "md"} */}
                         {!isLoggedIn && (
                             <div className="perfect-center gap-2">
-                                <Button onClick={handleLogin} size={isMobile ? "sm" : "md"} variant="primary">
+                                <Button onClick={handleLogin} size="md" variant="primary">
                                     {getText("loginButton")}
                                 </Button>
                                 <Button
@@ -141,6 +128,20 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         )}
                         <ThemeButton />
                         <LanguagesSelector placement="bottom-end" onClick={handleCloseMobileMenu} />
+                        <div className="navbar-user-profile">
+                            {isLoggedIn && (
+                                <>
+                                    {cart &&
+                                        cart?.items &&
+                                        cart.items?.length > 0 &&
+                                        !pathname.includes("/cart") && <TrollyButton />}
+                                    {pathname !== "/user" && (
+                                        <ProfileButton onClick={handleCloseMobileMenu} />
+                                    )}
+                                </>
+                            )}
+                        </div>
+
                         {user && (
                             <div className="flex lg:hidden justify-center h-10 w-10">
                                 <BurgerButton

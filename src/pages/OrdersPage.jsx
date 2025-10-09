@@ -117,13 +117,7 @@ export const OrderPage = () => {
     return (
         <div className="flex flex-1 flex-col py-6">
             <Container className="gap-4">
-                <BackToTopButton
-                    size="sm"
-                    rounded="lg"
-                    showAt={1000}
-                    placement="top-right"
-                    variant="secondary"
-                />
+                <BackToTopButton iconSize="w-5" showAt={1000} placement="top-right" variant="secondary" />
 
                 <div className="flex flex-col">
                     <h1>{getText("h1OrdersPage")}</h1>
@@ -227,7 +221,7 @@ export const OrderPage = () => {
                     </div>
                 </div>
 
-                <ProductsContainer className="grid  gap-2 md:grid-cols-2 lg:grid-cols-3">
+                <ProductsContainer className="grid gap-sm sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-md">
                     {filteredProducts.map((product) => {
                         const isCartItem = cart?.items?.find((item) => item.productId === product.id);
                         const productQty = isCartItem ? isCartItem.qty : null;

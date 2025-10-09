@@ -53,7 +53,7 @@ export const ProfileButton = ({ onClick }) => {
                 />
             </DropdownTrigger>
             <DropdownMenu className="px-4" gap="gap-2">
-                <Button className="flex-1" onClick={handleProfile}>
+                <Button className="flex-1" variant="primary" onClick={handleProfile}>
                     {getText("profilePageButton")}
                 </Button>
                 <LoadingButton

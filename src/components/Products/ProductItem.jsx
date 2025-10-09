@@ -3,22 +3,22 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import { Image } from "../UI/Image";
 import { ImageContainer } from "../UI/ImageContainer";
 
-export const ProductItem = ({ productData = {}, className = "", imgSize = "" }) => {
+export const ProductItem = ({ productData = {}, className = "" }) => {
     const { theme } = useContext(ThemeContext);
 
     return (
         <article
-            className={`flex ${
+            className={`flex flex-col justify-between p-sm rounded-default gap-xs xs:p-md xs:rounded-md xs:gap-sm md:gap-md xl:p-lg xl:rounded-lg xl:gap-lg ${
                 theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
             } ${className}`}
         >
             {productData?.image && (
-                <ImageContainer className={` ${imgSize}`}>
-                    <Image className="rounded-2xl object-contain" imageData={productData?.image} />
+                <ImageContainer>
+                    <Image className="rounded-2xl" imageData={productData?.image} />
                 </ImageContainer>
             )}
-            <div className="flex flex-1 self-center flex-col justify-between gap-4 lg:text-center lg:gap-2 lg:self-stretch">
-                {productData?.name && <h3>{productData.name}</h3>}
+            <div className="flex flex-col flex-1 justify-between gap-xs">
+                {productData?.name && <h4>{productData.name}</h4>}
                 {productData?.description && <p className="opacity-60">{productData.description}</p>}
                 {productData?.price && <h3>{productData.price}€</h3>}
                 {productData?.categories && (

@@ -41,52 +41,55 @@ export const Button = ({
         }
     };
 
-    const baseClasses =
-        "inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer";
+    const baseClasses = "lg:focus:outline-none lg:focus:ring-2 lg:focus:ring-offset-2";
 
     const variantConfig = {
         default: {
-            classes:
-                "bg-primary-color text-text-color border border-primary-color hover:bg-primary-color/80 focus:ring-gray-900",
+            classes: "bg-gray-400  border border-gray-500 shadow-sm hover:bg-gray-500/80 focus:ring-gray-900",
             hasHoverEffects: true,
+            hasActiveEffects: true,
             shadowColor: null,
         },
         primary: {
             classes:
-                "bg-primary-color text-text-color border border-primary-color hover:bg-primary-color/80 focus:ring-primary-color shadow-sm",
+                "bg-primary-color border border-primary-color/90 shadow-sm hover:bg-primary-color/90 focus:ring-primary-color",
             hasHoverEffects: true,
+            hasActiveEffects: true,
             shadowColor: "hover:shadow-primary-color/25",
         },
         secondary: {
             classes:
-                "bg-secondary-color text-text-color border border-secondary-color hover:bg-secondary-color/80 focus:ring-secondary-color shadow-sm",
+                "bg-secondary-color border border-secondary-color/90 shadow-sm hover:bg-secondary-color/90 focus:ring-secondary-color",
             hasHoverEffects: true,
+            hasActiveEffects: true,
             shadowColor: "hover:shadow-secondary-color/25",
         },
         outline: {
-            classes: `bg-transparent ${
-                theme === "light" ? "text-text-color border-gray-700" : "text-text-color-dark border-gray-500"
-            } border hover:bg-gray-200/50 focus:ring-gray-500`,
+            classes: `bg-transparent border border-gray-500 hover:bg-gray-300 focus:ring-gray-500`,
             hasHoverEffects: true,
+            hasActiveEffects: true,
             shadowColor: null,
         },
         ghost: {
-            classes:
-                "bg-transparent text-text-color border-transparent hover:bg-gray-100 focus:ring-gray-500",
+            classes: "bg-transparent border-transparent hover:bg-gray-200/50 focus:ring-gray-500",
             hasHoverEffects: false,
+            hasActiveEffects: false,
             shadowColor: null,
         },
         danger: {
             classes:
-                "bg-error-500 text-white border border-error-600 hover:bg-error-600 focus:ring-error-500 shadow-sm",
+                "bg-error-600 text-white border border-error-500 shadow-sm hover:bg-error-500 focus:ring-error-500",
             hasHoverEffects: true,
-            shadowColor: "hover:shadow-error-500/25",
+            hasActiveEffects: true,
+            shadowColor: "hover:shadow-error-600/25",
         },
     };
 
     const sizeConfig = {
+        "2xs": "px-1 py-0.5 text-2xs",
+        xs: "px-2 py-1 text-2xs",
         sm: "px-3 py-1.5 text-base",
-        md: "px-4 py-2 text-md",
+        md: "px-4 py-2 text-sm",
         lg: "px-6 py-3 text-md",
         xl: "px-8 py-4 text-lg",
     };
@@ -100,7 +103,8 @@ export const Button = ({
         currentSize,
         {
             "opacity-50 cursor-not-allowed pointer-events-none": disabled,
-            "hover:scale-105 hover:shadow-lg transform": !disabled && currentVariant.hasHoverEffects,
+            "hover:shadow-lg": !disabled && currentVariant.hasHoverEffects,
+            "active:scale-95 active:shadow-lg": !disabled && currentVariant.hasActiveEffects,
             [currentVariant.shadowColor]: !disabled && currentVariant.shadowColor,
         },
         className
@@ -112,21 +116,3 @@ export const Button = ({
         </button>
     );
 };
-
-// import classNames from "classnames";
-
-// export const Button = ({ className = "", children, onClick, variant = "normal", ...props }) => {
-//     const baseClasses =
-//         "inline-flex lg:py-landing-sm py-landing-xs lg:px-6 px-4 rounded cursor-pointer elevation transition-colors duration-200";
-
-//     const normal = "bg-primary text-white border border-primary";
-
-//     const outline = "bg-transparent text-primary border border-primary";
-
-//     const variantClasses = variant === "outline" ? outline : normal;
-//     return (
-//         <button className={classNames(baseClasses, variantClasses, className)} onClick={onClick} {...props}>
-//             {children}
-//         </button>
-//     );
-// };

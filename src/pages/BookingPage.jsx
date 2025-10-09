@@ -388,10 +388,10 @@ export const BookingPage = () => {
                 )}
                 <div className="flex flex-col gap-2 md:flex-row lg:justify-center lg:gap-4">
                     <Button onClick={onBookingSubmit} variant="primary" className="flex-1 lg:flex-none">
-                        Reservar
+                        {getText("bookingButtonConfirmText")}
                     </Button>
                     <Button onClick={resetForm} variant="danger" className="flex-1 lg:flex-none">
-                        resetear Form
+                        {getText("bookingButtonResetForm")}
                     </Button>
                 </div>
                 <ToastContainer toasts={toasts} onClose={dismissToast} />

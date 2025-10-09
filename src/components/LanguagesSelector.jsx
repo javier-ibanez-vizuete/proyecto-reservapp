@@ -12,11 +12,22 @@ import iconItalyFlag from "../assets/icons/icons-flags/icon-italy-flag.webp";
 import iconSpanishFlag from "../assets/icons/icons-flags/icon-spanish-flag.webp";
 import iconUkFlag from "../assets/icons/icons-flags/icon-uk-flag.webp";
 
+import classNames from "classnames";
+import { useDevice } from "../hooks/useDevice";
 import { DropdownItem } from "./Dropdown/DropdownItem";
 import { DropdownMenu } from "./Dropdown/DropdownMenu";
 
 export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => {} }) => {
     const { lang, languages, handleLang } = useContext(LanguageContext);
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+
+    const iconsSizeConfig = classNames({
+        "w-6": isMobile2Xs,
+        "w-7": isMobileXs,
+        "w-8": isMobileSm,
+        "w-9": isTablet,
+        "w-10": isDesktop,
+    });
 
     const LANGUAGES_FLAG = {
         en: iconUkFlag,
@@ -30,7 +41,7 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
     return (
         <Dropdown placement={placement} className={"rounded-full"} onClick={onClick}>
             <DropdownTrigger hasIcon={false} btnStyle={false}>
-                <ImageContainer className="w-11">
+                <ImageContainer size={iconsSizeConfig}>
                     <Image src={LANGUAGES_FLAG[lang]} alt="Language Flag" />
                 </ImageContainer>
             </DropdownTrigger>
@@ -39,7 +50,7 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
                     <DropdownItem key={langCode} onClick={() => handleLang(langCode)}>
                         <div className="flex justify-between items-center">
                             <span>{langValue}</span>
-                            <ImageContainer className="w-11">
+                            <ImageContainer size={iconsSizeConfig}>
                                 <Image src={LANGUAGES_FLAG[langCode]} />
                             </ImageContainer>
                         </div>

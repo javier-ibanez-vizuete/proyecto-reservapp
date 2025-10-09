@@ -66,10 +66,9 @@ export const MenuPage = () => {
         <div className="flex flex-col flex-1 py-4">
             <Container className="flex-1 gap-4">
                 <BackToTopButton
-                    size="sm"
-                    rounded="lg"
+                    iconSize={"w-5"}
                     showAt={1000}
-                    placement="top-right"
+                    placement="bottom-right"
                     variant="secondary"
                 />
                 <div className="lg:flex lg:justify-center">
@@ -147,14 +146,9 @@ export const MenuPage = () => {
                             )}
                         </div>
 
-                        <ProductsContainer className="flex-col gap-4 lg:grid lg:grid-cols-3">
+                        <ProductsContainer className="grid grid-cols-1 gap-sm sm:grid-cols-2 xs:gap-md md:grid-cols-3 md:gap-lg xl:grid-cols-4 xl:gap-xl">
                             {filteredProducts.map((product) => (
-                                <ProductItem
-                                    key={product.id}
-                                    productData={product}
-                                    imgSize="w-40 lg:w-1/2 lg:max-w-"
-                                    className={`p-4 rounded-2xl gap-4 lg:flex-col items-center`}
-                                />
+                                <ProductItem key={product.id} productData={product} />
                             ))}
                         </ProductsContainer>
                     </>

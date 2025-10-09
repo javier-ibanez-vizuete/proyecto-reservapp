@@ -91,6 +91,9 @@ const TEXTS = {
 
         bookingSelectTableButton: "Select Table",
 
+        bookingButtonConfirmText: "Booking",
+        bookingButtonResetForm: "Reset From",
+
         toastBookingSuccess: "Booking Completed",
         toastBookingUnavailable: "Booking Failed: This table is already reserved.",
         toastBookingError: "Booking Failed. Try Again",

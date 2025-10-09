@@ -39,7 +39,7 @@ export const CartSummaryCard = ({ cartSummary, handleOpenModal, handleDeleteCart
                 </div>
             </div>
             <div className="flex flex-col gap-2 md:flex-row">
-                <Button className="flex-1" onClick={handleOpenModal}>
+                <Button className="flex-1" variant="primary" onClick={handleOpenModal}>
                     {getText("buttonCartPageOpenPaymentModal")}
                 </Button>
                 <LoadingButton
