@@ -16,7 +16,7 @@ export const BookingCalendar = ({ onChange, className = "", selectedDate }) => {
     };
 
     return (
-        <div className="">
+        <div>
             <Calendar
                 className={`${theme} ${className}`}
                 minDetail="month"

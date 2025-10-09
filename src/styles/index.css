@@ -271,30 +271,47 @@ body {
     }
 
     .navbar-menu-container {
-        @apply hidden lg:flex lg:flex-1 justify-center items-center overflow-hidden;
+        @apply hidden lg:flex lg:self-stretch lg:flex-1 justify-center items-center overflow-hidden;
     }
 
-    .navbar-link {
-        @apply flex-1 text-sm rounded-md font-medium px-md py-sm transition-all duration-300
+    /* .navbar-link {
+        @apply flex-1 font-medium px-md py-sm transition-all duration-300
             relative overflow-hidden bg-secondary-color/40 text-text-color hover:scale-105 hover:bg-secondary-color/80;
+    } */
+
+    .light.navbar-link {
+        @apply bg-background;
     }
 
-    .navbar-link.active {
-        @apply bg-secondary-color;
+    .dark.navbar-link {
+        @apply bg-background-dark;
     }
 
-    .navbar-link::before {
+    .light.navbar-link.active {
+        @apply bg-accent-background-dark text-text-color-dark;
+    }
+
+    .dark.navbar-link.active {
+        @apply bg-accent-background text-text-color;
+    }
+
+    .light.navbar-link::before {
         content: "";
-        @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-black/25
-            transition-all duration-300 -translate-x-1/2;
+        @apply absolute bottom-0 left-[5px] w-0 h-0.5 bg-accent-background-dark
+            transition-all ease-in-out duration-500 -translate-x-1/2;
+    }
+    .dark.navbar-link::before {
+        content: "";
+        @apply absolute bottom-0 left-1/10 w-0 h-0.5 bg-accent-background
+            transition-all ease-in-out duration-500 -translate-x-1/2;
     }
 
     .navbar-link:hover::before {
-        @apply w-full;
+        @apply w-9/10 left-1/2;
     }
 
     .navbar-link.active::before {
-        @apply w-full;
+        @apply w-9/10 left-1/2;
     }
 
     .navbar-actions {
@@ -314,7 +331,7 @@ body {
     }
 
     .mobile-menu {
-        @apply flex flex-col duration-900 ease-in-out overflow-hidden transition-all z-50 absolute top-0 right-0 left-0 mt-16;
+        @apply flex flex-col min-h-0 overflow-hidden duration-500 ease-in-out transition-all z-50;
     }
 
     /* Estilos base del calendario */

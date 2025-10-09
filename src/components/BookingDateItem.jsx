@@ -125,7 +125,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                     onClick={(event) => event.stopPropagation()}
                 >
                     <p className="flex-1 opacity-80">{getText("bookingDataNoPendingBookingsFound")}</p>
-                    <Button size="sm" onClick={() => navigate("/booking")}>
+                    <Button size="sm" onClick={() => navigate("/bookings")}>
                         {getText("buttonBookingDataMakeABook")}
                     </Button>
                 </div>

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
@@ -18,6 +18,7 @@ import { CartsContext } from "../contexts/CartsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useDevice } from "../hooks/useDevice";
+import { useWindowWidth } from "../hooks/useWindowWidth";
 import { BurgerButton } from "./BurgerButton";
 import { Container } from "./Container";
 import { LanguagesSelector } from "./LanguagesSelector";
@@ -45,8 +46,10 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
+    const width = useWindowWidth();
     const { isMobile2Xs, isMobileXs, isMobileSm, isMobile, isTablet, isDesktop } = useDevice();
 
+    const mobileNavRef = useRef(null);
     const Navigate = useNavigate();
     const { pathname } = useLocation();
 
@@ -55,6 +58,15 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const { getText } = useContext(LanguageContext);
 
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
+
+    useEffect(() => {
+        if (!mobileNavRef?.current) return;
+
+        const mobileMenuContainer = mobileNavRef.current;
+
+        if (isMobileMenuOpen) mobileMenuContainer.style.height = `${mobileMenuContainer.scrollHeight}px`;
+        if (!isMobileMenuOpen) mobileMenuContainer.style.height = 0;
+    }, [mobileNavRef, isMobileMenuOpen, width]);
 
     const logoSizeConfig = classNames({
         "w-6": isMobile2Xs,
@@ -144,7 +156,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         </div>
 
                         {user && (
-                            <div className="flex lg:hidden justify-center h-10 w-10">
+                            <div className="flex flex-col self-stretch lg:hidden">
                                 <BurgerButton
                                     isMobileMenuOpen={isMobileMenuOpen}
                                     toggleMobileMenu={toggleMobileMenu}
@@ -153,17 +165,20 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         )}
                     </div>
                 </div>
-                {isMobileMenuOpen && (
-                    <div className={`${isMobile || isTablet ? "" : "hidden"} mobile-menu`}>
-                        <Container
-                            className={`${
-                                theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
-                            } py-3 gap-2`}
-                        >
-                            <NavbarLinks handleLinkClick={handleLinkClick} />
-                        </Container>
-                    </div>
-                )}
+                <div
+                    ref={mobileNavRef}
+                    className={`${isMobile || isTablet ? "" : "hidden"} mobile-menu ${
+                        isMobileMenuOpen ? "" : "cursor-not-allowed"
+                    }`}
+                >
+                    <Container
+                        className={`${
+                            theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+                        } py-3 gap-2`}
+                    >
+                        <NavbarLinks handleLinkClick={handleLinkClick} />
+                    </Container>
+                </div>
             </Container>
         </nav>
     );
