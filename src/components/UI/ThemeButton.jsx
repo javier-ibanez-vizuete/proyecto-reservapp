@@ -67,7 +67,7 @@ const getContainerClasses = (className, theme, sizesDevice) => {
     });
 
     return classNames(
-        `relative rounded-full cursor-pointer border ${
+        `relative rounded-full cursor-pointer border transition-all duration-500 ease-in-out active:scale-95 lg:hover:-translate-y-[2px] ${
             theme === "light" ? "border-amber-500" : "border-text-color-dark/50"
         }`,
         "backdrop-blur-[15px]",

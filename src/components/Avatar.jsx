@@ -1,5 +1,8 @@
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useDevice } from "../hooks/useDevice";
+import { Image } from "./UI/Image";
+import { ImageContainer } from "./UI/ImageContainer";
 
 /**
  * Avatar Component - Componente de avatar versátil del sistema de diseño Eleven Code
@@ -26,7 +29,7 @@ import { useEffect, useState } from "react";
 export const Avatar = ({
     avatar = {},
     alt = "",
-    size = "md",
+    size,
     variant = "circle",
     fallback,
     online = false,
@@ -35,6 +38,8 @@ export const Avatar = ({
 }) => {
     const [imageSrc, setImageSrc] = useState(null);
     const [imageError, setImageError] = useState(false);
+
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const sizeConfig = {
         xs: {
@@ -69,6 +74,27 @@ export const Avatar = ({
         },
     };
 
+    const automaticallySizeConfig = useMemo(
+        () => ({
+            avatar: classNames({
+                "w-6 h-6": isMobile2Xs,
+                "w-7 h-7": isMobileXs,
+                "w-8 h-8": isMobileSm,
+                "w-9 h-9": isTablet,
+                "w-10 h-10": isDesktop,
+            }),
+            indicator: classNames({
+                "w-1.5 h-1.5": isMobile2Xs,
+                "w-[6px] h-[6px]": isMobileXs,
+                "w-2 h-2": isMobileSm,
+                "w-[9px] h-[9px]": isTablet,
+                "w-2.5 h-2.5": isDesktop,
+            }),
+            position: "top-0 right-0",
+        }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+    );
+
     const textSizeClass = `text-${size}`;
 
     const variantConfig = {
@@ -102,10 +128,9 @@ export const Avatar = ({
         setImageSrc(processedSrc);
     }, [avatar?.url]);
 
-    const baseClasses =
-        "relative inline-flex items-center justify-center overflow-hidden bg-gray-100 text-gray-600 font-medium";
+    const baseClasses = "relative perfect-center overflow-hidden bg-gray-200/50 text-gray-600 font-medium";
 
-    const currentSize = sizeConfig[size] || sizeConfig.md;
+    const currentSize = sizeConfig[size] || automaticallySizeConfig;
     const currentVariant = variantConfig[variant] || variantConfig.circle;
 
     const avatarClasses = classNames(
@@ -117,7 +142,7 @@ export const Avatar = ({
     );
 
     const indicatorClasses = classNames(
-        "absolute bg-success-400 border-2 border-white rounded-full",
+        "absolute bg-green-400 border-1 border-white rounded-full",
         currentSize.indicator,
         currentSize.position
     );
@@ -137,19 +162,14 @@ export const Avatar = ({
             <div className={avatarClasses} {...props}>
                 {/* Imagen del avatar */}
                 {imageSrc && !imageError && (
-                    <img
-                        src={imageSrc}
-                        alt={alt}
-                        className="w-full h-full object-cover"
-                        onError={handleImageError}
-                    />
+                    <ImageContainer className="flex-1">
+                        <Image src={imageSrc} alt={alt} className="object-cover rounded-full" />
+                    </ImageContainer>
                 )}
 
-                {/* Fallback text cuando no hay imagen o hay error */}
                 {(!imageSrc || imageError) && <span className="select-none">{getFallbackText()}</span>}
             </div>
 
-            {/* Indicador de estado online */}
             {online && <span className={indicatorClasses} aria-label="En línea" />}
         </div>
     );

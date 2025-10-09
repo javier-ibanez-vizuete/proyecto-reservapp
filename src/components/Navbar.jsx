@@ -13,6 +13,7 @@ import logoReservappDarkPng480 from "../assets/logos/reservapp-logo/logo-reserva
 import logoReservappDarkWebp480 from "../assets/logos/reservapp-logo/logo-reservapp-dark-480w.webp";
 import logoReservappDark from "../assets/logos/reservapp-logo/logo-reservapp-dark.png";
 
+import classNames from "classnames";
 import { CartsContext } from "../contexts/CartsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -44,7 +45,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { isMobile, isTablet } = useDevice();
+    const { isMobile2Xs, isMobileXs, isMobileSm, isMobile, isTablet, isDesktop } = useDevice();
 
     const Navigate = useNavigate();
     const { pathname } = useLocation();
@@ -55,15 +56,15 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
 
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
+    const logoSizeConfig = classNames({
+        "w-6": isMobile2Xs,
+        "w-7": isMobileXs,
+        "w-8": isMobileSm,
+        "w-9": isTablet,
+        "w-10": isDesktop,
+    });
+
     // FUNCIONES UTILITARIAS
-    const getUserInitial = () => {
-        return user?.name ? user.name.charAt(0).toUpperCase() : "U";
-    };
-
-    const getUserDisplayName = () => {
-        return user?.name || getText("userReplaceName");
-    };
-
     const handleCloseMobileMenu = () => {
         setIsMobileMenuOpen(false);
     };
@@ -99,7 +100,7 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
             <Container className="navbar-content">
                 <div className="navbar-inner">
                     <Link className="navbar-logo" to={isLoading ? null : "/"}>
-                        <ImageContainer className="flex-1 logo-icon">
+                        <ImageContainer size={logoSizeConfig} className="flex-1 logo-icon">
                             <Image
                                 imageData={theme === "light" ? LOGO_LIGHT : LOGO_DARK}
                                 alt="Logo ReservApp"

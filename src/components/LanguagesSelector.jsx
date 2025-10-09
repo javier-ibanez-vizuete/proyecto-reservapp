@@ -40,7 +40,11 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
 
     return (
         <Dropdown placement={placement} className={"rounded-full"} onClick={onClick}>
-            <DropdownTrigger hasIcon={false} btnStyle={false}>
+            <DropdownTrigger
+                hasIcon={false}
+                btnStyle={false}
+                className={"active:scale-95 lg:hover:-translate-y-[2px]"}
+            >
                 <ImageContainer size={iconsSizeConfig}>
                     <Image src={LANGUAGES_FLAG[lang]} alt="Language Flag" />
                 </ImageContainer>

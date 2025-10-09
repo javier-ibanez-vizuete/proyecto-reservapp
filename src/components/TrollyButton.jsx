@@ -5,18 +5,22 @@ import iconTrolly from "../assets/icons/icon-trolly-black.webp";
 import iconTrollyWhite from "../assets/icons/icon-trolly-white.webp";
 import { CartsContext } from "../contexts/CartsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useDevice } from "../hooks/useDevice";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
 
-export const TrollyButton = ({ size = "md", variant = "circle", className = "" }) => {
+export const TrollyButton = ({ variant = "circle", className = "" }) => {
     const { theme } = useContext(ThemeContext);
     const { cart } = useContext(CartsContext);
     const iconRef = useRef(null);
     const Navigate = useNavigate();
 
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+
     useEffect(() => {
         if (cart?.items?.length) {
             const icon = iconRef?.current;
+            if (!iconRef?.current) return;
             icon.classList.add("animate-pulse");
             icon.style.animation = "glowPulse 2s ease-in-out infinite";
 
@@ -24,6 +28,8 @@ export const TrollyButton = ({ size = "md", variant = "circle", className = "" }
                 icon.classList.remove("animate-pulse");
                 icon.style.animation = "none";
             }, 5000);
+
+            return () => clearTimeout(timer);
         }
     }, [cart?.items]);
 
@@ -31,38 +37,21 @@ export const TrollyButton = ({ size = "md", variant = "circle", className = "" }
         return cart?.items?.reduce((acc, item) => acc + item?.qty, 0 || 0);
     }, [cart?.items]);
 
-    const sizeConfig = {
-        xs: {
-            icon: "w-6 h-6",
-            indicator: "text-[10px]",
-            position: "-top-1.5 right-1/2 translate-x-1/2",
-        },
-        sm: {
-            icon: "w-8 h-8",
-            indicator: "text-[12px]",
-            position: "-top-1 right-1/2 translate-x-1/2",
-        },
-        md: {
-            icon: "w-10 h-10",
-            indicator: "text-[13px]",
-            position: "-top-0.5 right-1/2 translate-x-1/2",
-        },
-        lg: {
-            icon: "w-12 h-12",
-            indicator: "text-[14px]",
-            position: "-top-0.5 right-1/2 translate-x-1/2",
-        },
-        xl: {
-            icon: "w-14 h-14",
-            indicator: "text-[15px]",
-            position: "top-0.5 right-1/2 translate-x-1/2",
-        },
-        "2xl": {
-            icon: "w-15 h-15",
-            indicator: "text-[16px]",
-            position: "top-0.5 right-1/2 translate-x-1/2",
-        },
-    };
+    const iconTrollyConfig = classNames({
+        "w-6 h-6": isMobile2Xs,
+        "w-7 h-7": isMobileXs,
+        "w-8 h-8": isMobileSm,
+        "w-9 h-9": isTablet,
+        "w-10 h-10": isDesktop,
+    });
+
+    const productsQuantityConfig = classNames({
+        "text-[8px] -top-[3px]": isMobile2Xs,
+        "text-[10px] -top-1": isMobileXs,
+        "text-[12px] -top-1": isMobileSm,
+        "text-[13px] -top-0.5": isTablet,
+        "text-[13px] -top-0": isDesktop,
+    });
 
     const variantConfig = {
         circle: "rounded-full",
@@ -70,20 +59,17 @@ export const TrollyButton = ({ size = "md", variant = "circle", className = "" }
         rounded: "rounded-md",
     };
 
-    const baseClasses = `relative inline-flex items-center justify-center shadow-lg overflow-hidden ${
-        theme === "light" ? "bg-background" : "bg-background-dark"
-    } text-gray-600 font-medium`;
+    const baseClasses = classNames("relative perfect-center overflow-hidden bg-transparent");
 
-    const currentSize = sizeConfig[size] || sizeConfig.md;
     const currentVariant = variantConfig[variant] || variantConfig.circle;
 
-    const iconClasses = classNames(baseClasses, currentSize.icon, currentVariant, className);
+    const iconClasses = classNames(baseClasses, iconTrollyConfig, currentVariant, className);
 
-    const indicatorClasses = classNames("absolute", currentSize.indicator, currentSize.position);
+    const indicatorClasses = classNames("absolute right-1/2 translate-x-1/2", productsQuantityConfig);
 
     return (
         <div
-            className="relative inline-flex cursor-pointer transition-scale duration-300 ease-in-out lg:hover:scale-105"
+            className="relative perfect-center cursor-pointer transition-scale duration-500 ease-in-out lg:hover:-translate-y-[2px]"
             onClick={() => Navigate("/cart")}
         >
             <div className={iconClasses} ref={iconRef}>
