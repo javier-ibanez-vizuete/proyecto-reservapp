@@ -203,7 +203,7 @@ export const RegisterPage = () => {
                 <h1>{getText("h1RegisterPage")}</h1>
 
                 <form className="flex flex-col gap-sm" onSubmit={onRegisterSubmit}>
-                    <Dropdown placement="bottom-start">
+                    <Dropdown placement="bottom-full">
                         <DropdownTrigger className={"flex justify-start gap-2 p-0 flex-1"}>
                             <ImageContainer size={registerPageConfig.avatar}>
                                 <Image className={`rounded-full`} src={form?.avatar?.url} />
