@@ -268,7 +268,7 @@ export const BookingPage = () => {
                             <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
                                     key={"Hora"}
-                                    defaultStyles={false}
+                                    variant="none"
                                     className={`perfect-center py-1 px-1.5 hover:scale-120 ${
                                         form.time === "" ? "font-bold" : "opacity-60"
                                     }`}
@@ -282,7 +282,7 @@ export const BookingPage = () => {
                                     return (
                                         <DropdownItem
                                             key={time.label}
-                                            defaultStyles={false}
+                                            variant="none"
                                             className={`perfect-center py-1 px-1.5 hover:scale-120 ${
                                                 form.time === time.time ? "font-bold" : ""
                                             }`}
@@ -316,7 +316,7 @@ export const BookingPage = () => {
                             </DropdownTrigger>
                             <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
-                                    defaultStyles={false}
+                                    variant="none"
                                     className={`perfect-center py-1.5 px-1.5 hover:scale-120 ${
                                         form.partySize === "" ? "font-bold" : "opacity-60"
                                     }`}
@@ -327,7 +327,7 @@ export const BookingPage = () => {
                                 </DropdownItem>
                                 {Array.from({ length: 8 }, (_, index) => (
                                     <DropdownItem
-                                        defaultStyles={false}
+                                        variant="none"
                                         className={`perfect-center py-1.5 px-1.5 hover:scale-120 ${
                                             form.partySize === index + 1 ? "font-bold" : ""
                                         }`}

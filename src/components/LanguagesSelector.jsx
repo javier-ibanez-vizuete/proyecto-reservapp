@@ -36,13 +36,16 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
             </DropdownTrigger>
             <DropdownMenu classNameMenuContainer="flex-col">
                 {Object.entries(languages).map(([langCode, langValue]) => (
-                    <DropdownItem key={langCode} onClick={() => handleLang(langCode)}>
-                        <div className="flex justify-between items-center">
-                            <span>{langValue}</span>
-                            <ImageContainer size={iconsSizeConfig}>
-                                <Image imageData={FLAGS_URL_DATA[langCode]} />
-                            </ImageContainer>
-                        </div>
+                    <DropdownItem
+                        key={langCode}
+                        onClick={() => handleLang(langCode)}
+                        variant="none"
+                        className="flex justify-between items-center gap-4"
+                    >
+                        <span>{langValue}</span>
+                        <ImageContainer size={iconsSizeConfig}>
+                            <Image imageData={FLAGS_URL_DATA[langCode]} />
+                        </ImageContainer>
                     </DropdownItem>
                 ))}
             </DropdownMenu>
