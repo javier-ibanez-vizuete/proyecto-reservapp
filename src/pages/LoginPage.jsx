@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import classNames from "classnames/bind";
+import { useContext, useMemo, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { Container } from "../components/Container";
 import { FormInput } from "../components/FormInput";
@@ -9,7 +10,6 @@ import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { LoginVerificationFields } from "../helpers/FieldsVerificator";
-import { getDataFromSessionStorage } from "../helpers/storage";
 import { useDevice } from "../hooks/useDevice";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 import { useToast } from "../hooks/useToast";
@@ -25,12 +25,20 @@ export const LoginPage = () => {
     const { toasts, showToast, dismissToast } = useToast();
     const { login } = useAuth();
     const { theme } = useContext(ThemeContext);
-    const { isMobile } = useDevice();
+    const { isMobile2Xs, isMobileXs, isMobileSm, isMobile, isTablet, isDesktop } = useDevice();
     const { visible, toggleVisible } = usePasswordVisibility();
     const { getText } = useContext(LanguageContext);
 
     const location = useLocation();
-    const intentedFromStorage = getDataFromSessionStorage("intendedRoute");
+
+    const loginContainerConfig = useMemo(
+        () =>
+            classNames({
+                "px-md py-sm rounded-md gap-xs": isMobile2Xs,
+                "px-lg py-md rounded-md gap-sm": isMobileXs || isMobileSm || isTablet || isDesktop,
+            }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+    );
 
     const LOGIN_FIELDS = [
         {
@@ -97,9 +105,17 @@ export const LoginPage = () => {
     return (
         <Container className="flex flex-col justify-center flex-1">
             <div
-                className={`flex flex-col gap-md ${
-                    theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
-                } rounded-2xl shadow-landing-lg xs:p-6 2xs:py-6 2xs:px-2 sm:p-8 md:p-10`}
+                className={classNames(
+                    "flex flex-col border shadow-md md:mx-auto md:w-[600px]",
+                    loginContainerConfig,
+                    {
+                        "bg-accent-background border-text-color/50": theme === "light",
+                        "bg-accent-background-dark border-text-color-dark/50": theme !== "light",
+                    }
+                )}
+                // className={`flex flex-col gap-md ${
+                //     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+                // } rounded-2xl shadow-md xs:p-6 2xs:py-6 2xs:px-2 sm:p-8 md:p-10 max-w-[800px] mx-auto`}
             >
                 <h1>{getText("h1LoginPage")}</h1>
                 <form className="flex flex-col gap-5" onSubmit={onLoginSubmit}>

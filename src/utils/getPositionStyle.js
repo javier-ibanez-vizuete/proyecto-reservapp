@@ -12,5 +12,8 @@ export const getPositionStyle = (position) => {
         "bottom-center": `${base} bottom-0 left-1/2 -translate-x-1/2 items-center`,
         "bottom-right": `${base} bottom-0 right-0 items-end`,
     };
-    return positions[position] || positions["top-right"];
+    const selectedPosition = positions[position];
+    const defaultPosition = positions["top-right"];
+
+    return position ? selectedPosition : defaultPosition;
 };

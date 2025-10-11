@@ -1,8 +1,8 @@
-export const ImageContainer = ({ children, className = "", loading = "lazy", onClick }) => {
+export const ImageContainer = ({ children, className = "", size, loading = "lazy", onClick }) => {
     return (
         <picture
             onClick={onClick}
-            className={`flex justify-center items-center ${className}`}
+            className={`flex justify-center items-center ${className} ${size}`}
             loading={loading}
         >
             {children}

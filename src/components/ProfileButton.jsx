@@ -23,7 +23,7 @@ export const ProfileButton = ({ onClick }) => {
 
     const { getText } = useContext(LanguageContext);
 
-    const handleProfile = () => {
+    const handleGoProfile = () => {
         Navigate("/user");
     };
 
@@ -41,7 +41,7 @@ export const ProfileButton = ({ onClick }) => {
 
     return (
         <Dropdown placement="bottom-end" className="flex" onClick={onClick}>
-            <DropdownTrigger btnStyle={false} hasIcon={false} className={""}>
+            <DropdownTrigger btnStyle={false} hasIcon={false} className={"lg:hover:-translate-y-[2px]"}>
                 <Avatar
                     avatar={user?.avatar}
                     alt="Avatar"
@@ -50,8 +50,8 @@ export const ProfileButton = ({ onClick }) => {
                     className={"shadow-lg"}
                 />
             </DropdownTrigger>
-            <DropdownMenu className="px-4" gap="gap-2">
-                <Button className="flex-1" onClick={handleProfile}>
+            <DropdownMenu gap="gap-2" classNameMenuContainer="flex-col">
+                <Button className="flex-1" variant="primary" onClick={handleGoProfile}>
                     {getText("profilePageButton")}
                 </Button>
                 <LoadingButton

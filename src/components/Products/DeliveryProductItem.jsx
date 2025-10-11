@@ -35,7 +35,7 @@ export const DeliveryProductItem = ({
             if (updatedCart) showToast(getText("toastAddedProductToCart"), "success", 1000);
         } catch (err) {
             console.error("No se ha añadido el producto", err);
-            showToast(getText("toastErrorAddingProductToCart"), "error");
+            showToast(getText("toastErrorAddingProductToCart"), "error", 1000);
         } finally {
             loading1.setIsLoading(false);
         }
@@ -95,14 +95,14 @@ export const DeliveryProductItem = ({
                 </div>
                 <div className="flex flex-1 flex-col justify-between gap-1">
                     <div className="flex flex-col gap-1">
-                        <h3>{productData?.name}</h3>
-                        <small>{productData.description}</small>
+                        <h4>{getText(productData?.name)}</h4>
+                        <small>{getText(productData.description)}</small>
                         <h3>{productData.deliveryPrice} €</h3>
                     </div>
                     {!qty && (
                         <div className="flex flex-col justify-between">
                             <LoadingButton
-                                variant="secondary"
+                                variant="primary"
                                 loading={loading1.isLoading}
                                 loadingText={getText("loadingTextAddingProductsToCartButton")}
                                 onClick={() => handleAddProduct(productData)}

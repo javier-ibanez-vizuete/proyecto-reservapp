@@ -1,4 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
+import { Card } from "../components/Card/Card";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
@@ -10,6 +11,7 @@ import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Button } from "../components/UI/Button";
 import { LanguageContext } from "../contexts/LanguageContext";
+import { LoaderContext } from "../contexts/LoaderContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
@@ -17,6 +19,8 @@ import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/
 
 export const MenuPage = () => {
     const { products, categories } = useContext(ProductsContext);
+    const { loaders } = useContext(LoaderContext);
+    const isLoadingProducts = loaders.includes("get-products-loader");
 
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
@@ -62,13 +66,7 @@ export const MenuPage = () => {
     return (
         <div className="flex flex-col flex-1 py-4">
             <Container className="flex-1 gap-4">
-                <BackToTopButton
-                    size="sm"
-                    rounded="lg"
-                    showAt={1000}
-                    placement="top-right"
-                    variant="secondary"
-                />
+                <BackToTopButton iconSize={"w-5"} showAt={1000} placement="top-right" variant="secondary" />
                 <div className="lg:flex lg:justify-center">
                     <h1>{getText("h1MenuPage")}</h1>
                 </div>
@@ -94,7 +92,7 @@ export const MenuPage = () => {
                                 <Dropdown>
                                     <DropdownTrigger
                                         btnStyle={false}
-                                        className={`px-4 py-2 rounded-xl ${
+                                        className={`px-4 py-2 rounded-xl shadow-md ${
                                             theme === "light"
                                                 ? "bg-accent-background text-text-color"
                                                 : "bg-accent-background-dark text-text-color-dark"
@@ -102,7 +100,7 @@ export const MenuPage = () => {
                                     >
                                         {displayCategoryName()}
                                     </DropdownTrigger>
-                                    <DropdownMenu>
+                                    <DropdownMenu classNameMenuContainer="flex-col">
                                         <DropdownItem
                                             onClick={() => {
                                                 handleCategoryChange("All Categories");
@@ -126,9 +124,9 @@ export const MenuPage = () => {
                                 </Dropdown>
 
                                 {products.length && filteredProducts.length && (
-                                    <span>
+                                    <Card variant="accent" rounded={"lg"}>
                                         {filteredProducts.length}/{products.length}
-                                    </span>
+                                    </Card>
                                 )}
                             </div>
 
@@ -144,14 +142,9 @@ export const MenuPage = () => {
                             )}
                         </div>
 
-                        <ProductsContainer className="flex-col gap-4 lg:grid lg:grid-cols-3">
+                        <ProductsContainer className="grid grid-cols-1 gap-sm sm:grid-cols-2 xs:gap-md md:grid-cols-3 md:gap-lg xl:grid-cols-4 xl:gap-xl">
                             {filteredProducts.map((product) => (
-                                <ProductItem
-                                    key={product.id}
-                                    productData={product}
-                                    imgSize="w-40 lg:w-1/2 lg:max-w-"
-                                    className={`p-4 rounded-2xl gap-4 lg:flex-col items-center`}
-                                />
+                                <ProductItem key={product.id} productData={product} />
                             ))}
                         </ProductsContainer>
                     </>

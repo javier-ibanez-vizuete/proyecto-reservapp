@@ -1,5 +1,6 @@
-import { useContext, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import classNames from "classnames";
+import { useContext, useMemo, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
@@ -16,7 +17,7 @@ import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { RegisterVerificationFields } from "../helpers/FieldsVerificator";
-import { getDataFromSessionStorage } from "../helpers/storage";
+import { useDevice } from "../hooks/useDevice";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 import { useToast } from "../hooks/useToast";
 import { AVATAR_DATA } from "../utils/AVATAR_DATA";
@@ -47,12 +48,24 @@ export const RegisterPage = () => {
 
     const visibility1 = usePasswordVisibility();
     const visibility2 = usePasswordVisibility();
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
-    const location = useLocation();
-    const intentedFromStorage = getDataFromSessionStorage("intendedRoute");
-
-    console.log("que vale intendedFromStorage en register", intentedFromStorage);
-    console.log("Que vale location state", location.state);
+    const registerPageConfig = useMemo(
+        () => ({
+            avatar: classNames({
+                "w-10": isMobile2Xs,
+                "w-11": isMobileXs,
+                "w-12": isMobileSm,
+                "w-13": isTablet,
+                "w-14": isDesktop,
+            }),
+            containerClasses: classNames({
+                "px-md py-sm rounded-md gap-xs": isMobile2Xs,
+                "px-lg py-md rounded-md gap-sm": isMobileXs || isMobileSm || isTablet || isDesktop,
+            }),
+        }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+    );
 
     const REGISTER_FORM_FIELDS = [
         {
@@ -175,33 +188,41 @@ export const RegisterPage = () => {
     return (
         <Container className="perfect-center flex-1 py-4">
             <div
-                className={`flex flex-col gap-md rounded-2xl p-md lg:p-lg ${
-                    theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
-                }`}
+                className={classNames(
+                    "flex flex-col border shadow-md md:mx-auto md:w-[600px]",
+                    registerPageConfig?.containerClasses,
+                    {
+                        "bg-accent-background border-text-color/50": theme === "light",
+                        "bg-accent-background-dark border-text-color-dark/50": theme !== "light",
+                    }
+                )}
+                // className={`flex flex-col gap-md rounded-2xl p-md lg:p-lg ${
+                //     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
+                // }`}
             >
                 <h1>{getText("h1RegisterPage")}</h1>
 
                 <form className="flex flex-col gap-sm" onSubmit={onRegisterSubmit}>
-                    <Dropdown placement="bottom-start">
+                    <Dropdown placement="bottom-full">
                         <DropdownTrigger className={"flex justify-start gap-2 p-0 flex-1"}>
-                            <ImageContainer className="w-14">
-                                <Image className="rounded-xl" imgSrc={form?.avatar?.url} />
+                            <ImageContainer size={registerPageConfig.avatar}>
+                                <Image className={`rounded-full`} src={form?.avatar?.url} />
                             </ImageContainer>
                             <Button variant={"ghost"} className="flex-1">
                                 {form?.avatar?.alt ? form.avatar.alt : "Avatar"}
                             </Button>
                         </DropdownTrigger>
-                        <DropdownMenu className="w-full">
+                        <DropdownMenu classNameMenuContainer="flex-col">
                             {AVATAR_DATA.map((avatar) => (
                                 <DropdownItem
                                     key={avatar.url}
-                                    className="flex items-center gap-3"
+                                    className="flex justify-start flex-1 items-center gap-3"
                                     onClick={() => handleAvatarClick(avatar)}
                                 >
-                                    <ImageContainer className="w-20">
-                                        <Image imgSrc={avatar.url} />
+                                    <ImageContainer size={registerPageConfig.avatar}>
+                                        <Image src={avatar.url} />
                                     </ImageContainer>
-                                    <span>{avatar.alt}</span>
+                                    <span className="flex">{avatar.alt}</span>
                                 </DropdownItem>
                             ))}
                         </DropdownMenu>

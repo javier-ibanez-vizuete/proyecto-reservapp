@@ -208,7 +208,7 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
                         </div>
                         {!isPendingOrders && (
                             <ImageContainer className="w-3" onClick={() => handleShowInfoModal(order)}>
-                                <Image imgSrc={theme === "light" ? iconArrowDownBlack : iconArrowDownWhite} />
+                                <Image src={theme === "light" ? iconArrowDownBlack : iconArrowDownWhite} />
                             </ImageContainer>
                         )}
                         {isPendingOrders && (

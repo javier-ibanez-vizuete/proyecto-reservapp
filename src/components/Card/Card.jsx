@@ -1,27 +1,58 @@
 import classNames from "classnames";
+import { useContext, useMemo } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { useDevice } from "../../hooks/useDevice";
 
 export const Card = ({
     children,
     variant = "default",
-    padding = "md",
+    padding,
     shadow = "md",
-    rounded = "md",
+    rounded,
     border = false,
     hover = "none",
     className = "",
     ...props
 }) => {
-    const baseClasses = "bg-white transition-all duration-200";
+    const { theme } = useContext(ThemeContext);
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+
+    const baseClasses = "transition-all duration-200";
 
     const variantClasses = {
-        default: "border-gray-200",
-        primary: "border-primary",
-        secondary: "border-secondary",
-        success: "border-success-500",
-        warning: "border-warning-500",
-        danger: "border-error-500",
-        glass: "backdrop-blur-md bg-white/70 border-white/20",
+        default: "bg-white border-gray-200",
+        background: `${
+            theme === "light"
+                ? "bg-background border-background/50"
+                : " bg-background-dark border-background-dark/50"
+        }`,
+        accent: `${
+            theme === "light"
+                ? "bg-accent-background border-accent-background/50"
+                : "bg-accent-background-dark border-accent-background-dark/50"
+        }`,
+        primary: "bg-white border-primary-color",
+        secondary: "bg-white border-secondary-color",
+        success: "bg-white border-success-color",
+        warning: "bg-white border-info-color",
+        danger: "bg-white border-error-color",
+        glass: "backdrop-blur-md bg-white/50 border-white/20",
     };
+
+    const stylesConfigByDevice = useMemo(
+        () => ({
+            padding: classNames({
+                "p-sm": isMobile2Xs || isMobileXs || isMobileSm || isTablet,
+                "p-md": isDesktop,
+            }),
+            rounded: classNames({
+                "rounded-md": isMobile2Xs || isMobileXs,
+                "rounded-lg": isMobileSm || isTablet,
+                "rounded-xl": isDesktop,
+            }),
+        }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+    );
 
     const paddingClasses = {
         none: "p-0",
@@ -59,9 +90,9 @@ export const Card = ({
 
     const cardClasses = classNames(
         baseClasses,
-        paddingClasses[padding],
+        paddingClasses[padding] || stylesConfigByDevice.padding,
         shadowClasses[shadow],
-        roundedClasses[rounded],
+        roundedClasses[rounded] || stylesConfigByDevice.rounded,
         {
             [`border ${variantClasses[variant]}`]: border || variant !== "default",
             border: border,

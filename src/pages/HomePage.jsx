@@ -71,6 +71,7 @@ export const HomePage = () => {
                                 title={title}
                                 description={description}
                                 buttonText={buttonText}
+                                variant="accent"
                                 imageSrc={imageSrc}
                                 imageAlt={imageAlt}
                                 imagePosition={index % 2 === 0 ? "left" : "right"}
