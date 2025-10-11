@@ -302,7 +302,7 @@ const TEXTS = {
         productRedWineDescription: "Our House Red Wine.",
 
         productWhiteWineName: "White Wine Glass",
-        productWhiteWineDescription: "Our House White Wine",
+        productWhiteWineDescription: "Our House White",
 
         productCoffeeName: "Espreso",
         productCoffeDescription: "Our Espresso Coffe Made with the best Arabics Coffee Beans.",
@@ -402,7 +402,7 @@ const TEXTS = {
     },
 
     es: {
-        // BARRA DE NAVEGACIÓN
+        // BARRA DE NAVIGATION
         userReplaceName: "Usuario",
         toastLogoutError: "Error al cerrar sesión.",
 
@@ -411,112 +411,117 @@ const TEXTS = {
         menusPageNavLabel: "MENÚ",
         cartPageNavLabel: "CARRITO",
 
-        lodingTextLogoutUser: "Cerrando perfil...",
-        logoutButton: "Cerrar sesión",
+        lodingTextLogoutUser: "Cerrando Perfil...",
+        logoutButton: "Cerrar Sesión",
         loadingTextLogoutButton: "Cerrando sesión...",
-        loginButton: "Iniciar sesión",
+        loginButton: "Iniciar Sesión",
         registerButton: "Registrarse",
 
         toastErrorLogout: "Error al cerrar sesión",
 
         profilePageButton: "Perfil",
 
-        // PÁGINA DE INICIO DE SESIÓN
-        h1LoginPage: "Iniciar sesión",
+        // LOGIN PAGE
+        h1LoginPage: "Iniciar Sesión",
 
         toastLoginError: "Error al iniciar sesión",
         loadingLoginButtonText: "Iniciando sesión...",
 
-        // PÁGINA DE REGISTRO
-        h1RegisterPage: "Únete a nosotros",
+        // REGISTER PAGE
+        h1RegisterPage: "Únete a Nosotros",
 
         registerButtonText: "Registrarse",
         loadingRegisterButtonText: "Registrando...",
 
         namePlaceholderFieldText: "Introduce tu nombre",
-        emailPlaceholderFieldText: "Introduce tu correo electrónico",
+        emailPlaceholderFieldText: "Introduce tu email",
         addressPlaceholderFieldText: "Dirección de entrega",
         passwordPlaceholderFieldText: "Introduce tu contraseña",
         confirmPasswordPlaceholderFieldText: "Repite tu contraseña",
 
-        toastRegisterError: "Error al registrarse",
+        toastRegisterError: "Error en el registro",
 
-        // PÁGINA DE INICIO
+        // HOME PAGE
         toastWelcomeRegister: "Bienvenido",
-        toastLoginSuccess: "Inicio de sesión exitoso ✔",
-        toastLogoutSuccess: "Cierre de sesión exitoso ✔",
+        toastLoginSuccess: "Sesión iniciada correctamente ✔",
+        toastLogoutSuccess: "Sesión cerrada correctamente ✔",
 
         h1HomePage: "ReservApp",
 
-        // PÁGINA DE MENÚ
-        fetchMessageError: "Error al cargar los productos. Intenta de nuevo.",
-        allCategoriesFilter: "Todas las categorías",
+        // MENUPAGE
+        fetchMessageError: "Error al cargar productos. Inténtalo de nuevo.",
+        allCategoriesFilter: "Todas las Categorías",
         h1MenuPage: "MENÚ",
 
-        loadingTextRefreshProductsButton: "Actualizando productos...",
+        loadingTextRefreshProductsButton: "Actualizando Productos...",
         textRefreshProductsButton: "Actualizar",
-        clearFilterButton: "Limpiar filtro",
+        clearFilterButton: "Limpiar Filtro",
 
-        // PÁGINA DE RESERVAS
-        h1BookingPage: "RESERVA",
+        // BOOKING PAGE
+        h1BookingPage: "RESERVAS",
 
         confirmBookingTitle: "Revisar y Confirmar",
-        userNameConfirmText: "Nombre de la reserva",
+        userNameConfirmText: "Nombre de la Reserva",
         dateConfirmText: "Fecha",
         timeConfirmText: "Hora",
         customersConfirmText: "Comensales",
-        highChairConfirmText: "¿Silla alta?",
-        aditionalMessageConfirmText: "Mensaje adicional",
+        highChairConfirmText: "¿Trona?",
+        aditionalMessageConfirmText: "Mensaje Adicional",
         confirmButtonModal: "Confirmar",
         loadingTextConfirmButtonModal: "Reservando...",
 
         bookingTimeText: "Hora",
-        bookingTimePlaceholder: "Seleccionar hora",
+        bookingTimePlaceholder: "Selecciona Hora",
         bookingCustomersText: "Comensales",
-        bookingCustomersPlaceholder: "Seleccionar cantidad",
+        bookingCustomersPlaceholder: "Selecciona Comensales",
 
-        bookingHighChairTitle: "Añadir silla alta",
-        bookingHighChairDescription: "Sin coste adicional",
+        bookingHighChairTitle: "Añadir Trona",
+        bookingHighChairDescription: "Sin cargo adicional",
 
         bookingAditionalMessagePlaceholder: "¿Alguna petición especial?",
 
-        bookingMaxCapacityTableTitle: "Cap. máxima:",
-        bookingTableTypeTitle: "Tipo de mesa:",
+        bookingMaxCapacityTableTitle: "Capacidad Máx.:",
+        bookingTableTypeTitle: "Tipo de Mesa:",
 
-        squareTableForm: "Mesa cuadrada",
-        roundTableForm: "Mesa redonda",
-        rectangularTableForm: "Mesa rectangular",
+        squareTableForm: "Mesa Cuadrada",
+        roundTableForm: "Mesa Redonda",
+        rectangularTableForm: "Mesa Rectangular",
 
         bookingTableWifiText: "Wifi:",
 
-        bookingSelectTableButton: "Seleccionar mesa",
+        bookingSelectTableButton: "Seleccionar Mesa",
 
-        toastBookingSuccess: "Reserva completada",
-        toastBookingUnavailable: "Error: esta mesa ya está reservada.",
-        toastBookingError: "Error al realizar la reserva. Intenta nuevamente",
+        bookingButtonConfirmText: "Reservar",
+        bookingButtonResetForm: "Resetear Formulario",
 
-        // PÁGINA DE PEDIDOS
-        h1OrdersPage: "PEDIDOS",
-        smallOrdersPageSubtitle: "Disfruta de nuestro menú desde casa.",
+        toastBookingSuccess: "Reserva Completada",
+        toastBookingUnavailable: "Reserva Fallida: Esta mesa ya está reservada.",
+        toastBookingError: "Reserva Fallida. Inténtalo de nuevo",
 
-        addProductToCartButton: "Añadir al carrito",
-        removeProductToCartButton: "Eliminar del carrito",
+        // ORDERS PAGE
+        h1OrdersPage: "DELIVERY",
+        smallOrdersPageSubtitle: "Disfruta de nuestro menú desde la comodidad de tu casa.",
+
+        ordersPageInputPlaceholder: "Buscar Productos...",
+
+        addProductToCartButton: "Añadir al Carrito",
+        removeProductToCartButton: "Quitar del Carrito",
         loadingTextAddingProductsToCartButton: "Añadiendo...",
-        loadingTextRemovingProductsFromCartButton: "Eliminando...",
-        addOneMoreProductToCartButton: "Añadir uno más",
-        removeOneMoreProductFromCartButton: "Eliminar uno",
+        loadingTextRemovingProductsFromCartButton: "Quitando...",
+        addOneMoreProductToCartButton: "Añadir uno",
+        removeOneMoreProductFromCartButton: "Quitar uno",
 
         toastAddedProductToCart: "Añadido ✔",
         toastQuantityProductUpdatedToCart: "Carrito actualizado correctamente ✔",
-        toastRemovedProductFromCart: "Producto eliminado del carrito ✔",
-        toastErrorAddingProductToCart: "Error: no se pudo añadir al carrito",
-        toastErrorQuantityProductUpdatedToCart: "Error: no se pudo actualizar la cantidad",
-        toastErrorRemovingProductFromCart: "Error: no se pudo eliminar el producto",
+        toastRemovedProductFromCart: "Artículo eliminado del carrito ✔",
+        toastErrorAddingProductToCart: "Error: No se pudo añadir al carrito",
+        toastErrorQuantityProductUpdatedToCart: "Error: Falló la actualización de cantidad",
+        toastErrorRemovingProductFromCart: "Error: No se pudo eliminar el artículo del carrito",
 
-        // PÁGINA DEL CARRITO
+        // CART PAGE
         h1CartPage: "TU CARRITO",
-        confirmModalCartTitle: "Confirmación del pedido",
-        confirmModalCartMessage: "¡Ya casi! Confirma tu pedido para continuar",
+        confirmModalCartTitle: "Confirmación de Pedido",
+        confirmModalCartMessage: "¡Ya casi está! Confirma tu pedido para continuar",
 
         confirmButtonCartModal: "Confirmar",
         loadingConfirmButtonCartModal: "Procesando...",
@@ -526,71 +531,74 @@ const TEXTS = {
         accordionDescriptionText: "Descripción:",
         accordionPriceText: "Precio:",
 
-        noProductsTitle: "Tu carrito está vacío",
-        goToOrdersCartButton: "Hacer pedido",
+        noProductsTitle: "Tu Carrito está vacío",
+        goToOrdersCartButton: "Pedir Ahora",
 
         toastCartRemovedSuccess: "Carrito vaciado ✔",
-        toastCartRemovedError: "Error al eliminar los artículos",
+        toastCartRemovedError: "Error al eliminar todos los artículos",
 
-        // PÁGINA DE PERFIL
+        buttonCartPageOpenPaymentModal: "Pedir",
+        buttonCartPageDeleteCart: "Vaciar Carrito",
+
+        // PROFILE PAGE
         h1ProfilePage: "Bienvenido, ",
-        userDataSectionTitle: "Información personal",
-        bookingsDataSectionTitle: "Tus reservas",
-        ordersDataSectionTitle: "Tus pedidos",
+        userDataSectionTitle: "Información Personal",
+        bookingsDataSectionTitle: "Tus Reservas",
+        ordersDataSectionTitle: "Tus Pedidos",
 
-        buttonChangeAvatar: "Cambiar avatar",
+        buttonChangeAvatar: "Cambiar Avatar",
 
-        // ----- DATOS DEL USUARIO
+        //  ----- USER DATA
         nameFieldText: "Nombre",
-        fullNameFieldText: "Nombre completo",
-        emailFieldText: "Correo electrónico",
+        fullNameFieldText: "Nombre Completo",
+        emailFieldText: "Email",
         addressFieldText: "Dirección",
         passwordFieldText: "Contraseña",
-        confirmPasswordFieldText: "Confirmar contraseña",
-        userDataModalTitle: "Confirmar cambio de datos",
-        userDataModalMessage: "Confirmar cambio de:",
+        confirmPasswordFieldText: "Confirmar Contraseña",
+        userDataModalTitle: "Confirmar Cambio de Datos",
+        userDataModalMessage: "Confirmar cambio: ",
         userDataModalMessageNexo: "a",
         userDataModalConfirmText: "Cambiar",
         loadingUserDataModalConfirmText: "Cambiando...",
         userDataModalCancelText: "Cancelar",
 
         userDataEditButtonText: "Editar",
-        userDataChangeButtonText: "Guardar cambios",
+        userDataChangeButtonText: "Cambiar",
 
         toastUserDataChangeSuccess: "Perfil actualizado correctamente ✔",
         toastUserDataChangeError: "Error al actualizar el perfil",
 
-        // ------ DATOS DE RESERVAS
-        bookingDataTitle1: "Próximas reservas",
-        bookingDataTitle2: "Visitas anteriores",
+        //  ------ BOOKING DATA
+        bookingDataTitle1: "Tus próximas reservas",
+        bookingDataTitle2: "Tus visitas pasadas",
         bookingDataNoPendingBookingsFound: "No tienes reservas pendientes.",
-        bookingDataNoPastVisitsFound: "No tienes visitas anteriores.",
+        bookingDataNoPastVisitsFound: "No tienes visitas pasadas",
 
         buttonBookingDataMakeABook: "Reservar ahora",
         buttonBookingDataCloseModalInfo: "Cerrar",
-        buttonBookingDataCancelReservation: "Cancelar reserva",
+        buttonBookingDataCancelReservation: "Cancelar Reserva",
 
-        bookingDataModalDeletingTitle: "Eliminar reserva",
+        bookingDataModalDeletingTitle: "Eliminar Reserva",
         bookingDataModalDeletingbutton: "Eliminar",
         loadingBookingDataModalDeletingbutton: "Eliminando...",
 
-        bookingDataModalInfotitle: "Detalles de la reserva",
-        bookingDataModalInfoMessageText1: "Eliminar tu reserva para ",
+        bookingDataModalInfotitle: "Detalles de la Reserva",
+        bookingDataModalInfoMessageText1: "Eliminar tu Reserva para ",
         bookingDataModalInfoMessageCustomer1: "Comensal",
         bookingDataModalInfoMessageCustomer2: "Comensales",
 
-        bookingDataModalInfoDateText: "Fecha de la reserva:",
-        bookingDataModalInfoTimeText: "Hora de la reserva:",
-        bookingDataModalInfoPartySizeText: "Tamaño del grupo:",
-        bookingDataModalInfoHighChairText: "¿Silla alta necesaria?",
+        bookingDataModalInfoDateText: "Fecha de reserva:",
+        bookingDataModalInfoTimeText: "Hora de reserva:",
+        bookingDataModalInfoPartySizeText: "Número de personas:",
+        bookingDataModalInfoHighChairText: "¿Se necesita trona?",
 
-        toastBookingDataDeltingBookingError: "Error al eliminar la reserva",
+        toastBookingDataDeltingBookingError: "Error al eliminar la Reserva",
 
-        // ----- DATOS DE PEDIDOS
-        ordersDataTitle1: "Pedidos pendientes",
-        ordersDataTitle2: "Pedidos completados",
+        //  -----ORDERS DATA
+        ordersDataTitle1: "Pedidos Pendientes",
+        ordersDataTitle2: "Pedidos Completados",
 
-        ordersDataInfoModalMessage: "¿Deseas cancelar el pedido de ",
+        ordersDataInfoModalMessage: "¿Quieres cancelar el pedido de ",
 
         toastOrdersDataSuccess: "Pedido cancelado correctamente ✔",
         toastOrdersDataError: "Error al cancelar el pedido.",
@@ -598,74 +606,207 @@ const TEXTS = {
         ordersDataNotPendingOrdersText: "No hay pedidos pendientes.",
         ordersDataNotOrders: "No hay pedidos.",
 
-        ordersDataCancelModalTitle: "Cancelar pedido",
+        ordersDataCancelModalTitle: "Cancelar Pedido",
         ordersDataCancelModalBackButton: "Volver",
         loadingOrdersDataCancelButton: "Cancelando...",
 
-        ordersDataInfoModalTitle: "Detalles del pedido",
-        ordersDataInfoModalcreationText: "Fecha de creación:",
+        ordersDataInfoModalTitle: "Detalles del Pedido",
+        ordersDataInfoModalcreationText: "Fecha de Creación:",
         ordersDataInfoModalProductText: "Producto:",
         ordersDataInfoModalPriceText: "Precio:",
-        ordersDataInfoModalTotalProductsText: "Total de productos:",
+        ordersDataInfoModalTotalProductsText: "Total Productos:",
         ordersDataInfoModalTotalCountText: "Total:",
         buttonOrdersDataInfomodalCloseText: "Cerrar",
 
         buttonOrdersDataInfoCancelText: "Cancelar",
 
-        // PIE DE PÁGINA
-        copyrightText: "ReservApp. Todos los derechos reservados.",
+        // Footer
+        copyrightText: "ReservApp. Todos los derechos reservados",
 
-        // MENSAJES GENERALES
+        // Mensajes Generales
         affirmationText: "Sí",
         NegationText: "No",
 
-        // VALIDACIÓN DE CAMPOS
-        emailIsRequiredField: "El campo de correo es obligatorio",
-        emailNotValidField1: "Correo no válido (falta '@')",
-        emailNotValidField2: "Correo no válido (falta '.')",
-        emailTooShortField: "Correo demasiado corto (mín. 5 caracteres)",
-        emailTooLongField: "Correo demasiado largo (máx. 50 caracteres)",
+        // FIELDS VERIFICATOR
+        emailIsRequiredField: "El campo Email es Obligatorio",
+        emailNotValidField1: "Email no válido (falta '@')",
+        emailNotValidField2: "Email no válido (falta '.')",
+        emailTooShortField: "Email demasiado corto (mín. 5 caracteres)",
+        emailTooLongField: "Email demasiado largo (máx. 50 caracteres)",
 
-        passwordIsRequiredField: "El campo de contraseña es obligatorio",
+        passwordIsRequiredField: "El campo Contraseña es Obligatorio",
         passwordTooShortField: "Contraseña demasiado corta (mín. 9 caracteres)",
         passwordTooLongField: "Contraseña demasiado larga (máx. 30 caracteres)",
 
-        confirmPasswordIsRequiredField: "El campo de confirmación es obligatorio",
+        confirmPasswordIsRequiredField: "El campo Confirmar Contraseña es Obligatorio",
         doNotMatchPasswordsFields: "Las contraseñas no coinciden",
 
-        nameIsRequiredField: "El campo de nombre es obligatorio",
+        nameIsRequiredField: "El campo Nombre es Obligatorio",
         nameIsTooShortField: "Nombre demasiado corto (mín. 4 caracteres)",
         nameIsTooLongField: "Nombre demasiado largo (máx. 30 caracteres)",
 
-        addressIsRequiredField: "El campo de dirección es obligatorio",
+        addressIsRequiredField: "El campo Dirección es Obligatorio",
         addressTooShortField: "Dirección demasiado corta (mín. 6 caracteres)",
         addressTooLongField: "Dirección demasiado larga (máx. 60 caracteres)",
 
-        bookingDateIsRequiredField: "Debes elegir una fecha de reserva",
-        bookingTimeIsRequiredField: "El campo de hora es obligatorio",
-        bookingCustomersIsRequiredField: "El campo de comensales es obligatorio",
-        bookingTableIsRequiredField: "Debes elegir una mesa",
+        bookingDateIsRequiredField: "Debes elegir una Fecha de Reserva",
+        bookingTimeIsRequiredField: "El campo Hora es Obligatorio",
+        bookingCustomersIsRequiredField: "El campo Comensales es Obligatorio",
+        bookingTableIsRequiredField: "Debes elegir una Mesa",
 
-        profileNameNotEmptyField: "El nombre no puede estar vacío",
-        profileEmailNotEmptyField: "El correo no puede estar vacío",
-        profileAddressNotEmptyField: "La dirección no puede estar vacía",
+        profileNameNotEmptyField: "El campo Nombre no debe estar vacío",
+        profileEmailNotEmptyField: "El Email no debe estar vacío",
+        profileAddressNotEmptyField: "La Dirección no debe estar vacía",
 
-        // TARJETAS CTA
-        cardDataMenuTitle: "Consulta nuestro menú",
+        //  CTA CARDS DATA
+        cardDataMenuTitle: "Consulta nuestro Menú",
         cardDataMenuDescription: "Explora nuestra selección completa de platos y bebidas.",
-        cardDataMenuButtonText: "Ver menú",
+        cardDataMenuButtonText: "Ver Menú",
 
-        cardDataLoginTitle: "Bienvenido de nuevo",
+        cardDataLoginTitle: "Bienvenido de Nuevo",
         cardDataLoginDescription: "Inicia sesión para gestionar tus pedidos y reservas.",
-        cardDataLoginButtonText: "Iniciar sesión",
+        cardDataLoginButtonText: "Iniciar Sesión",
 
-        cardDataBookingTitle: "Reserva tu mesa",
-        cardDataBookingDescription: "Elige fecha, hora y te guardaremos un lugar.",
-        cardDataBookingButtonText: "Reservar ahora",
+        cardDataBookingTitle: "Reserva tu Mesa",
+        cardDataBookingDescription: "Elige tu fecha, hora y te guardaremos el sitio.",
+        cardDataBookingButtonText: "Reservar Ahora",
 
-        cardDataOrdersTitle: "¿Tienes hambre?",
-        cardDataOrdersDescription: "Disfruta de nuestros mejores platos sin salir de casa.",
-        cardDataOrdersButtonText: "Hacer pedido",
+        cardDataOrdersTitle: "¿Hambre? Te Tenemos Cubierto",
+        cardDataOrdersDescription: "Disfruta de nuestros mejores platos desde la comodidad de tu hogar.",
+        cardDataOrdersButtonText: "Pedir Ahora",
+
+        // PRODUCTS DATA
+        productCokeName: "Coca-Cola",
+        productCokeDescription: "Botella de Coca-Cola servida con cubitos de hielo y una rodaja de lima.",
+
+        productOrangeFantaName: "Fanta de Naranja",
+        productOrangeFantaDescription:
+            "Botella de Fanta de Naranja servida con cubitos de hielo y una rodaja de naranja.",
+
+        productMineralWaterName: "Agua Mineral",
+        productMineralWaterDescription: "Botella de Agua Mineral servida con cubitos de hielo.",
+
+        productSparklingWaterName: "Agua con Gas",
+        productSparklingWaterDescription:
+            "Botella de Agua con Gas servida con cubitos de hielo y una rodaja de lima.",
+
+        productBeerName: "Cerveza Fuller's",
+        productBeerDescription: "Media Pinta de nuestra Ale Premium (Fuller's).",
+
+        productOrangeJuiceName: "Zumo de Naranja Natural",
+        productOrangeJuiceDescription: "Un vaso de zumo de naranja recién exprimido",
+
+        productLemonFantaName: "Fanta de Limón",
+        productLemonFantaDescription:
+            "Botella de Fanta de Limón servida con cubitos de hielo y una rodaja de limón.",
+
+        productRedWineName: "Copa de Vino Tinto",
+        productRedWineDescription: "Nuestro Vino Tinto de la Casa.",
+
+        productWhiteWineName: "Copa de Vino Blanco",
+        productWhiteWineDescription: "Nuestro Vino Blanco de la Casa",
+
+        productCoffeeName: "Café Expreso",
+        productCoffeDescription: "Nuestro Café Expreso elaborado con los mejores granos de café arábica.",
+
+        productToastName: "Tostada con Tomate",
+        productDescription: "Pan tostado con tomate, ajo y nuestro mejor aceite de oliva español.",
+
+        productCheeseName: "Tabla de Quesos",
+        productCheeseDescription: "Nuestra mejor selección de quesos nacionales con acompañamientos.",
+
+        productCroquettesName: "Croquetas de Jamón",
+        productCroquettesDescription: "Las mejores croquetas de jamón caseras que hemos hecho nunca.",
+
+        productIberianHamName: "Jamón Ibérico",
+        productIberianHamDescription: "100g de nuestro mejor jamón ibérico 5J, cortado a mano.",
+
+        productBravasName: "Patatas Bravas",
+        productBravasDescription: "Nuestras patatas seleccionadas y la mejor salsa brava del mundo.",
+
+        productMixedSaladName: "Ensalada Tradicional",
+        productMixedSaladDescription:
+            "Un bol de lechuga, tomate, cebolla y aceitunas. Se puede servir con aliño.",
+
+        productClassicBurgerName: "Hamburguesa de Ternera",
+        productClassicBurgerDescription:
+            "La hamburguesa de ternera número uno con nuestro mejor queso cheddar, tomate y lechuga.",
+
+        productPorkSteakSirloinName: "Solomillo Ibérico",
+        productPorkSteakSirloinDescription:
+            "Solomillo de cerdo a la parrilla servido con nuestra mejor salsa de menta.",
+
+        productRisottoName: "Risotto de Boletus",
+        productRisottoDescription: "El risotto más cremoso que hemos hecho servido con láminas de boletus.",
+
+        productVeggieBurgerName: "Hamburguesa Vegetal",
+        productVeggieBurgerDescription:
+            "Una jugosa hamburguesa vegetal hecha con remolacha, proteína de guisante, zanahoria y manzana, servida en un suave pan brioche con cebolla roja y lechuga crujiente.",
+
+        productSteakTartareName: "Steak Tartar",
+        productSteakTartareDescription:
+            "Steak Tartar servido con yema de huevo y ahumado con madera de chocolate.",
+
+        productTakosName: "Tacos de Pollo",
+        productTakosDescription: "Tacos de pollo marinado servidos con salsa picante y pico de gallo fresco.",
+
+        productRoastChickenName: "Pollo Asado",
+        productRoastChickenDescription:
+            "Nuestro mejor pollo asado servido con nuestra salsa artesanal de limón y pimienta.",
+
+        productCarbonaraName: "Espaguetis a la Carbonara",
+        productCarbonaraDescription:
+            "Pasta fresca de espaguetis elaborada con nuestra tradicional salsa carbonara.",
+
+        productPaellaName: "Paella de Marisco",
+        productPaellaDescription: "Una paella tradicional española servida con variedad de mariscos",
+
+        productCalamariName: "Calamares Fritos",
+        productCalamariDescription: "Anillas de calamar rebozadas, servidas con un borde de limón.",
+
+        productSoupName: "Sopa de Jamón Ibérico",
+        productSoupDescription: "Nuestra sopa casera servida con un huevo cocido y jamón ibérico.",
+
+        productMusselsMariniereName: "Mejillones a la Marinera",
+        productMusselsMarinièreDescription: "Mejillones cocinados en nuestra salsa marinera casera fresca.",
+
+        productPizzaName: "Pizza Margarita",
+        productPizzaDescription: "Nuestra base de pizza casera con tomate, mozzarella fresca y albahaca.",
+
+        productLasagnaName: "Lasaña Boloñesa",
+        productLasagnaDescription: "Nuestra lasaña casera hecha con salsa boloñesa y bechamel.",
+
+        productSalmonName: "Salmón a la Parrilla",
+        productSalmonDescription:
+            "Un filete de salmón fresco a la parrilla a la perfección y servido con nuestra cremosa sopa de calabaza.",
+
+        productEntrecoteBeefName: "Entrecot de Ternera",
+        productentrecoteBeefDescription: "Entrecot de ternera a la parrilla y salado",
+
+        productFrenchFriesName: "Guarnición de Patatas Fritas",
+        productFrenchFriesDescription: "Una guarnición salada de nuestras mejores patatas fritas",
+
+        productGarlicBreadName: "Pan de Ajo",
+        productGarlicBreadDescription: "Rebanadas de nuestro crujiente pan de ajo con mantequilla.",
+
+        productEggFlanName: "Flan de Huevo",
+        productEggFlanDescription:
+            "Flan casero servido con nuestro caramelo líquido artesanal y la clásica galleta napolitana.",
+
+        productCremaCatalanaName: "Crema Catalana",
+        productCremaCatalanaDescription:
+            "Nuestro postre tradicional español servido con azúcar caramelizado.",
+
+        productPannaCottaName: "Panna Cotta",
+        productPannaCottaDescription: "Panna cotta casera servida con coulis de frutos rojos.",
+
+        productCheesecakeName: "Tarta de Queso",
+        productCheesecakeDescription:
+            "Nuestra cremosa tarta de queso casera servida con mermelada de arándanos",
+
+        productBrownieName: "Brownie de Chocolate",
+        productBrownieDescription:
+            "Nuestro brownie artesanal perfectamente horneado con helado artesanal de vainilla.",
     },
 
     fr: {
@@ -678,294 +819,436 @@ const TEXTS = {
         menusPageNavLabel: "MENU",
         cartPageNavLabel: "PANIER",
 
-        lodingTextLogoutUser: "Fermeture du profil...",
-        logoutButton: "Se déconnecter",
+        lodingTextLogoutUser: "Fermeture du Profil...",
+        logoutButton: "Se Déconnecter",
         loadingTextLogoutButton: "Déconnexion...",
-        loginButton: "Se connecter",
-        registerButton: "S’inscrire",
+        loginButton: "Se Connecter",
+        registerButton: "S'inscrire",
 
         toastErrorLogout: "Échec de la déconnexion",
 
         profilePageButton: "Profil",
 
-        // PAGE DE CONNEXION
-        h1LoginPage: "Connexion",
+        // LOGIN PAGE
+        h1LoginPage: "Se Connecter",
 
         toastLoginError: "Échec de la connexion",
-        loadingLoginButtonText: "Connexion en cours...",
+        loadingLoginButtonText: "Connexion...",
 
-        // PAGE D’INSCRIPTION
-        h1RegisterPage: "Rejoignez-nous",
+        // REGISTER PAGE
+        h1RegisterPage: "Rejoignez-Nous",
 
-        registerButtonText: "S’inscrire",
-        loadingRegisterButtonText: "Inscription en cours...",
+        registerButtonText: "S'inscrire",
+        loadingRegisterButtonText: "Inscription...",
 
         namePlaceholderFieldText: "Entrez votre nom",
-        emailPlaceholderFieldText: "Entrez votre e-mail",
+        emailPlaceholderFieldText: "Entrez votre email",
         addressPlaceholderFieldText: "Adresse de livraison",
         passwordPlaceholderFieldText: "Entrez votre mot de passe",
         confirmPasswordPlaceholderFieldText: "Répétez votre mot de passe",
 
-        toastRegisterError: "Échec de l’inscription",
+        toastRegisterError: "Échec de l'inscription",
 
-        // PAGE D’ACCUEIL
+        // HOME PAGE
         toastWelcomeRegister: "Bienvenue",
         toastLoginSuccess: "Connexion réussie ✔",
         toastLogoutSuccess: "Déconnexion réussie ✔",
 
         h1HomePage: "ReservApp",
 
-        // PAGE DU MENU
-        fetchMessageError: "Erreur lors du chargement des produits. Réessayez.",
-        allCategoriesFilter: "Toutes les catégories",
+        // MENUPAGE
+        fetchMessageError: "Erreur de chargement des produits. Réessayez.",
+        allCategoriesFilter: "Toutes les Catégories",
         h1MenuPage: "MENU",
 
-        loadingTextRefreshProductsButton: "Actualisation des produits...",
+        loadingTextRefreshProductsButton: "Actualisation des Produits...",
         textRefreshProductsButton: "Actualiser",
-        clearFilterButton: "Effacer le filtre",
+        clearFilterButton: "Effacer le Filtre",
 
-        // PAGE DE RÉSERVATION
-        h1BookingPage: "RÉSERVATION",
+        // BOOKING PAGE
+        h1BookingPage: "RÉSERVATIONS",
 
-        confirmBookingTitle: "Vérifier et confirmer",
-        userNameConfirmText: "Nom de la réservation",
+        confirmBookingTitle: "Réviser et Confirmer",
+        userNameConfirmText: "Nom de la Réservation",
         dateConfirmText: "Date",
         timeConfirmText: "Heure",
-        customersConfirmText: "Clients",
-        highChairConfirmText: "Chaise haute ?",
-        aditionalMessageConfirmText: "Message supplémentaire",
+        customersConfirmText: "Convives",
+        highChairConfirmText: "Chaise Haute?",
+        aditionalMessageConfirmText: "Message Supplémentaire",
         confirmButtonModal: "Confirmer",
         loadingTextConfirmButtonModal: "Réservation...",
 
         bookingTimeText: "Heure",
-        bookingTimePlaceholder: "Sélectionnez l’heure",
-        bookingCustomersText: "Clients",
-        bookingCustomersPlaceholder: "Sélectionnez le nombre de personnes",
+        bookingTimePlaceholder: "Sélectionnez l'Heure",
+        bookingCustomersText: "Convives",
+        bookingCustomersPlaceholder: "Sélectionnez les Convives",
 
-        bookingHighChairTitle: "Ajouter une chaise haute",
+        bookingHighChairTitle: "Ajouter une Chaise Haute",
         bookingHighChairDescription: "Gratuit",
 
-        bookingAditionalMessagePlaceholder: "Des demandes particulières ?",
+        bookingAditionalMessagePlaceholder: "Des demandes spéciales?",
 
-        bookingMaxCapacityTableTitle: "Capacité max. :",
-        bookingTableTypeTitle: "Type de table :",
+        bookingMaxCapacityTableTitle: "Capacité Max.:",
+        bookingTableTypeTitle: "Type de Table:",
 
-        squareTableForm: "Table carrée",
-        roundTableForm: "Table ronde",
-        rectangularTableForm: "Table rectangulaire",
+        squareTableForm: "Table Carrée",
+        roundTableForm: "Table Ronde",
+        rectangularTableForm: "Table Rectangulaire",
 
-        bookingTableWifiText: "Wifi :",
+        bookingTableWifiText: "Wifi:",
 
-        bookingSelectTableButton: "Choisir la table",
+        bookingSelectTableButton: "Sélectionner la Table",
 
-        toastBookingSuccess: "Réservation terminée",
-        toastBookingUnavailable: "Échec : cette table est déjà réservée.",
-        toastBookingError: "Échec de la réservation. Réessayez.",
+        bookingButtonConfirmText: "Réserver",
+        bookingButtonResetForm: "Réinitialiser le Formulaire",
 
-        // PAGE DES COMMANDES
+        toastBookingSuccess: "Réservation Confirmée",
+        toastBookingUnavailable: "Réservation Échouée: Cette table est déjà réservée.",
+        toastBookingError: "Réservation Échouée. Réessayez",
+
+        // ORDERS PAGE
         h1OrdersPage: "LIVRAISON",
-        smallOrdersPageSubtitle: "Profitez de notre menu depuis chez vous.",
+        smallOrdersPageSubtitle: "Profitez de notre menu dans le confort de votre maison.",
 
-        addProductToCartButton: "Ajouter au panier",
-        removeProductToCartButton: "Retirer du panier",
+        ordersPageInputPlaceholder: "Rechercher des Produits...",
+
+        addProductToCartButton: "Ajouter au Panier",
+        removeProductToCartButton: "Retirer du Panier",
         loadingTextAddingProductsToCartButton: "Ajout...",
-        loadingTextRemovingProductsFromCartButton: "Suppression...",
-        addOneMoreProductToCartButton: "Ajouter un autre",
+        loadingTextRemovingProductsFromCartButton: "Retrait...",
+        addOneMoreProductToCartButton: "Ajouter un",
         removeOneMoreProductFromCartButton: "Retirer un",
 
         toastAddedProductToCart: "Ajouté ✔",
-        toastQuantityProductUpdatedToCart: "Panier mis à jour ✔",
+        toastQuantityProductUpdatedToCart: "Panier mis à jour avec succès ✔",
         toastRemovedProductFromCart: "Article retiré du panier ✔",
-        toastErrorAddingProductToCart: "Erreur : impossible d’ajouter au panier",
-        toastErrorQuantityProductUpdatedToCart: "Erreur : mise à jour échouée",
-        toastErrorRemovingProductFromCart: "Erreur : impossible de retirer l’article",
+        toastErrorAddingProductToCart: "Erreur: Impossible d'ajouter au panier",
+        toastErrorQuantityProductUpdatedToCart: "Erreur: Échec de la mise à jour de la quantité",
+        toastErrorRemovingProductFromCart: "Erreur: Impossible de retirer l'article du panier",
 
-        // PAGE DU PANIER
+        // CART PAGE
         h1CartPage: "VOTRE PANIER",
-        confirmModalCartTitle: "Confirmation de la commande",
-        confirmModalCartMessage: "Presque terminé ! Confirmez votre commande pour continuer",
+        confirmModalCartTitle: "Confirmation de Commande",
+        confirmModalCartMessage: "Vous y êtes presque! Confirmez votre commande pour continuer",
 
         confirmButtonCartModal: "Confirmer",
         loadingConfirmButtonCartModal: "Traitement...",
         cancelButtonCartModal: "Retour",
 
-        accordionQtyText: "Qté :",
-        accordionDescriptionText: "Description :",
-        accordionPriceText: "Prix :",
+        accordionQtyText: "Qté:",
+        accordionDescriptionText: "Description:",
+        accordionPriceText: "Prix:",
 
-        noProductsTitle: "Votre panier est vide",
-        goToOrdersCartButton: "Commander maintenant",
+        noProductsTitle: "Votre Panier est vide",
+        goToOrdersCartButton: "Commander Maintenant",
 
         toastCartRemovedSuccess: "Panier vidé ✔",
-        toastCartRemovedError: "Erreur lors de la suppression des articles",
+        toastCartRemovedError: "Échec de la suppression de tous les articles",
 
-        // PAGE DE PROFIL
+        buttonCartPageOpenPaymentModal: "Commander",
+        buttonCartPageDeleteCart: "Vider le Panier",
+
+        // PROFILE PAGE
         h1ProfilePage: "Bienvenue, ",
-        userDataSectionTitle: "Informations personnelles",
-        bookingsDataSectionTitle: "Vos réservations",
-        ordersDataSectionTitle: "Vos commandes",
+        userDataSectionTitle: "Informations Personnelles",
+        bookingsDataSectionTitle: "Vos Réservations",
+        ordersDataSectionTitle: "Vos Commandes",
 
-        buttonChangeAvatar: "Changer d’avatar",
+        buttonChangeAvatar: "Changer l'Avatar",
 
-        // ----- DONNÉES UTILISATEUR
+        //  ----- USER DATA
         nameFieldText: "Nom",
-        fullNameFieldText: "Nom complet",
-        emailFieldText: "E-mail",
+        fullNameFieldText: "Nom Complet",
+        emailFieldText: "Email",
         addressFieldText: "Adresse",
-        passwordFieldText: "Mot de passe",
-        confirmPasswordFieldText: "Confirmer le mot de passe",
-        userDataModalTitle: "Confirmer le changement de données",
-        userDataModalMessage: "Confirmer le changement de :",
+        passwordFieldText: "Mot de Passe",
+        confirmPasswordFieldText: "Confirmer le Mot de Passe",
+        userDataModalTitle: "Confirmer le Changement de Données",
+        userDataModalMessage: "Confirmer le changement: ",
         userDataModalMessageNexo: "en",
-        userDataModalConfirmText: "Changer",
+        userDataModalConfirmText: "Modifier",
         loadingUserDataModalConfirmText: "Modification...",
         userDataModalCancelText: "Annuler",
 
-        userDataEditButtonText: "Modifier",
-        userDataChangeButtonText: "Enregistrer",
+        userDataEditButtonText: "Éditer",
+        userDataChangeButtonText: "Modifier",
 
-        toastUserDataChangeSuccess: "Profil mis à jour ✔",
+        toastUserDataChangeSuccess: "Profil mis à jour avec succès ✔",
         toastUserDataChangeError: "Erreur lors de la mise à jour du profil",
 
-        // ------ DONNÉES DES RÉSERVATIONS
+        //  ------ BOOKING DATA
         bookingDataTitle1: "Vos prochaines réservations",
         bookingDataTitle2: "Vos visites passées",
-        bookingDataNoPendingBookingsFound: "Aucune réservation en attente.",
-        bookingDataNoPastVisitsFound: "Aucune visite passée.",
+        bookingDataNoPendingBookingsFound: "Vous n'avez pas de réservations en attente.",
+        bookingDataNoPastVisitsFound: "Vous n'avez pas de visites passées",
 
         buttonBookingDataMakeABook: "Réserver maintenant",
         buttonBookingDataCloseModalInfo: "Fermer",
-        buttonBookingDataCancelReservation: "Annuler la réservation",
+        buttonBookingDataCancelReservation: "Annuler la Réservation",
 
-        bookingDataModalDeletingTitle: "Supprimer la réservation",
+        bookingDataModalDeletingTitle: "Supprimer la Réservation",
         bookingDataModalDeletingbutton: "Supprimer",
         loadingBookingDataModalDeletingbutton: "Suppression...",
 
-        bookingDataModalInfotitle: "Détails de la réservation",
-        bookingDataModalInfoMessageText1: "Supprimer votre réservation pour ",
-        bookingDataModalInfoMessageCustomer1: "Client",
-        bookingDataModalInfoMessageCustomer2: "Clients",
+        bookingDataModalInfotitle: "Détails de la Réservation",
+        bookingDataModalInfoMessageText1: "Supprimer votre Réservation pour ",
+        bookingDataModalInfoMessageCustomer1: "Convive",
+        bookingDataModalInfoMessageCustomer2: "Convives",
 
-        bookingDataModalInfoDateText: "Date de la réservation :",
-        bookingDataModalInfoTimeText: "Heure de la réservation :",
-        bookingDataModalInfoPartySizeText: "Taille du groupe :",
-        bookingDataModalInfoHighChairText: "Chaise haute nécessaire ?",
+        bookingDataModalInfoDateText: "Date de réservation:",
+        bookingDataModalInfoTimeText: "Heure de réservation:",
+        bookingDataModalInfoPartySizeText: "Nombre de personnes:",
+        bookingDataModalInfoHighChairText: "Chaise haute nécessaire?",
 
-        toastBookingDataDeltingBookingError: "Erreur lors de la suppression de la réservation",
+        toastBookingDataDeltingBookingError: "Erreur lors de la suppression de la Réservation",
 
-        // ----- DONNÉES DES COMMANDES
-        ordersDataTitle1: "Commandes en attente",
-        ordersDataTitle2: "Commandes terminées",
+        //  -----ORDERS DATA
+        ordersDataTitle1: "Commandes en Attente",
+        ordersDataTitle2: "Commandes Complétées",
 
-        ordersDataInfoModalMessage: "Souhaitez-vous annuler la commande de ",
+        ordersDataInfoModalMessage: "Voulez-vous annuler la commande de ",
 
-        toastOrdersDataSuccess: "Commande annulée ✔",
-        toastOrdersDataError: "Erreur lors de l’annulation de la commande.",
+        toastOrdersDataSuccess: "Commande annulée avec succès ✔",
+        toastOrdersDataError: "Erreur lors de l'annulation de la commande.",
 
-        ordersDataNotPendingOrdersText: "Aucune commande en attente.",
-        ordersDataNotOrders: "Aucune commande.",
+        ordersDataNotPendingOrdersText: "Il n'y a pas de commandes en attente.",
+        ordersDataNotOrders: "Il n'y a pas de commandes.",
 
-        ordersDataCancelModalTitle: "Annuler la commande",
+        ordersDataCancelModalTitle: "Annuler la Commande",
         ordersDataCancelModalBackButton: "Retour",
         loadingOrdersDataCancelButton: "Annulation...",
 
-        ordersDataInfoModalTitle: "Détails de la commande",
-        ordersDataInfoModalcreationText: "Date de création :",
-        ordersDataInfoModalProductText: "Produit :",
-        ordersDataInfoModalPriceText: "Prix :",
-        ordersDataInfoModalTotalProductsText: "Total produits :",
-        ordersDataInfoModalTotalCountText: "Total :",
+        ordersDataInfoModalTitle: "Détails de la Commande",
+        ordersDataInfoModalcreationText: "Date de Création:",
+        ordersDataInfoModalProductText: "Produit:",
+        ordersDataInfoModalPriceText: "Prix:",
+        ordersDataInfoModalTotalProductsText: "Total Produits:",
+        ordersDataInfoModalTotalCountText: "Total:",
         buttonOrdersDataInfomodalCloseText: "Fermer",
 
         buttonOrdersDataInfoCancelText: "Annuler",
 
-        // PIED DE PAGE
-        copyrightText: "ReservApp. Tous droits réservés.",
+        // Footer
+        copyrightText: "ReservApp. Tous droits réservés",
 
-        // MESSAGES GÉNÉRAUX
+        // Messages Généraux
         affirmationText: "Oui",
         NegationText: "Non",
 
-        // VALIDATION DES CHAMPS
-        emailIsRequiredField: "Le champ e-mail est requis",
-        emailNotValidField1: "E-mail invalide (manque '@')",
-        emailNotValidField2: "E-mail invalide (manque '.')",
-        emailTooShortField: "E-mail trop court (min. 5 caractères)",
-        emailTooLongField: "E-mail trop long (max. 50 caractères)",
+        // FIELDS VERIFICATOR
+        emailIsRequiredField: "Le champ Email est Obligatoire",
+        emailNotValidField1: "Email non valide ('@' manquant)",
+        emailNotValidField2: "Email non valide ('.' manquant)",
+        emailTooShortField: "Email trop court (min. 5 caractères)",
+        emailTooLongField: "Email trop long (max. 50 caractères)",
 
-        passwordIsRequiredField: "Le champ mot de passe est requis",
+        passwordIsRequiredField: "Le champ Mot de Passe est Obligatoire",
         passwordTooShortField: "Mot de passe trop court (min. 9 caractères)",
         passwordTooLongField: "Mot de passe trop long (max. 30 caractères)",
 
-        confirmPasswordIsRequiredField: "Le champ de confirmation est requis",
+        confirmPasswordIsRequiredField: "Le champ Confirmer le Mot de Passe est Obligatoire",
         doNotMatchPasswordsFields: "Les mots de passe ne correspondent pas",
 
-        nameIsRequiredField: "Le champ nom est requis",
+        nameIsRequiredField: "Le champ Nom est Obligatoire",
         nameIsTooShortField: "Nom trop court (min. 4 caractères)",
         nameIsTooLongField: "Nom trop long (max. 30 caractères)",
 
-        addressIsRequiredField: "Le champ adresse est requis",
+        addressIsRequiredField: "Le champ Adresse est Obligatoire",
         addressTooShortField: "Adresse trop courte (min. 6 caractères)",
         addressTooLongField: "Adresse trop longue (max. 60 caractères)",
 
-        bookingDateIsRequiredField: "Vous devez choisir une date de réservation",
-        bookingTimeIsRequiredField: "Le champ heure est requis",
-        bookingCustomersIsRequiredField: "Le champ clients est requis",
-        bookingTableIsRequiredField: "Vous devez choisir une table",
+        bookingDateIsRequiredField: "Vous devez choisir une Date de Réservation",
+        bookingTimeIsRequiredField: "Le champ Heure est Obligatoire",
+        bookingCustomersIsRequiredField: "Le champ Convives est Obligatoire",
+        bookingTableIsRequiredField: "Vous devez choisir une Table",
 
-        profileNameNotEmptyField: "Le nom ne peut pas être vide",
-        profileEmailNotEmptyField: "L’e-mail ne peut pas être vide",
-        profileAddressNotEmptyField: "L’adresse ne peut pas être vide",
+        profileNameNotEmptyField: "Le champ Nom ne doit pas être vide",
+        profileEmailNotEmptyField: "L'Email ne doit pas être vide",
+        profileAddressNotEmptyField: "L'Adresse ne doit pas être vide",
 
-        // CARTES CTA
-        cardDataMenuTitle: "Découvrez notre menu",
+        //  CTA CARDS DATA
+        cardDataMenuTitle: "Consultez notre Menu",
         cardDataMenuDescription: "Parcourez notre sélection complète de plats et boissons.",
-        cardDataMenuButtonText: "Voir le menu",
+        cardDataMenuButtonText: "Voir le Menu",
 
-        cardDataLoginTitle: "Bon retour",
+        cardDataLoginTitle: "Bon Retour",
         cardDataLoginDescription: "Connectez-vous pour gérer vos commandes et réservations.",
-        cardDataLoginButtonText: "Se connecter",
+        cardDataLoginButtonText: "Se Connecter",
 
-        cardDataBookingTitle: "Réservez votre table",
-        cardDataBookingDescription: "Choisissez la date, l’heure, et nous vous garderons une place.",
-        cardDataBookingButtonText: "Réserver maintenant",
+        cardDataBookingTitle: "Réservez votre Table",
+        cardDataBookingDescription: "Choisissez votre date, heure et nous vous garderons une place.",
+        cardDataBookingButtonText: "Réserver Maintenant",
 
-        cardDataOrdersTitle: "Vous avez faim ?",
-        cardDataOrdersDescription: "Savourez nos meilleurs plats depuis chez vous.",
-        cardDataOrdersButtonText: "Commander maintenant",
+        cardDataOrdersTitle: "Faim? On s'occupe de Vous",
+        cardDataOrdersDescription: "Profitez de nos meilleurs plats dans le confort de votre maison.",
+        cardDataOrdersButtonText: "Commander Maintenant",
+
+        // PRODUCTS DATA
+        productCokeName: "Coca-Cola",
+        productCokeDescription:
+            "Bouteille de Coca-Cola servie avec des glaçons et une tranche de citron vert.",
+
+        productOrangeFantaName: "Fanta Orange",
+        productOrangeFantaDescription:
+            "Bouteille de Fanta Orange servie avec des glaçons et une tranche d'orange.",
+
+        productMineralWaterName: "Eau Minérale",
+        productMineralWaterDescription: "Bouteille d'Eau Minérale servie avec des glaçons.",
+
+        productSparklingWaterName: "Eau Gazeuse",
+        productSparklingWaterDescription:
+            "Bouteille d'Eau Gazeuse servie avec des glaçons et une tranche de citron vert.",
+
+        productBeerName: "Bière Fuller's",
+        productBeerDescription: "Demi-pinte de notre Ale Premium (Fuller's).",
+
+        productOrangeJuiceName: "Jus d'Orange Pressé",
+        productOrangeJuiceDescription: "Un verre de jus d'orange fraîchement pressé",
+
+        productLemonFantaName: "Fanta Citron",
+        productLemonFantaDescription:
+            "Bouteille de Fanta Citron servie avec des glaçons et une tranche de citron.",
+
+        productRedWineName: "Verre de Vin Rouge",
+        productRedWineDescription: "Notre Vin Rouge de la Maison.",
+
+        productWhiteWineName: "Verre de Vin Blanc",
+        productWhiteWineDescription: "Notre Vin Blanc de la Maison",
+
+        productCoffeeName: "Expresso",
+        productCoffeDescription: "Notre Café Expresso préparé avec les meilleurs grains de café arabica.",
+
+        productToastName: "Tartine à la Tomate",
+        productDescription: "Pain grillé avec tomate, ail et notre meilleure huile d'olive espagnole.",
+
+        productCheeseName: "Plateau de Fromages",
+        productCheeseDescription: "Notre meilleure sélection de fromages nationaux avec accompagnements.",
+
+        productCroquettesName: "Croquettes au Jambon",
+        productCroquettesDescription:
+            "Les meilleures croquettes au jambon maison que nous ayons jamais faites.",
+
+        productIberianHamName: "Jambon Ibérique",
+        productIberianHamDescription: "100g de notre meilleur jambon ibérique 5J, tranché à la main.",
+
+        productBravasName: "Patatas Bravas",
+        productBravasDescription: "Nos pommes de terre sélectionnées et la meilleure sauce brava du monde.",
+
+        productMixedSaladName: "Salade Traditionnelle",
+        productMixedSaladDescription:
+            "Un bol de laitue, tomate, oignon et olives. Peut être servi avec vinaigrette.",
+
+        productClassicBurgerName: "Burger au Bœuf",
+        productClassicBurgerDescription:
+            "Le burger au bœuf numéro un avec notre meilleur fromage cheddar, tomate et laitue.",
+
+        productPorkSteakSirloinName: "Filet Mignon Ibérique",
+        productPorkSteakSirloinDescription:
+            "Filet mignon de porc grillé servi avec notre meilleure sauce à la menthe.",
+
+        productRisottoName: "Risotto aux Cèpes",
+        productRisottoDescription:
+            "Le risotto le plus crémeux que nous ayons fait servi avec des tranches de cèpes.",
+
+        productVeggieBurgerName: "Burger Végétarien",
+        productVeggieBurgerDescription:
+            "Un burger végétal juteux à base de betterave, protéine de pois, carotte et pomme, servi dans un pain brioché moelleux avec oignon rouge et laitue croquante.",
+
+        productSteakTartareName: "Steak Tartare",
+        productSteakTartareDescription: "Steak Tartare servi avec jaune d'œuf et fumé au bois de chocolat.",
+
+        productTakosName: "Tacos au Poulet",
+        productTakosDescription: "Tacos au poulet mariné servis avec sauce piquante et pico de gallo frais.",
+
+        productRoastChickenName: "Poulet Rôti",
+        productRoastChickenDescription:
+            "Notre meilleur poulet rôti servi avec notre sauce artisanale citron/poivre.",
+
+        productCarbonaraName: "Spaghetti Carbonara",
+        productCarbonaraDescription:
+            "Pâtes fraîches spaghetti préparées avec notre sauce carbonara traditionnelle.",
+
+        productPaellaName: "Paella aux Fruits de Mer",
+        productPaellaDescription:
+            "Une paella traditionnelle espagnole servie avec une variété de fruits de mer",
+
+        productCalamariName: "Calamars Frits",
+        productCalamariDescription: "Anneaux de calamars panés, servis avec un quartier de citron.",
+
+        productSoupName: "Soupe au Jambon Ibérique",
+        productSoupDescription: "Notre soupe maison servie avec un œuf dur et du jambon ibérique.",
+
+        productMusselsMariniereName: "Moules Marinières",
+        productMusselsMarinièreDescription: "Moules cuisinées dans notre sauce marinière maison fraîche.",
+
+        productPizzaName: "Pizza Margherita",
+        productPizzaDescription: "Notre base de pizza maison avec tomate, mozzarella fraîche et basilic.",
+
+        productLasagnaName: "Lasagne Bolognaise",
+        productLasagnaDescription: "Notre lasagne maison préparée avec sauce bolognaise et béchamel.",
+
+        productSalmonName: "Saumon Grillé",
+        productSalmonDescription:
+            "Un filet de saumon frais grillé à la perfection et servi avec notre velouté de potiron crémeux.",
+
+        productEntrecoteBeefName: "Entrecôte de Bœuf",
+        productentrecoteBeefDescription: "Entrecôte de bœuf grillée et salée",
+
+        productFrenchFriesName: "Accompagnement de Frites",
+        productFrenchFriesDescription: "Un accompagnement salé de nos meilleures frites",
+
+        productGarlicBreadName: "Pain à l'Ail",
+        productGarlicBreadDescription: "Tranches de notre pain à l'ail croustillant et beurré.",
+
+        productEggFlanName: "Flan aux Œufs",
+        productEggFlanDescription:
+            "Flan maison servi avec notre caramel liquide artisanal et le classique biscuit napolitain.",
+
+        productCremaCatalanaName: "Crème Catalane",
+        productCremaCatalanaDescription: "Notre dessert traditionnel espagnol servi avec sucre caramélisé.",
+
+        productPannaCottaName: "Panna Cotta",
+        productPannaCottaDescription: "Panna cotta maison servie avec coulis de fruits rouges.",
+
+        productCheesecakeName: "Cheesecake",
+        productCheesecakeDescription: "Notre cheesecake maison crémeux servi avec confiture de myrtilles",
+
+        productBrownieName: "Brownie au Chocolat",
+        productBrownieDescription:
+            "Notre brownie artisanal parfaitement cuit avec glace artisanale à la vanille.",
     },
 
     it: {
         // BARRA DI NAVIGAZIONE
         userReplaceName: "Utente",
-        toastLogoutError: "Disconnessione non riuscita.",
+        toastLogoutError: "Disconnessione fallita.",
 
         bookingPageNavLabel: "PRENOTAZIONI",
         ordersPageNavLabel: "ORDINI",
         menusPageNavLabel: "MENU",
         cartPageNavLabel: "CARRELLO",
 
-        lodingTextLogoutUser: "Chiusura profilo...",
+        lodingTextLogoutUser: "Chiusura Profilo...",
         logoutButton: "Disconnetti",
         loadingTextLogoutButton: "Disconnessione...",
         loginButton: "Accedi",
         registerButton: "Registrati",
 
-        toastErrorLogout: "Errore durante la disconnessione",
+        toastErrorLogout: "Disconnessione fallita",
 
         profilePageButton: "Profilo",
 
-        // PAGINA DI ACCESSO
+        // LOGIN PAGE
         h1LoginPage: "Accedi",
 
-        toastLoginError: "Accesso non riuscito",
-        loadingLoginButtonText: "Accesso in corso...",
+        toastLoginError: "Accesso fallito",
+        loadingLoginButtonText: "Accesso...",
 
-        // PAGINA DI REGISTRAZIONE
-        h1RegisterPage: "Unisciti a noi",
+        // REGISTER PAGE
+        h1RegisterPage: "Unisciti a Noi",
 
-        registerButtonText: "Registrati",
-        loadingRegisterButtonText: "Registrazione in corso...",
+        registerButtonText: "Iscriviti",
+        loadingRegisterButtonText: "Iscrizione...",
 
         namePlaceholderFieldText: "Inserisci il tuo nome",
         emailPlaceholderFieldText: "Inserisci la tua email",
@@ -973,84 +1256,89 @@ const TEXTS = {
         passwordPlaceholderFieldText: "Inserisci la tua password",
         confirmPasswordPlaceholderFieldText: "Ripeti la tua password",
 
-        toastRegisterError: "Registrazione non riuscita",
+        toastRegisterError: "Registrazione fallita",
 
-        // PAGINA HOME
+        // HOME PAGE
         toastWelcomeRegister: "Benvenuto",
         toastLoginSuccess: "Accesso effettuato con successo ✔",
-        toastLogoutSuccess: "Disconnessione riuscita ✔",
+        toastLogoutSuccess: "Disconnessione effettuata con successo ✔",
 
         h1HomePage: "ReservApp",
 
-        // PAGINA MENU
-        fetchMessageError: "Errore durante il caricamento dei prodotti. Riprova.",
-        allCategoriesFilter: "Tutte le categorie",
+        // MENUPAGE
+        fetchMessageError: "Errore nel caricamento dei prodotti. Riprova.",
+        allCategoriesFilter: "Tutte le Categorie",
         h1MenuPage: "MENU",
 
-        loadingTextRefreshProductsButton: "Aggiornamento prodotti...",
+        loadingTextRefreshProductsButton: "Aggiornamento Prodotti...",
         textRefreshProductsButton: "Aggiorna",
-        clearFilterButton: "Pulisci filtro",
+        clearFilterButton: "Cancella Filtro",
 
-        // PAGINA PRENOTAZIONI
-        h1BookingPage: "PRENOTAZIONE",
+        // BOOKING PAGE
+        h1BookingPage: "PRENOTAZIONI",
 
         confirmBookingTitle: "Rivedi e Conferma",
-        userNameConfirmText: "Nome della prenotazione",
+        userNameConfirmText: "Nome della Prenotazione",
         dateConfirmText: "Data",
         timeConfirmText: "Ora",
-        customersConfirmText: "Clienti",
+        customersConfirmText: "Commensali",
         highChairConfirmText: "Seggiolone?",
-        aditionalMessageConfirmText: "Messaggio aggiuntivo",
+        aditionalMessageConfirmText: "Messaggio Aggiuntivo",
         confirmButtonModal: "Conferma",
         loadingTextConfirmButtonModal: "Prenotazione...",
 
         bookingTimeText: "Ora",
-        bookingTimePlaceholder: "Seleziona ora",
-        bookingCustomersText: "Clienti",
-        bookingCustomersPlaceholder: "Seleziona numero di persone",
+        bookingTimePlaceholder: "Seleziona Ora",
+        bookingCustomersText: "Commensali",
+        bookingCustomersPlaceholder: "Seleziona Commensali",
 
-        bookingHighChairTitle: "Aggiungi seggiolone",
+        bookingHighChairTitle: "Aggiungi Seggiolone",
         bookingHighChairDescription: "Gratuito",
 
-        bookingAditionalMessagePlaceholder: "Richieste particolari?",
+        bookingAditionalMessagePlaceholder: "Richieste speciali?",
 
-        bookingMaxCapacityTableTitle: "Capacità max:",
-        bookingTableTypeTitle: "Tipo di tavolo:",
+        bookingMaxCapacityTableTitle: "Capacità Max:",
+        bookingTableTypeTitle: "Tipo di Tavolo:",
 
-        squareTableForm: "Tavolo quadrato",
-        roundTableForm: "Tavolo rotondo",
-        rectangularTableForm: "Tavolo rettangolare",
+        squareTableForm: "Tavolo Quadrato",
+        roundTableForm: "Tavolo Rotondo",
+        rectangularTableForm: "Tavolo Rettangolare",
 
         bookingTableWifiText: "Wifi:",
 
-        bookingSelectTableButton: "Seleziona tavolo",
+        bookingSelectTableButton: "Seleziona Tavolo",
 
-        toastBookingSuccess: "Prenotazione completata",
-        toastBookingUnavailable: "Errore: questo tavolo è già prenotato.",
-        toastBookingError: "Prenotazione non riuscita. Riprova.",
+        bookingButtonConfirmText: "Prenota",
+        bookingButtonResetForm: "Reimposta Modulo",
 
-        // PAGINA ORDINI
+        toastBookingSuccess: "Prenotazione Completata",
+        toastBookingUnavailable: "Prenotazione Fallita: Questo tavolo è già prenotato.",
+        toastBookingError: "Prenotazione Fallita. Riprova",
+
+        // ORDERS PAGE
         h1OrdersPage: "CONSEGNA",
         smallOrdersPageSubtitle: "Goditi il nostro menu comodamente da casa.",
 
-        addProductToCartButton: "Aggiungi al carrello",
-        removeProductToCartButton: "Rimuovi dal carrello",
+        ordersPageInputPlaceholder: "Cerca Prodotti...",
+
+        addProductToCartButton: "Aggiungi al Carrello",
+        removeProductToCartButton: "Rimuovi dal Carrello",
         loadingTextAddingProductsToCartButton: "Aggiunta...",
         loadingTextRemovingProductsFromCartButton: "Rimozione...",
         addOneMoreProductToCartButton: "Aggiungi uno",
         removeOneMoreProductFromCartButton: "Rimuovi uno",
 
         toastAddedProductToCart: "Aggiunto ✔",
-        toastQuantityProductUpdatedToCart: "Carrello aggiornato ✔",
+        toastQuantityProductUpdatedToCart: "Carrello aggiornato con successo ✔",
         toastRemovedProductFromCart: "Articolo rimosso dal carrello ✔",
-        toastErrorAddingProductToCart: "Errore: impossibile aggiungere al carrello",
-        toastErrorQuantityProductUpdatedToCart: "Errore: aggiornamento quantità non riuscito",
-        toastErrorRemovingProductFromCart: "Errore: impossibile rimuovere l’articolo",
+        toastErrorAddingProductToCart: "Errore: Impossibile aggiungere al carrello",
+        toastErrorQuantityProductUpdatedToCart: "Errore: Aggiornamento quantità fallito",
+        toastErrorRemovingProductFromCart: "Errore: Impossibile rimuovere l'articolo dal carrello",
 
-        // PAGINA CARRELLO
+        // CART PAGE
         h1CartPage: "IL TUO CARRELLO",
-        confirmModalCartTitle: "Conferma dell’ordine",
-        confirmModalCartMessage: "Quasi fatto! Conferma il tuo ordine per continuare",
+        confirmModalCartTitle: "Conferma Ordine",
+        confirmModalCartMessage: "Ci sei quasi! Conferma il tuo ordine per continuare",
 
         confirmButtonCartModal: "Conferma",
         loadingConfirmButtonCartModal: "Elaborazione...",
@@ -1060,146 +1348,289 @@ const TEXTS = {
         accordionDescriptionText: "Descrizione:",
         accordionPriceText: "Prezzo:",
 
-        noProductsTitle: "Il tuo carrello è vuoto",
-        goToOrdersCartButton: "Ordina ora",
+        noProductsTitle: "Il tuo Carrello è vuoto",
+        goToOrdersCartButton: "Ordina Ora",
 
         toastCartRemovedSuccess: "Carrello svuotato ✔",
-        toastCartRemovedError: "Errore durante la rimozione degli articoli",
+        toastCartRemovedError: "Impossibile rimuovere tutti gli articoli",
 
-        // PAGINA PROFILO
+        buttonCartPageOpenPaymentModal: "Ordina",
+        buttonCartPageDeleteCart: "Svuota Carrello",
+
+        // PROFILE PAGE
         h1ProfilePage: "Benvenuto, ",
-        userDataSectionTitle: "Informazioni personali",
-        bookingsDataSectionTitle: "Le tue prenotazioni",
-        ordersDataSectionTitle: "I tuoi ordini",
+        userDataSectionTitle: "Informazioni Personali",
+        bookingsDataSectionTitle: "Le Tue Prenotazioni",
+        ordersDataSectionTitle: "I Tuoi Ordini",
 
-        buttonChangeAvatar: "Cambia avatar",
+        buttonChangeAvatar: "Cambia Avatar",
 
-        // ----- DATI UTENTE
+        //  ----- USER DATA
         nameFieldText: "Nome",
-        fullNameFieldText: "Nome completo",
+        fullNameFieldText: "Nome Completo",
         emailFieldText: "Email",
         addressFieldText: "Indirizzo",
         passwordFieldText: "Password",
-        confirmPasswordFieldText: "Conferma password",
-        userDataModalTitle: "Conferma modifica dati",
-        userDataModalMessage: "Confermare la modifica di:",
+        confirmPasswordFieldText: "Conferma Password",
+        userDataModalTitle: "Conferma Modifica Dati",
+        userDataModalMessage: "Conferma modifica: ",
         userDataModalMessageNexo: "in",
         userDataModalConfirmText: "Modifica",
-        loadingUserDataModalConfirmText: "Modifica in corso...",
+        loadingUserDataModalConfirmText: "Modifica...",
         userDataModalCancelText: "Annulla",
 
         userDataEditButtonText: "Modifica",
-        userDataChangeButtonText: "Salva modifiche",
+        userDataChangeButtonText: "Cambia",
 
-        toastUserDataChangeSuccess: "Profilo aggiornato ✔",
-        toastUserDataChangeError: "Errore durante l’aggiornamento del profilo",
+        toastUserDataChangeSuccess: "Profilo aggiornato con successo ✔",
+        toastUserDataChangeError: "Errore nell'aggiornamento del profilo",
 
-        // ------ DATI PRENOTAZIONI
+        //  ------ BOOKING DATA
         bookingDataTitle1: "Le tue prossime prenotazioni",
         bookingDataTitle2: "Le tue visite passate",
-        bookingDataNoPendingBookingsFound: "Nessuna prenotazione in sospeso.",
-        bookingDataNoPastVisitsFound: "Nessuna visita precedente.",
+        bookingDataNoPendingBookingsFound: "Non hai prenotazioni in sospeso.",
+        bookingDataNoPastVisitsFound: "Non hai visite passate",
 
         buttonBookingDataMakeABook: "Prenota ora",
         buttonBookingDataCloseModalInfo: "Chiudi",
-        buttonBookingDataCancelReservation: "Annulla prenotazione",
+        buttonBookingDataCancelReservation: "Annulla Prenotazione",
 
-        bookingDataModalDeletingTitle: "Elimina prenotazione",
+        bookingDataModalDeletingTitle: "Elimina Prenotazione",
         bookingDataModalDeletingbutton: "Elimina",
         loadingBookingDataModalDeletingbutton: "Eliminazione...",
 
-        bookingDataModalInfotitle: "Dettagli della prenotazione",
-        bookingDataModalInfoMessageText1: "Elimina la tua prenotazione per ",
-        bookingDataModalInfoMessageCustomer1: "Cliente",
-        bookingDataModalInfoMessageCustomer2: "Clienti",
+        bookingDataModalInfotitle: "Dettagli della Prenotazione",
+        bookingDataModalInfoMessageText1: "Eliminare la tua Prenotazione per ",
+        bookingDataModalInfoMessageCustomer1: "Commensale",
+        bookingDataModalInfoMessageCustomer2: "Commensali",
 
-        bookingDataModalInfoDateText: "Data della prenotazione:",
-        bookingDataModalInfoTimeText: "Ora della prenotazione:",
+        bookingDataModalInfoDateText: "Data prenotazione:",
+        bookingDataModalInfoTimeText: "Ora prenotazione:",
         bookingDataModalInfoPartySizeText: "Numero di persone:",
-        bookingDataModalInfoHighChairText: "Serve un seggiolone?",
+        bookingDataModalInfoHighChairText: "Seggiolone necessario?",
 
-        toastBookingDataDeltingBookingError: "Errore durante l’eliminazione della prenotazione",
+        toastBookingDataDeltingBookingError: "Errore nell'eliminazione della Prenotazione",
 
-        // ----- DATI ORDINI
-        ordersDataTitle1: "Ordini in sospeso",
-        ordersDataTitle2: "Ordini completati",
+        //  -----ORDERS DATA
+        ordersDataTitle1: "Ordini in Attesa",
+        ordersDataTitle2: "Ordini Completati",
 
-        ordersDataInfoModalMessage: "Vuoi annullare l’ordine di ",
+        ordersDataInfoModalMessage: "Vuoi annullare l'ordine di ",
 
-        toastOrdersDataSuccess: "Ordine annullato ✔",
-        toastOrdersDataError: "Errore durante l’annullamento dell’ordine.",
+        toastOrdersDataSuccess: "Ordine annullato con successo ✔",
+        toastOrdersDataError: "Errore nell'annullamento dell'ordine.",
 
-        ordersDataNotPendingOrdersText: "Nessun ordine in sospeso.",
-        ordersDataNotOrders: "Nessun ordine.",
+        ordersDataNotPendingOrdersText: "Non ci sono ordini in attesa.",
+        ordersDataNotOrders: "Non ci sono ordini.",
 
-        ordersDataCancelModalTitle: "Annulla ordine",
+        ordersDataCancelModalTitle: "Annulla Ordine",
         ordersDataCancelModalBackButton: "Indietro",
         loadingOrdersDataCancelButton: "Annullamento...",
 
-        ordersDataInfoModalTitle: "Dettagli dell’ordine",
-        ordersDataInfoModalcreationText: "Data di creazione:",
+        ordersDataInfoModalTitle: "Dettagli dell'Ordine",
+        ordersDataInfoModalcreationText: "Data di Creazione:",
         ordersDataInfoModalProductText: "Prodotto:",
         ordersDataInfoModalPriceText: "Prezzo:",
-        ordersDataInfoModalTotalProductsText: "Totale prodotti:",
+        ordersDataInfoModalTotalProductsText: "Totale Prodotti:",
         ordersDataInfoModalTotalCountText: "Totale:",
         buttonOrdersDataInfomodalCloseText: "Chiudi",
 
         buttonOrdersDataInfoCancelText: "Annulla",
 
-        // FOOTER
-        copyrightText: "ReservApp. Tutti i diritti riservati.",
+        // Footer
+        copyrightText: "ReservApp. Tutti i diritti riservati",
 
-        // MESSAGGI GENERALI
+        // Messaggi Generali
         affirmationText: "Sì",
         NegationText: "No",
 
-        // VALIDAZIONE CAMPI
-        emailIsRequiredField: "Il campo email è obbligatorio",
-        emailNotValidField1: "Email non valida (manca '@')",
-        emailNotValidField2: "Email non valida (manca '.')",
+        // FIELDS VERIFICATOR
+        emailIsRequiredField: "Il campo Email è Obbligatorio",
+        emailNotValidField1: "Email non valida ('@' mancante)",
+        emailNotValidField2: "Email non valida ('.' mancante)",
         emailTooShortField: "Email troppo corta (min. 5 caratteri)",
         emailTooLongField: "Email troppo lunga (max. 50 caratteri)",
 
-        passwordIsRequiredField: "Il campo password è obbligatorio",
+        passwordIsRequiredField: "Il campo Password è Obbligatorio",
         passwordTooShortField: "Password troppo corta (min. 9 caratteri)",
         passwordTooLongField: "Password troppo lunga (max. 30 caratteri)",
 
-        confirmPasswordIsRequiredField: "Il campo conferma password è obbligatorio",
-        doNotMatchPasswordsFields: "Le password non coincidono",
+        confirmPasswordIsRequiredField: "Il campo Conferma Password è Obbligatorio",
+        doNotMatchPasswordsFields: "Le password non corrispondono",
 
-        nameIsRequiredField: "Il campo nome è obbligatorio",
+        nameIsRequiredField: "Il campo Nome è Obbligatorio",
         nameIsTooShortField: "Nome troppo corto (min. 4 caratteri)",
         nameIsTooLongField: "Nome troppo lungo (max. 30 caratteri)",
 
-        addressIsRequiredField: "Il campo indirizzo è obbligatorio",
+        addressIsRequiredField: "Il campo Indirizzo è Obbligatorio",
         addressTooShortField: "Indirizzo troppo corto (min. 6 caratteri)",
         addressTooLongField: "Indirizzo troppo lungo (max. 60 caratteri)",
 
-        bookingDateIsRequiredField: "Devi scegliere una data di prenotazione",
-        bookingTimeIsRequiredField: "Il campo ora è obbligatorio",
-        bookingCustomersIsRequiredField: "Il campo clienti è obbligatorio",
-        bookingTableIsRequiredField: "Devi scegliere un tavolo",
+        bookingDateIsRequiredField: "Devi scegliere una Data di Prenotazione",
+        bookingTimeIsRequiredField: "Il campo Ora è Obbligatorio",
+        bookingCustomersIsRequiredField: "Il campo Commensali è Obbligatorio",
+        bookingTableIsRequiredField: "Devi scegliere un Tavolo",
 
-        profileNameNotEmptyField: "Il nome non può essere vuoto",
-        profileEmailNotEmptyField: "L’email non può essere vuota",
-        profileAddressNotEmptyField: "L’indirizzo non può essere vuoto",
+        profileNameNotEmptyField: "Il campo Nome non deve essere vuoto",
+        profileEmailNotEmptyField: "L'Email non deve essere vuota",
+        profileAddressNotEmptyField: "L'Indirizzo non deve essere vuoto",
 
-        // CARD CTA
-        cardDataMenuTitle: "Scopri il nostro menu",
-        cardDataMenuDescription: "Esplora la nostra selezione di piatti e bevande.",
-        cardDataMenuButtonText: "Vedi menu",
+        //  CTA CARDS DATA
+        cardDataMenuTitle: "Consulta il nostro Menu",
+        cardDataMenuDescription: "Sfoglia la nostra selezione completa di piatti e bevande.",
+        cardDataMenuButtonText: "Vedi Menu",
 
         cardDataLoginTitle: "Bentornato",
         cardDataLoginDescription: "Accedi per gestire i tuoi ordini e prenotazioni.",
         cardDataLoginButtonText: "Accedi",
 
-        cardDataBookingTitle: "Prenota il tuo tavolo",
-        cardDataBookingDescription: "Scegli data e ora, e ti riserviamo un posto.",
-        cardDataBookingButtonText: "Prenota ora",
+        cardDataBookingTitle: "Prenota il tuo Tavolo",
+        cardDataBookingDescription: "Scegli data, ora e ti riserveremo il posto.",
+        cardDataBookingButtonText: "Prenota Ora",
 
-        cardDataOrdersTitle: "Hai fame?",
-        cardDataOrdersDescription: "Goditi i nostri piatti migliori direttamente a casa tua.",
-        cardDataOrdersButtonText: "Ordina ora",
+        cardDataOrdersTitle: "Fame? Ci Pensiamo Noi",
+        cardDataOrdersDescription: "Goditi i nostri migliori piatti comodamente da casa tua.",
+        cardDataOrdersButtonText: "Ordina Ora",
+
+        // PRODUCTS DATA
+        productCokeName: "Coca-Cola",
+        productCokeDescription: "Bottiglia di Coca-Cola servita con cubetti di ghiaccio e una fetta di lime.",
+
+        productOrangeFantaName: "Fanta all'Arancia",
+        productOrangeFantaDescription:
+            "Bottiglia di Fanta all'Arancia servita con cubetti di ghiaccio e una fetta d'arancia.",
+
+        productMineralWaterName: "Acqua Minerale",
+        productMineralWaterDescription: "Bottiglia di Acqua Minerale servita con cubetti di ghiaccio.",
+
+        productSparklingWaterName: "Acqua Frizzante",
+        productSparklingWaterDescription:
+            "Bottiglia di Acqua Frizzante servita con cubetti di ghiaccio e una fetta di lime.",
+
+        productBeerName: "Birra Fuller's",
+        productBeerDescription: "Mezza pinta della nostra Ale Premium (Fuller's).",
+
+        productOrangeJuiceName: "Succo d'Arancia Fresco",
+        productOrangeJuiceDescription: "Un bicchiere di succo d'arancia appena spremuto",
+
+        productLemonFantaName: "Fanta al Limone",
+        productLemonFantaDescription:
+            "Bottiglia di Fanta al Limone servita con cubetti di ghiaccio e una fetta di limone.",
+
+        productRedWineName: "Bicchiere di Vino Rosso",
+        productRedWineDescription: "Il nostro Vino Rosso della Casa.",
+
+        productWhiteWineName: "Bicchiere di Vino Bianco",
+        productWhiteWineDescription: "Il nostro Vino Bianco della Casa",
+
+        productCoffeeName: "Espresso",
+        productCoffeDescription:
+            "Il nostro Caffè Espresso preparato con i migliori chicchi di caffè arabica.",
+
+        productToastName: "Bruschetta al Pomodoro",
+        productDescription: "Pane tostato con pomodoro, aglio e il nostro miglior olio d'oliva spagnolo.",
+
+        productCheeseName: "Tagliere di Formaggi",
+        productCheeseDescription: "La nostra migliore selezione di formaggi nazionali con accompagnamenti.",
+
+        productCroquettesName: "Crocchette di Prosciutto",
+        productCroquettesDescription:
+            "Le migliori crocchette di prosciutto fatte in casa che abbiamo mai preparato.",
+
+        productIberianHamName: "Prosciutto Iberico",
+        productIberianHamDescription: "100g del nostro miglior prosciutto iberico 5J, tagliato a mano.",
+
+        productBravasName: "Patatas Bravas",
+        productBravasDescription: "Le nostre patate selezionate e la migliore salsa brava del mondo.",
+
+        productMixedSaladName: "Insalata Tradizionale",
+        productMixedSaladDescription:
+            "Una ciotola di lattuga, pomodoro, cipolla e olive. Può essere servita con condimento.",
+
+        productClassicBurgerName: "Hamburger di Manzo",
+        productClassicBurgerDescription:
+            "L'hamburger di manzo numero uno con il nostro miglior formaggio cheddar, pomodoro e lattuga.",
+
+        productPorkSteakSirloinName: "Filetto di Maiale Iberico",
+        productPorkSteakSirloinDescription:
+            "Filetto di maiale alla griglia servito con la nostra migliore salsa alla menta.",
+
+        productRisottoName: "Risotto ai Porcini",
+        productRisottoDescription:
+            "Il risotto più cremoso che abbiamo mai fatto servito con fette di porcini.",
+
+        productVeggieBurgerName: "Hamburger Vegetariano",
+        productVeggieBurgerDescription:
+            "Un succoso hamburger vegetale a base di barbabietola, proteine di piselli, carota e mela, servito in un soffice panino brioche con cipolla rossa e lattuga croccante.",
+
+        productSteakTartareName: "Tartare di Manzo",
+        productSteakTartareDescription:
+            "Tartare di manzo servita con tuorlo d'uovo e affumicata con legno di cioccolato.",
+
+        productTakosName: "Tacos di Pollo",
+        productTakosDescription: "Tacos di pollo marinato serviti con salsa piccante e pico de gallo fresco.",
+
+        productRoastChickenName: "Pollo Arrosto",
+        productRoastChickenDescription:
+            "Il nostro miglior pollo arrosto servito con la nostra salsa artigianale limone/pepe.",
+
+        productCarbonaraName: "Spaghetti alla Carbonara",
+        productCarbonaraDescription:
+            "Pasta fresca di spaghetti preparata con la nostra tradizionale salsa carbonara.",
+
+        productPaellaName: "Paella ai Frutti di Mare",
+        productPaellaDescription: "Una paella tradizionale spagnola servita con varietà di frutti di mare",
+
+        productCalamariName: "Calamari Fritti",
+        productCalamariDescription: "Anelli di calamari impanati, serviti con uno spicchio di limone.",
+
+        productSoupName: "Zuppa al Prosciutto Iberico",
+        productSoupDescription:
+            "La nostra zuppa fatta in casa servita con un uovo sodo e prosciutto iberico.",
+
+        productMusselsMariniereName: "Cozze alla Marinara",
+        productMusselsMarinièreDescription:
+            "Cozze cucinate nella nostra salsa marinara fresca fatta in casa.",
+
+        productPizzaName: "Pizza Margherita",
+        productPizzaDescription:
+            "La nostra base di pizza fatta in casa con pomodoro, mozzarella fresca e basilico.",
+
+        productLasagnaName: "Lasagne alla Bolognese",
+        productLasagnaDescription:
+            "Le nostre lasagne fatte in casa preparate con salsa bolognese e besciamella.",
+
+        productSalmonName: "Salmone alla Griglia",
+        productSalmonDescription:
+            "Un filetto di salmone fresco grigliato alla perfezione e servito con la nostra cremosa vellutata di zucca.",
+
+        productEntrecoteBeefName: "Entrecôte di Manzo",
+        productentrecoteBeefDescription: "Entrecôte di manzo grigliata e salata",
+
+        productFrenchFriesName: "Contorno di Patatine Fritte",
+        productFrenchFriesDescription: "Un contorno salato delle nostre migliori patatine fritte",
+
+        productGarlicBreadName: "Pane all'Aglio",
+        productGarlicBreadDescription: "Fette del nostro croccante pane all'aglio imburrato.",
+
+        productEggFlanName: "Flan alle Uova",
+        productEggFlanDescription:
+            "Flan fatto in casa servito con il nostro caramello liquido artigianale e il classico biscotto napoletano.",
+
+        productCremaCatalanaName: "Crema Catalana",
+        productCremaCatalanaDescription:
+            "Il nostro dessert tradizionale spagnolo servito con zucchero caramellato.",
+
+        productPannaCottaName: "Panna Cotta",
+        productPannaCottaDescription: "Panna cotta fatta in casa servita con coulis di frutti rossi.",
+
+        productCheesecakeName: "Cheesecake",
+        productCheesecakeDescription:
+            "La nostra cremosa cheesecake fatta in casa servita con marmellata di mirtilli",
+
+        productBrownieName: "Brownie al Cioccolato",
+        productBrownieDescription:
+            "Il nostro brownie artigianale perfettamente cotto con gelato artigianale alla vaniglia.",
     },
 
     de: {
@@ -1209,80 +1640,80 @@ const TEXTS = {
 
         bookingPageNavLabel: "RESERVIERUNGEN",
         ordersPageNavLabel: "BESTELLUNGEN",
-        menusPageNavLabel: "MENÜ",
+        menusPageNavLabel: "SPEISEKARTE",
         cartPageNavLabel: "WARENKORB",
 
         lodingTextLogoutUser: "Profil wird geschlossen...",
         logoutButton: "Abmelden",
-        loadingTextLogoutButton: "Abmelden...",
+        loadingTextLogoutButton: "Abmeldung läuft...",
         loginButton: "Anmelden",
         registerButton: "Registrieren",
 
-        toastErrorLogout: "Fehler beim Abmelden",
+        toastErrorLogout: "Abmeldung fehlgeschlagen",
 
         profilePageButton: "Profil",
 
-        // LOGIN-SEITE
+        // LOGIN PAGE
         h1LoginPage: "Anmelden",
 
         toastLoginError: "Anmeldung fehlgeschlagen",
-        loadingLoginButtonText: "Anmeldung...",
+        loadingLoginButtonText: "Anmeldung läuft...",
 
-        // REGISTRIERUNGSSEITE
-        h1RegisterPage: "Tritt uns bei",
+        // REGISTER PAGE
+        h1RegisterPage: "Werden Sie Mitglied",
 
         registerButtonText: "Registrieren",
-        loadingRegisterButtonText: "Registrierung...",
+        loadingRegisterButtonText: "Registrierung läuft...",
 
-        namePlaceholderFieldText: "Gib deinen Namen ein",
-        emailPlaceholderFieldText: "Gib deine E-Mail ein",
+        namePlaceholderFieldText: "Geben Sie Ihren Namen ein",
+        emailPlaceholderFieldText: "Geben Sie Ihre E-Mail ein",
         addressPlaceholderFieldText: "Lieferadresse",
-        passwordPlaceholderFieldText: "Gib dein Passwort ein",
-        confirmPasswordPlaceholderFieldText: "Wiederhole dein Passwort",
+        passwordPlaceholderFieldText: "Geben Sie Ihr Passwort ein",
+        confirmPasswordPlaceholderFieldText: "Wiederholen Sie Ihr Passwort",
 
         toastRegisterError: "Registrierung fehlgeschlagen",
 
-        // STARTSEITE
+        // HOME PAGE
         toastWelcomeRegister: "Willkommen",
         toastLoginSuccess: "Erfolgreich angemeldet ✔",
         toastLogoutSuccess: "Erfolgreich abgemeldet ✔",
 
         h1HomePage: "ReservApp",
 
-        // MENÜSEITE
-        fetchMessageError: "Fehler beim Laden der Produkte. Bitte versuche es erneut.",
+        // MENUPAGE
+        fetchMessageError: "Fehler beim Laden der Produkte. Bitte erneut versuchen.",
         allCategoriesFilter: "Alle Kategorien",
-        h1MenuPage: "MENÜ",
+        h1MenuPage: "SPEISEKARTE",
 
         loadingTextRefreshProductsButton: "Produkte werden aktualisiert...",
         textRefreshProductsButton: "Aktualisieren",
         clearFilterButton: "Filter löschen",
 
-        // RESERVIERUNGSSEITE
-        h1BookingPage: "RESERVIERUNG",
+        // BOOKING PAGE
+        h1BookingPage: "RESERVIERUNGEN",
 
-        confirmBookingTitle: "Überprüfen und bestätigen",
-        userNameConfirmText: "Reservierungsname",
+        confirmBookingTitle: "Überprüfen und Bestätigen",
+        userNameConfirmText: "Name der Reservierung",
         dateConfirmText: "Datum",
         timeConfirmText: "Uhrzeit",
-        customersConfirmText: "Kunden",
-        highChairConfirmText: "Kinderstuhl?",
+        customersConfirmText: "Gäste",
+        highChairConfirmText: "Hochstuhl?",
         aditionalMessageConfirmText: "Zusätzliche Nachricht",
         confirmButtonModal: "Bestätigen",
-        loadingTextConfirmButtonModal: "Reservierung...",
+        loadingTextConfirmButtonModal: "Reservierung läuft...",
 
         bookingTimeText: "Uhrzeit",
-        bookingTimePlaceholder: "Wähle Uhrzeit",
-        bookingCustomersText: "Kunden",
-        bookingCustomersPlaceholder: "Wähle Anzahl der Personen",
+        bookingTimePlaceholder: "Uhrzeit auswählen",
+        bookingCustomersText: "Gäste",
+        bookingCustomersPlaceholder: "Gäste auswählen",
 
-        bookingHighChairTitle: "Kinderstuhl hinzufügen",
+        bookingHighChairTitle: "Hochstuhl hinzufügen",
         bookingHighChairDescription: "Kostenlos",
 
         bookingAditionalMessagePlaceholder: "Besondere Wünsche?",
 
-        bookingMaxCapacityTableTitle: "Maximale Kapazität:",
-        bookingTableTypeTitle: "Tischtyp:",
+        bookingMaxCapacityTableTitle: "Max. Kapazität:",
+        bookingTableTypeTitle: "Tischart:",
 
         squareTableForm: "Quadratischer Tisch",
         roundTableForm: "Runder Tisch",
@@ -1292,32 +1723,37 @@ const TEXTS = {
 
         bookingSelectTableButton: "Tisch auswählen",
 
-        toastBookingSuccess: "Reservierung erfolgreich ✔",
-        toastBookingUnavailable: "Fehler: Dieser Tisch ist bereits reserviert.",
-        toastBookingError: "Reservierung fehlgeschlagen. Bitte versuche es erneut.",
+        bookingButtonConfirmText: "Reservieren",
+        bookingButtonResetForm: "Formular zurücksetzen",
 
-        // BESTELLSEITE
+        toastBookingSuccess: "Reservierung abgeschlossen",
+        toastBookingUnavailable: "Reservierung fehlgeschlagen: Dieser Tisch ist bereits reserviert.",
+        toastBookingError: "Reservierung fehlgeschlagen. Bitte erneut versuchen",
+
+        // ORDERS PAGE
         h1OrdersPage: "LIEFERUNG",
-        smallOrdersPageSubtitle: "Genieße unser Menü bequem von zu Hause aus.",
+        smallOrdersPageSubtitle: "Genießen Sie unsere Speisekarte bequem von zu Hause aus.",
+
+        ordersPageInputPlaceholder: "Produkte suchen...",
 
         addProductToCartButton: "In den Warenkorb",
         removeProductToCartButton: "Aus dem Warenkorb entfernen",
         loadingTextAddingProductsToCartButton: "Wird hinzugefügt...",
         loadingTextRemovingProductsFromCartButton: "Wird entfernt...",
-        addOneMoreProductToCartButton: "Eins mehr",
-        removeOneMoreProductFromCartButton: "Eins weniger",
+        addOneMoreProductToCartButton: "Eins hinzufügen",
+        removeOneMoreProductFromCartButton: "Eins entfernen",
 
         toastAddedProductToCart: "Hinzugefügt ✔",
-        toastQuantityProductUpdatedToCart: "Warenkorb aktualisiert ✔",
-        toastRemovedProductFromCart: "Artikel entfernt ✔",
-        toastErrorAddingProductToCart: "Fehler: Artikel konnte nicht hinzugefügt werden",
-        toastErrorQuantityProductUpdatedToCart: "Fehler: Menge konnte nicht aktualisiert werden",
-        toastErrorRemovingProductFromCart: "Fehler: Artikel konnte nicht entfernt werden",
+        toastQuantityProductUpdatedToCart: "Warenkorb erfolgreich aktualisiert ✔",
+        toastRemovedProductFromCart: "Artikel aus dem Warenkorb entfernt ✔",
+        toastErrorAddingProductToCart: "Fehler: Konnte nicht zum Warenkorb hinzugefügt werden",
+        toastErrorQuantityProductUpdatedToCart: "Fehler: Mengenaktualisierung fehlgeschlagen",
+        toastErrorRemovingProductFromCart: "Fehler: Artikel konnte nicht aus dem Warenkorb entfernt werden",
 
-        // WARENKORBSEITE
-        h1CartPage: "DEIN WARENKORB",
-        confirmModalCartTitle: "Bestellung bestätigen",
-        confirmModalCartMessage: "Fast fertig! Bestätige deine Bestellung, um fortzufahren.",
+        // CART PAGE
+        h1CartPage: "IHR WARENKORB",
+        confirmModalCartTitle: "Bestellbestätigung",
+        confirmModalCartMessage: "Fast geschafft! Bestätigen Sie Ihre Bestellung, um fortzufahren",
 
         confirmButtonCartModal: "Bestätigen",
         loadingConfirmButtonCartModal: "Wird verarbeitet...",
@@ -1327,21 +1763,24 @@ const TEXTS = {
         accordionDescriptionText: "Beschreibung:",
         accordionPriceText: "Preis:",
 
-        noProductsTitle: "Dein Warenkorb ist leer",
+        noProductsTitle: "Ihr Warenkorb ist leer",
         goToOrdersCartButton: "Jetzt bestellen",
 
         toastCartRemovedSuccess: "Warenkorb geleert ✔",
-        toastCartRemovedError: "Fehler beim Leeren des Warenkorbs",
+        toastCartRemovedError: "Fehler beim Entfernen aller Artikel",
 
-        // PROFILSEITE
+        buttonCartPageOpenPaymentModal: "Bestellen",
+        buttonCartPageDeleteCart: "Warenkorb leeren",
+
+        // PROFILE PAGE
         h1ProfilePage: "Willkommen, ",
-        userDataSectionTitle: "Persönliche Daten",
-        bookingsDataSectionTitle: "Deine Reservierungen",
-        ordersDataSectionTitle: "Deine Bestellungen",
+        userDataSectionTitle: "Persönliche Informationen",
+        bookingsDataSectionTitle: "Ihre Reservierungen",
+        ordersDataSectionTitle: "Ihre Bestellungen",
 
         buttonChangeAvatar: "Avatar ändern",
 
-        // ----- BENUTZERDATEN
+        //  ----- USER DATA
         nameFieldText: "Name",
         fullNameFieldText: "Vollständiger Name",
         emailFieldText: "E-Mail",
@@ -1349,23 +1788,23 @@ const TEXTS = {
         passwordFieldText: "Passwort",
         confirmPasswordFieldText: "Passwort bestätigen",
         userDataModalTitle: "Datenänderung bestätigen",
-        userDataModalMessage: "Änderung bestätigen von:",
+        userDataModalMessage: "Änderung bestätigen: ",
         userDataModalMessageNexo: "zu",
         userDataModalConfirmText: "Ändern",
         loadingUserDataModalConfirmText: "Wird geändert...",
         userDataModalCancelText: "Abbrechen",
 
         userDataEditButtonText: "Bearbeiten",
-        userDataChangeButtonText: "Änderungen speichern",
+        userDataChangeButtonText: "Ändern",
 
-        toastUserDataChangeSuccess: "Profil aktualisiert ✔",
+        toastUserDataChangeSuccess: "Profil erfolgreich aktualisiert ✔",
         toastUserDataChangeError: "Fehler beim Aktualisieren des Profils",
 
-        // ------ RESERVIERUNGSDATEN
-        bookingDataTitle1: "Deine bevorstehenden Reservierungen",
-        bookingDataTitle2: "Deine bisherigen Besuche",
-        bookingDataNoPendingBookingsFound: "Keine anstehenden Reservierungen.",
-        bookingDataNoPastVisitsFound: "Keine vergangenen Besuche.",
+        //  ------ BOOKING DATA
+        bookingDataTitle1: "Ihre nächsten Reservierungen",
+        bookingDataTitle2: "Ihre vergangenen Besuche",
+        bookingDataNoPendingBookingsFound: "Sie haben keine ausstehenden Reservierungen.",
+        bookingDataNoPastVisitsFound: "Sie haben keine vergangenen Besuche",
 
         buttonBookingDataMakeABook: "Jetzt reservieren",
         buttonBookingDataCloseModalInfo: "Schließen",
@@ -1376,28 +1815,28 @@ const TEXTS = {
         loadingBookingDataModalDeletingbutton: "Wird gelöscht...",
 
         bookingDataModalInfotitle: "Reservierungsdetails",
-        bookingDataModalInfoMessageText1: "Lösche deine Reservierung für ",
+        bookingDataModalInfoMessageText1: "Ihre Reservierung löschen für ",
         bookingDataModalInfoMessageCustomer1: "Gast",
         bookingDataModalInfoMessageCustomer2: "Gäste",
 
         bookingDataModalInfoDateText: "Reservierungsdatum:",
         bookingDataModalInfoTimeText: "Reservierungszeit:",
-        bookingDataModalInfoPartySizeText: "Anzahl der Personen:",
-        bookingDataModalInfoHighChairText: "Kinderstuhl benötigt?",
+        bookingDataModalInfoPartySizeText: "Personenanzahl:",
+        bookingDataModalInfoHighChairText: "Hochstuhl erforderlich?",
 
         toastBookingDataDeltingBookingError: "Fehler beim Löschen der Reservierung",
 
-        // ----- BESTELLDATEN
+        //  -----ORDERS DATA
         ordersDataTitle1: "Ausstehende Bestellungen",
         ordersDataTitle2: "Abgeschlossene Bestellungen",
 
-        ordersDataInfoModalMessage: "Möchtest du die Bestellung von ",
+        ordersDataInfoModalMessage: "Möchten Sie die Bestellung stornieren von ",
 
-        toastOrdersDataSuccess: "Bestellung storniert ✔",
+        toastOrdersDataSuccess: "Bestellung erfolgreich storniert ✔",
         toastOrdersDataError: "Fehler beim Stornieren der Bestellung.",
 
-        ordersDataNotPendingOrdersText: "Keine ausstehenden Bestellungen.",
-        ordersDataNotOrders: "Keine Bestellungen.",
+        ordersDataNotPendingOrdersText: "Es gibt keine ausstehenden Bestellungen.",
+        ordersDataNotOrders: "Es gibt keine Bestellungen.",
 
         ordersDataCancelModalTitle: "Bestellung stornieren",
         ordersDataCancelModalBackButton: "Zurück",
@@ -1408,71 +1847,211 @@ const TEXTS = {
         ordersDataInfoModalProductText: "Produkt:",
         ordersDataInfoModalPriceText: "Preis:",
         ordersDataInfoModalTotalProductsText: "Gesamtprodukte:",
-        ordersDataInfoModalTotalCountText: "Gesamtsumme:",
+        ordersDataInfoModalTotalCountText: "Gesamt:",
         buttonOrdersDataInfomodalCloseText: "Schließen",
 
         buttonOrdersDataInfoCancelText: "Stornieren",
 
-        // FOOTER
-        copyrightText: "ReservApp. Alle Rechte vorbehalten.",
+        // Footer
+        copyrightText: "ReservApp. Alle Rechte vorbehalten",
 
-        // ALLGEMEINE NACHRICHTEN
+        // Allgemeine Nachrichten
         affirmationText: "Ja",
         NegationText: "Nein",
 
-        // FELDVALIDIERUNG
+        // FIELDS VERIFICATOR
         emailIsRequiredField: "E-Mail-Feld ist erforderlich",
-        emailNotValidField1: "Ungültige E-Mail (fehlendes '@')",
-        emailNotValidField2: "Ungültige E-Mail (fehlender Punkt)",
+        emailNotValidField1: "E-Mail ungültig ('@' fehlt)",
+        emailNotValidField2: "E-Mail ungültig ('.' fehlt)",
         emailTooShortField: "E-Mail zu kurz (min. 5 Zeichen)",
         emailTooLongField: "E-Mail zu lang (max. 50 Zeichen)",
 
-        passwordIsRequiredField: "Passwort ist erforderlich",
+        passwordIsRequiredField: "Passwort-Feld ist erforderlich",
         passwordTooShortField: "Passwort zu kurz (min. 9 Zeichen)",
         passwordTooLongField: "Passwort zu lang (max. 30 Zeichen)",
 
-        confirmPasswordIsRequiredField: "Bestätigung des Passworts ist erforderlich",
+        confirmPasswordIsRequiredField: "Passwort bestätigen-Feld ist erforderlich",
         doNotMatchPasswordsFields: "Passwörter stimmen nicht überein",
 
-        nameIsRequiredField: "Namensfeld ist erforderlich",
+        nameIsRequiredField: "Name-Feld ist erforderlich",
         nameIsTooShortField: "Name zu kurz (min. 4 Zeichen)",
         nameIsTooLongField: "Name zu lang (max. 30 Zeichen)",
 
-        addressIsRequiredField: "Adressfeld ist erforderlich",
+        addressIsRequiredField: "Adress-Feld ist erforderlich",
         addressTooShortField: "Adresse zu kurz (min. 6 Zeichen)",
         addressTooLongField: "Adresse zu lang (max. 60 Zeichen)",
 
-        bookingDateIsRequiredField: "Du musst ein Reservierungsdatum wählen",
-        bookingTimeIsRequiredField: "Uhrzeitfeld ist erforderlich",
-        bookingCustomersIsRequiredField: "Kundenfeld ist erforderlich",
-        bookingTableIsRequiredField: "Du musst einen Tisch auswählen",
+        bookingDateIsRequiredField: "Sie müssen ein Reservierungsdatum auswählen",
+        bookingTimeIsRequiredField: "Uhrzeit-Feld ist erforderlich",
+        bookingCustomersIsRequiredField: "Gäste-Feld ist erforderlich",
+        bookingTableIsRequiredField: "Sie müssen einen Tisch auswählen",
 
-        profileNameNotEmptyField: "Name darf nicht leer sein",
+        profileNameNotEmptyField: "Name-Feld darf nicht leer sein",
         profileEmailNotEmptyField: "E-Mail darf nicht leer sein",
         profileAddressNotEmptyField: "Adresse darf nicht leer sein",
 
-        // KARTE CTA
-        cardDataMenuTitle: "Entdecke unser Menü",
-        cardDataMenuDescription: "Erkunde unsere Auswahl an Gerichten und Getränken.",
-        cardDataMenuButtonText: "Menü ansehen",
+        //  CTA CARDS DATA
+        cardDataMenuTitle: "Sehen Sie unsere Speisekarte",
+        cardDataMenuDescription: "Durchsuchen Sie unsere vollständige Auswahl an Gerichten und Getränken.",
+        cardDataMenuButtonText: "Speisekarte ansehen",
 
         cardDataLoginTitle: "Willkommen zurück",
-        cardDataLoginDescription: "Melde dich an, um deine Bestellungen und Reservierungen zu verwalten.",
+        cardDataLoginDescription: "Melden Sie sich an, um Ihre Bestellungen und Reservierungen zu verwalten.",
         cardDataLoginButtonText: "Anmelden",
 
-        cardDataBookingTitle: "Reserviere deinen Tisch",
-        cardDataBookingDescription: "Wähle Datum und Uhrzeit, und wir halten dir einen Platz frei.",
+        cardDataBookingTitle: "Reservieren Sie Ihren Tisch",
+        cardDataBookingDescription: "Wählen Sie Datum, Uhrzeit und wir reservieren Ihren Platz.",
         cardDataBookingButtonText: "Jetzt reservieren",
 
-        cardDataOrdersTitle: "Hungrig?",
-        cardDataOrdersDescription: "Genieße unsere besten Gerichte direkt zu Hause.",
+        cardDataOrdersTitle: "Hunger? Wir haben Sie abgedeckt",
+        cardDataOrdersDescription: "Genießen Sie unsere besten Gerichte bequem von zu Hause aus.",
         cardDataOrdersButtonText: "Jetzt bestellen",
+
+        // PRODUCTS DATA
+        productCokeName: "Coca-Cola",
+        productCokeDescription: "Flasche Coca-Cola serviert mit Eiswürfeln und einer Limettenscheibe.",
+
+        productOrangeFantaName: "Fanta Orange",
+        productOrangeFantaDescription:
+            "Flasche Fanta Orange serviert mit Eiswürfeln und einer Orangenscheibe.",
+
+        productMineralWaterName: "Mineralwasser",
+        productMineralWaterDescription: "Flasche Mineralwasser serviert mit Eiswürfeln.",
+
+        productSparklingWaterName: "Sprudelwasser",
+        productSparklingWaterDescription:
+            "Flasche Sprudelwasser serviert mit Eiswürfeln und einer Limettenscheibe.",
+
+        productBeerName: "Fuller's Bier",
+        productBeerDescription: "Halbes Pint unseres Premium Ales (Fuller's).",
+
+        productOrangeJuiceName: "Frisch gepresster Orangensaft",
+        productOrangeJuiceDescription: "Ein Glas frisch gepresster Orangensaft",
+
+        productLemonFantaName: "Fanta Zitrone",
+        productLemonFantaDescription:
+            "Flasche Fanta Zitrone serviert mit Eiswürfeln und einer Zitronenscheibe.",
+
+        productRedWineName: "Glas Rotwein",
+        productRedWineDescription: "Unser Hauswein Rot.",
+
+        productWhiteWineName: "Glas Weißwein",
+        productWhiteWineDescription: "Unser Hauswein Weiß",
+
+        productCoffeeName: "Espresso",
+        productCoffeDescription: "Unser Espresso-Kaffee aus den besten Arabica-Kaffeebohnen.",
+
+        productToastName: "Tomaten-Toast",
+        productDescription: "Geröstetes Brot mit Tomate, Knoblauch und unserem besten spanischen Olivenöl.",
+
+        productCheeseName: "Käseplatte",
+        productCheeseDescription: "Unsere beste Auswahl an einheimischen Käsesorten mit Beilagen.",
+
+        productCroquettesName: "Schinken-Kroketten",
+        productCroquettesDescription:
+            "Die besten hausgemachten Schinken-Kroketten, die wir je gemacht haben.",
+
+        productIberianHamName: "Iberischer Schinken",
+        productIberianHamDescription: "100g unseres feinsten 5J Iberischen Schinkens, handgeschnitten.",
+
+        productBravasName: "Patatas Bravas",
+        productBravasDescription: "Unsere handverlesenen Kartoffeln und die beste Brava-Sauce der Welt.",
+
+        productMixedSaladName: "Traditioneller Salat",
+        productMixedSaladDescription:
+            "Eine Schüssel mit Salat, Tomate, Zwiebel und Oliven. Kann mit Dressing serviert werden.",
+
+        productClassicBurgerName: "Rindfleisch-Burger",
+        productClassicBurgerDescription:
+            "Der Rindfleisch-Burger Nummer eins mit unserem besten Cheddar-Käse, Tomate und Salat.",
+
+        productPorkSteakSirloinName: "Iberisches Schweine-Filet",
+        productPorkSteakSirloinDescription: "Gegrilltes Schweinefilet serviert mit unserer besten Minzsauce.",
+
+        productRisottoName: "Steinpilz-Risotto",
+        productRisottoDescription:
+            "Das cremigste Risotto, das wir je gemacht haben, serviert mit Steinpilzscheiben.",
+
+        productVeggieBurgerName: "Veggie-Burger",
+        productVeggieBurgerDescription:
+            "Ein saftiges pflanzliches Patty aus Rote Beete, Erbsenprotein, Karotte und Apfel, serviert in einem weichen Brioche-Brötchen mit roter Zwiebel und knackigem Salat.",
+
+        productSteakTartareName: "Steak Tartar",
+        productSteakTartareDescription:
+            "Steak Tartar serviert mit Eigelb und geräuchert mit Schokoladenholz.",
+
+        productTakosName: "Hähnchen-Tacos",
+        productTakosDescription:
+            "Marinierte Hähnchen-Tacos serviert mit scharfer Sauce und frischem Pico de Gallo.",
+
+        productRoastChickenName: "Brathähnchen",
+        productRoastChickenDescription:
+            "Unser bestes Brathähnchen serviert mit unserer handwerklichen Zitronen-Pfeffer-Sauce.",
+
+        productCarbonaraName: "Spaghetti Carbonara",
+        productCarbonaraDescription:
+            "Frische Spaghetti-Pasta zubereitet mit unserer traditionellen Carbonara-Sauce.",
+
+        productPaellaName: "Meeresfrüchte-Paella",
+        productPaellaDescription:
+            "Eine traditionelle spanische Paella serviert mit einer Vielzahl von Meeresfrüchten",
+
+        productCalamariName: "Frittierte Calamari",
+        productCalamariDescription: "Panierte Calamari-Ringe, serviert mit einem Stück Zitrone.",
+
+        productSoupName: "Iberische Schinkensuppe",
+        productSoupDescription:
+            "Unsere hausgemachte Suppe serviert mit einem gekochten Ei und Iberischem Schinken.",
+
+        productMusselsMariniereName: "Muscheln nach Matrosenart",
+        productMusselsMarinièreDescription:
+            "Muscheln gekocht in unserer frischen hausgemachten Marinara-Sauce.",
+
+        productPizzaName: "Pizza Margherita",
+        productPizzaDescription:
+            "Unsere hausgemachte Pizzabasis mit Tomate, frischem Mozzarella und Basilikum.",
+
+        productLasagnaName: "Lasagne Bolognese",
+        productLasagnaDescription:
+            "Unsere hausgemachte Lasagne zubereitet mit Bolognese-Sauce und Béchamelsauce.",
+
+        productSalmonName: "Gegrillter Lachs",
+        productSalmonDescription:
+            "Ein frisches Lachsfilet perfekt gegrillt und serviert mit unserer cremigen Kürbissuppe.",
+
+        productEntrecoteBeefName: "Entrecôte vom Rind",
+        productentrecoteBeefDescription: "Gegrilltes und gesalzenes Entrecôte vom Rind",
+
+        productFrenchFriesName: "Pommes Frites Beilage",
+        productFrenchFriesDescription: "Eine salzige Beilage unserer besten Pommes Frites",
+
+        productGarlicBreadName: "Knoblauchbrot",
+        productGarlicBreadDescription: "Scheiben unseres butterigen und knusprigen Knoblauchbrots.",
+
+        productEggFlanName: "Eier-Flan",
+        productEggFlanDescription:
+            "Hausgemachter Flan serviert mit unserem handwerklichen flüssigen Karamell und dem klassischen Napolitana-Keks.",
+
+        productCremaCatalanaName: "Crema Catalana",
+        productCremaCatalanaDescription:
+            "Unser traditionelles spanisches Dessert serviert mit karamellisiertem Zucker.",
+
+        productPannaCottaName: "Panna Cotta",
+        productPannaCottaDescription: "Hausgemachte Panna Cotta serviert mit Rote-Früchte-Coulis.",
+
+        productCheesecakeName: "Käsekuchen",
+        productCheesecakeDescription:
+            "Unser cremiger hausgemachter Käsekuchen serviert mit Heidelbeermarmelade",
+
+        productBrownieName: "Schokoladen-Brownie",
+        productBrownieDescription:
+            "Unser handwerklicher perfekt gebackener Brownie mit handwerklichem Vanilleeis.",
     },
 
     zh: {
         // 导航栏
         userReplaceName: "用户",
-        toastLogoutError: "登出失败。",
+        toastLogoutError: "退出登录失败。",
 
         bookingPageNavLabel: "预订",
         ordersPageNavLabel: "订单",
@@ -1480,73 +2059,73 @@ const TEXTS = {
         cartPageNavLabel: "购物车",
 
         lodingTextLogoutUser: "正在关闭个人资料...",
-        logoutButton: "登出",
-        loadingTextLogoutButton: "正在登出...",
+        logoutButton: "退出登录",
+        loadingTextLogoutButton: "正在退出...",
         loginButton: "登录",
         registerButton: "注册",
 
-        toastErrorLogout: "登出失败",
+        toastErrorLogout: "退出登录失败",
 
         profilePageButton: "个人资料",
 
-        // 登录页面
+        // LOGIN PAGE
         h1LoginPage: "登录",
 
         toastLoginError: "登录失败",
         loadingLoginButtonText: "正在登录...",
 
-        // 注册页面
+        // REGISTER PAGE
         h1RegisterPage: "加入我们",
 
         registerButtonText: "注册",
         loadingRegisterButtonText: "正在注册...",
 
-        namePlaceholderFieldText: "请输入姓名",
-        emailPlaceholderFieldText: "请输入邮箱",
-        addressPlaceholderFieldText: "送货地址",
-        passwordPlaceholderFieldText: "请输入密码",
-        confirmPasswordPlaceholderFieldText: "请再次输入密码",
+        namePlaceholderFieldText: "请输入您的姓名",
+        emailPlaceholderFieldText: "请输入您的邮箱",
+        addressPlaceholderFieldText: "配送地址",
+        passwordPlaceholderFieldText: "请输入您的密码",
+        confirmPasswordPlaceholderFieldText: "请再次输入您的密码",
 
         toastRegisterError: "注册失败",
 
-        // 首页
+        // HOME PAGE
         toastWelcomeRegister: "欢迎",
         toastLoginSuccess: "登录成功 ✔",
-        toastLogoutSuccess: "成功登出 ✔",
+        toastLogoutSuccess: "退出登录成功 ✔",
 
         h1HomePage: "ReservApp",
 
-        // 菜单页
-        fetchMessageError: "加载产品时出错。请重试。",
-        allCategoriesFilter: "所有分类",
+        // MENUPAGE
+        fetchMessageError: "加载产品错误。请重试。",
+        allCategoriesFilter: "所有类别",
         h1MenuPage: "菜单",
 
         loadingTextRefreshProductsButton: "正在刷新产品...",
         textRefreshProductsButton: "刷新",
         clearFilterButton: "清除筛选",
 
-        // 预订页面
+        // BOOKING PAGE
         h1BookingPage: "预订",
 
-        confirmBookingTitle: "确认预订信息",
-        userNameConfirmText: "预订人姓名",
+        confirmBookingTitle: "审核并确认",
+        userNameConfirmText: "预订姓名",
         dateConfirmText: "日期",
         timeConfirmText: "时间",
-        customersConfirmText: "顾客人数",
-        highChairConfirmText: "需要儿童座椅？",
+        customersConfirmText: "用餐人数",
+        highChairConfirmText: "需要儿童椅吗？",
         aditionalMessageConfirmText: "附加信息",
         confirmButtonModal: "确认",
         loadingTextConfirmButtonModal: "正在预订...",
 
         bookingTimeText: "时间",
         bookingTimePlaceholder: "选择时间",
-        bookingCustomersText: "顾客人数",
+        bookingCustomersText: "用餐人数",
         bookingCustomersPlaceholder: "选择人数",
 
-        bookingHighChairTitle: "添加儿童座椅",
-        bookingHighChairDescription: "免费提供",
+        bookingHighChairTitle: "添加儿童椅",
+        bookingHighChairDescription: "免费",
 
-        bookingAditionalMessagePlaceholder: "有特殊需求吗？",
+        bookingAditionalMessagePlaceholder: "有特殊要求吗？",
 
         bookingMaxCapacityTableTitle: "最大容量：",
         bookingTableTypeTitle: "桌子类型：",
@@ -1555,36 +2134,41 @@ const TEXTS = {
         roundTableForm: "圆桌",
         rectangularTableForm: "长方桌",
 
-        bookingTableWifiText: "Wi-Fi：",
+        bookingTableWifiText: "无线网络：",
 
         bookingSelectTableButton: "选择桌子",
 
-        toastBookingSuccess: "预订成功 ✔",
+        bookingButtonConfirmText: "预订",
+        bookingButtonResetForm: "重置表单",
+
+        toastBookingSuccess: "预订成功",
         toastBookingUnavailable: "预订失败：该桌已被预订。",
-        toastBookingError: "预订失败。请重试。",
+        toastBookingError: "预订失败。请重试",
 
-        // 订单页面
+        // ORDERS PAGE
         h1OrdersPage: "外卖",
-        smallOrdersPageSubtitle: "在家也能享用我们的美味。",
+        smallOrdersPageSubtitle: "在家舒适地享受我们的菜单。",
 
-        addProductToCartButton: "加入购物车",
+        ordersPageInputPlaceholder: "搜索产品...",
+
+        addProductToCartButton: "添加到购物车",
         removeProductToCartButton: "从购物车移除",
         loadingTextAddingProductsToCartButton: "正在添加...",
         loadingTextRemovingProductsFromCartButton: "正在移除...",
-        addOneMoreProductToCartButton: "再加一个",
-        removeOneMoreProductFromCartButton: "减少一个",
+        addOneMoreProductToCartButton: "添加一个",
+        removeOneMoreProductFromCartButton: "移除一个",
 
         toastAddedProductToCart: "已添加 ✔",
-        toastQuantityProductUpdatedToCart: "购物车已更新 ✔",
-        toastRemovedProductFromCart: "已从购物车移除 ✔",
+        toastQuantityProductUpdatedToCart: "购物车更新成功 ✔",
+        toastRemovedProductFromCart: "商品已从购物车移除 ✔",
         toastErrorAddingProductToCart: "错误：无法添加到购物车",
-        toastErrorQuantityProductUpdatedToCart: "错误：更新数量失败",
-        toastErrorRemovingProductFromCart: "错误：无法移除商品",
+        toastErrorQuantityProductUpdatedToCart: "错误：数量更新失败",
+        toastErrorRemovingProductFromCart: "错误：无法从购物车移除商品",
 
-        // 购物车页面
+        // CART PAGE
         h1CartPage: "您的购物车",
-        confirmModalCartTitle: "确认订单",
-        confirmModalCartMessage: "快完成了！确认订单以继续。",
+        confirmModalCartTitle: "订单确认",
+        confirmModalCartMessage: "快完成了！确认您的订单以继续",
 
         confirmButtonCartModal: "确认",
         loadingConfirmButtonCartModal: "正在处理...",
@@ -1598,9 +2182,12 @@ const TEXTS = {
         goToOrdersCartButton: "立即订购",
 
         toastCartRemovedSuccess: "购物车已清空 ✔",
-        toastCartRemovedError: "清空购物车失败",
+        toastCartRemovedError: "删除所有商品失败",
 
-        // 个人资料页面
+        buttonCartPageOpenPaymentModal: "订购",
+        buttonCartPageDeleteCart: "清空购物车",
+
+        // PROFILE PAGE
         h1ProfilePage: "欢迎，",
         userDataSectionTitle: "个人信息",
         bookingsDataSectionTitle: "您的预订",
@@ -1608,31 +2195,31 @@ const TEXTS = {
 
         buttonChangeAvatar: "更换头像",
 
-        // ----- 用户数据
+        //  ----- USER DATA
         nameFieldText: "姓名",
         fullNameFieldText: "全名",
         emailFieldText: "邮箱",
         addressFieldText: "地址",
         passwordFieldText: "密码",
         confirmPasswordFieldText: "确认密码",
-        userDataModalTitle: "确认修改资料",
-        userDataModalMessage: "确认修改：",
+        userDataModalTitle: "确认数据更改",
+        userDataModalMessage: "确认更改：",
         userDataModalMessageNexo: "为",
-        userDataModalConfirmText: "修改",
-        loadingUserDataModalConfirmText: "正在修改...",
+        userDataModalConfirmText: "更改",
+        loadingUserDataModalConfirmText: "正在更改...",
         userDataModalCancelText: "取消",
 
         userDataEditButtonText: "编辑",
-        userDataChangeButtonText: "保存修改",
+        userDataChangeButtonText: "更改",
 
-        toastUserDataChangeSuccess: "资料更新成功 ✔",
-        toastUserDataChangeError: "更新资料时出错",
+        toastUserDataChangeSuccess: "个人资料更新成功 ✔",
+        toastUserDataChangeError: "更新个人资料错误",
 
-        // ------ 预订数据
-        bookingDataTitle1: "即将到来的预订",
-        bookingDataTitle2: "过去的访问记录",
-        bookingDataNoPendingBookingsFound: "暂无待进行的预订。",
-        bookingDataNoPastVisitsFound: "暂无历史访问。",
+        //  ------ BOOKING DATA
+        bookingDataTitle1: "您的即将到来的预订",
+        bookingDataTitle2: "您的历史访问",
+        bookingDataNoPendingBookingsFound: "您没有待处理的预订。",
+        bookingDataNoPastVisitsFound: "您没有历史访问记录",
 
         buttonBookingDataMakeABook: "立即预订",
         buttonBookingDataCloseModalInfo: "关闭",
@@ -1643,28 +2230,28 @@ const TEXTS = {
         loadingBookingDataModalDeletingbutton: "正在删除...",
 
         bookingDataModalInfotitle: "预订详情",
-        bookingDataModalInfoMessageText1: "删除您的预订：",
-        bookingDataModalInfoMessageCustomer1: "顾客",
-        bookingDataModalInfoMessageCustomer2: "顾客人数",
+        bookingDataModalInfoMessageText1: "删除您的预订，预订人数为",
+        bookingDataModalInfoMessageCustomer1: "位客人",
+        bookingDataModalInfoMessageCustomer2: "位客人",
 
         bookingDataModalInfoDateText: "预订日期：",
         bookingDataModalInfoTimeText: "预订时间：",
         bookingDataModalInfoPartySizeText: "人数：",
-        bookingDataModalInfoHighChairText: "是否需要儿童座椅？",
+        bookingDataModalInfoHighChairText: "需要儿童椅吗？",
 
-        toastBookingDataDeltingBookingError: "删除预订时出错",
+        toastBookingDataDeltingBookingError: "删除预订错误",
 
-        // ----- 订单数据
+        //  -----ORDERS DATA
         ordersDataTitle1: "待处理订单",
         ordersDataTitle2: "已完成订单",
 
-        ordersDataInfoModalMessage: "您确定要取消订单：",
+        ordersDataInfoModalMessage: "您想取消订单吗",
 
-        toastOrdersDataSuccess: "订单已取消 ✔",
-        toastOrdersDataError: "取消订单时出错。",
+        toastOrdersDataSuccess: "订单取消成功 ✔",
+        toastOrdersDataError: "取消订单错误。",
 
-        ordersDataNotPendingOrdersText: "暂无待处理订单。",
-        ordersDataNotOrders: "暂无订单。",
+        ordersDataNotPendingOrdersText: "没有待处理的订单。",
+        ordersDataNotOrders: "没有订单。",
 
         ordersDataCancelModalTitle: "取消订单",
         ordersDataCancelModalBackButton: "返回",
@@ -1672,68 +2259,187 @@ const TEXTS = {
 
         ordersDataInfoModalTitle: "订单详情",
         ordersDataInfoModalcreationText: "创建日期：",
-        ordersDataInfoModalProductText: "商品：",
+        ordersDataInfoModalProductText: "产品：",
         ordersDataInfoModalPriceText: "价格：",
-        ordersDataInfoModalTotalProductsText: "商品总数：",
+        ordersDataInfoModalTotalProductsText: "总产品数：",
         ordersDataInfoModalTotalCountText: "总计：",
         buttonOrdersDataInfomodalCloseText: "关闭",
 
         buttonOrdersDataInfoCancelText: "取消",
 
-        // 页脚
-        copyrightText: "ReservApp. 版权所有。",
+        // Footer
+        copyrightText: "ReservApp. 版权所有",
 
-        // 通用提示
+        // 常规消息
         affirmationText: "是",
         NegationText: "否",
 
-        // 字段验证
-        emailIsRequiredField: "邮箱为必填项",
-        emailNotValidField1: "邮箱格式错误（缺少 '@'）",
-        emailNotValidField2: "邮箱格式错误（缺少 '.'）",
-        emailTooShortField: "邮箱太短（至少 5 个字符）",
-        emailTooLongField: "邮箱太长（最多 50 个字符）",
+        // FIELDS VERIFICATOR
+        emailIsRequiredField: "邮箱字段为必填项",
+        emailNotValidField1: "邮箱无效（缺少'@'）",
+        emailNotValidField2: "邮箱无效（缺少'.'）",
+        emailTooShortField: "邮箱太短（最少5个字符）",
+        emailTooLongField: "邮箱太长（最多50个字符）",
 
-        passwordIsRequiredField: "密码为必填项",
-        passwordTooShortField: "密码太短（至少 9 个字符）",
-        passwordTooLongField: "密码太长（最多 30 个字符）",
+        passwordIsRequiredField: "密码字段为必填项",
+        passwordTooShortField: "密码太短（最少9个字符）",
+        passwordTooLongField: "密码太长（最多30个字符）",
 
-        confirmPasswordIsRequiredField: "确认密码为必填项",
-        doNotMatchPasswordsFields: "两次输入的密码不一致",
+        confirmPasswordIsRequiredField: "确认密码字段为必填项",
+        doNotMatchPasswordsFields: "密码不匹配",
 
-        nameIsRequiredField: "姓名为必填项",
-        nameIsTooShortField: "姓名太短（至少 4 个字符）",
-        nameIsTooLongField: "姓名太长（最多 30 个字符）",
+        nameIsRequiredField: "姓名字段为必填项",
+        nameIsTooShortField: "姓名太短（最少4个字符）",
+        nameIsTooLongField: "姓名太长（最多30个字符）",
 
-        addressIsRequiredField: "地址为必填项",
-        addressTooShortField: "地址太短（至少 6 个字符）",
-        addressTooLongField: "地址太长（最多 60 个字符）",
+        addressIsRequiredField: "地址字段为必填项",
+        addressTooShortField: "地址太短（最少6个字符）",
+        addressTooLongField: "地址太长（最多60个字符）",
 
-        bookingDateIsRequiredField: "必须选择预订日期",
-        bookingTimeIsRequiredField: "时间为必填项",
-        bookingCustomersIsRequiredField: "顾客人数为必填项",
-        bookingTableIsRequiredField: "必须选择桌子",
+        bookingDateIsRequiredField: "您必须选择预订日期",
+        bookingTimeIsRequiredField: "时间字段为必填项",
+        bookingCustomersIsRequiredField: "用餐人数字段为必填项",
+        bookingTableIsRequiredField: "您必须选择一张桌子",
 
-        profileNameNotEmptyField: "姓名不能为空",
+        profileNameNotEmptyField: "姓名字段不能为空",
         profileEmailNotEmptyField: "邮箱不能为空",
         profileAddressNotEmptyField: "地址不能为空",
 
-        // CTA 卡片数据
-        cardDataMenuTitle: "查看菜单",
-        cardDataMenuDescription: "浏览我们所有的菜品和饮品。",
+        //  CTA CARDS DATA
+        cardDataMenuTitle: "查看我们的菜单",
+        cardDataMenuDescription: "浏览我们全部的菜品和饮料选择。",
         cardDataMenuButtonText: "查看菜单",
 
         cardDataLoginTitle: "欢迎回来",
         cardDataLoginDescription: "登录以管理您的订单和预订。",
         cardDataLoginButtonText: "登录",
 
-        cardDataBookingTitle: "预订您的餐桌",
-        cardDataBookingDescription: "选择日期和时间，我们为您保留位置。",
+        cardDataBookingTitle: "预订您的桌子",
+        cardDataBookingDescription: "选择您的日期、时间，我们将为您保留位置。",
         cardDataBookingButtonText: "立即预订",
 
-        cardDataOrdersTitle: "饿了吗？",
-        cardDataOrdersDescription: "在家中享受我们最好的美食。",
+        cardDataOrdersTitle: "饿了吗？我们为您服务",
+        cardDataOrdersDescription: "在家舒适地享受我们的最佳菜品。",
         cardDataOrdersButtonText: "立即订购",
+
+        // PRODUCTS DATA
+        productCokeName: "可口可乐",
+        productCokeDescription: "瓶装可口可乐配冰块和一片青柠。",
+
+        productOrangeFantaName: "橙味芬达",
+        productOrangeFantaDescription: "瓶装橙味芬达配冰块和一片橙子。",
+
+        productMineralWaterName: "矿泉水",
+        productMineralWaterDescription: "瓶装矿泉水配冰块。",
+
+        productSparklingWaterName: "苏打水",
+        productSparklingWaterDescription: "瓶装苏打水配冰块和一片青柠。",
+
+        productBeerName: "富勒啤酒",
+        productBeerDescription: "半品脱我们的优质艾尔啤酒（富勒）。",
+
+        productOrangeJuiceName: "鲜榨橙汁",
+        productOrangeJuiceDescription: "一杯鲜榨橙汁",
+
+        productLemonFantaName: "柠檬味芬达",
+        productLemonFantaDescription: "瓶装柠檬味芬达配冰块和一片柠檬。",
+
+        productRedWineName: "红葡萄酒杯",
+        productRedWineDescription: "我们的招牌红葡萄酒。",
+
+        productWhiteWineName: "白葡萄酒杯",
+        productWhiteWineDescription: "我们的招牌白葡萄酒",
+
+        productCoffeeName: "浓缩咖啡",
+        productCoffeDescription: "用最好的阿拉比卡咖啡豆制作的浓缩咖啡。",
+
+        productToastName: "番茄吐司",
+        productDescription: "烤面包配番茄、大蒜和我们最好的西班牙橄榄油。",
+
+        productCheeseName: "奶酪拼盘",
+        productCheeseDescription: "我们精选的国产奶酪配小食。",
+
+        productCroquettesName: "火腿可乐饼",
+        productCroquettesDescription: "我们做过的最好的自制火腿可乐饼。",
+
+        productIberianHamName: "伊比利亚火腿",
+        productIberianHamDescription: "100克我们最好的5J伊比利亚火腿，手工切片。",
+
+        productBravasName: "辣味炸薯条",
+        productBravasDescription: "我们精选的土豆和世界上最好的辣味酱。",
+
+        productMixedSaladName: "传统沙拉",
+        productMixedSaladDescription: "一碗生菜、番茄、洋葱和橄榄。可配沙拉酱。",
+
+        productClassicBurgerName: "牛肉汉堡",
+        productClassicBurgerDescription: "第一名的牛肉汉堡配我们最好的切达奶酪、番茄和生菜。",
+
+        productPorkSteakSirloinName: "伊比利亚猪里脊牛排",
+        productPorkSteakSirloinDescription: "烤猪里脊牛排配我们最好的薄荷酱。",
+
+        productRisottoName: "牛肝菌意式烩饭",
+        productRisottoDescription: "我们做过的最奶油的意式烩饭配牛肝菌片。",
+
+        productVeggieBurgerName: "素食汉堡",
+        productVeggieBurgerDescription:
+            "用甜菜根、豌豆蛋白、胡萝卜和苹果制作的多汁植物基汉堡，配红洋葱和脆生菜，夹在柔软的布里欧修面包中。",
+
+        productSteakTartareName: "鞑靼牛排",
+        productSteakTartareDescription: "鞑靼牛排配蛋黄，用巧克力木熏制。",
+
+        productTakosName: "鸡肉塔可",
+        productTakosDescription: "腌制鸡肉塔可配辣酱和新鲜墨西哥莎莎酱。",
+
+        productRoastChickenName: "烤鸡",
+        productRoastChickenDescription: "我们最好的烤鸡配手工柠檬胡椒酱。",
+
+        productCarbonaraName: "意大利培根蛋面",
+        productCarbonaraDescription: "用我们传统的培根蛋酱制作的新鲜意面。",
+
+        productPaellaName: "海鲜烩饭",
+        productPaellaDescription: "传统西班牙烩饭配各种海鲜",
+
+        productCalamariName: "炸鱿鱼圈",
+        productCalamariDescription: "裹面炸鱿鱼圈，配柠檬角。",
+
+        productSoupName: "伊比利亚火腿汤",
+        productSoupDescription: "我们的自制汤配煮鸡蛋和伊比利亚火腿。",
+
+        productMusselsMariniereName: "水手式贻贝",
+        productMusselsMarinièreDescription: "用我们新鲜的自制水手式酱汁烹制的贻贝。",
+
+        productPizzaName: "玛格丽特披萨",
+        productPizzaDescription: "我们的自制披萨底配番茄、新鲜马苏里拉奶酪和罗勒。",
+
+        productLasagnaName: "博洛尼亚千层面",
+        productLasagnaDescription: "用博洛尼亚肉酱和白酱制作的自制千层面。",
+
+        productSalmonName: "烤三文鱼",
+        productSalmonDescription: "新鲜三文鱼片完美烤制，配我们奶油南瓜汤。",
+
+        productEntrecoteBeefName: "牛里脊肉",
+        productentrecoteBeefDescription: "烤制并加盐的牛里脊肉",
+
+        productFrenchFriesName: "炸薯条配菜",
+        productFrenchFriesDescription: "一份咸味的我们最好的炸薯条",
+
+        productGarlicBreadName: "蒜香面包",
+        productGarlicBreadDescription: "我们黄油蒜香脆面包片。",
+
+        productEggFlanName: "鸡蛋布丁",
+        productEggFlanDescription: "自制布丁配我们的手工液体焦糖和经典那不勒斯饼干。",
+
+        productCremaCatalanaName: "加泰罗尼亚奶油",
+        productCremaCatalanaDescription: "我们的传统西班牙甜点配焦糖化糖。",
+
+        productPannaCottaName: "意式奶冻",
+        productPannaCottaDescription: "自制意式奶冻配红色水果果酱。",
+
+        productCheesecakeName: "芝士蛋糕",
+        productCheesecakeDescription: "我们奶油自制芝士蛋糕配蓝莓果酱",
+
+        productBrownieName: "巧克力布朗尼",
+        productBrownieDescription: "我们完美烘焙的手工布朗尼配手工香草冰淇淋。",
     },
 };
 
