@@ -3,6 +3,7 @@ import iconCloseWhite from "../assets/icons/icon-equis-white.webp";
 import iconClose from "../assets/icons/icon-equis.webp";
 import iconSearchWhite from "../assets/icons/icon-search-white.webp";
 import iconSearch from "../assets/icons/icon-search.webp";
+import { Card } from "../components/Card/Card";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
@@ -117,13 +118,7 @@ export const OrderPage = () => {
     return (
         <div className="flex flex-1 flex-col py-6">
             <Container className="gap-4">
-                <BackToTopButton
-                    size="sm"
-                    rounded="lg"
-                    showAt={1000}
-                    placement="top-right"
-                    variant="secondary"
-                />
+                <BackToTopButton iconSize="w-5" showAt={1000} placement="top-right" variant="secondary" />
 
                 <div className="flex flex-col">
                     <h1>{getText("h1OrdersPage")}</h1>
@@ -131,15 +126,15 @@ export const OrderPage = () => {
                 </div>
 
                 {products?.length > 0 && filteredProducts?.length > 0 && (
-                    <span className=" self-start bg-transparent p-2 rounded-lg text-text-color border border-gray-700">
-                        {filteredProducts?.length}/{products?.length}
-                    </span>
+                    <div className="flex items-center">
+                        <Card variant="accent">
+                            {filteredProducts?.length}/{products?.length}
+                        </Card>
+                    </div>
                 )}
 
                 {products?.length && filteredProducts?.length <= 0 && (
-                    <span className=" self-start bg-transparent p-2 rounded-lg text-text-color border border-gray-700">
-                        0/{products?.length}
-                    </span>
+                    <span className="">0/{products?.length}</span>
                 )}
 
                 <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-stretch">
@@ -157,7 +152,7 @@ export const OrderPage = () => {
                                     {categorySelected ? categorySelected : getText("allCategoriesFilter")}
                                 </span>
                             </DropdownTrigger>
-                            <DropdownMenu>
+                            <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
                                     className={categorySelected === "All Categories" ? "font-bold" : ""}
                                     onClick={() => handleCategorySelected("")}
@@ -190,7 +185,7 @@ export const OrderPage = () => {
                                 ref={inputRef}
                                 type="text"
                                 name="name"
-                                placeholder="PlaceHolder"
+                                placeholder={getText("ordersPageInputPlaceholder")}
                                 className={`bg-white flex-1 text-text-color placeholder:text-text-color/50 rounded-lg ${
                                     showInput ? "py-1 px-2" : ""
                                 }`}
@@ -205,29 +200,29 @@ export const OrderPage = () => {
                         >
                             {showInput && theme === "light" && (
                                 <ImageContainer className="w-4">
-                                    <Image imgSrc={iconClose} />
+                                    <Image src={iconClose} />
                                 </ImageContainer>
                             )}
                             {showInput && theme !== "light" && (
                                 <ImageContainer className="w-4">
-                                    <Image imgSrc={iconCloseWhite} />
+                                    <Image src={iconCloseWhite} />
                                 </ImageContainer>
                             )}
                             {!showInput && theme === "light" && (
                                 <ImageContainer className="w-4">
-                                    <Image imgSrc={iconSearch} />
+                                    <Image src={iconSearch} />
                                 </ImageContainer>
                             )}
                             {!showInput && theme !== "light" && (
                                 <ImageContainer className="w-4">
-                                    <Image imgSrc={iconSearchWhite} />
+                                    <Image src={iconSearchWhite} />
                                 </ImageContainer>
                             )}
                         </div>
                     </div>
                 </div>
 
-                <ProductsContainer className="grid  gap-2 md:grid-cols-2 lg:grid-cols-3">
+                <ProductsContainer className="grid gap-sm sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-md">
                     {filteredProducts.map((product) => {
                         const isCartItem = cart?.items?.find((item) => item.productId === product.id);
                         const productQty = isCartItem ? isCartItem.qty : null;

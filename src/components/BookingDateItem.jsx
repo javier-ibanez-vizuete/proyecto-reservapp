@@ -119,13 +119,13 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
     if (content?.length <= 0 && !areOldBooking)
         return (
             <div className="flex flex-col gap-1">
-                <h3>{title}</h3>
+                <h5>{title}</h5>
                 <div
                     className="flex items-center justify-between gap-2"
                     onClick={(event) => event.stopPropagation()}
                 >
                     <p className="flex-1 opacity-80">{getText("bookingDataNoPendingBookingsFound")}</p>
-                    <Button size="sm" onClick={() => navigate("/booking")}>
+                    <Button variant="primary" size="sm" onClick={() => navigate("/bookings")}>
                         {getText("buttonBookingDataMakeABook")}
                     </Button>
                 </div>
@@ -135,7 +135,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
     if (content?.length <= 0 && areOldBooking)
         return (
             <div className="flex flex-col gap-1">
-                <h3>{title}</h3>
+                <h5>{title}</h5>
                 <p className="opacity-80">{getText("bookingDataNoPastVisitsFound")}</p>
             </div>
         );
@@ -180,12 +180,12 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={handleShowModalInfo}>
+                    <Button variant="danger" onClick={handleShowModalInfo}>
                         {getText("buttonBookingDataCloseModalInfo")}
                     </Button>
                 </ModalFooter>
             </Modal>
-            <h3>{title}</h3>
+            <h5>{title}</h5>
             <ul>
                 {content.map((booking) => (
                     <li key={booking?.id || booking?._id} className="flex flex-col py-2 pr-2">
@@ -199,11 +199,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                             </div>
 
                             {!areOldBooking && (
-                                <Button
-                                    size="sm"
-                                    variant="secondary"
-                                    onClick={() => handleShowModal(booking)}
-                                >
+                                <Button size="sm" variant="primary" onClick={() => handleShowModal(booking)}>
                                     {getText("buttonBookingDataCancelReservation")}
                                 </Button>
                             )}

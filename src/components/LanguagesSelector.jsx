@@ -5,44 +5,47 @@ import { DropdownTrigger } from "./Dropdown/DropdownTrigger";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
 
-import iconChinesseFlag from "../assets/icons/icons-flags/icon-chinesse-flag.webp";
-import iconDeutchFlag from "../assets/icons/icons-flags/icon-deutch-flag.webp";
-import iconFranceFlag from "../assets/icons/icons-flags/icon-france-flag.webp";
-import iconItalyFlag from "../assets/icons/icons-flags/icon-italy-flag.webp";
-import iconSpanishFlag from "../assets/icons/icons-flags/icon-spanish-flag.webp";
-import iconUkFlag from "../assets/icons/icons-flags/icon-uk-flag.webp";
-
+import classNames from "classnames";
+import { useDevice } from "../hooks/useDevice";
+import { FLAGS_URL_DATA } from "../utils/FLAGS_URL_DATA";
 import { DropdownItem } from "./Dropdown/DropdownItem";
 import { DropdownMenu } from "./Dropdown/DropdownMenu";
 
 export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => {} }) => {
     const { lang, languages, handleLang } = useContext(LanguageContext);
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
-    const LANGUAGES_FLAG = {
-        en: iconUkFlag,
-        es: iconSpanishFlag,
-        fr: iconFranceFlag,
-        it: iconItalyFlag,
-        de: iconDeutchFlag,
-        zh: iconChinesseFlag,
-    };
+    const iconsSizeConfig = classNames({
+        "w-6": isMobile2Xs,
+        "w-7": isMobileXs,
+        "w-8": isMobileSm,
+        "w-9": isTablet,
+        "w-10": isDesktop,
+    });
 
     return (
         <Dropdown placement={placement} className={"rounded-full"} onClick={onClick}>
-            <DropdownTrigger hasIcon={false} btnStyle={false}>
-                <ImageContainer className="w-11">
-                    <Image imgSrc={LANGUAGES_FLAG[lang]} alt="Language Flag" />
+            <DropdownTrigger
+                hasIcon={false}
+                btnStyle={false}
+                className={"active:scale-95 lg:hover:-translate-y-[2px]"}
+            >
+                <ImageContainer size={iconsSizeConfig}>
+                    <Image imageData={FLAGS_URL_DATA[lang]} alt="Language Flag" />
                 </ImageContainer>
             </DropdownTrigger>
-            <DropdownMenu>
+            <DropdownMenu classNameMenuContainer="flex-col">
                 {Object.entries(languages).map(([langCode, langValue]) => (
-                    <DropdownItem key={langCode} onClick={() => handleLang(langCode)}>
-                        <div className="flex justify-between items-center">
-                            <span>{langValue}</span>
-                            <ImageContainer className="w-11">
-                                <Image imgSrc={LANGUAGES_FLAG[langCode]} />
-                            </ImageContainer>
-                        </div>
+                    <DropdownItem
+                        key={langCode}
+                        onClick={() => handleLang(langCode)}
+                        variant="none"
+                        className="flex justify-between items-center gap-4"
+                    >
+                        <span>{langValue}</span>
+                        <ImageContainer size={iconsSizeConfig}>
+                            <Image imageData={FLAGS_URL_DATA[langCode]} />
+                        </ImageContainer>
                     </DropdownItem>
                 ))}
             </DropdownMenu>

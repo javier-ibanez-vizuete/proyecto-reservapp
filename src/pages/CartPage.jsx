@@ -74,12 +74,11 @@ export const CartPage = () => {
     const handleConfirmCart = async () => {
         isLoading2.setIsLoading(true);
         try {
-            const confirmedCart = await postCartCheckout();
-            if (!confirmedCart) return;
-            setShowModal(false);
+            await postCartCheckout();
         } catch (err) {
         } finally {
             isLoading2.setIsLoading(false);
+            setShowModal(false);
         }
     };
 
@@ -141,7 +140,7 @@ export const CartPage = () => {
                     )}
                     {cart?.items?.length <= 0 && (
                         <div className="flex flex-col md:mx-auto">
-                            <Button onClick={() => Navigate("/orders")}>
+                            <Button variant="primary" onClick={() => Navigate("/orders")}>
                                 {getText("goToOrdersCartButton")}
                             </Button>
                         </div>

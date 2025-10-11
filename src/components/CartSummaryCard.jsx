@@ -1,10 +1,12 @@
 import { useContext } from "react";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { LoadingButton } from "./Spinner/LoadingButton";
 import { Button } from "./UI/Button";
 
 export const CartSummaryCard = ({ cartSummary, handleOpenModal, handleDeleteCart, isLoading }) => {
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     return (
         <div
@@ -37,8 +39,8 @@ export const CartSummaryCard = ({ cartSummary, handleOpenModal, handleDeleteCart
                 </div>
             </div>
             <div className="flex flex-col gap-2 md:flex-row">
-                <Button className="flex-1" onClick={handleOpenModal}>
-                    Pedir
+                <Button className="flex-1" variant="primary" onClick={handleOpenModal}>
+                    {getText("buttonCartPageOpenPaymentModal")}
                 </Button>
                 <LoadingButton
                     className="flex-1"
@@ -47,7 +49,7 @@ export const CartSummaryCard = ({ cartSummary, handleOpenModal, handleDeleteCart
                     loadingText="Borrando Carrito"
                     onClick={handleDeleteCart}
                 >
-                    Eliminar Carrito
+                    {getText("buttonCartPageDeleteCart")}
                 </LoadingButton>
             </div>
         </div>

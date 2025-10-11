@@ -84,7 +84,7 @@ export const UserPage = () => {
         setAvatarLoaded(false);
         try {
             const newData = { avatar: { url: avatarData.url, alt: avatarData.alt } };
-            const updatedUser = await patchUser(newData);
+            await patchUser(newData);
         } catch (err) {
             console.error("Algo ha salido mal", err);
         }
@@ -129,7 +129,7 @@ export const UserPage = () => {
                 <Modal isOpen={showAvatarModal} onClose={handleShowAvatarModal} closeOnEscape={true}>
                     <ImageContainer>
                         <Image
-                            imgSrc={userProfile?.avatar?.url}
+                            src={userProfile?.avatar?.url}
                             alt={userProfile?.avatar?.alt}
                             className="rounded-lg"
                         />
@@ -145,7 +145,7 @@ export const UserPage = () => {
                         <ImageContainer className={avatarClasses}>
                             <Image
                                 onLoad={() => setAvatarLoaded(true)}
-                                imgSrc={userProfile?.avatar?.url}
+                                src={userProfile?.avatar?.url}
                                 alt={userProfile?.avatar?.alt}
                             />
                         </ImageContainer>
@@ -169,14 +169,14 @@ export const UserPage = () => {
                             >
                                 {getText("buttonChangeAvatar")}
                             </DropdownTrigger>
-                            <DropdownMenu direction="flex-row" className="mt-1 px-3" gap="gap-2">
+                            <DropdownMenu gap="gap-2">
                                 {AVATAR_DATA.map((avatar) => (
                                     <ImageContainer
                                         key={avatar.url}
                                         className={miniAvatarClasses}
                                         onClick={() => handleChangeAvatar(avatar)}
                                     >
-                                        <Image imgSrc={avatar.url} alt={avatar.alt} />
+                                        <Image src={avatar.url} alt={avatar.alt} />
                                     </ImageContainer>
                                 ))}
                             </DropdownMenu>
@@ -184,7 +184,7 @@ export const UserPage = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-6 max-w-[600px] mx-auto">
+                <div className="flex flex-col gap-6 md:max-w-[600px] md:mx-auto">
                     <Accordion
                         items={USER_DATA}
                         defaultOpen={false}

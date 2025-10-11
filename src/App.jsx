@@ -19,14 +19,13 @@ export const App = () => {
     const { orders } = useContext(OrdersContext);
     const { getOrders, getOrdersByUserId } = useOrders();
 
+    useImageFallback();
     useEffect(() => {
         if (!products?.length) getProducts();
         if (!categories?.length) getCategories();
         if (!orders && user?.role === "admin") getOrders();
         if (!orders && user?.role === "user") getOrdersByUserId();
     }, [user]);
-
-    useImageFallback();
 
     if (user?.role === "admin")
         return (

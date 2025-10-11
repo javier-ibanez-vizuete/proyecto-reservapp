@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { useDevice } from "../../hooks/useDevice";
 
 /**
  * ThemeButton Component - Simple button for switching between light and dark themes
@@ -27,6 +28,7 @@ import { ThemeContext } from "../../contexts/ThemeContext";
  */
 export const ThemeButton = ({ className = "", ...props }) => {
     const { theme, onToggleTheme } = useContext(ThemeContext);
+    const sizesDevice = useDevice();
 
     const handleClick = () => {
         onToggleTheme?.();
@@ -35,28 +37,43 @@ export const ThemeButton = ({ className = "", ...props }) => {
     const isDarkTheme = theme === "dark";
 
     return (
-        <div className={getContainerClasses(className, theme)} onClick={handleClick} role="button">
+        <div
+            className={getContainerClasses(className, theme, sizesDevice)}
+            onClick={handleClick}
+            role="button"
+        >
             <button
                 className={getButtonClasses()}
                 aria-label={getAriaLabel(theme, isDarkTheme)}
                 title={`Currently ${theme} theme. Click to toggle.`}
                 {...props}
             >
-                {renderThemeIcon(isDarkTheme)}
+                {renderThemeIcon(isDarkTheme, sizesDevice)}
             </button>
         </div>
     );
 };
 
 // Helper functions extracted to avoid nested logic
-const getContainerClasses = (className, theme) => {
+const getContainerClasses = (className, theme, sizesDevice) => {
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = sizesDevice;
+
+    const iconSunContainer = classNames({
+        "w-6 h-6": isMobile2Xs,
+        "w-7 h-7": isMobileXs,
+        "w-8 h-8": isMobileSm,
+        "w-9 h-9": isTablet,
+        "w-10 h-10": isDesktop,
+    });
+
     return classNames(
-        `relative rounded-full cursor-pointer border ${
-            theme === "light" ? "border-amber-500" : "border-gray-500"
+        `relative rounded-full cursor-pointer border transition-all duration-500 ease-in-out active:scale-95 lg:hover:-translate-y-[2px] ${
+            theme === "light" ? "border-amber-500" : "border-text-color-dark/50"
         }`,
         "backdrop-blur-[15px]",
         "shadow-[0px_0px_0px_1px_rgba(0,0,0,0.01)]",
-        "w-9 h-9 perfect-center",
+        "perfect-center",
+        iconSunContainer,
         className
     );
 };
@@ -70,51 +87,82 @@ const getAriaLabel = (theme, isDarkTheme) => {
     return `Switch theme from ${theme} to ${targetTheme}`;
 };
 
-const renderThemeIcon = (isDarkTheme) => {
+const renderThemeIcon = (isDarkTheme, sizesDevice) => {
     if (isDarkTheme) {
-        return renderMoonIcon();
+        return renderMoonIcon(sizesDevice);
     }
 
-    return renderSunIcon();
+    return renderSunIcon(sizesDevice);
 };
 
-const renderMoonIcon = () => {
+const renderMoonIcon = (sizesDevice) => {
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = sizesDevice;
+
+    const iconMoonConfig = classNames({
+        "w-3.5 h-3.5 before:h-3 before:w-3 before:-right-0.5 before:top-0": isMobile2Xs,
+        "w-4 h-4 before:h-3.5 before:w-3.5 before:-right-[2px] before:top-0": isMobileXs,
+        "w-4.5 h-4.5 before:h-4 before:w-4 before:-right-[2px] before:top-0": isMobileSm,
+        "w-5 h-5 before:h-4.5 before:w-4.5 before:-right-[2px] before:top-0": isTablet,
+        "w-5.5 h-5.5 before:h-5 before:w-5 before:-right-[3px] before:-top-[1px]": isDesktop,
+    });
+
     return (
         <span
             className={classNames(
-                "relative z-10 rounded-full transition-colors duration-300 outline-none",
-                "w-[14px] h-[14px] bg-gray-500",
-                // Moon shape using pseudo-element
-                'before:content-[""] before:w-[11px] before:h-[11px] before:rounded-full',
-                "before:bg-accent-background-dark before:absolute before:top-[0px] before:-right-[1px]"
+                "relative z-10 rounded-full transition-colors ease-in-out duration-500 outline-none",
+                "bg-text-color-dark shadow-2xs shadow-text-color-dark",
+                'before:content-[""] before:rounded-full',
+                "before:bg-accent-background-dark before:absolute",
+                iconMoonConfig
             )}
         />
     );
 };
 
-const renderSunIcon = () => {
+const renderSunIcon = (sizesDevice) => {
     return (
         <>
-            {renderSunCenter()}
-            {renderSunRays()}
+            {renderSunCenter(sizesDevice)}
+            {renderSunRays(sizesDevice)}
         </>
     );
 };
 
-const renderSunCenter = () => {
+const renderSunCenter = (sizesDevice) => {
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = sizesDevice;
+
+    const iconSunCenterConfig = classNames({
+        "w-2.5 h-2.5": isMobile2Xs,
+        "w-3 h-3": isMobileXs,
+        "w-3.5 h-3.5": isMobileSm,
+        "w-4 h-4": isTablet,
+        "w-4.5 h-4.5": isDesktop,
+    });
+
     return (
         <span
             className={classNames(
-                "relative z-10 rounded-full transition-colors duration-700 outline-none",
-                "w-[8px] h-[8px] bg-amber-500"
+                "relative z-10 rounded-full transition-colors duration-500 outline-none",
+                "bg-amber-500",
+                iconSunCenterConfig
             )}
         />
     );
 };
 
-const renderSunRays = () => {
+const renderSunRays = (sizesDevice) => {
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = sizesDevice;
+
+    const iconSunRaysConfig = classNames({
+        "w-[16px] h-[16px]": isMobile2Xs,
+        "w-[18px] h-[18px]": isMobileXs,
+        "w-[20px] h-[20px]": isMobileSm,
+        "w-[23px] h-[23px]": isTablet,
+        "w-[26px] h-[26px]": isDesktop,
+    });
+
     return (
-        <div className="absolute w-[17px] h-[17px]">
+        <div className={`absolute ${iconSunRaysConfig}`}>
             {Array.from({ length: 8 }, (_, index) => (
                 <span key={index} className={getSunRayClasses(index)} />
             ))}
@@ -124,7 +172,7 @@ const renderSunRays = () => {
 
 const getSunRayClasses = (rayIndex) => {
     const baseClasses =
-        "absolute w-[1.5px] h-[2.5px] rounded-full bg-amber-400 transition-colors duration-700 outline-none";
+        "absolute w-[1.5px] h-[2.5px] rounded-full bg-amber-400 transition-colors duration-500 outline-none";
     const positionClasses = getSunRayPosition(rayIndex);
 
     return classNames(baseClasses, positionClasses);

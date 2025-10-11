@@ -1,31 +1,35 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import iconBackWebp from "../../assets/icons/icon-go-back/icon-go-back.webp";
-import iconBackAvif from "../../assets/icons/icon-go-back/icon-go-back.png";
 import iconBackPng from "../../assets/icons/icon-go-back/icon-go-back.avif";
+import iconBackAvif from "../../assets/icons/icon-go-back/icon-go-back.png";
+import iconBackWebp from "../../assets/icons/icon-go-back/icon-go-back.webp";
+import { Button } from "./Button";
+import { Image } from "./Image";
+import { ImageContainer } from "./ImageContainer";
+
+const DEFAULT_PICTURE_DATA = {
+    url: iconBackPng,
+    webp: iconBackWebp,
+    avif: iconBackAvif,
+    alt: "Icon go Back",
+};
 
 const defaultImage = (
-	<picture className="flex flex-1 justify-center items-center">
-		<source srcSet={iconBackWebp} type="image/webp" />
-		<source srcSet={iconBackAvif} type="image/avif" />
-		<img className="w-full" src={iconBackPng} alt="Icon go Back" />
-	</picture>
+    <ImageContainer>
+        <Image imageData={DEFAULT_PICTURE_DATA} alt={DEFAULT_PICTURE_DATA.alt} />
+    </ImageContainer>
 );
 
 export const BackButton = ({ fallbackPath = "/", children = defaultImage }) => {
-	const navigate = useNavigate();
-	const location = useLocation();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-	const handleBack = () => {
-		const from = location.state?.from;
-		if (from) return navigate(from);
-		if (window.history.length > 1) return navigate(-1);
-		return navigate(fallbackPath);
-	};
+    const handleBack = () => {
+        const from = location.state?.from;
+        if (from) return navigate(from);
+        if (window.history.length > 1) return navigate(-1);
+        return navigate(fallbackPath);
+    };
 
-	return (
-		<button className="flex justify-center items-center w-8 self-start mb-6" onClick={handleBack}>
-			{children}
-		</button>
-	);
+    return <Button onClick={handleBack}>{children}</Button>;
 };

@@ -265,10 +265,10 @@ export const BookingPage = () => {
                                 {(form?.time && `${getText("bookingTimeText")}: ${form?.time}`) ||
                                     getText("bookingTimeText")}
                             </DropdownTrigger>
-                            <DropdownMenu>
+                            <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
                                     key={"Hora"}
-                                    defaultStyles={false}
+                                    variant="none"
                                     className={`perfect-center py-1 px-1.5 hover:scale-120 ${
                                         form.time === "" ? "font-bold" : "opacity-60"
                                     }`}
@@ -282,7 +282,7 @@ export const BookingPage = () => {
                                     return (
                                         <DropdownItem
                                             key={time.label}
-                                            defaultStyles={false}
+                                            variant="none"
                                             className={`perfect-center py-1 px-1.5 hover:scale-120 ${
                                                 form.time === time.time ? "font-bold" : ""
                                             }`}
@@ -314,9 +314,9 @@ export const BookingPage = () => {
                                     `${getText("bookingCustomersText")}: ${form?.partySize}`) ||
                                     getText("bookingCustomersText")}
                             </DropdownTrigger>
-                            <DropdownMenu>
+                            <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
-                                    defaultStyles={false}
+                                    variant="none"
                                     className={`perfect-center py-1.5 px-1.5 hover:scale-120 ${
                                         form.partySize === "" ? "font-bold" : "opacity-60"
                                     }`}
@@ -327,7 +327,7 @@ export const BookingPage = () => {
                                 </DropdownItem>
                                 {Array.from({ length: 8 }, (_, index) => (
                                     <DropdownItem
-                                        defaultStyles={false}
+                                        variant="none"
                                         className={`perfect-center py-1.5 px-1.5 hover:scale-120 ${
                                             form.partySize === index + 1 ? "font-bold" : ""
                                         }`}
@@ -388,10 +388,10 @@ export const BookingPage = () => {
                 )}
                 <div className="flex flex-col gap-2 md:flex-row lg:justify-center lg:gap-4">
                     <Button onClick={onBookingSubmit} variant="primary" className="flex-1 lg:flex-none">
-                        Reservar
+                        {getText("bookingButtonConfirmText")}
                     </Button>
                     <Button onClick={resetForm} variant="danger" className="flex-1 lg:flex-none">
-                        resetear Form
+                        {getText("bookingButtonResetForm")}
                     </Button>
                 </div>
                 <ToastContainer toasts={toasts} onClose={dismissToast} />

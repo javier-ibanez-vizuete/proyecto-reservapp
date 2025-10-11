@@ -59,7 +59,6 @@ export const useBookings = () => {
         try {
             const removedBooking = await deleteBookingByIdApi(bookingId);
             if (!removedBooking) return;
-            console.log("que vale removed booking", removedBooking);
             setBookings((prevValue) => {
                 const filteredBookings = prevValue?.filter(
                     (booking) => booking.id !== (removedBooking?.removed?.id || removedBooking?.removed?._id)

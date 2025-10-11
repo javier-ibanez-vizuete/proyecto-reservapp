@@ -161,10 +161,10 @@ export const Dropdown = ({
          * Previene el scroll cuando el dropdown está abierto (móvil)
          */
         const handleScroll = () => {
-            if (window.innerWidth <= 768) {
-                // Solo en móvil
-                setIsOpen(false);
-            }
+            // if (window.innerWidth < 768) {
+            //     // Solo en móvil
+            //     setIsOpen(false);
+            // }
         };
 
         if (isOpen) {
@@ -225,7 +225,8 @@ export const Dropdown = ({
         "top-start": "bottom-full left-0 mb-2",
         "top-end": "bottom-full right-0 mb-2",
         "bottom-start": "top-full left-0 mt-2",
-        "bottom-center": "top-full right-1/2 translate-x-1/2",
+        "bottom-center": "top-full right-1/2 translate-x-1/2 mt-xs",
+        "bottom-full": "top-full right-0 left-0 mt-xs",
         "bottom-end": "top-full right-0 mt-2",
         "left-start": "right-full top-0 mr-2",
         "left-end": "right-full bottom-0 mr-2",

@@ -116,7 +116,7 @@ export const useCart = () => {
             const postedOrder = await postOrder(newOrder);
             if (!postedOrder) throw new Error("Fallo al postear el pedido");
 
-            const newCart = await postCart(user.id);
+            const newCart = postCart(user.id);
             if (newCart) return newCart;
         } catch (err) {
             throw err;
