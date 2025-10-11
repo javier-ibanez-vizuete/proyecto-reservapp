@@ -1,4 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
+import { Card } from "../components/Card/Card";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
@@ -65,12 +66,7 @@ export const MenuPage = () => {
     return (
         <div className="flex flex-col flex-1 py-4">
             <Container className="flex-1 gap-4">
-                <BackToTopButton
-                    iconSize={"w-5"}
-                    showAt={1000}
-                    placement="bottom-right"
-                    variant="secondary"
-                />
+                <BackToTopButton iconSize={"w-5"} showAt={1000} placement="top-right" variant="secondary" />
                 <div className="lg:flex lg:justify-center">
                     <h1>{getText("h1MenuPage")}</h1>
                 </div>
@@ -96,7 +92,7 @@ export const MenuPage = () => {
                                 <Dropdown>
                                     <DropdownTrigger
                                         btnStyle={false}
-                                        className={`px-4 py-2 rounded-xl ${
+                                        className={`px-4 py-2 rounded-xl shadow-md ${
                                             theme === "light"
                                                 ? "bg-accent-background text-text-color"
                                                 : "bg-accent-background-dark text-text-color-dark"
@@ -128,9 +124,9 @@ export const MenuPage = () => {
                                 </Dropdown>
 
                                 {products.length && filteredProducts.length && (
-                                    <span>
+                                    <Card variant="accent" rounded={"lg"}>
                                         {filteredProducts.length}/{products.length}
-                                    </span>
+                                    </Card>
                                 )}
                             </div>
 

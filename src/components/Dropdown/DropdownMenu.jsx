@@ -77,7 +77,7 @@ export const DropdownMenu = ({
 
     // Clases para el contenido interno (el que tiene el borde y fondo)
     const baseContainerClasses = classNames(
-        "flex flex-1 min-h-0 overflow-y-auto overflow-x-hidden border border-gray-200 rounded-lg shadow-md ring-1 ring-black/5 focus:outline-none",
+        "flex flex-1 min-h-0 overflow-y-auto overflow-x-hidden scrollbar-hide border border-gray-200 rounded-lg shadow-md ring-1 ring-black/5 focus:outline-none",
         "px-2 py-2 xs:px-4 sm:px-6 sm:py-4 lg:px-8",
         containerHeightConfig,
         {

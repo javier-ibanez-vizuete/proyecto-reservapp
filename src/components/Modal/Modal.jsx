@@ -97,20 +97,20 @@ export const Modal = ({
 
     const overlayClasses = classNames(baseClasses, overlayClassName);
 
-    const backdropClasses = classNames("fixed inset-0 transition-opacity duration-300", {
+    const backdropClasses = classNames("fixed inset-0 transition-opacity duration-500", {
         "backdrop-blur-sm": blurBackground,
     });
 
     const backgroundClasses = classNames("fixed inset-0", overlayColor);
 
     const modalClasses = classNames(
-        "relative rounded-lg shadow-xl mx-auto my-8 transition-all duration-300 transform animate-in fade-in-0 zoom-in-95",
+        "relative rounded-lg shadow-xl mx-auto my-8 transition-all duration-500 transform animate-in fade-in-0 zoom-in-95",
         currentSize,
         className
     );
 
     const closeButtonClasses = classNames(
-        "absolute top-2 right-2 p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary z-10"
+        "absolute top-2 right-2 p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-primary z-10"
     );
 
     return (

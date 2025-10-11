@@ -1,7 +1,7 @@
 import classnames from "classnames";
 
 export const ModalHeader = ({ children, className = "", ...props }) => {
-    const headerClasses = classnames("p-lg border-b border-gray-200", className);
+    const headerClasses = classnames("p-lg", className);
 
     return (
         <div className={headerClasses} {...props}>

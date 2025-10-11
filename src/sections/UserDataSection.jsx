@@ -63,7 +63,7 @@ const EditableField = ({
             <div className="flex gap-2 p-1">
                 {!isEditing && (
                     <Button
-                        variant="secondary"
+                        variant="primary"
                         size="sm"
                         onClick={(event) => handleShowInput(event, fieldName)}
                     >
@@ -74,7 +74,7 @@ const EditableField = ({
                     <>
                         <Button
                             size="sm"
-                            variant="outline"
+                            variant="danger"
                             onClick={(event) => handleHideInput(event, fieldName)}
                         >
                             {getText("userDataModalCancelText")}
@@ -82,7 +82,7 @@ const EditableField = ({
                         {hasValue && (
                             <Button
                                 size="sm"
-                                variant="primary"
+                                variant="secondary"
                                 onClick={(event) => handleShowModal(event, fieldName)}
                             >
                                 {getText("userDataChangeButtonText")}
@@ -249,7 +249,7 @@ export const UserDataSection = ({ userData }) => {
             setIsLoading(true);
 
             try {
-                const newUser = await patchUser(form);
+                await patchUser(form);
             } catch (err) {
                 console.error("User Data is not Updated");
                 showToast(getText("toastUserDataChangeError"), "error", 1000);
@@ -260,11 +260,6 @@ export const UserDataSection = ({ userData }) => {
             }
         },
         [form, patchUser, showToast, resetFormState, setIsLoading]
-    );
-
-    const modalClassName = useMemo(
-        () => `${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`,
-        [theme]
     );
 
     return (
@@ -279,7 +274,7 @@ export const UserDataSection = ({ userData }) => {
                 confirmText={getText("userDataModalConfirmText")}
                 loadingText={getText("loadingUserDataModalConfirmText")}
                 cancelText={getText("userDataModalCancelText")}
-                className={modalClassName}
+                showCloseButton={false}
             />
             <div className="flex flex-col gap-3">
                 {Object.keys(FIELD_CONFIG).map((fieldName) => (

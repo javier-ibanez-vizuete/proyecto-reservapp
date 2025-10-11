@@ -1,6 +1,4 @@
 import classNames from "classnames";
-import { useContext } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
 
 /**
  * Button Component - Botón versátil del sistema de diseño Eleven Code
@@ -32,8 +30,6 @@ export const Button = ({
     className = "",
     ...props
 }) => {
-    const { theme } = useContext(ThemeContext);
-
     const handleClick = (event) => {
         if (!disabled) {
             onClick?.(event);
@@ -78,7 +74,7 @@ export const Button = ({
         },
         danger: {
             classes:
-                "bg-error-600 text-white border border-error-500 shadow-sm hover:bg-error-500 focus:ring-error-500",
+                "bg-error-600 text-white border border-error-500 shadow-md hover:bg-error-500 focus:ring-error-500",
             hasHoverEffects: true,
             hasActiveEffects: true,
             shadowColor: "hover:shadow-error-600/25",

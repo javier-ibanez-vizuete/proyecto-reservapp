@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tailwind-scrollbar-hide/v4";
 
 .admin-layout {
     display: flex;
@@ -40,8 +41,12 @@ body {
     --color-text-color: #0b1220;
     --color-text-color-dark: #f2f6f8;
 
-    --color-primary-color: #2563eb;
-    --color-secondary-color: #ff6b35;
+    --color-primary-color: #1a73e8;
+    --color-secondary-color: #5ec1e8;
+
+    --color-success-color: linear-gradient(135deg, #5cd17d 0%, #36b37e 100%);
+    --color-info-color: linear-gradient(135deg, #4cb0e8 0%, #1a73e8 100%);
+    --color-error-color: linear-gradient(135deg, #f66b6b 0%, #d83a3a 100%);
 
     /* 🚨 COLORES DE ERROR */
     --color-error-50: #fef2f2;

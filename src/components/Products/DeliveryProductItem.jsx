@@ -35,7 +35,7 @@ export const DeliveryProductItem = ({
             if (updatedCart) showToast(getText("toastAddedProductToCart"), "success", 1000);
         } catch (err) {
             console.error("No se ha añadido el producto", err);
-            showToast(getText("toastErrorAddingProductToCart"), "error");
+            showToast(getText("toastErrorAddingProductToCart"), "error", 1000);
         } finally {
             loading1.setIsLoading(false);
         }
@@ -102,7 +102,7 @@ export const DeliveryProductItem = ({
                     {!qty && (
                         <div className="flex flex-col justify-between">
                             <LoadingButton
-                                variant="secondary"
+                                variant="primary"
                                 loading={loading1.isLoading}
                                 loadingText={getText("loadingTextAddingProductsToCartButton")}
                                 onClick={() => handleAddProduct(productData)}

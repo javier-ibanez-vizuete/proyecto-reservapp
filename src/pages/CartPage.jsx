@@ -140,7 +140,7 @@ export const CartPage = () => {
                     )}
                     {cart?.items?.length <= 0 && (
                         <div className="flex flex-col md:mx-auto">
-                            <Button onClick={() => Navigate("/orders")}>
+                            <Button variant="primary" onClick={() => Navigate("/orders")}>
                                 {getText("goToOrdersCartButton")}
                             </Button>
                         </div>

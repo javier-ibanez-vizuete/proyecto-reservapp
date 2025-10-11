@@ -102,6 +102,8 @@ const TEXTS = {
         h1OrdersPage: "DELIVERY",
         smallOrdersPageSubtitle: "Enjoy our menu from the comfort of home.",
 
+        ordersPageInputPlaceholder: "Search Products...",
+
         addProductToCartButton: "Add to Cart",
         removeProductToCartButton: "Remove from Cart",
         loadingTextAddingProductsToCartButton: "Adding...",

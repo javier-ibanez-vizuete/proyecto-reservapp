@@ -35,7 +35,7 @@ export const BurgerButton = ({ isMobileMenuOpen, toggleMobileMenu }) => {
         if (isMobileSm && isMobileMenuOpen) return 32 * Math.sqrt(2) - 6;
 
         if (isTablet && !isMobileMenuOpen) return 36;
-        if (isTablet && isMobileMenuOpen) return 36 * Math.sqrt(2) - 7;
+        if (isTablet && isMobileMenuOpen) return 36 * Math.sqrt(2) - 5;
     }, [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, isMobileMenuOpen]);
 
     return (

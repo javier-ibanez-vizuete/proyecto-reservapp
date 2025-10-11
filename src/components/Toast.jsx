@@ -1,24 +1,38 @@
-import { useContext } from "react";
+import classNames from "classnames";
+import { useContext, useMemo } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useDevice } from "../hooks/useDevice";
 
 export const Toast = ({ message, type = "info", onClose, closing = false }) => {
     const { theme } = useContext(ThemeContext);
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+
+    const toastConfig = useMemo(
+        () => ({
+            bg: classNames({
+                "text-color": theme === "light",
+                "text-color-dark": theme !== "light",
+            }),
+            widthSize: classNames({
+                "w-[90vw]": isMobile2Xs,
+                "w-[80vw]": isMobileXs,
+                "w-[75vw]": isMobileSm,
+                "w-[450px]": isTablet || isDesktop,
+            }),
+        }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, theme]
+    );
 
     const OPTIONS = {
-        success: "border border-green-500 bg-green-600 text-text-color",
-        error: "border border-red-600 bg-red-700 text-white",
-        info: `border border-gray-400 ${
-            theme === "light"
-                ? "text-text-color bg-accent-background"
-                : "text-text-color-dark bg-accent-background-dark"
-        }`,
+        success: `border border-green-500 bg-gradient-to-br from-[#5cd17d] to-[#36b37e] ${toastConfig.bg}`,
+        error: `border border-red-600 bg-gradient-to-br from-[#f66b6b] to-[#d83a3a] ${toastConfig.bg}`,
+        info: `border border-gray-400 bg-gradient-to-br from-[#4cb0e8] to-[#1a73e8] ${toastConfig.bg}`,
     };
 
     const toastType = OPTIONS[type] || OPTIONS.info;
 
     // clases para animar entrada/salida
-    const baseClasses =
-        "p-4 transform min-w-[300px] transition-all duration-400 ease-in-out rounded-sm shadow-lg";
+    const baseClasses = `flex shrink p-4 ${toastConfig.widthSize} transform transition-all duration-500 ease-in-out rounded-sm shadow-lg`;
     const openState = "opacity-100 translate-y-0";
     const closingState = "opacity-0 -translate-y-4 pointer-events-none";
 
@@ -30,7 +44,7 @@ export const Toast = ({ message, type = "info", onClose, closing = false }) => {
                 closing ? closingState : openState
             } motion-reduce:transition-none`}
         >
-            <div className="flex justify-between items-center">
+            <div className={`flex flex-1 justify-between items-center`}>
                 <span className="flex-1">{message}</span>
                 <button
                     onClick={onClose}
