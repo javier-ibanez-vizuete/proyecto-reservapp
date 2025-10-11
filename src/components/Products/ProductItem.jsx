@@ -1,10 +1,12 @@
 import { useContext } from "react";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { Image } from "../UI/Image";
 import { ImageContainer } from "../UI/ImageContainer";
 
 export const ProductItem = ({ productData = {}, className = "" }) => {
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     return (
         <article
@@ -18,8 +20,8 @@ export const ProductItem = ({ productData = {}, className = "" }) => {
                 </ImageContainer>
             )}
             <div className="flex flex-col flex-1 justify-between gap-xs">
-                {productData?.name && <h4>{productData.name}</h4>}
-                {productData?.description && <p className="opacity-60">{productData.description}</p>}
+                {productData?.name && <h4>{getText(productData.name)}</h4>}
+                {productData?.description && <p className="opacity-60">{getText(productData.description)}</p>}
                 {productData?.price && <h3>{productData.price}€</h3>}
                 {productData?.categories && (
                     <ul className="flex items-center gap-1 lg:justify-center">

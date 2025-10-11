@@ -274,6 +274,131 @@ const TEXTS = {
         cardDataOrdersTitle: "Hungry? We Got You",
         cardDataOrdersDescription: "Enjoy our best dishes from the comfort of your place.",
         cardDataOrdersButtonText: "Order Now",
+
+        // PRODUCTS DATA
+        productCokeName: "Coke",
+        productCokeDescription: "Bottle of Coke served with Ice cubes and a slice of lime.",
+
+        productOrangeFantaName: "Orange Fanta",
+        productOrangeFantaDescription: "Bottle of Orange Fanta served with Ice cubes and a slice of orange.",
+
+        productMineralWaterName: "Mineral Water",
+        productMineralWaterDescription: "Bottle of Mineral Water served with Ice cubes.",
+
+        productSparklingWaterName: "Sparkling Water",
+        productSparklingWaterDescription:
+            "Bottle of Sparkling Water served with Ice cubes and a slice of lime.",
+
+        productBeerName: "Fuller's Beer",
+        productBeerDescription: "Half Pint of our Premium Ale (Fuller's).",
+
+        productOrangeJuiceName: "Fresh Squeezed Orange Juice",
+        productOrangeJuiceDescription: "A Glass of Freshly squeezed orange Juice",
+
+        productLemonFantaName: "Lemon Fanta",
+        productLemonFantaDescription: "Bottle of Lemon Fanta served with Ice cubes and a slice of Lemon.",
+
+        productRedWineName: "Red Wine Glass",
+        productRedWineDescription: "Our House Red Wine.",
+
+        productWhiteWineName: "White Wine Glass",
+        productWhiteWineDescription: "Our House White Wine",
+
+        productCoffeeName: "Espreso",
+        productCoffeDescription: "Our Espresso Coffe Made with the best Arabics Coffee Beans.",
+
+        productToastName: "Tomato Toast",
+        productDescription: "A Toasted bread with tomato, garlic and our best Spanish Olive Oil.",
+
+        productCheeseName: "Cheese Board",
+        productCheeseDescription: "Our best Selection of national cheeses with accompaniments.",
+
+        productCroquettesName: "Ham Croquettes",
+        productCroquettesDescription: "The best Homemade Ham Croquettes we ever made.",
+
+        productIberianHamName: "Iberian Ham",
+        productIberianHamDescription: "100g of Our finest 5J Iberian Ham, hand-sliced.",
+
+        productBravasName: "Bravas Potato Fries",
+        productBravasDescription: "Our hand picked potatoes and the best Brava sauce in the world.",
+
+        productMixedSaladName: "Traditional Salad",
+        productMixedSaladDescription:
+            "A bowl of Lettuce, tomato, onion and olives. Can be served with dressing.",
+
+        productClassicBurgerName: "Beef Burger",
+        productClassicBurgerDescription:
+            "The Number one Beef Burger with our best Cheddar Cheese, tomato and lettuce.",
+
+        productPorkSteakSirloinName: "Iberian Sirloin Steak",
+        productPorkSteakSirloinDescription: "A Grilled pork sirloin Steak served with our best Mint sauce.",
+
+        productRisottoName: "Boletus Risotto",
+        productRisottoDescription: "The most creamy risotto we ever made served with boletus slices.",
+
+        productVeggieBurgerName: "Veggie Burger",
+        productVeggieBurgerDescription:
+            "A juicy plant-based patty made with beetroot, pea protein, carrot, and apple, served in a soft brioche bun with red onion and crisp lettuce.",
+
+        productSteakTartareName: "Steak Tartare",
+        productSteakTartareDescription: "Steak Tartare served with egg yolk and smoked with chocolate wood.",
+
+        productTakosName: "Chicken Tacos",
+        productTakosDescription: "Marinated chicken Tacos served with spicy sauce and fresh pico de gallo.",
+
+        productRoastChickenName: "Roast Chicken",
+        productRoastChickenDescription:
+            "Our Best Roasted Chicken served with our artisan lemon/pepper sauce.",
+
+        productCarbonaraName: "Spaguetti Carbonara",
+        productCarbonaraDescription: "spaguetti fresh pasta made with our tradicional Carbonara Sauce.",
+
+        productPaellaName: "Seafood Paella",
+        productPaellaDescription: "A Spanish Traditional Paella served with a variety of seafood",
+
+        productCalamariName: "Fried Calamari",
+        productCalamariDescription: "Battered calamari Rings, served with an edge of lemon.",
+
+        productSoupName: "Iberian Ham Soup",
+        productSoupDescription: "Our Homemade Soup served with a Boiled Egg and Iberian Ham.",
+
+        productMusselsMariniereName: "Mussels Marinière",
+        productMusselsMarinièreDescription: "Mussels cooked in our fresh homemade marinara-style sauce.",
+
+        productPizzaName: "Margherita Pizza",
+        productPizzaDescription: "Our Homemade Pizza base with tomate, fresh mozzarella and basil.",
+
+        productLasagnaName: "Bolognese Lasagna",
+        productLasagnaDescription: "Our Homemade Lasagna made with bolognese sauce and bechamel.",
+
+        productSalmonName: "Grilled Salmon",
+        productSalmonDescription:
+            "A fresh Salmon fillet grilled to perfection and served with our creamy punpkin soup.",
+
+        productEntrecoteBeefName: "Entrecote Beef",
+        productentrecoteBeefDescription: "Grilled and Salty Entrecote Beef",
+
+        productFrenchFriesName: "French Fries Side",
+        productFrenchFriesDescription: "A Salty Side of Our best French Fries",
+
+        productGarlicBreadName: "Garlic Bread",
+        productGarlicBreadDescription: "Slices of our buttered and crunchy garlic bread.",
+
+        productEggFlanName: "Egg Flan",
+        productEggFlanDescription:
+            "Homemade Flan served with our artisan liquid caramel and the classic Napolitana biscuit.",
+
+        productCremaCatalanaName: "Crema Catalana",
+        productCremaCatalanaDescription: "our traditional Spanish Dessert served with caramelized sugar.",
+
+        productPannaCottaName: "Panna Cotta",
+        productPannaCottaDescription: "Homemade Panna cotta served with red fruit coulis.",
+
+        productCheesecakeName: "Cheesecake",
+        productCheesecakeDescription: "Our Creamy homemade cheesecake served with blueberry Jam",
+
+        productBrownieName: "Chocolate Brownie",
+        productBrownieDescription: "Our Artisan and perfectly Baked Brownie with vanilla artisan Ice cream.",
     },
 
     es: {

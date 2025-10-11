@@ -95,8 +95,8 @@ export const DeliveryProductItem = ({
                 </div>
                 <div className="flex flex-1 flex-col justify-between gap-1">
                     <div className="flex flex-col gap-1">
-                        <h4>{productData?.name}</h4>
-                        <small>{productData.description}</small>
+                        <h4>{getText(productData?.name)}</h4>
+                        <small>{getText(productData.description)}</small>
                         <h3>{productData.deliveryPrice} €</h3>
                     </div>
                     {!qty && (
