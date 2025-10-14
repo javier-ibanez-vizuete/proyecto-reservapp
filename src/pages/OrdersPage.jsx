@@ -32,7 +32,7 @@ export const OrderPage = () => {
 
     const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { lang, TEXTS, getText } = useContext(LanguageContext);
     const location = useLocation();
 
     const [categorySelected, setCategorySelected] = useState(null);
@@ -93,13 +93,36 @@ export const OrderPage = () => {
             return products.filter(
                 (product) => product.categories && product.categories.includes(categorySelected)
             );
-        if (productSearch && !categorySelected)
-            return products.filter((product) =>
-                product.name.toLowerCase().includes(productSearch.toLowerCase().trim())
-            );
+        if (productSearch && !categorySelected) {
+            // Aqui lo quiero Aplicar
+            const normalizedSearch = productSearch.toLowerCase().trim();
+            const productsTranslations = Object.entries(TEXTS[lang]).filter(([property, value]) => {
+                const isProduct = property.startsWith("product") && property.endsWith("Name");
+                const normalizedValue = value.toLowerCase().trim();
+                return normalizedValue.includes(normalizedSearch) && isProduct;
+            });
+
+            const productsKeys = productsTranslations.map(([key]) => key);
+
+            return products.filter((product) => productsKeys.includes(product.name));
+        }
         return products.filter((product) => {
+            const normalizedSearch = productSearch.toLowerCase().trim();
+            const productsTranslations = Object.entries(TEXTS[lang]).filter(([property, value]) => {
+                const isProduct = property.startsWith("product") && property.endsWith("Name");
+                const normalizedValue = value.toLowerCase().trim();
+                return normalizedValue.includes(normalizedSearch) && isProduct;
+            });
+
+            console.log("productsTranslations", productsTranslations);
+            const productsKeys = productsTranslations.map(([key]) => key);
+            console.log("ProductsKEYS", productsKeys);
+
+            const sameName = productsKeys.includes(product.name);
+            console.log("SAME NAME", sameName);
             const sameCategory = product.categories && product.categories.includes(categorySelected);
-            const sameName = product.name.toLowerCase().includes(productSearch.toLowerCase().trim());
+            console.log("Same CATEGORY", sameCategory);
+
             return sameCategory && sameName;
         });
     }, [productSearch, categorySelected]);
