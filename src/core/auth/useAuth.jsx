@@ -40,13 +40,12 @@ export const useAuth = () => {
                 const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
 
                 if (intendedFromStorage) {
-                    navigate(intendedFromStorage, { replace: true });
                     removeFromSessionStorage("intendedRoute");
+                    return navigate(intendedFromStorage, { replace: true });
                 }
-                if (!intendedFromStorage) {
-                    navigate("/", { state: { fromLogin: true } });
-                    saveDataInSessionStorage("fromLogin", true);
-                }
+
+                saveDataInSessionStorage("fromLogin", true);
+                return navigate("/", { state: { fromLogin: true } });
             }
         } catch (err) {
             console.error("El login no ha podido Completarse 'useAuth-login()'", err);
@@ -66,8 +65,8 @@ export const useAuth = () => {
                 setUser(false);
                 setCart(null);
                 removeCartFromLocalStorage();
-                navigate("/", { state: { logoutSuccess: true } });
                 saveDataInSessionStorage("logoutSuccess", true);
+                return navigate("/", { state: { logoutSuccess: true } });
             }
         } catch (err) {
             console.error("El Logout no ha podido completarse", err);

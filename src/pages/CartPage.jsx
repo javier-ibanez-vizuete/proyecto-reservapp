@@ -11,7 +11,6 @@ import { CartsContext } from "../contexts/CartsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useCart } from "../core/cart/useCart";
-import { saveDataInSessionStorage } from "../helpers/storage";
 import { useLoading } from "../hooks/useLoading";
 import { useToast } from "../hooks/useToast";
 
@@ -41,10 +40,6 @@ export const CartPage = () => {
             setIsLoading(false);
         }
     };
-
-    useEffect(() => {
-        saveDataInSessionStorage("currentRoute", location?.pathname);
-    }, []);
 
     useEffect(() => {
         if (cart && !loadingDelete.isLoading) handleGetSummaryCart();

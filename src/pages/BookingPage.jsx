@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BookingCalendar } from "../components/BookingCalendar";
 import { Container } from "../components/Container";
@@ -79,10 +79,6 @@ export const BookingPage = () => {
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
     const { toasts, showToast, dismissToast } = useToast();
-
-    useEffect(() => {
-        saveDataInSessionStorage("currentRoute", location?.pathname);
-    }, []);
 
     const onChangeDate = (selectedDate) => {
         setError("");

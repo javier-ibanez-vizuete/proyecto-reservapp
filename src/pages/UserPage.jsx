@@ -18,7 +18,6 @@ import { OrdersContext } from "../contexts/OrdersContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { normalizeId } from "../helpers/normalizeId";
-import { saveDataInSessionStorage } from "../helpers/storage";
 import { useDevice } from "../hooks/useDevice";
 import { UserBookingsSection } from "../sections/UserBookingsSection";
 import { UserDataSection } from "../sections/UserDataSection";
@@ -38,10 +37,6 @@ export const UserPage = () => {
     const { getText } = useContext(LanguageContext);
     const { theme } = useContext(ThemeContext);
     const { isMobile, isTablet, isDesktop } = useDevice();
-
-    useEffect(() => {
-        saveDataInSessionStorage("currentRoute", location?.pathname);
-    }, []);
 
     const USER_DATA = [
         { title: getText("userDataSectionTitle"), content: <UserDataSection userData={userProfile} /> },

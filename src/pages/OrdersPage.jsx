@@ -21,7 +21,6 @@ import { LanguageContext } from "../contexts/LanguageContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
-import { saveDataInSessionStorage } from "../helpers/storage";
 import { useDevice } from "../hooks/useDevice";
 
 export const OrderPage = () => {
@@ -42,10 +41,6 @@ export const OrderPage = () => {
     const inputRef = useRef(null);
 
     const { isMobile } = useDevice();
-
-    useEffect(() => {
-        saveDataInSessionStorage("currentRoute", location?.pathname);
-    }, []);
 
     useEffect(() => {
         const handleEscapeKey = (event) => {
