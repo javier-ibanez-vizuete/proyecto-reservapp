@@ -8,22 +8,15 @@ export const AdminRouter = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    if (user && user?.role === "admin") return navigate("/dashboard", { replace: true });
+    if (user && user?.role === "user") return navigate("/dashboard", { replace: true });
 
     return (
         <Routes>
-            {/* <Route
-                path="/"
-                element={
-                    user?.role === "admin" ? <Navigate to={"/dashboard"} replace /> : <Navigate to={"/"} />
-                }
-            /> */}
-
             <Route element={<PrivateRoute />}>
                 <Route path="/dashboard/*" element={<DashboardPage />} />
             </Route>
 
-            <Route path="*" element={<DashboardPage />} />
+            <Route path="*" element={<h1>PAGINA NO ENCONTRADA</h1>} />
         </Routes>
     );
 };

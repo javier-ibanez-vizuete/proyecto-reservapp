@@ -44,6 +44,21 @@ body {
     --color-primary-color: #1a73e8;
     --color-secondary-color: #5ec1e8;
 
+    --color-admin-background: #b9c6cf;
+    --color-admin-background-dark: #121920;
+
+    --color-admin-accent-background: #b6dff0;
+    --color-admin-accent-background-dark: #0b2430;
+
+    --color-admin-text-color: #07131a;
+    --color-admin-text-color-dark: #eef6fa;
+
+    --color-admin-primary-color: #104fbf;
+    --color-admin-primary-hover: #0d44a1;
+
+    --color-admin-secondary-color: #2c7990;
+    --color-admin-secondary-hover: #246276;
+
     --color-success-color: linear-gradient(135deg, #5cd17d 0%, #36b37e 100%);
     --color-info-color: linear-gradient(135deg, #4cb0e8 0%, #1a73e8 100%);
     --color-error-color: linear-gradient(135deg, #f66b6b 0%, #d83a3a 100%);
