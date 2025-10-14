@@ -1,30 +1,27 @@
 import { useContext, useEffect } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import {
-    getDataFromSessionStorage,
-    removeFromSessionStorage,
-    saveDataInSessionStorage,
-} from "../helpers/storage";
+import { saveDataInSessionStorage } from "../helpers/storage";
 
 export const PrivateRoute = () => {
     const { user } = useContext(AuthContext);
     const location = useLocation();
 
     useEffect(() => {
-        if (user === null) {
+        if (!user) {
             saveDataInSessionStorage("intendedRoute", location.pathname);
         }
     }, [user, location.pathname]);
 
     if (user === null) {
-        const routeFromStorage = getDataFromSessionStorage("currentRoute");
-        if (!routeFromStorage) return <Navigate to={"login"} />;
-        <Navigate to={routeFromStorage} />;
-        return removeFromSessionStorage("currentRoute");
+        return <div>Cargando...</div>;
     }
 
-    if (user === false) return <Navigate to={"/"} state={{ isUser: "No Existe Usuario" }} />;
+    if (user === false) {
+        console.log("Entrando en false");
+
+        return <Navigate to={"/login"} />;
+    }
 
     return <Outlet />;
 };
