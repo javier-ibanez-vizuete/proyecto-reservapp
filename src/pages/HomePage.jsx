@@ -17,6 +17,7 @@ export const HomePage = () => {
     const { user } = useContext(AuthContext);
 
     const { toasts, showToast, dismissToast } = useToast();
+
     useEffect(() => {
         const fromLogin =
             location.state?.fromLogin === true || getDataFromSessionStorage("fromLogin") === true;

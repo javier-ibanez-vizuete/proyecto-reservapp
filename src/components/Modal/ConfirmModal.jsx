@@ -19,6 +19,7 @@ export const ConfirmModal = ({
     cancelText = "Cancelar",
     showCloseButton,
     variant = "accent",
+    variantButton = "primary",
     loading = false,
     className = "",
 }) => {
@@ -60,7 +61,7 @@ export const ConfirmModal = ({
                 </Button>
                 <LoadingButton
                     loading={loading}
-                    variant={variant}
+                    variant={variantButton}
                     loadingText={loadingText}
                     onClick={handleConfirm}
                     disabled={loading}

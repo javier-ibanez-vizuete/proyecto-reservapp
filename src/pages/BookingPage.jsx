@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { BookingCalendar } from "../components/BookingCalendar";
 import { Container } from "../components/Container";
 import { CustomCheckbox } from "../components/CustomCheckbox";
@@ -72,11 +73,16 @@ export const BookingPage = () => {
     const [error, setError] = useState("");
 
     const { postBookings, isLoading } = useBookings();
+    const location = useLocation();
 
-    const { user, setUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
     const { toasts, showToast, dismissToast } = useToast();
+
+    useEffect(() => {
+        saveDataInSessionStorage("currentRoute", location?.pathname);
+    }, []);
 
     const onChangeDate = (selectedDate) => {
         setError("");

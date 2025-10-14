@@ -1,4 +1,5 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import iconCloseWhite from "../assets/icons/icon-equis-white.webp";
 import iconClose from "../assets/icons/icon-equis.webp";
 import iconSearchWhite from "../assets/icons/icon-search-white.webp";
@@ -20,6 +21,7 @@ import { LanguageContext } from "../contexts/LanguageContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
+import { saveDataInSessionStorage } from "../helpers/storage";
 import { useDevice } from "../hooks/useDevice";
 
 export const OrderPage = () => {
@@ -31,6 +33,7 @@ export const OrderPage = () => {
     const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
+    const location = useLocation();
 
     const [categorySelected, setCategorySelected] = useState(null);
     const [productSearch, setProductSearch] = useState("");
@@ -39,6 +42,10 @@ export const OrderPage = () => {
     const inputRef = useRef(null);
 
     const { isMobile } = useDevice();
+
+    useEffect(() => {
+        saveDataInSessionStorage("currentRoute", location?.pathname);
+    }, []);
 
     useEffect(() => {
         const handleEscapeKey = (event) => {

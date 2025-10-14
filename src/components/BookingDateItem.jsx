@@ -150,7 +150,9 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                 title={getText("bookingDataModalDeletingTitle")}
                 message={messageModal}
                 confirmText={getText("bookingDataModalDeletingbutton")}
-                variant="danger"
+                showCloseButton={false}
+                variant="accent"
+                variantButton="danger"
                 loadingText={getText("loadingBookingDataModalDeletingbutton")}
                 loading={isLoading}
             />
@@ -199,7 +201,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                             </div>
 
                             {!areOldBooking && (
-                                <Button size="sm" variant="primary" onClick={() => handleShowModal(booking)}>
+                                <Button size="sm" variant="danger" onClick={() => handleShowModal(booking)}>
                                     {getText("buttonBookingDataCancelReservation")}
                                 </Button>
                             )}

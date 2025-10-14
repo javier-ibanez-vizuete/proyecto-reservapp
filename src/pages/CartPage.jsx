@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AccordionProductsCart } from "../components/AccordionProductsCart";
 import { CartSummaryCard } from "../components/CartSummaryCard";
 import { Container } from "../components/Container";
@@ -11,6 +11,7 @@ import { CartsContext } from "../contexts/CartsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useCart } from "../core/cart/useCart";
+import { saveDataInSessionStorage } from "../helpers/storage";
 import { useLoading } from "../hooks/useLoading";
 import { useToast } from "../hooks/useToast";
 
@@ -22,6 +23,7 @@ export const CartPage = () => {
 
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
+    const location = useLocation();
 
     const { isLoading, setIsLoading } = useLoading();
     const loadingDelete = useLoading();
@@ -39,6 +41,10 @@ export const CartPage = () => {
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        saveDataInSessionStorage("currentRoute", location?.pathname);
+    }, []);
 
     useEffect(() => {
         if (cart && !loadingDelete.isLoading) handleGetSummaryCart();
@@ -113,7 +119,9 @@ export const CartPage = () => {
                     loadingText={getText("loadingConfirmButtonCartModal")}
                     confirmText={getText("confirmButtonCartModal")}
                     cancelText={getText("cancelButtonCartModal")}
-                    variant="primary"
+                    variant="accent"
+                    variantButton="primary"
+                    showCloseButton={false}
                     loading={isLoading2.isLoading}
                     className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
                 />

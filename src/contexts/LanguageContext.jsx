@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/storage";
 
 const TEXTS = {
     en: {
@@ -2461,7 +2462,11 @@ export const LanguageContext = createContext({
 });
 
 export const LanguageProvider = ({ children }) => {
-    const [lang, setLang] = useState("en");
+    const [lang, setLang] = useState(() => {
+        const langFromStorage = getDataFromSessionStorage("lang");
+        if (!langFromStorage) return "en";
+        return langFromStorage;
+    });
 
     const getText = (key) => {
         const selectedText = TEXTS[lang][key];
@@ -2471,6 +2476,7 @@ export const LanguageProvider = ({ children }) => {
     };
     const handleLang = (lang = "en") => {
         setLang(lang);
+        saveDataInSessionStorage("lang", lang);
     };
 
     return (

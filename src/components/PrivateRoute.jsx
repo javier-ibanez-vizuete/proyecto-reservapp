@@ -1,7 +1,11 @@
 import { useContext, useEffect } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { saveDataInSessionStorage } from "../helpers/storage";
+import {
+    getDataFromSessionStorage,
+    removeFromSessionStorage,
+    saveDataInSessionStorage,
+} from "../helpers/storage";
 
 export const PrivateRoute = () => {
     const { user } = useContext(AuthContext);
@@ -13,11 +17,14 @@ export const PrivateRoute = () => {
         }
     }, [user, location.pathname]);
 
-    if (user === null) return <Navigate to={"login"} />;
-
-    if (user === false) {
-        return <Navigate to={"/"} state={{ isUser: "No Existe Usuario" }} />;
+    if (user === null) {
+        const routeFromStorage = getDataFromSessionStorage("currentRoute");
+        if (!routeFromStorage) return <Navigate to={"login"} />;
+        <Navigate to={routeFromStorage} />;
+        return removeFromSessionStorage("currentRoute");
     }
+
+    if (user === false) return <Navigate to={"/"} state={{ isUser: "No Existe Usuario" }} />;
 
     return <Outlet />;
 };

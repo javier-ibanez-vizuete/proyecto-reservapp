@@ -271,6 +271,8 @@ export const UserDataSection = ({ userData }) => {
                 onConfirm={handleConfirmChangeData}
                 onClose={handleCloseModal}
                 loading={isLoading}
+                variant="accent"
+                variantButton="primary"
                 confirmText={getText("userDataModalConfirmText")}
                 loadingText={getText("loadingUserDataModalConfirmText")}
                 cancelText={getText("userDataModalCancelText")}

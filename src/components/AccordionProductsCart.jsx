@@ -136,7 +136,7 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
             <header className="flex items-center">
                 <div className={`flex flex-1 items-center ${isMobileXs ? "gap-2" : "gap-4"}`}>
                     <div className="flex items-center gap-0.5">
-                        <h6>{product.name}</h6>
+                        <h6>{getText(product.name)}</h6>
                     </div>
                     {!isMobileXs && (
                         <div className="flex items-center gap-0.5">
@@ -164,7 +164,7 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
                     {!isMobile && (
                         <div className="flex items-center gap-1">
                             <h6>{getText("accordionDescriptionText")}</h6>
-                            <p>{product.description}</p>
+                            <p>{getText(product.description)}</p>
                         </div>
                     )}
                     <div className="flex items-center gap-1">

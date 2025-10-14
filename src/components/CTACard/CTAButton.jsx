@@ -10,8 +10,8 @@ export const CTAButton = ({ text, href, onClick }) => {
     const ctaButtonConfig = useMemo(
         () =>
             classNames({
-                "px-2 py-1 text-2xs": isMobile2Xs || isMobileXs,
-                "px-3 py-1.5 text-base": isMobileSm,
+                "px-2 py-1 text-2xs": isMobile2Xs,
+                "px-3 py-1.5 text-base": isMobileXs || isMobileSm,
                 "px-4 py-2 text-sm": isTablet,
                 "px-6 py-3 text-md": isDesktop,
             }),

@@ -151,7 +151,9 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
                 onConfirm={() => handleCancelOrder(orderIdSelected)}
                 loading={isLoading}
                 className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
-                variant="primary"
+                variant="accent"
+                variantButton="danger"
+                showCloseButton={false}
             />
             <Modal
                 closeOnEscape={true}
@@ -190,7 +192,7 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={() => handleShowInfoModal()}>
+                    <Button variant="danger" onClick={() => handleShowInfoModal()}>
                         {getText("buttonOrdersDataInfomodalCloseText")}
                     </Button>
                 </ModalFooter>
@@ -212,11 +214,7 @@ export const OrdersDateItem = ({ title = "", content = [], isPendingOrders = fal
                             </ImageContainer>
                         )}
                         {isPendingOrders && (
-                            <Button
-                                size="sm"
-                                variant="secondary"
-                                onClick={() => handleShowDeleteModal(order)}
-                            >
+                            <Button size="sm" variant="danger" onClick={() => handleShowDeleteModal(order)}>
                                 {getText("buttonOrdersDataInfoCancelText")}
                             </Button>
                         )}

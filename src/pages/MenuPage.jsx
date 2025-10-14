@@ -1,4 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Card } from "../components/Card/Card";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
@@ -11,7 +12,6 @@ import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Button } from "../components/UI/Button";
 import { LanguageContext } from "../contexts/LanguageContext";
-import { LoaderContext } from "../contexts/LoaderContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
@@ -19,9 +19,10 @@ import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/
 
 export const MenuPage = () => {
     const { products, categories } = useContext(ProductsContext);
-    const { loaders } = useContext(LoaderContext);
-    const isLoadingProducts = loaders.includes("get-products-loader");
+    // const { loaders } = useContext(LoaderContext);
+    // const isLoadingProducts = loaders.includes("get-products-loader");
 
+    const location = useLocation();
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
     const { getProducts, loadingProducts } = useProducts();

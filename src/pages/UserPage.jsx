@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Accordion } from "../components/Accordion";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
@@ -17,6 +18,7 @@ import { OrdersContext } from "../contexts/OrdersContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { normalizeId } from "../helpers/normalizeId";
+import { saveDataInSessionStorage } from "../helpers/storage";
 import { useDevice } from "../hooks/useDevice";
 import { UserBookingsSection } from "../sections/UserBookingsSection";
 import { UserDataSection } from "../sections/UserDataSection";
@@ -32,9 +34,14 @@ export const UserPage = () => {
     const { orders } = useContext(OrdersContext);
     const { getProfile, patchUser, loadingUserMe } = useAuth();
 
+    const location = useLocation();
     const { getText } = useContext(LanguageContext);
     const { theme } = useContext(ThemeContext);
     const { isMobile, isTablet, isDesktop } = useDevice();
+
+    useEffect(() => {
+        saveDataInSessionStorage("currentRoute", location?.pathname);
+    }, []);
 
     const USER_DATA = [
         { title: getText("userDataSectionTitle"), content: <UserDataSection userData={userProfile} /> },
