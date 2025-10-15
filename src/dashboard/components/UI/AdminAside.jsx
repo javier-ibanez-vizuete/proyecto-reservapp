@@ -1,8 +1,10 @@
 import classNames from "classnames";
-import { useContext, useEffect, useMemo, useRef } from "react";
+import { useContext, useMemo } from "react";
 import { ThemeContext } from "../../../contexts/ThemeContext";
+import { ASIDE_DATA } from "../../../data/ASIDE_DATA";
 import { useDevice } from "../../../hooks/useDevice";
 import { useWindowWidth } from "../../../hooks/useWindowWidth";
+import { AdminAccordion } from "../AdminAccordion";
 
 export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
@@ -10,22 +12,10 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
 
     const { theme } = useContext(ThemeContext);
 
-    const asideref = useRef(null);
-
-    useEffect(() => {
-        if (!asideref?.current) return;
-
-        const asideContainer = asideref.current;
-
-        if (isAsideOpen) asideContainer.style.width = `${asideContainer.scrollWidth}px`;
-        if (!isAsideOpen) {
-            asideContainer.style.width = 0;
-            // asideContainer.style.padding = 0;
-        }
-    }, [asideref, isAsideOpen, width, isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]);
-
     const baseClasses =
         "absolute w-0 flex flex-col top-0 left-0 bottom-0 z-10 overflow-hidden transition-all duration-500 ease-in-out lg:flex-1 lg:relative lg:top-auto lg:bottom-auto lg:left-auto";
+
+    console.log("Que vale isAsideOpen", isAsideOpen);
 
     const autoAsideConfig = useMemo(
         () => ({
@@ -34,7 +24,7 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
                 "p-sm": isMobileXs && isAsideOpen,
                 "p-md": isMobileSm && isAsideOpen,
                 "p-lg": isTablet && isAsideOpen,
-                "p-xl": isDesktop && isAsideOpen,
+                "py-lg pr-md": isDesktop && isAsideOpen,
                 "p-0": !isAsideOpen,
             }),
             bg: classNames({
@@ -47,6 +37,14 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
                 "border-r": isAsideOpen,
                 "border-r-0": !isAsideOpen,
             }),
+            width: classNames({
+                "w-1/2":
+                    (isMobile2Xs && isAsideOpen) ||
+                    (isMobileXs && isAsideOpen) ||
+                    (isMobileSm && isAsideOpen),
+                "w-1/3": isTablet && isAsideOpen,
+                "w-0": !isAsideOpen,
+            }),
         }),
         [width, isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, theme, isAsideOpen]
     );
@@ -55,14 +53,15 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
         baseClasses,
         autoAsideConfig.borderLine,
         bgColor || autoAsideConfig.bg,
-        autoAsideConfig.padding || "p-8 pl-8",
+        autoAsideConfig.padding,
+        autoAsideConfig.width,
         className
     );
 
     return (
-        <aside ref={asideref} className={currentAsideClasses}>
-            <div className="flex flex-1 flex-col">
-                <h1>LA RUTA DE LA CRUZ DEL CAMPO</h1>
+        <aside className={currentAsideClasses}>
+            <div className="flex overflow-hidden flex-col">
+                <AdminAccordion contents={ASIDE_DATA} defaultOpen={null} />
             </div>
         </aside>
     );
