@@ -2,11 +2,14 @@ import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { BurgerButton } from "../../components/BurgerButton";
+import { LanguagesSelector } from "../../components/LanguagesSelector";
 import { Image } from "../../components/UI/Image";
 import { ImageContainer } from "../../components/UI/ImageContainer";
+import { ThemeButton } from "../../components/UI/ThemeButton";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { LOGO_DARK, LOGO_LIGHT } from "../../data/LOGO_DATA";
 import { useDevice } from "../../hooks/useDevice";
+import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { AdminContainer } from "./UI/AdminContainer";
 
 export const AdminNavbar = ({
@@ -21,13 +24,14 @@ export const AdminNavbar = ({
     className = "",
 }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+    const width = useWindowWidth();
     const { theme } = useContext(ThemeContext);
 
     const baseClasses = "flex flex-col justify-center";
 
     const variantsBgColor = classNames({
         "bg-admin-accent-background": theme === "light",
-        "bg-admin-accent-background-color": theme !== "light",
+        "bg-admin-accent-background-dark": theme !== "light",
     });
 
     const variantsPadding = {
@@ -76,7 +80,7 @@ export const AdminNavbar = ({
                 "w-10": isDesktop,
             }),
         }),
-        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, width]
     );
 
     const navClasses = classNames(
@@ -94,7 +98,7 @@ export const AdminNavbar = ({
     return (
         <nav className={navClasses}>
             <AdminContainer className="justify-between items-center">
-                <div className="flex items-center 2xs:gap-xs sm:gap-sm md:gap-md">
+                <div className="flex items-center 2xs:gap-sm md:gap-md">
                     <div className="flex flex-col self-stretch lg:hidden">
                         <BurgerButton isMobileMenuOpen={isAsideOpen} toggleMobileMenu={onToggleAside} />
                     </div>
@@ -110,7 +114,10 @@ export const AdminNavbar = ({
                     </div>
                 </div>
                 <h2>ReservApp</h2>
-                <div>navbar Actions</div>
+                <div className="flex justify-end items-center 2xs:gap-sm md:gap-md">
+                    <ThemeButton />
+                    <LanguagesSelector placement="bottom-end" />
+                </div>
             </AdminContainer>
         </nav>
     );
