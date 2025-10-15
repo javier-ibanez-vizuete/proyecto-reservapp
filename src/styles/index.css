@@ -1,12 +1,6 @@
 @import "tailwindcss";
 @import "tailwind-scrollbar-hide/v4";
 
-.admin-layout {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
 body {
     margin: 0;
     font-family: "Montserrat", Roboto, sans-serif, ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial;
@@ -199,6 +193,23 @@ body {
     #root {
         display: flex;
         flex-direction: column;
+    }
+
+    .admin-aside-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc((100vw - 960px) / 2);
+        z-index: 1;
+        height: 100%;
+    }
+
+    .light.admin-aside-container::before {
+        background: #b6dff0;
+    }
+    .dark.admin-aside-container::before {
+        background: #0b2430;
     }
 }
 

@@ -16,6 +16,7 @@ export const AdminLayout = ({ children }) => {
 
     useEffect(() => {
         if (isDesktop) setIsAsideOpen(true);
+        if (!isDesktop) setIsAsideOpen(false);
     }, [isDesktop]);
 
     const onToggleAside = () => {
@@ -24,15 +25,15 @@ export const AdminLayout = ({ children }) => {
     };
 
     const baseLayoutContainerClasses = "flex flex-1 flex-col divide-y";
-    const baseMainClasses = "flex flex-col flex-3";
-
+    const baseAsideContainerClasses = `flex flex-1 flex-col relative admin-aside-container`;
+    const baseAdminContainerBaseClasses = "flex-1 justify-between before";
     const autoColorConfig = useMemo(
         () => ({
             layoutContainer: classNames({
                 "divide-admin-text-color text-admin-text-color": theme === "light",
                 "divide-admin-text-color-dark text-admin-text-color-dark": theme !== "light",
             }),
-            main: classNames({
+            mainContainer: classNames({
                 "bg-admin-background": theme === "light",
                 "bg-admin-background-dark": theme !== "light",
             }),
@@ -40,12 +41,13 @@ export const AdminLayout = ({ children }) => {
         [theme]
     );
 
-    const currentAdminLayoutClasses = classNames(
-        baseLayoutContainerClasses,
-        autoColorConfig.layoutContainer || "divide-admin-text-color text-admin-text-color"
+    const currentAdminLayoutClasses = classNames(baseLayoutContainerClasses, autoColorConfig.layoutContainer);
+    const currentAdminContainerClasses = classNames(baseAdminContainerBaseClasses);
+    const currentAsideContainerClasses = classNames(
+        baseAsideContainerClasses,
+        autoColorConfig.mainContainer,
+        theme
     );
-
-    const currentMainClasses = classNames(baseMainClasses);
 
     const { logout } = useAuth();
     return (
@@ -56,10 +58,10 @@ export const AdminLayout = ({ children }) => {
                 isAsideOpen={isAsideOpen}
                 onToggleAside={onToggleAside}
             />
-            <div className={`flex flex-1 flex-col ${autoColorConfig.main} lg:gap-md`}>
-                <AdminContainer className="flex-1 justify-between">
+            <div className={currentAsideContainerClasses}>
+                <AdminContainer className={currentAdminContainerClasses}>
                     <AdminAside isAsideOpen={isAsideOpen} />
-                    <main className={currentMainClasses}>{children}</main>
+                    <main className={""}>{children}</main>
                 </AdminContainer>
             </div>
             <footer onClick={logout}>FOOTER: CERRAR SESION</footer>
