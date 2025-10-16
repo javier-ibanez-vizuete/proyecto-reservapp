@@ -3,6 +3,7 @@ import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Image } from "../../components/UI/Image";
 import { ImageContainer } from "../../components/UI/ImageContainer";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useDevice } from "../../hooks/useDevice";
 import { ARROW_DOWN_BLACK, ARROW_DOWN_WHITE } from "../../utils/ICONS_DATA";
@@ -13,6 +14,7 @@ export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false
 
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     const location = useLocation();
 
@@ -28,8 +30,7 @@ export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false
         () => ({
             iconSize: classNames({
                 "w-3": isMobile2Xs || isMobileXs,
-                "w-4": isMobileSm || isTablet,
-                "w-5": isDesktop,
+                "w-3.5": isMobileSm || isTablet || isDesktop,
             }),
             iconDirection: classNames({
                 "rotate-180": isOpen,
@@ -67,7 +68,7 @@ export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false
     return (
         <article>
             <header className={baseHeaderClasses} onClick={onToggleOpen}>
-                <h5>{title}</h5>
+                <h6>{getText(title)}</h6>
                 <ImageContainer
                     size={autoAdminAccordionItemConfig.iconSize}
                     className={currentImageContainerConfig}
@@ -91,7 +92,7 @@ export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false
                                     autoAdminAccordionItemConfig.link
                                 )}
                             >
-                                {label}
+                                {getText(label)}
                             </Link>
                         </li>
                     ))}
@@ -102,7 +103,6 @@ export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false
 };
 
 export const AdminAccordion = ({ contents = [], padding, gap, defaultOpen = 0, className = "" }) => {
-    const { getText } = useContext(ThemeContext);
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const baseAdminAccordionClasses = "flex flex-col";
@@ -135,8 +135,7 @@ export const AdminAccordion = ({ contents = [], padding, gap, defaultOpen = 0, c
             }),
             gap: classNames({
                 "gap-sm": isMobile2Xs || isMobileXs,
-                "gap-md": isMobileSm || isTablet,
-                "gap-lg": isDesktop,
+                "gap-md": isMobileSm || isTablet || isDesktop,
             }),
         }),
         [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]

@@ -400,6 +400,21 @@ const TEXTS = {
 
         productBrownieName: "Chocolate Brownie",
         productBrownieDescription: "Our Artisan and perfectly Baked Brownie with vanilla artisan Ice cream.",
+
+        // ADMIN LAYOUT
+        // - - - ASIDE DATA - - -
+        asideUsersTitleLink: "Users",
+        asideSeeUsersLabelLink: "View Users",
+
+        asideProductsTitleLink: "Products",
+        asideSeeProductsLabelLink: "View Users",
+        asideAddProductsLabelLink: "Add Product",
+
+        asideBookingsTitleLink: "Bookings",
+        asideSeeBookings: "View Bookings",
+
+        asideOrdersTitleLink: "Orders",
+        asideSeeOrdersLabelLink: "View Orders",
     },
 
     es: {
