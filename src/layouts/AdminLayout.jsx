@@ -3,7 +3,6 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useAuth } from "../core/auth/useAuth";
 import { AdminNavbar } from "../dashboard/components/AdminNavbar";
 import { AdminAside } from "../dashboard/components/UI/AdminAside";
 import { AdminContainer } from "../dashboard/components/UI/AdminContainer";
@@ -57,7 +56,6 @@ export const AdminLayout = ({ children }) => {
         theme
     );
 
-    const { logout } = useAuth();
     return (
         <div className={currentAdminLayoutClasses}>
             <AdminNavbar
@@ -72,7 +70,6 @@ export const AdminLayout = ({ children }) => {
                     <main className={baseMainClasses}>{children}</main>
                 </AdminContainer>
             </div>
-            <footer onClick={logout}>FOOTER: CERRAR SESION</footer>
         </div>
     );
 };

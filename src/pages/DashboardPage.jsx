@@ -1,7 +1,38 @@
+import classNames from "classnames";
+import { useCallback, useContext, useEffect, useMemo } from "react";
+import { UsersContext } from "../contexts/UsersContext";
+import { useUsers } from "../core/users/useUsers";
 import { AdminBentoGrid } from "../dashboard/components/AdminBentoGrid";
 import { AdminBentoGridItem } from "../dashboard/components/AdminBentoGridItem";
+import { AdminBentoGridItemUser } from "../dashboard/components/AdminBentoGridItemUser";
+import { AdminSkeleton } from "../dashboard/components/AdminSkeleton";
+import { useDevice } from "../hooks/useDevice";
+import { useLoading } from "../hooks/useLoading";
 
 export const DashboardPage = () => {
+    const { users } = useContext(UsersContext);
+    const { getUsers } = useUsers();
+    const loaderUsers = useLoading();
+
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+
+    const handleGetUsers = useCallback(async () => {
+        try {
+            loaderUsers.setIsLoading(true);
+            await getUsers();
+            console.log("Usuarios Obtenidos");
+        } catch (err) {
+        } finally {
+            loaderUsers.setIsLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!users) handleGetUsers();
+    }, []);
+
+    // LLAMAR FUNCION DE OBTENER USUARIOS
+
     const dashboardItems = [
         {
             title: 5,
@@ -41,8 +72,19 @@ export const DashboardPage = () => {
         },
     ];
 
+    const usersBentoDisplay = useMemo(
+        () =>
+            classNames({
+                3: isMobile2Xs || isMobileXs || isTablet || isDesktop,
+                2: isMobileSm,
+            }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+    );
+
+    console.log("users", users);
+
     return (
-        <div>
+        <div className="flex flex-1 flex-col">
             <AdminBentoGrid>
                 {dashboardItems.map((item) => (
                     <AdminBentoGridItem
@@ -55,32 +97,18 @@ export const DashboardPage = () => {
                     />
                 ))}
                 {/* ESTO ES UN EJEMPLO HAY QUE COMPONETIZARLO */}
-                <AdminBentoGridItem to="/dashboard/users" colSpan={3} rowSpan={2}>
-                    <article className="flex flex-1">
-                        <div>
-                            <div>Avatar 1</div>
-                            <h6>username 1</h6>
-                            <div>
-                                <p>Pedidos:</p>
-                                <p>2</p>
-                            </div>
-                        </div>
-                        <div>
-                            <div>Avatar 2</div>
-                            <h6>username 2</h6>
-                            <div>
-                                <p>Pedidos:</p>
-                                <p>4</p>
-                            </div>
-                        </div>
-                        <div>
-                            <div>Avatar 3</div>
-                            <h6>username 3</h6>
-                            <div>
-                                <p>Pedidos:</p>
-                                <p>6</p>
-                            </div>
-                        </div>
+                <AdminBentoGridItem to="/dashboard/users">
+                    <article className="flex flex-1 justify-center gap-xs">
+                        {loaderUsers.isLoading &&
+                            Array.from({ length: usersBentoDisplay }).map((_, index) => (
+                                <AdminSkeleton key={index} variant="avatar" />
+                            ))}
+                        {users
+                            .sort((userA, userB) => userB.isActive - userA.isActive)
+                            .slice(0, usersBentoDisplay)
+                            .map((user) => (
+                                <AdminBentoGridItemUser user={user} />
+                            ))}
                     </article>
                 </AdminBentoGridItem>
             </AdminBentoGrid>
