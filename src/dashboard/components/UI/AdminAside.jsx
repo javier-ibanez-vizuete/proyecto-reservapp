@@ -20,7 +20,7 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
     const { logout } = useAuth();
 
     const baseClasses =
-        "absolute w-0 flex flex-col top-0 left-0 bottom-0 z-10 overflow-hidden transition-all duration-500 ease-in-out lg:flex-1 lg:relative lg:top-auto lg:bottom-auto lg:left-auto";
+        "absolute w-0 flex flex-col top-0 left-0 bottom-0 z-20 overflow-hidden transition-all duration-500 ease-in-out lg:flex-1 lg:relative lg:top-auto lg:bottom-auto lg:left-auto";
 
     const autoAsideConfig = useMemo(
         () => ({

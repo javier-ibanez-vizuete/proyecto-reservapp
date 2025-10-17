@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { AuthContext } from "../contexts/AuthContext";
 import { AdminBookingsPage } from "../dashboard/pages/AdminBookingsPage";
@@ -12,7 +12,9 @@ export const AdminRouter = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    if (user && user?.role === "user") return navigate("/dashboard", { replace: true });
+    if (user && user?.role === "user") return navigate("/", { replace: true });
+
+    console.log("Que vale user", user);
 
     return (
         <Routes>
@@ -28,7 +30,7 @@ export const AdminRouter = () => {
                 <Route path="/dashboard/orders" element={<AdminOrdersPage />} />
             </Route>
 
-            <Route path="*" element={<h1>PAGINA NO ENCONTRADA</h1>} />
+            <Route path="*" element={<Navigate to={"/dashboard"} />} />
         </Routes>
     );
 };

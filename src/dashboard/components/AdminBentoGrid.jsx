@@ -5,7 +5,7 @@ import { useDevice } from "../../hooks/useDevice";
 export const AdminBentoGrid = ({ children, columns, gap, padding, className = "", ...rest }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
-    const baseClasses = "grid grid-flow-dense lg:grid-flow-col auto-rows-fr";
+    const baseClasses = "grid grid-flow-dense  auto-rows-fr";
 
     const variantsColumns = {
         1: "grid-cols-1",

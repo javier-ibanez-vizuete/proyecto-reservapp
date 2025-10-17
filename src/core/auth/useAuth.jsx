@@ -8,8 +8,11 @@ import {
     saveDataInSessionStorage,
 } from "../../helpers/storage";
 import { useLoading } from "../../hooks/useLoading";
+import { removeBookingsFromLocalStorage } from "../bookings/bookings.service";
 import { removeCartFromLocalStorage } from "../cart/cart.service";
 import { useCart } from "../cart/useCart";
+import { removeOrdersFromLocalStorage } from "../orders/orders.service";
+import { removeProductsFromLocalStorage } from "../products/Products.service";
 import { getProfileApi, loginApi, logoutApi, patchUserApi, registerApi } from "./auth.api";
 import {
     removeTokenFromLocalStorage,
@@ -65,6 +68,9 @@ export const useAuth = () => {
                 setUser(false);
                 setCart(null);
                 removeCartFromLocalStorage();
+                removeBookingsFromLocalStorage();
+                removeOrdersFromLocalStorage();
+                removeProductsFromLocalStorage();
                 saveDataInSessionStorage("logoutSuccess", true);
                 return navigate("/", { state: { logoutSuccess: true } });
             }
