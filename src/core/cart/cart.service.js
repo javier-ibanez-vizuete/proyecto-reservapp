@@ -19,3 +19,7 @@ export const saveCartSummaryInLocalStorage = (cartSummary) => {
 export const getCartSummaryFromLocalStorage = () => {
     return getDataFromStorage("cartSummary");
 };
+
+export const removeCartSummaryFromLocalStorage = () => {
+    removeFromStorage("cartSummary");
+};

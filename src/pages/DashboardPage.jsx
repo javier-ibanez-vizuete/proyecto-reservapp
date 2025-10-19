@@ -16,7 +16,9 @@ import {
     getCancelledOrders,
     getCompletedOrders,
     getConnectedUsers,
+    getDelayedBookings,
     getPendingOrders,
+    getTodaysBookings,
     getTotalBookings,
     getTotalOrders,
     getTotalUsers,
@@ -26,8 +28,6 @@ export const DashboardPage = () => {
     const { users } = useContext(UsersContext);
     const { orders } = useContext(OrdersContext);
     const { bookings } = useContext(BookingsContext);
-
-    console.log("que vale bookings", bookings);
 
     const { getUsers } = useUsers();
     const loaderUsers = useLoading();
@@ -40,8 +40,8 @@ export const DashboardPage = () => {
     const handleGetUsers = useCallback(async () => {
         try {
             loaderUsers.setIsLoading(true);
-            await getUsers();
-            console.log("Usuarios Obtenidos");
+            const usersResponse = await getUsers();
+            console.log("que vale userresponse", usersResponse);
         } catch (err) {
             //Aqui meter un toast
         } finally {
@@ -53,7 +53,6 @@ export const DashboardPage = () => {
         try {
             loaderBookings.setIsLoading(true);
             const bookingsResponse = await getBookings();
-            console.log("Reservas obtenidas", bookingsResponse);
         } catch (err) {
             // Aqui meter un toast
         } finally {
@@ -62,12 +61,12 @@ export const DashboardPage = () => {
     }, []);
 
     useEffect(() => {
-        if (!users) handleGetUsers();
-    }, []);
+        if (!users || !users.length) handleGetUsers();
+    }, [users]);
 
     useEffect(() => {
-        if (!bookings) handleGetBookings();
-    }, []);
+        if (!bookings || !bookings.length) handleGetBookings();
+    }, [bookings]);
 
     // LLAMAR FUNCION DE OBTENER USUARIOS
 
@@ -145,8 +144,17 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: 6,
+            title: getTodaysBookings(bookings),
             description: "Reservas (Hoy)",
+            icon: "",
+            to: "/dashboard/bookings",
+            colSpan: 1,
+            rowSpan: 1,
+            gradient: null,
+        },
+        {
+            title: getDelayedBookings(bookings),
+            description: "Reservas con retraso",
             icon: "",
             to: "/dashboard/bookings",
             colSpan: 1,
@@ -173,8 +181,6 @@ export const DashboardPage = () => {
         [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
     );
 
-    console.log("users", users);
-
     return (
         <div className="flex flex-1 flex-col">
             <AdminBentoGrid>
@@ -186,6 +192,7 @@ export const DashboardPage = () => {
                         rowSpan={item.rowSpan}
                         title={item.title}
                         description={item.description}
+                        gradient={item.gradient}
                     />
                 ))}
                 {/* ESTO ES UN EJEMPLO HAY QUE COMPONETIZARLO */}

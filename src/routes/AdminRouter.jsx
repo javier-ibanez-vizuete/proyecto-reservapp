@@ -14,7 +14,8 @@ export const AdminRouter = () => {
 
     if (user && user?.role === "user") return navigate("/", { replace: true });
 
-    console.log("Que vale user", user);
+    if (user?.role !== "admin") return navigate("/");
+    console.log("que vale user", user);
 
     return (
         <Routes>
@@ -30,7 +31,7 @@ export const AdminRouter = () => {
                 <Route path="/dashboard/orders" element={<AdminOrdersPage />} />
             </Route>
 
-            <Route path="*" element={<Navigate to={"/dashboard"} />} />
+            <Route path="*" element={<Navigate to={user?.role === "admin" ? "/dashboard" : "/"} />} />
         </Routes>
     );
 };

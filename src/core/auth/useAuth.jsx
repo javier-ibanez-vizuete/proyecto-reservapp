@@ -8,11 +8,19 @@ import {
     saveDataInSessionStorage,
 } from "../../helpers/storage";
 import { useLoading } from "../../hooks/useLoading";
-import { removeBookingsFromLocalStorage } from "../bookings/bookings.service";
-import { removeCartFromLocalStorage } from "../cart/cart.service";
+import {
+    removeBookingFormFromLocalStorage,
+    removeBookingsFromLocalStorage,
+} from "../bookings/bookings.service";
+import { removeCartFromLocalStorage, removeCartSummaryFromLocalStorage } from "../cart/cart.service";
 import { useCart } from "../cart/useCart";
 import { removeOrdersFromLocalStorage } from "../orders/orders.service";
-import { removeProductsFromLocalStorage } from "../products/Products.service";
+import {
+    removeCategoriesFromLocalStorage,
+    removeProductsFromLocalStorage,
+} from "../products/Products.service";
+import { removeUsersFromLocalStorage } from "../users/users.service";
+import { useUsers } from "../users/useUsers";
 import { getProfileApi, loginApi, logoutApi, patchUserApi, registerApi } from "./auth.api";
 import {
     removeTokenFromLocalStorage,
@@ -23,6 +31,7 @@ import {
 
 export const useAuth = () => {
     const { user, setUser } = useContext(AuthContext);
+    const { getUsers } = useUsers();
     const { setCart } = useContext(CartsContext);
     const { getCartMe } = useCart();
     const loadingUserMe = useLoading();
@@ -38,11 +47,14 @@ export const useAuth = () => {
                 saveTokenInLocalStorage(authData.token);
                 saveUserInLocalStorage(authData.user);
                 setUser(authData.user);
-                await getCartMe(authData.user.id);
+                if (authData.user.role === "admin") {
+                    const users = await getUsers();
+                }
+                if (authData.user.role === "user") await getCartMe(authData.user.id);
 
                 const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
 
-                if (intendedFromStorage) {
+                if (intendedFromStorage && !intendedFromStorage.includes("/dashboard")) {
                     removeFromSessionStorage("intendedRoute");
                     return navigate(intendedFromStorage, { replace: true });
                 }
@@ -67,10 +79,16 @@ export const useAuth = () => {
                 removeTokenFromLocalStorage();
                 setUser(false);
                 setCart(null);
+                removeUsersFromLocalStorage();
                 removeCartFromLocalStorage();
+                removeCartSummaryFromLocalStorage();
                 removeBookingsFromLocalStorage();
+                removeBookingFormFromLocalStorage();
                 removeOrdersFromLocalStorage();
                 removeProductsFromLocalStorage();
+                removeCategoriesFromLocalStorage();
+                removeFromSessionStorage("intendedRoute");
+
                 saveDataInSessionStorage("logoutSuccess", true);
                 return navigate("/", { state: { logoutSuccess: true } });
             }

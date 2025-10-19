@@ -4,7 +4,7 @@ import { getUsersFromLocalStorage } from "../core/users/users.service";
 export const UsersContext = createContext(null);
 
 export const UsersProvider = ({ children }) => {
-    const [users, setUsers] = useState(null);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         const usersFromStorage = getUsersFromLocalStorage();

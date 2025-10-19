@@ -60,3 +60,39 @@ export const getTotalBookings = (bookings) => {
 
     return bookings.length;
 };
+
+export const getTodaysBookings = (bookings) => {
+    if (!bookings || !bookings.length) return 0;
+
+    const currentDate = new Date().toISOString().split("T")[0];
+    const currentTime = new Date().getTime();
+
+    return bookings.filter((booking) => {
+        const bookingDate = booking.scheduledFor.split("T")[0];
+        const bookingTime = new Date(booking.scheduledFor).getTime();
+        const isPending = booking.status === "pending";
+
+        const sameDate = currentDate === bookingDate;
+        const isLater = currentTime < bookingTime;
+
+        return sameDate && isLater && isPending;
+    }).length;
+};
+
+export const getDelayedBookings = (bookings) => {
+    if (!bookings || !bookings.length) return 0;
+
+    const currentDate = new Date().toISOString().split("T")[0];
+    const currentTime = new Date().getTime();
+
+    return bookings.filter((booking) => {
+        const bookingDate = booking.scheduledFor.split("T")[0];
+        const bookingTime = new Date(booking.scheduledFor).getTime();
+        const isPending = booking.status === "pending";
+
+        const sameDate = currentDate === bookingDate;
+        const isDelayed = currentTime >= bookingTime;
+
+        return sameDate && isDelayed && isPending;
+    }).legnth;
+};

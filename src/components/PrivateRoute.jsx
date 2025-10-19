@@ -9,6 +9,8 @@ export const PrivateRoute = () => {
 
     useEffect(() => {
         if (!user) {
+            console.log("Guardando la ruta", location.pathname);
+
             saveDataInSessionStorage("intendedRoute", location.pathname);
         }
     }, [user, location.pathname]);

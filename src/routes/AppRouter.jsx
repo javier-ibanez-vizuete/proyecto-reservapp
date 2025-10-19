@@ -1,10 +1,7 @@
-import { useContext } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "../components/PrivateRoute";
-import { AuthContext } from "../contexts/AuthContext";
 import { BookingPage } from "../pages/BookingPage";
 import { CartPage } from "../pages/CartPage";
-import { DashboardPage } from "../pages/DashboardPage";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { MenuPage } from "../pages/MenuPage";
@@ -13,11 +10,6 @@ import { RegisterPage } from "../pages/RegisterPage";
 import { UserPage } from "../pages/UserPage";
 
 export const AppRouter = () => {
-    const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
-
-    if (user && user?.role === "admin") return navigate("/dashboard", { replace: true });
-
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
@@ -31,7 +23,6 @@ export const AppRouter = () => {
                 <Route path="/bookings" element={<BookingPage />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/user" element={<UserPage />} />
-                <Route path="/dashboard/*" element={<DashboardPage />} />
                 <Route path="/orders" element={<OrderPage />} />
             </Route>
 

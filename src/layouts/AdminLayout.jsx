@@ -25,7 +25,6 @@ export const AdminLayout = ({ children }) => {
     }, [location.pathname]);
 
     const onToggleAside = () => {
-        console.log("haciendo click en Menu Hamburguesa");
         setIsAsideOpen((prev) => !prev);
     };
 

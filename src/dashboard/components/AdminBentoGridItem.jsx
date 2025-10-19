@@ -9,7 +9,7 @@ export const AdminBentoGridItem = ({
     to = "#",
     colSpan,
     rowSpan,
-    title,
+    title = 0,
     description,
     icon,
     gradient,
@@ -17,6 +17,8 @@ export const AdminBentoGridItem = ({
     padding,
     ...rest
 }) => {
+    const hasTitle = (typeof title === "number" && title >= 0) || title.length;
+
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
 
@@ -155,7 +157,7 @@ export const AdminBentoGridItem = ({
                 {children && children}
                 {!children && (
                     <article className="flex flex-1 flex-col justify-center items-center">
-                        {title && <h6>{title}</h6>}
+                        {hasTitle && <h6>{title}</h6>}
                         {description && <p>{description}</p>}
                     </article>
                 )}
