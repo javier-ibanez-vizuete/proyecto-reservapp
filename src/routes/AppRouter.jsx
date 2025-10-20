@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { BookingPage } from "../pages/BookingPage";
 import { CartPage } from "../pages/CartPage";
@@ -10,6 +10,8 @@ import { RegisterPage } from "../pages/RegisterPage";
 import { UserPage } from "../pages/UserPage";
 
 export const AppRouter = () => {
+    const location = useLocation();
+
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
@@ -26,7 +28,16 @@ export const AppRouter = () => {
                 <Route path="/orders" element={<OrderPage />} />
             </Route>
 
-            <Route path="/*" element={<h1>RUTA NO ENCONTRADA</h1>} />
+            <Route
+                path="/*"
+                element={
+                    <Navigate
+                        to={"/"}
+                        state={{ errorRoute: true, intendedRoute: location.pathname }}
+                        replace
+                    />
+                }
+            />
         </Routes>
     );
 };
