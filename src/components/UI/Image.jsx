@@ -1,6 +1,21 @@
-export const Image = ({ imageData = {}, alt = "", className = "", src = "", onLoad = () => {} }) => {
+export const Image = ({
+    imageData = {},
+    alt = "",
+    className = "",
+    src = "",
+    onLoad = () => {},
+    onError = () => {},
+}) => {
     if (src) {
-        return <img className={`w-full ${className}`} src={src} alt={alt || "Image"} onLoad={onLoad} />;
+        return (
+            <img
+                className={`w-full ${className}`}
+                src={src}
+                alt={alt || "Image"}
+                onLoad={onLoad}
+                onError={onError}
+            />
+        );
     }
 
     if (imageData?.url) {
@@ -55,6 +70,7 @@ export const Image = ({ imageData = {}, alt = "", className = "", src = "", onLo
                     src={imageData.url}
                     alt={alt || imageData.alt || "Image"}
                     onLoad={onLoad}
+                    onError={onError}
                 />
             </>
         );

@@ -1,12 +1,6 @@
 @import "tailwindcss";
 @import "tailwind-scrollbar-hide/v4";
 
-.admin-layout {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
 body {
     margin: 0;
     font-family: "Montserrat", Roboto, sans-serif, ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial;
@@ -44,6 +38,21 @@ body {
     --color-primary-color: #1a73e8;
     --color-secondary-color: #5ec1e8;
 
+    --color-admin-background: #b9c6cf;
+    --color-admin-background-dark: #121920;
+
+    --color-admin-accent-background: #b6dff0;
+    --color-admin-accent-background-dark: #0b2430;
+
+    --color-admin-text-color: #07131a;
+    --color-admin-text-color-dark: #eef6fa;
+
+    --color-admin-primary-color: #104fbf;
+    --color-admin-primary-hover: #0d44a1;
+
+    --color-admin-secondary-color: #2c7990;
+    --color-admin-secondary-hover: #246276;
+
     --color-success-color: linear-gradient(135deg, #5cd17d 0%, #36b37e 100%);
     --color-info-color: linear-gradient(135deg, #4cb0e8 0%, #1a73e8 100%);
     --color-error-color: linear-gradient(135deg, #f66b6b 0%, #d83a3a 100%);
@@ -59,6 +68,28 @@ body {
     --color-error-700: #b91c1c;
     --color-error-800: #991b1b;
     --color-error-900: #7f1d1d;
+
+    --color-success-50: #f0fdf4;
+    --color-success-100: #dcfce7;
+    --color-success-200: #bbf7d0;
+    --color-success-300: #86efac;
+    --color-success-400: #4ade80;
+    --color-success-500: #22c55e;
+    --color-success-600: #16a34a;
+    --color-success-700: #15803d;
+    --color-success-800: #166534;
+    --color-success-900: #14532d;
+
+    --color-warning-50: #fffbeb;
+    --color-warning-100: #fef3c7;
+    --color-warning-200: #fde68a;
+    --color-warning-300: #fcd34d;
+    --color-warning-400: #fbbf24;
+    --color-warning-500: #f59e0b;
+    --color-warning-600: #d97706;
+    --color-warning-700: #b45309;
+    --color-warning-800: #92400e;
+    --color-warning-900: #78350f;
 
     /* 📐 ESPACIADO */
     --spacing-xs: 4px;
@@ -184,6 +215,23 @@ body {
     #root {
         display: flex;
         flex-direction: column;
+    }
+
+    .admin-aside-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc((100vw - 960px) / 2);
+        z-index: 1;
+        height: 100%;
+    }
+
+    .light.admin-aside-container::before {
+        background: #b6dff0;
+    }
+    .dark.admin-aside-container::before {
+        background: #0b2430;
     }
 }
 

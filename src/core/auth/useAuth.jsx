@@ -8,8 +8,19 @@ import {
     saveDataInSessionStorage,
 } from "../../helpers/storage";
 import { useLoading } from "../../hooks/useLoading";
-import { removeCartFromLocalStorage } from "../cart/cart.service";
+import {
+    removeBookingFormFromLocalStorage,
+    removeBookingsFromLocalStorage,
+} from "../bookings/bookings.service";
+import { removeCartFromLocalStorage, removeCartSummaryFromLocalStorage } from "../cart/cart.service";
 import { useCart } from "../cart/useCart";
+import { removeOrdersFromLocalStorage } from "../orders/orders.service";
+import {
+    removeCategoriesFromLocalStorage,
+    removeProductsFromLocalStorage,
+} from "../products/Products.service";
+import { removeUsersFromLocalStorage } from "../users/users.service";
+import { useUsers } from "../users/useUsers";
 import { getProfileApi, loginApi, logoutApi, patchUserApi, registerApi } from "./auth.api";
 import {
     removeTokenFromLocalStorage,
@@ -20,26 +31,31 @@ import {
 
 export const useAuth = () => {
     const { user, setUser } = useContext(AuthContext);
+    const { getUsers } = useUsers();
     const { setCart } = useContext(CartsContext);
     const { getCartMe } = useCart();
     const loadingUserMe = useLoading();
+    const loaderUser = useLoading();
 
     const navigate = useNavigate();
 
     const login = async ({ email, password }) => {
-        // Enviar a la API de autenticación
         try {
+            loaderUser.setIsLoading(true);
             const authData = await loginApi({ email, password });
 
             if (authData) {
                 saveTokenInLocalStorage(authData.token);
                 saveUserInLocalStorage(authData.user);
                 setUser(authData.user);
-                await getCartMe(authData.user.id);
+                if (authData.user.role === "admin") {
+                    const users = await getUsers();
+                }
+                if (authData.user.role === "user") await getCartMe(authData.user.id);
 
                 const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
 
-                if (intendedFromStorage) {
+                if (intendedFromStorage && !intendedFromStorage.includes("/dashboard")) {
                     removeFromSessionStorage("intendedRoute");
                     return navigate(intendedFromStorage, { replace: true });
                 }
@@ -49,14 +65,14 @@ export const useAuth = () => {
             }
         } catch (err) {
             console.error("El login no ha podido Completarse 'useAuth-login()'", err);
+        } finally {
+            loaderUser.setIsLoading(false);
         }
-
-        // Si la API nos dice error, mostramos un mensaje de error
     };
 
     const logout = async () => {
-        // Lógica de cierre de sesión
         try {
+            loaderUser.setIsLoading(true);
             const logoutResponse = await logoutApi();
 
             if (logoutResponse?.logout) {
@@ -64,18 +80,29 @@ export const useAuth = () => {
                 removeTokenFromLocalStorage();
                 setUser(false);
                 setCart(null);
+                removeUsersFromLocalStorage();
                 removeCartFromLocalStorage();
+                removeCartSummaryFromLocalStorage();
+                removeBookingsFromLocalStorage();
+                removeBookingFormFromLocalStorage();
+                removeOrdersFromLocalStorage();
+                removeProductsFromLocalStorage();
+                removeCategoriesFromLocalStorage();
+                removeFromSessionStorage("intendedRoute");
+
                 saveDataInSessionStorage("logoutSuccess", true);
                 return navigate("/", { state: { logoutSuccess: true } });
             }
         } catch (err) {
             console.error("El Logout no ha podido completarse", err);
+        } finally {
+            loaderUser.setIsLoading(false);
         }
     };
 
     const register = async (user) => {
-        // Enviar a la API de autenticación
         try {
+            loaderUser.setIsLoading(true);
             const authData = await registerApi(user);
 
             if (authData) {
@@ -97,6 +124,8 @@ export const useAuth = () => {
             }
         } catch (err) {
             console.error("ERROR", err);
+        } finally {
+            loaderUser.setIsLoading(false);
         }
     };
 
@@ -128,5 +157,5 @@ export const useAuth = () => {
         }
     };
 
-    return { login, logout, register, getProfile, patchUser, loadingUserMe };
+    return { login, logout, register, getProfile, patchUser, loadingUserMe, loaderUser };
 };

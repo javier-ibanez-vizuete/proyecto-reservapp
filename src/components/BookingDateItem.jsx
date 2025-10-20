@@ -177,7 +177,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                         <p>{modalInfo.customerNumber}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <p>{getText("High chair needed?")}</p>
+                        <p>{getText("bookingDataModalInfoHighChairText")}</p>
                         <p>{modalInfo.extras.highChair ? "Yes" : "No"}</p>
                     </div>
                 </ModalBody>

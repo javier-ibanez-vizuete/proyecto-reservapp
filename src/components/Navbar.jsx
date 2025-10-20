@@ -126,8 +126,8 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                     <div className="navbar-actions">
                         {/*    colocar despues de la prueba size={isMobile ? "sm" : "md"} */}
                         {!isLoggedIn && (
-                            <div className="perfect-center gap-2">
-                                <Button onClick={handleLogin} size={isMobile ? "sm" : "md"} variant="primary">
+                            <div className="perfect-center self-center gap-2">
+                                <Button onClick={handleLogin} variant="primary">
                                     {getText("loginButton")}
                                 </Button>
                                 <Button

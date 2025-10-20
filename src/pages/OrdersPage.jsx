@@ -109,14 +109,9 @@ export const OrderPage = () => {
                 return normalizedValue.includes(normalizedSearch) && isProduct;
             });
 
-            console.log("productsTranslations", productsTranslations);
             const productsKeys = productsTranslations.map(([key]) => key);
-            console.log("ProductsKEYS", productsKeys);
-
             const sameName = productsKeys.includes(product.name);
-            console.log("SAME NAME", sameName);
             const sameCategory = product.categories && product.categories.includes(categorySelected);
-            console.log("Same CATEGORY", sameCategory);
 
             return sameCategory && sameName;
         });
