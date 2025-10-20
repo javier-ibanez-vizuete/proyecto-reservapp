@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Accordion } from "../components/Accordion";
 import { Container } from "../components/Container";
@@ -8,7 +8,9 @@ import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
 import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
 import { Modal } from "../components/Modal/Modal";
 import { Skeleton, SkeletonCard, SkeletonText } from "../components/Skeleton";
+import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { Spinner } from "../components/Spinner/Spinner";
+import { ToastContainer } from "../components/ToastContainer";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
 import { AuthContext } from "../contexts/AuthContext";
@@ -19,6 +21,8 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { normalizeId } from "../helpers/normalizeId";
 import { useDevice } from "../hooks/useDevice";
+import { useLoading } from "../hooks/useLoading";
+import { useToast } from "../hooks/useToast";
 import { UserBookingsSection } from "../sections/UserBookingsSection";
 import { UserDataSection } from "../sections/UserDataSection";
 import { UserOrdersSection } from "../sections/UserOrdersSections";
@@ -31,7 +35,10 @@ export const UserPage = () => {
     const { user } = useContext(AuthContext);
     const { bookings } = useContext(BookingsContext);
     const { orders } = useContext(OrdersContext);
-    const { getProfile, patchUser, loadingUserMe } = useAuth();
+    const { getProfile, patchUser, loadingUserMe, logout } = useAuth();
+
+    const loaderLogout = useLoading();
+    const { toasts, showToast, dismissToast } = useToast();
 
     const location = useLocation();
     const { getText } = useContext(LanguageContext);
@@ -95,6 +102,18 @@ export const UserPage = () => {
     const handleShowAvatarModal = () => {
         setShowAvatarModal((prev) => !prev);
     };
+
+    const handleLogout = useCallback(async () => {
+        try {
+            loaderLogout.setIsLoading(true);
+            await logout();
+        } catch (err) {
+            console.error("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
+            showToast(getText("toastLogoutError"), "error", 2000);
+        } finally {
+            loaderLogout.setIsLoading(false);
+        }
+    }, [user]);
 
     useEffect(() => {
         handleGetMeUser();
@@ -208,7 +227,19 @@ export const UserPage = () => {
                             theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                         }`}
                     />
+                    <div className="flex flex-col items-center">
+                        <LoadingButton
+                            loading={loaderLogout.isLoading}
+                            loadingText={getText("loadingTextLogoutButton")}
+                            disabled={loaderLogout.isLoading}
+                            variant="danger"
+                            onClick={handleLogout}
+                        >
+                            {getText("logoutButton")}
+                        </LoadingButton>
+                    </div>
                 </div>
+                <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </div>
     );

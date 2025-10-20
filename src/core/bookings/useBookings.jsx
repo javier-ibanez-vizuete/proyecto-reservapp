@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { BookingsContext } from "../../contexts/BookingsContext";
 import { saveDataInSessionStorage } from "../../helpers/storage";
-import { deleteBookingByIdApi, getBookingsByDateApi, postBookingApi } from "./bookings.api";
+import { deleteBookingByIdApi, getBookingsApi, getBookingsByDateApi, postBookingApi } from "./bookings.api";
 import { saveBookingsInLocalStorage } from "./bookings.service";
 
 export const useBookings = () => {
@@ -12,6 +12,18 @@ export const useBookings = () => {
     const navigate = useNavigate();
 
     const defaultDate = new Date().toISOString().split("T")[0];
+
+    const getBookings = async () => {
+        try {
+            const bookings = await getBookingsApi();
+            if (!bookings) throw new Error("Not Bookings Found");
+            setBookings(bookings);
+            saveBookingsInLocalStorage(bookings);
+        } catch (err) {
+            console.error("Error Getting Bookings", err);
+            throw err;
+        }
+    };
 
     const getBookingsByDate = async (date = defaultDate) => {
         setLoadingBookings(true);
@@ -76,5 +88,5 @@ export const useBookings = () => {
         }
     };
 
-    return { getBookingsByDate, postBookings, deleteBookingById, loadingBookings, isLoading };
+    return { getBookings, getBookingsByDate, postBookings, deleteBookingById, loadingBookings, isLoading };
 };

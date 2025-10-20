@@ -1,5 +1,15 @@
 import { api } from "../http/axios";
 
+export const getBookingsApi = async () => {
+    try {
+        const response = await api.get("/bookings");
+        return response.data;
+    } catch (err) {
+        console.error("Error Getting Bookings From Api", err);
+        throw err;
+    }
+};
+
 export const getBookingsByDateApi = async (date) => {
     try {
         const response = await api.get(`/bookings?date=${date}`);

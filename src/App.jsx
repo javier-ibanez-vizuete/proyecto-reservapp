@@ -23,9 +23,16 @@ export const App = () => {
     useEffect(() => {
         if (!products?.length) getProducts();
         if (!categories?.length) getCategories();
-        if (!orders && user?.role === "admin") getOrders();
+        if ((!orders || !orders.length) && user?.role === "admin") getOrders();
         if (!orders && user?.role === "user") getOrdersByUserId();
     }, [user]);
+
+    if (!user || user?.role === "user")
+        return (
+            <MainLayout>
+                <AppRouter />
+            </MainLayout>
+        );
 
     if (user?.role === "admin")
         return (
@@ -33,10 +40,4 @@ export const App = () => {
                 <AdminRouter />
             </AdminLayout>
         );
-
-    return (
-        <MainLayout>
-            <AppRouter />
-        </MainLayout>
-    );
 };

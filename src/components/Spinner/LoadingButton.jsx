@@ -1,4 +1,6 @@
 import classNames from "classnames";
+import { useMemo } from "react";
+import { useDevice } from "../../hooks/useDevice.jsx";
 import { Spinner } from "./Spinner.jsx";
 
 /**
@@ -47,13 +49,15 @@ export const LoadingButton = ({
     loading = false,
     disabled = false,
     variant = "default",
-    size = "md",
+    size,
     loadingText = "Cargando...",
     className = "",
     onClick,
     type = "button",
     ...props
 }) => {
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+
     const baseClasses =
         "inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer relative";
 
@@ -75,6 +79,16 @@ export const LoadingButton = ({
         xl: "px-8 py-4 text-lg",
     };
 
+    const autoButtonConfig = useMemo(
+        () => ({
+            padding: classNames({
+                "px-3 py-1.5 text-xs": isMobile2Xs || isMobileXs || isMobileSm,
+                "px-4 py-2 text-base": isTablet || isDesktop,
+            }),
+        }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+    );
+
     const spinnerSizeMap = {
         sm: "sm",
         md: "sm",
@@ -87,7 +101,7 @@ export const LoadingButton = ({
     const buttonClasses = classNames(
         baseClasses,
         variantClasses[variant],
-        sizeClasses[size],
+        sizeClasses[size] || autoButtonConfig.padding || sizeClasses.sm,
         {
             "opacity-50 cursor-not-allowed pointer-events-none": isDisabled,
             "hover:scale-105 hover:shadow-lg transform": !isDisabled && variant !== "ghost",

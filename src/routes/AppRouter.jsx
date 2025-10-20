@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { PrivateRoute } from "../components/PrivateRoute";
-import { AuthContext } from "../contexts/AuthContext";
+import { useAuth } from "../core/auth/useAuth";
 import { BookingPage } from "../pages/BookingPage";
 import { CartPage } from "../pages/CartPage";
-import { DashboardPage } from "../pages/DashboardPage";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { MenuPage } from "../pages/MenuPage";
@@ -13,10 +12,17 @@ import { RegisterPage } from "../pages/RegisterPage";
 import { UserPage } from "../pages/UserPage";
 
 export const AppRouter = () => {
-    const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const location = useLocation();
+    const { loaderUser } = useAuth();
 
-    if (user && user?.role === "admin") return navigate("/dashboard", { replace: true });
+    const handleIntendedRoute = useMemo(() => {
+        if (location.pathname.includes("/dashboard")) {
+            return {};
+        }
+        return { errorRoute: true, intendedRoute: location.pathname };
+    }, [location.pathname]);
+
+    if (loaderUser.isLoading) return <div>Cargando...</div>;
 
     return (
         <Routes>
@@ -31,11 +37,10 @@ export const AppRouter = () => {
                 <Route path="/bookings" element={<BookingPage />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/user" element={<UserPage />} />
-                <Route path="/dashboard/*" element={<DashboardPage />} />
                 <Route path="/orders" element={<OrderPage />} />
             </Route>
 
-            <Route path="/*" element={<h1>RUTA NO ENCONTRADA</h1>} />
+            <Route path="/*" element={<Navigate to={"/"} state={handleIntendedRoute} replace />} />
         </Routes>
     );
 };

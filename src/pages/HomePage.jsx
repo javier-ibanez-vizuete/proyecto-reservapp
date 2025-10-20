@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CTACard } from "../components/CTACard/CTACard";
 import { ToastContainer } from "../components/ToastContainer";
@@ -9,8 +9,11 @@ import { useToast } from "../hooks/useToast";
 
 import { ctaCardsData } from "../components/CTACard/ctaCardsData";
 import { Container } from "../components/Container";
+import { ConfirmModal } from "../components/Modal";
 
 export const HomePage = () => {
+    const [showNotFoundModal, setShowNotFoundModal] = useState(false);
+    const [notFoundRoute, setNotFoundRoute] = useState("");
     const { getText } = useContext(LanguageContext);
     const location = useLocation();
     const navigate = useNavigate();
@@ -26,12 +29,14 @@ export const HomePage = () => {
         const fromLogout =
             location?.state?.logoutSuccess === true || getDataFromSessionStorage("logoutSuccess") === true;
 
-        if (!fromLogin && !fromRegister && !fromLogout) return;
+        const fromNotFound = location?.state?.errorRoute === true;
+
+        if (!fromLogin && !fromRegister && !fromLogout && !fromNotFound) return;
 
         if (fromLogin) {
             showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
-            navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromLogin");
+            navigate(location.pathname, { replace: true, state: {} });
         }
         if (fromRegister) {
             showToast(
@@ -40,18 +45,30 @@ export const HomePage = () => {
                 2000,
                 "top-center"
             );
-            navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromRegister");
+            navigate(location.pathname, { replace: true, state: {} });
         }
         if (fromLogout) {
             showToast(getText("toastLogoutSuccess"), "success");
-            navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("logoutSuccess");
+            navigate(location.pathname, { replace: true, state: {} });
+        }
+
+        if (fromNotFound) {
+            setShowNotFoundModal(true);
+            setNotFoundRoute(location.state.intendedRoute);
+
+            navigate(location.pathname, { replace: true, state: {} });
         }
     }, [location.state]);
 
     const handleRedirectCTA = (url) => {
         navigate(url);
+    };
+
+    const handleCloseModal = () => {
+        setShowNotFoundModal(false);
+        setNotFoundRoute("");
     };
 
     return (
@@ -83,6 +100,18 @@ export const HomePage = () => {
                     }
                 )}
             </div>
+
+            <ConfirmModal
+                isOpen={showNotFoundModal}
+                onClose={handleCloseModal}
+                onConfirm={handleCloseModal}
+                title="Not Found 404"
+                message={`Route: ${notFoundRoute}`}
+                confirmText="Entendido"
+                showCloseButton={false}
+                variantButton="primary"
+                variant="accent"
+            />
             <ToastContainer toasts={toasts} onClose={dismissToast} />
         </Container>
     );

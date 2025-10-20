@@ -9,25 +9,28 @@ import { LoaderProvider } from "./contexts/LoaderContext.jsx";
 import { OrdersProvider } from "./contexts/OrdersContext.jsx";
 import { ProductsProvider } from "./contexts/ProductsContext.jsx";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
+import { UsersProvider } from "./contexts/UsersContext.jsx";
 import "./styles/index.css";
 
 createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <LanguageProvider>
             <AuthProvider>
-                <BookingsProvider>
-                    <ProductsProvider>
-                        <CartsProvider>
-                            <OrdersProvider>
-                                <LoaderProvider>
-                                    <ThemeProvider>
-                                        <App />
-                                    </ThemeProvider>
-                                </LoaderProvider>
-                            </OrdersProvider>
-                        </CartsProvider>
-                    </ProductsProvider>
-                </BookingsProvider>
+                <UsersProvider>
+                    <BookingsProvider>
+                        <ProductsProvider>
+                            <CartsProvider>
+                                <OrdersProvider>
+                                    <LoaderProvider>
+                                        <ThemeProvider>
+                                            <App />
+                                        </ThemeProvider>
+                                    </LoaderProvider>
+                                </OrdersProvider>
+                            </CartsProvider>
+                        </ProductsProvider>
+                    </BookingsProvider>
+                </UsersProvider>
             </AuthProvider>
         </LanguageProvider>
     </BrowserRouter>
