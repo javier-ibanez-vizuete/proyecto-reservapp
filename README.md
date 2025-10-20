@@ -37,8 +37,6 @@ const [products, setProducts] = useState([]);
 const fetchProducts = async () => {
     try {
         const response = await api.get("/products");
-        console.log("response", response);
-        console.log("Products data:", response.data);
         setProducts(response.data);
     } catch (error) {
         console.error("Error fetching products:", error);

@@ -1,16 +1,20 @@
-import classNames from "classnames";
-import { useCallback, useContext, useEffect, useMemo } from "react";
+import { useCallback, useContext, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer } from "../components/ToastContainer";
 import { BookingsContext } from "../contexts/BookingsContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { OrdersContext } from "../contexts/OrdersContext";
+import { ProductsContext } from "../contexts/ProductsContext";
 import { UsersContext } from "../contexts/UsersContext";
 import { useBookings } from "../core/bookings/useBookings";
+import { useOrders } from "../core/orders/useOrders";
+import { useProducts } from "../core/products/useProducts";
 import { useUsers } from "../core/users/useUsers";
 import { AdminBentoGrid } from "../dashboard/components/AdminBentoGrid";
 import { AdminBentoGridItem } from "../dashboard/components/AdminBentoGridItem";
-import { AdminBentoGridItemUser } from "../dashboard/components/AdminBentoGridItemUser";
-import { AdminSkeleton } from "../dashboard/components/AdminSkeleton";
-import { useDevice } from "../hooks/useDevice";
+import { getDataFromSessionStorage, removeFromSessionStorage } from "../helpers/storage";
 import { useLoading } from "../hooks/useLoading";
+import { useToast } from "../hooks/useToast";
 import {
     calculateCompletedOrdersPercentage,
     getCancelledOrders,
@@ -21,13 +25,15 @@ import {
     getTodaysBookings,
     getTotalBookings,
     getTotalOrders,
+    getTotalProducts,
     getTotalUsers,
 } from "../utils/stats";
 
 export const DashboardPage = () => {
     const { users } = useContext(UsersContext);
-    const { orders } = useContext(OrdersContext);
     const { bookings } = useContext(BookingsContext);
+    const { orders } = useContext(OrdersContext);
+    const { products } = useContext(ProductsContext);
 
     const { getUsers } = useUsers();
     const loaderUsers = useLoading();
@@ -35,15 +41,24 @@ export const DashboardPage = () => {
     const { getBookings } = useBookings();
     const loaderBookings = useLoading();
 
-    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+    const { getOrders } = useOrders();
+    const loaderOrders = useLoading();
+
+    const { getProducts } = useProducts();
+    const loaderProducts = useLoading();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const { toasts, showToast, dismissToast } = useToast();
+    const { getText } = useContext(LanguageContext);
 
     const handleGetUsers = useCallback(async () => {
         try {
             loaderUsers.setIsLoading(true);
-            const usersResponse = await getUsers();
-            console.log("que vale userresponse", usersResponse);
+            await getUsers();
         } catch (err) {
-            //Aqui meter un toast
+            showToast("Error Obteniendo Usuarios", "error", 1000);
         } finally {
             loaderUsers.setIsLoading(false);
         }
@@ -52,28 +67,77 @@ export const DashboardPage = () => {
     const handleGetBookings = useCallback(async () => {
         try {
             loaderBookings.setIsLoading(true);
-            const bookingsResponse = await getBookings();
+            await getBookings();
         } catch (err) {
-            // Aqui meter un toast
+            showToast("Error Obteniendo Reservas", "error", 1000);
         } finally {
             loaderBookings.setIsLoading(false);
         }
     }, []);
 
+    const handleGetOrders = useCallback(async () => {
+        try {
+            loaderOrders.setIsLoading(true);
+            await getOrders();
+        } catch (err) {
+            showToast("Error Pedidos", "error", 1000);
+        } finally {
+            loaderOrders.setIsLoading(false);
+        }
+    }, []);
+
+    const handleGetProducts = useCallback(async () => {
+        try {
+            loaderProducts.setIsLoading(true);
+            await getProducts();
+        } catch (err) {
+            showToast("Error Productos", "error", 1000);
+        } finally {
+            loaderProducts.setIsLoading(false);
+        }
+    }, []);
+
     useEffect(() => {
         if (!users || !users.length) handleGetUsers();
-    }, [users]);
+        if (!bookings || !bookings.length) handleGetBookings();
+        if (!orders || !orders.length) handleGetOrders();
+        if (!products || !products.length) handleGetProducts();
+    }, [users, bookings, orders, products]);
 
     useEffect(() => {
-        if (!bookings || !bookings.length) handleGetBookings();
-    }, [bookings]);
+        const fromLogin =
+            location.state?.fromLogin === true || getDataFromSessionStorage("fromLogin") === true;
 
-    // LLAMAR FUNCION DE OBTENER USUARIOS
+        if (!fromLogin) return;
+
+        showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
+        removeFromSessionStorage("fromLogin");
+        navigate(location.pathname, { replace: true, state: {} });
+    }, [location.state]);
 
     const dashboardItems = [
         {
-            title: getTotalUsers(users),
-            description: "Usuarios",
+            title: loaderUsers.isLoading ? loaderUsers.isLoading : getTotalUsers(users),
+            description: "dashboardTotalUsersDescriptionLabel",
+            icon: "",
+            to: "/dashboard/users",
+            colSpan: 1,
+            rowSpan: 2,
+            gradient: null,
+        },
+        {
+            title: null,
+            description: "",
+            icon: null,
+            users: loaderUsers.isLoading ? loaderUsers.isLoading : users,
+            to: "/dashboard/users",
+            colSpan: 2,
+            rowSpan: 1,
+            gradient: "success",
+        },
+        {
+            title: loaderUsers.isLoading ? loaderUsers.isLoading : getConnectedUsers(users),
+            description: "dashboardConnectedUsersDescriptionLabel",
             icon: "",
             to: "/dashboard/users",
             colSpan: 1,
@@ -81,62 +145,26 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: getConnectedUsers(users),
-            description: "Usuarios Conectados",
+            title: loaderBookings.isLoading ? loaderBookings.isLoading : getTotalBookings(bookings),
+            description: "dashboardTotalBookingsDescriptionLabel",
             icon: "",
-            to: "/dashboard/users",
+            to: "/dashboard/bookings",
             colSpan: 1,
-            rowSpan: 1,
+            rowSpan: 2,
             gradient: null,
         },
         {
-            title: getTotalOrders(orders),
-            description: "PEDIDOS TOTALES",
+            title: loaderBookings.isLoading ? loaderBookings.isLoading : getTodaysBookings(bookings),
+            description: "dashboardPendingBookingsDescriptionLabel",
             icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 1,
+            to: "/dashboard/bookings",
+            colSpan: 2,
+            rowSpan: 2,
             gradient: null,
         },
         {
-            title: getCompletedOrders(orders),
-            description: "PEDIDOS COMPLETADOS",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: getPendingOrders(orders),
-            description: "PEDIDOS PENDIENTES",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: getCancelledOrders(orders),
-            description: "PEDIDOS CANCELADOS",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: `${calculateCompletedOrdersPercentage(orders).toFixed(0)}%`,
-            description: "PORCENTAJE Completados",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: getTotalBookings(bookings),
-            description: "Reservas Totales",
+            title: loaderBookings.isLoading ? loaderBookings.isLoading : getDelayedBookings(bookings),
+            description: "dashboardDelayedBookingsDescriptionLabel",
             icon: "",
             to: "/dashboard/bookings",
             colSpan: 1,
@@ -144,47 +172,81 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: getTodaysBookings(bookings),
-            description: "Reservas (Hoy)",
+            title: loaderOrders.isLoading ? loaderOrders.isLoading : getTotalOrders(orders),
+            description: "dashboardTotalOrdersDescriptionLabel",
             icon: "",
-            to: "/dashboard/bookings",
+            to: "/dashboard/orders",
+            colSpan: 1,
+            rowSpan: 2,
+            gradient: null,
+        },
+        {
+            title: loaderOrders.isLoading ? loaderOrders.isLoading : getCompletedOrders(orders),
+            description: "dashboardCompletedOrdersDescriptionLabel",
+            icon: "",
+            to: "/dashboard/orders",
             colSpan: 1,
             rowSpan: 1,
             gradient: null,
         },
         {
-            title: getDelayedBookings(bookings),
-            description: "Reservas con retraso",
+            title: loaderOrders.isLoading ? loaderOrders.isLoading : getPendingOrders(orders),
+            description: "dashboardPendingOrdersDescriptionLabel",
             icon: "",
-            to: "/dashboard/bookings",
+            to: "/dashboard/orders",
             colSpan: 1,
             rowSpan: 1,
             gradient: null,
         },
         {
-            title: 40,
-            description: "Productos",
+            title: loaderOrders.isLoading ? loaderOrders.isLoading : getCancelledOrders(orders),
+            description: "dashboardCancelledOrdersDescriptionLabel",
+            icon: "",
+            to: "/dashboard/orders",
+            colSpan: 1,
+            rowSpan: 1,
+            gradient: null,
+        },
+        {
+            title: loaderOrders.isLoading
+                ? loaderOrders.isLoading
+                : `${calculateCompletedOrdersPercentage(orders).toFixed(0)}%`,
+            description: "dashboardSuccesfulAverageOrdersDescriptionLabel",
+            icon: "",
+            to: "/dashboard/orders",
+            colSpan: 2,
+            rowSpan: 1,
+            gradient: null,
+        },
+        {
+            title: loaderProducts.isLoading ? loaderProducts.isLoading : getTotalProducts(products),
+            description: "dashboardTotalProductsDescriptionLabel",
             icon: "",
             to: "/dashboard/products",
             colSpan: 1,
-            rowSpan: 1,
+            rowSpan: 2,
             gradient: null,
         },
     ];
 
-    const usersBentoDisplay = useMemo(
-        () =>
-            classNames({
-                3: isMobile2Xs || isMobileXs || isTablet || isDesktop,
-                2: isMobileSm,
-            }),
-        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
-    );
+    const handleDashboardItemsGradient = (item, index) => {
+        if (!item || !item.title || !index) return null;
+
+        const isPar = index % 2 === 0;
+        if (typeof item.title === "string" && item.title.includes("%")) {
+            const averageNumber = Number(item.title.split("%")[0]);
+            if (averageNumber >= 60) return "success";
+            if (averageNumber < 60 && averageNumber >= 50) return "warning";
+            if (averageNumber < 50) return "error";
+        }
+        if (!isPar) return "default";
+        if (isPar) return "accent";
+    };
 
     return (
         <div className="flex flex-1 flex-col">
             <AdminBentoGrid>
-                {dashboardItems.map((item) => (
+                {dashboardItems.map((item, index) => (
                     <AdminBentoGridItem
                         key={item.description}
                         to={item.to}
@@ -192,25 +254,13 @@ export const DashboardPage = () => {
                         rowSpan={item.rowSpan}
                         title={item.title}
                         description={item.description}
-                        gradient={item.gradient}
+                        gradient={handleDashboardItemsGradient(item, index)}
+                        users={item.users}
                     />
                 ))}
                 {/* ESTO ES UN EJEMPLO HAY QUE COMPONETIZARLO */}
-                <AdminBentoGridItem to="/dashboard/users" colSpan={2}>
-                    <article className="flex flex-1 justify-center gap-xs">
-                        {loaderUsers.isLoading &&
-                            Array.from({ length: usersBentoDisplay }).map((_, index) => (
-                                <AdminSkeleton key={index} variant="avatar" />
-                            ))}
-                        {users
-                            .sort((userA, userB) => userB.isActive - userA.isActive)
-                            .slice(0, usersBentoDisplay)
-                            .map((user) => (
-                                <AdminBentoGridItemUser key={user?.id || user?._id} user={user} />
-                            ))}
-                    </article>
-                </AdminBentoGridItem>
             </AdminBentoGrid>
+            <ToastContainer toasts={toasts} onClose={dismissToast} />
         </div>
     );
 };

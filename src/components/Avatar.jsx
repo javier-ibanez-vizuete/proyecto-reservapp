@@ -142,7 +142,11 @@ export const Avatar = ({
     );
 
     const indicatorClasses = classNames(
-        "absolute bg-green-400 border-1 border-white rounded-full",
+        "absolute border-1 border-white rounded-full",
+        {
+            "bg-green-400": online,
+            "bg-gray-300": !online,
+        },
         currentSize.indicator,
         currentSize.position
     );
@@ -163,14 +167,20 @@ export const Avatar = ({
                 {/* Imagen del avatar */}
                 {imageSrc && !imageError && (
                     <ImageContainer className="flex-1">
-                        <Image src={imageSrc} alt={alt} className="object-cover rounded-full" />
+                        <Image
+                            src={imageSrc}
+                            alt={alt}
+                            className="object-cover rounded-full"
+                            onError={handleImageError}
+                        />
                     </ImageContainer>
                 )}
 
                 {(!imageSrc || imageError) && <span className="select-none">{getFallbackText()}</span>}
             </div>
 
-            {online && <span className={indicatorClasses} aria-label="En línea" />}
+            {online && <span className={indicatorClasses} aria-label="Online" />}
+            {!online && <span className={indicatorClasses} aria-label="Offline" />}
         </div>
     );
 };

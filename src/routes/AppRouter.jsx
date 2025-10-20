@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { PrivateRoute } from "../components/PrivateRoute";
+import { useAuth } from "../core/auth/useAuth";
 import { BookingPage } from "../pages/BookingPage";
 import { CartPage } from "../pages/CartPage";
 import { HomePage } from "../pages/HomePage";
@@ -11,6 +13,16 @@ import { UserPage } from "../pages/UserPage";
 
 export const AppRouter = () => {
     const location = useLocation();
+    const { loaderUser } = useAuth();
+
+    const handleIntendedRoute = useMemo(() => {
+        if (location.pathname.includes("/dashboard")) {
+            return {};
+        }
+        return { errorRoute: true, intendedRoute: location.pathname };
+    }, [location.pathname]);
+
+    if (loaderUser.isLoading) return <div>Cargando...</div>;
 
     return (
         <Routes>
@@ -28,16 +40,7 @@ export const AppRouter = () => {
                 <Route path="/orders" element={<OrderPage />} />
             </Route>
 
-            <Route
-                path="/*"
-                element={
-                    <Navigate
-                        to={"/"}
-                        state={{ errorRoute: true, intendedRoute: location.pathname }}
-                        replace
-                    />
-                }
-            />
+            <Route path="/*" element={<Navigate to={"/"} state={handleIntendedRoute} replace />} />
         </Routes>
     );
 };

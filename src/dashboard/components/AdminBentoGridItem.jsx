@@ -1,8 +1,11 @@
 import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { Spinner } from "../../components/Spinner/Spinner";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useDevice } from "../../hooks/useDevice";
+import { AdminBentoGridItemUser } from "./AdminBentoGridItemUser";
 
 export const AdminBentoGridItem = ({
     children,
@@ -12,15 +15,19 @@ export const AdminBentoGridItem = ({
     title = 0,
     description,
     icon,
+    users,
     gradient,
     borderVariant,
     padding,
     ...rest
 }) => {
-    const hasTitle = (typeof title === "number" && title >= 0) || title.length;
+    const hasTitle = (typeof title === "number" && title >= 0) || title?.length;
+    const isLoadingTitle = typeof title === "boolean";
+    const isLoadingUsers = typeof users === "boolean";
 
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     const baseClasses =
         "group flex flex-col relative overflow-hidden shadow-md transition-all duration-500 ease-in-out";
@@ -149,19 +156,48 @@ export const AdminBentoGridItem = ({
         variantsRowSpan[rowSpan] || variantsRowSpan.default
     );
 
+    const usersBentoDisplay = useMemo(
+        () =>
+            classNames({
+                3: isMobile2Xs || isMobileXs || isTablet || isDesktop,
+                2: isMobileSm,
+            }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+    );
+
     return (
         <Link to={to} className={currentBentoGridItemClasses} {...rest}>
             <div className={overlayClasses} />
-            <div className="relative z-10 flex flex-col flex-1 justify-between">
-                {icon && <div>ICONO</div>}
-                {children && children}
-                {!children && (
-                    <article className="flex flex-1 flex-col justify-center items-center">
-                        {hasTitle && <h6>{title}</h6>}
-                        {description && <p>{description}</p>}
-                    </article>
-                )}
-            </div>
+            {!users && (
+                <div className="relative z-10 flex flex-col flex-1 justify-between">
+                    <>
+                        {icon && <div>{icon}</div>}
+                        {children && children}
+                        {!children && (
+                            <article className="flex flex-1 flex-col justify-center items-center">
+                                {hasTitle && <h6>{title}</h6>}
+                                {isLoadingTitle && <Spinner size="sm" color="warning" />}
+                                {description && <small className="font-medium">{getText(description)}</small>}
+                            </article>
+                        )}
+                    </>
+                </div>
+            )}
+            {users && (
+                <div className="perfect-center">
+                    {isLoadingUsers &&
+                        Array.from({ length: usersBentoDisplay }).map((_, i) => (
+                            <Spinner size="md" color="gray" />
+                        ))}
+                    {!isLoadingUsers &&
+                        users
+                            .sort((userA, userB) => userB.isActive - userA.isActive)
+                            .slice(0, usersBentoDisplay)
+                            .map((user) => (
+                                <AdminBentoGridItemUser key={user?.id || user?._id} user={user} />
+                            ))}
+                </div>
+            )}
         </Link>
     );
 };

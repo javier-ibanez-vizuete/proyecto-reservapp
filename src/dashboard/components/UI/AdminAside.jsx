@@ -20,7 +20,7 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
     const { logout } = useAuth();
 
     const baseClasses =
-        "absolute w-0 flex flex-col top-0 left-0 bottom-0 z-20 overflow-hidden transition-all duration-500 ease-in-out lg:flex-1 lg:relative lg:top-auto lg:bottom-auto lg:left-auto";
+        "fixed w-0 flex flex-col left-0 bottom-0 z-20 overflow-hidden transition-all duration-500 ease-in-out lg:flex-1 lg:relative lg:bottom-auto lg:left-auto";
 
     const autoAsideConfig = useMemo(
         () => ({
@@ -50,6 +50,13 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
                 "w-1/3": isTablet && isAsideOpen,
                 "w-0": !isAsideOpen,
             }),
+            top: classNames({
+                "top-14": isMobile2Xs,
+                "top-15": isMobileXs,
+                "top-16": isMobileSm,
+                "top-17": isTablet,
+                "top-auto": isDesktop,
+            }),
         }),
         [width, isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, theme, isAsideOpen]
     );
@@ -60,6 +67,7 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
         bgColor || autoAsideConfig.bg,
         autoAsideConfig.padding,
         autoAsideConfig.width,
+        autoAsideConfig.top || "top-14 lg:top-auto",
         className
     );
 

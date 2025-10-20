@@ -15,12 +15,12 @@ const DEFAULT_PICTURE_DATA = {
 };
 
 const defaultImage = (
-    <ImageContainer>
+    <ImageContainer size={"w-5"}>
         <Image imageData={DEFAULT_PICTURE_DATA} alt={DEFAULT_PICTURE_DATA.alt} />
     </ImageContainer>
 );
 
-export const BackButton = ({ fallbackPath = "/", children = defaultImage }) => {
+export const BackButton = ({ fallbackPath = "/", children = defaultImage, variant = "outline" }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -31,5 +31,9 @@ export const BackButton = ({ fallbackPath = "/", children = defaultImage }) => {
         return navigate(fallbackPath);
     };
 
-    return <Button onClick={handleBack}>{children}</Button>;
+    return (
+        <Button variant={variant} onClick={handleBack}>
+            {children}
+        </Button>
+    );
 };

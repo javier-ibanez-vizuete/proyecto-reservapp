@@ -170,13 +170,13 @@ export const Dropdown = ({
         if (isOpen) {
             document.addEventListener("mousedown", handleClickOutside);
             document.addEventListener("keydown", handleEscape);
-            window.addEventListener("scroll", handleScroll);
+            // window.addEventListener("scroll", handleScroll);
         }
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
             document.removeEventListener("keydown", handleEscape);
-            window.removeEventListener("scroll", handleScroll);
+            // window.removeEventListener("scroll", handleScroll);
         };
     }, [isOpen]);
 

@@ -96,3 +96,9 @@ export const getDelayedBookings = (bookings) => {
         return sameDate && isDelayed && isPending;
     }).legnth;
 };
+
+export const getTotalProducts = (products) => {
+    if (!products || !products.length) return 0;
+
+    return products.length;
+};

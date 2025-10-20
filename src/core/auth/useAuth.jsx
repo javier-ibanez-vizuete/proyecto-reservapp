@@ -35,12 +35,13 @@ export const useAuth = () => {
     const { setCart } = useContext(CartsContext);
     const { getCartMe } = useCart();
     const loadingUserMe = useLoading();
+    const loaderUser = useLoading();
 
     const navigate = useNavigate();
 
     const login = async ({ email, password }) => {
-        // Enviar a la API de autenticación
         try {
+            loaderUser.setIsLoading(true);
             const authData = await loginApi({ email, password });
 
             if (authData) {
@@ -64,14 +65,14 @@ export const useAuth = () => {
             }
         } catch (err) {
             console.error("El login no ha podido Completarse 'useAuth-login()'", err);
+        } finally {
+            loaderUser.setIsLoading(false);
         }
-
-        // Si la API nos dice error, mostramos un mensaje de error
     };
 
     const logout = async () => {
-        // Lógica de cierre de sesión
         try {
+            loaderUser.setIsLoading(true);
             const logoutResponse = await logoutApi();
 
             if (logoutResponse?.logout) {
@@ -94,12 +95,14 @@ export const useAuth = () => {
             }
         } catch (err) {
             console.error("El Logout no ha podido completarse", err);
+        } finally {
+            loaderUser.setIsLoading(false);
         }
     };
 
     const register = async (user) => {
-        // Enviar a la API de autenticación
         try {
+            loaderUser.setIsLoading(true);
             const authData = await registerApi(user);
 
             if (authData) {
@@ -121,6 +124,8 @@ export const useAuth = () => {
             }
         } catch (err) {
             console.error("ERROR", err);
+        } finally {
+            loaderUser.setIsLoading(false);
         }
     };
 
@@ -152,5 +157,5 @@ export const useAuth = () => {
         }
     };
 
-    return { login, logout, register, getProfile, patchUser, loadingUserMe };
+    return { login, logout, register, getProfile, patchUser, loadingUserMe, loaderUser };
 };

@@ -30,11 +30,9 @@ export const HomePage = () => {
             location?.state?.logoutSuccess === true || getDataFromSessionStorage("logoutSuccess") === true;
 
         const fromNotFound = location?.state?.errorRoute === true;
-        console.log(fromNotFound);
 
         if (!fromLogin && !fromRegister && !fromLogout && !fromNotFound) return;
 
-        console.log("Pasando por aqui");
         if (fromLogin) {
             showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
             removeFromSessionStorage("fromLogin");
@@ -53,15 +51,13 @@ export const HomePage = () => {
         if (fromLogout) {
             showToast(getText("toastLogoutSuccess"), "success");
             removeFromSessionStorage("logoutSuccess");
-            console.log("Eliminando user 'fromLogout-homePage'=>", user);
-            console.log("Que ruta tengo aqui", location.pathname);
-
             navigate(location.pathname, { replace: true, state: {} });
         }
 
         if (fromNotFound) {
             setShowNotFoundModal(true);
             setNotFoundRoute(location.state.intendedRoute);
+
             navigate(location.pathname, { replace: true, state: {} });
         }
     }, [location.state]);

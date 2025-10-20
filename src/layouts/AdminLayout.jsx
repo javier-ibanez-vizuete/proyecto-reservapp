@@ -11,6 +11,7 @@ import { useDevice } from "../hooks/useDevice";
 export const AdminLayout = ({ children }) => {
     const [isAsideOpen, setIsAsideOpen] = useState(false);
     const { user } = useContext(AuthContext);
+
     const { isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
     const location = useLocation();
@@ -23,6 +24,11 @@ export const AdminLayout = ({ children }) => {
     useEffect(() => {
         if (!isDesktop) setIsAsideOpen(false);
     }, [location.pathname]);
+
+    useEffect(() => {
+        if (isAsideOpen && !isDesktop) return document.body.classList.add("overflow-hidden");
+        if (!isAsideOpen) return document.body.classList.remove("overflow-hidden");
+    }, [isAsideOpen, isDesktop]);
 
     const onToggleAside = () => {
         setIsAsideOpen((prev) => !prev);
