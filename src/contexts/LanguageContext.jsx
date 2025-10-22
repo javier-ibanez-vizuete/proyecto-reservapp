@@ -412,7 +412,7 @@ const TEXTS = {
 
         dashboardTotalOrdersDescriptionLabel: "Orders",
         dashboardCompletedOrdersDescriptionLabel: "Completed Orders",
-        dashboardPendingOrdersDescriptionLabel: "Completed Orders",
+        dashboardPendingOrdersDescriptionLabel: "Pending Orders",
         dashboardCancelledOrdersDescriptionLabel: "Cancelled Orders",
         dashboardSuccesfulAverageOrdersDescriptionLabel: "Order Completion Rate",
 

@@ -186,8 +186,8 @@ export const AdminBentoGridItem = ({
             {users && (
                 <div className="perfect-center">
                     {isLoadingUsers &&
-                        Array.from({ length: usersBentoDisplay }).map((_, i) => (
-                            <Spinner size="md" color="gray" />
+                        Array.from({ length: usersBentoDisplay }).map((_, index) => (
+                            <Spinner key={index} size="md" color="gray" />
                         ))}
                     {!isLoadingUsers &&
                         users

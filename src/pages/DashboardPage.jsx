@@ -1,19 +1,11 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "../components/ToastContainer";
-import { BookingsContext } from "../contexts/BookingsContext";
 import { LanguageContext } from "../contexts/LanguageContext";
-import { OrdersContext } from "../contexts/OrdersContext";
-import { ProductsContext } from "../contexts/ProductsContext";
-import { UsersContext } from "../contexts/UsersContext";
-import { useBookings } from "../core/bookings/useBookings";
-import { useOrders } from "../core/orders/useOrders";
-import { useProducts } from "../core/products/useProducts";
-import { useUsers } from "../core/users/useUsers";
 import { AdminBentoGrid } from "../dashboard/components/AdminBentoGrid";
 import { AdminBentoGridItem } from "../dashboard/components/AdminBentoGridItem";
+import { useAdminData } from "../dashboard/hooks/useAdminData";
 import { getDataFromSessionStorage, removeFromSessionStorage } from "../helpers/storage";
-import { useLoading } from "../hooks/useLoading";
 import { useToast } from "../hooks/useToast";
 import {
     calculateCompletedOrdersPercentage,
@@ -30,72 +22,25 @@ import {
 } from "../utils/stats";
 
 export const DashboardPage = () => {
-    const { users } = useContext(UsersContext);
-    const { bookings } = useContext(BookingsContext);
-    const { orders } = useContext(OrdersContext);
-    const { products } = useContext(ProductsContext);
-
-    const { getUsers } = useUsers();
-    const loaderUsers = useLoading();
-
-    const { getBookings } = useBookings();
-    const loaderBookings = useLoading();
-
-    const { getOrders } = useOrders();
-    const loaderOrders = useLoading();
-
-    const { getProducts } = useProducts();
-    const loaderProducts = useLoading();
-
     const navigate = useNavigate();
     const location = useLocation();
 
     const { toasts, showToast, dismissToast } = useToast();
     const { getText } = useContext(LanguageContext);
 
-    const handleGetUsers = useCallback(async () => {
-        try {
-            loaderUsers.setIsLoading(true);
-            await getUsers();
-        } catch (err) {
-            showToast("Error Obteniendo Usuarios", "error", 1000);
-        } finally {
-            loaderUsers.setIsLoading(false);
-        }
-    }, []);
-
-    const handleGetBookings = useCallback(async () => {
-        try {
-            loaderBookings.setIsLoading(true);
-            await getBookings();
-        } catch (err) {
-            showToast("Error Obteniendo Reservas", "error", 1000);
-        } finally {
-            loaderBookings.setIsLoading(false);
-        }
-    }, []);
-
-    const handleGetOrders = useCallback(async () => {
-        try {
-            loaderOrders.setIsLoading(true);
-            await getOrders();
-        } catch (err) {
-            showToast("Error Pedidos", "error", 1000);
-        } finally {
-            loaderOrders.setIsLoading(false);
-        }
-    }, []);
-
-    const handleGetProducts = useCallback(async () => {
-        try {
-            loaderProducts.setIsLoading(true);
-            await getProducts();
-        } catch (err) {
-            showToast("Error Productos", "error", 1000);
-        } finally {
-            loaderProducts.setIsLoading(false);
-        }
-    }, []);
+    const {
+        users,
+        bookings,
+        orders,
+        products,
+        isLoadingUsers,
+        isLoadingBookings,
+        isLoadingOrders,
+        isLoadingProducts,
+    } = useAdminData({
+        enablePolling: true,
+        pollingInterval: 30000,
+    });
 
     useEffect(() => {
         if (!users || !users.length) handleGetUsers();
@@ -117,7 +62,7 @@ export const DashboardPage = () => {
 
     const dashboardItems = [
         {
-            title: loaderUsers.isLoading ? loaderUsers.isLoading : getTotalUsers(users),
+            title: isLoadingUsers ? isLoadingUsers : getTotalUsers(users),
             description: "dashboardTotalUsersDescriptionLabel",
             icon: "",
             to: "/dashboard/users",
@@ -129,14 +74,14 @@ export const DashboardPage = () => {
             title: null,
             description: "",
             icon: null,
-            users: loaderUsers.isLoading ? loaderUsers.isLoading : users,
+            users: isLoadingUsers ? isLoadingUsers : users,
             to: "/dashboard/users",
             colSpan: 2,
             rowSpan: 1,
             gradient: "success",
         },
         {
-            title: loaderUsers.isLoading ? loaderUsers.isLoading : getConnectedUsers(users),
+            title: isLoadingUsers ? isLoadingUsers : getConnectedUsers(users),
             description: "dashboardConnectedUsersDescriptionLabel",
             icon: "",
             to: "/dashboard/users",
@@ -145,7 +90,7 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderBookings.isLoading ? loaderBookings.isLoading : getTotalBookings(bookings),
+            title: isLoadingBookings ? isLoadingBookings : getTotalBookings(bookings),
             description: "dashboardTotalBookingsDescriptionLabel",
             icon: "",
             to: "/dashboard/bookings",
@@ -154,7 +99,7 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderBookings.isLoading ? loaderBookings.isLoading : getTodaysBookings(bookings),
+            title: isLoadingBookings ? isLoadingBookings : getTodaysBookings(bookings),
             description: "dashboardPendingBookingsDescriptionLabel",
             icon: "",
             to: "/dashboard/bookings",
@@ -163,7 +108,7 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderBookings.isLoading ? loaderBookings.isLoading : getDelayedBookings(bookings),
+            title: isLoadingBookings ? isLoadingBookings : getDelayedBookings(bookings),
             description: "dashboardDelayedBookingsDescriptionLabel",
             icon: "",
             to: "/dashboard/bookings",
@@ -172,7 +117,7 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderOrders.isLoading ? loaderOrders.isLoading : getTotalOrders(orders),
+            title: isLoadingOrders ? isLoadingOrders : getTotalOrders(orders),
             description: "dashboardTotalOrdersDescriptionLabel",
             icon: "",
             to: "/dashboard/orders",
@@ -181,7 +126,7 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderOrders.isLoading ? loaderOrders.isLoading : getCompletedOrders(orders),
+            title: isLoadingOrders ? isLoadingOrders : getCompletedOrders(orders),
             description: "dashboardCompletedOrdersDescriptionLabel",
             icon: "",
             to: "/dashboard/orders",
@@ -190,7 +135,7 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderOrders.isLoading ? loaderOrders.isLoading : getPendingOrders(orders),
+            title: isLoadingOrders ? isLoadingOrders : getPendingOrders(orders),
             description: "dashboardPendingOrdersDescriptionLabel",
             icon: "",
             to: "/dashboard/orders",
@@ -199,7 +144,7 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderOrders.isLoading ? loaderOrders.isLoading : getCancelledOrders(orders),
+            title: isLoadingOrders ? isLoadingOrders : getCancelledOrders(orders),
             description: "dashboardCancelledOrdersDescriptionLabel",
             icon: "",
             to: "/dashboard/orders",
@@ -208,8 +153,8 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderOrders.isLoading
-                ? loaderOrders.isLoading
+            title: isLoadingOrders
+                ? isLoadingOrders
                 : `${calculateCompletedOrdersPercentage(orders).toFixed(0)}%`,
             description: "dashboardSuccesfulAverageOrdersDescriptionLabel",
             icon: "",
@@ -219,12 +164,12 @@ export const DashboardPage = () => {
             gradient: null,
         },
         {
-            title: loaderProducts.isLoading ? loaderProducts.isLoading : getTotalProducts(products),
+            title: isLoadingProducts ? isLoadingProducts : getTotalProducts(products),
             description: "dashboardTotalProductsDescriptionLabel",
             icon: "",
             to: "/dashboard/products",
             colSpan: 1,
-            rowSpan: 2,
+            rowSpan: 1,
             gradient: null,
         },
     ];

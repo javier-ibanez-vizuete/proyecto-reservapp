@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const user = getUserFromLocalStorage();
+        if (!user) return;
         setUser(user);
     }, []);
 

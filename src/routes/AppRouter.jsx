@@ -17,12 +17,16 @@ export const AppRouter = () => {
 
     const handleIntendedRoute = useMemo(() => {
         if (location.pathname.includes("/dashboard")) {
-            return {};
+            return null;
         }
         return { errorRoute: true, intendedRoute: location.pathname };
     }, [location.pathname]);
 
     if (loaderUser.isLoading) return <div>Cargando...</div>;
+
+    if (location.pathname.startsWith("/dashboard")) {
+        return null;
+    }
 
     return (
         <Routes>
