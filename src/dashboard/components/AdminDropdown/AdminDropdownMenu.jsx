@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useMemo } from "react";
+import { useDevice } from "../../../hooks/useDevice";
 
 /**
  * AdminDropdownMenu - Menu container for dropdown items
@@ -58,11 +59,6 @@ export const AdminDropdownMenu = ({
     rounded,
 
     /**
-     * Auto-configuration object (injected by parent)
-     */
-    autoConfig,
-
-    /**
      * Current theme (injected by parent)
      */
     theme,
@@ -77,6 +73,8 @@ export const AdminDropdownMenu = ({
      */
     ...props
 }) => {
+    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+
     /**
      * Color variants for menu
      */
@@ -140,6 +138,34 @@ export const AdminDropdownMenu = ({
         lg: "rounded-lg",
         xl: "rounded-xl",
     };
+
+    /**
+     * Auto-configuration based on screen size and theme
+     */
+    const autoConfig = useMemo(
+        () => ({
+            padding: classNames({
+                "px-xs py-2xs": isMobile2Xs || isMobileXs,
+                "px-sm py-xs": isMobileSm,
+                "px-md py-sm": isTablet || isDesktop,
+            }),
+            gap: classNames({
+                "gap-xs": isMobile2Xs || isMobileXs,
+                "gap-sm": isMobileSm || isTablet,
+                "gap-md": isDesktop,
+            }),
+            rounded: classNames({
+                "rounded-sm": isMobile2Xs || isMobileXs,
+                "rounded-default": isMobileSm || isTablet,
+                "rounded-md": isDesktop,
+            }),
+            color: classNames("bg-transparent border shadow-sm lg:hover:shadow-md", {
+                "border-admin-text-color/90 lg:hover:bg-admin-text-color/10": theme === "light",
+                "border-admin-text-color-dark/90 lg:hover:bg-admin-text-color-dark/10": theme !== "light",
+            }),
+        }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, theme]
+    );
 
     /**
      * Menu classes with animations and variants

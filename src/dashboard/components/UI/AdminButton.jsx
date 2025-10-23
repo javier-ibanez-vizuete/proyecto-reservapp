@@ -62,7 +62,7 @@ export const AdminButton = ({ children, variant, padding, onClick, className = "
 
     const variantsPadding = {
         default: "px-3 py-1.5",
-        none: "p-0",
+        none: " ",
         "2xs": "px-1 py-0.5",
         xs: "px-2 py-1",
         sm: "px-3 py-1",

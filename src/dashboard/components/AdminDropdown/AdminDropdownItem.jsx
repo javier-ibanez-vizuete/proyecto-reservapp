@@ -1,3 +1,7 @@
+import classNames from "classnames";
+import { useContext } from "react";
+import { ThemeContext } from "../../../contexts/ThemeContext";
+
 /**
  * AdminDropdownItem - Individual item in the dropdown menu
  *
@@ -39,24 +43,12 @@
  * </AdminDropdownItem>
  */
 export const AdminDropdownItem = ({
-    /**
-     * Content to display inside the item
-     */
     children,
 
-    /**
-     * Click handler for the item
-     */
     onClick,
 
-    /**
-     * Close callback (automatically injected by parent AdminDropdownMenu)
-     */
     onClose,
 
-    /**
-     * Whether item is disabled
-     */
     disabled = false,
 
     /**

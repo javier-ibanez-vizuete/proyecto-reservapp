@@ -1,8 +1,7 @@
 import classNames from "classnames";
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ThemeContext } from "../../../contexts/ThemeContext";
-import { useDevice } from "../../../hooks/useDevice";
 import { AdminDropdownMenu } from "./AdminDropdownMenu";
 import { AdminDropdownTrigger } from "./AdminDropdownTrigger";
 
@@ -98,41 +97,11 @@ export const AdminDropdown = ({
     ...props
 }) => {
     const { theme } = useContext(ThemeContext);
-    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { pathname } = useLocation();
 
-    // State and refs
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const triggerRef = useRef(null);
-
-    /**
-     * Auto-configuration based on screen size and theme
-     */
-    const autoConfig = useMemo(
-        () => ({
-            padding: classNames({
-                "px-xs py-2xs": isMobile2Xs || isMobileXs,
-                "px-sm py-xs": isMobileSm,
-                "px-md py-sm": isTablet || isDesktop,
-            }),
-            gap: classNames({
-                "gap-xs": isMobile2Xs || isMobileXs,
-                "gap-sm": isMobileSm || isTablet,
-                "gap-md": isDesktop,
-            }),
-            rounded: classNames({
-                "rounded-sm": isMobile2Xs || isMobileXs,
-                "rounded-default": isMobileSm || isTablet,
-                "rounded-md": isDesktop,
-            }),
-            color: classNames("bg-transparent border shadow-sm lg:hover:shadow-md", {
-                "border-admin-text-color/90 lg:hover:bg-admin-text-color/10": theme === "light",
-                "border-admin-text-color-dark/90 lg:hover:bg-admin-text-color-dark/10": theme !== "light",
-            }),
-        }),
-        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, theme]
-    );
 
     /**
      * Close dropdown on route change
@@ -173,7 +142,7 @@ export const AdminDropdown = ({
      */
     const toggleDropdown = () => {
         if (!disabled) {
-            setIsOpen(!isOpen);
+            setIsOpen((prev) => !prev);
         }
     };
 
@@ -221,7 +190,7 @@ export const AdminDropdown = ({
     /**
      * Container classes
      */
-    const dropdownClasses = classNames(
+    const dropdownBaseClasses = classNames(
         "relative inline-flex text-left",
         {
             "opacity-50 cursor-not-allowed": disabled,
@@ -233,7 +202,7 @@ export const AdminDropdown = ({
         <div
             {...props}
             ref={dropdownRef}
-            className={dropdownClasses}
+            className={dropdownBaseClasses}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             role="menu"
@@ -262,7 +231,6 @@ export const AdminDropdown = ({
                         padding,
                         gap,
                         rounded,
-                        autoConfig,
                         theme,
                     });
                 }
