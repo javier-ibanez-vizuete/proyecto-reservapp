@@ -65,7 +65,11 @@ export const AdminUsersPage = ({ padding }) => {
                 <AdminDropdown variant={"accent"} placement="bottom-start">
                     <AdminDropdownTrigger>ABRETE</AdminDropdownTrigger>
                     <AdminDropdownMenu>
-                        <AdminDropdownItem variant="destructive">PERRACOOOO</AdminDropdownItem>
+                        <AdminDropdownItem>PERRACOOOO</AdminDropdownItem>
+                        <AdminDropdownItem>GATACOOO</AdminDropdownItem>
+                        <AdminDropdownItem>CONEJACO</AdminDropdownItem>
+                        <AdminDropdownItem>CONEJACO</AdminDropdownItem>
+                        <AdminDropdownItem>CONEJACO</AdminDropdownItem>
                     </AdminDropdownMenu>
                 </AdminDropdown>
             </div>

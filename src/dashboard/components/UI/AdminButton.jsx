@@ -65,7 +65,7 @@ export const AdminButton = ({ children, variant, padding, onClick, className = "
         none: " ",
         "2xs": "px-1 py-0.5",
         xs: "px-2 py-1",
-        sm: "px-3 py-1",
+        sm: "px-3 py-1.5",
         md: "px-4 py-2",
         lg: "px-6 py-3",
         xl: "px-8 py-4",

@@ -1,6 +1,8 @@
 import classNames from "classnames";
-import React, { useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useRef } from "react";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import { useDevice } from "../../../hooks/useDevice";
+import { useWindowWidth } from "../../../hooks/useWindowWidth";
 
 /**
  * AdminDropdownMenu - Menu container for dropdown items
@@ -39,29 +41,24 @@ export const AdminDropdownMenu = ({
     placement,
 
     /**
-     * Color variant (injected by parent)
+     * Color variant
      */
     variant,
 
     /**
-     * Padding size (injected by parent)
+     * Padding size
      */
     padding,
 
     /**
-     * Gap between items (injected by parent)
+     * Gap between items
      */
     gap,
 
     /**
-     * Border radius (injected by parent)
+     * Border radius
      */
     rounded,
-
-    /**
-     * Current theme (injected by parent)
-     */
-    theme,
 
     /**
      * Additional CSS classes
@@ -74,11 +71,61 @@ export const AdminDropdownMenu = ({
     ...props
 }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+    const { theme } = useContext(ThemeContext);
+    const width = useWindowWidth();
+
+    const containerRef = useRef(null);
+
+    const containerItemHeightConfig = useMemo(
+        () =>
+            classNames({
+                "max-h-[60vh]": isMobile2Xs || isMobileXs || isMobileSm,
+                "max-h-[50vh]": isTablet,
+                "max-h-[40vh]": isDesktop,
+            }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+    );
+
+    useEffect(() => {
+        if (!containerRef?.current) return;
+
+        const container = containerRef.current;
+
+        if (isOpen) {
+            container.style.display = "flex";
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    container.style.visibility = "visible";
+                    container.style.opacity = "1";
+                    container.style.height = `auto`;
+                });
+            });
+        }
+        if (!isOpen) {
+            container.style.opacity = 0;
+            container.style.height = 0;
+
+            const timeOut = setTimeout(() => {
+                if (container) {
+                    container.style.visibility = "hidden";
+                    container.style.display = "none";
+                }
+            }, 500);
+            return () => clearTimeout(timeOut);
+        }
+    }, [isOpen, width]);
+
+    const baseMenuClasses =
+        "absolute z-50 flex flex-col transition-all duration-500 ease-in-out overflow-hidden max-w-[325px] xs:max-w-[375px] sm:max-w-[425px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px]";
+
+    const baseContainerItemsClasses =
+        "flex flex-col flex-1 min-h-0 overflow-y-auto overflow-x-hidden scrollbar-hide";
 
     /**
      * Color variants for menu
      */
-    const variantsColor = {
+    const variantConfig = {
         default: classNames("shadow-lg border", {
             "bg-white border-admin-text-color/20": theme === "light",
             "bg-admin-background-dark border-admin-text-color-dark/20": theme !== "light",
@@ -105,7 +152,7 @@ export const AdminDropdownMenu = ({
      */
     const variantsPadding = {
         default: "p-sm",
-        none: "p-0",
+        none: " ",
         xs: "p-xs",
         sm: "p-sm",
         md: "p-md",
@@ -118,7 +165,7 @@ export const AdminDropdownMenu = ({
      */
     const variantsGap = {
         default: "gap-sm",
-        none: "gap-0",
+        none: " ",
         xs: "gap-xs",
         sm: "gap-sm",
         md: "gap-md",
@@ -131,7 +178,7 @@ export const AdminDropdownMenu = ({
      */
     const variantsRounded = {
         default: "rounded-default",
-        none: "rounded-0",
+        none: " ",
         xs: "rounded-xs",
         sm: "rounded-sm",
         md: "rounded-md",
@@ -170,32 +217,47 @@ export const AdminDropdownMenu = ({
     /**
      * Menu classes with animations and variants
      */
-    const menuClasses = classNames(
-        "absolute z-50 min-w-max flex flex-col",
-        "transition-all duration-200 ease-in-out",
-        "overflow-hidden",
-        {
-            "opacity-0 invisible scale-95 pointer-events-none": !isOpen,
-            "opacity-100 visible scale-100": isOpen,
-        },
-        placement,
-        variantsColor[variant] || autoConfig?.color || variantsColor.default,
+    const currentMenuClasses = classNames(
+        baseMenuClasses,
+        variantConfig[variant] || autoConfig?.color || variantConfig.default,
         variantsPadding[padding] || autoConfig?.padding || variantsPadding.default,
-        variantsGap[gap] || autoConfig?.gap || variantsGap.default,
         variantsRounded[rounded] || autoConfig?.rounded || variantsRounded.default,
+        placement,
         className
+    );
+
+    const currentContainerItemClasses = classNames(
+        baseContainerItemsClasses,
+        containerItemHeightConfig,
+        variantsGap[gap] || autoConfig?.gap || variantsGap.default,
+        {
+            "overflow-hidden": !isOpen,
+        }
     );
 
     if (!isOpen) return null;
 
     return (
-        <div className={menuClasses} role="menu" {...props}>
-            {React.Children.map(children, (child) => {
-                if (React.isValidElement(child)) {
-                    return React.cloneElement(child, { onClose });
-                }
-                return child;
-            })}
+        <div
+            ref={containerRef}
+            className={currentMenuClasses}
+            role="menu"
+            style={{
+                display: "none",
+                visibility: "hidden",
+                opacity: 0,
+                transformOrigin: "top-right",
+            }}
+            {...props}
+        >
+            <div className={currentContainerItemClasses}>
+                {React.Children.map(children, (child) => {
+                    if (React.isValidElement(child)) {
+                        return React.cloneElement(child, { onClose });
+                    }
+                    return child;
+                })}
+            </div>
         </div>
     );
 };
