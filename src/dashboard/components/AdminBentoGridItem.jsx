@@ -103,7 +103,7 @@ export const AdminBentoGridItem = ({
     };
 
     const variantsPadding = {
-        none: "p-0",
+        none: " ",
         xs: "p-xs",
         sm: "p-sm",
         default: "p-sm",

@@ -4,6 +4,7 @@ import { UnderConstruction } from "../components/UnderConstruction";
 import { AuthContext } from "../contexts/AuthContext";
 import { useAuth } from "../core/auth/useAuth";
 import { AdminPrivateRoute } from "../dashboard/components/AdminPrivateRoute";
+import { AdminUserDetail } from "../dashboard/pages/AdminUserDetail";
 import { AdminUsersPage } from "../dashboard/pages/AdminUsersPage";
 import { DashboardPage } from "../pages/DashboardPage";
 
@@ -24,6 +25,7 @@ export const AdminRouter = () => {
                 <Route path="/dashboard" element={<DashboardPage />} />
 
                 <Route path="/dashboard/users" element={<AdminUsersPage />} />
+                <Route path="/dashboard/users/:id" element={<AdminUserDetail />} />
 
                 <Route path="/dashboard/bookings" element={<UnderConstruction pageName="Bookings Page" />} />
 

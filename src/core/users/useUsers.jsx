@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { UsersContext } from "../../contexts/UsersContext";
-import { getUsersApi } from "./users.api";
-import { saveUsersInLocalStorage } from "./users.service";
+import { getUserByIdApi, getUsersApi } from "./users.api";
+import { saveUserDetailsInLocalStorage, saveUsersInLocalStorage } from "./users.service";
 
 export const useUsers = () => {
-    const { setUsers } = useContext(UsersContext);
+    const { setUsers, setUserDetails } = useContext(UsersContext);
 
     const getUsers = async () => {
         try {
@@ -19,5 +19,17 @@ export const useUsers = () => {
         }
     };
 
-    return { getUsers };
+    const getUserById = async (id) => {
+        try {
+            const user = await getUserByIdApi();
+            if (!user) throw new Error("There is a Problem getting user by Id");
+            saveUserDetailsInLocalStorage(user);
+            setUserDetails(user);
+        } catch (err) {
+            console.error("We can't get User by Id", err);
+            throw err;
+        }
+    };
+
+    return { getUsers, getUserById };
 };
