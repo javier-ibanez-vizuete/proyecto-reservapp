@@ -48,6 +48,8 @@ export const Avatar = ({
         lg: { avatar: "w-12 h-12", indicator: "w-3 h-3", position: "top-0.5 right-0.5" },
         xl: { avatar: "w-16 h-16", indicator: "w-3.5 h-3.5", position: "top-1 right-1" },
         "2xl": { avatar: "w-20 h-20", indicator: "w-4 h-4", position: "top-1 right-1" },
+        "4xl": { avatar: "w-40 h-40", indicator: "w-4.5 h-4.5", position: "top-3 right-4.5" },
+        "6xl": { avatar: "w-60 h-60", indicator: "w-4.5 h-4.5", position: "top-6 right-7" },
     };
 
     const automaticallySizeConfig = useMemo(

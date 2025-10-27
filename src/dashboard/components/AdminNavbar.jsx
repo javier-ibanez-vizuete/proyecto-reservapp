@@ -13,8 +13,6 @@ import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { AdminContainer } from "./UI/AdminContainer";
 
 export const AdminNavbar = ({
-    isLoggedIn = false,
-    user = null,
     isAsideOpen = false,
     onToggleAside = () => {},
     padding,

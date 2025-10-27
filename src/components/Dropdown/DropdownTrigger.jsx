@@ -46,14 +46,10 @@ export const DropdownTrigger = React.forwardRef(
         const autoConfig = useMemo(
             () => ({
                 padding: classnames({
-                    "": isMobile2Xs,
-                    "": isMobileXs,
-                    "": isMobileSm,
-                    "": isTablet,
-                    "": isDesktop,
+                    "p-xs": isMobile2Xs || isMobileXs || isMobileSm || isTablet || isDesktop,
                 }),
             }),
-            []
+            [isMobile2Xs || isMobileXs || isMobileSm || isTablet || isDesktop]
         );
 
         const currentClasses = classnames(
@@ -66,7 +62,7 @@ export const DropdownTrigger = React.forwardRef(
             <div
                 ref={ref}
                 role="button"
-                className={triggerClasses}
+                className={currentClasses}
                 onClick={onClick}
                 disabled={disabled}
                 aria-expanded={isOpen}

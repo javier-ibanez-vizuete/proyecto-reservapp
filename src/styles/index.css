@@ -308,7 +308,7 @@ body {
     }
 
     .navbar-inner {
-        @apply flex justify-between items-center h-16 py-3;
+        @apply flex justify-between items-center;
     }
 
     .navbar-logo {
@@ -326,11 +326,6 @@ body {
     .navbar-menu-container {
         @apply hidden lg:flex lg:self-stretch lg:flex-1 justify-center items-center overflow-hidden;
     }
-
-    /* .navbar-link {
-        @apply flex-1 font-medium px-md py-sm transition-all duration-300
-            relative overflow-hidden bg-secondary-color/40 text-text-color hover:scale-105 hover:bg-secondary-color/80;
-    } */
 
     .light.navbar-link {
         @apply bg-background lg:focus:ring-background-dark;

@@ -1,10 +1,18 @@
 import { useContext } from "react";
+import { replace, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 import { UsersContext } from "../../contexts/UsersContext";
-import { getUserByIdApi, getUsersApi } from "./users.api";
-import { saveUserDetailsInLocalStorage, saveUsersInLocalStorage } from "./users.service";
+import { deleteUserByIdApi, getUserByIdApi, getUsersApi } from "./users.api";
+import {
+    removeUserDetailsFromLocalStorage,
+    saveUserDetailsInLocalStorage,
+    saveUsersInLocalStorage,
+} from "./users.service";
 
 export const useUsers = () => {
-    const { setUsers, setUserDetails } = useContext(UsersContext);
+    const { user } = useContext(AuthContext);
+    const { users, setUsers, setUserDetails } = useContext(UsersContext);
+    const navigate = useNavigate();
 
     const getUsers = async () => {
         try {
@@ -31,5 +39,26 @@ export const useUsers = () => {
         }
     };
 
-    return { getUsers, getUserById };
+    const deleteUserById = async (id) => {
+        try {
+            console.log("esto vale la id", id);
+
+            if (id === user?.id) return;
+            const userRemoved = await deleteUserByIdApi(id);
+            if (userRemoved.ok) {
+                const restUsers = users.filter((user) => user.id !== id);
+                if (!restUsers.length) return console.error("No hay usuarios");
+                saveUsersInLocalStorage(restUsers);
+                removeUserDetailsFromLocalStorage();
+                setUsers(restUsers);
+                setUserDetails(null);
+                return navigate("/dashboard/users", replace);
+            }
+        } catch (err) {
+            console.error(("Error deleting User", err));
+            throw err;
+        }
+    };
+
+    return { getUsers, getUserById, deleteUserById };
 };
