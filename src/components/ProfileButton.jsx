@@ -40,7 +40,7 @@ export const ProfileButton = ({ onClick }) => {
     };
 
     return (
-        <Dropdown placement="bottom-end" className="flex" onClick={onClick}>
+        <Dropdown placement="bottom-end" onClick={onClick}>
             <DropdownTrigger btnStyle={false} hasIcon={false} className={"lg:hover:-translate-y-[2px]"}>
                 <Avatar
                     avatar={user?.avatar}

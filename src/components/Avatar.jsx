@@ -15,7 +15,7 @@ import { ImageContainer } from "./UI/ImageContainer";
  * @param {string} [props.fallback] - Texto a mostrar cuando no hay imagen (por defecto: primera letra del alt)
  * @param {boolean} [props.online=false] - Si mostrar indicador de estado online
  * @param {string} [props.className=''] - Clases CSS adicionales para personalización
- * @param {Object} [props...rest] - Resto de props HTML del elemento div
+ * @param {Object} [props...pros] - Resto de props HTML del elemento div
  *
  * Valores aceptados:
  * - size: 'xs' (24px), 'sm' (32px), 'md' (40px), 'lg' (48px), 'xl' (64px), '2xl' (80px)
@@ -42,36 +42,14 @@ export const Avatar = ({
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const sizeConfig = {
-        xs: {
-            avatar: "w-6 h-6",
-            indicator: "bg-green-500 w-1.5 h-1.5",
-            position: "top-0 right-0",
-        },
-        sm: {
-            avatar: "w-8 h-8",
-            indicator: "bg-green-500 w-2 h-2 ",
-            position: "top-0 right-0",
-        },
-        md: {
-            avatar: "w-10 h-10",
-            indicator: "bg-green-500 w-2.5 h-2.5",
-            position: "top-0.5 right-0.5",
-        },
-        lg: {
-            avatar: "w-12 h-12",
-            indicator: "bg-green-500 w-3 h-3",
-            position: "top-0.5 right-0.5",
-        },
-        xl: {
-            avatar: "w-16 h-16",
-            indicator: "bg-green-500 w-3.5 h-3.5",
-            position: "top-1 right-1",
-        },
-        "2xl": {
-            avatar: "w-20 h-20",
-            indicator: "bg-green-500 w-4 h-4",
-            position: "top-1 right-1",
-        },
+        xs: { avatar: "w-6 h-6", indicator: "w-1.5 h-1.5", position: "top-0 right-0" },
+        sm: { avatar: "w-8 h-8", indicator: "w-2 h-2", position: "top-0 right-0" },
+        md: { avatar: "w-10 h-10", indicator: "w-2.5 h-2.5", position: "top-0.5 right-0.5" },
+        lg: { avatar: "w-12 h-12", indicator: "w-3 h-3", position: "top-0.5 right-0.5" },
+        xl: { avatar: "w-16 h-16", indicator: "w-3.5 h-3.5", position: "top-1 right-1" },
+        "2xl": { avatar: "w-20 h-20", indicator: "w-4 h-4", position: "top-1 right-1" },
+        "4xl": { avatar: "w-40 h-40", indicator: "w-4.5 h-4.5", position: "top-3 right-4.5" },
+        "6xl": { avatar: "w-60 h-60", indicator: "w-4.5 h-4.5", position: "top-6 right-7" },
     };
 
     const automaticallySizeConfig = useMemo(
@@ -142,13 +120,13 @@ export const Avatar = ({
     );
 
     const indicatorClasses = classNames(
-        "absolute border-1 border-white rounded-full",
+        "absolute border border-white rounded-full",
+        currentSize.indicator,
+        currentSize.position,
         {
             "bg-green-400": online,
             "bg-gray-300": !online,
-        },
-        currentSize.indicator,
-        currentSize.position
+        }
     );
 
     const getFallbackText = () => {
@@ -178,7 +156,6 @@ export const Avatar = ({
 
                 {(!imageSrc || imageError) && <span className="select-none">{getFallbackText()}</span>}
             </div>
-
             {online && <span className={indicatorClasses} aria-label="Online" />}
             {!online && <span className={indicatorClasses} aria-label="Offline" />}
         </div>
