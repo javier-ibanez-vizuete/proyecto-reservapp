@@ -37,16 +37,20 @@ export const DashboardPage = () => {
         isLoadingBookings,
         isLoadingOrders,
         isLoadingProducts,
+        refreshUsers,
+        refreshBookings,
+        refreshOrders,
+        refreshProducts,
     } = useAdminData({
         enablePolling: true,
         pollingInterval: 30000,
     });
 
     useEffect(() => {
-        if (!users || !users.length) handleGetUsers();
-        if (!bookings || !bookings.length) handleGetBookings();
-        if (!orders || !orders.length) handleGetOrders();
-        if (!products || !products.length) handleGetProducts();
+        if (!users || !users.length) refreshUsers();
+        if (!bookings || !bookings.length) refreshBookings();
+        if (!orders || !orders.length) refreshOrders();
+        if (!products || !products.length) refreshProducts();
     }, [users, bookings, orders, products]);
 
     useEffect(() => {

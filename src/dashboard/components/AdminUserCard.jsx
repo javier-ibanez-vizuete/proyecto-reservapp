@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { Avatar } from "../../components/Avatar";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useDevice } from "../../hooks/useDevice";
 
@@ -18,13 +19,14 @@ export const AdminUserCard = ({
 }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
+    const { getText } = useContext(LanguageContext);
 
     const handleClick = () => {
         if (!userData) return;
         onClick?.(userData?.id || userData?._id);
     };
 
-    const baseClasses = "flex flex-1 flex-col items-center last:flex-none last:basis-auto cursor-pointer";
+    const baseClasses = "flex flex-col items-center cursor-pointer";
 
     const variantsConfig = {
         default: classNames("bg-gradient-to-br hover:bg-gradient-to-tr", {
@@ -119,15 +121,6 @@ export const AdminUserCard = ({
         }),
     };
 
-    const variantsAvatarSize = {
-        default: "w-full",
-        xs: "w-20",
-        sm: "w-28",
-        md: "w-34",
-        lg: "w-60",
-        xl: "w-72",
-    };
-
     const autoConfig = useMemo(
         () => ({
             padding: classNames({
@@ -153,12 +146,6 @@ export const AdminUserCard = ({
                 "border-admin-text-color/40": theme === "light",
                 "border-admin-text-color-dark/40": theme !== "light",
             }),
-            avatarSize: classNames({
-                "w-32": isMobile2Xs || isMobileXs,
-                "w-40": isMobileSm,
-                "w-28": isTablet,
-                "w-30": isDesktop,
-            }),
         }),
         [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, theme]
     );
@@ -170,10 +157,6 @@ export const AdminUserCard = ({
         variantsGap[gap] || autoConfig?.gap || variantsGap.default,
         variantsRounded[rounded] || autoConfig?.rounded || variantsRounded.default,
         variantsBorder[border] || autoConfig?.border || variantsBorder.default
-    );
-
-    const currentAvatarSizeClasses = classNames(
-        variantsAvatarSize[avatarSize] || autoConfig?.avatarSize || variantsAvatarSize.default
     );
 
     return (
@@ -190,7 +173,8 @@ export const AdminUserCard = ({
 
             <small className="font-medium whitespace-nowrap">{userData?.name}</small>
             <small>
-                Role:<span>{userData?.role}</span>
+                {getText("adminUserPageUserRoleText")}
+                <span>{userData?.role}</span>
             </small>
         </article>
     );

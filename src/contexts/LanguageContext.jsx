@@ -153,6 +153,7 @@ const TEXTS = {
         nameFieldText: "Name",
         fullNameFieldText: "Full Name",
         emailFieldText: "Email",
+        phoneNumberFieldText: "Phone Number",
         addressFieldText: "Address",
         passwordFieldText: "Password",
         confirmPasswordFieldText: "Confirm Password",
@@ -434,6 +435,46 @@ const TEXTS = {
 
         // - - - ADMIN BENTO GRID ITEM - - -
         bentoGridUserRoleText: "Role:",
+
+        //  - - - ADMIN USERS PAGE
+        h1AdminUserPage: "Users",
+
+        adminUserPageLabelTextName: "Filter users by name",
+        adminUserPagePlaceholderTextName: "Search users...",
+
+        adminUserPageDefaultStatusFilter: "Filter by status",
+        adminUserPageActiveStatusFilter: "Active",
+        adminUserPageInactiveStatusFilter: "Inactive",
+
+        adminUserPageUserRoleText: "Role:",
+
+        //  - - - ADMIN USER DETAILS
+        adminUserDetailNotSubjectFieldText: "Please enter a subject.",
+        adminUserDetailNotMessageFieldText: "Please enter a message.",
+
+        adminUserDetailMailModalTitle: "Send Email to -",
+        adminUserDetailMailModalSubjectText: "Subject",
+        adminUserDetailMailModalSubjectPlaceholder: "Write a Subject...",
+        adminUserDetailMailModalMessageText: "Message",
+        adminUserDetailMailModalMessagePlaceholder: "Write a message...",
+        adminUserDetailMailModalSendButton: "Send",
+        adminUserDetailMailButtonText: "Send Email",
+
+        adminUserDetailConfirmModalTitle: "Call Confirmation",
+        adminUserDetailConfirmModalText: "Call",
+        adminUserDetailConfirmModalButtonText: "Call User",
+
+        adminUserDetailDeleteModalTitle: "Delete User",
+        adminUserDetailDeleteModalText: "Are you sure you want to delete",
+        adminUserDetailDeleteModalDeleteButton: "Delete user",
+        loadingAdminUserDetailDeleteModalDeleteButton: "Deleting user...",
+
+        adminUserDetailBookingsCountText: "Total Reservations:",
+        adminUserDetailOrdersCountText: "Total Reservations:",
+
+        adminUserDetailDeleteButtonText: "Delete User",
+        adminUserDetailCancelButton: "Cancel",
+        toastAdminUserDetailsRemoveUserError: "Error Deleting User",
     },
 
     es: {
@@ -877,6 +918,46 @@ const TEXTS = {
 
         // - - - ELEMENTO BENTO GRID ADMIN - - -
         bentoGridUserRoleText: "Rol:",
+
+        //  - - - ADMIN USERS PAGE
+        h1AdminUserPage: "Usuarios",
+
+        adminUserPageLabelTextName: "Filtrar usuarios por nombre",
+        adminUserPagePlaceholderTextName: "Buscar usuarios...",
+
+        adminUserPageDefaultStatusFilter: "Filtrar por estado",
+        adminUserPageActiveStatusFilter: "Activo",
+        adminUserPageInactiveStatusFilter: "Inactivo",
+
+        adminUserPageUserRoleText: "Rol:",
+
+        //  - - - ADMIN USER DETAILS
+        adminUserDetailNotSubjectFieldText: "Por favor ingrese un asunto.",
+        adminUserDetailNotMessageFieldText: "Por favor ingrese un mensaje.",
+
+        adminUserDetailMailModalTitle: "Enviar correo a -",
+        adminUserDetailMailModalSubjectText: "Asunto",
+        adminUserDetailMailModalSubjectPlaceholder: "Escriba un asunto...",
+        adminUserDetailMailModalMessageText: "Mensaje",
+        adminUserDetailMailModalMessagePlaceholder: "Escriba un mensaje...",
+        adminUserDetailMailModalSendButton: "Enviar",
+        adminUserDetailMailButtonText: "Enviar correo",
+
+        adminUserDetailConfirmModalTitle: "Confirmación de llamada",
+        adminUserDetailConfirmModalText: "Llamar",
+        adminUserDetailConfirmModalButtonText: "Llamar al usuario",
+
+        adminUserDetailDeleteModalTitle: "Eliminar usuario",
+        adminUserDetailDeleteModalText: "¿Está seguro que desea eliminar",
+        adminUserDetailDeleteModalDeleteButton: "Eliminar usuario",
+        loadingAdminUserDetailDeleteModalDeleteButton: "Eliminando usuario...",
+
+        adminUserDetailBookingsCountText: "Total de reservas:",
+        adminUserDetailOrdersCountText: "Total de reservas:",
+
+        adminUserDetailDeleteButtonText: "Eliminar usuario",
+        adminUserDetailCancelButton: "Cancelar",
+        toastAdminUserDetailsRemoveUserError: "Error al eliminar usuario",
     },
 
     fr: {
@@ -1321,6 +1402,46 @@ const TEXTS = {
 
         // - - - ÉLÉMENT BENTO GRID ADMIN - - -
         bentoGridUserRoleText: "Rôle:",
+
+        //  - - - ADMIN USERS PAGE
+        h1AdminUserPage: "Utilisateurs",
+
+        adminUserPageLabelTextName: "Filtrer les utilisateurs par nom",
+        adminUserPagePlaceholderTextName: "Rechercher des utilisateurs...",
+
+        adminUserPageDefaultStatusFilter: "Filtrer par statut",
+        adminUserPageActiveStatusFilter: "Actif",
+        adminUserPageInactiveStatusFilter: "Inactif",
+
+        adminUserPageUserRoleText: "Rôle:",
+
+        //  - - - ADMIN USER DETAILS
+        adminUserDetailNotSubjectFieldText: "Veuillez saisir un objet.",
+        adminUserDetailNotMessageFieldText: "Veuillez saisir un message.",
+
+        adminUserDetailMailModalTitle: "Envoyer un email à -",
+        adminUserDetailMailModalSubjectText: "Objet",
+        adminUserDetailMailModalSubjectPlaceholder: "Écrire un objet...",
+        adminUserDetailMailModalMessageText: "Message",
+        adminUserDetailMailModalMessagePlaceholder: "Écrire un message...",
+        adminUserDetailMailModalSendButton: "Envoyer",
+        adminUserDetailMailButtonText: "Envoyer l'email",
+
+        adminUserDetailConfirmModalTitle: "Confirmation d'appel",
+        adminUserDetailConfirmModalText: "Appeler",
+        adminUserDetailConfirmModalButtonText: "Appeler l'utilisateur",
+
+        adminUserDetailDeleteModalTitle: "Supprimer l'utilisateur",
+        adminUserDetailDeleteModalText: "Êtes-vous sûr de vouloir supprimer",
+        adminUserDetailDeleteModalDeleteButton: "Supprimer l'utilisateur",
+        loadingAdminUserDetailDeleteModalDeleteButton: "Suppression de l'utilisateur...",
+
+        adminUserDetailBookingsCountText: "Total des réservations :",
+        adminUserDetailOrdersCountText: "Total des réservations :",
+
+        adminUserDetailDeleteButtonText: "Supprimer l'utilisateur",
+        adminUserDetailCancelButton: "Annuler",
+        toastAdminUserDetailsRemoveUserError: "Erreur lors de la suppression de l'utilisateur",
     },
 
     it: {
@@ -1771,6 +1892,46 @@ const TEXTS = {
 
         // - - - ELEMENTO BENTO GRID ADMIN - - -
         bentoGridUserRoleText: "Ruolo:",
+
+        //  - - - ADMIN USERS PAGE
+        h1AdminUserPage: "Utenti",
+
+        adminUserPageLabelTextName: "Filtra gli utenti per nome",
+        adminUserPagePlaceholderTextName: "Cerca utenti...",
+
+        adminUserPageDefaultStatusFilter: "Filtra per stato",
+        adminUserPageActiveStatusFilter: "Attivo",
+        adminUserPageInactiveStatusFilter: "Inattivo",
+
+        adminUserPageUserRoleText: "Ruolo:",
+
+        //  - - - ADMIN USER DETAILS
+        adminUserDetailNotSubjectFieldText: "Inserisci un oggetto.",
+        adminUserDetailNotMessageFieldText: "Inserisci un messaggio.",
+
+        adminUserDetailMailModalTitle: "Invia email a -",
+        adminUserDetailMailModalSubjectText: "Oggetto",
+        adminUserDetailMailModalSubjectPlaceholder: "Scrivi un oggetto...",
+        adminUserDetailMailModalMessageText: "Messaggio",
+        adminUserDetailMailModalMessagePlaceholder: "Scrivi un messaggio...",
+        adminUserDetailMailModalSendButton: "Invia",
+        adminUserDetailMailButtonText: "Invia email",
+
+        adminUserDetailConfirmModalTitle: "Conferma chiamata",
+        adminUserDetailConfirmModalText: "Chiama",
+        adminUserDetailConfirmModalButtonText: "Chiama utente",
+
+        adminUserDetailDeleteModalTitle: "Elimina utente",
+        adminUserDetailDeleteModalText: "Sei sicuro di voler eliminare",
+        adminUserDetailDeleteModalDeleteButton: "Elimina utente",
+        loadingAdminUserDetailDeleteModalDeleteButton: "Eliminazione utente...",
+
+        adminUserDetailBookingsCountText: "Totale prenotazioni:",
+        adminUserDetailOrdersCountText: "Totale prenotazioni:",
+
+        adminUserDetailDeleteButtonText: "Elimina utente",
+        adminUserDetailCancelButton: "Annulla",
+        toastAdminUserDetailsRemoveUserError: "Errore durante l'eliminazione dell'utente",
     },
 
     de: {
@@ -2210,6 +2371,46 @@ const TEXTS = {
 
         // - - - ADMIN BENTO GRID ITEM - -
         bentoGridUserRoleText: "Rolle:",
+
+        //  - - - ADMIN USERS PAGE
+        h1AdminUserPage: "Benutzer",
+
+        adminUserPageLabelTextName: "Benutzer nach Name filtern",
+        adminUserPagePlaceholderTextName: "Benutzer suchen...",
+
+        adminUserPageDefaultStatusFilter: "Nach Status filtern",
+        adminUserPageActiveStatusFilter: "Aktiv",
+        adminUserPageInactiveStatusFilter: "Inaktiv",
+
+        adminUserPageUserRoleText: "Rolle:",
+
+        //  - - - ADMIN USER DETAILS
+        adminUserDetailNotSubjectFieldText: "Bitte geben Sie einen Betreff ein.",
+        adminUserDetailNotMessageFieldText: "Bitte geben Sie eine Nachricht ein.",
+
+        adminUserDetailMailModalTitle: "E-Mail senden an -",
+        adminUserDetailMailModalSubjectText: "Betreff",
+        adminUserDetailMailModalSubjectPlaceholder: "Betreff schreiben...",
+        adminUserDetailMailModalMessageText: "Nachricht",
+        adminUserDetailMailModalMessagePlaceholder: "Nachricht schreiben...",
+        adminUserDetailMailModalSendButton: "Senden",
+        adminUserDetailMailButtonText: "E-Mail senden",
+
+        adminUserDetailConfirmModalTitle: "Anrufbestätigung",
+        adminUserDetailConfirmModalText: "Anrufen",
+        adminUserDetailConfirmModalButtonText: "Benutzer anrufen",
+
+        adminUserDetailDeleteModalTitle: "Benutzer löschen",
+        adminUserDetailDeleteModalText: "Sind Sie sicher, dass Sie löschen möchten",
+        adminUserDetailDeleteModalDeleteButton: "Benutzer löschen",
+        loadingAdminUserDetailDeleteModalDeleteButton: "Benutzer wird gelöscht...",
+
+        adminUserDetailBookingsCountText: "Gesamtreservierungen:",
+        adminUserDetailOrdersCountText: "Gesamtreservierungen:",
+
+        adminUserDetailDeleteButtonText: "Benutzer löschen",
+        adminUserDetailCancelButton: "Abbrechen",
+        toastAdminUserDetailsRemoveUserError: "Fehler beim Löschen des Benutzers",
     },
 
     zh: {
@@ -2638,6 +2839,46 @@ const TEXTS = {
 
         // - - - ADMIN BENTO GRID ITEM - - -
         bentoGridUserRoleText: "角色：",
+
+        //  - - - ADMIN USERS PAGE
+        h1AdminUserPage: "用户",
+
+        adminUserPageLabelTextName: "按姓名筛选用户",
+        adminUserPagePlaceholderTextName: "搜索用户...",
+
+        adminUserPageDefaultStatusFilter: "按状态筛选",
+        adminUserPageActiveStatusFilter: "活跃",
+        adminUserPageInactiveStatusFilter: "不活跃",
+
+        adminUserPageUserRoleText: "角色：",
+
+        //  - - - ADMIN USER DETAILS
+        adminUserDetailNotSubjectFieldText: "请输入主题。",
+        adminUserDetailNotMessageFieldText: "请输入消息。",
+
+        adminUserDetailMailModalTitle: "发送邮件给 -",
+        adminUserDetailMailModalSubjectText: "主题",
+        adminUserDetailMailModalSubjectPlaceholder: "写一个主题...",
+        adminUserDetailMailModalMessageText: "消息",
+        adminUserDetailMailModalMessagePlaceholder: "写一条消息...",
+        adminUserDetailMailModalSendButton: "发送",
+        adminUserDetailMailButtonText: "发送邮件",
+
+        adminUserDetailConfirmModalTitle: "呼叫确认",
+        adminUserDetailConfirmModalText: "呼叫",
+        adminUserDetailConfirmModalButtonText: "呼叫用户",
+
+        adminUserDetailDeleteModalTitle: "删除用户",
+        adminUserDetailDeleteModalText: "您确定要删除",
+        adminUserDetailDeleteModalDeleteButton: "删除用户",
+        loadingAdminUserDetailDeleteModalDeleteButton: "正在删除用户...",
+
+        adminUserDetailBookingsCountText: "总预订数：",
+        adminUserDetailOrdersCountText: "总预订数：",
+
+        adminUserDetailDeleteButtonText: "删除用户",
+        adminUserDetailCancelButton: "取消",
+        toastAdminUserDetailsRemoveUserError: "删除用户时出错",
     },
 };
 

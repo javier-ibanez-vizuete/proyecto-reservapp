@@ -164,7 +164,7 @@ export const AdminInputSearch = React.forwardRef(
          */
         const variantsGap = {
             default: "gap-sm",
-            none: "gap-0",
+            none: " ",
             xs: "gap-xs",
             sm: "gap-sm",
             md: "gap-md",
@@ -191,9 +191,8 @@ export const AdminInputSearch = React.forwardRef(
         const autoConfig = useMemo(
             () => ({
                 containerGap: classNames({
-                    "gap-xs": isMobile2Xs,
-                    "gap-sm": isMobileXs,
-                    "gap-md": isMobileSm || isTablet || isDesktop,
+                    "gap-xs": isMobile2Xs || isMobileXs,
+                    "gap-sm": isMobileSm || isTablet || isDesktop,
                 }),
                 iconSize: classNames({
                     "w-sm": isMobile2Xs || isMobileXs || isMobileSm || isTablet,
@@ -204,8 +203,8 @@ export const AdminInputSearch = React.forwardRef(
                     "px-md py-sm": isMobileSm || isTablet || isDesktop,
                 }),
                 gap: classNames({
-                    "gap-xs": isMobile2Xs || isMobileXs,
-                    "gap-sm": isMobileSm || isTablet || isDesktop,
+                    "gap-xs": isMobile2Xs || isMobileXs || isMobileSm,
+                    "gap-sm": isTablet || isDesktop,
                 }),
                 rounded: classNames({
                     "rounded-sm": isMobile2Xs || isMobileXs,
