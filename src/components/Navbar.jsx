@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
@@ -42,7 +42,7 @@ const LOGO_DARK = {
     avif480: logoReservappDarkAvif480,
 };
 
-export const Navbar = ({ isLoggedIn = false, user = null }) => {
+export const Navbar = ({ isLoggedIn = false, user = null, height, padding, logoSize }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -67,14 +67,6 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         if (isMobileMenuOpen) mobileMenuContainer.style.height = `${mobileMenuContainer.scrollHeight}px`;
         if (!isMobileMenuOpen) mobileMenuContainer.style.height = 0;
     }, [mobileNavRef, isMobileMenuOpen, width]);
-
-    const logoSizeConfig = classNames({
-        "w-6": isMobile2Xs,
-        "w-7": isMobileXs,
-        "w-8": isMobileSm,
-        "w-9": isTablet,
-        "w-10": isDesktop,
-    });
 
     // FUNCIONES UTILITARIAS
     const handleCloseMobileMenu = () => {
@@ -103,6 +95,70 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
         return linkName;
     };
 
+    const baseNavbarInnerClasses = "flex justify-between items-center";
+
+    const variantsPadding = {
+        default: "py-xs",
+        none: " ",
+        xs: "py-xs",
+        sm: "py-sm",
+        md: "py-md",
+        lg: "py-lg",
+        xl: "py-xl",
+    };
+
+    const variantsHeight = {
+        default: "h-15",
+        xs: "h-15",
+        sm: "h-16",
+        md: "h-17",
+        lg: "h-18",
+        xl: "h-19",
+    };
+
+    const variantsLogoSize = {
+        xs: "w-8",
+        sm: "w-10",
+        default: "w-12",
+        md: "w-14",
+        lg: "w-16",
+        xl: "w-18",
+    };
+
+    const autoConfig = useMemo(
+        () => ({
+            padding: classNames({
+                "py-md": isMobile2Xs || isMobileXs || isMobileSm || isTablet,
+                "py-lg": isDesktop,
+            }),
+            height: classNames({
+                "h-14": isMobile2Xs,
+                "h-15": isMobileXs,
+                "h-16": isMobileSm,
+                "h-17": isTablet,
+                "h-18": isDesktop,
+            }),
+            logoSize: classNames({
+                "w-6": isMobile2Xs,
+                "w-7": isMobileXs,
+                "w-8": isMobileSm,
+                "w-9": isTablet,
+                "w-10": isDesktop,
+            }),
+        }),
+        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, width]
+    );
+
+    const currentNavbarInnerClasses = classNames(
+        baseNavbarInnerClasses,
+        variantsHeight[height] || autoConfig?.height || variantsHeight.default,
+        variantsPadding[padding] || autoConfig?.padding || variantsPadding.default
+    );
+
+    const currentLogoSize = classNames(
+        variantsLogoSize[logoSize] || autoConfig.logoSize || variantsLogoSize.default
+    );
+
     return (
         <nav
             className={`navbar transition-all duration-500 ease-in-out fixed top-0 w-full z-10 shadow-xl ${
@@ -110,9 +166,9 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
             }`}
         >
             <Container className="navbar-content">
-                <div className="navbar-inner">
+                <div className={currentNavbarInnerClasses}>
                     <Link className="navbar-logo" to={isLoading ? null : "/"}>
-                        <ImageContainer size={logoSizeConfig} className="flex-1 logo-icon">
+                        <ImageContainer size={currentLogoSize} className="flex-1 logo-icon">
                             <Image
                                 imageData={theme === "light" ? LOGO_LIGHT : LOGO_DARK}
                                 alt="Logo ReservApp"
@@ -124,7 +180,6 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         <NavbarLinks handleLinkClick={handleLinkClick} />
                     </div>
                     <div className="navbar-actions">
-                        {/*    colocar despues de la prueba size={isMobile ? "sm" : "md"} */}
                         {!isLoggedIn && (
                             <div className="perfect-center self-center gap-2">
                                 <Button onClick={handleLogin} variant="primary">
@@ -156,7 +211,9 @@ export const Navbar = ({ isLoggedIn = false, user = null }) => {
                         </div>
 
                         {user && (
-                            <div className="flex flex-col self-stretch lg:hidden">
+                            <div
+                                className={`flex flex-col lg:hidden ${autoConfig?.height} ${autoConfig?.padding}`}
+                            >
                                 <BurgerButton
                                     isMobileMenuOpen={isMobileMenuOpen}
                                     toggleMobileMenu={toggleMobileMenu}

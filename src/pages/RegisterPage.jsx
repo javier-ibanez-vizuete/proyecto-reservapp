@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { useContext, useMemo, useState } from "react";
-import { Navigate } from "react-router-dom";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
@@ -180,10 +179,6 @@ export const RegisterPage = () => {
     const handleAvatarClick = (avatar) => {
         setForm((prev) => ({ ...prev, avatar: { url: avatar.url, alt: avatar.alt } }));
     };
-
-    if (user) {
-        return <Navigate to={"/home"} replace />;
-    }
 
     return (
         <Container className="perfect-center flex-1 py-4">

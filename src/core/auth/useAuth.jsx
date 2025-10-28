@@ -78,8 +78,6 @@ export const useAuth = () => {
             if (logoutResponse?.logout) {
                 removeUserFromLocalStorage();
                 removeTokenFromLocalStorage();
-                setUser(false);
-                setCart(null);
                 removeUsersFromLocalStorage();
                 removeCartFromLocalStorage();
                 removeCartSummaryFromLocalStorage();
@@ -89,8 +87,9 @@ export const useAuth = () => {
                 removeProductsFromLocalStorage();
                 removeCategoriesFromLocalStorage();
                 removeFromSessionStorage("intendedRoute");
-
                 saveDataInSessionStorage("logoutSuccess", true);
+                setUser(false);
+                setCart(null);
                 return navigate("/", { state: { logoutSuccess: true } });
             }
         } catch (err) {

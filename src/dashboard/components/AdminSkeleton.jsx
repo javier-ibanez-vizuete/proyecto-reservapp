@@ -9,8 +9,6 @@ import { useDevice } from "../../hooks/useDevice";
  * @param {Object} props - Component properties
  * @param {string} props.variant - Shape variant ('card'|'text'|'circle'|'avatar'|'button') (default: 'card')
  * @param {number} props.lines - Number of text lines (default: 3)
- * @param {string} props.colSpan - Grid columns to span (1|2|3|4)
- * @param {string} props.rowSpan - Grid rows to span (1|2|3|4)
  * @param {string} props.padding - Padding size ('none'|'xs'|'sm'|'md'|'lg'|'xl')
  * @param {string} props.className - Additional CSS classes
  */
@@ -119,13 +117,13 @@ export const AdminSkeleton = ({
         switch (variant) {
             case "text":
                 return (
-                    <div className="flex flex-col w-10 gap-xs">
+                    <div className="flex flex-col w-full gap-xs">
                         {Array.from({ length: lines }).map((_, i) => (
                             <div
                                 key={i}
                                 className={classNames(elementClasses, "h-3", {
-                                    "w-full": i < lines - 1,
-                                    "w-full": i === lines - 1,
+                                    "w-full": i % 2 === 0,
+                                    "w-2/3": i % 2 !== 0,
                                 })}
                             />
                         ))}
