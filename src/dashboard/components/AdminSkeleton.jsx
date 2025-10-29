@@ -93,6 +93,7 @@ export const AdminSkeleton = ({
         xl: "w-32",
         "2xl": "w-40",
         "4xl": "w-52",
+        "6xl": "w-72",
         full: "w-full",
     };
 
@@ -107,6 +108,7 @@ export const AdminSkeleton = ({
         xl: "h-32",
         "2xl": "h-40",
         "4xl": "h-52",
+        "6xl": "h-72",
         full: "h-full",
     };
 
@@ -173,10 +175,7 @@ export const AdminSkeleton = ({
                                     variantsHeight[height] ||
                                         autoSkeletonConfig?.height ||
                                         variantsHeight.default,
-                                    {
-                                        "w-full": i % 2 === 0,
-                                        "w-2/3": i % 2 !== 0,
-                                    }
+                                    variantsWidth[width] || autoSkeletonConfig?.width || "w-full"
                                 )}
                             />
                         ))}

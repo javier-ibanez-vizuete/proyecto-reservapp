@@ -188,8 +188,8 @@ export const AdminUsersPage = ({ padding, gap, columns }) => {
                     <AdminSkeleton variant="button" lines={1} />
                 </div>
                 <div className={currentUsersContainerClasses}>
-                    {Array.from({ length: 4 }).map((_, i) => (
-                        <AdminSkeleton variant="avatar" />
+                    {Array.from({ length: 4 }).map((_, index) => (
+                        <AdminSkeleton key={index} variant="avatar" />
                     ))}
                 </div>
             </div>
