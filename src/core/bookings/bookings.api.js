@@ -10,6 +10,16 @@ export const getBookingsApi = async () => {
     }
 };
 
+export const getBookingsByIdApi = async (id) => {
+    try {
+        const response = await api.get(`/bookings/${id}`);
+        return response.data;
+    } catch (err) {
+        console.error("Error Getting Booking By ID", err);
+        throw err;
+    }
+};
+
 export const getBookingsByDateApi = async (date) => {
     try {
         const response = await api.get(`/bookings?date=${date}`);

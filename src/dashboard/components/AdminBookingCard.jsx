@@ -1,32 +1,57 @@
 import classNames from "classnames";
 import { useContext, useMemo } from "react";
-import { Avatar } from "../../components/Avatar";
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { Image } from "../../components/UI/Image";
+import { ImageContainer } from "../../components/UI/ImageContainer";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { UsersContext } from "../../contexts/UsersContext";
+import {
+    ICON_BABY_CHAIR_ACTIVE,
+    ICON_BABY_CHAIR_INACTIVE,
+    ICON_NOTES_ACTIVE,
+    ICON_NOTES_INACTIVE,
+} from "../../data/ICONS_DATA";
 import { useDevice } from "../../hooks/useDevice";
 
-export const AdminUserCard = ({
-    userData,
-    onClick,
+export const AdminBookingCard = ({
+    bookingData,
+    onClick = () => {},
     variant,
     padding,
-    gap,
+    articleGap,
+    elementsGap,
     rounded,
-    border,
-    avatarSize,
+    borderColor,
+    iconsSize,
     className = "",
     ...props
 }) => {
+    const { users } = useContext(UsersContext);
+
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
 
-    const handleClick = () => {
+    const formatTime = useMemo(() => {
+        if (!bookingData?.scheduledFor) return;
+        const date = bookingData?.scheduledFor.split(".")[0].replace("T", " ");
+        return date;
+    }, [bookingData?.scheduledFor]);
+
+    const bookingName = useMemo(() => {
+        if (!users || !users?.length) return;
+        const userBookingId = bookingData?.userId;
+
+        const userData = users.find((user) => {
+            return (user?.id || user?._id) === userBookingId;
+        });
+
         if (!userData) return;
-        onClick?.(userData?.id || userData?._id);
-    };
+        return userData?.name;
+    }, [users, bookingData]);
 
-    const baseClasses = "flex flex-col items-center cursor-pointer";
+    const baseArticleClasses =
+        "flex flex-col items-center cursor-pointer transition-all duration-500 ease-in-out lg:hover:-translate-y-[2px]";
+    const baseContentContainerClasses = "flex flex-col items-center";
+    const baseIconsContainerClasses = "flex items-center";
 
     const variantsConfig = {
         default: classNames("bg-gradient-to-br hover:bg-gradient-to-tr", {
@@ -57,6 +82,10 @@ export const AdminUserCard = ({
             "bg-gradient-to-br from-error-400 to-error-500",
             "hover:bg-gradient-to-lt hover:from-error-500 hover:to-error-400"
         ),
+        delayed: classNames(
+            "bg-gradient-to-br from-error-400 to-error-500",
+            "hover:from-error-500 hover:to-error-400"
+        ),
     };
 
     const variantsPadding = {
@@ -69,7 +98,17 @@ export const AdminUserCard = ({
         xl: "p-xl",
     };
 
-    const variantsGap = {
+    const variantsArticleGap = {
+        default: "gap-sm",
+        none: " ",
+        xs: "gap-xs",
+        sm: "gap-sm",
+        md: "gap-md",
+        lg: "gap-lg",
+        xl: "gap-xl",
+    };
+
+    const variantsElementsGap = {
         default: "gap-sm",
         none: " ",
         xs: "gap-xs",
@@ -121,6 +160,16 @@ export const AdminUserCard = ({
         }),
     };
 
+    const variantsIconSize = {
+        "2xs": "w-4",
+        xs: "w-6",
+        sm: "w-8",
+        md: "w-10",
+        xl: "w-14",
+        "2xl": "w-20",
+        full: "w-full",
+    };
+
     const autoConfig = useMemo(
         () => ({
             variant: classNames("bg-gradient-to-bl hover:bg-gradient-to-tr", {
@@ -128,11 +177,15 @@ export const AdminUserCard = ({
                 "from-admin-accent-background-dark via-[#103247] to-admin-background-dark": theme !== "light",
             }),
             padding: classNames({
-                "p-xs": isMobile2Xs || isMobileXs,
-                "p-sm": isMobileSm || isTablet,
-                "p-md": isDesktop,
+                "p-sm": isMobile2Xs || isMobileXs,
+                "p-md": isMobileSm || isTablet,
+                "p-lg": isDesktop,
             }),
-            gap: classNames({
+            articleGap: classNames({
+                "gap-sm": isMobile2Xs || isMobileXs,
+                "gap-md": isMobileSm || isTablet || isDesktop,
+            }),
+            elementsGap: classNames({
                 "gap-xs": isMobile2Xs || isMobileXs,
                 "gap-sm": isMobileSm || isTablet,
                 "gap-md": isDesktop,
@@ -146,36 +199,63 @@ export const AdminUserCard = ({
                 "border-admin-text-color/40": theme === "light",
                 "border-admin-text-color-dark/40": theme !== "light",
             }),
+            iconSize: classNames({
+                "w-6": isMobile2Xs || isMobileXs,
+                "w-8": isMobileSm || isTablet,
+                "w-10": isDesktop,
+            }),
         }),
         [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, theme]
     );
 
-    const currentClasses = classNames(
-        baseClasses,
+    const currentArticleClasses = classNames(
+        baseArticleClasses,
         variantsConfig[variant] || autoConfig?.variant || variantsConfig.default,
-        variantsPadding[variant] || autoConfig?.padding || variantsPadding.default,
-        variantsGap[gap] || autoConfig?.gap || variantsGap.default,
+        variantsPadding[padding] || autoConfig?.padding || variantsPadding.default,
+        variantsArticleGap[articleGap] || autoConfig?.articleGap || variantsArticleGap.default,
         variantsRounded[rounded] || autoConfig?.rounded || variantsRounded.default,
-        variantsBorder[border] || autoConfig?.border || variantsBorder.default
+        variantsBorder[borderColor] || autoConfig?.border || variantsBorder.default,
+        className
+    );
+
+    const currentContentContainerClasses = classNames(
+        baseContentContainerClasses,
+        variantsElementsGap[elementsGap] || autoConfig?.elementsGap || variantsElementsGap.default
+    );
+
+    const currentIconsContainerClasses = classNames(
+        baseIconsContainerClasses,
+        variantsElementsGap[elementsGap] || autoConfig?.elementsGap || variantsElementsGap.default
+    );
+
+    const currentIconSizeClasses = classNames(
+        variantsIconSize[iconsSize] || autoConfig?.iconSize || variantsIconSize.full
     );
 
     return (
-        <article className={currentClasses} onClick={handleClick} {...props}>
-            <div className="perfect-center">
-                <Avatar
-                    avatar={userData?.avatar}
-                    alt={userData?.avatar?.alt}
-                    size="2xl"
-                    fallback={userData?.name}
-                    online={userData?.isActive}
-                />
+        <article onClick={() => onClick(bookingData?.id)} className={currentArticleClasses}>
+            <p className="font-bold">{formatTime}</p>
+            <div className={currentContentContainerClasses}>
+                <p>
+                    Customers: <span>{bookingData?.partySize}</span>
+                </p>
+                <p className="lg:flex lg:flex-col">
+                    Booking Name: <span>{bookingName}</span>
+                </p>
             </div>
 
-            <small className="font-medium whitespace-nowrap">{userData?.name}</small>
-            <small>
-                {getText("adminUserPageUserRoleText")}
-                <span>{userData?.role}</span>
-            </small>
+            <div className={currentIconsContainerClasses}>
+                <ImageContainer size={currentIconSizeClasses} title={bookingData?.notes}>
+                    <Image imageData={bookingData?.notes ? ICON_NOTES_ACTIVE : ICON_NOTES_INACTIVE} />
+                </ImageContainer>
+                <ImageContainer size={currentIconSizeClasses}>
+                    <Image
+                        imageData={
+                            bookingData?.extras?.highChair ? ICON_BABY_CHAIR_ACTIVE : ICON_BABY_CHAIR_INACTIVE
+                        }
+                    />
+                </ImageContainer>
+            </div>
         </article>
     );
 };

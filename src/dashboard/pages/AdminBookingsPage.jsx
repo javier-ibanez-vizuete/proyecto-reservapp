@@ -9,7 +9,8 @@ export const AdminBookingsPage = ({ padding, gap }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { pathname } = useLocation();
 
-    const baseSectionClasses = "flex-1 flex flex-col lg:max-h-[100vh] overflow-y-auto overflow-x-hidden";
+    const baseSectionClasses =
+        "flex-1 flex flex-col lg:max-h-[100vh] overflow-y-auto overflow-x-hidden scrollbar-hide";
     const baseLinksContainerClasses = "flex items-center";
 
     const variantsPadding = {

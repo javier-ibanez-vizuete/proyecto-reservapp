@@ -4,6 +4,7 @@ import { UnderConstruction } from "../components/UnderConstruction";
 import { AuthContext } from "../contexts/AuthContext";
 import { useAuth } from "../core/auth/useAuth";
 import { AdminPrivateRoute } from "../dashboard/components/AdminPrivateRoute";
+import { AdminBookingDetail } from "../dashboard/pages/AdminBookingDetail";
 import { AdminBookingsPage } from "../dashboard/pages/AdminBookingsPage";
 import { AdminUserDetail } from "../dashboard/pages/AdminUserDetail";
 import { AdminUsersPage } from "../dashboard/pages/AdminUsersPage";
@@ -36,6 +37,8 @@ export const AdminRouter = () => {
                     <Route path="today" element={<AdminBookingsTodaySection />} />
                     <Route path="all" element={<AdminBookingsListSection />} />
                 </Route>
+
+                <Route path="/dashboard/bookings/:id" element={<AdminBookingDetail />} />
 
                 <Route path="/dashboard/orders" element={<UnderConstruction pageName="Orders Page" />} />
 

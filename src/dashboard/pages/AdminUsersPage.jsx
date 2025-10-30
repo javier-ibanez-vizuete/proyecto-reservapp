@@ -118,9 +118,10 @@ export const AdminUsersPage = ({ padding, gap, columns }) => {
     };
 
     const variantsGap = {
+        default: "gap-sm",
+        none: " ",
         xs: "gap-xs",
         sm: "gap-sm",
-        default: "gap-sm",
         md: "gap-md",
         lg: "gap-lg",
         xl: "gap-xl",

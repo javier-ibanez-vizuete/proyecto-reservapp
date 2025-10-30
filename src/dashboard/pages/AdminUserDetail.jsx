@@ -224,7 +224,7 @@ export const AdminUserDetail = ({ padding, gap }) => {
         autoConfig?.detailsGap
     );
 
-    if (!userDetails)
+    if (!userDetails || loaderUser.isLoading)
         return (
             <div className={currentArticleClasses}>
                 <AdminSkeleton>
