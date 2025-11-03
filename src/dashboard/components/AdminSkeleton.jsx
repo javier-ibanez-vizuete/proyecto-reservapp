@@ -13,11 +13,14 @@ import { useDevice } from "../../hooks/useDevice";
  * @param {string} props.className - Additional CSS classes
  */
 export const AdminSkeleton = ({
+    children,
     variant = "card",
     lines = 3,
     bgCard,
     padding,
     borderColor,
+    width,
+    height,
     rounded,
     className = "",
     ...rest
@@ -28,6 +31,7 @@ export const AdminSkeleton = ({
     const baseClasses = "flex flex-col justify-center animate-pulse overflow-hidden";
 
     const variantsBackgroundCard = {
+        none: " ",
         default: classNames({
             "bg-gray-200": theme === "light",
             "bg-gray-700": theme !== "light",
@@ -43,6 +47,7 @@ export const AdminSkeleton = ({
     };
 
     const variantsBorder = {
+        none: " ",
         default: classNames("border", {
             "border-gray-300/50": theme === "light",
             "border-gray-600/50": theme !== "light",
@@ -58,7 +63,7 @@ export const AdminSkeleton = ({
     };
 
     const variantsPadding = {
-        none: "p-0",
+        none: " ",
         xs: "p-xs",
         sm: "p-sm",
         default: "p-sm",
@@ -68,13 +73,43 @@ export const AdminSkeleton = ({
     };
 
     const variantsRounded = {
-        none: "rounded-0",
+        none: " ",
         xs: "rounded-xs",
         sm: "rounded-sm",
         default: "rounded-md",
         md: "rounded-md",
         lg: "rounded-lg",
         xl: "rounded-xl",
+    };
+
+    const variantsWidth = {
+        default: "w-10",
+        none: " ",
+        "2xs": "w-4",
+        xs: "w-8",
+        sm: "w-10",
+        md: "w-14",
+        lg: "w-18",
+        xl: "w-32",
+        "2xl": "w-40",
+        "4xl": "w-52",
+        "6xl": "w-72",
+        full: "w-full",
+    };
+
+    const variantsHeight = {
+        default: "h-10",
+        none: " ",
+        "2xs": "h-4",
+        xs: "h-8",
+        sm: "h-10",
+        md: "h-14",
+        lg: "h-18",
+        xl: "h-32",
+        "2xl": "h-40",
+        "4xl": "h-52",
+        "6xl": "h-72",
+        full: "h-full",
     };
 
     const autoSkeletonConfig = useMemo(
@@ -94,6 +129,20 @@ export const AdminSkeleton = ({
             rounded: classNames({
                 "rounded-sm": isMobile2Xs || isMobileXs,
                 "rounded-md": isMobileSm || isTablet || isDesktop,
+            }),
+            width: classNames({
+                "w-14": isMobile2Xs,
+                "w-18": isMobileXs || isMobileSm,
+                "w-24": isTablet || isDesktop,
+            }),
+            height: classNames({
+                "h-14": isMobile2Xs,
+                "h-18": isMobileXs || isMobileSm,
+                "h-24": isTablet || isDesktop,
+            }),
+            buttonSize: classNames({
+                "w-3xl h-lg": isMobile2Xs || isMobileXs || isMobileSm,
+                "w-[120px] h-lg": isTablet || isDesktop,
             }),
         }),
         [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, theme]
@@ -121,17 +170,29 @@ export const AdminSkeleton = ({
                         {Array.from({ length: lines }).map((_, i) => (
                             <div
                                 key={i}
-                                className={classNames(elementClasses, "h-3", {
-                                    "w-full": i % 2 === 0,
-                                    "w-2/3": i % 2 !== 0,
-                                })}
+                                className={classNames(
+                                    elementClasses,
+                                    variantsHeight[height] ||
+                                        autoSkeletonConfig?.height ||
+                                        variantsHeight.default,
+                                    variantsWidth[width] || autoSkeletonConfig?.width || "w-full"
+                                )}
                             />
                         ))}
                     </div>
                 );
 
             case "circle":
-                return <div className={classNames(elementClasses, "w-10 h-10 rounded-full mx-auto")} />;
+                return (
+                    <div
+                        className={classNames(
+                            elementClasses,
+                            "rounded-full mx-auto",
+                            variantsWidth[width] || autoSkeletonConfig?.width || variantsWidth.default,
+                            variantsHeight[height] || autoSkeletonConfig?.height || variantsHeight.default
+                        )}
+                    />
+                );
 
             case "avatar":
                 return (
@@ -145,7 +206,16 @@ export const AdminSkeleton = ({
                 );
 
             case "button":
-                return <div className={classNames(elementClasses, "h-md w-2xl")} />;
+                return (
+                    <div
+                        className={classNames(
+                            elementClasses,
+                            (variantsWidth[width] && variantsHeight[height]) ||
+                                autoSkeletonConfig?.buttonSize ||
+                                (variantsWidth.default && variantsHeight.default)
+                        )}
+                    />
+                );
 
             case "card":
             default:
@@ -166,6 +236,13 @@ export const AdminSkeleton = ({
                 );
         }
     };
+
+    if (children)
+        return (
+            <div className={currentSkeletonClasses} {...rest}>
+                {children}
+            </div>
+        );
 
     return (
         <div className={currentSkeletonClasses} {...rest}>

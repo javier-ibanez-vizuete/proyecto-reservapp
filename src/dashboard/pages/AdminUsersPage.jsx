@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { Users } from "lucide-react";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BackButton } from "../../components/UI/BackButton";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import {
     getDataFromSessionStorage,
@@ -117,9 +118,10 @@ export const AdminUsersPage = ({ padding, gap, columns }) => {
     };
 
     const variantsGap = {
+        default: "gap-sm",
+        none: " ",
         xs: "gap-xs",
         sm: "gap-sm",
-        default: "gap-sm",
         md: "gap-md",
         lg: "gap-lg",
         xl: "gap-xl",
@@ -187,8 +189,8 @@ export const AdminUsersPage = ({ padding, gap, columns }) => {
                     <AdminSkeleton variant="button" lines={1} />
                 </div>
                 <div className={currentUsersContainerClasses}>
-                    {Array.from({ length: 4 }).map((_, i) => (
-                        <AdminSkeleton variant="avatar" />
+                    {Array.from({ length: 4 }).map((_, index) => (
+                        <AdminSkeleton key={index} variant="avatar" />
                     ))}
                 </div>
             </div>
@@ -196,6 +198,9 @@ export const AdminUsersPage = ({ padding, gap, columns }) => {
 
     return (
         <section className={currentClasses}>
+            <div className="perfect-center self-start lg:self-center">
+                <BackButton />
+            </div>
             <h1>{getText("h1AdminUserPage")}</h1>
             <div className={currentFiltersContainerClasses}>
                 <AdminInputSearch

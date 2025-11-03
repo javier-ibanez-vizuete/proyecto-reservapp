@@ -1,28 +1,25 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import iconBackPng from "../../assets/icons/icon-go-back/icon-go-back.avif";
-import iconBackAvif from "../../assets/icons/icon-go-back/icon-go-back.png";
-import iconBackWebp from "../../assets/icons/icon-go-back/icon-go-back.webp";
+import { useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { ICON_GO_BACK_BLACK_DATA, ICON_GO_BACK_WHITE_DATA } from "../../data/ICONS_DATA";
 import { Button } from "./Button";
 import { Image } from "./Image";
 import { ImageContainer } from "./ImageContainer";
 
-const DEFAULT_PICTURE_DATA = {
-    url: iconBackPng,
-    webp: iconBackWebp,
-    avif: iconBackAvif,
-    alt: "Icon go Back",
-};
-
-const defaultImage = (
-    <ImageContainer size={"w-5"}>
-        <Image imageData={DEFAULT_PICTURE_DATA} alt={DEFAULT_PICTURE_DATA.alt} />
-    </ImageContainer>
-);
-
-export const BackButton = ({ fallbackPath = "/", children = defaultImage, variant = "outline" }) => {
+export const BackButton = ({ fallbackPath = "/", children, variant = "outline" }) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { theme } = useContext(ThemeContext);
+
+    const defaultImage = (
+        <ImageContainer size={"w-5"}>
+            <Image
+                imageData={theme === "light" ? ICON_GO_BACK_BLACK_DATA : ICON_GO_BACK_WHITE_DATA}
+                alt={theme === "light" ? ICON_GO_BACK_BLACK_DATA.alt : ICON_GO_BACK_WHITE_DATA.alt}
+            />
+        </ImageContainer>
+    );
 
     const handleBack = () => {
         const from = location.state?.from;
@@ -30,6 +27,13 @@ export const BackButton = ({ fallbackPath = "/", children = defaultImage, varian
         if (window.history.length > 1) return navigate(-1);
         return navigate(fallbackPath);
     };
+
+    if (!children)
+        return (
+            <Button variant={variant} onClick={handleBack}>
+                {defaultImage}
+            </Button>
+        );
 
     return (
         <Button variant={variant} onClick={handleBack}>

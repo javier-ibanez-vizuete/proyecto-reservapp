@@ -12,6 +12,7 @@ export const getUsersApi = async () => {
 
 export const getUserByIdApi = async (id) => {
     try {
+        if (!id) return;
         const response = await api.get(`/users/${id}`);
         return response.data;
     } catch (err) {

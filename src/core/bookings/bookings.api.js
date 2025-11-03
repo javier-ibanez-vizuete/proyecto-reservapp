@@ -10,6 +10,16 @@ export const getBookingsApi = async () => {
     }
 };
 
+export const getBookingsByIdApi = async (id) => {
+    try {
+        const response = await api.get(`/bookings/${id}`);
+        return response.data;
+    } catch (err) {
+        console.error("Error Getting Booking By ID", err);
+        throw err;
+    }
+};
+
 export const getBookingsByDateApi = async (date) => {
     try {
         const response = await api.get(`/bookings?date=${date}`);
@@ -26,6 +36,14 @@ export const postBookingApi = async (bookingData) => {
         return created.data;
     } catch (err) {
         console.error("Error al Guardar Reserva");
+        throw err;
+    }
+};
+export const postCancelBookingByIdApi = async (bookingId) => {
+    try {
+        const cancelled = await api.post(`/bookings/${bookingId}/cancel`);
+        return cancelled.data;
+    } catch (err) {
         throw err;
     }
 };
