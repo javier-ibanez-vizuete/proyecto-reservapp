@@ -37,7 +37,7 @@ export const AdminLayout = ({ children }) => {
     const baseLayoutContainerClasses = "flex flex-1 flex-col divide-y";
     const baseAsideContainerClasses = `flex flex-1 flex-col relative admin-aside-container`;
     const baseAdminContainerBaseClasses = "flex-1 justify-between before";
-    const baseMainClasses = "flex flex-6 flex-col";
+    const baseMainClasses = "flex flex-6 flex-col overflow-x-hidden";
 
     const autoColorConfig = useMemo(
         () => ({

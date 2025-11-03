@@ -2,13 +2,19 @@ import { useContext, useState } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { BookingsContext } from "../../contexts/BookingsContext";
 import { saveDataInSessionStorage } from "../../helpers/storage";
-import { deleteBookingByIdApi, getBookingsApi, getBookingsByDateApi, postBookingApi } from "./bookings.api";
-import { saveBookingsInLocalStorage } from "./bookings.service";
+import {
+    deleteBookingByIdApi,
+    getBookingsApi,
+    getBookingsByDateApi,
+    postBookingApi,
+    postCancelBookingByIdApi,
+} from "./bookings.api";
+import { saveBookingDetailsInLocalStorage, saveBookingsInLocalStorage } from "./bookings.service";
 
 export const useBookings = () => {
     const [loadingBookings, setLoadingBookings] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const { setBookings } = useContext(BookingsContext);
+    const { setBookings, setBookingDetails } = useContext(BookingsContext);
     const navigate = useNavigate();
 
     const defaultDate = new Date().toISOString().split("T")[0];
@@ -22,6 +28,21 @@ export const useBookings = () => {
         } catch (err) {
             console.error("Error Getting Bookings", err);
             throw err;
+        }
+    };
+
+    const getBookingsById = async (id) => {
+        try {
+            setIsLoading(true);
+            const booking = await getBookingsByIdApi(id);
+            if (!booking) throw new Error("NOT Booking by ID FOUND");
+            saveBookingDetailsInLocalStorage(booking);
+            setBookingDetails(booking);
+        } catch (err) {
+            console.error("NOT Booking by ID FOUND", err);
+            throw err;
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -67,6 +88,28 @@ export const useBookings = () => {
         }
     };
 
+    const postCancelBookingById = async (bookingId) => {
+        try {
+            const canceledBooking = await postCancelBookingByIdApi(bookingId);
+            if (!canceledBooking.ok) return;
+            setBookings((prevValue) => {
+                const restBookings = prevValue.filter(
+                    (booking) => (booking?.id || booking._id) !== bookingId
+                );
+                const updatedBooking = { ...canceledBooking.booking };
+                const newBookings = { ...restBookings, updatedBooking };
+                saveBookingsInLocalStorage(newBookings);
+                return newBookings;
+            });
+            saveBookingDetailsInLocalStorage(canceledBooking?.booking);
+            setBookingDetails(canceledBooking?.booking);
+            return canceledBooking?.booking;
+        } catch (err) {
+            console.error("Error Cancelling Booking by ID", err);
+            throw err;
+        }
+    };
+
     const deleteBookingById = async (bookingId) => {
         try {
             const removedBooking = await deleteBookingByIdApi(bookingId);
@@ -88,5 +131,14 @@ export const useBookings = () => {
         }
     };
 
-    return { getBookings, getBookingsByDate, postBookings, deleteBookingById, loadingBookings, isLoading };
+    return {
+        getBookings,
+        getBookingsById,
+        getBookingsByDate,
+        postBookings,
+        postCancelBookingById,
+        deleteBookingById,
+        loadingBookings,
+        isLoading,
+    };
 };

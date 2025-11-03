@@ -1,9 +1,11 @@
 import classNames from "classnames";
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import { useDevice } from "../../../hooks/useDevice";
 
 export const AdminButton = ({ children, variant, padding, onClick, className = "", disabled, ...props }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+    const { theme } = useContext(ThemeContext);
 
     const handleClick = (event) => {
         if (!disabled) onClick?.(event);
@@ -15,6 +17,24 @@ export const AdminButton = ({ children, variant, padding, onClick, className = "
     const variantsConfig = {
         default: {
             classes: "bg-gray-400  border border-gray-500 shadow-sm hover:bg-gray-500/80 focus:ring-gray-900",
+            hasHoverEffects: true,
+            hasActiveEffects: true,
+            shadowColor: null,
+        },
+        active: {
+            classes: classNames("bg-gradient-to-tr hover:opacity-70", {
+                "from-admin-primary-color via-[#0BABB0] to-admin-primary-hover": theme === "light",
+                "from-admin-primary-color via-[#0A5A6E] to-admin-primary-hover": theme !== "light",
+            }),
+            hasHoverEffects: true,
+            hasActiveEffects: true,
+            shadowColor: null,
+        },
+        inactive: {
+            classes: classNames("bg-gradient-to-tr opacity-70 hover:opacity-100", {
+                "from-admin-secondary-color via-[#5ec1e8] to-admin-secondary-hover": theme === "light",
+                "from-admin-secondary-color via-[#4cb0e8] to-admin-secondary-hover": theme !== "light",
+            }),
             hasHoverEffects: true,
             hasActiveEffects: true,
             shadowColor: null,

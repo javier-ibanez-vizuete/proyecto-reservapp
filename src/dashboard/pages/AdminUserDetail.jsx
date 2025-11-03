@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Avatar } from "../../components/Avatar";
 import { ConfirmModal } from "../../components/Modal/ConfirmModal";
 import { Modal } from "../../components/Modal/Modal";
@@ -23,6 +23,7 @@ import { normalizeId } from "../../helpers/normalizeId";
 import { useDevice } from "../../hooks/useDevice";
 import { useLoading } from "../../hooks/useLoading";
 import { useToast } from "../../hooks/useToast";
+import { AdminSkeleton } from "../components/AdminSkeleton";
 import { AdminButton } from "../components/UI/AdminButton";
 import { useAdminData } from "../hooks/useAdminData";
 
@@ -82,7 +83,7 @@ export const AdminUserDetail = ({ padding, gap }) => {
             removeUserDetailsFromLocalStorage();
             setUserDetails(null);
         };
-    }, [id, users]);
+    }, [id]);
 
     const handleContactModal = () => {
         setContactForm(INITIAL_FORM_DATA);
@@ -96,7 +97,8 @@ export const AdminUserDetail = ({ padding, gap }) => {
     };
 
     const handleSendEmail = () => {
-        if (!contactForm?.subject) return setContactError(getText("adminUserDetailNotSubjectFieldText"));
+        if (!contactForm?.contactSubject)
+            return setContactError(getText("adminUserDetailNotSubjectFieldText"));
         if (!contactForm?.contactBody) return setContactError(getText("adminUserDetailNotMessageFieldText"));
 
         const encodedSubject = encodeURIComponent(contactForm?.subject);
@@ -113,6 +115,10 @@ export const AdminUserDetail = ({ padding, gap }) => {
         document.body.removeChild(anchor);
 
         handleContactModal();
+    };
+
+    const onEnterKey = (event) => {
+        if (event?.key === "Enter") handleSendEmail();
     };
 
     const handleCallModal = () => setShowCallModal((prev) => !prev);
@@ -218,7 +224,31 @@ export const AdminUserDetail = ({ padding, gap }) => {
         autoConfig?.detailsGap
     );
 
-    if (!userDetails) return <Navigate to={"/dashboard"} state={{ notUserDetailsFound: true }} replace />;
+    if (!userDetails || loaderUser.isLoading)
+        return (
+            <div className={currentArticleClasses}>
+                <AdminSkeleton>
+                    <AdminSkeleton variant="button" bgCard="none" borderColor="none" />
+                    <AdminSkeleton
+                        variant="text"
+                        lines={1}
+                        bgCard="none"
+                        borderColor="none"
+                        height="xs"
+                        className="w-1/2 md:w-1/3 lg:mx-auto"
+                    />
+                    <AdminSkeleton
+                        variant="circle"
+                        width={"4xl"}
+                        height={"4xl"}
+                        bgCard="none"
+                        borderColor="none"
+                    />
+                    <AdminSkeleton variant="text" height="xs" bgCard="none" borderColor="none" />
+                    <AdminSkeleton variant="button" bgCard="none" borderColor="none" />
+                </AdminSkeleton>
+            </div>
+        );
 
     return (
         <article className={currentArticleClasses}>
@@ -238,6 +268,7 @@ export const AdminUserDetail = ({ padding, gap }) => {
                             value={contactForm?.subject}
                             placeholder={getText("adminUserDetailMailModalSubjectPlaceholder")}
                             onChange={onContactInputChange}
+                            onKeyDown={onEnterKey}
                         />
                     </div>
                     <div className="flex flex-col gap-xs">
@@ -250,6 +281,7 @@ export const AdminUserDetail = ({ padding, gap }) => {
                             value={contactForm?.contactBody}
                             placeholder={getText("adminUserDetailMailModalMessagePlaceholder")}
                             onChange={onContactInputChange}
+                            onKeyDown={onEnterKey}
                         />
                     </div>
                 </ModalBody>

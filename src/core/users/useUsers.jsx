@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { UsersContext } from "../../contexts/UsersContext";
 import { deleteUserByIdApi, getUserByIdApi, getUsersApi } from "./users.api";
@@ -29,7 +29,7 @@ export const useUsers = () => {
 
     const getUserById = async (id) => {
         try {
-            const user = await getUserByIdApi();
+            const user = await getUserByIdApi(id);
             if (!user) throw new Error("There is a Problem getting user by Id");
             saveUserDetailsInLocalStorage(user);
             setUserDetails(user);
@@ -50,9 +50,9 @@ export const useUsers = () => {
                 if (!restUsers.length) return console.error("No hay usuarios");
                 saveUsersInLocalStorage(restUsers);
                 removeUserDetailsFromLocalStorage();
+                navigate("/dashboard/users", { replace: true });
                 setUsers(restUsers);
                 setUserDetails(null);
-                return navigate("/dashboard/users", replace);
             }
         } catch (err) {
             console.error(("Error deleting User", err));

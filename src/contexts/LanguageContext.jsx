@@ -475,6 +475,44 @@ const TEXTS = {
         adminUserDetailDeleteButtonText: "Delete User",
         adminUserDetailCancelButton: "Cancel",
         toastAdminUserDetailsRemoveUserError: "Error Deleting User",
+
+        // - - - ADMIN BOOKINGS PAGE
+        h1AdminBookingsPage: "BOOKINGS",
+
+        adminBookingsAllLinkText: "All bookings",
+        adminBookingsTodaysLinkText: "Today",
+        adminBookingsSelectDateText: "Select Date",
+
+        // - - - ADMIN BOOKINGS TODAY SECTION
+        h5AdminBookingsTodaySection: "Bookings for ",
+        adminBookingsTodaySectionPendingTitle: "Pending Bookings",
+        adminBookingsTodaySectionLateArrivalsTitle: "Late Arrivals",
+        adminBookingsTodaySectionNotPendingBookingsText: "There's not Pending Bookings",
+
+        // - - - ADMIN BOOKING CARD
+        adminBookingCardCustomersText: "Guests: ",
+        adminBookingCardBookedByText: "Booked by: ",
+
+        // - - - ADMIN BOOKING DETAIL
+        adminBookingDetailSuccessCancelToast: "Booking cancelled successfully ✔",
+        adminBookingDetailErrorCancelToast: "Failed to cancel booking",
+
+        adminBookingDetailCancelModaltitleText: "Cancel Booking",
+        adminBookingDetailCancelModalMessageText: "Are you sure you want to cancel the booking of ",
+        adminBookingDetailCancelConfirmButtonText: "Cancel Booking",
+        loadingAdminBookingDetailCancelConfirmButtonText: "Cancelling...",
+        adminBookingDetailCancelCancelButtonText: "Go back",
+
+        adminBookingDetailBookedOnText: "Booked on: ",
+        adminBookingDetailAdditinoalMessageText: "Additional message:",
+        adminBookingDetailExtrasText: "Extras:",
+        adminBookingDetailHighChairExtraText: "High Chair",
+        adminBookingDetailStatusText: "Status: ",
+
+        adminBookingDetailCompletedStatusText: "Completed",
+        adminBookingDetailPendingStatusText: "Pending",
+        adminBookingDetailCancelledStatusText: "Cancelled",
+        adminBookingDetailCancelBookingButtonText: "Cancel Booking",
     },
 
     es: {
@@ -958,6 +996,44 @@ const TEXTS = {
         adminUserDetailDeleteButtonText: "Eliminar usuario",
         adminUserDetailCancelButton: "Cancelar",
         toastAdminUserDetailsRemoveUserError: "Error al eliminar usuario",
+
+        // - - - ADMIN BOOKINGS PAGE
+        h1AdminBookingsPage: "RESERVAS",
+
+        adminBookingsAllLinkText: "Todas las reservas",
+        adminBookingsTodaysLinkText: "Hoy",
+        adminBookingsSelectDateText: "Seleccionar fecha",
+
+        // - - - ADMIN BOOKINGS TODAY SECTION
+        h5AdminBookingsTodaySection: "Reservas para ",
+        adminBookingsTodaySectionPendingTitle: "Reservas pendientes",
+        adminBookingsTodaySectionLateArrivalsTitle: "Llegadas tarde",
+        adminBookingsTodaySectionNotPendingBookingsText: "No hay reservas pendientes",
+
+        // - - - ADMIN BOOKING CARD
+        adminBookingCardCustomersText: "Comensales: ",
+        adminBookingCardBookedByText: "Reservado por: ",
+
+        // - - - ADMIN BOOKING DETAIL
+        adminBookingDetailSuccessCancelToast: "Reserva cancelada correctamente ✔",
+        adminBookingDetailErrorCancelToast: "Error al cancelar la reserva",
+
+        adminBookingDetailCancelModaltitleText: "Cancelar reserva",
+        adminBookingDetailCancelModalMessageText: "¿Estás seguro de que deseas cancelar la reserva de ",
+        adminBookingDetailCancelConfirmButtonText: "Cancelar reserva",
+        loadingAdminBookingDetailCancelConfirmButtonText: "Cancelando...",
+        adminBookingDetailCancelCancelButtonText: "Volver",
+
+        adminBookingDetailBookedOnText: "Reservado el: ",
+        adminBookingDetailAdditinoalMessageText: "Mensaje adicional:",
+        adminBookingDetailExtrasText: "Extras:",
+        adminBookingDetailHighChairExtraText: "Trona",
+        adminBookingDetailStatusText: "Estado: ",
+
+        adminBookingDetailCompletedStatusText: "Completada",
+        adminBookingDetailPendingStatusText: "Pendiente",
+        adminBookingDetailCancelledStatusText: "Cancelada",
+        adminBookingDetailCancelBookingButtonText: "Cancelar reserva",
     },
 
     fr: {
@@ -1442,6 +1518,44 @@ const TEXTS = {
         adminUserDetailDeleteButtonText: "Supprimer l'utilisateur",
         adminUserDetailCancelButton: "Annuler",
         toastAdminUserDetailsRemoveUserError: "Erreur lors de la suppression de l'utilisateur",
+
+        // - - - ADMIN BOOKINGS PAGE
+        h1AdminBookingsPage: "RÉSERVATIONS",
+
+        adminBookingsAllLinkText: "Toutes les réservations",
+        adminBookingsTodaysLinkText: "Aujourd'hui",
+        adminBookingsSelectDateText: "Sélectionner une date",
+
+        // - - - ADMIN BOOKINGS TODAY SECTION
+        h5AdminBookingsTodaySection: "Réservations pour ",
+        adminBookingsTodaySectionPendingTitle: "Réservations en attente",
+        adminBookingsTodaySectionLateArrivalsTitle: "Arrivées tardives",
+        adminBookingsTodaySectionNotPendingBookingsText: "Il n'y a pas de réservations en attente",
+
+        // - - - ADMIN BOOKING CARD
+        adminBookingCardCustomersText: "Convives : ",
+        adminBookingCardBookedByText: "Réservé par : ",
+
+        // - - - ADMIN BOOKING DETAIL
+        adminBookingDetailSuccessCancelToast: "Réservation annulée avec succès ✔",
+        adminBookingDetailErrorCancelToast: "Échec de l'annulation de la réservation",
+
+        adminBookingDetailCancelModaltitleText: "Annuler la réservation",
+        adminBookingDetailCancelModalMessageText: "Êtes-vous sûr de vouloir annuler la réservation de ",
+        adminBookingDetailCancelConfirmButtonText: "Annuler la réservation",
+        loadingAdminBookingDetailCancelConfirmButtonText: "Annulation en cours...",
+        adminBookingDetailCancelCancelButtonText: "Retour",
+
+        adminBookingDetailBookedOnText: "Réservé le : ",
+        adminBookingDetailAdditinoalMessageText: "Message supplémentaire :",
+        adminBookingDetailExtrasText: "Extras :",
+        adminBookingDetailHighChairExtraText: "Chaise haute",
+        adminBookingDetailStatusText: "Statut : ",
+
+        adminBookingDetailCompletedStatusText: "Terminée",
+        adminBookingDetailPendingStatusText: "En attente",
+        adminBookingDetailCancelledStatusText: "Annulée",
+        adminBookingDetailCancelBookingButtonText: "Annuler la réservation",
     },
 
     it: {
@@ -1932,6 +2046,44 @@ const TEXTS = {
         adminUserDetailDeleteButtonText: "Elimina utente",
         adminUserDetailCancelButton: "Annulla",
         toastAdminUserDetailsRemoveUserError: "Errore durante l'eliminazione dell'utente",
+
+        // - - - ADMIN BOOKINGS PAGE
+        h1AdminBookingsPage: "PRENOTAZIONI",
+
+        adminBookingsAllLinkText: "Tutte le prenotazioni",
+        adminBookingsTodaysLinkText: "Oggi",
+        adminBookingsSelectDateText: "Seleziona data",
+
+        // - - - ADMIN BOOKINGS TODAY SECTION
+        h5AdminBookingsTodaySection: "Prenotazioni per ",
+        adminBookingsTodaySectionPendingTitle: "Prenotazioni in sospeso",
+        adminBookingsTodaySectionLateArrivalsTitle: "Arrivi in ritardo",
+        adminBookingsTodaySectionNotPendingBookingsText: "Non ci sono prenotazioni in sospeso",
+
+        // - - - ADMIN BOOKING CARD
+        adminBookingCardCustomersText: "Ospiti: ",
+        adminBookingCardBookedByText: "Prenotato da: ",
+
+        // - - - ADMIN BOOKING DETAIL
+        adminBookingDetailSuccessCancelToast: "Prenotazione annullata con successo ✔",
+        adminBookingDetailErrorCancelToast: "Impossibile annullare la prenotazione",
+
+        adminBookingDetailCancelModaltitleText: "Annulla prenotazione",
+        adminBookingDetailCancelModalMessageText: "Sei sicuro di voler annullare la prenotazione di ",
+        adminBookingDetailCancelConfirmButtonText: "Annulla prenotazione",
+        loadingAdminBookingDetailCancelConfirmButtonText: "Annullamento in corso...",
+        adminBookingDetailCancelCancelButtonText: "Torna indietro",
+
+        adminBookingDetailBookedOnText: "Prenotato il: ",
+        adminBookingDetailAdditinoalMessageText: "Messaggio aggiuntivo:",
+        adminBookingDetailExtrasText: "Extra:",
+        adminBookingDetailHighChairExtraText: "Seggiolone",
+        adminBookingDetailStatusText: "Stato: ",
+
+        adminBookingDetailCompletedStatusText: "Completata",
+        adminBookingDetailPendingStatusText: "In sospeso",
+        adminBookingDetailCancelledStatusText: "Annullata",
+        adminBookingDetailCancelBookingButtonText: "Annulla prenotazione",
     },
 
     de: {
@@ -2411,6 +2563,44 @@ const TEXTS = {
         adminUserDetailDeleteButtonText: "Benutzer löschen",
         adminUserDetailCancelButton: "Abbrechen",
         toastAdminUserDetailsRemoveUserError: "Fehler beim Löschen des Benutzers",
+
+        // - - - ADMIN BOOKINGS PAGE
+        h1AdminBookingsPage: "BUCHUNGEN",
+
+        adminBookingsAllLinkText: "Alle Buchungen",
+        adminBookingsTodaysLinkText: "Heute",
+        adminBookingsSelectDateText: "Datum auswählen",
+
+        // - - - ADMIN BOOKINGS TODAY SECTION
+        h5AdminBookingsTodaySection: "Buchungen für ",
+        adminBookingsTodaySectionPendingTitle: "Ausstehende Buchungen",
+        adminBookingsTodaySectionLateArrivalsTitle: "Verspätete Ankünfte",
+        adminBookingsTodaySectionNotPendingBookingsText: "Keine ausstehenden Buchungen vorhanden",
+
+        // - - - ADMIN BOOKING CARD
+        adminBookingCardCustomersText: "Gäste: ",
+        adminBookingCardBookedByText: "Gebucht von: ",
+
+        // - - - ADMIN BOOKING DETAIL
+        adminBookingDetailSuccessCancelToast: "Buchung erfolgreich storniert ✔",
+        adminBookingDetailErrorCancelToast: "Fehler beim Stornieren der Buchung",
+
+        adminBookingDetailCancelModaltitleText: "Buchung stornieren",
+        adminBookingDetailCancelModalMessageText: "Sind Sie sicher, dass Sie die Buchung von ",
+        adminBookingDetailCancelConfirmButtonText: "Buchung stornieren",
+        loadingAdminBookingDetailCancelConfirmButtonText: "Stornierung läuft...",
+        adminBookingDetailCancelCancelButtonText: "Zurück",
+
+        adminBookingDetailBookedOnText: "Gebucht am: ",
+        adminBookingDetailAdditinoalMessageText: "Zusätzliche Nachricht:",
+        adminBookingDetailExtrasText: "Extras:",
+        adminBookingDetailHighChairExtraText: "Kinderstuhl",
+        adminBookingDetailStatusText: "Status: ",
+
+        adminBookingDetailCompletedStatusText: "Abgeschlossen",
+        adminBookingDetailPendingStatusText: "Ausstehend",
+        adminBookingDetailCancelledStatusText: "Storniert",
+        adminBookingDetailCancelBookingButtonText: "Buchung stornieren",
     },
 
     zh: {
@@ -2879,6 +3069,44 @@ const TEXTS = {
         adminUserDetailDeleteButtonText: "删除用户",
         adminUserDetailCancelButton: "取消",
         toastAdminUserDetailsRemoveUserError: "删除用户时出错",
+
+        // - - - ADMIN BOOKINGS PAGE
+        h1AdminBookingsPage: "预订",
+
+        adminBookingsAllLinkText: "所有预订",
+        adminBookingsTodaysLinkText: "今天",
+        adminBookingsSelectDateText: "选择日期",
+
+        // - - - ADMIN BOOKINGS TODAY SECTION
+        h5AdminBookingsTodaySection: "预订日期：",
+        adminBookingsTodaySectionPendingTitle: "待处理的预订",
+        adminBookingsTodaySectionLateArrivalsTitle: "迟到的客人",
+        adminBookingsTodaySectionNotPendingBookingsText: "没有待处理的预订",
+
+        // - - - ADMIN BOOKING CARD
+        adminBookingCardCustomersText: "客人：",
+        adminBookingCardBookedByText: "预订人：",
+
+        // - - - ADMIN BOOKING DETAIL
+        adminBookingDetailSuccessCancelToast: "预订已成功取消 ✔",
+        adminBookingDetailErrorCancelToast: "取消预订失败",
+
+        adminBookingDetailCancelModaltitleText: "取消预订",
+        adminBookingDetailCancelModalMessageText: "您确定要取消以下预订：",
+        adminBookingDetailCancelConfirmButtonText: "取消预订",
+        loadingAdminBookingDetailCancelConfirmButtonText: "正在取消...",
+        adminBookingDetailCancelCancelButtonText: "返回",
+
+        adminBookingDetailBookedOnText: "预订日期：",
+        adminBookingDetailAdditinoalMessageText: "附加留言：",
+        adminBookingDetailExtrasText: "额外要求：",
+        adminBookingDetailHighChairExtraText: "婴儿高脚椅",
+        adminBookingDetailStatusText: "状态：",
+
+        adminBookingDetailCompletedStatusText: "已完成",
+        adminBookingDetailPendingStatusText: "待处理",
+        adminBookingDetailCancelledStatusText: "已取消",
+        adminBookingDetailCancelBookingButtonText: "取消预订",
     },
 };
 
