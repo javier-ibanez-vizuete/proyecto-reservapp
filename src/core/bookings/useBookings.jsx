@@ -2,7 +2,13 @@ import { useContext, useState } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { BookingsContext } from "../../contexts/BookingsContext";
 import { saveDataInSessionStorage } from "../../helpers/storage";
-import { deleteBookingByIdApi, getBookingsApi, getBookingsByDateApi, postBookingApi } from "./bookings.api";
+import {
+    deleteBookingByIdApi,
+    getBookingsApi,
+    getBookingsByDateApi,
+    postBookingApi,
+    postCancelBookingByIdApi,
+} from "./bookings.api";
 import { saveBookingDetailsInLocalStorage, saveBookingsInLocalStorage } from "./bookings.service";
 
 export const useBookings = () => {
@@ -82,6 +88,28 @@ export const useBookings = () => {
         }
     };
 
+    const postCancelBookingById = async (bookingId) => {
+        try {
+            const canceledBooking = await postCancelBookingByIdApi(bookingId);
+            if (!canceledBooking.ok) return;
+            setBookings((prevValue) => {
+                const restBookings = prevValue.filter(
+                    (booking) => (booking?.id || booking._id) !== bookingId
+                );
+                const updatedBooking = { ...canceledBooking.booking };
+                const newBookings = { ...restBookings, updatedBooking };
+                saveBookingsInLocalStorage(newBookings);
+                return newBookings;
+            });
+            saveBookingDetailsInLocalStorage(canceledBooking?.booking);
+            setBookingDetails(canceledBooking?.booking);
+            return canceledBooking?.booking;
+        } catch (err) {
+            console.error("Error Cancelling Booking by ID", err);
+            throw err;
+        }
+    };
+
     const deleteBookingById = async (bookingId) => {
         try {
             const removedBooking = await deleteBookingByIdApi(bookingId);
@@ -108,6 +136,7 @@ export const useBookings = () => {
         getBookingsById,
         getBookingsByDate,
         postBookings,
+        postCancelBookingById,
         deleteBookingById,
         loadingBookings,
         isLoading,

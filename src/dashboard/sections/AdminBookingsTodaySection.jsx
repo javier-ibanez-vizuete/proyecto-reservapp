@@ -75,6 +75,12 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
             .sort((bookingA, bookingB) => new Date(bookingA.scheduledFor) - new Date(bookingB.scheduledFor));
     }, [filteredBookings]);
 
+    const notPendingBookings = useMemo(() => {
+        if (!pendingBookings || !pendingBookings?.length) return null;
+        const allCancelled = pendingBookings.every((booking) => booking?.status === "cancelled");
+        return allCancelled;
+    }, [pendingBookings]);
+
     const delayedBookings = useMemo(() => {
         if (!bookings || !filteredBookings?.length) return [];
         const nowTime = new Date().toLocaleTimeString();
@@ -87,6 +93,12 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
                 (bookingA, bookingB) => new Date(bookingB?.scheduledFor) - new Date(bookingA?.scheduledFor)
             );
     }, [filteredBookings]);
+
+    const notDelayedBookings = useMemo(() => {
+        if (!delayedBookings || !delayedBookings?.length) return null;
+        const allCancelled = delayedBookings.every((booking) => booking?.status === "cancelled");
+        return allCancelled;
+    }, [delayedBookings]);
 
     const baseSectionClasses = "flex flex-col";
 
@@ -207,9 +219,14 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
         <section className={currentSectionClasses}>
             <h5>RESERVAS DE {todayDate}</h5>
             <AdminBookingsContainer title="PENDIENTES">
+                {notPendingBookings && (
+                    <small className="italic opacity-60">no hay reservas Pendientes</small>
+                )}
                 {pendingBookings.map((booking) => {
                     const bookingTime = booking?.scheduledFor.split("T")[1].split(".")[0];
                     const isNearby = isBookingNearby(bookingTime);
+
+                    if (booking?.status === "cancelled") return null;
 
                     return (
                         <AdminBookingCard
@@ -223,15 +240,22 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
                 })}
             </AdminBookingsContainer>
             <AdminBookingsContainer title="RETRASADAS">
-                {delayedBookings.map((booking) => (
-                    <AdminBookingCard
-                        key={booking?.id || booking?._id}
-                        bookingData={booking}
-                        variant={"error"}
-                        borderColor={"error"}
-                        onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
-                    />
-                ))}
+                {notDelayedBookings && (
+                    <small className="italic opacity-60">No hay reservas retrasadas</small>
+                )}
+                {delayedBookings.map((booking) => {
+                    if (booking?.status === "cancelled") return null;
+
+                    return (
+                        <AdminBookingCard
+                            key={booking?.id || booking?._id}
+                            bookingData={booking}
+                            variant={"error"}
+                            borderColor={"error"}
+                            onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
+                        />
+                    );
+                })}
             </AdminBookingsContainer>
         </section>
     );

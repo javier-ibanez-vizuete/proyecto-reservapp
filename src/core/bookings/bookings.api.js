@@ -39,6 +39,14 @@ export const postBookingApi = async (bookingData) => {
         throw err;
     }
 };
+export const postCancelBookingByIdApi = async (bookingId) => {
+    try {
+        const cancelled = await api.post(`/bookings/${bookingId}/cancel`);
+        return cancelled.data;
+    } catch (err) {
+        throw err;
+    }
+};
 
 export const deleteBookingByIdApi = async (bookingId) => {
     try {
