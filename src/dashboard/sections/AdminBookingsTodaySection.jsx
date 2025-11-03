@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useCallback, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { useDevice } from "../../hooks/useDevice";
 import { AdminBookingCard } from "../components/AdminBookingCard";
 import { AdminBookingsContainer } from "../components/AdminBookingsContainer";
@@ -11,8 +11,8 @@ import { useAdminData } from "../hooks/useAdminData";
 export const AdminBookingsTodaySection = ({ padding, gap }) => {
     const { bookings, isLoadingBookings } = useAdminData({ enablePolling: true, pollingInterval: 120000 });
 
+    const { getText } = useContext(LanguageContext);
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
-    const { theme } = useContext(ThemeContext);
 
     const navigate = useNavigate();
 
@@ -217,10 +217,14 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
 
     return (
         <section className={currentSectionClasses}>
-            <h5>RESERVAS DE {todayDate}</h5>
-            <AdminBookingsContainer title="PENDIENTES">
+            <h5>
+                {getText("h5AdminBookingsTodaySection")} {todayDate}
+            </h5>
+            <AdminBookingsContainer title={getText("adminBookingsTodaySectionPendingTitle")}>
                 {notPendingBookings && (
-                    <small className="italic opacity-60">no hay reservas Pendientes</small>
+                    <small className="italic opacity-60">
+                        {getText("adminBookingsTodaySectionNotPendingBookingsText")}
+                    </small>
                 )}
                 {pendingBookings.map((booking) => {
                     const bookingTime = booking?.scheduledFor.split("T")[1].split(".")[0];
@@ -239,7 +243,7 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
                     );
                 })}
             </AdminBookingsContainer>
-            <AdminBookingsContainer title="RETRASADAS">
+            <AdminBookingsContainer title={getText("adminBookingsTodaySectionLateArrivalsTitle")}>
                 {notDelayedBookings && (
                     <small className="italic opacity-60">No hay reservas retrasadas</small>
                 )}

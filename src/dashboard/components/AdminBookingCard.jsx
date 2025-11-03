@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { Image } from "../../components/UI/Image";
 import { ImageContainer } from "../../components/UI/ImageContainer";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { UsersContext } from "../../contexts/UsersContext";
 import {
@@ -27,6 +28,7 @@ export const AdminBookingCard = ({
 }) => {
     const { users } = useContext(UsersContext);
 
+    const { getText } = useContext(LanguageContext);
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
 
@@ -233,14 +235,14 @@ export const AdminBookingCard = ({
     );
 
     return (
-        <article onClick={() => onClick(bookingData?.id)} className={currentArticleClasses}>
+        <article onClick={() => onClick(bookingData?.id)} className={currentArticleClasses} {...props}>
             <p className="font-bold">{formatTime}</p>
             <div className={currentContentContainerClasses}>
                 <p>
-                    Customers: <span>{bookingData?.partySize}</span>
+                    {getText("adminBookingCardCustomersText")} <span>{bookingData?.partySize}</span>
                 </p>
                 <p className="lg:flex lg:flex-col">
-                    Booking Name: <span>{bookingName}</span>
+                    {getText("adminBookingCardBookedByText")} <span>{bookingName}</span>
                 </p>
             </div>
 

@@ -2,9 +2,11 @@ import classNames from "classnames";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ConfirmModal } from "../../components/Modal/ConfirmModal";
+import { Spinner } from "../../components/Spinner/Spinner";
 import { ToastContainer } from "../../components/ToastContainer";
 import { BackButton } from "../../components/UI/BackButton";
 import { BookingsContext } from "../../contexts/BookingsContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import {
     removeBookingDetailsFromLocalStorage,
@@ -37,6 +39,7 @@ export const AdminBookingDetail = ({
     const { bookingDetails, setBookingDetails } = useContext(BookingsContext);
     const { getBookingsById, postCancelBookingById, isLoading } = useBookings();
 
+    const { getText } = useContext(LanguageContext);
     const { toasts, showToast, dismissToast } = useToast();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
@@ -57,9 +60,9 @@ export const AdminBookingDetail = ({
     }, [bookingDetails]);
 
     const getBookingStatusName = () => {
-        if (bookingDetails?.status === "pending") return "Pendiente";
-        if (bookingDetails?.status === "completed") return "Completada";
-        if (bookingDetails?.status === "cancelled") return "Cancelada";
+        if (bookingDetails?.status === "pending") return getText("adminBookingDetailPendingStatusText");
+        if (bookingDetails?.status === "completed") return getText("adminBookingDetailCompletedStatusText");
+        if (bookingDetails?.status === "cancelled") return getText("adminBookingDetailCancelledStatusText");
         return null;
     };
 
@@ -133,9 +136,9 @@ export const AdminBookingDetail = ({
             loaderCancelBooking.setIsLoading(true);
             const cancelledBooking = await postCancelBookingById(bookingDetails?.id || bookingDetails?._id);
             if (!cancelledBooking) throw new Error("ERROR CANCELLING BOOKING");
-            showToast("Reserva Cancelada con Exito", "success", 1000);
+            showToast(getText("adminBookingDetailSuccessCancelToast"), "success", 1000);
         } catch (err) {
-            showToast("Error Cancelando Reserva", "error", 1000);
+            showToast(getText("adminBookingDetailErrorCancelToast"), "error", 1000);
         } finally {
             loaderCancelBooking.setIsLoading(false);
             setShowDeleteModal(false);
@@ -320,7 +323,9 @@ export const AdminBookingDetail = ({
     if (!bookingDetails || isLoading)
         return (
             // PONER UN ESKELETON
-            <div>Cargando...</div>
+            <div className={classNames(currentArticleClasses, "items-center justify-center")}>
+                <Spinner size="xxl" color="primary" />
+            </div>
         );
 
     return (
@@ -329,11 +334,11 @@ export const AdminBookingDetail = ({
                 isOpen={showDeleteModal}
                 onClose={handleDeleteModal}
                 onConfirm={handleCancelBooking}
-                title={"Cancelar Reserva?"}
-                message={`Cancelar la reserva de ${ownerDetails?.name}`}
-                confirmText={"Cancelar"}
-                loadingText={"Cancelando..."}
-                cancelText={"Volver"}
+                title={getText("adminBookingDetailCancelModalTitleText")}
+                message={`${getText("adminBookingDetailCancelModalMessageText")} ${ownerDetails?.name} ?`}
+                confirmText={getText("adminBookingDetailCancelConfirmButtonText")}
+                loadingText={getText("loadingAdminBookingDetailCancelConfirmButtonText")}
+                cancelText={getText("adminBookingDetailCancelCancelButtonText")}
                 showCloseButton={false}
                 variantButton="danger"
                 loading={loaderCancelBooking.isLoading}
@@ -346,42 +351,55 @@ export const AdminBookingDetail = ({
             <div className={currentCardContainer}>
                 <h6>{bookingTime}</h6>
                 <p>
-                    Hecha por: <span>{handleGetBookingOwner}</span>
+                    {getText("adminBookingCardBookedByText")} <span>{handleGetBookingOwner}</span>
                 </p>
                 <p>
-                    Creada el: <span>{bookingMadeTime}</span>
+                    {getText("adminBookingDetailBookedOnText")} <span>{bookingMadeTime}</span>
                 </p>
                 {bookingDetails?.notes && (
-                    <div>
-                        <p>Adicional Message:</p>
+                    <div
+                        className={classNames(
+                            "flex flex-col",
+                            variantsElementsGap[elementsGap] ||
+                                autoConfig?.elementsGap ||
+                                variantsElementsGap.default
+                        )}
+                    >
+                        <p>{getText("adminBookingDetailAdditinoalMessageText")}</p>
                         <p>{bookingDetails?.notes}</p>
                     </div>
                 )}
                 {bookingDetails?.extras?.highChair && (
-                    <div>
-                        <p>
-                            Extras: <span>Trona</span>
-                        </p>
+                    <div
+                        className={classNames(
+                            "flex",
+                            variantsElementsGap[elementsGap] ||
+                                autoConfig?.elementsGap ||
+                                variantsElementsGap.default
+                        )}
+                    >
+                        <p>{getText("adminBookingDetailExtrasText")}</p>
+                        <p>{getText("adminBookingDetailHighChairExtraText")}</p>
                     </div>
                 )}
                 <p>
-                    Estado: <span>{getBookingStatusName()}</span>
+                    {getText("adminBookingDetailStatusText")} <span>{getBookingStatusName()}</span>
                 </p>
 
                 <div className={currentButtonsContainerClasses}>
                     <div className={currentContactButtonsContainerClasses}>
                         <AdminButton onClick={handleSendEmailToOwner} variant={"primary"}>
-                            Contactar
+                            {getText("adminUserDetailMailButtonText")}
                         </AdminButton>
                         {ownerDetails?.phoneNumber && (
                             <AdminButton variant={"secondary"} onClick={handleCallOwner}>
-                                Llamar
+                                {getText("adminUserDetailConfirmModalButtonText")}
                             </AdminButton>
                         )}
                     </div>
                     {bookingDetails?.status !== "cancelled" && (
                         <AdminButton onClick={handleDeleteModal} variant={"danger"}>
-                            Cancelar Reserva
+                            {getText("adminBookingDetailCancelBookingButtonText")}
                         </AdminButton>
                     )}
                 </div>
