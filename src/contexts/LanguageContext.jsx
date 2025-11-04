@@ -488,6 +488,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Pending Bookings",
         adminBookingsTodaySectionLateArrivalsTitle: "Late Arrivals",
         adminBookingsTodaySectionNotPendingBookingsText: "There's not Pending Bookings",
+        adminBookingsTodaySectionNotLateBookingsText: "No late bookings",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Guests: ",
@@ -1009,6 +1010,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Reservas pendientes",
         adminBookingsTodaySectionLateArrivalsTitle: "Llegadas tarde",
         adminBookingsTodaySectionNotPendingBookingsText: "No hay reservas pendientes",
+        adminBookingsTodaySectionNotLateBookingsText: "No hay reservas tardías",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Comensales: ",
@@ -1531,6 +1533,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Réservations en attente",
         adminBookingsTodaySectionLateArrivalsTitle: "Arrivées tardives",
         adminBookingsTodaySectionNotPendingBookingsText: "Il n'y a pas de réservations en attente",
+        adminBookingsTodaySectionNotLateBookingsText: "Aucune réservation en retard",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Convives : ",
@@ -2059,6 +2062,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Prenotazioni in sospeso",
         adminBookingsTodaySectionLateArrivalsTitle: "Arrivi in ritardo",
         adminBookingsTodaySectionNotPendingBookingsText: "Non ci sono prenotazioni in sospeso",
+        adminBookingsTodaySectionNotLateBookingsText: "Nessuna prenotazione in ritardo",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Ospiti: ",
@@ -2576,6 +2580,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Ausstehende Buchungen",
         adminBookingsTodaySectionLateArrivalsTitle: "Verspätete Ankünfte",
         adminBookingsTodaySectionNotPendingBookingsText: "Keine ausstehenden Buchungen vorhanden",
+        adminBookingsTodaySectionNotLateBookingsText: "Keine verspäteten Buchungen",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Gäste: ",
@@ -3082,6 +3087,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "待处理的预订",
         adminBookingsTodaySectionLateArrivalsTitle: "迟到的客人",
         adminBookingsTodaySectionNotPendingBookingsText: "没有待处理的预订",
+        adminBookingsTodaySectionNotLateBookingsText: "没有迟到的预订",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "客人：",
