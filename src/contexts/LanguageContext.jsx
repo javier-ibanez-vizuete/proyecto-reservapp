@@ -56,7 +56,7 @@ const TEXTS = {
 
         loadingTextRefreshProductsButton: "Refreshing Products...",
         textRefreshProductsButton: "Refresh",
-        clearFilterButton: "Clear Filter",
+        clearFilterButton: "Clear Filters",
 
         // BOOKING PAGE
         h1BookingPage: "BOOKING",
@@ -488,6 +488,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Pending Bookings",
         adminBookingsTodaySectionLateArrivalsTitle: "Late Arrivals",
         adminBookingsTodaySectionNotPendingBookingsText: "There's not Pending Bookings",
+        adminBookingsTodaySectionNotLateBookingsText: "No late bookings",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Guests: ",
@@ -497,7 +498,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Booking cancelled successfully ✔",
         adminBookingDetailErrorCancelToast: "Failed to cancel booking",
 
-        adminBookingDetailCancelModaltitleText: "Cancel Booking",
+        adminBookingDetailCancelModalTitleText: "Cancel Booking",
         adminBookingDetailCancelModalMessageText: "Are you sure you want to cancel the booking of ",
         adminBookingDetailCancelConfirmButtonText: "Cancel Booking",
         loadingAdminBookingDetailCancelConfirmButtonText: "Cancelling...",
@@ -513,6 +514,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "Pending",
         adminBookingDetailCancelledStatusText: "Cancelled",
         adminBookingDetailCancelBookingButtonText: "Cancel Booking",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "All Bookings",
+
+        adminBookingsAllCompletedStatusLabel: "Completed",
+        adminBookingsAllPendingStatusLabel: "Pending",
+        adminBookingsAllCancelledStatusLabel: "Cancelled",
+
+        adminBookingsAllInputPlaceholder: "Search by guest name...",
+        adminBookingsAllGuestNumberUnselected: "Guests",
+        adminBookingsAllGuestNumberSelected: "guest/s",
+        adminBookingsAllNotSpecifiedText: "Any party size",
+        adminBookingsAllStatusTriggerText: "Status",
+        adminBookingsAllNotStatusSpecifiedText: "Any status",
+        adminBookingsAllHighchairLabelText: "High chair required",
+        adminBookingsAllNoBookingMatchText: "No bookings match your filters",
     },
 
     es: {
@@ -569,7 +586,7 @@ const TEXTS = {
 
         loadingTextRefreshProductsButton: "Actualizando Productos...",
         textRefreshProductsButton: "Actualizar",
-        clearFilterButton: "Limpiar Filtro",
+        clearFilterButton: "Limpiar Filtros",
 
         // PÁGINA DE RESERVAS
         h1BookingPage: "RESERVAS",
@@ -1009,6 +1026,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Reservas pendientes",
         adminBookingsTodaySectionLateArrivalsTitle: "Llegadas tarde",
         adminBookingsTodaySectionNotPendingBookingsText: "No hay reservas pendientes",
+        adminBookingsTodaySectionNotLateBookingsText: "No hay reservas tardías",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Comensales: ",
@@ -1018,7 +1036,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Reserva cancelada correctamente ✔",
         adminBookingDetailErrorCancelToast: "Error al cancelar la reserva",
 
-        adminBookingDetailCancelModaltitleText: "Cancelar reserva",
+        adminBookingDetailCancelModalTitleText: "Cancelar reserva",
         adminBookingDetailCancelModalMessageText: "¿Estás seguro de que deseas cancelar la reserva de ",
         adminBookingDetailCancelConfirmButtonText: "Cancelar reserva",
         loadingAdminBookingDetailCancelConfirmButtonText: "Cancelando...",
@@ -1034,6 +1052,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "Pendiente",
         adminBookingDetailCancelledStatusText: "Cancelada",
         adminBookingDetailCancelBookingButtonText: "Cancelar reserva",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "Todas las reservas",
+
+        adminBookingsAllCompletedStatusLabel: "Completada",
+        adminBookingsAllPendingStatusLabel: "Pendiente",
+        adminBookingsAllCancelledStatusLabel: "Cancelada",
+
+        adminBookingsAllInputPlaceholder: "Buscar por nombre del cliente...",
+        adminBookingsAllGuestNumberUnselected: "Comensales",
+        adminBookingsAllGuestNumberSelected: "comensal/es",
+        adminBookingsAllNotSpecifiedText: "Cualquier tamaño de grupo",
+        adminBookingsAllStatusTriggerText: "Estado",
+        adminBookingsAllNotStatusSpecifiedText: "Cualquier estado",
+        adminBookingsAllHighchairLabelText: "Se requiere trona",
+        adminBookingsAllNoBookingMatchText: "Ninguna reserva coincide con tus filtros",
     },
 
     fr: {
@@ -1531,6 +1565,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Réservations en attente",
         adminBookingsTodaySectionLateArrivalsTitle: "Arrivées tardives",
         adminBookingsTodaySectionNotPendingBookingsText: "Il n'y a pas de réservations en attente",
+        adminBookingsTodaySectionNotLateBookingsText: "Aucune réservation en retard",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Convives : ",
@@ -1540,7 +1575,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Réservation annulée avec succès ✔",
         adminBookingDetailErrorCancelToast: "Échec de l'annulation de la réservation",
 
-        adminBookingDetailCancelModaltitleText: "Annuler la réservation",
+        adminBookingDetailCancelModalTitleText: "Annuler la réservation",
         adminBookingDetailCancelModalMessageText: "Êtes-vous sûr de vouloir annuler la réservation de ",
         adminBookingDetailCancelConfirmButtonText: "Annuler la réservation",
         loadingAdminBookingDetailCancelConfirmButtonText: "Annulation en cours...",
@@ -1556,6 +1591,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "En attente",
         adminBookingDetailCancelledStatusText: "Annulée",
         adminBookingDetailCancelBookingButtonText: "Annuler la réservation",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "Toutes les réservations",
+
+        adminBookingsAllCompletedStatusLabel: "Terminée",
+        adminBookingsAllPendingStatusLabel: "En attente",
+        adminBookingsAllCancelledStatusLabel: "Annulée",
+
+        adminBookingsAllInputPlaceholder: "Rechercher par nom du client...",
+        adminBookingsAllGuestNumberUnselected: "Convives",
+        adminBookingsAllGuestNumberSelected: "convive(s)",
+        adminBookingsAllNotSpecifiedText: "Toute taille de groupe",
+        adminBookingsAllStatusTriggerText: "Statut",
+        adminBookingsAllNotStatusSpecifiedText: "Tout statut",
+        adminBookingsAllHighchairLabelText: "Chaise haute requise",
+        adminBookingsAllNoBookingMatchText: "Aucune réservation ne correspond à vos filtres",
     },
 
     it: {
@@ -2059,6 +2110,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Prenotazioni in sospeso",
         adminBookingsTodaySectionLateArrivalsTitle: "Arrivi in ritardo",
         adminBookingsTodaySectionNotPendingBookingsText: "Non ci sono prenotazioni in sospeso",
+        adminBookingsTodaySectionNotLateBookingsText: "Nessuna prenotazione in ritardo",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Ospiti: ",
@@ -2068,7 +2120,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Prenotazione annullata con successo ✔",
         adminBookingDetailErrorCancelToast: "Impossibile annullare la prenotazione",
 
-        adminBookingDetailCancelModaltitleText: "Annulla prenotazione",
+        adminBookingDetailCancelModalTitleText: "Annulla prenotazione",
         adminBookingDetailCancelModalMessageText: "Sei sicuro di voler annullare la prenotazione di ",
         adminBookingDetailCancelConfirmButtonText: "Annulla prenotazione",
         loadingAdminBookingDetailCancelConfirmButtonText: "Annullamento in corso...",
@@ -2084,6 +2136,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "In sospeso",
         adminBookingDetailCancelledStatusText: "Annullata",
         adminBookingDetailCancelBookingButtonText: "Annulla prenotazione",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "Tutte le prenotazioni",
+
+        adminBookingsAllCompletedStatusLabel: "Completata",
+        adminBookingsAllPendingStatusLabel: "In sospeso",
+        adminBookingsAllCancelledStatusLabel: "Annullata",
+
+        adminBookingsAllInputPlaceholder: "Cerca per nome dell'ospite...",
+        adminBookingsAllGuestNumberUnselected: "Ospiti",
+        adminBookingsAllGuestNumberSelected: "ospite/i",
+        adminBookingsAllNotSpecifiedText: "Qualsiasi numero di persone",
+        adminBookingsAllStatusTriggerText: "Stato",
+        adminBookingsAllNotStatusSpecifiedText: "Qualsiasi stato",
+        adminBookingsAllHighchairLabelText: "Seggiolone richiesto",
+        adminBookingsAllNoBookingMatchText: "Nessuna prenotazione corrisponde ai filtri",
     },
 
     de: {
@@ -2576,6 +2644,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "Ausstehende Buchungen",
         adminBookingsTodaySectionLateArrivalsTitle: "Verspätete Ankünfte",
         adminBookingsTodaySectionNotPendingBookingsText: "Keine ausstehenden Buchungen vorhanden",
+        adminBookingsTodaySectionNotLateBookingsText: "Keine verspäteten Buchungen",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "Gäste: ",
@@ -2585,7 +2654,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Buchung erfolgreich storniert ✔",
         adminBookingDetailErrorCancelToast: "Fehler beim Stornieren der Buchung",
 
-        adminBookingDetailCancelModaltitleText: "Buchung stornieren",
+        adminBookingDetailCancelModalTitleText: "Buchung stornieren",
         adminBookingDetailCancelModalMessageText: "Sind Sie sicher, dass Sie die Buchung von ",
         adminBookingDetailCancelConfirmButtonText: "Buchung stornieren",
         loadingAdminBookingDetailCancelConfirmButtonText: "Stornierung läuft...",
@@ -2601,6 +2670,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "Ausstehend",
         adminBookingDetailCancelledStatusText: "Storniert",
         adminBookingDetailCancelBookingButtonText: "Buchung stornieren",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "Alle Buchungen",
+
+        adminBookingsAllCompletedStatusLabel: "Abgeschlossen",
+        adminBookingsAllPendingStatusLabel: "Ausstehend",
+        adminBookingsAllCancelledStatusLabel: "Storniert",
+
+        adminBookingsAllInputPlaceholder: "Nach Gastnamen suchen...",
+        adminBookingsAllGuestNumberUnselected: "Gäste",
+        adminBookingsAllGuestNumberSelected: "Gast/Gäste",
+        adminBookingsAllNotSpecifiedText: "Beliebige Gruppengröße",
+        adminBookingsAllStatusTriggerText: "Status",
+        adminBookingsAllNotStatusSpecifiedText: "Beliebiger Status",
+        adminBookingsAllHighchairLabelText: "Kinderstuhl erforderlich",
+        adminBookingsAllNoBookingMatchText: "Keine Buchungen entsprechen deinen Filtern",
     },
 
     zh: {
@@ -3082,6 +3167,7 @@ const TEXTS = {
         adminBookingsTodaySectionPendingTitle: "待处理的预订",
         adminBookingsTodaySectionLateArrivalsTitle: "迟到的客人",
         adminBookingsTodaySectionNotPendingBookingsText: "没有待处理的预订",
+        adminBookingsTodaySectionNotLateBookingsText: "没有迟到的预订",
 
         // - - - ADMIN BOOKING CARD
         adminBookingCardCustomersText: "客人：",
@@ -3091,7 +3177,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "预订已成功取消 ✔",
         adminBookingDetailErrorCancelToast: "取消预订失败",
 
-        adminBookingDetailCancelModaltitleText: "取消预订",
+        adminBookingDetailCancelModalTitleText: "取消预订",
         adminBookingDetailCancelModalMessageText: "您确定要取消以下预订：",
         adminBookingDetailCancelConfirmButtonText: "取消预订",
         loadingAdminBookingDetailCancelConfirmButtonText: "正在取消...",
@@ -3107,6 +3193,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "待处理",
         adminBookingDetailCancelledStatusText: "已取消",
         adminBookingDetailCancelBookingButtonText: "取消预订",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "所有预订",
+
+        adminBookingsAllCompletedStatusLabel: "已完成",
+        adminBookingsAllPendingStatusLabel: "待处理",
+        adminBookingsAllCancelledStatusLabel: "已取消",
+
+        adminBookingsAllInputPlaceholder: "按客人姓名搜索...",
+        adminBookingsAllGuestNumberUnselected: "客人",
+        adminBookingsAllGuestNumberSelected: "位客人",
+        adminBookingsAllNotSpecifiedText: "任何人数",
+        adminBookingsAllStatusTriggerText: "状态",
+        adminBookingsAllNotStatusSpecifiedText: "任何状态",
+        adminBookingsAllHighchairLabelText: "需要婴儿高脚椅",
+        adminBookingsAllNoBookingMatchText: "没有符合筛选条件的预订",
     },
 };
 

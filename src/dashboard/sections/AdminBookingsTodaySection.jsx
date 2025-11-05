@@ -215,6 +215,28 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
             </div>
         );
 
+    if (!filteredBookings.length)
+        return (
+            <div className={currentSectionClasses}>
+                <h5>
+                    {getText("h5AdminBookingsTodaySection")} {todayDate}
+                </h5>
+
+                <div className="flex flex-col gap-xs">
+                    <h6>{getText("adminBookingsTodaySectionPendingTitle")}</h6>
+                    <small className="italic opacity-60">
+                        {getText("adminBookingsTodaySectionNotPendingBookingsText")}
+                    </small>
+                </div>
+                <div className="flex flex-col gap-xs">
+                    <h6>{getText("adminBookingsTodaySectionLateArrivalsTitle")}</h6>
+                    <small className="italic opacity-60">
+                        {getText("adminBookingsTodaySectionNotLateBookingsText")}
+                    </small>
+                </div>
+            </div>
+        );
+
     return (
         <section className={currentSectionClasses}>
             <h5>
@@ -245,7 +267,9 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
             </AdminBookingsContainer>
             <AdminBookingsContainer title={getText("adminBookingsTodaySectionLateArrivalsTitle")}>
                 {notDelayedBookings && (
-                    <small className="italic opacity-60">No hay reservas retrasadas</small>
+                    <small className="italic opacity-60">
+                        {getText("adminBookingsTodaySectionNotLateBookingsText")}
+                    </small>
                 )}
                 {delayedBookings.map((booking) => {
                     if (booking?.status === "cancelled") return null;
