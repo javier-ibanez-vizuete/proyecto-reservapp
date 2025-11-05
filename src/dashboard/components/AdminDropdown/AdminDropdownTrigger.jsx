@@ -62,6 +62,24 @@ export const AdminDropdownTrigger = React.forwardRef(
                 hasActiveEffects: true,
                 shadowColor: null,
             },
+            active: {
+                classes: classNames("bg-gradient-to-tr hover:opacity-70", {
+                    "from-admin-primary-color via-[#0BABB0] to-admin-primary-hover": theme === "light",
+                    "from-admin-primary-color via-[#0A5A6E] to-admin-primary-hover": theme !== "light",
+                }),
+                hasHoverEffects: true,
+                hasActiveEffects: true,
+                shadowColor: null,
+            },
+            inactive: {
+                classes: classNames("bg-gradient-to-tr opacity-70 hover:opacity-100", {
+                    "from-admin-secondary-color via-[#5ec1e8] to-admin-secondary-hover": theme === "light",
+                    "from-admin-secondary-color via-[#4cb0e8] to-admin-secondary-hover": theme !== "light",
+                }),
+                hasHoverEffects: true,
+                hasActiveEffects: true,
+                shadowColor: null,
+            },
             primary: {
                 classes:
                     "bg-admin-primary-color border border-admin-primary-color/90 shadow-sm hover:bg-admin-primary-color/90 focus:ring-admin-primary-color",

@@ -105,6 +105,11 @@ export const AdminInputSearch = React.forwardRef(
              * Additional CSS classes for outer container
              */
             containerClassName = "",
+
+            /**
+             * Additional CSS classes for input
+             */
+            inputClassName = "",
         },
         ref
     ) => {
@@ -237,7 +242,7 @@ export const AdminInputSearch = React.forwardRef(
             className
         );
 
-        const currentInputClasses = classNames(baseInputClasses, autoConfig.placeholder);
+        const currentInputClasses = classNames(baseInputClasses, autoConfig.placeholder, inputClassName);
 
         return (
             <div className={currentContainerClasses}>
