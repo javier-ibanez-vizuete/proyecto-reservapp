@@ -1052,6 +1052,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "Pendiente",
         adminBookingDetailCancelledStatusText: "Cancelada",
         adminBookingDetailCancelBookingButtonText: "Cancelar reserva",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "Todas las reservas",
+
+        adminBookingsAllCompletedStatusLabel: "Completada",
+        adminBookingsAllPendingStatusLabel: "Pendiente",
+        adminBookingsAllCancelledStatusLabel: "Cancelada",
+
+        adminBookingsAllInputPlaceholder: "Buscar por nombre del cliente...",
+        adminBookingsAllGuestNumberUnselected: "Comensales",
+        adminBookingsAllGuestNumberSelected: "comensal/es",
+        adminBookingsAllNotSpecifiedText: "Cualquier tamaño de grupo",
+        adminBookingsAllStatusTriggerText: "Estado",
+        adminBookingsAllNotStatusSpecifiedText: "Cualquier estado",
+        adminBookingsAllHighchairLabelText: "Se requiere trona",
+        adminBookingsAllNoBookingMatchText: "Ninguna reserva coincide con tus filtros",
     },
 
     fr: {
@@ -1575,6 +1591,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "En attente",
         adminBookingDetailCancelledStatusText: "Annulée",
         adminBookingDetailCancelBookingButtonText: "Annuler la réservation",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "Toutes les réservations",
+
+        adminBookingsAllCompletedStatusLabel: "Terminée",
+        adminBookingsAllPendingStatusLabel: "En attente",
+        adminBookingsAllCancelledStatusLabel: "Annulée",
+
+        adminBookingsAllInputPlaceholder: "Rechercher par nom du client...",
+        adminBookingsAllGuestNumberUnselected: "Convives",
+        adminBookingsAllGuestNumberSelected: "convive(s)",
+        adminBookingsAllNotSpecifiedText: "Toute taille de groupe",
+        adminBookingsAllStatusTriggerText: "Statut",
+        adminBookingsAllNotStatusSpecifiedText: "Tout statut",
+        adminBookingsAllHighchairLabelText: "Chaise haute requise",
+        adminBookingsAllNoBookingMatchText: "Aucune réservation ne correspond à vos filtres",
     },
 
     it: {
@@ -2104,6 +2136,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "In sospeso",
         adminBookingDetailCancelledStatusText: "Annullata",
         adminBookingDetailCancelBookingButtonText: "Annulla prenotazione",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "Tutte le prenotazioni",
+
+        adminBookingsAllCompletedStatusLabel: "Completata",
+        adminBookingsAllPendingStatusLabel: "In sospeso",
+        adminBookingsAllCancelledStatusLabel: "Annullata",
+
+        adminBookingsAllInputPlaceholder: "Cerca per nome dell'ospite...",
+        adminBookingsAllGuestNumberUnselected: "Ospiti",
+        adminBookingsAllGuestNumberSelected: "ospite/i",
+        adminBookingsAllNotSpecifiedText: "Qualsiasi numero di persone",
+        adminBookingsAllStatusTriggerText: "Stato",
+        adminBookingsAllNotStatusSpecifiedText: "Qualsiasi stato",
+        adminBookingsAllHighchairLabelText: "Seggiolone richiesto",
+        adminBookingsAllNoBookingMatchText: "Nessuna prenotazione corrisponde ai filtri",
     },
 
     de: {
@@ -2622,6 +2670,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "Ausstehend",
         adminBookingDetailCancelledStatusText: "Storniert",
         adminBookingDetailCancelBookingButtonText: "Buchung stornieren",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "Alle Buchungen",
+
+        adminBookingsAllCompletedStatusLabel: "Abgeschlossen",
+        adminBookingsAllPendingStatusLabel: "Ausstehend",
+        adminBookingsAllCancelledStatusLabel: "Storniert",
+
+        adminBookingsAllInputPlaceholder: "Nach Gastnamen suchen...",
+        adminBookingsAllGuestNumberUnselected: "Gäste",
+        adminBookingsAllGuestNumberSelected: "Gast/Gäste",
+        adminBookingsAllNotSpecifiedText: "Beliebige Gruppengröße",
+        adminBookingsAllStatusTriggerText: "Status",
+        adminBookingsAllNotStatusSpecifiedText: "Beliebiger Status",
+        adminBookingsAllHighchairLabelText: "Kinderstuhl erforderlich",
+        adminBookingsAllNoBookingMatchText: "Keine Buchungen entsprechen deinen Filtern",
     },
 
     zh: {
@@ -3129,6 +3193,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "待处理",
         adminBookingDetailCancelledStatusText: "已取消",
         adminBookingDetailCancelBookingButtonText: "取消预订",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "所有预订",
+
+        adminBookingsAllCompletedStatusLabel: "已完成",
+        adminBookingsAllPendingStatusLabel: "待处理",
+        adminBookingsAllCancelledStatusLabel: "已取消",
+
+        adminBookingsAllInputPlaceholder: "按客人姓名搜索...",
+        adminBookingsAllGuestNumberUnselected: "客人",
+        adminBookingsAllGuestNumberSelected: "位客人",
+        adminBookingsAllNotSpecifiedText: "任何人数",
+        adminBookingsAllStatusTriggerText: "状态",
+        adminBookingsAllNotStatusSpecifiedText: "任何状态",
+        adminBookingsAllHighchairLabelText: "需要婴儿高脚椅",
+        adminBookingsAllNoBookingMatchText: "没有符合筛选条件的预订",
     },
 };
 
