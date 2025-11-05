@@ -56,7 +56,7 @@ const TEXTS = {
 
         loadingTextRefreshProductsButton: "Refreshing Products...",
         textRefreshProductsButton: "Refresh",
-        clearFilterButton: "Clear Filter",
+        clearFilterButton: "Clear Filters",
 
         // BOOKING PAGE
         h1BookingPage: "BOOKING",
@@ -498,7 +498,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Booking cancelled successfully ✔",
         adminBookingDetailErrorCancelToast: "Failed to cancel booking",
 
-        adminBookingDetailCancelModaltitleText: "Cancel Booking",
+        adminBookingDetailCancelModalTitleText: "Cancel Booking",
         adminBookingDetailCancelModalMessageText: "Are you sure you want to cancel the booking of ",
         adminBookingDetailCancelConfirmButtonText: "Cancel Booking",
         loadingAdminBookingDetailCancelConfirmButtonText: "Cancelling...",
@@ -514,6 +514,22 @@ const TEXTS = {
         adminBookingDetailPendingStatusText: "Pending",
         adminBookingDetailCancelledStatusText: "Cancelled",
         adminBookingDetailCancelBookingButtonText: "Cancel Booking",
+
+        // - - - ADMIN BOOKINGS LIST 'ALL'
+        h5AdminBookingsAll: "All Bookings",
+
+        adminBookingsAllCompletedStatusLabel: "Completed",
+        adminBookingsAllPendingStatusLabel: "Pending",
+        adminBookingsAllCancelledStatusLabel: "Cancelled",
+
+        adminBookingsAllInputPlaceholder: "Search by guest name...",
+        adminBookingsAllGuestNumberUnselected: "Guests",
+        adminBookingsAllGuestNumberSelected: "guest/s",
+        adminBookingsAllNotSpecifiedText: "Any party size",
+        adminBookingsAllStatusTriggerText: "Status",
+        adminBookingsAllNotStatusSpecifiedText: "Any status",
+        adminBookingsAllHighchairLabelText: "High chair required",
+        adminBookingsAllNoBookingMatchText: "No bookings match your filters",
     },
 
     es: {
@@ -570,7 +586,7 @@ const TEXTS = {
 
         loadingTextRefreshProductsButton: "Actualizando Productos...",
         textRefreshProductsButton: "Actualizar",
-        clearFilterButton: "Limpiar Filtro",
+        clearFilterButton: "Limpiar Filtros",
 
         // PÁGINA DE RESERVAS
         h1BookingPage: "RESERVAS",
@@ -1020,7 +1036,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Reserva cancelada correctamente ✔",
         adminBookingDetailErrorCancelToast: "Error al cancelar la reserva",
 
-        adminBookingDetailCancelModaltitleText: "Cancelar reserva",
+        adminBookingDetailCancelModalTitleText: "Cancelar reserva",
         adminBookingDetailCancelModalMessageText: "¿Estás seguro de que deseas cancelar la reserva de ",
         adminBookingDetailCancelConfirmButtonText: "Cancelar reserva",
         loadingAdminBookingDetailCancelConfirmButtonText: "Cancelando...",
@@ -1543,7 +1559,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Réservation annulée avec succès ✔",
         adminBookingDetailErrorCancelToast: "Échec de l'annulation de la réservation",
 
-        adminBookingDetailCancelModaltitleText: "Annuler la réservation",
+        adminBookingDetailCancelModalTitleText: "Annuler la réservation",
         adminBookingDetailCancelModalMessageText: "Êtes-vous sûr de vouloir annuler la réservation de ",
         adminBookingDetailCancelConfirmButtonText: "Annuler la réservation",
         loadingAdminBookingDetailCancelConfirmButtonText: "Annulation en cours...",
@@ -2072,7 +2088,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Prenotazione annullata con successo ✔",
         adminBookingDetailErrorCancelToast: "Impossibile annullare la prenotazione",
 
-        adminBookingDetailCancelModaltitleText: "Annulla prenotazione",
+        adminBookingDetailCancelModalTitleText: "Annulla prenotazione",
         adminBookingDetailCancelModalMessageText: "Sei sicuro di voler annullare la prenotazione di ",
         adminBookingDetailCancelConfirmButtonText: "Annulla prenotazione",
         loadingAdminBookingDetailCancelConfirmButtonText: "Annullamento in corso...",
@@ -2590,7 +2606,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "Buchung erfolgreich storniert ✔",
         adminBookingDetailErrorCancelToast: "Fehler beim Stornieren der Buchung",
 
-        adminBookingDetailCancelModaltitleText: "Buchung stornieren",
+        adminBookingDetailCancelModalTitleText: "Buchung stornieren",
         adminBookingDetailCancelModalMessageText: "Sind Sie sicher, dass Sie die Buchung von ",
         adminBookingDetailCancelConfirmButtonText: "Buchung stornieren",
         loadingAdminBookingDetailCancelConfirmButtonText: "Stornierung läuft...",
@@ -3097,7 +3113,7 @@ const TEXTS = {
         adminBookingDetailSuccessCancelToast: "预订已成功取消 ✔",
         adminBookingDetailErrorCancelToast: "取消预订失败",
 
-        adminBookingDetailCancelModaltitleText: "取消预订",
+        adminBookingDetailCancelModalTitleText: "取消预订",
         adminBookingDetailCancelModalMessageText: "您确定要取消以下预订：",
         adminBookingDetailCancelConfirmButtonText: "取消预订",
         loadingAdminBookingDetailCancelConfirmButtonText: "正在取消...",

@@ -14,9 +14,11 @@ import { useDevice } from "../../hooks/useDevice";
 export const AdminCheckbox = ({
     isChecked,
     onClick,
+    label,
     variant = "active",
     innerCircleBgColor,
     padding,
+    gap,
     height,
     innerCircleHeight,
     checkmarkHeight,
@@ -128,6 +130,15 @@ export const AdminCheckbox = ({
         md: "p-4",
         lg: "p-5",
         xl: "p-6",
+    };
+
+    const variantsGap = {
+        xs: "gap-xs",
+        sm: "gap-sm",
+        default: "gap-sm",
+        md: "gap-md",
+        lg: "gap-lg",
+        xl: "gap-xl",
     };
 
     const variantsHeight = {
@@ -257,6 +268,10 @@ export const AdminCheckbox = ({
                 "p-3": isMobile2Xs || isMobileXs || isMobileSm,
                 "p-4": isTablet || isDesktop,
             }),
+            gap: classNames({
+                "gap-xs": isMobile2Xs || isMobileXs || isMobileSm,
+                "gap-sm": isTablet || isDesktop,
+            }),
             height: classNames({
                 "h-4": isMobile2Xs,
                 "h-8": isMobileXs || isMobileSm,
@@ -269,8 +284,8 @@ export const AdminCheckbox = ({
             }),
             checkmarkHeight: classNames({
                 "h-1": isMobile2Xs,
-                "h-1.5": isMobileXs || isMobileSm,
-                "h-1.5": isTablet || isDesktop,
+                "h-2": isMobileXs || isMobileSm,
+                "h-2": isTablet || isDesktop,
             }),
             verticalCheckmarkHeight: classNames({
                 "h-1.5": isMobile2Xs,
@@ -295,7 +310,7 @@ export const AdminCheckbox = ({
             checkmarkWidth: classNames({
                 "w-3": isMobile2Xs,
                 "w-2.5": isMobileXs || isMobileSm,
-                "w-3": isTablet || isDesktop,
+                "w-3.5": isTablet || isDesktop,
             }),
             verticalCheckmarkWidth: classNames({
                 "w-[3px]": isMobile2Xs,
@@ -316,6 +331,7 @@ export const AdminCheckbox = ({
     const currentContainerClasses = classNames(
         baseContainerClasses,
         variantsPadding[padding] || autoConfig?.padding || variantsPadding.default,
+        variantsGap[gap] || autoConfig?.gap || variantsGap.default,
         className
     );
 
@@ -410,6 +426,7 @@ export const AdminCheckbox = ({
                     <div className={currentHorizontalCheckmarkClasses} />
                 </div>
             </button>
+            {label && <p>{label}</p>}
         </div>
     );
 };
