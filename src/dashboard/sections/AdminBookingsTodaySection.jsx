@@ -154,7 +154,6 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
             <div className={currentSectionClasses}>
                 <AdminSkeleton variant="text" lines={1} height="xs" className="w-2/3" width="full" />
                 <AdminSkeleton variant="text" lines={1} height="2xs" className="w-1/3" width="full" />
-                {/* METER ESTILOS DE GRID AL CONTENEDOR DE RESERVAS DEL SKELETON */}
                 <div
                     className={classNames(
                         "grid grid-flow-dense auto-rows-fr",

@@ -22,6 +22,7 @@ import {
 } from "../core/bookings/bookings.service";
 import { useBookings } from "../core/bookings/useBookings";
 import { TABLES } from "../data/tables";
+import { dateVerificator } from "../helpers/dateVerificator";
 import { BookingVerificationSubmit } from "../helpers/FieldsVerificator";
 import {
     getDataFromSessionStorage,
@@ -83,10 +84,20 @@ export const BookingPage = () => {
     const onChangeDate = (selectedDate) => {
         setError("");
         const date = selectedDate.toISOString().split("T")[0];
-        const year = date.split("-")[0];
-        const month = date.split("-")[1];
-        const day = ++date.split("-")[2];
-        const dateChange = `${year}-${month}-${day}`;
+        let year = date.split("-")[0];
+        let month = date.split("-")[1];
+        let day = ++date.split("-")[2];
+        let dateChange = `${year}-${month}-${day}`;
+
+        const isValidDay = dateVerificator(dateChange);
+        if (!isValidDay) {
+            dateChange = `${year}-${++month}-${1}`;
+        }
+
+        const isValidMonth = dateVerificator(dateChange);
+        if (!isValidMonth) {
+            dateChange = `${++year}-${1}-${1}`;
+        }
 
         setForm((prevValue) => {
             const newBookingValue = { ...prevValue, date: dateChange };
@@ -253,6 +264,7 @@ export const BookingPage = () => {
                         className="shadow-lg"
                         onChange={onChangeDate}
                         selectedDate={selectedDate}
+                        userConfig={true}
                     />
                 </div>
                 <div className="flex flex-col gap-4 md:flex-row md:justify-center md:items-stretch">

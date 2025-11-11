@@ -530,6 +530,12 @@ const TEXTS = {
         adminBookingsAllNotStatusSpecifiedText: "Any status",
         adminBookingsAllHighchairLabelText: "High chair required",
         adminBookingsAllNoBookingMatchText: "No bookings match your filters",
+
+        // - - - ADMIN BOOKINGS BY DATE SECTION
+        adminBookingsByDateButtonText: "Today's Bookings",
+        adminBookingsByDateLabelText1: " Booking",
+        adminBookingsByDateLabelText2: " Bookings",
+        adminBookingsByDateNotBookingsText: "No bookings for the selected date.",
     },
 
     es: {
@@ -1068,6 +1074,12 @@ const TEXTS = {
         adminBookingsAllNotStatusSpecifiedText: "Cualquier estado",
         adminBookingsAllHighchairLabelText: "Se requiere trona",
         adminBookingsAllNoBookingMatchText: "Ninguna reserva coincide con tus filtros",
+
+        // - - - ADMIN BOOKINGS BY DATE SECTION
+        adminBookingsByDateButtonText: "Reservas de hoy",
+        adminBookingsByDateLabelText1: " reserva",
+        adminBookingsByDateLabelText2: " reservas",
+        adminBookingsByDateNotBookingsText: "No hay reservas para la fecha seleccionada.",
     },
 
     fr: {
@@ -1607,6 +1619,12 @@ const TEXTS = {
         adminBookingsAllNotStatusSpecifiedText: "Tout statut",
         adminBookingsAllHighchairLabelText: "Chaise haute requise",
         adminBookingsAllNoBookingMatchText: "Aucune réservation ne correspond à vos filtres",
+
+        // - - - ADMIN BOOKINGS BY DATE SECTION
+        adminBookingsByDateButtonText: "Réservations d'aujourd'hui",
+        adminBookingsByDateLabelText1: " réservation",
+        adminBookingsByDateLabelText2: " réservations",
+        adminBookingsByDateNotBookingsText: "Aucune réservation pour la date sélectionnée.",
     },
 
     it: {
@@ -2152,6 +2170,12 @@ const TEXTS = {
         adminBookingsAllNotStatusSpecifiedText: "Qualsiasi stato",
         adminBookingsAllHighchairLabelText: "Seggiolone richiesto",
         adminBookingsAllNoBookingMatchText: "Nessuna prenotazione corrisponde ai filtri",
+
+        // - - - ADMIN BOOKINGS BY DATE SECTION
+        adminBookingsByDateButtonText: "Prenotazioni di oggi",
+        adminBookingsByDateLabelText1: " prenotazione",
+        adminBookingsByDateLabelText2: " prenotazioni",
+        adminBookingsByDateNotBookingsText: "Nessuna prenotazione per la data selezionata.",
     },
 
     de: {
@@ -2686,6 +2710,12 @@ const TEXTS = {
         adminBookingsAllNotStatusSpecifiedText: "Beliebiger Status",
         adminBookingsAllHighchairLabelText: "Kinderstuhl erforderlich",
         adminBookingsAllNoBookingMatchText: "Keine Buchungen entsprechen deinen Filtern",
+
+        // - - - ADMIN BOOKINGS BY DATE SECTION
+        adminBookingsByDateButtonText: "Heutige Buchungen",
+        adminBookingsByDateLabelText1: " Buchung",
+        adminBookingsByDateLabelText2: " Buchungen",
+        adminBookingsByDateNotBookingsText: "Keine Buchungen für das ausgewählte Datum.",
     },
 
     zh: {
@@ -3209,6 +3239,12 @@ const TEXTS = {
         adminBookingsAllNotStatusSpecifiedText: "任何状态",
         adminBookingsAllHighchairLabelText: "需要婴儿高脚椅",
         adminBookingsAllNoBookingMatchText: "没有符合筛选条件的预订",
+
+        // - - - ADMIN BOOKINGS BY DATE SECTION
+        adminBookingsByDateButtonText: "今日预订",
+        adminBookingsByDateLabelText1: " 个预订",
+        adminBookingsByDateLabelText2: " 个预订",
+        adminBookingsByDateNotBookingsText: "所选日期没有预订。",
     },
 };
 

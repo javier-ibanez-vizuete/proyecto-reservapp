@@ -1,11 +1,9 @@
 import classNames from "classnames";
-import { useContext, useMemo } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { useMemo } from "react";
 import { useDevice } from "../../hooks/useDevice";
 
 export const AdminBookingsContainer = ({ children, title = "", padding, gap, columns }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
-    const { theme } = useContext(ThemeContext);
 
     const baseContainerClasses = "flex flex-col";
     const baseGridContainerClasses = "grid grid-flow-dense auto-rows-fr";

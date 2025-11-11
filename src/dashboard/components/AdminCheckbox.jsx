@@ -426,7 +426,7 @@ export const AdminCheckbox = ({
                     <div className={currentHorizontalCheckmarkClasses} />
                 </div>
             </button>
-            {label && <p>{label}</p>}
+            {label && <p onClick={onClick}>{label}</p>}
         </div>
     );
 };

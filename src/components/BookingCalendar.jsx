@@ -2,7 +2,7 @@ import { useContext } from "react";
 import Calendar from "react-calendar";
 import { ThemeContext } from "../contexts/ThemeContext";
 
-export const BookingCalendar = ({ onChange, className = "", selectedDate }) => {
+export const BookingCalendar = ({ onChange, className = "", selectedDate, userConfig = true }) => {
     const { theme } = useContext(ThemeContext);
 
     const currentDate = {
@@ -20,7 +20,7 @@ export const BookingCalendar = ({ onChange, className = "", selectedDate }) => {
             <Calendar
                 className={`${theme} ${className}`}
                 minDetail="month"
-                minDate={new Date(currentDate.year, currentDate.month, currentDate.today)}
+                minDate={userConfig && new Date(currentDate.year, currentDate.month, currentDate.today)}
                 maxDate={new Date(currentDate.nextYear, currentDate.nextMonth, currentDate.nextDate)}
                 onChange={(date) => onChange(date)}
                 defaultValue={selectedDate ? new Date(selectedDate) : null}
