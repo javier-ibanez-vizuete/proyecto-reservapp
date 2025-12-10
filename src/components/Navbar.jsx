@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
@@ -42,7 +42,7 @@ const LOGO_DARK = {
     avif480: logoReservappDarkAvif480,
 };
 
-export const Navbar = ({ isLoggedIn = false, user = null, height, padding, logoSize }) => {
+export const Navbar = memo(({ isLoggedIn = false, user = null, height, padding, logoSize }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -50,12 +50,14 @@ export const Navbar = ({ isLoggedIn = false, user = null, height, padding, logoS
     const { isMobile2Xs, isMobileXs, isMobileSm, isMobile, isTablet, isDesktop } = useDevice();
 
     const mobileNavRef = useRef(null);
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
     const { pathname } = useLocation();
 
     const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
+
+    console.log("Render Navbar");
 
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
@@ -69,31 +71,32 @@ export const Navbar = ({ isLoggedIn = false, user = null, height, padding, logoS
     }, [mobileNavRef, isMobileMenuOpen, width]);
 
     // FUNCIONES UTILITARIAS
-    const handleCloseMobileMenu = () => {
-        setIsMobileMenuOpen(false);
-    };
+    const handleCloseMobileMenu = useCallback(
+        () => () => {
+            setIsMobileMenuOpen(false);
+        },
+        []
+    );
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
+    const toggleMobileMenu = useCallback(() => {
+        setIsMobileMenuOpen((prevValue) => !prevValue);
+    });
 
     // HANDLER EVENTS
 
-    const handleLogin = () => {
-        Navigate("/login");
+    const handleLogin = useCallback(() => {
         handleCloseMobileMenu();
-        //AQUI PONER NAVIGATE TO PAGINA LOGIN
-    };
+        navigate("/login");
+    }, [navigate]);
 
-    const handleRegister = () => {
-        Navigate("register");
-        //AQUI PONER NAVIGATE TO PAGINA REGISTER
-    };
+    const handleRegister = useCallback(() => {
+        navigate("register");
+    }, [navigate]);
 
-    const handleLinkClick = (linkName) => {
+    const handleLinkClick = useCallback((linkName) => {
         handleCloseMobileMenu();
         return linkName;
-    };
+    }, []);
 
     const baseNavbarInnerClasses = "flex justify-between items-center";
 
@@ -149,15 +152,25 @@ export const Navbar = ({ isLoggedIn = false, user = null, height, padding, logoS
         [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop, width]
     );
 
-    const currentNavbarInnerClasses = classNames(
-        baseNavbarInnerClasses,
-        variantsHeight[height] || autoConfig?.height || variantsHeight.default,
-        variantsPadding[padding] || autoConfig?.padding || variantsPadding.default
+    const currentNavbarInnerClasses = useMemo(
+        () =>
+            classNames(
+                baseNavbarInnerClasses,
+                variantsHeight[height] || autoConfig?.height || variantsHeight.default,
+                variantsPadding[padding] || autoConfig?.padding || variantsPadding.default
+            ),
+        [height, padding]
     );
 
-    const currentLogoSize = classNames(
-        variantsLogoSize[logoSize] || autoConfig.logoSize || variantsLogoSize.default
+    const currentLogoSize = useMemo(
+        () => classNames(variantsLogoSize[logoSize] || autoConfig.logoSize || variantsLogoSize.default),
+        []
     );
+
+    const logoTheme = useMemo(() => {
+        if (theme === "light") return LOGO_LIGHT;
+        if (theme !== "light") return LOGO_DARK;
+    }, [theme]);
 
     return (
         <nav
@@ -169,10 +182,7 @@ export const Navbar = ({ isLoggedIn = false, user = null, height, padding, logoS
                 <div className={currentNavbarInnerClasses}>
                     <Link className="navbar-logo" to={isLoading ? null : "/"}>
                         <ImageContainer size={currentLogoSize} className="flex-1 logo-icon">
-                            <Image
-                                imageData={theme === "light" ? LOGO_LIGHT : LOGO_DARK}
-                                alt="Logo ReservApp"
-                            />
+                            <Image imageData={logoTheme} alt="Logo ReservApp" />
                         </ImageContainer>
                         {isLoggedIn && !isMobile && <h2 className="logo-text">ReservApp</h2>}
                     </Link>
@@ -239,4 +249,4 @@ export const Navbar = ({ isLoggedIn = false, user = null, height, padding, logoS
             </Container>
         </nav>
     );
-};
+});

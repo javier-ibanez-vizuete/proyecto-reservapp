@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { getUserFromLocalStorage } from "../core/auth/auth.service";
 
 export const AuthContext = createContext(null);
@@ -12,5 +12,7 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
     }, []);
 
-    return <AuthContext value={{ user, setUser }}>{children}</AuthContext>;
+    const valueContext = useMemo(() => ({ user, setUser }), [user]);
+
+    return <AuthContext value={valueContext}>{children}</AuthContext>;
 };

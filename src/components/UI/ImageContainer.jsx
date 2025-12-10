@@ -1,4 +1,6 @@
-export const ImageContainer = ({ children, className = "", size, loading = "lazy", onClick, title }) => {
+import { memo } from "react";
+
+export const ImageContainer = memo(({ children, className = "", size, loading = "lazy", onClick, title }) => {
     return (
         <picture
             title={title}
@@ -9,4 +11,4 @@ export const ImageContainer = ({ children, className = "", size, loading = "lazy
             {children}
         </picture>
     );
-};
+});

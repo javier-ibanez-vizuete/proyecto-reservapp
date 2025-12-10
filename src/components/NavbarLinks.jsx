@@ -1,12 +1,12 @@
 import classNames from "classnames";
-import { useContext, useMemo } from "react";
+import { memo, useContext, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useDevice } from "../hooks/useDevice";
 
-export const NavbarLinks = ({ handleLinkClick }) => {
+export const NavbarLinks = memo(({ handleLinkClick }) => {
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
     const { user } = useContext(AuthContext);
@@ -53,4 +53,4 @@ export const NavbarLinks = ({ handleLinkClick }) => {
             })}
         </ul>
     );
-};
+});

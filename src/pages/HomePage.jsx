@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CTACard } from "../components/CTACard/CTACard";
 import { ToastContainer } from "../components/ToastContainer";
@@ -20,6 +20,8 @@ export const HomePage = () => {
     const { user } = useContext(AuthContext);
 
     const { toasts, showToast, dismissToast } = useToast();
+
+    console.log("Render HomePage.jsx");
 
     useEffect(() => {
         const fromLogin =
@@ -62,14 +64,14 @@ export const HomePage = () => {
         }
     }, [location.state]);
 
-    const handleRedirectCTA = (url) => {
+    const handleRedirectCTA = useCallback((url) => {
         navigate(url);
-    };
+    }, []);
 
-    const handleCloseModal = () => {
+    const handleCloseModal = useCallback(() => {
         setShowNotFoundModal(false);
         setNotFoundRoute("");
-    };
+    }, []);
 
     return (
         <Container className="flex flex-col flex-1 gap-2 lg:gap-4 py-4">

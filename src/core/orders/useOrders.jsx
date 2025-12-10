@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { OrdersContext } from "../../contexts/OrdersContext";
@@ -22,7 +22,7 @@ export const useOrders = () => {
     const loadingGetOrders = useLoading();
     const loadingPostOrders = useLoading();
 
-    const getOrders = async () => {
+    const getOrders = useCallback(async () => {
         loadingGetOrders.setIsLoading(true);
         try {
             const orders = await getOrdersApi();
@@ -34,76 +34,88 @@ export const useOrders = () => {
         } finally {
             loadingGetOrders.setIsLoading(false);
         }
-    };
+    }, [getOrdersApi]);
 
-    const getOrdersByUserId = async (userId) => {
-        loadingGetOrders.setIsLoading(true);
-        try {
-            const orders = await getOrdersByUserIdApi(userId);
-            if (!orders) throw console.error("No orders");
-            setOrders(orders);
-            saveOrdersInLocalStorage(orders);
-            return orders;
-        } catch (err) {
-            console.error(err);
-        } finally {
-            loadingGetOrders.setIsLoading(false);
-        }
-    };
+    const getOrdersByUserId = useCallback(
+        async (userId) => {
+            loadingGetOrders.setIsLoading(true);
+            try {
+                const orders = await getOrdersByUserIdApi(userId);
+                if (!orders) throw console.error("No orders");
+                setOrders(orders);
+                saveOrdersInLocalStorage(orders);
+                return orders;
+            } catch (err) {
+                console.error(err);
+            } finally {
+                loadingGetOrders.setIsLoading(false);
+            }
+        },
+        [getOrdersByUserIdApi]
+    );
 
-    const postOrder = async (orderData) => {
-        loadingPostOrders.setIsLoading(true);
-        try {
-            const postedOrder = await postOrderApi(orderData);
-            if (!postedOrder) throw console.error("No Order Posted");
-            const updatedOrders = await getOrdersByUserId(user?.id);
+    const postOrder = useCallback(
+        async (orderData) => {
+            loadingPostOrders.setIsLoading(true);
+            try {
+                const postedOrder = await postOrderApi(orderData);
+                if (!postedOrder) throw console.error("No Order Posted");
+                const updatedOrders = await getOrdersByUserId(user?.id);
 
-            if (!updatedOrders) throw console.error("Orders no Updated");
-            setOrders(updatedOrders);
-            saveOrdersInLocalStorage(updatedOrders);
-            return updatedOrders;
-        } catch (err) {
-            console.error(err);
-        }
-        loadingPostOrders.setIsLoading(false);
-    };
+                if (!updatedOrders) throw console.error("Orders no Updated");
+                setOrders(updatedOrders);
+                saveOrdersInLocalStorage(updatedOrders);
+                return updatedOrders;
+            } catch (err) {
+                console.error(err);
+            }
+            loadingPostOrders.setIsLoading(false);
+        },
+        [postOrderApi]
+    );
 
-    const patchOrderDelivered = async (orderId) => {
-        try {
-            const updatedOrder = await patchOrderDeliveredApi(orderId);
-            if (!updatedOrder) return;
-            setOrders((prevValue) => {
-                const restOrders = prevValue.filter((order) => order.id !== orderId);
-                const newOrders = [...restOrders];
-                saveOrdersInLocalStorage(newOrders);
-                return newOrders;
-            });
-            return updatedOrder;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-    };
+    const patchOrderDelivered = useCallback(
+        async (orderId) => {
+            try {
+                const updatedOrder = await patchOrderDeliveredApi(orderId);
+                if (!updatedOrder) return;
+                setOrders((prevValue) => {
+                    const restOrders = prevValue.filter((order) => order.id !== orderId);
+                    const newOrders = [...restOrders];
+                    saveOrdersInLocalStorage(newOrders);
+                    return newOrders;
+                });
+                return updatedOrder;
+            } catch (err) {
+                console.error(err);
+                throw err;
+            }
+        },
+        [patchOrderDeliveredApi]
+    );
 
-    const patchOrderCancelled = async (orderId) => {
-        try {
-            const updatedOrder = await patchOrderCancelledApi(orderId);
-            if (!updatedOrder) return;
-            setOrders((prevValue) => {
-                const restOrders = prevValue.filter((order) => order.id !== orderId);
-                const newOrders = [...restOrders];
-                saveOrdersInLocalStorage(newOrders);
-                return newOrders;
-            });
+    const patchOrderCancelled = useCallback(
+        async (orderId) => {
+            try {
+                const updatedOrder = await patchOrderCancelledApi(orderId);
+                if (!updatedOrder) return;
+                setOrders((prevValue) => {
+                    const restOrders = prevValue.filter((order) => order.id !== orderId);
+                    const newOrders = [...restOrders];
+                    saveOrdersInLocalStorage(newOrders);
+                    return newOrders;
+                });
 
-            navigate("/user", { state: { fromCancelOrder: true } }, replace);
-            saveDataInSessionStorage("fromCancelOrder", true);
-            return updatedOrder;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-    };
+                navigate("/user", { state: { fromCancelOrder: true } }, replace);
+                saveDataInSessionStorage("fromCancelOrder", true);
+                return updatedOrder;
+            } catch (err) {
+                console.error(err);
+                throw err;
+            }
+        },
+        [patchOrderCancelledApi]
+    );
 
     return {
         getOrders,

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { UsersContext } from "../../contexts/UsersContext";
@@ -14,10 +14,17 @@ export const useUsers = () => {
     const { users, setUsers, setUserDetails } = useContext(UsersContext);
     const navigate = useNavigate();
 
-    const getUsers = async () => {
+    const userIdRef = useRef(user?.id);
+    const usersRef = useRef(users);
+
+    userIdRef.current = user?.id;
+    usersRef.current = users;
+
+    const getUsers = useCallback(async () => {
         try {
             const data = await getUsersApi();
             if (!data) throw new Error("There is a Problem getting Users");
+
             const users = data?.users;
             saveUsersInLocalStorage(users);
             setUsers(users);
@@ -25,40 +32,52 @@ export const useUsers = () => {
             console.error("Get users didn't work", err);
             throw err;
         }
-    };
+    }, []);
 
-    const getUserById = async (id) => {
+    const getUserById = useCallback(async (id) => {
         try {
             const user = await getUserByIdApi(id);
             if (!user) throw new Error("There is a Problem getting user by Id");
+
             saveUserDetailsInLocalStorage(user);
             setUserDetails(user);
         } catch (err) {
             console.error("We can't get User by Id", err);
             throw err;
         }
-    };
+    }, []);
 
-    const deleteUserById = async (id) => {
-        try {
-            console.log("esto vale la id", id);
+    const deleteUserById = useCallback(
+        async (id) => {
+            try {
+                if (id === userIdRef.current) {
+                    console.warn("Cannot delete current user");
+                    return;
+                }
 
-            if (id === user?.id) return;
-            const userRemoved = await deleteUserByIdApi(id);
-            if (userRemoved.ok) {
-                const restUsers = users.filter((user) => user.id !== id);
-                if (!restUsers.length) return console.error("No hay usuarios");
-                saveUsersInLocalStorage(restUsers);
-                removeUserDetailsFromLocalStorage();
-                navigate("/dashboard/users", { replace: true });
-                setUsers(restUsers);
-                setUserDetails(null);
+                const userRemoved = await deleteUserByIdApi(id);
+
+                if (userRemoved.ok) {
+                    const restUsers = usersRef.current.filter((user) => user.id !== id);
+
+                    if (!restUsers.length) {
+                        console.error("No hay usuarios");
+                        return;
+                    }
+
+                    saveUsersInLocalStorage(restUsers);
+                    removeUserDetailsFromLocalStorage();
+                    setUsers(restUsers);
+                    setUserDetails(null);
+                    navigate("/dashboard/users", { replace: true });
+                }
+            } catch (err) {
+                console.error(("Error deleting User", err));
+                throw err;
             }
-        } catch (err) {
-            console.error(("Error deleting User", err));
-            throw err;
-        }
-    };
+        },
+        [navigate]
+    );
 
     return { getUsers, getUserById, deleteUserById };
 };

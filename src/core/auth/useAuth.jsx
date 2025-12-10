@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { CartsContext } from "../../contexts/CartsContext";
@@ -39,96 +39,103 @@ export const useAuth = () => {
 
     const navigate = useNavigate();
 
-    const login = async ({ email, password }) => {
-        try {
-            loaderUser.setIsLoading(true);
-            const authData = await loginApi({ email, password });
+    const login = useCallback(
+        async ({ email, password }) => {
+            try {
+                loaderUser.setIsLoading(true);
+                const authData = await loginApi({ email, password });
 
-            if (authData) {
-                saveTokenInLocalStorage(authData.token);
-                saveUserInLocalStorage(authData.user);
-                setUser(authData.user);
-                if (authData.user.role === "admin") {
-                    const users = await getUsers();
+                if (authData) {
+                    saveTokenInLocalStorage(authData.token);
+                    saveUserInLocalStorage(authData.user);
+                    setUser(authData.user);
+                    if (authData.user.role === "admin") {
+                        await getUsers();
+                    }
+                    if (authData.user.role === "user") await getCartMe(authData.user.id);
+
+                    const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
+
+                    if (intendedFromStorage && !intendedFromStorage.includes("/dashboard")) {
+                        removeFromSessionStorage("intendedRoute");
+                        return navigate(intendedFromStorage, { replace: true });
+                    }
+
+                    saveDataInSessionStorage("fromLogin", true);
+                    return navigate("/", { state: { fromLogin: true } });
                 }
-                if (authData.user.role === "user") await getCartMe(authData.user.id);
-
-                const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
-
-                if (intendedFromStorage && !intendedFromStorage.includes("/dashboard")) {
-                    removeFromSessionStorage("intendedRoute");
-                    return navigate(intendedFromStorage, { replace: true });
-                }
-
-                saveDataInSessionStorage("fromLogin", true);
-                return navigate("/", { state: { fromLogin: true } });
+            } catch (err) {
+                console.error("El login no ha podido Completarse 'useAuth-login()'", err);
+            } finally {
+                loaderUser.setIsLoading(false);
             }
-        } catch (err) {
-            console.error("El login no ha podido Completarse 'useAuth-login()'", err);
-        } finally {
-            loaderUser.setIsLoading(false);
-        }
-    };
+        },
+        [navigate]
+    );
 
-    const logout = async () => {
+    const logout = useCallback(async () => {
         try {
             loaderUser.setIsLoading(true);
             const logoutResponse = await logoutApi();
 
             if (logoutResponse?.logout) {
-                removeUserFromLocalStorage();
-                removeTokenFromLocalStorage();
-                removeUsersFromLocalStorage();
-                removeCartFromLocalStorage();
-                removeCartSummaryFromLocalStorage();
-                removeBookingsFromLocalStorage();
-                removeBookingFormFromLocalStorage();
-                removeOrdersFromLocalStorage();
-                removeProductsFromLocalStorage();
-                removeCategoriesFromLocalStorage();
-                removeFromSessionStorage("intendedRoute");
-                saveDataInSessionStorage("logoutSuccess", true);
-                setUser(false);
-                setCart(null);
                 return navigate("/", { state: { logoutSuccess: true } });
             }
         } catch (err) {
             console.error("El Logout no ha podido completarse", err);
         } finally {
+            removeUserFromLocalStorage();
+            removeTokenFromLocalStorage();
+            removeUsersFromLocalStorage();
+            removeCartFromLocalStorage();
+            removeCartSummaryFromLocalStorage();
+            removeBookingsFromLocalStorage();
+            removeBookingFormFromLocalStorage();
+            removeOrdersFromLocalStorage();
+            removeProductsFromLocalStorage();
+            removeCategoriesFromLocalStorage();
+            removeFromSessionStorage("intendedRoute");
+            saveDataInSessionStorage("logoutSuccess", true);
+            setUser(false);
+            setCart(null);
+
             loaderUser.setIsLoading(false);
         }
-    };
+    }, [navigate]);
 
-    const register = async (user) => {
-        try {
-            loaderUser.setIsLoading(true);
-            const authData = await registerApi(user);
+    const register = useCallback(
+        async (user) => {
+            try {
+                loaderUser.setIsLoading(true);
+                const authData = await registerApi(user);
 
-            if (authData) {
-                saveTokenInLocalStorage(authData.token);
-                saveUserInLocalStorage(authData.user);
-                setUser(authData.user);
-                await getCartMe(authData.user.id);
+                if (authData) {
+                    saveTokenInLocalStorage(authData.token);
+                    saveUserInLocalStorage(authData.user);
+                    setUser(authData.user);
+                    await getCartMe(authData.user.id);
 
-                const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
-                if (intendedFromStorage) {
-                    navigate(intendedFromStorage, { replace: true });
-                    removeFromSessionStorage("intendedRoute");
+                    const intendedFromStorage = getDataFromSessionStorage("intendedRoute");
+                    if (intendedFromStorage) {
+                        navigate(intendedFromStorage, { replace: true });
+                        removeFromSessionStorage("intendedRoute");
+                    }
+
+                    if (!intendedFromStorage) {
+                        navigate("/", { state: { fromRegister: true } }, replace);
+                        saveDataInSessionStorage("fromRegister", true);
+                    }
                 }
-
-                if (!intendedFromStorage) {
-                    navigate("/", { state: { fromRegister: true } }, replace);
-                    saveDataInSessionStorage("fromRegister", true);
-                }
+            } catch (err) {
+                console.error("ERROR", err);
+            } finally {
+                loaderUser.setIsLoading(false);
             }
-        } catch (err) {
-            console.error("ERROR", err);
-        } finally {
-            loaderUser.setIsLoading(false);
-        }
-    };
+        },
+        [navigate]
+    );
 
-    const getProfile = async () => {
+    const getProfile = useCallback(async () => {
         loadingUserMe.setIsLoading(true);
         try {
             const fullUser = await getProfileApi();
@@ -139,22 +146,25 @@ export const useAuth = () => {
         } finally {
             loadingUserMe.setIsLoading(false);
         }
-    };
+    }, []);
 
-    const patchUser = async (newUserData) => {
-        try {
-            const updatedUser = await patchUserApi(user.id, newUserData);
+    const patchUser = useCallback(
+        async (newUserData) => {
+            try {
+                const updatedUser = await patchUserApi(user.id, newUserData);
 
-            if (!updatedUser) throw new Error("Error updating User");
-            setUser(updatedUser);
-            saveUserInLocalStorage(updatedUser);
-            navigate("/user", { state: { fromPatchUSer: true } }, replace);
-            saveDataInSessionStorage("fromPatchUser", true);
-            return updatedUser;
-        } catch (err) {
-            throw err;
-        }
-    };
+                if (!updatedUser) throw new Error("Error updating User");
+                setUser(updatedUser);
+                saveUserInLocalStorage(updatedUser);
+                navigate("/user", { state: { fromPatchUSer: true } }, replace);
+                saveDataInSessionStorage("fromPatchUser", true);
+                return updatedUser;
+            } catch (err) {
+                throw err;
+            }
+        },
+        [navigate]
+    );
 
     return { login, logout, register, getProfile, patchUser, loadingUserMe, loaderUser };
 };

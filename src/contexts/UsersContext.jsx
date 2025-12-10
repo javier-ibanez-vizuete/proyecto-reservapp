@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { getUserDetailsFromLocalStorage, getUsersFromLocalStorage } from "../core/users/users.service";
 
 export const UsersContext = createContext(null);
@@ -15,5 +15,10 @@ export const UsersProvider = ({ children }) => {
         if (userDetailsFromStorage) setUserDetails(userDetailsFromStorage);
     }, []);
 
-    return <UsersContext value={{ users, setUsers, userDetails, setUserDetails }}>{children}</UsersContext>;
+    const valueContext = useMemo(
+        () => ({ users, setUsers, userDetails, setUserDetails }),
+        [users, userDetails]
+    );
+
+    return <UsersContext value={valueContext}>{children}</UsersContext>;
 };

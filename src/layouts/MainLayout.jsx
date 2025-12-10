@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { AuthContext } from "../contexts/AuthContext";
@@ -8,6 +8,10 @@ import { ThemeContext } from "../contexts/ThemeContext";
 export const MainLayout = ({ children }) => {
     const { theme } = useContext(ThemeContext);
     const { user } = useContext(AuthContext);
+
+    console.log("Render MainLayout");
+
+    const userValue = useMemo(() => user, [user]);
 
     const baseLayoutClasses = "flex flex-col flex-1 divide-y transition-colors duration-500 ease-in-out";
 
@@ -18,7 +22,7 @@ export const MainLayout = ({ children }) => {
                 "text-text-color-dark divide-text-color-dark/50": theme !== "light",
             })}
         >
-            <Navbar isLoggedIn={user ? true : false} user={user} />
+            <Navbar isLoggedIn={user ? true : false} user={userValue} />
             <main
                 className={`mt-16 flex-1 flex flex-col ${
                     theme === "light" ? "bg-background" : "bg-background-dark"

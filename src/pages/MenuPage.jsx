@@ -19,8 +19,6 @@ import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/
 
 export const MenuPage = () => {
     const { products, categories } = useContext(ProductsContext);
-    // const { loaders } = useContext(LoaderContext);
-    // const isLoadingProducts = loaders.includes("get-products-loader");
 
     const location = useLocation();
     const { theme } = useContext(ThemeContext);

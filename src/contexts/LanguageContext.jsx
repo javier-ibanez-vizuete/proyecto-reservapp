@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/storage";
 
 const TEXTS = {
@@ -3272,18 +3272,22 @@ export const LanguageProvider = ({ children }) => {
         return langFromStorage;
     });
 
-    const getText = (key) => {
+    const getText = useCallback((key) => {
         const selectedText = TEXTS[lang][key];
         if (!selectedText)
             return TEXTS[lang] && TEXTS[lang].noTextFound ? TEXTS[lang].noTextFound : "No text Found";
         return selectedText;
-    };
-    const handleLang = (lang = "en") => {
+    }, []);
+
+    const handleLang = useCallback((lang = "en") => {
         setLang(lang);
         saveDataInSessionStorage("lang", lang);
-    };
+    }, []);
 
-    return (
-        <LanguageContext value={{ lang, TEXTS, languages, getText, handleLang }}>{children}</LanguageContext>
+    const valueContext = useMemo(
+        () => ({ lang, TEXTS, languages, getText, handleLang }),
+        [lang, TEXTS, languages, getText, handleLang]
     );
+
+    return <LanguageContext value={valueContext}>{children}</LanguageContext>;
 };
