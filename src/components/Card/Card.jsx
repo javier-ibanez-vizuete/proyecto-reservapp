@@ -19,25 +19,28 @@ export const Card = ({
 
     const baseClasses = "transition-all duration-200";
 
-    const variantClasses = {
-        default: "bg-white border-gray-200",
-        background: `${
-            theme === "light"
-                ? "bg-background border-background/50"
-                : " bg-background-dark border-background-dark/50"
-        }`,
-        accent: `${
-            theme === "light"
-                ? "bg-accent-background border-accent-background/50"
-                : "bg-accent-background-dark border-accent-background-dark/50"
-        }`,
-        primary: "bg-white border-primary-color",
-        secondary: "bg-white border-secondary-color",
-        success: "bg-white border-success-color",
-        warning: "bg-white border-info-color",
-        danger: "bg-white border-error-color",
-        glass: "backdrop-blur-md bg-white/50 border-white/20",
-    };
+    const variantClasses = useMemo(
+        () => ({
+            default: "bg-white border-gray-200",
+            background: `${
+                theme === "light"
+                    ? "bg-background border-background/50"
+                    : " bg-background-dark border-background-dark/50"
+            }`,
+            accent: `${
+                theme === "light"
+                    ? "bg-accent-background border-accent-background/50"
+                    : "bg-accent-background-dark border-accent-background-dark/50"
+            }`,
+            primary: "bg-white border-primary-color",
+            secondary: "bg-white border-secondary-color",
+            success: "bg-white border-success-color",
+            warning: "bg-white border-info-color",
+            danger: "bg-white border-error-color",
+            glass: "backdrop-blur-md bg-white/50 border-white/20",
+        }),
+        [theme]
+    );
 
     const stylesConfigByDevice = useMemo(
         () => ({
@@ -88,17 +91,21 @@ export const Card = ({
         glow: "transition-shadow duration-200 ease-in-out hover:shadow-lg hover:shadow-primary/25",
     };
 
-    const cardClasses = classNames(
-        baseClasses,
-        paddingClasses[padding] || stylesConfigByDevice.padding,
-        shadowClasses[shadow],
-        roundedClasses[rounded] || stylesConfigByDevice.rounded,
-        {
-            [`border ${variantClasses[variant]}`]: border || variant !== "default",
-            border: border,
-        },
-        hover && hover !== "none" ? hoverClasses[hover] : "",
-        className
+    const cardClasses = useMemo(
+        () =>
+            classNames(
+                baseClasses,
+                paddingClasses[padding] || stylesConfigByDevice.padding,
+                shadowClasses[shadow],
+                roundedClasses[rounded] || stylesConfigByDevice.rounded,
+                {
+                    [`border ${variantClasses[variant]}`]: border || variant !== "default",
+                    border: border,
+                },
+                hover && hover !== "none" ? hoverClasses[hover] : "",
+                className
+            ),
+        [padding, shadow, rounded, variant, border, hover, className]
     );
 
     return (

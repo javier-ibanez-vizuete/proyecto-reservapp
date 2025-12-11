@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { Container } from "../components/Container";
 import { FormInput } from "../components/FormInput";
@@ -80,23 +80,35 @@ export const LoginPage = () => {
         setForm({ ...form, [name]: value });
     };
 
-    const onLoginSubmit = async (event) => {
-        try {
-            event.preventDefault();
+    const onLoginSubmit = useCallback(
+        async (event) => {
+            try {
+                event.preventDefault();
 
-            const isError = LoginVerificationFields(form);
-            if (isError) return setError(isError);
-            setIsloading(true);
+                const isError = LoginVerificationFields(form);
+                if (isError) return setError(isError);
+                setIsloading(true);
 
-            await login(form);
-            setForm(INITIAL_FORM);
-        } catch (error) {
-            setForm(INITIAL_FORM);
-            showToast(getText("toastLoginError"), "error", 1000);
-        } finally {
-            setIsloading(false);
-        }
-    };
+                await login(form);
+                setForm(INITIAL_FORM);
+            } catch (error) {
+                setForm(INITIAL_FORM);
+                showToast(getText("toastLoginError"), "error", 1000);
+            } finally {
+                setIsloading(false);
+            }
+        },
+        [form]
+    );
+
+    const currentContainerConfig = useMemo(
+        () =>
+            classNames("flex flex-col border shadow-md md:mx-auto md:w-[600px]", loginContainerConfig, {
+                "bg-accent-background border-text-color/50": theme === "light",
+                "bg-accent-background-dark border-text-color-dark/50": theme !== "light",
+            }),
+        [theme, loginContainerConfig]
+    );
 
     if (user) {
         return <Navigate to={"/"} replace />;
@@ -105,14 +117,7 @@ export const LoginPage = () => {
     return (
         <Container className="flex flex-col justify-center flex-1">
             <div
-                className={classNames(
-                    "flex flex-col border shadow-md md:mx-auto md:w-[600px]",
-                    loginContainerConfig,
-                    {
-                        "bg-accent-background border-text-color/50": theme === "light",
-                        "bg-accent-background-dark border-text-color-dark/50": theme !== "light",
-                    }
-                )}
+                className={currentContainerConfig}
                 // className={`flex flex-col gap-md ${
                 //     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                 // } rounded-2xl shadow-md xs:p-6 2xs:py-6 2xs:px-2 sm:p-8 md:p-10 max-w-[800px] mx-auto`}

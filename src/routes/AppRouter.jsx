@@ -15,6 +15,8 @@ export const AppRouter = () => {
     const location = useLocation();
     const { loaderUser } = useAuth();
 
+    console.log("Render AppRouter.jsx");
+
     const handleIntendedRoute = useMemo(() => {
         if (location.pathname.includes("/dashboard")) {
             return null;

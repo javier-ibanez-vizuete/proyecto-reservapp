@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import Calendar from "react-calendar";
 import { ThemeContext } from "../contexts/ThemeContext";
 
-export const BookingCalendar = ({ onChange, className = "", selectedDate, userConfig = true }) => {
+export const BookingCalendar = memo(({ onChange, className = "", selectedDate, userConfig = true }) => {
     const { theme } = useContext(ThemeContext);
 
     const currentDate = {
@@ -28,4 +28,4 @@ export const BookingCalendar = ({ onChange, className = "", selectedDate, userCo
             />
         </div>
     );
-};
+});

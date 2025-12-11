@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { memo, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
@@ -13,21 +13,19 @@ import { LoadingButton } from "./Spinner/LoadingButton";
 import { ToastContainer } from "./ToastContainer";
 import { Button } from "./UI/Button";
 
-export const ProfileButton = React.memo(({ onClick }) => {
+export const ProfileButton = memo(({ onClick }) => {
     const { user } = useContext(AuthContext);
     const { logout } = useAuth();
 
     const { isLoading, setIsLoading } = useLoading();
     const { toasts, showToast, dismissToast } = useToast();
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const { getText } = React.useContext(LanguageContext);
+    const { getText } = useContext(LanguageContext);
 
-    const handleGoProfile = () => {
-        Navigate("/user");
-    };
+    const handleGoProfile = useCallback(() => navigate("/user"), [navigate]);
 
-    const handleLogout = async () => {
+    const handleLogout = useCallback(async () => {
         setIsLoading(true);
         try {
             await logout();
@@ -37,7 +35,7 @@ export const ProfileButton = React.memo(({ onClick }) => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
 
     return (
         <Dropdown placement="bottom-end" onClick={onClick}>

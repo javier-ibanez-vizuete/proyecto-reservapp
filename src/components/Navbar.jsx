@@ -57,8 +57,6 @@ export const Navbar = memo(({ isLoggedIn = false, user = null, height, padding, 
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
 
-    console.log("Render Navbar");
-
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
     useEffect(() => {

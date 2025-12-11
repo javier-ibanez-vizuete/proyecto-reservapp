@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "../components/ToastContainer";
 import { LanguageContext } from "../contexts/LanguageContext";
@@ -64,121 +64,133 @@ export const DashboardPage = () => {
         navigate(location.pathname, { replace: true, state: {} });
     }, [location.state]);
 
-    const dashboardItems = [
-        {
-            title: isLoadingUsers ? isLoadingUsers : getTotalUsers(users),
-            description: "dashboardTotalUsersDescriptionLabel",
-            icon: "",
-            to: "/dashboard/users",
-            colSpan: 1,
-            rowSpan: 2,
-            gradient: null,
-        },
-        {
-            title: null,
-            description: "",
-            icon: null,
-            users: isLoadingUsers ? isLoadingUsers : users,
-            to: "/dashboard/users",
-            colSpan: 2,
-            rowSpan: 1,
-            gradient: "success",
-        },
-        {
-            title: isLoadingUsers ? isLoadingUsers : getConnectedUsers(users),
-            description: "dashboardConnectedUsersDescriptionLabel",
-            icon: "",
-            to: "/dashboard/users",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: isLoadingBookings ? isLoadingBookings : getTotalBookings(bookings),
-            description: "dashboardTotalBookingsDescriptionLabel",
-            icon: "",
-            to: "/dashboard/bookings/date",
-            colSpan: 1,
-            rowSpan: 2,
-            gradient: null,
-        },
-        {
-            title: isLoadingBookings ? isLoadingBookings : getTodaysBookings(bookings),
-            description: "dashboardPendingBookingsDescriptionLabel",
-            icon: "",
-            to: "/dashboard/bookings/today",
-            colSpan: 2,
-            rowSpan: 2,
-            gradient: null,
-        },
-        {
-            title: isLoadingBookings ? isLoadingBookings : getDelayedBookings(bookings),
-            description: "dashboardDelayedBookingsDescriptionLabel",
-            icon: "",
-            to: "/dashboard/bookings/today",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: isLoadingOrders ? isLoadingOrders : getTotalOrders(orders),
-            description: "dashboardTotalOrdersDescriptionLabel",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 2,
-            gradient: null,
-        },
-        {
-            title: isLoadingOrders ? isLoadingOrders : getCompletedOrders(orders),
-            description: "dashboardCompletedOrdersDescriptionLabel",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: isLoadingOrders ? isLoadingOrders : getPendingOrders(orders),
-            description: "dashboardPendingOrdersDescriptionLabel",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: isLoadingOrders ? isLoadingOrders : getCancelledOrders(orders),
-            description: "dashboardCancelledOrdersDescriptionLabel",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: isLoadingOrders
-                ? isLoadingOrders
-                : `${calculateCompletedOrdersPercentage(orders).toFixed(0)}%`,
-            description: "dashboardSuccesfulAverageOrdersDescriptionLabel",
-            icon: "",
-            to: "/dashboard/orders",
-            colSpan: 2,
-            rowSpan: 1,
-            gradient: null,
-        },
-        {
-            title: isLoadingProducts ? isLoadingProducts : getTotalProducts(products),
-            description: "dashboardTotalProductsDescriptionLabel",
-            icon: "",
-            to: "/dashboard/products",
-            colSpan: 1,
-            rowSpan: 1,
-            gradient: null,
-        },
-    ];
+    const dashboardItems = useMemo(
+        () => [
+            {
+                title: isLoadingUsers ? isLoadingUsers : getTotalUsers(users),
+                description: "dashboardTotalUsersDescriptionLabel",
+                icon: "",
+                to: "/dashboard/users",
+                colSpan: 1,
+                rowSpan: 2,
+                gradient: null,
+            },
+            {
+                title: null,
+                description: "",
+                icon: null,
+                users: isLoadingUsers ? isLoadingUsers : users,
+                to: "/dashboard/users",
+                colSpan: 2,
+                rowSpan: 1,
+                gradient: "success",
+            },
+            {
+                title: isLoadingUsers ? isLoadingUsers : getConnectedUsers(users),
+                description: "dashboardConnectedUsersDescriptionLabel",
+                icon: "",
+                to: "/dashboard/users",
+                colSpan: 1,
+                rowSpan: 1,
+                gradient: null,
+            },
+            {
+                title: isLoadingBookings ? isLoadingBookings : getTotalBookings(bookings),
+                description: "dashboardTotalBookingsDescriptionLabel",
+                icon: "",
+                to: "/dashboard/bookings/date",
+                colSpan: 1,
+                rowSpan: 2,
+                gradient: null,
+            },
+            {
+                title: isLoadingBookings ? isLoadingBookings : getTodaysBookings(bookings),
+                description: "dashboardPendingBookingsDescriptionLabel",
+                icon: "",
+                to: "/dashboard/bookings/today",
+                colSpan: 2,
+                rowSpan: 2,
+                gradient: null,
+            },
+            {
+                title: isLoadingBookings ? isLoadingBookings : getDelayedBookings(bookings),
+                description: "dashboardDelayedBookingsDescriptionLabel",
+                icon: "",
+                to: "/dashboard/bookings/today",
+                colSpan: 1,
+                rowSpan: 1,
+                gradient: null,
+            },
+            {
+                title: isLoadingOrders ? isLoadingOrders : getTotalOrders(orders),
+                description: "dashboardTotalOrdersDescriptionLabel",
+                icon: "",
+                to: "/dashboard/orders",
+                colSpan: 1,
+                rowSpan: 2,
+                gradient: null,
+            },
+            {
+                title: isLoadingOrders ? isLoadingOrders : getCompletedOrders(orders),
+                description: "dashboardCompletedOrdersDescriptionLabel",
+                icon: "",
+                to: "/dashboard/orders",
+                colSpan: 1,
+                rowSpan: 1,
+                gradient: null,
+            },
+            {
+                title: isLoadingOrders ? isLoadingOrders : getPendingOrders(orders),
+                description: "dashboardPendingOrdersDescriptionLabel",
+                icon: "",
+                to: "/dashboard/orders",
+                colSpan: 1,
+                rowSpan: 1,
+                gradient: null,
+            },
+            {
+                title: isLoadingOrders ? isLoadingOrders : getCancelledOrders(orders),
+                description: "dashboardCancelledOrdersDescriptionLabel",
+                icon: "",
+                to: "/dashboard/orders",
+                colSpan: 1,
+                rowSpan: 1,
+                gradient: null,
+            },
+            {
+                title: isLoadingOrders
+                    ? isLoadingOrders
+                    : `${calculateCompletedOrdersPercentage(orders).toFixed(0)}%`,
+                description: "dashboardSuccesfulAverageOrdersDescriptionLabel",
+                icon: "",
+                to: "/dashboard/orders",
+                colSpan: 2,
+                rowSpan: 1,
+                gradient: null,
+            },
+            {
+                title: isLoadingProducts ? isLoadingProducts : getTotalProducts(products),
+                description: "dashboardTotalProductsDescriptionLabel",
+                icon: "",
+                to: "/dashboard/products",
+                colSpan: 1,
+                rowSpan: 1,
+                gradient: null,
+            },
+        ],
+        [
+            isLoadingUsers,
+            isLoadingBookings,
+            isLoadingOrders,
+            isLoadingProducts,
+            users,
+            bookings,
+            orders,
+            products,
+        ]
+    );
 
-    const handleDashboardItemsGradient = (item, index) => {
+    const handleDashboardItemsGradient = useCallback((item, index) => {
         if (!item || !item.title || !index) return null;
 
         const isPar = index % 2 === 0;
@@ -190,7 +202,7 @@ export const DashboardPage = () => {
         }
         if (!isPar) return "default";
         if (isPar) return "accent";
-    };
+    }, []);
 
     return (
         <div className="flex flex-1 flex-col">

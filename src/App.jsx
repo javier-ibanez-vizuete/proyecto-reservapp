@@ -19,8 +19,6 @@ export const App = () => {
     const { orders } = useContext(OrdersContext);
     const { getOrders, getOrdersByUserId } = useOrders();
 
-    console.log("Render App.jsx");
-
     useImageFallback();
     useEffect(() => {
         if (!products?.length) getProducts();

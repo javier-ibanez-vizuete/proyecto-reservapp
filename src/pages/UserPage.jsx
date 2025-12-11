@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { useCallback, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { Accordion } from "../components/Accordion";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
@@ -40,7 +39,6 @@ export const UserPage = () => {
     const loaderLogout = useLoading();
     const { toasts, showToast, dismissToast } = useToast();
 
-    const location = useLocation();
     const { getText } = useContext(LanguageContext);
     const { theme } = useContext(ThemeContext);
     const { isMobile, isTablet, isDesktop } = useDevice();
@@ -75,7 +73,7 @@ export const UserPage = () => {
         "w-24": isDesktop,
     });
 
-    const handleGetMeUser = async () => {
+    const handleGetMeUser = useCallback(async () => {
         try {
             const fetchedUser = await getProfile();
             if (!fetchedUser) throw new Error("Not Fetched User");
@@ -86,22 +84,25 @@ export const UserPage = () => {
         } catch (err) {
             console.error(err);
         }
-    };
+    }, []);
 
-    const handleChangeAvatar = async (avatarData) => {
-        if (avatarData.url === userProfile?.avatar?.url) return;
-        setAvatarLoaded(false);
-        try {
-            const newData = { avatar: { url: avatarData.url, alt: avatarData.alt } };
-            await patchUser(newData);
-        } catch (err) {
-            console.error("Algo ha salido mal", err);
-        }
-    };
+    const handleChangeAvatar = useCallback(
+        async (avatarData) => {
+            if (avatarData.url === userProfile?.avatar?.url) return;
+            setAvatarLoaded(false);
+            try {
+                const newData = { avatar: { url: avatarData.url, alt: avatarData.alt } };
+                await patchUser(newData);
+            } catch (err) {
+                console.error("Algo ha salido mal", err);
+            }
+        },
+        [userProfile?.avatar?.url]
+    );
 
-    const handleShowAvatarModal = () => {
+    const handleShowAvatarModal = useCallback(() => {
         setShowAvatarModal((prev) => !prev);
-    };
+    }, []);
 
     const handleLogout = useCallback(async () => {
         try {

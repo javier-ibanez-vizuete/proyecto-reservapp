@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useScroll = () => {
     const [scroll, setScroll] = useState(window.scrollY);
@@ -12,9 +12,9 @@ export const useScroll = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const scrollToTop = () => {
+    const scrollToTop = useCallback(() => {
         window.scrollTo({ behavior: "smooth", top: 0 });
-    };
+    }, []);
 
     return { scroll, scrollToTop };
 };

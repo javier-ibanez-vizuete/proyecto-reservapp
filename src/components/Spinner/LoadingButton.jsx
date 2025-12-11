@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { useDevice } from "../../hooks/useDevice.jsx";
 import { Spinner } from "./Spinner.jsx";
 
@@ -44,95 +44,108 @@ import { Spinner } from "./Spinner.jsx";
  *   Subir Archivo
  * </LoadingButton>
  */
-export const LoadingButton = ({
-    children,
-    loading = false,
-    disabled = false,
-    variant = "default",
-    size,
-    loadingText = "Cargando...",
-    className = "",
-    onClick,
-    type = "button",
-    ...props
-}) => {
-    const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+export const LoadingButton = memo(
+    ({
+        children,
+        loading = false,
+        disabled = false,
+        variant = "default",
+        size,
+        loadingText = "Cargando...",
+        className = "",
+        onClick,
+        type = "button",
+        ...props
+    }) => {
+        const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
-    const baseClasses =
-        "inline-flex items-center justify-center font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer relative";
+        const baseClasses =
+            "inline-flex items-center justify-center font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer relative";
 
-    const variantClasses = {
-        default: "bg-gray-50 text-text-color border border-gray-500 hover:bg-gray-500/80 focus:ring-gray-900",
-        primary:
-            "bg-primary-color text-text-color border border-primary-color hover:bg-primary-color/80 focus:ring-primary-color shadow-sm",
-        secondary:
-            "bg-secondary-color text-text-color border border-secondary-color hover:bg-secondary-color/80 focus:ring-secondary-color shadow-sm",
-        outline: "bg-transparent text-text-color border border-gray-300 hover:bg-gray-50 focus:ring-gray-500",
-        ghost: "bg-transparent text-text-color border-transparent hover:bg-gray-100 focus:ring-gray-500",
-        danger: "bg-error-500 text-white border border-error-600 hover:bg-error-600 focus:ring-error-500 shadow-sm",
-    };
+        const variantClasses = {
+            default:
+                "bg-gray-50 text-text-color border border-gray-500 hover:bg-gray-500/80 focus:ring-gray-900",
+            primary:
+                "bg-primary-color text-text-color border border-primary-color hover:bg-primary-color/80 focus:ring-primary-color shadow-sm",
+            secondary:
+                "bg-secondary-color text-text-color border border-secondary-color hover:bg-secondary-color/80 focus:ring-secondary-color shadow-sm",
+            outline:
+                "bg-transparent text-text-color border border-gray-300 hover:bg-gray-50 focus:ring-gray-500",
+            ghost: "bg-transparent text-text-color border-transparent hover:bg-gray-100 focus:ring-gray-500",
+            danger: "bg-error-500 text-white border border-error-600 hover:bg-error-600 focus:ring-error-500 shadow-sm",
+        };
 
-    const sizeClasses = {
-        sm: "px-3 py-1.5 text-base",
-        md: "px-4 py-2 text-md",
-        lg: "px-6 py-3 text-md",
-        xl: "px-8 py-4 text-lg",
-    };
+        const sizeClasses = {
+            sm: "px-3 py-1.5 text-base",
+            md: "px-4 py-2 text-md",
+            lg: "px-6 py-3 text-md",
+            xl: "px-8 py-4 text-lg",
+        };
 
-    const autoButtonConfig = useMemo(
-        () => ({
-            padding: classNames({
-                "px-3 py-1.5 text-xs": isMobile2Xs || isMobileXs || isMobileSm,
-                "px-4 py-2 text-base": isTablet || isDesktop,
+        const autoButtonConfig = useMemo(
+            () => ({
+                padding: classNames({
+                    "px-3 py-1.5 text-xs": isMobile2Xs || isMobileXs || isMobileSm,
+                    "px-4 py-2 text-base": isTablet || isDesktop,
+                }),
             }),
-        }),
-        [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
-    );
+            [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
+        );
 
-    const spinnerSizeMap = {
-        sm: "sm",
-        md: "sm",
-        lg: "md",
-        xl: "md",
-    };
+        const spinnerSizeMap = {
+            sm: "sm",
+            md: "sm",
+            lg: "md",
+            xl: "md",
+        };
 
-    const isDisabled = disabled || loading;
+        const isDisabled = disabled || loading;
 
-    const buttonClasses = classNames(
-        baseClasses,
-        variantClasses[variant],
-        sizeClasses[size] || autoButtonConfig.padding || sizeClasses.sm,
-        {
-            "opacity-50 cursor-not-allowed pointer-events-none": isDisabled,
-            "hover:scale-105 hover:shadow-lg transform": !isDisabled && variant !== "ghost",
-            "hover:shadow-brand-400/25": !isDisabled && variant === "primary",
-            "hover:shadow-blue-400/25": !isDisabled && variant === "secondary",
-        },
-        className
-    );
+        const buttonClasses = useMemo(
+            () =>
+                classNames(
+                    baseClasses,
+                    variantClasses[variant],
+                    sizeClasses[size] || autoButtonConfig.padding || sizeClasses.sm,
+                    {
+                        "opacity-50 cursor-not-allowed pointer-events-none": isDisabled,
+                        "hover:scale-105 hover:shadow-lg transform": !isDisabled && variant !== "ghost",
+                        "hover:shadow-brand-400/25": !isDisabled && variant === "primary",
+                        "hover:shadow-blue-400/25": !isDisabled && variant === "secondary",
+                    },
+                    className
+                ),
+            [variant, size, isDisabled]
+        );
 
-    const handleClick = (event) => {
-        if (!isDisabled && onClick) {
-            onClick(event);
-        }
-    };
+        const handleClick = useCallback(
+            (event) => {
+                if (!isDisabled && onClick) {
+                    onClick?.(event);
+                }
+            },
+            [isDisabled, onClick]
+        );
 
-    const getSpinnerColor = () => {
-        if (variant === "primary" || variant === "danger") return "white";
-        return "primary";
-    };
+        const getSpinnerColor = () => {
+            if (variant === "primary" || variant === "danger") return "white";
+            return "primary";
+        };
 
-    return (
-        <button
-            type={type}
-            disabled={isDisabled}
-            onClick={handleClick}
-            className={buttonClasses}
-            aria-busy={loading}
-            {...props}
-        >
-            {loading && <Spinner size={spinnerSizeMap[size]} color={getSpinnerColor()} className="mr-2" />}
-            <span className={loading ? "opacity-75" : ""}>{loading ? loadingText : children}</span>
-        </button>
-    );
-};
+        return (
+            <button
+                type={type}
+                disabled={isDisabled}
+                onClick={handleClick}
+                className={buttonClasses}
+                aria-busy={loading}
+                {...props}
+            >
+                {loading && (
+                    <Spinner size={spinnerSizeMap[size]} color={getSpinnerColor()} className="mr-2" />
+                )}
+                <span className={loading ? "opacity-75" : ""}>{loading ? loadingText : children}</span>
+            </button>
+        );
+    }
+);

@@ -1,15 +1,13 @@
 import classNames from "classnames";
-import { useContext, useMemo } from "react";
+import { memo, useContext, useMemo } from "react";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { AuthContext } from "../contexts/AuthContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 
-export const MainLayout = ({ children }) => {
+export const MainLayout = memo(({ children }) => {
     const { theme } = useContext(ThemeContext);
     const { user } = useContext(AuthContext);
-
-    console.log("Render MainLayout");
 
     const userValue = useMemo(() => user, [user]);
 
@@ -33,4 +31,4 @@ export const MainLayout = ({ children }) => {
             <Footer />
         </div>
     );
-};
+});

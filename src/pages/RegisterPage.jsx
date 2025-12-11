@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
@@ -11,7 +11,6 @@ import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
-import { AuthContext } from "../contexts/AuthContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
@@ -41,7 +40,6 @@ export const RegisterPage = () => {
     const { register } = useAuth();
     const { toasts, showToast, dismissToast } = useToast();
 
-    const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
 
@@ -66,119 +64,128 @@ export const RegisterPage = () => {
         [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
     );
 
-    const REGISTER_FORM_FIELDS = [
-        {
-            containerClass: "flex flex-col gap-2",
-            input: {
-                id: "name",
-                name: "name",
-                type: "text",
-                placeholder: getText("namePlaceholderFieldText"),
-                label: "Campo nombre completo",
-                required: true,
-                className: "flex-1",
+    const REGISTER_FORM_FIELDS = useMemo(
+        () => [
+            {
+                containerClass: "flex flex-col gap-2",
+                input: {
+                    id: "name",
+                    name: "name",
+                    type: "text",
+                    placeholder: getText("namePlaceholderFieldText"),
+                    label: "Campo nombre completo",
+                    required: true,
+                    className: "flex-1",
+                },
+                label: {
+                    text: getText("fullNameFieldText"),
+                    className: "",
+                },
             },
-            label: {
-                text: getText("fullNameFieldText"),
-                className: "",
+            {
+                containerClass: "flex flex-col gap-2",
+                input: {
+                    id: "email",
+                    name: "email",
+                    type: "email",
+                    placeholder: getText("emailPlaceholderFieldText"),
+                    label: "Campo Correo Electrónico",
+                    required: true,
+                    className: "flex-1",
+                },
+                label: {
+                    text: getText("emailFieldText"),
+                    className: "",
+                },
             },
+            {
+                containerClass: "flex flex-col gap-2",
+                input: {
+                    id: "address",
+                    name: "address",
+                    type: "text",
+                    placeholder: getText("addressPlaceholderFieldText"),
+                    label: "Campo Direccion Personal",
+                    required: true,
+                    className: "flex-1",
+                },
+                label: {
+                    text: getText("addressFieldText"),
+                    className: "",
+                },
+            },
+            {
+                containerClass: "flex flex-col gap-2",
+                input: {
+                    id: "password",
+                    name: "password",
+                    type: "password",
+                    placeholder: getText("passwordPlaceholderFieldText"),
+                    label: "Campo contraseña",
+                    required: true,
+                    className: "rounded-r-none flex-1",
+                },
+                label: {
+                    text: getText("passwordFieldText"),
+                    className: "",
+                },
+            },
+            {
+                containerClass: "flex flex-col gap-2",
+                input: {
+                    id: "repassword",
+                    name: "repassword",
+                    type: "password",
+                    placeholder: getText("confirmPasswordPlaceholderFieldText"),
+                    label: "Campo Confirmar Contraseña",
+                    required: true,
+                    className: "rounded-r-none flex-1",
+                },
+                label: {
+                    text: getText("confirmPasswordFieldText"),
+                    className: "",
+                },
+            },
+        ],
+        []
+    );
+
+    const onInputChange = useCallback(
+        (event) => {
+            if (isLoading) return;
+            const { name, value } = event.target;
+            setError("");
+
+            setForm((prevValue) => ({ ...prevValue, [name]: value }));
         },
-        {
-            containerClass: "flex flex-col gap-2",
-            input: {
-                id: "email",
-                name: "email",
-                type: "email",
-                placeholder: getText("emailPlaceholderFieldText"),
-                label: "Campo Correo Electrónico",
-                required: true,
-                className: "flex-1",
-            },
-            label: {
-                text: getText("emailFieldText"),
-                className: "",
-            },
+        [isLoading]
+    );
+
+    const onRegisterSubmit = useCallback(
+        async (event) => {
+            try {
+                event.preventDefault();
+
+                const isError = RegisterVerificationFields(form);
+                if (isError) return setError(isError);
+                setIsLoading(true);
+                const { repassword, ...restForm } = form;
+
+                await register(restForm);
+                setForm(INITIAL_FORM_DATA);
+            } catch (err) {
+                setForm(INITIAL_FORM_DATA);
+                showToast(getText("toastRegisterError"), "error", 1000);
+            } finally {
+                setIsLoading(false);
+            }
         },
-        {
-            containerClass: "flex flex-col gap-2",
-            input: {
-                id: "address",
-                name: "address",
-                type: "text",
-                placeholder: getText("addressPlaceholderFieldText"),
-                label: "Campo Direccion Personal",
-                required: true,
-                className: "flex-1",
-            },
-            label: {
-                text: getText("addressFieldText"),
-                className: "",
-            },
-        },
-        {
-            containerClass: "flex flex-col gap-2",
-            input: {
-                id: "password",
-                name: "password",
-                type: "password",
-                placeholder: getText("passwordPlaceholderFieldText"),
-                label: "Campo contraseña",
-                required: true,
-                className: "rounded-r-none flex-1",
-            },
-            label: {
-                text: getText("passwordFieldText"),
-                className: "",
-            },
-        },
-        {
-            containerClass: "flex flex-col gap-2",
-            input: {
-                id: "repassword",
-                name: "repassword",
-                type: "password",
-                placeholder: getText("confirmPasswordPlaceholderFieldText"),
-                label: "Campo Confirmar Contraseña",
-                required: true,
-                className: "rounded-r-none flex-1",
-            },
-            label: {
-                text: getText("confirmPasswordFieldText"),
-                className: "",
-            },
-        },
-    ];
+        [form]
+    );
 
-    const onInputChange = (event) => {
-        if (isLoading) return;
-        const { name, value } = event.target;
-        setError("");
-
-        setForm((prevValue) => ({ ...prevValue, [name]: value }));
-    };
-
-    const onRegisterSubmit = async (event) => {
-        try {
-            event.preventDefault();
-
-            const isError = RegisterVerificationFields(form);
-            if (isError) return setError(isError);
-            setIsLoading(true);
-            const { repassword, ...restForm } = form;
-
-            await register(restForm);
-            setForm(INITIAL_FORM_DATA);
-        } catch (err) {
-            setForm(INITIAL_FORM_DATA);
-            showToast(getText("toastRegisterError"), "error", 1000);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleAvatarClick = (avatar) => {
+    const handleAvatarClick = useCallback((avatar) => {
         setForm((prev) => ({ ...prev, avatar: { url: avatar.url, alt: avatar.alt } }));
-    };
+    }, []);
 
     return (
         <Container className="perfect-center flex-1 py-4">
@@ -191,9 +198,6 @@ export const RegisterPage = () => {
                         "bg-accent-background-dark border-text-color-dark/50": theme !== "light",
                     }
                 )}
-                // className={`flex flex-col gap-md rounded-2xl p-md lg:p-lg ${
-                //     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
-                // }`}
             >
                 <h1>{getText("h1RegisterPage")}</h1>
 

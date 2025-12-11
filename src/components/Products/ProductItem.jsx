@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { Image } from "../UI/Image";
 import { ImageContainer } from "../UI/ImageContainer";
 
-export const ProductItem = ({ productData = {}, className = "" }) => {
+export const ProductItem = memo(({ productData = {}, className = "" }) => {
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
 
@@ -35,4 +35,4 @@ export const ProductItem = ({ productData = {}, className = "" }) => {
             </div>
         </article>
     );
-};
+});

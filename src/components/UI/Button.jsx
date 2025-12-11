@@ -32,8 +32,6 @@ export const Button = memo(
         className = "",
         ...props
     }) => {
-        console.log("Render Button");
-
         const handleClick = useCallback(
             (event) => {
                 if (!disabled) {

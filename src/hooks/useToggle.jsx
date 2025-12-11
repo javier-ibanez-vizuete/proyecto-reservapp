@@ -1,13 +1,10 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export const useToggle = (givenOption = false) => {
-	const [visible, setVisible] = useState(givenOption);
+    const [visible, setVisible] = useState(givenOption);
 
-	if (typeof givenOption !== "boolean") return null;
+    if (typeof givenOption !== "boolean") return null;
 
-	const toggleVisible = () => {
-		setVisible((prev) => !prev);
-	};
-
-	return [visible, toggleVisible];
+    const toggleVisible = useCallback(() => setVisible((prev) => !prev), []);
+    return [visible, toggleVisible];
 };
