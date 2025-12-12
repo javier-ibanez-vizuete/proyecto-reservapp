@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Container } from "./Container";
 
-export const Footer = () => {
+export const Footer = memo(() => {
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
 
@@ -22,4 +22,4 @@ export const Footer = () => {
             </Container>
         </footer>
     );
-};
+});

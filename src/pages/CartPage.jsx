@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AccordionProductsCart } from "../components/AccordionProductsCart";
 import { CartSummaryCard } from "../components/CartSummaryCard";
@@ -31,7 +31,7 @@ export const CartPage = () => {
     const { toasts, showToast, dismissToast } = useToast();
     const Navigate = useNavigate();
 
-    const handleGetSummaryCart = async () => {
+    const handleGetSummaryCart = useCallback(async () => {
         setIsLoading(true);
         try {
             await getCartSummary();
@@ -39,7 +39,7 @@ export const CartPage = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         if (cart && !loadingDelete.isLoading) handleGetSummaryCart();
@@ -53,7 +53,7 @@ export const CartPage = () => {
         setShowModal(false);
     };
 
-    const handleDeleteCart = async () => {
+    const handleDeleteCart = useCallback(async () => {
         let productId;
         loadingDelete.setIsLoading(true);
         try {
@@ -70,9 +70,9 @@ export const CartPage = () => {
         } finally {
             loadingDelete.setIsLoading(false);
         }
-    };
+    }, [cart]);
 
-    const handleConfirmCart = async () => {
+    const handleConfirmCart = useCallback(async () => {
         isLoading2.setIsLoading(true);
         try {
             await postCartCheckout();
@@ -81,7 +81,7 @@ export const CartPage = () => {
             isLoading2.setIsLoading(false);
             setShowModal(false);
         }
-    };
+    }, []);
 
     if (isLoading)
         return (

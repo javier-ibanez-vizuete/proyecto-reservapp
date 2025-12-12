@@ -2,16 +2,11 @@
 // text size: 16px; Line height: 150%
 // Padding: 12px; 24px
 
-import { useContext } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
-
 // Input Mobile: Use for mobile
 // Text size: 16px; Line height: 150%
 // Padding: 12px; 20px
 
 export const Input = ({ ...props }) => {
-    const { theme } = useContext(ThemeContext);
-
     return (
         <input
             {...props}

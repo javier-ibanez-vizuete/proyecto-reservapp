@@ -1,5 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { Card } from "../components/Card/Card";
 import { Container } from "../components/Container";
 import { Dropdown } from "../components/Dropdown/Dropdown";
@@ -19,10 +18,7 @@ import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/
 
 export const MenuPage = () => {
     const { products, categories } = useContext(ProductsContext);
-    // const { loaders } = useContext(LoaderContext);
-    // const isLoadingProducts = loaders.includes("get-products-loader");
 
-    const location = useLocation();
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
     const { getProducts, loadingProducts } = useProducts();
@@ -44,7 +40,7 @@ export const MenuPage = () => {
         if (categorySelected) saveDataInSessionStorage("categorySelected", categorySelected);
     }, [categorySelected]);
 
-    const handleCategoryChange = (category) => setCategorySelected(category);
+    const handleCategoryChange = useCallback((category) => setCategorySelected(category));
 
     const handleRefreshProduct = () => getProducts();
 
@@ -62,6 +58,15 @@ export const MenuPage = () => {
         return (
             <h1>MENU ESKELETON</h1>
             // UTILIZAR SKELETON PARA RELLENAR LA WEB MIENTRAS CARGAN LOS PRODUCTOS
+        );
+
+    if (!loadingProducts && !products.length)
+        return (
+            <>
+                {/* Añadir Estilos Para cuando no hay productos y no esta cargando */}
+                <h2>NO HAY PRODUCTS</h2>
+                <Button onClick={handleRefreshProduct}>Refrescar productos</Button>
+            </>
         );
 
     return (

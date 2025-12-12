@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import {
     getCategoriesFromLocalStorage,
     getProductsFromLocalStorage,
@@ -18,9 +18,10 @@ export const ProductsProvider = ({ children }) => {
         if (categoriesFromStorage) setCategories(categoriesFromStorage);
     }, []);
 
-    return (
-        <ProductsContext value={{ products, setProducts, categories, setCategories }}>
-            {children}
-        </ProductsContext>
+    const valueContext = useMemo(
+        () => ({ products, setProducts, categories, setCategories }),
+        [products, categories]
     );
+
+    return <ProductsContext value={valueContext}>{children}</ProductsContext>;
 };

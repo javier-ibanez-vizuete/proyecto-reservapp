@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { BookingsContext } from "../../contexts/BookingsContext";
 import { saveDataInSessionStorage } from "../../helpers/storage";
@@ -19,7 +19,7 @@ export const useBookings = () => {
 
     const defaultDate = new Date().toISOString().split("T")[0];
 
-    const getBookings = async () => {
+    const getBookings = useCallback(async () => {
         try {
             const bookings = await getBookingsApi();
             if (!bookings) throw new Error("Not Bookings Found");
@@ -29,9 +29,9 @@ export const useBookings = () => {
             console.error("Error Getting Bookings", err);
             throw err;
         }
-    };
+    }, []);
 
-    const getBookingsById = async (id) => {
+    const getBookingsById = useCallback(async (id) => {
         try {
             setIsLoading(true);
             const booking = await getBookingsByIdApi(id);
@@ -44,9 +44,9 @@ export const useBookings = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
 
-    const getBookingsByDate = async (date = defaultDate) => {
+    const getBookingsByDate = useCallback(async (date = defaultDate) => {
         setLoadingBookings(true);
         try {
             const bookings = await getBookingsByDateApi(date);
@@ -60,9 +60,9 @@ export const useBookings = () => {
         } finally {
             setLoadingBookings(false);
         }
-    };
+    }, []);
 
-    const postBookings = async (bookingData) => {
+    const postBookings = useCallback(async (bookingData) => {
         setIsLoading(true);
         try {
             const booking = await postBookingApi(bookingData);
@@ -86,9 +86,9 @@ export const useBookings = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
 
-    const postCancelBookingById = async (bookingId) => {
+    const postCancelBookingById = useCallback(async (bookingId) => {
         try {
             const canceledBooking = await postCancelBookingByIdApi(bookingId);
             if (!canceledBooking.ok) return;
@@ -108,9 +108,9 @@ export const useBookings = () => {
             console.error("Error Cancelling Booking by ID", err);
             throw err;
         }
-    };
+    }, []);
 
-    const deleteBookingById = async (bookingId) => {
+    const deleteBookingById = useCallback(async (bookingId) => {
         try {
             const removedBooking = await deleteBookingByIdApi(bookingId);
             if (!removedBooking) return;
@@ -129,7 +129,7 @@ export const useBookings = () => {
             console.error("Something went wrong deleting the booking", err);
             throw err;
         }
-    };
+    }, []);
 
     return {
         getBookings,

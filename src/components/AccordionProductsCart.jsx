@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useContext, useEffect, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import iconArrowDownBlack from "../assets/icons/icon-arrow-down-black.webp";
 import iconArrowDownWhite from "../assets/icons/icon-arrow-down-white.webp";
 import { LanguageContext } from "../contexts/LanguageContext";
@@ -16,7 +16,7 @@ import { ToastContainer } from "./ToastContainer";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
 
-const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
+const AccordionProductsCartItem = memo(({ id, qty, defaultOpen = false }) => {
     const [product, setProduct] = useState(null);
     const { getProductsById } = useProducts();
     const { products } = useContext(ProductsContext);
@@ -37,33 +37,45 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
         setIsOpen((prev) => !prev);
     };
 
-    const articleClasses = classNames(
-        "flex flex-col p-4 md:p-6 break-all",
-        {
-            "gap-4": isOpen,
-            "gap-0": !isOpen,
-        },
-        `rounded-xl cursor-pointer ${theme === "light" ? "bg-background" : "bg-background-dark"}`
+    const articleClasses = useMemo(
+        () =>
+            classNames(
+                "flex flex-col p-4 md:p-6 break-all",
+                {
+                    "gap-4": isOpen,
+                    "gap-0": !isOpen,
+                },
+                `rounded-xl cursor-pointer ${theme === "light" ? "bg-background" : "bg-background-dark"}`
+            ),
+        [isOpen, theme]
     );
 
-    const iconClasses = classNames("rotate-0 transition-all duration-300 ease-in-out", {
-        "rotate-180": isOpen,
-        "rotate-0": !isOpen,
-    });
+    const iconClasses = useMemo(
+        () =>
+            classNames("rotate-0 transition-all duration-300 ease-in-out", {
+                "rotate-180": isOpen,
+                "rotate-0": !isOpen,
+            }),
+        [isOpen]
+    );
 
-    const containerClasses = classNames("grid overflow-hidden transition-all duration-300 ease-in-out", {
-        "grid-rows-[1fr] opacity-100": isOpen,
-        "grid-rows-[0fr] opacity-0": !isOpen,
-    });
+    const containerClasses = useMemo(
+        () =>
+            classNames("grid overflow-hidden transition-all duration-300 ease-in-out", {
+                "grid-rows-[1fr] opacity-100": isOpen,
+                "grid-rows-[0fr] opacity-0": !isOpen,
+            }),
+        [isOpen]
+    );
 
-    const handleGetProductById = () => {
+    const handleGetProductById = useCallback(() => {
         if (!products) return handleGetProductByIdOnError();
         const selectedProduct = products?.filter((product) => product.id === id)[0] || {};
         const newProduct = { ...selectedProduct, qty: qty };
         setProduct(newProduct);
-    };
+    }, [products, id]);
 
-    const handleGetProductByIdOnError = async () => {
+    const handleGetProductByIdOnError = useCallback(async () => {
         isLoading1.setIsLoading(true);
         try {
             const product = await getProductsById(id);
@@ -75,9 +87,9 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
         } finally {
             isLoading1.setIsLoading(false);
         }
-    };
+    }, []);
 
-    const handleIncreaseProduct = async (event) => {
+    const handleIncreaseProduct = useCallback(async (event) => {
         event.stopPropagation();
         isLoading2.setIsLoading(true);
         try {
@@ -90,9 +102,9 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
         } finally {
             isLoading2.setIsLoading(false);
         }
-    };
+    }, []);
 
-    const handleDecreaseProduct = async (event) => {
+    const handleDecreaseProduct = useCallback(async (event) => {
         event.stopPropagation();
         isLoading3.setIsLoading(true);
         try {
@@ -106,9 +118,9 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
         } finally {
             isLoading3.setIsLoading(false);
         }
-    };
+    }, []);
 
-    const handleRemoveProduct = async (event) => {
+    const handleRemoveProduct = useCallback(async (event) => {
         event.stopPropagation();
         isLoading4.setIsLoading(true);
         try {
@@ -121,10 +133,10 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
         } finally {
             isLoading4.setIsLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
-        handleGetProductById(); // LANZAR PETICION PARA PEDIR PRODUCTO A LA API
+        handleGetProductById();
     }, [qty]);
 
     if (!product && !isLoading1) return null;
@@ -211,7 +223,7 @@ const AccordionProductsCartItem = ({ id, qty, defaultOpen = false }) => {
             <ToastContainer toasts={toasts} onClose={dismissToast} />
         </article>
     );
-};
+});
 
 export const AccordionProductsCart = ({ products = [], defaultOpen = 0 }) => {
     const { getText } = useContext(LanguageContext);

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { memo } from "react";
 
 /**
  * Spinner Component - Indicador de carga visual del sistema de diseño Eleven Code
@@ -26,7 +27,7 @@ import classNames from "classnames";
  *   <span>Cargando datos...</span>
  * </div>
  */
-export const Spinner = ({ size = "md", color = "primary", className = "", ...props }) => {
+export const Spinner = memo(({ size = "md", color = "primary", className = "", ...props }) => {
     const sizeClasses = {
         sm: "w-4 h-4",
         md: "w-6 h-6",
@@ -65,4 +66,4 @@ export const Spinner = ({ size = "md", color = "primary", className = "", ...pro
             />
         </svg>
     );
-};
+});

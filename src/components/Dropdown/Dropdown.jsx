@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { DropdownMenu } from "./DropdownMenu";
 import { DropdownTrigger } from "./DropdownTrigger";
@@ -80,217 +80,207 @@ import { DropdownTrigger } from "./DropdownTrigger";
  *   </DropdownMenu>
  * </Dropdown>
  */
-export const Dropdown = ({
-    /**
-     * Componentes hijos - debe incluir DropdownTrigger y DropdownMenu
-     * @type {React.ReactNode}
-     */
-    children,
-
-    /**
-     * Evento que activa el dropdown
-     * @type {'click' | 'hover'}
-     * @default 'click'
-     */
-    trigger = "click",
-
-    /**
-     * Posición del menú relativo al trigger
-     * @type {'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end'}
-     * @default 'bottom-start'
-     */
-    placement = "bottom-start",
-
-    /**
-     * Distancia en píxeles entre el trigger y el menú
-     * @type {number}
-     * @default 8
-     */
-    offset = 8,
-
-    /**
-     * Clases CSS adicionales para el contenedor
-     * @type {string}
-     * @default ''
-     */
-    className = "",
-
-    /**
-     * Si el dropdown está deshabilitado
-     * @type {boolean}
-     * @default false
-     */
-    disabled = false,
-
-    /**
-     * Props adicionales pasadas al contenedor
-     */
-    ...props
-}) => {
-    // Estado para controlar la visibilidad del dropdown
-    const [isOpen, setIsOpen] = useState(false);
-
-    // Referencias para los elementos DOM
-    const dropdownRef = useRef(null);
-    const triggerRef = useRef(null);
-    const { pathname } = useLocation();
-
-    /**
-     * Effect para manejar eventos globales cuando el dropdown está abierto
-     */
-    useEffect(() => {
+export const Dropdown = memo(
+    ({
         /**
-         * Cierra el dropdown al hacer click fuera
+         * Componentes hijos - debe incluir DropdownTrigger y DropdownMenu
+         * @type {React.ReactNode}
          */
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsOpen(false);
+        children,
+
+        /**
+         * Evento que activa el dropdown
+         * @type {'click' | 'hover'}
+         * @default 'click'
+         */
+        trigger = "click",
+
+        /**
+         * Posición del menú relativo al trigger
+         * @type {'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end'}
+         * @default 'bottom-start'
+         */
+        placement = "bottom-start",
+
+        /**
+         * Distancia en píxeles entre el trigger y el menú
+         * @type {number}
+         * @default 8
+         */
+        offset = 8,
+
+        /**
+         * Clases CSS adicionales para el contenedor
+         * @type {string}
+         * @default ''
+         */
+        className = "",
+
+        /**
+         * Si el dropdown está deshabilitado
+         * @type {boolean}
+         * @default false
+         */
+        disabled = false,
+
+        /**
+         * Props adicionales pasadas al contenedor
+         */
+        ...props
+    }) => {
+        // Estado para controlar la visibilidad del dropdown
+        const [isOpen, setIsOpen] = useState(false);
+
+        // Referencias para los elementos DOM
+        const dropdownRef = useRef(null);
+        const triggerRef = useRef(null);
+        const { pathname } = useLocation();
+
+        /**
+         * Effect para manejar eventos globales cuando el dropdown está abierto
+         */
+        useEffect(() => {
+            /**
+             * Cierra el dropdown al hacer click fuera
+             */
+            const handleClickOutside = (event) => {
+                if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                    setIsOpen(false);
+                }
+            };
+
+            /**
+             * Cierra el dropdown con la tecla Escape
+             */
+            const handleEscape = (event) => {
+                if (event.key === "Escape") {
+                    setIsOpen(false);
+                }
+            };
+
+            if (isOpen) {
+                document.addEventListener("mousedown", handleClickOutside);
+                document.addEventListener("keydown", handleEscape);
             }
-        };
 
-        /**
-         * Cierra el dropdown con la tecla Escape
-         */
-        const handleEscape = (event) => {
-            if (event.key === "Escape") {
-                setIsOpen(false);
-            }
-        };
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+                document.removeEventListener("keydown", handleEscape);
+            };
+        }, [isOpen]);
 
-        /**
-         * Previene el scroll cuando el dropdown está abierto (móvil)
-         */
-        const handleScroll = () => {
-            // if (window.innerWidth < 768) {
-            //     // Solo en móvil
-            //     setIsOpen(false);
-            // }
-        };
-
-        if (isOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
-            document.addEventListener("keydown", handleEscape);
-            // window.addEventListener("scroll", handleScroll);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-            document.removeEventListener("keydown", handleEscape);
-            // window.removeEventListener("scroll", handleScroll);
-        };
-    }, [isOpen]);
-
-    useEffect(() => {
-        setIsOpen(false);
-    }, [pathname]);
-
-    /**
-     * Alterna la visibilidad del dropdown
-     */
-    const toggleDropdown = () => {
-        if (!disabled) {
-            setIsOpen(!isOpen);
-        }
-    };
-
-    /**
-     * Cierra el dropdown
-     */
-    const closeDropdown = () => setIsOpen(false);
-
-    /**
-     * Maneja eventos de hover para trigger hover
-     */
-    const handleMouseEnter = () => {
-        if (trigger === "hover" && !disabled) {
-            setIsOpen(true);
-        }
-    };
-
-    /**
-     * Maneja eventos de mouse leave para trigger hover
-     */
-    const handleMouseLeave = () => {
-        if (trigger === "hover") {
+        useEffect(() => {
             setIsOpen(false);
-        }
-    };
+        }, [pathname]);
 
-    /**
-     * Mapeo de posiciones a clases CSS
-     */
-    const placementClasses = {
-        "right-center": "left-full ml-2 -translate-y-1/2",
-        "left-center": "right-full mr-2 -translate-y-1/2",
-        "top-start": "bottom-full left-0 mb-2",
-        "top-end": "bottom-full right-0 mb-2",
-        "bottom-start": "top-full left-0 mt-2",
-        "bottom-center": "top-full right-1/2 translate-x-1/2 mt-xs",
-        "bottom-full": "top-full right-0 left-0 mt-xs",
-        "bottom-end": "top-full right-0 mt-2",
-        "left-start": "right-full top-0 mr-2",
-        "left-end": "right-full bottom-0 mr-2",
-        "right-start": "left-full top-0 ml-2",
-        "right-end": "left-full bottom-0 ml-2",
-    };
+        /**
+         * Alterna la visibilidad del dropdown
+         */
+        const toggleDropdown = useCallback(() => {
+            if (!disabled) {
+                setIsOpen((prevValue) => !prevValue);
+            }
+        }, [disabled]);
 
-    /**
-     * Clases CSS calculadas para el contenedor
-     */
-    const dropdownClasses = classnames(
-        // Clases base del dropdown
-        `relative inline-flex text-left gap-8`,
+        /**
+         * Cierra el dropdown
+         */
+        const closeDropdown = useCallback(() => setIsOpen(false), []);
 
-        // Estado deshabilitado
-        {
-            "opacity-50 cursor-not-allowed": disabled,
-        },
+        /**
+         * Maneja eventos de hover para trigger hover
+         */
+        const handleMouseEnter = () => {
+            if (trigger === "hover" && !disabled) {
+                setIsOpen(true);
+            }
+        };
 
-        // Clases adicionales
-        className
-    );
+        /**
+         * Maneja eventos de mouse leave para trigger hover
+         */
+        const handleMouseLeave = () => {
+            if (trigger === "hover") {
+                setIsOpen(false);
+            }
+        };
 
-    /**
-     * Props para el contenedor dropdown
-     */
-    const dropdownProps = {
-        ref: dropdownRef,
-        className: dropdownClasses,
-        onMouseEnter: handleMouseEnter,
-        onMouseLeave: handleMouseLeave,
-        role: "menu",
-        "aria-haspopup": "true",
-        "aria-expanded": isOpen,
-        "data-dropdown": true,
-        "data-open": isOpen,
-        "data-placement": placement,
-        "data-trigger": trigger,
-        ...props,
-    };
+        /**
+         * Mapeo de posiciones a clases CSS
+         */
+        const placementClasses = {
+            "right-center": "left-full ml-2 -translate-y-1/2",
+            "left-center": "right-full mr-2 -translate-y-1/2",
+            "top-start": "bottom-full left-0 mb-2",
+            "top-end": "bottom-full right-0 mb-2",
+            "bottom-start": "top-full left-0 mt-2",
+            "bottom-center": "top-full right-1/2 translate-x-1/2 mt-xs",
+            "bottom-full": "top-full right-0 left-0 mt-xs",
+            "bottom-end": "top-full right-0 mt-2",
+            "left-start": "right-full top-0 mr-2",
+            "left-end": "right-full bottom-0 mr-2",
+            "right-start": "left-full top-0 ml-2",
+            "right-end": "left-full bottom-0 ml-2",
+        };
 
-    return (
-        <div {...dropdownProps}>
-            {React.Children.map(children, (child) => {
-                if (child.type === DropdownTrigger) {
-                    return React.cloneElement(child, {
-                        onClick: toggleDropdown,
-                        isOpen,
-                        disabled,
-                        ref: triggerRef,
-                    });
-                }
-                if (child.type === DropdownMenu) {
-                    return React.cloneElement(child, {
-                        isOpen,
-                        onClose: closeDropdown,
-                        placement: placementClasses[placement],
-                    });
-                }
-                return child;
-            })}
-        </div>
-    );
-};
+        /**
+         * Clases CSS calculadas para el contenedor
+         */
+        const dropdownClasses = classnames(
+            // Clases base del dropdown
+            `relative inline-flex text-left gap-8`,
+
+            // Estado deshabilitado
+            {
+                "opacity-50 cursor-not-allowed": disabled,
+            },
+
+            // Clases adicionales
+            className
+        );
+
+        /**
+         * Props para el contenedor dropdown
+         */
+        const dropdownProps = {
+            ref: dropdownRef,
+            className: dropdownClasses,
+            onMouseEnter: handleMouseEnter,
+            onMouseLeave: handleMouseLeave,
+            role: "menu",
+            "aria-haspopup": "true",
+            "aria-expanded": isOpen,
+            "data-dropdown": true,
+            "data-open": isOpen,
+            "data-placement": placement,
+            "data-trigger": trigger,
+            ...props,
+        };
+
+        return (
+            <div {...dropdownProps}>
+                {React.Children.map(children, (child) => {
+                    if (child.type === DropdownTrigger) {
+                        return React.cloneElement(child, {
+                            onClick: toggleDropdown,
+                            isOpen,
+                            disabled,
+                            ref: triggerRef,
+                        });
+                    }
+                    if (child.type === DropdownMenu) {
+                        return React.cloneElement(child, {
+                            isOpen,
+                            onClose: closeDropdown,
+                            placement: placementClasses[placement],
+                        });
+                    }
+                    return child;
+                })}
+            </div>
+        );
+    }
+);
 
 // Agregamos los sub-componentes como propiedades estáticas para facilitar el uso
 Dropdown.Trigger = DropdownTrigger;

@@ -54,7 +54,6 @@ export const ThemeButton = ({ className = "", ...props }) => {
     );
 };
 
-// Helper functions extracted to avoid nested logic
 const getContainerClasses = (className, theme, sizesDevice) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = sizesDevice;
 
