@@ -1,17 +1,43 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
+/**
+ * Custom hook that tracks window width with performance optimizations
+ * Includes debouncing to prevent excessive state updates during resize
+ *
+ * @returns {number} Current window width in pixels
+ *
+ * @example
+ * const width = useWindowWidth();
+ */
 export const useWindowWidth = () => {
-	const [width, setWidth] = useState(window.innerWidth);
+    const [width, setWidth] = useState(window.innerWidth);
 
-	useEffect(() => {
-		const handleResize = () => {
-			setWidth(window.innerWidth);
-		};
+    const timeoutRef = useRef(null);
 
-		window.addEventListener("resize", handleResize);
+    /**
+     * Handles window resize with debouncing
+     * useCallback evita recrear esta función en cada render
+     */
+    const handleResize = useCallback(() => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
 
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
+        timeoutRef.current = setTimeout(() => {
+            setWidth(window.innerWidth);
+        }, 150);
+    }, []);
 
-	return width;
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [handleResize]);
+
+    return width;
 };

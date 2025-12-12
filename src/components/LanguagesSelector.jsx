@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { Dropdown } from "./Dropdown/Dropdown";
 import { DropdownTrigger } from "./Dropdown/DropdownTrigger";
@@ -11,7 +11,7 @@ import { FLAGS_URL_DATA } from "../utils/FLAGS_URL_DATA";
 import { DropdownItem } from "./Dropdown/DropdownItem";
 import { DropdownMenu } from "./Dropdown/DropdownMenu";
 
-export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => {} }) => {
+export const LanguagesSelector = memo(({ placement = "bottom-start", onClick = () => {} }) => {
     const { lang, languages, handleLang } = useContext(LanguageContext);
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
@@ -31,7 +31,7 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
                 className={"active:scale-95 lg:hover:-translate-y-[2px]"}
             >
                 <ImageContainer size={iconsSizeConfig}>
-                    <Image imageData={FLAGS_URL_DATA[lang]} alt="Language Flag" />
+                    <Image imageData={FLAGS_URL_DATA[lang]} alt={`${lang} Flag`} />
                 </ImageContainer>
             </DropdownTrigger>
             <DropdownMenu classNameMenuContainer="flex-col">
@@ -51,4 +51,4 @@ export const LanguagesSelector = ({ placement = "bottom-start", onClick = () => 
             </DropdownMenu>
         </Dropdown>
     );
-};
+});

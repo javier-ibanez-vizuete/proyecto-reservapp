@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { getCartFromLocalStorage, getCartSummaryFromLocalStorage } from "../core/cart/cart.service";
 
 export const CartsContext = createContext(null);
@@ -14,5 +14,7 @@ export const CartsProvider = ({ children }) => {
         if (cartSummaryFromStorage) setCartSummary(cartSummaryFromStorage);
     }, []);
 
-    return <CartsContext value={{ cart, setCart, cartSummary, setCartSummary }}>{children}</CartsContext>;
+    const valueContext = useMemo(() => ({ cart, setCart, cartSummary, setCartSummary }), [cart, cartSummary]);
+
+    return <CartsContext value={valueContext}>{children}</CartsContext>;
 };

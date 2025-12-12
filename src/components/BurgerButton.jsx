@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import { useContext, useMemo } from "react";
+import { memo, useContext, useMemo } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useDevice } from "../hooks/useDevice";
 
-export const BurgerButton = ({ isMobileMenuOpen, toggleMobileMenu }) => {
+export const BurgerButton = memo(({ isMobileMenuOpen, toggleMobileMenu }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
 
@@ -83,4 +83,4 @@ export const BurgerButton = ({ isMobileMenuOpen, toggleMobileMenu }) => {
             </label>
         </div>
     );
-};
+});

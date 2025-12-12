@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useCallback, useContext, useState } from "react";
 import { BookingCalendar } from "../components/BookingCalendar";
 import { Container } from "../components/Container";
 import { CustomCheckbox } from "../components/CustomCheckbox";
@@ -22,6 +21,7 @@ import {
 } from "../core/bookings/bookings.service";
 import { useBookings } from "../core/bookings/useBookings";
 import { TABLES } from "../data/tables";
+import { dateVerificator } from "../helpers/dateVerificator";
 import { BookingVerificationSubmit } from "../helpers/FieldsVerificator";
 import {
     getDataFromSessionStorage,
@@ -73,20 +73,29 @@ export const BookingPage = () => {
     const [error, setError] = useState("");
 
     const { postBookings, isLoading } = useBookings();
-    const location = useLocation();
 
     const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
     const { getText } = useContext(LanguageContext);
     const { toasts, showToast, dismissToast } = useToast();
 
-    const onChangeDate = (selectedDate) => {
+    const onChangeDate = useCallback((selectedDate) => {
         setError("");
         const date = selectedDate.toISOString().split("T")[0];
-        const year = date.split("-")[0];
-        const month = date.split("-")[1];
-        const day = ++date.split("-")[2];
-        const dateChange = `${year}-${month}-${day}`;
+        let year = date.split("-")[0];
+        let month = date.split("-")[1];
+        let day = ++date.split("-")[2];
+        let dateChange = `${year}-${month}-${day}`;
+
+        const isValidDay = dateVerificator(dateChange);
+        if (!isValidDay) {
+            dateChange = `${year}-${++month}-${1}`;
+        }
+
+        const isValidMonth = dateVerificator(dateChange);
+        if (!isValidMonth) {
+            dateChange = `${++year}-${1}-${1}`;
+        }
 
         setForm((prevValue) => {
             const newBookingValue = { ...prevValue, date: dateChange };
@@ -96,27 +105,27 @@ export const BookingPage = () => {
 
         setSelectedDate(dateChange);
         saveDataInSessionStorage("selectedDate", dateChange);
-    };
+    }, []);
 
-    const onChangeTime = (time) => {
+    const onChangeTime = useCallback((time) => {
         setError("");
         setForm((prevValue) => {
             const newBookingValue = { ...prevValue, time: time };
             saveBookingFormInLocalStorage(newBookingValue);
             return newBookingValue;
         });
-    };
+    }, []);
 
-    const onChangeCustomer = (customers) => {
+    const onChangeCustomer = useCallback((customers) => {
         setError("");
         setForm((prevValue) => {
             const newBookingValue = { ...prevValue, partySize: customers };
             saveBookingFormInLocalStorage(newBookingValue);
             return newBookingValue;
         });
-    };
+    }, []);
 
-    const onChangeTable = (id) => {
+    const onChangeTable = useCallback((id) => {
         setError("");
         setForm((prevValue) => {
             const newValue = { ...prevValue, tableId: id };
@@ -125,9 +134,9 @@ export const BookingPage = () => {
         });
         setSelectedTable(id);
         saveDataInSessionStorage("selectedTable", id);
-    };
+    }, []);
 
-    const onInputChange = (event) => {
+    const onInputChange = useCallback((event) => {
         const isCheckbox = event.target.type === "checkbox";
         const isTextArea = event.target.type === "textarea";
 
@@ -153,16 +162,16 @@ export const BookingPage = () => {
                 return newValue;
             });
         }
-    };
+    }, []);
 
-    const onBookingSubmit = () => {
+    const onBookingSubmit = useCallback(() => {
         const hasError = BookingVerificationSubmit(form);
         if (hasError) return setError(hasError);
 
         setShowModal(true);
-    };
+    }, [form]);
 
-    const onConfirmSubmit = async () => {
+    const onConfirmSubmit = useCallback(async () => {
         try {
             const newFormValue = { ...form, userId: user?.id };
             const booked = await postBookings(newFormValue);
@@ -177,9 +186,9 @@ export const BookingPage = () => {
             }
             showToast(getText("toastBookingError"), "error");
         }
-    };
+    }, [form, user?.id]);
 
-    const resetForm = () => {
+    const resetForm = useCallback(() => {
         setForm(INITIAL_BOOKING_DATA);
         saveBookingFormInLocalStorage(INITIAL_BOOKING_DATA);
         setSelectedDate(null);
@@ -187,7 +196,9 @@ export const BookingPage = () => {
         setSelectedTable("");
         removeFromSessionStorage("selectedTable");
         setShowModal(false);
-    };
+    }, []);
+
+    const onCloseModal = useCallback(() => setShowModal(false), []);
 
     return (
         <div className="flex flex-1 flex-col py-4">
@@ -196,7 +207,7 @@ export const BookingPage = () => {
                 <Modal
                     isOpen={showModal}
                     size="lg"
-                    onClose={() => setShowModal(false)}
+                    onClose={onCloseModal}
                     className={theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}
                 >
                     <ModalHeader>{getText("confirmBookingTitle")}</ModalHeader>
@@ -208,15 +219,15 @@ export const BookingPage = () => {
                             </li>
                             <li className="flex flex-col gap-1">
                                 <p>{getText("dateConfirmText")}:</p>
-                                <h6>{form.date}</h6>
+                                <h6>{form?.date}</h6>
                             </li>
                             <li className="flex flex-col gap-1">
                                 <p>{getText("timeConfirmText")}:</p>
-                                <h6>{form.time}</h6>
+                                <h6>{form?.time}</h6>
                             </li>
                             <li className="flex flex-col gap-1">
                                 <p>{getText("customersConfirmText")}:</p>
-                                <h6>{form.partySize}</h6>
+                                <h6>{form?.partySize}</h6>
                             </li>
                             {form.extras?.highChair && (
                                 <li className="flex flex-col gap-1">
@@ -228,7 +239,7 @@ export const BookingPage = () => {
                                     </h6>
                                 </li>
                             )}
-                            {form.notes && (
+                            {form?.notes && (
                                 <li className="flex flex-col gap-1">
                                     <p>{getText("aditionalMessageConfirmText")}:</p>
                                     <h6 className="break-all">{form.notes}</h6>
@@ -253,6 +264,7 @@ export const BookingPage = () => {
                         className="shadow-lg"
                         onChange={onChangeDate}
                         selectedDate={selectedDate}
+                        userConfig={true}
                     />
                 </div>
                 <div className="flex flex-col gap-4 md:flex-row md:justify-center md:items-stretch">

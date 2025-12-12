@@ -114,7 +114,7 @@ export const AdminBookingDetail = ({
         document.body.appendChild(anchor);
         anchor.click();
         document.body.removeChild(anchor);
-    }, [ownerDetails]);
+    }, [ownerDetails?.email]);
 
     const handleCallOwner = useCallback(() => {
         if (!ownerDetails?.phoneNumber) return;
@@ -127,9 +127,9 @@ export const AdminBookingDetail = ({
         document.body.appendChild(anchor);
         anchor.click();
         document.body.removeChild(anchor);
-    }, [ownerDetails]);
+    }, [ownerDetails?.phoneNumber]);
 
-    const handleDeleteModal = useCallback(() => setShowDeleteModal((prev) => !prev), [showDeleteModal]);
+    const handleDeleteModal = useCallback(() => setShowDeleteModal((prev) => !prev), []);
 
     const handleCancelBooking = useCallback(async () => {
         try {
@@ -143,7 +143,7 @@ export const AdminBookingDetail = ({
             loaderCancelBooking.setIsLoading(false);
             setShowDeleteModal(false);
         }
-    }, [bookingDetails]);
+    }, []);
 
     const baseArticleClasses = "flex-1 flex flex-col";
     const baseCardContainerClasses = "flex flex-col";
@@ -226,36 +226,39 @@ export const AdminBookingDetail = ({
         full: "rounded-full",
     };
 
-    const variantsBorder = {
-        default: classNames("border", {
-            "border-gray-700/50": theme === "light",
-            "border-gray-200/50": theme !== "light",
+    const variantsBorder = useMemo(
+        () => ({
+            default: classNames("border", {
+                "border-gray-700/50": theme === "light",
+                "border-gray-200/50": theme !== "light",
+            }),
+            accent: classNames("border", {
+                "border-admin-accent-background/40": theme === "light",
+                "border-admin-accent-background-dark/40": theme !== "light",
+            }),
+            primary: classNames("border", {
+                "border-admin-primary-color/40": theme === "light",
+                "border-admin-primary-color/20": theme !== "light",
+            }),
+            secondary: classNames("border", {
+                "border-admin-secondary-color/40": theme === "light",
+                "border-admin-secondary-color/20": theme !== "light",
+            }),
+            success: classNames("border", {
+                "border-success-700/40": theme === "light",
+                "border-success-200/20": theme !== "light",
+            }),
+            warning: classNames("border", {
+                "border-warning-700/40": theme === "light",
+                "border-warning-200/20": theme !== "light",
+            }),
+            error: classNames("border", {
+                "border-error-700/40": theme === "light",
+                "border-error-200/20": theme !== "light",
+            }),
         }),
-        accent: classNames("border", {
-            "border-admin-accent-background/40": theme === "light",
-            "border-admin-accent-background-dark/40": theme !== "light",
-        }),
-        primary: classNames("border", {
-            "border-admin-primary-color/40": theme === "light",
-            "border-admin-primary-color/20": theme !== "light",
-        }),
-        secondary: classNames("border", {
-            "border-admin-secondary-color/40": theme === "light",
-            "border-admin-secondary-color/20": theme !== "light",
-        }),
-        success: classNames("border", {
-            "border-success-700/40": theme === "light",
-            "border-success-200/20": theme !== "light",
-        }),
-        warning: classNames("border", {
-            "border-warning-700/40": theme === "light",
-            "border-warning-200/20": theme !== "light",
-        }),
-        error: classNames("border", {
-            "border-error-700/40": theme === "light",
-            "border-error-200/20": theme !== "light",
-        }),
-    };
+        [theme]
+    );
 
     const autoConfig = useMemo(
         () => ({
@@ -329,7 +332,7 @@ export const AdminBookingDetail = ({
         );
 
     return (
-        <article className={currentArticleClasses}>
+        <article className={currentArticleClasses} {...props}>
             <ConfirmModal
                 isOpen={showDeleteModal}
                 onClose={handleDeleteModal}

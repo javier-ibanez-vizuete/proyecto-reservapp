@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import {
     getBookingDetailsFromLocalStorage,
     getBookingsFromLocalStorage,
@@ -18,9 +18,10 @@ export const BookingsProvider = ({ children }) => {
         if (bookingDetailsFromStorage) setBookingDetails(bookingDetailsFromStorage);
     }, []);
 
-    return (
-        <BookingsContext value={{ bookings, bookingDetails, setBookings, setBookingDetails }}>
-            {children}
-        </BookingsContext>
+    const valueContext = useMemo(
+        () => ({ bookings, bookingDetails, setBookings, setBookingDetails }),
+        [bookings, bookingDetails]
     );
+
+    return <BookingsContext value={valueContext}>{children}</BookingsContext>;
 };

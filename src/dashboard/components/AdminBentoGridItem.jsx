@@ -40,36 +40,39 @@ export const AdminBentoGridItem = ({
         }
     );
 
-    const variantsGradient = {
-        default: classNames("bg-gradient-to-br hover:bg-gradient-to-tr", {
-            "from-admin-background to-admin-accent-background": theme === "light",
-            "from-admin-background-dark to-admin-accent-background-dark": theme !== "light",
+    const variantsGradient = useMemo(
+        () => ({
+            default: classNames("bg-gradient-to-br hover:bg-gradient-to-tr", {
+                "from-admin-background to-admin-accent-background": theme === "light",
+                "from-admin-background-dark to-admin-accent-background-dark": theme !== "light",
+            }),
+            accent: classNames("bg-gradient-to-tr hover:bg-gradient-to-br", {
+                "from-admin-accent-background via-[#9cd4ec] to-admin-background": theme === "light",
+                "from-admin-accent-background-dark via-[#103247] to-admin-background-dark": theme !== "light",
+            }),
+            primary: classNames(
+                "bg-gradient-to-tr from-admin-primary-color to-admin-primary-hover",
+                "hover:bg-gradient-to-r hover:from-admin-primary-hover hover:to-admin-primary-color"
+            ),
+            secondary: classNames(
+                "bg-gradient-to-r from-admin-secondary-color to-admin-secondary-hover",
+                "hover:bg-gradient-to-r hover:from-admin-secondary-hover hover:to-admin-secondary-color"
+            ),
+            success: classNames(
+                "bg-gradient-to-br from-success-400 to-success-500",
+                "hover:bg-gradient-to-lt hover:from-success-500 hover:to-success-400"
+            ),
+            warning: classNames(
+                "bg-gradient-to-br from-warning-400 to-warning-500",
+                "hover:bg-gradient-to-lt hover:from-warning-500 hover:to-warning-400"
+            ),
+            error: classNames(
+                "bg-gradient-to-br from-error-400 to-error-500",
+                "hover:bg-gradient-to-lt hover:from-error-500 hover:to-error-400"
+            ),
         }),
-        accent: classNames("bg-gradient-to-tr hover:bg-gradient-to-br", {
-            "from-admin-accent-background via-[#9cd4ec] to-admin-background": theme === "light",
-            "from-admin-accent-background-dark via-[#103247] to-admin-background-dark": theme !== "light",
-        }),
-        primary: classNames(
-            "bg-gradient-to-tr from-admin-primary-color to-admin-primary-hover",
-            "hover:bg-gradient-to-r hover:from-admin-primary-hover hover:to-admin-primary-color"
-        ),
-        secondary: classNames(
-            "bg-gradient-to-r from-admin-secondary-color to-admin-secondary-hover",
-            "hover:bg-gradient-to-r hover:from-admin-secondary-hover hover:to-admin-secondary-color"
-        ),
-        success: classNames(
-            "bg-gradient-to-br from-success-400 to-success-500",
-            "hover:bg-gradient-to-lt hover:from-success-500 hover:to-success-400"
-        ),
-        warning: classNames(
-            "bg-gradient-to-br from-warning-400 to-warning-500",
-            "hover:bg-gradient-to-lt hover:from-warning-500 hover:to-warning-400"
-        ),
-        error: classNames(
-            "bg-gradient-to-br from-error-400 to-error-500",
-            "hover:bg-gradient-to-lt hover:from-error-500 hover:to-error-400"
-        ),
-    };
+        [theme]
+    );
 
     const variantsBorder = {
         default: classNames("border", {
@@ -146,14 +149,18 @@ export const AdminBentoGridItem = ({
         [theme, isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
     );
 
-    const currentBentoGridItemClasses = classNames(
-        baseClasses,
-        hoverClasses,
-        variantsGradient[gradient] || autoBentoGridItemConfig.gradient || variantsGradient.default,
-        variantsBorder[borderVariant] || autoBentoGridItemConfig.border || variantsBorder.default,
-        variantsPadding[padding] || autoBentoGridItemConfig.padding || variantsPadding.default,
-        variantsColSpan[colSpan] || variantsColSpan.default,
-        variantsRowSpan[rowSpan] || variantsRowSpan.default
+    const currentBentoGridItemClasses = useMemo(
+        () =>
+            classNames(
+                baseClasses,
+                hoverClasses,
+                variantsGradient[gradient] || autoBentoGridItemConfig.gradient || variantsGradient.default,
+                variantsBorder[borderVariant] || autoBentoGridItemConfig.border || variantsBorder.default,
+                variantsPadding[padding] || autoBentoGridItemConfig.padding || variantsPadding.default,
+                variantsColSpan[colSpan] || variantsColSpan.default,
+                variantsRowSpan[rowSpan] || variantsRowSpan.default
+            ),
+        [gradient, borderVariant, padding, colSpan, rowSpan]
     );
 
     const usersBentoDisplay = useMemo(

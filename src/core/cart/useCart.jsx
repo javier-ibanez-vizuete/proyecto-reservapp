@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { CartsContext } from "../../contexts/CartsContext";
 import { normalizeIdCart } from "../../helpers/normalizeIdCart";
@@ -21,44 +21,50 @@ export const useCart = () => {
     const { cart, setCart, setCartSummary } = useContext(CartsContext);
     const { postOrder } = useOrders();
 
-    const getCartMe = async (userId) => {
-        try {
-            const cart = await getCartMeApi();
+    const getCartMe = useCallback(
+        async (userId) => {
+            try {
+                const cart = await getCartMeApi();
 
-            if (cart) {
-                const normalizedCard = normalizeIdCart(cart);
+                if (cart) {
+                    const normalizedCard = normalizeIdCart(cart);
 
-                setCart(normalizedCard);
-                saveCartInLocalStorage(normalizedCard);
+                    setCart(normalizedCard);
+                    saveCartInLocalStorage(normalizedCard);
+                }
+            } catch (err) {
+                if (err === 404) {
+                    const created = await postCart(userId);
+                    if (!created) throw new Error("No se ha podido crear el carrito");
+                    return;
+                }
+                throw new Error("Creacion de carrito no autorizada");
             }
-        } catch (err) {
-            if (err === 404) {
-                const created = await postCart(userId);
-                if (!created) throw new Error("No se ha podido crear el carrito");
-                return;
-            }
-            throw new Error("Creacion de carrito no autorizada");
-        }
-    };
+        },
+        [getCartMeApi, normalizeIdCart]
+    );
 
-    const getCartsById = async (id) => {
-        setIsLoading(true);
-        try {
-            const cart = await getCartByIdApi(id);
-            if (cart) {
-                setCart(cart);
-                saveCartInLocalStorage(cart);
+    const getCartsById = useCallback(
+        async (id) => {
+            setIsLoading(true);
+            try {
+                const cart = await getCartByIdApi(id);
+                if (cart) {
+                    setCart(cart);
+                    saveCartInLocalStorage(cart);
+                }
+                if (!cart) console.error("NO HAY CARRITO");
+            } catch (err) {
+                console.error("Algo salió mal en getCartsById", err);
+                throw err;
+            } finally {
+                setIsLoading(false);
             }
-            if (!cart) console.error("NO HAY CARRITO");
-        } catch (err) {
-            console.error("Algo salió mal en getCartsById", err);
-            throw err;
-        } finally {
-            setIsLoading(false);
-        }
-    };
+        },
+        [getCartByIdApi]
+    );
 
-    const getCartSummary = async () => {
+    const getCartSummary = useCallback(async () => {
         try {
             const cartSummary = await getCartSummaryApi();
             if (cartSummary) {
@@ -69,46 +75,52 @@ export const useCart = () => {
             console.error("No hemos obtenido el resumen del carrito", err);
             throw err;
         }
-    };
+    }, [getCartSummaryApi]);
 
-    const postCart = async (userId) => {
-        setIsLoading(true);
-        try {
-            const cart = await postCartApi(userId);
-            if (!cart) return console.error("NO SE HA POSTEADO EL CARRITO");
-            setCart(cart);
-            saveCartInLocalStorage(cart);
-            return cart;
-        } catch (err) {
-            console.error("Algo ha salido mal en postCarts", err);
-            throw err;
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    const postCart = useCallback(
+        async (userId) => {
+            setIsLoading(true);
+            try {
+                const cart = await postCartApi(userId);
+                if (!cart) return console.error("NO SE HA POSTEADO EL CARRITO");
+                setCart(cart);
+                saveCartInLocalStorage(cart);
+                return cart;
+            } catch (err) {
+                console.error("Algo ha salido mal en postCarts", err);
+                throw err;
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [postCartApi]
+    );
 
-    const postCartItem = async (productId) => {
-        setIsLoading(true);
-        try {
-            const newProduct = {
-                productId: productId,
-                qty: 1,
-            };
+    const postCartItem = useCallback(
+        async (productId) => {
+            setIsLoading(true);
+            try {
+                const newProduct = {
+                    productId: productId,
+                    qty: 1,
+                };
 
-            const updatedCart = await postCartItemApi(cart.id, newProduct);
-            if (!updatedCart) return console.error("NO SE HA AÑADIDO EL PRODUCTO AL CARRITO");
-            setCart(updatedCart);
-            saveCartInLocalStorage(updatedCart);
-            return updatedCart;
-        } catch (err) {
-            console.error("Algo ha salido mal en postCartsItem", err);
-            throw err;
-        } finally {
-            setIsLoading(false);
-        }
-    };
+                const updatedCart = await postCartItemApi(cart.id, newProduct);
+                if (!updatedCart) return console.error("NO SE HA AÑADIDO EL PRODUCTO AL CARRITO");
+                setCart(updatedCart);
+                saveCartInLocalStorage(updatedCart);
+                return updatedCart;
+            } catch (err) {
+                console.error("Algo ha salido mal en postCartsItem", err);
+                throw err;
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [postCartItemApi]
+    );
 
-    const postCartCheckout = async () => {
+    const postCartCheckout = useCallback(async () => {
         try {
             const checkedCart = await postCartCheckoutApi(cart.id);
             if (!checkedCart.ok) return console.error("Algo ha sucedido mal");
@@ -121,42 +133,48 @@ export const useCart = () => {
         } catch (err) {
             throw err;
         }
-    };
+    }, [postCartCheckoutApi, postOrder, postCart]);
 
-    const patchCartItem = async (productId, newProductData) => {
-        setIsLoading(true);
-        try {
-            const updatedCart = await patchCartItemApi(cart.id, productId, newProductData);
-            if (!updatedCart) return console.error("NO SE HA MODIFICADO EL PRODUCTO DEL CARRITO");
-            setCart(updatedCart);
-            saveCartInLocalStorage(updatedCart);
-            return updatedCart;
-        } catch (err) {
-            console.error("Algo ha salido mal en patchCartsITem", err);
-            throw err;
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    const patchCartItem = useCallback(
+        async (productId, newProductData) => {
+            setIsLoading(true);
+            try {
+                const updatedCart = await patchCartItemApi(cart.id, productId, newProductData);
+                if (!updatedCart) return console.error("NO SE HA MODIFICADO EL PRODUCTO DEL CARRITO");
+                setCart(updatedCart);
+                saveCartInLocalStorage(updatedCart);
+                return updatedCart;
+            } catch (err) {
+                console.error("Algo ha salido mal en patchCartsITem", err);
+                throw err;
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [patchCartItemApi]
+    );
 
-    const deleteCartItem = async (productId) => {
-        setIsLoading(true);
+    const deleteCartItem = useCallback(
+        async (productId) => {
+            setIsLoading(true);
 
-        try {
-            const response = await deleteCartItemApi(cart.id, productId);
-            const updatedCart = response.cart;
+            try {
+                const response = await deleteCartItemApi(cart.id, productId);
+                const updatedCart = response.cart;
 
-            if (!updatedCart) return console.error("NO SE HA ELIMINADO EL PRODUCTO DEL CARRITO");
-            setCart(updatedCart);
-            saveCartInLocalStorage(updatedCart);
-            return updatedCart;
-        } catch (err) {
-            console.error("Algo ha salido mal en deleteCartsItem", err);
-            throw err;
-        } finally {
-            setIsLoading(false);
-        }
-    };
+                if (!updatedCart) return console.error("NO SE HA ELIMINADO EL PRODUCTO DEL CARRITO");
+                setCart(updatedCart);
+                saveCartInLocalStorage(updatedCart);
+                return updatedCart;
+            } catch (err) {
+                console.error("Algo ha salido mal en deleteCartsItem", err);
+                throw err;
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [deleteCartItemApi]
+    );
 
     return {
         getCartMe,

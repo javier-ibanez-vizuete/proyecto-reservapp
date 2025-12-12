@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useToast = (defaultDuration = 2000, defaultPosition = "top-center", animationDuration = 400) => {
     const [toasts, setToasts] = useState([]);
-    const timersRef = useRef({}); // { [id]: { auto: timeoutId, remove: timeoutId } }
+    const timersRef = useRef({});
 
     useEffect(() => {
         return () => {
@@ -15,7 +15,6 @@ export const useToast = (defaultDuration = 2000, defaultPosition = "top-center",
     }, []);
 
     const removeToast = useCallback((id) => {
-        // cleanup timers for this toast
         const timers = timersRef.current[id];
         if (timers?.auto) clearTimeout(timers.auto);
         if (timers?.remove) clearTimeout(timers.remove);

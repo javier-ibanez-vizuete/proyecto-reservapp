@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { getOrdersFromLocalStorage } from "../core/orders/orders.service";
 
 export const OrdersContext = createContext(null);
@@ -11,5 +11,7 @@ export const OrdersProvider = ({ children }) => {
         if (ordersFromStorage) setOrders(ordersFromStorage);
     }, []);
 
-    return <OrdersContext value={{ orders, setOrders }}>{children}</OrdersContext>;
+    const valueContext = useMemo(() => ({ orders, setOrders }), [orders]);
+
+    return <OrdersContext value={valueContext}>{children}</OrdersContext>;
 };

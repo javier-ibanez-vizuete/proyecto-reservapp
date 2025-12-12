@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import { ArrowRight } from "lucide-react";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useDevice } from "../../hooks/useDevice";
 
-export const CTAButton = ({ text, href, onClick }) => {
+export const CTAButton = memo(({ text, href, onClick }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const ctaButtonConfig = useMemo(
@@ -18,12 +18,16 @@ export const CTAButton = ({ text, href, onClick }) => {
         [isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop]
     );
 
-    const iconSizeConfig = classNames({
-        12: isMobile2Xs || isMobileXs,
-        14: isMobileSm,
-        15: isTablet,
-        16: isDesktop,
-    });
+    const iconSizeConfig = useMemo(
+        () =>
+            classNames({
+                12: isMobile2Xs || isMobileXs,
+                14: isMobileSm,
+                15: isTablet,
+                16: isDesktop,
+            }),
+        [isMobile2Xs, isMobileSm, isMobileXs, isTablet, isDesktop]
+    );
 
     return (
         <div className="flex">
@@ -40,4 +44,4 @@ export const CTAButton = ({ text, href, onClick }) => {
             </Link>
         </div>
     );
-};
+});

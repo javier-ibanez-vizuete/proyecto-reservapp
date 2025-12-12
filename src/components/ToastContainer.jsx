@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { getPositionStyle } from "../utils/getPositionStyle";
 import { Toast } from "./Toast";
 
-export const ToastContainer = ({ toasts = [], onClose = () => {}, className = "" }) => {
+export const ToastContainer = memo(({ toasts = [], onClose = () => {}, className = "" }) => {
     if (toasts?.length === 0) return null;
 
     const position = toasts[0]?.position || "top-center";
@@ -17,4 +18,4 @@ export const ToastContainer = ({ toasts = [], onClose = () => {}, className = ""
             ))}
         </div>
     );
-};
+});

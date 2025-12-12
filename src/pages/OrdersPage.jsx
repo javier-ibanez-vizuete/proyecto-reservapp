@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import iconCloseWhite from "../assets/icons/icon-equis-white.webp";
 import iconClose from "../assets/icons/icon-equis.webp";
@@ -63,7 +63,7 @@ export const OrderPage = () => {
         return () => document.removeEventListener("keydown", handleEscapeKey);
     }, [showInput]);
 
-    const handleShowInput = () => {
+    const handleShowInput = useCallback(() => {
         if (showInput) {
             setShowInput(false);
             return setProductSearch("");
@@ -71,12 +71,12 @@ export const OrderPage = () => {
         if (!showInput) {
             return setShowInput(true);
         }
-    };
+    }, [showInput]);
 
-    const onInputChange = (event) => {
+    const onInputChange = useCallback((event) => {
         const { value } = event.target;
         setProductSearch(value);
-    };
+    }, []);
 
     const handleCategorySelected = (category) => {
         setCategorySelected(category);
@@ -115,7 +115,7 @@ export const OrderPage = () => {
 
             return sameCategory && sameName;
         });
-    }, [productSearch, categorySelected]);
+    }, [productSearch, categorySelected, products]);
 
     if (loadingProducts)
         return (
