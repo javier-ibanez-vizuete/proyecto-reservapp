@@ -21,7 +21,7 @@ import {
     getTotalUsers,
 } from "../utils/stats";
 
-export const DashboardPage = () => {
+function DashboardPage() {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -224,4 +224,6 @@ export const DashboardPage = () => {
             <ToastContainer toasts={toasts} onClose={dismissToast} />
         </div>
     );
-};
+}
+
+export default DashboardPage;

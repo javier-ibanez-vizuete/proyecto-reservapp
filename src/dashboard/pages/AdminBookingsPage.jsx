@@ -1,12 +1,12 @@
 import classNames from "classnames";
-import { useContext, useMemo } from "react";
+import { memo, useContext, useMemo } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { BackButton } from "../../components/UI/BackButton";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { useDevice } from "../../hooks/useDevice";
 import { AdminButton } from "../components/UI/AdminButton";
 
-export const AdminBookingsPage = ({ padding, gap }) => {
+function AdminBookingsPage({ padding, gap }) {
     const { getText } = useContext(LanguageContext);
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { pathname } = useLocation();
@@ -87,4 +87,5 @@ export const AdminBookingsPage = ({ padding, gap }) => {
             <Outlet />
         </section>
     );
-};
+}
+export default memo(AdminBookingsPage);

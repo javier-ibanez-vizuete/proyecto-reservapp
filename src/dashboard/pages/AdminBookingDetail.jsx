@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ConfirmModal } from "../../components/Modal/ConfirmModal";
 import { Spinner } from "../../components/Spinner/Spinner";
@@ -19,7 +19,7 @@ import { useToast } from "../../hooks/useToast";
 import { AdminButton } from "../components/UI/AdminButton";
 import { useAdminData } from "../hooks/useAdminData";
 
-export const AdminBookingDetail = ({
+function AdminBookingDetail({
     variant,
     padding,
     articleGap,
@@ -28,7 +28,7 @@ export const AdminBookingDetail = ({
     borderColor,
     className = "",
     ...props
-}) => {
+}) {
     const [ownerDetails, setOwnerDetails] = useState(null);
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -410,4 +410,6 @@ export const AdminBookingDetail = ({
             <ToastContainer toasts={toasts} onClose={dismissToast} />
         </article>
     );
-};
+}
+
+export default memo(AdminBookingDetail);

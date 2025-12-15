@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useCallback, useContext, useMemo } from "react";
+import { memo, useCallback, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
 import { useErrorBoundary } from "../../components/ErrorBoundary/useErrorBoundary";
@@ -10,7 +10,7 @@ import { AdminBookingsContainer } from "../components/AdminBookingsContainer";
 import { AdminSkeleton } from "../components/AdminSkeleton";
 import { useAdminData } from "../hooks/useAdminData";
 
-export const AdminBookingsTodaySection = ({ padding, gap }) => {
+function AdminBookingsTodaySection({ padding, gap }) {
     const { bookings, isLoadingBookings } = useAdminData({ enablePolling: true, pollingInterval: 120000 });
 
     const { getText } = useContext(LanguageContext);
@@ -297,4 +297,6 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
             </ErrorBoundary>
         </section>
     );
-};
+}
+
+export default memo(AdminBookingsTodaySection);

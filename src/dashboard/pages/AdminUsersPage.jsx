@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { Users } from "lucide-react";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "../../components/UI/BackButton";
 import { LanguageContext } from "../../contexts/LanguageContext";
@@ -19,7 +19,7 @@ import { AdminUserCard } from "../components/AdminUserCard";
 import { AdminInputSearch } from "../components/UI/AdminInputSearch";
 import { useAdminData } from "../hooks/useAdminData";
 
-export const AdminUsersPage = ({ padding, gap, columns }) => {
+function AdminUsersPage({ padding, gap, columns }) {
     const [inputName, setInputname] = useState(() => {
         const inputNameFromStorage = getDataFromSessionStorage("inputUsersNameFilter");
         if (!inputNameFromStorage) return "";
@@ -250,4 +250,6 @@ export const AdminUsersPage = ({ padding, gap, columns }) => {
             )}
         </section>
     );
-};
+}
+
+export default memo(AdminUsersPage);

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { memo, useCallback, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
 import { PageError } from "../../components/ErrorBoundary/PageError";
@@ -29,7 +29,7 @@ const INITIAL_FILTER_STATES = {
     highChair: false,
 };
 
-export const AdminBookingsListSection = ({ padding, sectionGap, filtersGap }) => {
+function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
     const [filters, setFilters] = useState(
         () => getDataFromSessionStorage("allBookingsFilters") || INITIAL_FILTER_STATES
     );
@@ -354,4 +354,6 @@ export const AdminBookingsListSection = ({ padding, sectionGap, filtersGap }) =>
             </ErrorBoundary>
         </section>
     );
-};
+}
+
+export default memo(AdminBookingsListSection);

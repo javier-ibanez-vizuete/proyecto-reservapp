@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Avatar } from "../../components/Avatar";
 import { ConfirmModal } from "../../components/Modal/ConfirmModal";
@@ -32,7 +32,7 @@ const INITIAL_FORM_DATA = {
     contactBody: "",
 };
 
-export const AdminUserDetail = ({ padding, gap }) => {
+function AdminUserDetail({ padding, gap }) {
     const { user } = useContext(AuthContext);
 
     const { id } = useParams();
@@ -396,4 +396,6 @@ export const AdminUserDetail = ({ padding, gap }) => {
             <ToastContainer toasts={toasts} onClose={dismissToast} />
         </article>
     );
-};
+}
+
+export default memo(AdminUserDetail);
