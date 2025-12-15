@@ -79,10 +79,7 @@ export const HomePage = () => {
 
             <div className="flex flex-col gap-4 lg:gap-8">
                 {ctaCardsData.map(
-                    (
-                        { id, title, description, buttonText, imageSrc, imageAlt, imagePosition, redirectTo },
-                        index
-                    ) => {
+                    ({ id, title, description, buttonText, imageSrc, imageAlt, redirectTo }, index) => {
                         if (redirectTo === "/login" && user) return;
 
                         return (

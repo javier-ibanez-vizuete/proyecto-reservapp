@@ -536,6 +536,29 @@ const TEXTS = {
         adminBookingsByDateLabelText1: " Booking",
         adminBookingsByDateLabelText2: " Bookings",
         adminBookingsByDateNotBookingsText: "No bookings for the selected date.",
+
+        // - - - ERRORS SENTENCES
+        onErrorBaseSentence: "Whoops! Something went wrong in",
+        onErrorHomePage: "Home Page",
+        onErrorMenuPage: "Menu Page",
+        onErrorBookingsPage: "Bookings Page",
+        onErrorOrdersPage: "Orders Page",
+        onErrorCartPage: "Cart Page",
+        onErrorUserPage: "Profile Page",
+        onErrorLoginPage: "Login Page",
+        onErrorRegisterPage: "Register Page",
+        onErrorDashboardPage: "Dashboard Page",
+        onErrorDashboardUsersPage: "Users Page",
+        onErrorDashboardBookingsPage: "Bookings Page",
+        onErrorDashboardOrdersPage: "Orders Page",
+        onErrorDashboardProductsPage: "Products Page",
+
+        onErrorTodaysBookingTitle: "There's an error Loading Today's Bookings",
+        onErrorAllBookingTitle: "There's an error Loading All Bookings",
+        onErrorBookingByDateTitle: "There's an error Loading Bookings by Date",
+
+        onErrorRetryButtonText: "Retry",
+        onErrorBackToHomeButtonText: "Return Home",
     },
 
     es: {
@@ -1080,6 +1103,19 @@ const TEXTS = {
         adminBookingsByDateLabelText1: " reserva",
         adminBookingsByDateLabelText2: " reservas",
         adminBookingsByDateNotBookingsText: "No hay reservas para la fecha seleccionada.",
+
+        // - - - UBICACIÓN DE ERRORES
+        onErrorBaseSentence: "Ups! Algo salió mal en",
+        onErrorHomePage: "Página de inicio",
+        onErrorMenuPage: "Página del menú",
+        onErrorBookingsPage: "Página de reservas",
+        onErrorOrdersPage: "Página de pedidos",
+        onErrorCartPage: "Página del carrito",
+        onErrorUserPage: "Página de perfil",
+        onErrorLoginPage: "Página de inicio de sesión",
+        onErrorRegisterPage: "Página de registro",
+        onErrorRetryButtonText: "Reintentar",
+        onErrorBackToHomeButtonText: "Volver al inicio",
     },
 
     fr: {
@@ -1625,6 +1661,19 @@ const TEXTS = {
         adminBookingsByDateLabelText1: " réservation",
         adminBookingsByDateLabelText2: " réservations",
         adminBookingsByDateNotBookingsText: "Aucune réservation pour la date sélectionnée.",
+
+        // - - - EMPLACEMENT DES ERREURS
+        onErrorBaseSentence: "Oups ! Quelque chose a mal tourné sur",
+        onErrorHomePage: "Page d’accueil",
+        onErrorMenuPage: "Page du menu",
+        onErrorBookingsPage: "Page des réservations",
+        onErrorOrdersPage: "Page des commandes",
+        onErrorCartPage: "Page du panier",
+        onErrorUserPage: "Page du profil",
+        onErrorLoginPage: "Page de connexion",
+        onErrorRegisterPage: "Page d’inscription",
+        onErrorRetryButtonText: "Réessayer",
+        onErrorBackToHomeButtonText: "Retour à l’accueil",
     },
 
     it: {
@@ -2176,6 +2225,19 @@ const TEXTS = {
         adminBookingsByDateLabelText1: " prenotazione",
         adminBookingsByDateLabelText2: " prenotazioni",
         adminBookingsByDateNotBookingsText: "Nessuna prenotazione per la data selezionata.",
+
+        // - - - POSIZIONE DEGLI ERRORI
+        onErrorBaseSentence: "Ops! Qualcosa è andato storto in",
+        onErrorHomePage: "Pagina iniziale",
+        onErrorMenuPage: "Pagina del menu",
+        onErrorBookingsPage: "Pagina delle prenotazioni",
+        onErrorOrdersPage: "Pagina degli ordini",
+        onErrorCartPage: "Pagina del carrello",
+        onErrorUserPage: "Pagina del profilo",
+        onErrorLoginPage: "Pagina di accesso",
+        onErrorRegisterPage: "Pagina di registrazione",
+        onErrorRetryButtonText: "Riprova",
+        onErrorBackToHomeButtonText: "Torna alla home",
     },
 
     de: {
@@ -2716,6 +2778,19 @@ const TEXTS = {
         adminBookingsByDateLabelText1: " Buchung",
         adminBookingsByDateLabelText2: " Buchungen",
         adminBookingsByDateNotBookingsText: "Keine Buchungen für das ausgewählte Datum.",
+
+        // - - - FEHLERORT
+        onErrorBaseSentence: "Ups! Etwas ist schiefgelaufen in",
+        onErrorHomePage: "Startseite",
+        onErrorMenuPage: "Menüseiten",
+        onErrorBookingsPage: "Reservierungsseite",
+        onErrorOrdersPage: "Bestellseite",
+        onErrorCartPage: "Warenkorbseite",
+        onErrorUserPage: "Profilseite",
+        onErrorLoginPage: "Anmeldeseite",
+        onErrorRegisterPage: "Registrierungsseite",
+        onErrorRetryButtonText: "Erneut versuchen",
+        onErrorBackToHomeButtonText: "Zur Startseite",
     },
 
     zh: {
@@ -3245,6 +3320,19 @@ const TEXTS = {
         adminBookingsByDateLabelText1: " 个预订",
         adminBookingsByDateLabelText2: " 个预订",
         adminBookingsByDateNotBookingsText: "所选日期没有预订。",
+
+        // - - - 错误位置
+        onErrorBaseSentence: "哎呀！在…出错了",
+        onErrorHomePage: "首页",
+        onErrorMenuPage: "菜单页面",
+        onErrorBookingsPage: "预订页面",
+        onErrorOrdersPage: "订单页面",
+        onErrorCartPage: "购物车页面",
+        onErrorUserPage: "个人资料页面",
+        onErrorLoginPage: "登录页面",
+        onErrorRegisterPage: "注册页面",
+        onErrorRetryButtonText: "重试",
+        onErrorBackToHomeButtonText: "返回首页",
     },
 };
 
@@ -3272,12 +3360,15 @@ export const LanguageProvider = ({ children }) => {
         return langFromStorage;
     });
 
-    const getText = useCallback((key) => {
-        const selectedText = TEXTS[lang][key];
-        if (!selectedText)
-            return TEXTS[lang] && TEXTS[lang].noTextFound ? TEXTS[lang].noTextFound : "No text Found";
-        return selectedText;
-    }, []);
+    const getText = useCallback(
+        (key) => {
+            const selectedText = TEXTS[lang][key];
+            if (!selectedText)
+                return TEXTS[lang] && TEXTS[lang].noTextFound ? TEXTS[lang].noTextFound : "No text Found";
+            return selectedText;
+        },
+        [lang]
+    );
 
     const handleLang = useCallback((lang = "en") => {
         setLang(lang);

@@ -204,6 +204,7 @@ export const BookingPage = () => {
         <div className="flex flex-1 flex-col py-4">
             <Container className="flex-1 gap-2">
                 <h1>{getText("h1BookingPage")}</h1>
+
                 <Modal
                     isOpen={showModal}
                     size="lg"

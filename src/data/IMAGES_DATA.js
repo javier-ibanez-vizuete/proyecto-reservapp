@@ -16,6 +16,11 @@ import mason480Avif from "../assets/pictures/under-contruction-images/image-unde
 import mason480Png from "../assets/pictures/under-contruction-images/image-under-construction-480w.png";
 import mason480Webp from "../assets/pictures/under-contruction-images/image-under-construction-480w.webp";
 
+import waiterFallingAvif from "../assets/pictures/images-error/image-error-200w.avif";
+import waiterFallingPng from "../assets/pictures/images-error/image-error-200w.png";
+import waiterFallingWebp from "../assets/pictures/images-error/image-error-200w.webp";
+import waiterFalling from "../assets/pictures/images-error/image-error.png";
+
 export const underConstructionImagesData = {
     alt: "Image of a Mason",
     url: mason,
@@ -34,5 +39,14 @@ export const underConstructionImagesData = {
 
     png480: mason480Png,
     webp480: mason480Webp,
-    avif: mason480Avif,
+    avif480: mason480Avif,
+};
+
+export const imageErrorData = {
+    alt: "Image of a Waiter Falling Down",
+    url: waiterFalling,
+
+    png: waiterFallingPng,
+    webp: waiterFallingWebp,
+    avif: waiterFallingAvif,
 };

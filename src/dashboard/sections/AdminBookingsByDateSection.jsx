@@ -2,6 +2,8 @@ import classNames from "classnames";
 import { useCallback, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookingCalendar } from "../../components/BookingCalendar";
+import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
+import { PageError } from "../../components/ErrorBoundary/PageError";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { dateVerificator } from "../../helpers/dateVerificator";
 import { useDevice } from "../../hooks/useDevice";
@@ -9,6 +11,7 @@ import { AdminBookingCard } from "../components/AdminBookingCard";
 import { AdminBookingsContainer } from "../components/AdminBookingsContainer";
 import { AdminSkeleton } from "../components/AdminSkeleton";
 import { AdminButton } from "../components/UI/AdminButton";
+import { AdminContainer } from "../components/UI/AdminContainer";
 import { useAdminData } from "../hooks/useAdminData";
 
 const CURRENT_DATE = new Date(new Date().toISOString().split("T")[0]).getTime();
@@ -119,98 +122,106 @@ export const AdminBookingsByDateSection = ({ padding, gap }) => {
 
     return (
         <section className={currentSectionClasses}>
-            <BookingCalendar userConfig={false} onChange={onchangeDate} selectedDate={selectedDate} />
+            <ErrorBoundary
+                fallback={
+                    <AdminContainer className="flex-1">
+                        <PageError title={getText("onErrorBookingByDateTitle")} />
+                    </AdminContainer>
+                }
+            >
+                <BookingCalendar userConfig={false} onChange={onchangeDate} selectedDate={selectedDate} />
 
-            <div className={currentButtonContainerClasses}>
-                <AdminButton
-                    variant={"danger"}
-                    onClick={handleNavigateToTodayBookings}
-                    className={`${selectedDate === CURRENT_DATE && "invisible"}`}
-                >
-                    {getText("adminBookingsByDateButtonText")}
-                </AdminButton>
+                <div className={currentButtonContainerClasses}>
+                    <AdminButton
+                        variant={"danger"}
+                        onClick={handleNavigateToTodayBookings}
+                        className={`${selectedDate === CURRENT_DATE && "invisible"}`}
+                    >
+                        {getText("adminBookingsByDateButtonText")}
+                    </AdminButton>
 
-                {filteredBookings?.length > 0 && (
-                    <p>{`${filteredBookings?.length} ${
-                        filteredBookings?.length === 1
-                            ? getText("adminBookingsByDateLabelText1")
-                            : getText("adminBookingsByDateLabelText2")
-                    }`}</p>
-                )}
-            </div>
-
-            {isLoadingBookings && (
-                <AdminBookingsContainer>
-                    {Array.from({ length: 2 }).map((_, index) => (
-                        <AdminSkeleton className="gap-sm" key={index}>
-                            <AdminSkeleton
-                                variant="text"
-                                lines={1}
-                                padding="none"
-                                borderColor="none"
-                                bgCard="none"
-                                height="sm"
-                                width="full"
-                            />
-                            <AdminSkeleton
-                                variant="text"
-                                lines={1}
-                                padding="none"
-                                borderColor="none"
-                                bgCard="none"
-                                height="2xs"
-                                width="6xl"
-                            />
-                            <AdminSkeleton
-                                variant="text"
-                                lines={1}
-                                padding="none"
-                                borderColor="none"
-                                bgCard="none"
-                                height="2xs"
-                                width="2xl"
-                            />
-                            <AdminSkeleton
-                                variant="text"
-                                lines={1}
-                                padding="none"
-                                borderColor="none"
-                                bgCard="none"
-                                height="2xs"
-                                width="2xl"
-                            />
-                            <AdminSkeleton
-                                variant="text"
-                                lines={1}
-                                padding="none"
-                                borderColor="none"
-                                bgCard="none"
-                                height="2xs"
-                                width="4xl"
-                            />
-                        </AdminSkeleton>
-                    ))}
-                </AdminBookingsContainer>
-            )}
-
-            {!isLoadingBookings && !filteredBookings?.length > 0 && (
-                <div>
-                    <p className="italic opacity-50">{getText("adminBookingsByDateNotBookingsText")}</p>
+                    {filteredBookings?.length > 0 && (
+                        <p>{`${filteredBookings?.length} ${
+                            filteredBookings?.length === 1
+                                ? getText("adminBookingsByDateLabelText1")
+                                : getText("adminBookingsByDateLabelText2")
+                        }`}</p>
+                    )}
                 </div>
-            )}
 
-            {!isLoadingBookings && filteredBookings?.length > 0 && (
-                <AdminBookingsContainer>
-                    {filteredBookings.map((booking) => (
-                        <AdminBookingCard
-                            key={booking?.id || booking?._id}
-                            bookingData={booking}
-                            variant={getVariantCardByStatus(booking?.status)}
-                            onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
-                        />
-                    ))}
-                </AdminBookingsContainer>
-            )}
+                {isLoadingBookings && (
+                    <AdminBookingsContainer>
+                        {Array.from({ length: 2 }).map((_, index) => (
+                            <AdminSkeleton className="gap-sm" key={index}>
+                                <AdminSkeleton
+                                    variant="text"
+                                    lines={1}
+                                    padding="none"
+                                    borderColor="none"
+                                    bgCard="none"
+                                    height="sm"
+                                    width="full"
+                                />
+                                <AdminSkeleton
+                                    variant="text"
+                                    lines={1}
+                                    padding="none"
+                                    borderColor="none"
+                                    bgCard="none"
+                                    height="2xs"
+                                    width="6xl"
+                                />
+                                <AdminSkeleton
+                                    variant="text"
+                                    lines={1}
+                                    padding="none"
+                                    borderColor="none"
+                                    bgCard="none"
+                                    height="2xs"
+                                    width="2xl"
+                                />
+                                <AdminSkeleton
+                                    variant="text"
+                                    lines={1}
+                                    padding="none"
+                                    borderColor="none"
+                                    bgCard="none"
+                                    height="2xs"
+                                    width="2xl"
+                                />
+                                <AdminSkeleton
+                                    variant="text"
+                                    lines={1}
+                                    padding="none"
+                                    borderColor="none"
+                                    bgCard="none"
+                                    height="2xs"
+                                    width="4xl"
+                                />
+                            </AdminSkeleton>
+                        ))}
+                    </AdminBookingsContainer>
+                )}
+
+                {!isLoadingBookings && !filteredBookings?.length > 0 && (
+                    <div>
+                        <p className="italic opacity-50">{getText("adminBookingsByDateNotBookingsText")}</p>
+                    </div>
+                )}
+
+                {!isLoadingBookings && filteredBookings?.length > 0 && (
+                    <AdminBookingsContainer>
+                        {filteredBookings.map((booking) => (
+                            <AdminBookingCard
+                                key={booking?.id || booking?._id}
+                                bookingData={booking}
+                                variant={getVariantCardByStatus(booking?.status)}
+                                onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
+                            />
+                        ))}
+                    </AdminBookingsContainer>
+                )}
+            </ErrorBoundary>
         </section>
     );
 };

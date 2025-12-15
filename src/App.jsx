@@ -1,4 +1,7 @@
 import { useContext, useEffect } from "react";
+import { Container } from "./components/Container";
+import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
+import { PageError } from "./components/ErrorBoundary/PageError";
 import { AuthContext } from "./contexts/AuthContext";
 import { OrdersContext } from "./contexts/OrdersContext";
 import { ProductsContext } from "./contexts/ProductsContext";
@@ -30,14 +33,30 @@ export const App = () => {
     if (!user || user?.role === "user")
         return (
             <MainLayout>
-                <AppRouter />
+                <ErrorBoundary
+                    fallback={
+                        <Container className="flex-1">
+                            <PageError title={"Oops! Alguien La ha liado"} message={"¿Que quieres hacer?"} />
+                        </Container>
+                    }
+                >
+                    <AppRouter />
+                </ErrorBoundary>
             </MainLayout>
         );
 
     if (user?.role === "admin")
         return (
             <AdminLayout>
-                <AdminRouter />
+                <ErrorBoundary
+                    fallback={
+                        <Container className="flex-1">
+                            <PageError title={"Oops! Alguien La ha liado"} message={"¿Que quieres hacer?"} />
+                        </Container>
+                    }
+                >
+                    <AdminRouter />
+                </ErrorBoundary>
             </AdminLayout>
         );
 };

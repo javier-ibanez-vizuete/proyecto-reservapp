@@ -31,7 +31,6 @@ export const DeliveryProductItem = ({
         loading1.setIsLoading(true);
         try {
             const updatedCart = await postCartItem(productData.id);
-
             if (updatedCart) showToast(getText("toastAddedProductToCart"), "success", 1000);
         } catch (err) {
             console.error("No se ha añadido el producto", err);

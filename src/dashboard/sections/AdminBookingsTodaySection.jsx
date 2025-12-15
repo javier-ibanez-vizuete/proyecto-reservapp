@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { useCallback, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
+import { useErrorBoundary } from "../../components/ErrorBoundary/useErrorBoundary";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { useDevice } from "../../hooks/useDevice";
 import { AdminBookingCard } from "../components/AdminBookingCard";
@@ -15,6 +17,7 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const navigate = useNavigate();
+    const { getErrorLocationName } = useErrorBoundary();
 
     const todayDate = new Date().toISOString().split("T")[0];
     const warningTime = 15 * 60 * 1000;
@@ -238,52 +241,60 @@ export const AdminBookingsTodaySection = ({ padding, gap }) => {
 
     return (
         <section className={currentSectionClasses}>
-            <h5>
-                {getText("h5AdminBookingsTodaySection")} {todayDate}
-            </h5>
-            <AdminBookingsContainer title={getText("adminBookingsTodaySectionPendingTitle")}>
-                {notPendingBookings && (
-                    <small className="italic opacity-60">
-                        {getText("adminBookingsTodaySectionNotPendingBookingsText")}
-                    </small>
-                )}
-                {pendingBookings.map((booking) => {
-                    const bookingTime = booking?.scheduledFor.split("T")[1].split(".")[0];
-                    const isNearby = isBookingNearby(bookingTime);
+            <ErrorBoundary
+                fallback={
+                    <AdminContainer className="flex-1">
+                        <PageError title={getText("onErrorTodaysBookingTitle")} />
+                    </AdminContainer>
+                }
+            >
+                <h5>
+                    {getText("h5AdminBookingsTodaySection")} {todayDate}
+                </h5>
+                <AdminBookingsContainer title={getText("adminBookingsTodaySectionPendingTitle")}>
+                    {notPendingBookings && (
+                        <small className="italic opacity-60">
+                            {getText("adminBookingsTodaySectionNotPendingBookingsText")}
+                        </small>
+                    )}
+                    {pendingBookings.map((booking) => {
+                        const bookingTime = booking?.scheduledFor.split("T")[1].split(".")[0];
+                        const isNearby = isBookingNearby(bookingTime);
 
-                    if (booking?.status === "cancelled") return null;
+                        if (booking?.status === "cancelled") return null;
 
-                    return (
-                        <AdminBookingCard
-                            key={booking?.id || booking?._id}
-                            bookingData={booking}
-                            variant={isNearby ? "warning" : null}
-                            className={`${isNearby ? "animate-pulse" : ""}`}
-                            onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
-                        />
-                    );
-                })}
-            </AdminBookingsContainer>
-            <AdminBookingsContainer title={getText("adminBookingsTodaySectionLateArrivalsTitle")}>
-                {notDelayedBookings && (
-                    <small className="italic opacity-60">
-                        {getText("adminBookingsTodaySectionNotLateBookingsText")}
-                    </small>
-                )}
-                {delayedBookings.map((booking) => {
-                    if (booking?.status === "cancelled") return null;
+                        return (
+                            <AdminBookingCard
+                                key={booking?.id || booking?._id}
+                                bookingData={booking}
+                                variant={isNearby ? "warning" : null}
+                                className={`${isNearby ? "animate-pulse" : ""}`}
+                                onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
+                            />
+                        );
+                    })}
+                </AdminBookingsContainer>
+                <AdminBookingsContainer title={getText("adminBookingsTodaySectionLateArrivalsTitle")}>
+                    {notDelayedBookings && (
+                        <small className="italic opacity-60">
+                            {getText("adminBookingsTodaySectionNotLateBookingsText")}
+                        </small>
+                    )}
+                    {delayedBookings.map((booking) => {
+                        if (booking?.status === "cancelled") return null;
 
-                    return (
-                        <AdminBookingCard
-                            key={booking?.id || booking?._id}
-                            bookingData={booking}
-                            variant={"error"}
-                            borderColor={"error"}
-                            onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
-                        />
-                    );
-                })}
-            </AdminBookingsContainer>
+                        return (
+                            <AdminBookingCard
+                                key={booking?.id || booking?._id}
+                                bookingData={booking}
+                                variant={"error"}
+                                borderColor={"error"}
+                                onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
+                            />
+                        );
+                    })}
+                </AdminBookingsContainer>
+            </ErrorBoundary>
         </section>
     );
 };
