@@ -10,6 +10,8 @@ import { Dropdown } from "../components/Dropdown/Dropdown";
 import { DropdownItem } from "../components/Dropdown/DropdownItem";
 import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
 import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
+import { ErrorBoundary } from "../components/ErrorBoundary/ErrorBoundary";
+import { PageError } from "../components/ErrorBoundary/PageError";
 import { DeliveryProductItem } from "../components/Products/DeliveryProductItem";
 import { ProductsContainer } from "../components/Products/ProductsContainer";
 import { SkeletonCard, SkeletonText } from "../components/Skeleton";
@@ -138,130 +140,132 @@ export const OrderPage = () => {
     return (
         <div className="flex flex-1 flex-col py-6">
             <Container className="gap-4">
-                <BackToTopButton iconSize="w-5" showAt={1000} placement="top-right" variant="secondary" />
+                <ErrorBoundary fallback={<PageError />}>
+                    <BackToTopButton iconSize="w-5" showAt={1000} placement="top-right" variant="secondary" />
 
-                <div className="flex flex-col">
-                    <h1>{getText("h1OrdersPage")}</h1>
-                    <small className="lg:self-center">{getText("smallOrdersPageSubtitle")}</small>
-                </div>
-
-                {products?.length > 0 && filteredProducts?.length > 0 && (
-                    <div className="flex items-center">
-                        <Card variant="accent">
-                            {filteredProducts?.length}/{products?.length}
-                        </Card>
+                    <div className="flex flex-col">
+                        <h1>{getText("h1OrdersPage")}</h1>
+                        <small className="lg:self-center">{getText("smallOrdersPageSubtitle")}</small>
                     </div>
-                )}
 
-                {products?.length && filteredProducts?.length <= 0 && (
-                    <span className="">0/{products?.length}</span>
-                )}
+                    {products?.length > 0 && filteredProducts?.length > 0 && (
+                        <div className="flex items-center">
+                            <Card variant="accent">
+                                {filteredProducts?.length}/{products?.length}
+                            </Card>
+                        </div>
+                    )}
 
-                <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-stretch">
-                    <div className="flex">
-                        <Dropdown placement={isMobile ? "bottom-start" : "right-start"}>
-                            <DropdownTrigger
-                                btnStyle={false}
-                                className={`px-6 py-3 rounded-lg shadow-lg ${
-                                    theme === "light"
-                                        ? "bg-accent-background text-text-color"
-                                        : "bg-accent-background-dark text-text-color-dark"
+                    {products?.length && filteredProducts?.length <= 0 && (
+                        <span className="">0/{products?.length}</span>
+                    )}
+
+                    <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-stretch">
+                        <div className="flex">
+                            <Dropdown placement={isMobile ? "bottom-start" : "right-start"}>
+                                <DropdownTrigger
+                                    btnStyle={false}
+                                    className={`px-6 py-3 rounded-lg shadow-lg ${
+                                        theme === "light"
+                                            ? "bg-accent-background text-text-color"
+                                            : "bg-accent-background-dark text-text-color-dark"
+                                    }`}
+                                >
+                                    <span>
+                                        {categorySelected ? categorySelected : getText("allCategoriesFilter")}
+                                    </span>
+                                </DropdownTrigger>
+                                <DropdownMenu classNameMenuContainer="flex-col">
+                                    <DropdownItem
+                                        className={categorySelected === "All Categories" ? "font-bold" : ""}
+                                        onClick={() => handleCategorySelected("")}
+                                    >
+                                        All Categories
+                                    </DropdownItem>
+                                    {categories.map((category) => (
+                                        <DropdownItem
+                                            key={category}
+                                            onClick={() => handleCategorySelected(category)}
+                                            className={categorySelected === category ? "font-bold" : ""}
+                                        >
+                                            {category}
+                                        </DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+                        <div
+                            className={`flex items-center py-3 px-6 transition-all duration-200 ease-in-out rounded-lg shadow-xl ${
+                                showInput ? "self-stretch md:max-w-4/5 lg:flex-1 space-x-2" : ""
+                            } ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
+                        >
+                            <div
+                                className={`perfect-center flex-1 overflow-hidden transition-all duration-200 ease-in-out ${
+                                    showInput ? "max-w-full" : "max-w-0"
                                 }`}
                             >
-                                <span>
-                                    {categorySelected ? categorySelected : getText("allCategoriesFilter")}
-                                </span>
-                            </DropdownTrigger>
-                            <DropdownMenu classNameMenuContainer="flex-col">
-                                <DropdownItem
-                                    className={categorySelected === "All Categories" ? "font-bold" : ""}
-                                    onClick={() => handleCategorySelected("")}
-                                >
-                                    All Categories
-                                </DropdownItem>
-                                {categories.map((category) => (
-                                    <DropdownItem
-                                        key={category}
-                                        onClick={() => handleCategorySelected(category)}
-                                        className={categorySelected === category ? "font-bold" : ""}
-                                    >
-                                        {category}
-                                    </DropdownItem>
-                                ))}
-                            </DropdownMenu>
-                        </Dropdown>
-                    </div>
-                    <div
-                        className={`flex items-center py-3 px-6 transition-all duration-200 ease-in-out rounded-lg shadow-xl ${
-                            showInput ? "self-stretch md:max-w-4/5 lg:flex-1 space-x-2" : ""
-                        } ${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
-                    >
-                        <div
-                            className={`perfect-center flex-1 overflow-hidden transition-all duration-200 ease-in-out ${
-                                showInput ? "max-w-full" : "max-w-0"
-                            }`}
-                        >
-                            <input
-                                ref={inputRef}
-                                type="text"
-                                name="name"
-                                placeholder={getText("ordersPageInputPlaceholder")}
-                                className={`bg-white flex-1 text-text-color placeholder:text-text-color/50 rounded-lg ${
-                                    showInput ? "py-1 px-2" : ""
-                                }`}
-                                maxLength={30}
-                                value={productSearch}
-                                onChange={onInputChange}
-                            />
-                        </div>
-                        <div
-                            className={`perfect-center overflow-hidden transition-all duration-200 ease-in-out`}
-                            onClick={handleShowInput}
-                        >
-                            {showInput && theme === "light" && (
-                                <ImageContainer className="w-4">
-                                    <Image src={iconClose} />
-                                </ImageContainer>
-                            )}
-                            {showInput && theme !== "light" && (
-                                <ImageContainer className="w-4">
-                                    <Image src={iconCloseWhite} />
-                                </ImageContainer>
-                            )}
-                            {!showInput && theme === "light" && (
-                                <ImageContainer className="w-4">
-                                    <Image src={iconSearch} />
-                                </ImageContainer>
-                            )}
-                            {!showInput && theme !== "light" && (
-                                <ImageContainer className="w-4">
-                                    <Image src={iconSearchWhite} />
-                                </ImageContainer>
-                            )}
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    name="name"
+                                    placeholder={getText("ordersPageInputPlaceholder")}
+                                    className={`bg-white flex-1 text-text-color placeholder:text-text-color/50 rounded-lg ${
+                                        showInput ? "py-1 px-2" : ""
+                                    }`}
+                                    maxLength={30}
+                                    value={productSearch}
+                                    onChange={onInputChange}
+                                />
+                            </div>
+                            <div
+                                className={`perfect-center overflow-hidden transition-all duration-200 ease-in-out`}
+                                onClick={handleShowInput}
+                            >
+                                {showInput && theme === "light" && (
+                                    <ImageContainer className="w-4">
+                                        <Image src={iconClose} />
+                                    </ImageContainer>
+                                )}
+                                {showInput && theme !== "light" && (
+                                    <ImageContainer className="w-4">
+                                        <Image src={iconCloseWhite} />
+                                    </ImageContainer>
+                                )}
+                                {!showInput && theme === "light" && (
+                                    <ImageContainer className="w-4">
+                                        <Image src={iconSearch} />
+                                    </ImageContainer>
+                                )}
+                                {!showInput && theme !== "light" && (
+                                    <ImageContainer className="w-4">
+                                        <Image src={iconSearchWhite} />
+                                    </ImageContainer>
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <ProductsContainer className="grid gap-sm sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-md">
-                    {filteredProducts.map((product) => {
-                        const isCartItem = cart?.items?.find((item) => item.productId === product.id);
-                        const productQty = isCartItem ? isCartItem.qty : null;
+                    <ProductsContainer className="grid gap-sm sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-md">
+                        {filteredProducts.map((product) => {
+                            const isCartItem = cart?.items?.find((item) => item.productId === product.id);
+                            const productQty = isCartItem ? isCartItem.qty : null;
 
-                        return (
-                            <DeliveryProductItem
-                                key={product?.id}
-                                productData={product}
-                                className="gap-4"
-                                imgSize="w-full"
-                                qty={productQty}
-                                isLoading={isLoading}
-                            />
-                        );
-                    })}
-                    {!filteredProducts.length && (
-                        <h3 className="text-gray-400">No existen Productos con ese nombre</h3>
-                    )}
-                </ProductsContainer>
+                            return (
+                                <DeliveryProductItem
+                                    key={product?.id}
+                                    productData={product}
+                                    className="gap-4"
+                                    imgSize="w-full"
+                                    qty={productQty}
+                                    isLoading={isLoading}
+                                />
+                            );
+                        })}
+                        {!filteredProducts.length && (
+                            <h3 className="text-gray-400">No existen Productos con ese nombre</h3>
+                        )}
+                    </ProductsContainer>
+                </ErrorBoundary>
             </Container>
         </div>
     );
