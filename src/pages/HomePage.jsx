@@ -11,7 +11,7 @@ import { ctaCardsData } from "../components/CTACard/ctaCardsData";
 import { Container } from "../components/Container";
 import { ConfirmModal } from "../components/Modal";
 
-export const HomePage = () => {
+function HomePage() {
     const [showNotFoundModal, setShowNotFoundModal] = useState(false);
     const [notFoundRoute, setNotFoundRoute] = useState("");
     const { getText } = useContext(LanguageContext);
@@ -114,4 +114,6 @@ export const HomePage = () => {
             <ToastContainer toasts={toasts} onClose={dismissToast} />
         </Container>
     );
-};
+}
+
+export default HomePage;

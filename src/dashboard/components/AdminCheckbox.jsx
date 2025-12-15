@@ -283,8 +283,7 @@ export const AdminCheckbox = ({
                 "h-8": isTablet || isDesktop,
             }),
             checkmarkHeight: classNames({
-                "h-1": isMobile2Xs,
-                "h-2": isMobileXs || isMobileSm,
+                "h-1": isMobile2Xs || isMobileXs || isMobileSm,
                 "h-2": isTablet || isDesktop,
             }),
             verticalCheckmarkHeight: classNames({
@@ -313,8 +312,7 @@ export const AdminCheckbox = ({
                 "w-3.5": isTablet || isDesktop,
             }),
             verticalCheckmarkWidth: classNames({
-                "w-[3px]": isMobile2Xs,
-                "w-[3px]": isMobileXs || isMobileSm,
+                "w-[3px]": isMobile2Xs || isMobileXs || isMobileSm,
                 "w-1": isTablet || isDesktop,
             }),
             horizontalCheckmarkWidth: classNames({

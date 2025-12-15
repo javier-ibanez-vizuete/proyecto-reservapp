@@ -16,7 +16,7 @@ import { useToast } from "../hooks/useToast";
 
 const INITIAL_FORM = { email: "", password: "" };
 
-export const LoginPage = () => {
+function LoginPage() {
     const [form, setForm] = useState(INITIAL_FORM);
     const [error, setError] = useState("");
     const [isLoading, setIsloading] = useState(false);
@@ -172,4 +172,6 @@ export const LoginPage = () => {
             <ToastContainer toasts={toasts} onClose={dismissToast} />
         </Container>
     );
-};
+}
+
+export default LoginPage;
