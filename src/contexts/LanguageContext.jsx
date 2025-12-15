@@ -3,6 +3,10 @@ import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/
 
 const TEXTS = {
     en: {
+        // APP
+        onLoadingPageText: "Loading Page",
+        onReloadPageText: "Reload",
+
         // BARRA DE NAVIGATION
         userReplaceName: "User",
         toastLogoutError: "Logout failed.",
@@ -562,6 +566,10 @@ const TEXTS = {
     },
 
     es: {
+        // APP
+        onLoadingPageText: "Cargando página",
+        onReloadPageText: "Recargar",
+
         // BARRA DE NAVEGACIÓN
         userReplaceName: "Usuario",
         toastLogoutError: "Error al cerrar sesión.",
@@ -1104,7 +1112,7 @@ const TEXTS = {
         adminBookingsByDateLabelText2: " reservas",
         adminBookingsByDateNotBookingsText: "No hay reservas para la fecha seleccionada.",
 
-        // - - - UBICACIÓN DE ERRORES
+        // - - - ERRORS SENTENCES
         onErrorBaseSentence: "Ups! Algo salió mal en",
         onErrorHomePage: "Página de inicio",
         onErrorMenuPage: "Página del menú",
@@ -1114,11 +1122,25 @@ const TEXTS = {
         onErrorUserPage: "Página de perfil",
         onErrorLoginPage: "Página de inicio de sesión",
         onErrorRegisterPage: "Página de registro",
+        onErrorDashboardPage: "Página del panel de control",
+        onErrorDashboardUsersPage: "Página de usuarios",
+        onErrorDashboardBookingsPage: "Página de reservas",
+        onErrorDashboardOrdersPage: "Página de pedidos",
+        onErrorDashboardProductsPage: "Página de productos",
+
+        onErrorTodaysBookingTitle: "Se ha producido un error al cargar las reservas de hoy",
+        onErrorAllBookingTitle: "Se ha producido un error al cargar todas las reservas",
+        onErrorBookingByDateTitle: "Se ha producido un error al cargar las reservas por fecha",
+
         onErrorRetryButtonText: "Reintentar",
         onErrorBackToHomeButtonText: "Volver al inicio",
     },
 
     fr: {
+        // APP
+        onLoadingPageText: "Chargement de la page",
+        onReloadPageText: "Recharger",
+
         // BARRE DE NAVIGATION
         userReplaceName: "Utilisateur",
         toastLogoutError: "Échec de la déconnexion.",
@@ -1662,7 +1684,7 @@ const TEXTS = {
         adminBookingsByDateLabelText2: " réservations",
         adminBookingsByDateNotBookingsText: "Aucune réservation pour la date sélectionnée.",
 
-        // - - - EMPLACEMENT DES ERREURS
+        // - - - ERRORS SENTENCES
         onErrorBaseSentence: "Oups ! Quelque chose a mal tourné sur",
         onErrorHomePage: "Page d’accueil",
         onErrorMenuPage: "Page du menu",
@@ -1672,11 +1694,25 @@ const TEXTS = {
         onErrorUserPage: "Page du profil",
         onErrorLoginPage: "Page de connexion",
         onErrorRegisterPage: "Page d’inscription",
+        onErrorDashboardPage: "Page du tableau de bord",
+        onErrorDashboardUsersPage: "Page des utilisateurs",
+        onErrorDashboardBookingsPage: "Page des réservations",
+        onErrorDashboardOrdersPage: "Page des commandes",
+        onErrorDashboardProductsPage: "Page des produits",
+
+        onErrorTodaysBookingTitle: "Une erreur s’est produite lors du chargement des réservations du jour",
+        onErrorAllBookingTitle: "Une erreur s’est produite lors du chargement de toutes les réservations",
+        onErrorBookingByDateTitle: "Une erreur s’est produite lors du chargement des réservations par date",
+
         onErrorRetryButtonText: "Réessayer",
         onErrorBackToHomeButtonText: "Retour à l’accueil",
     },
 
     it: {
+        // APP
+        onLoadingPageText: "Caricamento della pagina",
+        onReloadPageText: "Ricarica",
+
         // BARRA DI NAVIGAZIONE
         userReplaceName: "Utente",
         toastLogoutError: "Disconnessione fallita.",
@@ -2226,7 +2262,7 @@ const TEXTS = {
         adminBookingsByDateLabelText2: " prenotazioni",
         adminBookingsByDateNotBookingsText: "Nessuna prenotazione per la data selezionata.",
 
-        // - - - POSIZIONE DEGLI ERRORI
+        // - - - ERRORS SENTENCES
         onErrorBaseSentence: "Ops! Qualcosa è andato storto in",
         onErrorHomePage: "Pagina iniziale",
         onErrorMenuPage: "Pagina del menu",
@@ -2236,11 +2272,27 @@ const TEXTS = {
         onErrorUserPage: "Pagina del profilo",
         onErrorLoginPage: "Pagina di accesso",
         onErrorRegisterPage: "Pagina di registrazione",
+        onErrorDashboardPage: "Pagina del pannello di controllo",
+        onErrorDashboardUsersPage: "Pagina degli utenti",
+        onErrorDashboardBookingsPage: "Pagina delle prenotazioni",
+        onErrorDashboardOrdersPage: "Pagina degli ordini",
+        onErrorDashboardProductsPage: "Pagina dei prodotti",
+
+        onErrorTodaysBookingTitle:
+            "Si è verificato un errore durante il caricamento delle prenotazioni di oggi",
+        onErrorAllBookingTitle: "Si è verificato un errore durante il caricamento di tutte le prenotazioni",
+        onErrorBookingByDateTitle:
+            "Si è verificato un errore durante il caricamento delle prenotazioni per data",
+
         onErrorRetryButtonText: "Riprova",
         onErrorBackToHomeButtonText: "Torna alla home",
     },
 
     de: {
+        // APP
+        onLoadingPageText: "Seite wird geladen",
+        onReloadPageText: "Neu laden",
+
         // BARRA DE NAVIGATION
         userReplaceName: "Benutzer",
         toastLogoutError: "Abmeldung fehlgeschlagen.",
@@ -2779,7 +2831,7 @@ const TEXTS = {
         adminBookingsByDateLabelText2: " Buchungen",
         adminBookingsByDateNotBookingsText: "Keine Buchungen für das ausgewählte Datum.",
 
-        // - - - FEHLERORT
+        // - - - ERRORS SENTENCES
         onErrorBaseSentence: "Ups! Etwas ist schiefgelaufen in",
         onErrorHomePage: "Startseite",
         onErrorMenuPage: "Menüseiten",
@@ -2789,11 +2841,25 @@ const TEXTS = {
         onErrorUserPage: "Profilseite",
         onErrorLoginPage: "Anmeldeseite",
         onErrorRegisterPage: "Registrierungsseite",
+        onErrorDashboardPage: "Dashboard-Seite",
+        onErrorDashboardUsersPage: "Benutzerseite",
+        onErrorDashboardBookingsPage: "Reservierungsseite",
+        onErrorDashboardOrdersPage: "Bestellseite",
+        onErrorDashboardProductsPage: "Produktseite",
+
+        onErrorTodaysBookingTitle: "Beim Laden der heutigen Reservierungen ist ein Fehler aufgetreten",
+        onErrorAllBookingTitle: "Beim Laden aller Reservierungen ist ein Fehler aufgetreten",
+        onErrorBookingByDateTitle: "Beim Laden der Reservierungen nach Datum ist ein Fehler aufgetreten",
+
         onErrorRetryButtonText: "Erneut versuchen",
         onErrorBackToHomeButtonText: "Zur Startseite",
     },
 
     zh: {
+        // APP
+        onLoadingPageText: "页面加载中",
+        onReloadPageText: "重新加载",
+
         // BARRA DE NAVIGATION
         userReplaceName: "用户",
         toastLogoutError: "退出失败。",
@@ -3321,8 +3387,8 @@ const TEXTS = {
         adminBookingsByDateLabelText2: " 个预订",
         adminBookingsByDateNotBookingsText: "所选日期没有预订。",
 
-        // - - - 错误位置
-        onErrorBaseSentence: "哎呀！在…出错了",
+        // - - - ERRORS SENTENCES
+        onErrorBaseSentence: "哎呀！在",
         onErrorHomePage: "首页",
         onErrorMenuPage: "菜单页面",
         onErrorBookingsPage: "预订页面",
@@ -3331,6 +3397,16 @@ const TEXTS = {
         onErrorUserPage: "个人资料页面",
         onErrorLoginPage: "登录页面",
         onErrorRegisterPage: "注册页面",
+        onErrorDashboardPage: "仪表盘页面",
+        onErrorDashboardUsersPage: "用户页面",
+        onErrorDashboardBookingsPage: "预订页面",
+        onErrorDashboardOrdersPage: "订单页面",
+        onErrorDashboardProductsPage: "产品页面",
+
+        onErrorTodaysBookingTitle: "加载今日预订时出错",
+        onErrorAllBookingTitle: "加载所有预订时出错",
+        onErrorBookingByDateTitle: "按日期加载预订时出错",
+
         onErrorRetryButtonText: "重试",
         onErrorBackToHomeButtonText: "返回首页",
     },
