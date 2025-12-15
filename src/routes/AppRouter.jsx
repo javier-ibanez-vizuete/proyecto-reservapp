@@ -1,8 +1,9 @@
-import { useCallback, useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Container } from "../components/Container";
 import { ErrorBoundary } from "../components/ErrorBoundary/ErrorBoundary";
 import { PageError } from "../components/ErrorBoundary/PageError";
+import { useErrorBoundary } from "../components/ErrorBoundary/useErrorBoundary";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { useAuth } from "../core/auth/useAuth";
@@ -16,9 +17,13 @@ import { RegisterPage } from "../pages/RegisterPage";
 import { UserPage } from "../pages/UserPage";
 
 export const AppRouter = () => {
-    const location = useLocation();
     const { loaderUser } = useAuth();
+
+    const location = useLocation();
+
     const { getText } = useContext(LanguageContext);
+
+    const { getErrorLocationName } = useErrorBoundary();
 
     console.log("Render AppRouter.jsx");
 
@@ -34,18 +39,6 @@ export const AppRouter = () => {
     if (location.pathname.startsWith("/dashboard")) {
         return null;
     }
-
-    const getErrorLocationName = useCallback(() => {
-        const pathName = location.pathname;
-        if (pathName.includes("menu")) return getText("onErrorMenuPage");
-        if (pathName.includes("bookings")) return getText("onErrorBookingsPage");
-        if (pathName.includes("orders")) return getText("onErrorOrdersPage");
-        if (pathName.includes("cart")) return getText("onErrorCartPage");
-        if (pathName.includes("user")) return "onErrorUserPage";
-        if (pathName.includes("login")) return getText("onErrorLoginPage");
-        if (pathName.includes("register")) return getText("onErrorRegisterPage");
-        return getText("onErrorHomePage");
-    }, [location.pathname, getText]);
 
     return (
         <ErrorBoundary

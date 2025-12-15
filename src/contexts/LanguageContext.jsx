@@ -547,6 +547,16 @@ const TEXTS = {
         onErrorUserPage: "Profile Page",
         onErrorLoginPage: "Login Page",
         onErrorRegisterPage: "Register Page",
+        onErrorDashboardPage: "Dashboard Page",
+        onErrorDashboardUsersPage: "Users Page",
+        onErrorDashboardBookingsPage: "Bookings Page",
+        onErrorDashboardOrdersPage: "Orders Page",
+        onErrorDashboardProductsPage: "Products Page",
+
+        onErrorTodaysBookingTitle: "There's an error Loading Today's Bookings",
+        onErrorAllBookingTitle: "There's an error Loading All Bookings",
+        onErrorBookingByDateTitle: "There's an error Loading Bookings by Date",
+
         onErrorRetryButtonText: "Retry",
         onErrorBackToHomeButtonText: "Return Home",
     },

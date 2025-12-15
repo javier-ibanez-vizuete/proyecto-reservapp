@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { useCallback, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
+import { PageError } from "../../components/ErrorBoundary/PageError";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import {
     getDataFromSessionStorage,
@@ -16,6 +18,7 @@ import { AdminDropdownItem } from "../components/AdminDropdown/AdminDropdownItem
 import { AdminDropdownMenu } from "../components/AdminDropdown/AdminDropdownMenu";
 import { AdminDropdownTrigger } from "../components/AdminDropdown/AdminDropdownTrigger";
 import { AdminButton } from "../components/UI/AdminButton";
+import { AdminContainer } from "../components/UI/AdminContainer";
 import { AdminInputSearch } from "../components/UI/AdminInputSearch";
 import { useAdminData } from "../hooks/useAdminData";
 
@@ -229,116 +232,126 @@ export const AdminBookingsListSection = ({ padding, sectionGap, filtersGap }) =>
 
     return (
         <section className={currentSectionClasses}>
-            <h5>
-                {getText("h5AdminBookingsAll")} (
-                <span>{`${filteredBookings?.length} / ${bookings?.length}`}</span>)
-            </h5>
-
-            <div className={currentFiltersContainerClasses}>
-                <div className={`flex flex-1`}>
-                    <AdminInputSearch
-                        containerClassName="flex-col self-start flex-1 lg:flex-row lg:items-center"
-                        className="lg:flex-1"
-                        inputClassName="flex-1"
-                        name={"ownerName"}
-                        id={"ownerName"}
-                        value={filters?.ownerName}
-                        placeholder={getText("adminBookingsAllInputPlaceholder")}
-                        onChange={onInputChange}
-                        onRemove={onInputRemove}
-                        variant="outline"
-                    />
-                </div>
+            <ErrorBoundary
+                fallback={
+                    <AdminContainer className="flex-1">
+                        <PageError title={getText("onErrorAllBookingTitle")} />
+                    </AdminContainer>
+                }
+            >
+                <h5>
+                    {getText("h5AdminBookingsAll")} (
+                    <span>{`${filteredBookings?.length} / ${bookings?.length}`}</span>)
+                </h5>
 
                 <div className={currentFiltersContainerClasses}>
-                    <AdminDropdown variant={"accent"} placement="right-center">
-                        <AdminDropdownTrigger variant={filters?.guestsNumber ? "active" : "inactive"}>
-                            {filters.guestsNumber
-                                ? `${filters.guestsNumber} ${getText("adminBookingsAllGuestNumberSelected")}`
-                                : getText("adminBookingsAllGuestNumberUnselected")}
-                        </AdminDropdownTrigger>
-                        <AdminDropdownMenu>
-                            <AdminDropdownItem
-                                onClick={() => handleGuestNumberFilter()}
-                                disabled={!filters?.guestsNumber}
-                            >
-                                {getText("adminBookingsAllNotSpecifiedText")}
-                            </AdminDropdownItem>
+                    <div className={`flex flex-1`}>
+                        <AdminInputSearch
+                            containerClassName="flex-col self-start flex-1 lg:flex-row lg:items-center"
+                            className="lg:flex-1"
+                            inputClassName="flex-1"
+                            name={"ownerName"}
+                            id={"ownerName"}
+                            value={filters?.ownerName}
+                            placeholder={getText("adminBookingsAllInputPlaceholder")}
+                            onChange={onInputChange}
+                            onRemove={onInputRemove}
+                            variant="outline"
+                        />
+                    </div>
 
-                            {guestsOptions.map((option) => (
+                    <div className={currentFiltersContainerClasses}>
+                        <AdminDropdown variant={"accent"} placement="right-center">
+                            <AdminDropdownTrigger variant={filters?.guestsNumber ? "active" : "inactive"}>
+                                {filters.guestsNumber
+                                    ? `${filters.guestsNumber} ${getText(
+                                          "adminBookingsAllGuestNumberSelected"
+                                      )}`
+                                    : getText("adminBookingsAllGuestNumberUnselected")}
+                            </AdminDropdownTrigger>
+                            <AdminDropdownMenu>
                                 <AdminDropdownItem
-                                    key={option}
-                                    onClick={() => handleGuestNumberFilter(option)}
-                                    disabled={filters?.guestsNumber === option}
+                                    onClick={() => handleGuestNumberFilter()}
+                                    disabled={!filters?.guestsNumber}
                                 >
-                                    {option}
+                                    {getText("adminBookingsAllNotSpecifiedText")}
                                 </AdminDropdownItem>
-                            ))}
-                        </AdminDropdownMenu>
-                    </AdminDropdown>
 
-                    <AdminDropdown variant={"accent"} placement="right-center">
-                        <AdminDropdownTrigger variant={filters?.bookingStatus ? "active" : "inactive"}>
-                            {filters?.bookingStatus
-                                ? filters?.bookingStatus
-                                : getText("adminBookingsAllStatusTriggerText")}
-                        </AdminDropdownTrigger>
-                        <AdminDropdownMenu>
-                            <AdminDropdownItem
-                                onClick={() => handleStatusFilter()}
-                                disabled={!filters?.bookingStatus}
-                            >
-                                {getText("adminBookingsAllNotStatusSpecifiedText")}
-                            </AdminDropdownItem>
-                            {statusOptions.map((option) => (
+                                {guestsOptions.map((option) => (
+                                    <AdminDropdownItem
+                                        key={option}
+                                        onClick={() => handleGuestNumberFilter(option)}
+                                        disabled={filters?.guestsNumber === option}
+                                    >
+                                        {option}
+                                    </AdminDropdownItem>
+                                ))}
+                            </AdminDropdownMenu>
+                        </AdminDropdown>
+
+                        <AdminDropdown variant={"accent"} placement="right-center">
+                            <AdminDropdownTrigger variant={filters?.bookingStatus ? "active" : "inactive"}>
+                                {filters?.bookingStatus
+                                    ? filters?.bookingStatus
+                                    : getText("adminBookingsAllStatusTriggerText")}
+                            </AdminDropdownTrigger>
+                            <AdminDropdownMenu>
                                 <AdminDropdownItem
-                                    key={option.value}
-                                    onClick={() => handleStatusFilter(option.value)}
-                                    disabled={filters?.bookingStatus === option.value}
+                                    onClick={() => handleStatusFilter()}
+                                    disabled={!filters?.bookingStatus}
                                 >
-                                    {option.label}
+                                    {getText("adminBookingsAllNotStatusSpecifiedText")}
                                 </AdminDropdownItem>
-                            ))}
-                        </AdminDropdownMenu>
-                    </AdminDropdown>
-                    <AdminCheckbox
-                        variant={filters?.highChair ? "active" : "inactive"}
-                        isChecked={filters?.highChair}
-                        onClick={onToggleHighchair}
-                        label={getText("adminBookingsAllHighchairLabelText")}
-                        padding={"none"}
-                    />
-                    {hasActiveFilters && (
-                        <AdminButton onClick={handleResetFilters} variant={"danger"}>
-                            {getText("clearFilterButton")}
-                        </AdminButton>
-                    )}
+                                {statusOptions.map((option) => (
+                                    <AdminDropdownItem
+                                        key={option.value}
+                                        onClick={() => handleStatusFilter(option.value)}
+                                        disabled={filters?.bookingStatus === option.value}
+                                    >
+                                        {option.label}
+                                    </AdminDropdownItem>
+                                ))}
+                            </AdminDropdownMenu>
+                        </AdminDropdown>
+                        <AdminCheckbox
+                            variant={filters?.highChair ? "active" : "inactive"}
+                            isChecked={filters?.highChair}
+                            onClick={onToggleHighchair}
+                            label={getText("adminBookingsAllHighchairLabelText")}
+                            padding={"none"}
+                        />
+                        {hasActiveFilters && (
+                            <AdminButton onClick={handleResetFilters} variant={"danger"}>
+                                {getText("clearFilterButton")}
+                            </AdminButton>
+                        )}
+                    </div>
                 </div>
-            </div>
 
-            {!filteredBookings?.length > 0 && (
-                <span className="italic opacity-80">{getText("adminBookingsAllNoBookingMatchText")}</span>
-            )}
-            {filteredBookings?.length > 0 && (
-                <AdminBookingsContainer>
-                    {filteredBookings
-                        .sort(
-                            (bookingA, bookingB) =>
-                                new Date(bookingB?.scheduledFor) - new Date(bookingA?.scheduledFor)
-                        )
-                        .map((booking) => {
-                            const variant = getVariantCardByStatus(booking?.status);
-                            return (
-                                <AdminBookingCard
-                                    key={booking?.id || booking?._id}
-                                    bookingData={booking}
-                                    variant={variant}
-                                    onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
-                                />
-                            );
-                        })}
-                </AdminBookingsContainer>
-            )}
+                {!filteredBookings?.length > 0 && (
+                    <span className="italic opacity-80">{getText("adminBookingsAllNoBookingMatchText")}</span>
+                )}
+                {filteredBookings?.length > 0 && (
+                    <AdminBookingsContainer>
+                        {filteredBookings
+                            .sort(
+                                (bookingA, bookingB) =>
+                                    new Date(bookingB?.scheduledFor) - new Date(bookingA?.scheduledFor)
+                            )
+                            .map((booking) => {
+                                const variant = getVariantCardByStatus(booking?.status);
+                                return (
+                                    <AdminBookingCard
+                                        key={booking?.id || booking?._id}
+                                        bookingData={booking}
+                                        variant={variant}
+                                        onClick={() => handleOpenBookingDetails(booking?.id || booking?._id)}
+                                    />
+                                );
+                            })}
+                    </AdminBookingsContainer>
+                )}
+            </ErrorBoundary>
         </section>
     );
 };

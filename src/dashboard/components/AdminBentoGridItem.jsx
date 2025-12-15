@@ -160,7 +160,16 @@ export const AdminBentoGridItem = ({
                 variantsColSpan[colSpan] || variantsColSpan.default,
                 variantsRowSpan[rowSpan] || variantsRowSpan.default
             ),
-        [gradient, borderVariant, padding, colSpan, rowSpan]
+        [
+            gradient,
+            borderVariant,
+            padding,
+            colSpan,
+            rowSpan,
+            baseClasses,
+            hoverClasses,
+            autoBentoGridItemConfig,
+        ]
     );
 
     const usersBentoDisplay = useMemo(
