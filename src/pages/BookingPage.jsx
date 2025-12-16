@@ -54,7 +54,7 @@ const DATE_TIMES_POSIBILITIES = [
     { time: "22:00", label: "22:00" },
 ];
 
-export const BookingPage = () => {
+function BookingPage() {
     const [form, setForm] = useState(() => {
         const formFromStorage = getBookingFormFromLocalStorage();
         return formFromStorage || INITIAL_BOOKING_DATA;
@@ -413,4 +413,6 @@ export const BookingPage = () => {
             </Container>
         </div>
     );
-};
+}
+
+export default BookingPage;

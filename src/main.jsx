@@ -12,6 +12,7 @@ import { UsersProvider } from "./contexts/UsersContext.jsx";
 import "./styles/index.css";
 
 createRoot(document.getElementById("root")).render(
+    // PONER ERROR BOUNDARY
     <BrowserRouter>
         <LanguageProvider>
             <AuthProvider>

@@ -32,7 +32,7 @@ const INITIAL_FORM_DATA = {
     },
 };
 
-export const RegisterPage = () => {
+function RegisterPage() {
     const [form, setForm] = useState(INITIAL_FORM_DATA);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -276,4 +276,6 @@ export const RegisterPage = () => {
             <ToastContainer toasts={toasts} onClose={dismissToast} />
         </Container>
     );
-};
+}
+
+export default RegisterPage;

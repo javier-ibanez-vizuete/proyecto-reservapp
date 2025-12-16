@@ -27,7 +27,7 @@ import { UserDataSection } from "../sections/UserDataSection";
 import { UserOrdersSection } from "../sections/UserOrdersSections";
 import { AVATAR_DATA } from "../utils/AVATAR_DATA";
 
-export const UserPage = () => {
+function UserPage() {
     const [userProfile, setUserProfile] = useState({});
     const [avatarLoaded, setAvatarLoaded] = useState(false);
     const [showAvatarModal, setShowAvatarModal] = useState(false);
@@ -244,4 +244,6 @@ export const UserPage = () => {
             </Container>
         </div>
     );
-};
+}
+
+export default UserPage;

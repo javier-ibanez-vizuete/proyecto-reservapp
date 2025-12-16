@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { lazy, Suspense, useContext, useMemo } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Container } from "../components/Container";
 import { ErrorBoundary } from "../components/ErrorBoundary/ErrorBoundary";
@@ -7,14 +7,16 @@ import { useErrorBoundary } from "../components/ErrorBoundary/useErrorBoundary";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { useAuth } from "../core/auth/useAuth";
-import { BookingPage } from "../pages/BookingPage";
-import { CartPage } from "../pages/CartPage";
-import { HomePage } from "../pages/HomePage";
-import { LoginPage } from "../pages/LoginPage";
-import { MenuPage } from "../pages/MenuPage";
-import { OrderPage } from "../pages/OrdersPage";
-import { RegisterPage } from "../pages/RegisterPage";
-import { UserPage } from "../pages/UserPage";
+import { LoadingPage } from "../pages/LoadingPage";
+
+const HomePage = lazy(() => import("../pages/HomePage"));
+const MenuPage = lazy(() => import("../pages/MenuPage"));
+const RegisterPage = lazy(() => import("../pages/RegisterPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const BookingPage = lazy(() => import("../pages/BookingPage"));
+const CartPage = lazy(() => import("../pages/CartPage"));
+const UserPage = lazy(() => import("../pages/UserPage"));
+const OrderPage = lazy(() => import("../pages/OrdersPage"));
 
 export const AppRouter = () => {
     const { loaderUser } = useAuth();
@@ -48,23 +50,25 @@ export const AppRouter = () => {
                 </Container>
             }
         >
-            <Routes>
-                <Route path="/" element={<HomePage />} />
+            <Suspense fallback={<LoadingPage />}>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
 
-                <Route path="/menu" element={<MenuPage />} />
+                    <Route path="/menu" element={<MenuPage />} />
 
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/login" element={<LoginPage />} />
 
-                <Route element={<PrivateRoute />}>
-                    <Route path="/bookings" element={<BookingPage />} />
-                    <Route path="/cart" element={<CartPage />} />
-                    <Route path="/user" element={<UserPage />} />
-                    <Route path="/orders" element={<OrderPage />} />
-                </Route>
+                    <Route element={<PrivateRoute />}>
+                        <Route path="/bookings" element={<BookingPage />} />
+                        <Route path="/cart" element={<CartPage />} />
+                        <Route path="/user" element={<UserPage />} />
+                        <Route path="/orders" element={<OrderPage />} />
+                    </Route>
 
-                <Route path="/*" element={<Navigate to={"/"} state={handleIntendedRoute} replace />} />
-            </Routes>
+                    <Route path="/*" element={<Navigate to={"/"} state={handleIntendedRoute} replace />} />
+                </Routes>
+            </Suspense>
         </ErrorBoundary>
     );
 };

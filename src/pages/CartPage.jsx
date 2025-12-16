@@ -14,7 +14,7 @@ import { useCart } from "../core/cart/useCart";
 import { useLoading } from "../hooks/useLoading";
 import { useToast } from "../hooks/useToast";
 
-export const CartPage = () => {
+function CartPage() {
     const [showModal, setShowModal] = useState(false);
     const { getCartSummary, deleteCartItem, postCartCheckout } = useCart();
 
@@ -153,4 +153,6 @@ export const CartPage = () => {
             </Container>
         </div>
     );
-};
+}
+
+export default CartPage;

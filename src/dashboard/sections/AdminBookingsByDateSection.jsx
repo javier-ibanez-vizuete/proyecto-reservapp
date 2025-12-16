@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { memo, useCallback, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookingCalendar } from "../../components/BookingCalendar";
 import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
@@ -16,7 +16,7 @@ import { useAdminData } from "../hooks/useAdminData";
 
 const CURRENT_DATE = new Date(new Date().toISOString().split("T")[0]).getTime();
 
-export const AdminBookingsByDateSection = ({ padding, gap }) => {
+function AdminBookingsByDateSection({ padding, gap }) {
     const [selectedDate, setSelectedDate] = useState(CURRENT_DATE);
 
     const { bookings, isLoadingBookings } = useAdminData({ enablePolling: true, pollingInterval: 120000 });
@@ -224,4 +224,6 @@ export const AdminBookingsByDateSection = ({ padding, gap }) => {
             </ErrorBoundary>
         </section>
     );
-};
+}
+
+export default memo(AdminBookingsByDateSection);

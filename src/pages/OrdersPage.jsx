@@ -25,7 +25,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
 import { useDevice } from "../hooks/useDevice";
 
-export const OrderPage = () => {
+function OrdersPage() {
     const { products, categories } = useContext(ProductsContext);
     const { loadingProducts } = useProducts();
 
@@ -269,4 +269,6 @@ export const OrderPage = () => {
             </Container>
         </div>
     );
-};
+}
+
+export default OrdersPage;

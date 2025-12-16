@@ -16,7 +16,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
 import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/storage";
 
-export const MenuPage = () => {
+function MenuPage() {
     const { products, categories } = useContext(ProductsContext);
 
     const { theme } = useContext(ThemeContext);
@@ -158,4 +158,6 @@ export const MenuPage = () => {
             </Container>
         </div>
     );
-};
+}
+
+export default MenuPage;
