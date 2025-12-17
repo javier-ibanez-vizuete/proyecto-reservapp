@@ -235,8 +235,8 @@ function BookingPage() {
                                     <p>{getText("booking_page.high_chair_confirm_text")}</p>
                                     <h6>
                                         {form.extras.highChair
-                                            ? getText("affirmationText")
-                                            : getText("NegationText")}
+                                            ? getText("general_messages.affirmation_text")
+                                            : getText("general_messages.negation_text")}
                                     </h6>
                                 </li>
                             )}

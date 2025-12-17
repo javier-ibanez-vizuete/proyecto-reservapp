@@ -1,58 +1,58 @@
 export const LoginVerificationFields = ({ email, password }) => {
-    if (!email) return "emailIsRequiredField";
-    if (!email.includes("@")) return "emailNotValidField1";
-    if (!email.includes(".")) return "emailNotValidField2";
-    if (email.length < 5) return "emailTooShortField";
-    if (email.length > 50) return "emailTooLongField";
+    if (!email) return "field_validations.email_is_required_field";
+    if (!email.includes("@")) return "field_validations.email_not_valid_field1";
+    if (!email.includes(".")) return "field_validations.email_not_valid_field2";
+    if (email.length < 5) return "field_validations.email_too_short_field";
+    if (email.length > 50) return "field_validations.email_too_long_field";
 
-    if (!password) return "passwordIsRequiredField";
-    if (password.length < 9) return "passwordTooShortField";
+    if (!password) return "field_validations.password_is_required_field";
+    if (password.length < 9) return "field_validations.password_too_short_field";
 };
 
 export const RegisterVerificationFields = ({ name, email, address, password, repassword }) => {
-    if (!name) return "nameIsRequiredField";
-    if (name.length < 4) return "nameIsTooShortField";
-    if (name.length > 30) return "nameIsTooLongField";
+    if (!name) return "field_validations.name_is_required_field";
+    if (name.length < 4) return "field_validations.name_is_too_short_field";
+    if (name.length > 30) return "field_validations.name_is_too_long_field";
 
-    if (!email) return "emailIsRequiredField";
-    if (!email.includes("@")) return "emailNotValidField1";
-    if (!email.includes(".")) return "emailNotValidField2";
-    if (email.length < 5) return "emailTooShortField";
-    if (email.length > 50) return "emailTooLongField";
+    if (!email) return "field_validations.email_is_required_field";
+    if (!email.includes("@")) return "field_validations.email_not_valid_field1";
+    if (!email.includes(".")) return "field_validations.email_not_valid_field2";
+    if (email.length < 5) return "field_validations.email_too_short_field";
+    if (email.length > 50) return "field_validations.email_too_long_field";
 
-    if (!address) return "addressIsRequiredField";
-    if (address.length < 6) return "addressTooShortField";
-    if (address.length > 60) return "addressTooLongField";
+    if (!address) return "field_validations.address_is_required_field";
+    if (address.length < 6) return "field_validations.address_too_short_field";
+    if (address.length > 60) return "field_validations.address_too_long_field";
 
-    if (!password) return "passwordIsRequiredField";
-    if (password.length < 9) return "passwordTooShortField";
-    if (password.length > 30) return "passwordTooLongField";
+    if (!password) return "field_validations.password_is_required_field";
+    if (password.length < 9) return "field_validations.password_too_short_field";
+    if (password.length > 30) return "field_validations.password_too_long_field";
 
-    if (!repassword) return "confirmPasswordIsRequiredField";
-    if (password !== repassword) return "doNotMatchPasswordsFields";
+    if (!repassword) return "field_validations.confirm_password_is_required_field";
+    if (password !== repassword) return "field_validations.do_not_match_passwords_fields";
 
     return null;
 };
 
 export const BookingVerificationSubmit = ({ tableId, date, time, partySize }) => {
-    if (!date) return "bookingDateIsRequiredField";
-    if (!time) return "bookingTimeIsRequiredField";
-    if (!partySize) return "bookingCustomersIsRequiredField";
-    if (!tableId) return "bookingTableIsRequiredField";
+    if (!date) return "field_validations.booking_date_is_required_field";
+    if (!time) return "field_validations.booking_time_is_required_field";
+    if (!partySize) return "field_validations.booking_customers_is_required_field";
+    if (!tableId) return "field_validations.booking_table_is_required_field";
 };
 
 export const ProfileDataChangingVerification = ({ name, email, address }) => {
-    if (!name) return "profileNameNotEmptyField";
-    if (name.length < 4) return "nameIsTooShortField";
-    if (name.length > 30) return "nameIsTooLongField";
+    if (!name) return "field_validations.profile_name_not_empty_field";
+    if (name.length < 4) return "field_validations.name_is_too_short_field";
+    if (name.length > 30) return "field_validations.name_is_too_long_field";
 
-    if (!email) return "profileEmailNotEmptyField";
-    if (!email.includes("@")) return "emailNotValidField1";
-    if (!email.includes(".")) return "emailNotValidField2";
-    if (email.length < 5) return "emailTooShortField";
-    if (email.length > 50) return "emailTooLongField";
+    if (!email) return "field_validations.profile_email_not_empty_field";
+    if (!email.includes("@")) return "field_validations.email_not_valid_field1";
+    if (!email.includes(".")) return "field_validations.email_not_valid_field2";
+    if (email.length < 5) return "field_validations.email_too_short_field";
+    if (email.length > 50) return "field_validations.email_too_long_field";
 
-    if (!address) return "profileAddressNotEmptyField";
-    if (address.length < 6) return "addressTooShortField";
-    if (address.length > 60) return "addressTooLongField";
+    if (!address) return "field_validations.profile_address_not_empty_field";
+    if (address.length < 6) return "field_validations.address_too_short_field";
+    if (address.length > 60) return "field_validations.address_too_long_field";
 };

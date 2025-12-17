@@ -56,12 +56,12 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
         (bookingData) => {
             if (!bookingData) setBookingId("");
             if (bookingData) {
-                const modalMessage = `${getText("bookingDataModalInfoMessageText1")} ${
+                const modalMessage = `${getText("booking_data.booking_data_modal_info_message_text1")} ${
                     bookingData?.partySize
                 } ${
                     bookingData?.partySize === 1
-                        ? getText("bookingDataModalInfoMessageCustomer1")
-                        : getText("bookingDataModalInfoMessageCustomer2")
+                        ? getText("booking_data.booking_data_modal_info_message_customer1")
+                        : getText("booking_data.booking_data_modal_info_message_customer2")
                 } ?`;
                 setBookingId(bookingData.id || bookingData._id);
                 setMessageModal(modalMessage);
@@ -96,7 +96,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
             try {
                 await deleteBookingById(bookingId);
             } catch (err) {
-                showToast(getText("toastBookingDataDeltingBookingError"), "error", 1000);
+                showToast(getText("booking_data.toast_booking_data_delting_booking_error"), "error", 1000);
             } finally {
                 setIsLoading(false);
                 setShowModalDelete(false);
@@ -164,22 +164,22 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                 closeOnEscape={true}
                 className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
             >
-                <ModalHeader>{getText("bookingDataModalInfotitle")}</ModalHeader>
+                <ModalHeader>{getText("booking_data.booking_data_modal_infotitle")}</ModalHeader>
                 <ModalBody className="flex flex-col gap-2">
                     <div className="flex items-center gap-2">
-                        <p>{getText("bookingDataModalInfoDateText")}</p>
+                        <p>{getText("booking_data.booking_data_modal_info_date_text")}</p>
                         <p>{modalInfo.date}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <p>{getText("bookingDataModalInfoTimeText")}</p>
+                        <p>{getText("booking_data.booking_data_modal_info_time_text")}</p>
                         <p>{modalInfo.time}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <p>{getText("bookingDataModalInfoPartySizeText")}</p>
+                        <p>{getText("booking_data.booking_data_modal_info_party_size_text")}</p>
                         <p>{modalInfo.customerNumber}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <p>{getText("bookingDataModalInfoHighChairText")}</p>
+                        <p>{getText("booking_data.booking_data_modal_info_high_chair_text")}</p>
                         <p>{modalInfo.extras.highChair ? "Yes" : "No"}</p>
                     </div>
                 </ModalBody>

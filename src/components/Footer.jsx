@@ -16,7 +16,7 @@ export const Footer = memo(() => {
             <Container>
                 <div className="flex flex-1 justify-center items-center text-center text-sm text-gray-500">
                     <p>
-                        © {new Date().getFullYear()} {getText("copyrightText")}
+                        © {new Date().getFullYear()} {getText("footer.copyright_text")}
                     </p>
                 </div>
             </Container>

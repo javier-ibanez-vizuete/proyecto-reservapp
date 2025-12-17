@@ -38,12 +38,12 @@ export const UserOrdersSection = ({ userOrdersData = [] }) => {
     return (
         <div className="flex flex-col gap-3">
             <OrdersDateItem
-                title={getText("ordersDataTitle1")}
+                title={getText("orders_data.orders_data_title1")}
                 content={pendingOrders}
                 isPendingOrders={true}
             />
             <OrdersDateItem
-                title={getText("ordersDataTitle2")}
+                title={getText("orders_data.orders_data_title2")}
                 content={userOrdersData}
                 isPendingOrders={false}
             />
