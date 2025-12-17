@@ -64,11 +64,11 @@ export const PageError = memo(
                     {message && <p>{message}</p>}
 
                     <Button variant="primary" onClick={onErrorRetry}>
-                        {retryText ? retryText : getText("onErrorRetryButtonText")}
+                        {retryText ? retryText : getText("error_sentences.on_error_retry_button_text")}
                     </Button>
 
                     <Button variant="danger" onClick={onErrorReset}>
-                        {getText("onErrorBackToHomeButtonText")}
+                        {getText("error_sentences.on_error_back_to_home_button_text")}
                     </Button>
                 </div>
             </div>

@@ -46,7 +46,11 @@ export const AppRouter = () => {
         <ErrorBoundary
             fallback={
                 <Container className="flex-1">
-                    <PageError title={`${getText("onErrorBaseSentence")} ${getErrorLocationName()}`} />
+                    <PageError
+                        title={`${getText(
+                            "error_sentences.on_error_base_sentence"
+                        )} ${getErrorLocationName()}`}
+                    />
                 </Container>
             }
         >

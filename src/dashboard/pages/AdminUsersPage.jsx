@@ -62,13 +62,13 @@ function AdminUsersPage({ padding, gap, columns }) {
             setSelectedActive("");
             return setShowOnlyActivedUsers(null);
         }
-        if (value === getText("adminUserPageActiveStatusFilter")) {
+        if (value === getText("admin_users_page.admin_user_page_active_status_filter")) {
             saveDataInSessionStorage("selectedActiveFilter", value);
             saveDataInSessionStorage("showOnlyActivedUsersFilter", true);
             setSelectedActive(value);
             return setShowOnlyActivedUsers(true);
         }
-        if (value === getText("adminUserPageInactiveStatusFilter")) {
+        if (value === getText("admin_users_page.admin_user_page_inactive_status_filter")) {
             saveDataInSessionStorage("selectedActiveFilter", value);
             saveDataInSessionStorage("showOnlyActivedUsersFilter", false);
             setSelectedActive(value);
@@ -176,8 +176,8 @@ function AdminUsersPage({ padding, gap, columns }) {
     );
 
     const usersFiltersOptions = {
-        isActive: getText("adminUserPageActiveStatusFilter"),
-        isInactive: getText("adminUserPageInactiveStatusFilter"),
+        isActive: getText("admin_users_page.admin_user_page_active_status_filter"),
+        isInactive: getText("admin_users_page.admin_user_page_inactive_status_filter"),
     };
     if (isLoadingUsers)
         return (
@@ -201,13 +201,13 @@ function AdminUsersPage({ padding, gap, columns }) {
             <div className="perfect-center self-start lg:self-center">
                 <BackButton />
             </div>
-            <h1>{getText("h1AdminUserPage")}</h1>
+            <h1>{getText("admin_users_page.h1_admin_user_page")}</h1>
             <div className={currentFiltersContainerClasses}>
                 <AdminInputSearch
-                    labelText={getText("adminUserPageLabelTextName")}
+                    labelText={getText("admin_users_page.admin_user_page_label_text_name")}
                     id={"name"}
                     value={inputName}
-                    placeholder={getText("adminUserPagePlaceholderTextName")}
+                    placeholder={getText("admin_users_page.admin_user_page_placeholder_text_name")}
                     onChange={onInputChange}
                     onRemove={onInputClear}
                     containerClassName="flex-col"
@@ -215,14 +215,16 @@ function AdminUsersPage({ padding, gap, columns }) {
                 />
                 <AdminDropdown variant={"accent"} placement="bottom-start">
                     <AdminDropdownTrigger>
-                        {!selectedActive ? getText("adminUserPageDefaultStatusFilter") : selectedActive}
+                        {!selectedActive
+                            ? getText("admin_users_page.admin_user_page_default_status_filter")
+                            : selectedActive}
                     </AdminDropdownTrigger>
                     <AdminDropdownMenu>
                         <AdminDropdownItem
                             disabled={selectedActive === "" ? true : false}
                             onClick={() => handleStateFilter()}
                         >
-                            {getText("adminUserPageDefaultStatusFilter")}
+                            {getText("admin_users_page.admin_user_page_default_status_filter")}
                         </AdminDropdownItem>
                         {Object.entries(usersFiltersOptions).map(([key, value]) => (
                             <AdminDropdownItem

@@ -239,10 +239,12 @@ export const AdminBookingCard = ({
             <p className="font-bold">{formatTime}</p>
             <div className={currentContentContainerClasses}>
                 <p>
-                    {getText("adminBookingCardCustomersText")} <span>{bookingData?.partySize}</span>
+                    {getText("admin_booking_card.admin_booking_card_customers_text")}{" "}
+                    <span>{bookingData?.partySize}</span>
                 </p>
                 <p className="lg:flex lg:flex-col">
-                    {getText("adminBookingCardBookedByText")} <span>{bookingName}</span>
+                    {getText("admin_booking_card.admin_booking_card_booked_by_text")}{" "}
+                    <span>{bookingName}</span>
                 </p>
             </div>
 

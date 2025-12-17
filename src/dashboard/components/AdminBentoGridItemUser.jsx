@@ -34,7 +34,9 @@ export const AdminBentoGridItemUser = ({ user }) => {
             {/* HAY QUE METER un recorte en el nombre para dejar solo el nombre antes del espacio */}
             <h6 className="text-[9px] whitespace-nowrap">{shortenUserName || user.name}</h6>
             <div className="perfect-center gap-xs">
-                <small className="text-[10px] font-normal">{getText("bentoGridUserRoleText")}</small>
+                <small className="text-[10px] font-normal">
+                    {getText("dashboard_items.bento_grid_user_role_text")}
+                </small>
                 <small className="text-[10px]">{user?.role}</small>
             </div>
         </div>

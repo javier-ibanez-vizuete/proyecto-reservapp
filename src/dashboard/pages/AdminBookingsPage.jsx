@@ -64,9 +64,18 @@ function AdminBookingsPage({ padding, gap }) {
     );
 
     const LINKS_DATA = [
-        { text: getText("adminBookingsAllLinkText"), href: "/dashboard/bookings/all" },
-        { text: getText("adminBookingsTodaysLinkText"), href: "/dashboard/bookings/today" },
-        { text: getText("adminBookingsSelectDateText"), href: "/dashboard/bookings/date" },
+        {
+            text: getText("admin_bookings_page.admin_bookings_all_link_text"),
+            href: "/dashboard/bookings/all",
+        },
+        {
+            text: getText("admin_bookings_page.admin_bookings_todays_link_text"),
+            href: "/dashboard/bookings/today",
+        },
+        {
+            text: getText("admin_bookings_page.admin_bookings_select_date_text"),
+            href: "/dashboard/bookings/date",
+        },
     ];
 
     return (
@@ -74,7 +83,7 @@ function AdminBookingsPage({ padding, gap }) {
             <div className="perfect-center self-start lg:self-center">
                 <BackButton />
             </div>
-            <h1 className="break-all break-words">{getText("h1AdminBookingsPage")}</h1>
+            <h1 className="break-all break-words">{getText("admin_bookings_page.h1_admin_bookings_page")}</h1>
             <div className={currentLinksContainerClasses}>
                 {LINKS_DATA.map((link) => (
                     <AdminButton key={link.text} variant={link.href === pathname ? "active" : "inactive"}>

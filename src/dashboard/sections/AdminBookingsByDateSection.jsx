@@ -125,7 +125,7 @@ function AdminBookingsByDateSection({ padding, gap }) {
             <ErrorBoundary
                 fallback={
                     <AdminContainer className="flex-1">
-                        <PageError title={getText("onErrorBookingByDateTitle")} />
+                        <PageError title={getText("error_sentences.on_error_booking_by_date_title")} />
                     </AdminContainer>
                 }
             >
@@ -137,14 +137,14 @@ function AdminBookingsByDateSection({ padding, gap }) {
                         onClick={handleNavigateToTodayBookings}
                         className={`${selectedDate === CURRENT_DATE && "invisible"}`}
                     >
-                        {getText("adminBookingsByDateButtonText")}
+                        {getText("admin_bookings_by_date.admin_bookings_by_date_button_text")}
                     </AdminButton>
 
                     {filteredBookings?.length > 0 && (
                         <p>{`${filteredBookings?.length} ${
                             filteredBookings?.length === 1
-                                ? getText("adminBookingsByDateLabelText1")
-                                : getText("adminBookingsByDateLabelText2")
+                                ? getText("admin_bookings_by_date.admin_bookings_by_date_label_text1")
+                                : getText("admin_bookings_by_date.admin_bookings_by_date_label_text2")
                         }`}</p>
                     )}
                 </div>
@@ -205,7 +205,9 @@ function AdminBookingsByDateSection({ padding, gap }) {
 
                 {!isLoadingBookings && !filteredBookings?.length > 0 && (
                     <div>
-                        <p className="italic opacity-50">{getText("adminBookingsByDateNotBookingsText")}</p>
+                        <p className="italic opacity-50">
+                            {getText("admin_bookings_by_date.admin_bookings_by_date_not_bookings_text")}
+                        </p>
                     </div>
                 )}
 

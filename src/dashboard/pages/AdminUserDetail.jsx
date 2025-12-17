@@ -98,8 +98,9 @@ function AdminUserDetail({ padding, gap }) {
 
     const handleSendEmail = () => {
         if (!contactForm?.contactSubject)
-            return setContactError(getText("adminUserDetailNotSubjectFieldText"));
-        if (!contactForm?.contactBody) return setContactError(getText("adminUserDetailNotMessageFieldText"));
+            return setContactError(getText("admin_user_details.admin_user_detail_not_subject_field_text"));
+        if (!contactForm?.contactBody)
+            return setContactError(getText("admin_user_details.admin_user_detail_not_message_field_text"));
 
         const encodedSubject = encodeURIComponent(contactForm?.subject);
         const encodedBody = encodeURIComponent(contactForm?.contactBody);
@@ -145,7 +146,11 @@ function AdminUserDetail({ padding, gap }) {
             await deleteUserById(normalizedUser?.id);
         } catch (err) {
             console.error("No se ha podido Eliminar User", err);
-            showToast(getText("toastAdminUserDetailsRemoveUserError"), "error", 1000);
+            showToast(
+                getText("admin_user_details.toast_admin_user_details_remove_user_error"),
+                "error",
+                1000
+            );
         } finally {
             loaderDeleteUser.setIsLoading(false);
             setShowDeleteModal(false);
@@ -253,33 +258,37 @@ function AdminUserDetail({ padding, gap }) {
     return (
         <article className={currentArticleClasses}>
             <Modal isOpen={showContactModal} onClose={handleContactModal} className={baseContactModalClasses}>
-                <ModalHeader>{`${getText("adminUserDetailMailModalTitle")} ${
+                <ModalHeader>{`${getText("admin_user_details.admin_user_detail_mail_modal_title")} ${
                     userDetails?.name
                 }`}</ModalHeader>
                 <ModalBody className="flex flex-col gap-sm">
                     <div className="flex flex-col gap-xs">
                         <label htmlFor="contactSubject" className="font-medium">
-                            {getText("adminUserDetailMailModalSubjectText")}
+                            {getText("admin_user_details.admin_user_detail_mail_modal_subject_text")}
                         </label>
                         <input
                             type="text"
                             name="contactSubject"
                             id="contactSubject"
                             value={contactForm?.subject}
-                            placeholder={getText("adminUserDetailMailModalSubjectPlaceholder")}
+                            placeholder={getText(
+                                "admin_user_details.admin_user_detail_mail_modal_subject_placeholder"
+                            )}
                             onChange={onContactInputChange}
                             onKeyDown={onEnterKey}
                         />
                     </div>
                     <div className="flex flex-col gap-xs">
                         <label htmlFor="contactBody" className="font-medium">
-                            {getText("adminUserDetailMailModalMessageText")}
+                            {getText("admin_user_details.admin_user_detail_mail_modal_message_text")}
                         </label>
                         <textarea
                             name="contactBody"
                             id="contactBody"
                             value={contactForm?.contactBody}
-                            placeholder={getText("adminUserDetailMailModalMessagePlaceholder")}
+                            placeholder={getText(
+                                "admin_user_details.admin_user_detail_mail_modal_message_placeholder"
+                            )}
                             onChange={onContactInputChange}
                             onKeyDown={onEnterKey}
                         />
@@ -291,10 +300,10 @@ function AdminUserDetail({ padding, gap }) {
                     )}
                     <div className="perfect-center gap-sm">
                         <AdminButton variant={"danger"} onClick={handleContactModal}>
-                            {getText("adminUserDetailCancelButton")}
+                            {getText("admin_user_details.admin_user_detail_cancel_button")}
                         </AdminButton>
                         <AdminButton variant={"primary"} onClick={handleSendEmail}>
-                            {getText("adminUserDetailMailModalSendButton")}
+                            {getText("admin_user_details.admin_user_detail_mail_modal_send_button")}
                         </AdminButton>
                     </div>
                 </ModalFooter>
@@ -303,29 +312,33 @@ function AdminUserDetail({ padding, gap }) {
                 isOpen={showCallModal}
                 onClose={handleCallModal}
                 onConfirm={handleCallUser}
-                title={getText("adminUserDetailConfirmModalTitle")}
-                message={`${getText("adminUserDetailConfirmModalText")} ${userDetails?.name} - [${
-                    userDetails?.phoneNumber
-                }] ?`}
+                title={getText("admin_user_details.admin_user_detail_confirm_modal_title")}
+                message={`${getText("admin_user_details.admin_user_detail_confirm_modal_text")} ${
+                    userDetails?.name
+                } - [${userDetails?.phoneNumber}] ?`}
                 showCloseButton={false}
             />
             <Modal isOpen={showDeleteModal} className={baseDeleteModalClasses}>
-                <ModalHeader>{getText("adminUserDetailDeleteModalTitle")}</ModalHeader>
+                <ModalHeader>
+                    {getText("admin_user_details.admin_user_detail_delete_modal_title")}
+                </ModalHeader>
                 <ModalBody>
-                    {getText("adminUserDetailDeleteModalText")} {userDetails?.name}?
+                    {getText("admin_user_details.admin_user_detail_delete_modal_text")} {userDetails?.name}?
                 </ModalBody>
                 <ModalFooter>
                     <AdminButton variant={"outline"} onClick={handleDeleteModal}>
-                        {getText("adminUserDetailCancelButton")}
+                        {getText("admin_user_details.admin_user_detail_cancel_button")}
                     </AdminButton>
                     <LoadingButton
                         variant="danger"
                         onClick={handleDeleteUser}
                         loading={loaderDeleteUser.isLoading}
                         disabled={loaderDeleteUser.isLoading}
-                        loadingText={getText("loadingAdminUserDetailDeleteModalDeleteButton")}
+                        loadingText={getText(
+                            "admin_user_details.loading_admin_user_detail_delete_modal_delete_button"
+                        )}
                     >
-                        {getText("adminUserDetailDeleteModalDeleteButton")}
+                        {getText("admin_user_details.admin_user_detail_delete_modal_delete_button")}
                     </LoadingButton>
                 </ModalFooter>
             </Modal>
@@ -348,7 +361,7 @@ function AdminUserDetail({ padding, gap }) {
                     <div className="flex justify-between items-center gap-2 md:flex-1">
                         <p>{userDetails?.email}</p>
                         <AdminButton variant={"primary"} onClick={handleContactModal}>
-                            {getText("adminUserDetailMailButtonText")}
+                            {getText("admin_user_details.admin_user_detail_mail_button_text")}
                         </AdminButton>
                     </div>
                 </div>
@@ -361,7 +374,9 @@ function AdminUserDetail({ padding, gap }) {
                             <p>{userDetails?.phoneNumber}</p>
                             {!isDesktop && (
                                 <AdminButton variant={"primary"} onClick={handleCallModal}>
-                                    {getText("adminUserDetailConfirmModalButtonText")}
+                                    {getText(
+                                        "admin_user_details.admin_user_detail_confirm_modal_button_text"
+                                    )}
                                 </AdminButton>
                             )}
                         </div>
@@ -372,26 +387,28 @@ function AdminUserDetail({ padding, gap }) {
                     <p>{userDetails?.address}</p>
                 </div>
                 <div className={currentDetailsClasses}>
-                    <p className={baseDetailsLabelClasses}>{getText("bentoGridUserRoleText")}</p>
+                    <p className={baseDetailsLabelClasses}>
+                        {getText("dashboard_items.bento_grid_user_role_text")}
+                    </p>
                     <p>{userDetails?.role}</p>
                 </div>
             </div>
             {userDetails?.bookings.length > 0 && (
                 <div className="flex items-center gap-sm">
-                    <p>{getText("adminUserDetailBookingsCountText")}</p>
+                    <p>{getText("admin_user_details.admin_user_detail_bookings_count_text")}</p>
                     <h6>{userDetails?.bookings.length}</h6>
                 </div>
             )}
             {userDetails?.orders.length > 0 && (
                 <div className="flex items-center gap-sm">
-                    <p>{getText("adminUserDetailOrdersCountText")}</p>
+                    <p>{getText("admin_user_details.admin_user_detail_orders_count_text")}</p>
                     <h6>{userDetails?.orders.length}</h6>
                 </div>
             )}
             {user?.id !== (userDetails?.id || userDetails?._id) && (
                 <div>
                     <AdminButton variant={"danger"} onClick={handleDeleteModal}>
-                        {getText("adminUserDetailDeleteButtonText")}
+                        {getText("admin_user_details.admin_user_detail_delete_button_text")}
                     </AdminButton>
                 </div>
             )}

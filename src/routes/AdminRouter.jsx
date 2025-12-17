@@ -39,7 +39,11 @@ export const AdminRouter = () => {
         <ErrorBoundary
             fallback={
                 <AdminContainer className="flex-1">
-                    <PageError title={`${getText("onErrorBaseSentence")} ${getErrorLocationName()}`} />
+                    <PageError
+                        title={`${getText(
+                            "error_sentences.on_error_base_sentence"
+                        )} ${getErrorLocationName()}`}
+                    />
                 </AdminContainer>
             }
         >

@@ -60,9 +60,12 @@ function AdminBookingDetail({
     }, [bookingDetails]);
 
     const getBookingStatusName = () => {
-        if (bookingDetails?.status === "pending") return getText("adminBookingDetailPendingStatusText");
-        if (bookingDetails?.status === "completed") return getText("adminBookingDetailCompletedStatusText");
-        if (bookingDetails?.status === "cancelled") return getText("adminBookingDetailCancelledStatusText");
+        if (bookingDetails?.status === "pending")
+            return getText("admin_booking_detail.admin_booking_detail_pending_status_text");
+        if (bookingDetails?.status === "completed")
+            return getText("admin_booking_detail.admin_booking_detail_completed_status_text");
+        if (bookingDetails?.status === "cancelled")
+            return getText("admin_booking_detail.admin_booking_detail_cancelled_status_text");
         return null;
     };
 
@@ -136,9 +139,13 @@ function AdminBookingDetail({
             loaderCancelBooking.setIsLoading(true);
             const cancelledBooking = await postCancelBookingById(bookingDetails?.id || bookingDetails?._id);
             if (!cancelledBooking) throw new Error("ERROR CANCELLING BOOKING");
-            showToast(getText("adminBookingDetailSuccessCancelToast"), "success", 1000);
+            showToast(
+                getText("admin_booking_detail.admin_booking_detail_success_cancel_toast"),
+                "success",
+                1000
+            );
         } catch (err) {
-            showToast(getText("adminBookingDetailErrorCancelToast"), "error", 1000);
+            showToast(getText("admin_booking_detail.admin_booking_detail_error_cancel_toast"), "error", 1000);
         } finally {
             loaderCancelBooking.setIsLoading(false);
             setShowDeleteModal(false);
@@ -337,11 +344,15 @@ function AdminBookingDetail({
                 isOpen={showDeleteModal}
                 onClose={handleDeleteModal}
                 onConfirm={handleCancelBooking}
-                title={getText("adminBookingDetailCancelModalTitleText")}
-                message={`${getText("adminBookingDetailCancelModalMessageText")} ${ownerDetails?.name} ?`}
-                confirmText={getText("adminBookingDetailCancelConfirmButtonText")}
-                loadingText={getText("loadingAdminBookingDetailCancelConfirmButtonText")}
-                cancelText={getText("adminBookingDetailCancelCancelButtonText")}
+                title={getText("admin_booking_detail.admin_booking_detail_cancel_modal_title_text")}
+                message={`${getText("admin_booking_detail.admin_booking_detail_cancel_modal_message_text")} ${
+                    ownerDetails?.name
+                } ?`}
+                confirmText={getText("admin_booking_detail.admin_booking_detail_cancel_confirm_button_text")}
+                loadingText={getText(
+                    "admin_booking_detail.loading_admin_booking_detail_cancel_confirm_button_text"
+                )}
+                cancelText={getText("admin_booking_detail.admin_booking_detail_cancel_cancel_button_text")}
                 showCloseButton={false}
                 variantButton="danger"
                 loading={loaderCancelBooking.isLoading}
@@ -354,10 +365,12 @@ function AdminBookingDetail({
             <div className={currentCardContainer}>
                 <h6>{bookingTime}</h6>
                 <p>
-                    {getText("adminBookingCardBookedByText")} <span>{handleGetBookingOwner}</span>
+                    {getText("admin_booking_card.admin_booking_card_booked_by_text")}{" "}
+                    <span>{handleGetBookingOwner}</span>
                 </p>
                 <p>
-                    {getText("adminBookingDetailBookedOnText")} <span>{bookingMadeTime}</span>
+                    {getText("admin_booking_detail.admin_booking_detail_booked_on_text")}{" "}
+                    <span>{bookingMadeTime}</span>
                 </p>
                 {bookingDetails?.notes && (
                     <div
@@ -368,7 +381,7 @@ function AdminBookingDetail({
                                 variantsElementsGap.default
                         )}
                     >
-                        <p>{getText("adminBookingDetailAdditinoalMessageText")}</p>
+                        <p>{getText("admin_booking_detail.admin_booking_detail_additinoal_message_text")}</p>
                         <p>{bookingDetails?.notes}</p>
                     </div>
                 )}
@@ -381,28 +394,29 @@ function AdminBookingDetail({
                                 variantsElementsGap.default
                         )}
                     >
-                        <p>{getText("adminBookingDetailExtrasText")}</p>
-                        <p>{getText("adminBookingDetailHighChairExtraText")}</p>
+                        <p>{getText("admin_booking_detail.admin_booking_detail_extras_text")}</p>
+                        <p>{getText("admin_booking_detail.admin_booking_detail_high_chair_extra_text")}</p>
                     </div>
                 )}
                 <p>
-                    {getText("adminBookingDetailStatusText")} <span>{getBookingStatusName()}</span>
+                    {getText("admin_booking_detail.admin_booking_detail_status_text")}{" "}
+                    <span>{getBookingStatusName()}</span>
                 </p>
 
                 <div className={currentButtonsContainerClasses}>
                     <div className={currentContactButtonsContainerClasses}>
                         <AdminButton onClick={handleSendEmailToOwner} variant={"primary"}>
-                            {getText("adminUserDetailMailButtonText")}
+                            {getText("admin_user_details.admin_user_detail_mail_button_text")}
                         </AdminButton>
                         {ownerDetails?.phoneNumber && (
                             <AdminButton variant={"secondary"} onClick={handleCallOwner}>
-                                {getText("adminUserDetailConfirmModalButtonText")}
+                                {getText("admin_user_details.admin_user_detail_confirm_modal_button_text")}
                             </AdminButton>
                         )}
                     </div>
                     {bookingDetails?.status !== "cancelled" && (
                         <AdminButton onClick={handleDeleteModal} variant={"danger"}>
-                            {getText("adminBookingDetailCancelBookingButtonText")}
+                            {getText("admin_booking_detail.admin_booking_detail_cancel_booking_button_text")}
                         </AdminButton>
                     )}
                 </div>

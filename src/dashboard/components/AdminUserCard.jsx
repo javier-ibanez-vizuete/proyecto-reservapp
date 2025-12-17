@@ -173,7 +173,7 @@ export const AdminUserCard = ({
 
             <small className="font-medium whitespace-nowrap">{userData?.name}</small>
             <small>
-                {getText("adminUserPageUserRoleText")}
+                {getText("admin_users_page.admin_user_page_user_role_text")}
                 <span>{userData?.role}</span>
             </small>
         </article>
