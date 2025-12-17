@@ -68,7 +68,7 @@ function DashboardPage() {
         () => [
             {
                 title: isLoadingUsers ? isLoadingUsers : getTotalUsers(users),
-                description: "dashboardTotalUsersDescriptionLabel",
+                description: "admin_layout.dashboard_total_users_description_label",
                 icon: "",
                 to: "/dashboard/users",
                 colSpan: 1,
@@ -87,7 +87,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingUsers ? isLoadingUsers : getConnectedUsers(users),
-                description: "dashboardConnectedUsersDescriptionLabel",
+                description: "admin_layout.dashboard_connected_users_description_label",
                 icon: "",
                 to: "/dashboard/users",
                 colSpan: 1,
@@ -96,7 +96,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingBookings ? isLoadingBookings : getTotalBookings(bookings),
-                description: "dashboardTotalBookingsDescriptionLabel",
+                description: "admin_layout.dashboard_total_bookings_description_label",
                 icon: "",
                 to: "/dashboard/bookings/date",
                 colSpan: 1,
@@ -105,7 +105,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingBookings ? isLoadingBookings : getTodaysBookings(bookings),
-                description: "dashboardPendingBookingsDescriptionLabel",
+                description: "admin_layout.dashboard_pending_bookings_description_label",
                 icon: "",
                 to: "/dashboard/bookings/today",
                 colSpan: 2,
@@ -114,7 +114,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingBookings ? isLoadingBookings : getDelayedBookings(bookings),
-                description: "dashboardDelayedBookingsDescriptionLabel",
+                description: "admin_layout.dashboard_delayed_bookings_description_label",
                 icon: "",
                 to: "/dashboard/bookings/today",
                 colSpan: 1,
@@ -123,7 +123,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingOrders ? isLoadingOrders : getTotalOrders(orders),
-                description: "dashboardTotalOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_total_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 1,
@@ -132,7 +132,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingOrders ? isLoadingOrders : getCompletedOrders(orders),
-                description: "dashboardCompletedOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_completed_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 1,
@@ -141,7 +141,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingOrders ? isLoadingOrders : getPendingOrders(orders),
-                description: "dashboardPendingOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_pending_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 1,
@@ -150,7 +150,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingOrders ? isLoadingOrders : getCancelledOrders(orders),
-                description: "dashboardCancelledOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_cancelled_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 1,
@@ -161,7 +161,7 @@ function DashboardPage() {
                 title: isLoadingOrders
                     ? isLoadingOrders
                     : `${calculateCompletedOrdersPercentage(orders).toFixed(0)}%`,
-                description: "dashboardSuccesfulAverageOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_succesful_average_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 2,
@@ -170,7 +170,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingProducts ? isLoadingProducts : getTotalProducts(products),
-                description: "dashboardTotalProductsDescriptionLabel",
+                description: "admin_layout.dashboard_total_products_description_label",
                 icon: "",
                 to: "/dashboard/products",
                 colSpan: 1,

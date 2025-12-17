@@ -9,6 +9,7 @@ import { LanguageContext } from "../contexts/LanguageContext";
 import { useAuth } from "../core/auth/useAuth";
 import { AdminPrivateRoute } from "../dashboard/components/AdminPrivateRoute";
 import { AdminContainer } from "../dashboard/components/UI/AdminContainer";
+import { AdminProductsPage } from "../dashboard/pages/AdminProductsPage";
 import { LoadingPage } from "../pages/LoadingPage";
 
 const DashboardPage = lazy(() => import("../pages/DashboardPage"));
@@ -63,10 +64,11 @@ export const AdminRouter = () => {
                             element={<UnderConstruction pageName="Orders Page" />}
                         />
 
-                        <Route
+                        {/* <Route
                             path="/dashboard/products"
                             element={<UnderConstruction pageName="Products Page" />}
-                        />
+                        /> */}
+                        <Route path="/dashboard/products" element={<AdminProductsPage />} />
                     </Route>
 
                     <Route path="*" element={<Navigate to={user?.role === "admin" ? "/dashboard" : "/"} />} />
