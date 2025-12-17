@@ -1,19 +1,27 @@
-import { memo, useContext } from "react";
+import { memo } from "react";
 import { Dropdown } from "./Dropdown/Dropdown";
 import { DropdownTrigger } from "./Dropdown/DropdownTrigger";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
 
 import classNames from "classnames";
-import { LanguageContext } from "../contexts/LanguageContext";
+import { useTranslation } from "react-i18next";
 import { useDevice } from "../hooks/useDevice";
 import { FLAGS_URL_DATA } from "../utils/FLAGS_URL_DATA";
 import { DropdownItem } from "./Dropdown/DropdownItem";
 import { DropdownMenu } from "./Dropdown/DropdownMenu";
 
 export const LanguagesSelector = memo(({ placement = "bottom-start", onClick = () => {} }) => {
-    const { lang, languages, handleLang } = useContext(LanguageContext);
+    const { i18n } = useTranslation();
+    const languages = Object.keys(i18n.options.resources);
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
+
+    const languagesMap = {
+        es: "Español",
+        en: "English",
+        fr: "François",
+        zh: "Chinese",
+    };
 
     const iconsSizeConfig = classNames({
         "w-6": isMobile2Xs,
@@ -31,20 +39,20 @@ export const LanguagesSelector = memo(({ placement = "bottom-start", onClick = (
                 className={"active:scale-95 lg:hover:-translate-y-[2px]"}
             >
                 <ImageContainer size={iconsSizeConfig}>
-                    <Image imageData={FLAGS_URL_DATA[lang]} alt={`${lang} Flag`} />
+                    <Image imageData={FLAGS_URL_DATA[i18n?.language]} alt={`${i18n?.language} Flag`} />
                 </ImageContainer>
             </DropdownTrigger>
             <DropdownMenu classNameMenuContainer="flex-col">
-                {Object.entries(languages).map(([langCode, langValue]) => (
+                {languages.map((language) => (
                     <DropdownItem
-                        key={langCode}
-                        onClick={() => handleLang(langCode)}
+                        key={language}
+                        onClick={() => i18n.changeLanguage(language)}
                         variant="none"
                         className="flex justify-between items-center gap-4"
                     >
-                        <span>{langValue}</span>
+                        <span>{languagesMap[language]}</span>
                         <ImageContainer size={iconsSizeConfig}>
-                            <Image imageData={FLAGS_URL_DATA[langCode]} />
+                            <Image imageData={FLAGS_URL_DATA[language]} />
                         </ImageContainer>
                     </DropdownItem>
                 ))}

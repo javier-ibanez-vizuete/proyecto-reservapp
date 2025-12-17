@@ -3,13 +3,13 @@ import { ImageContainer } from "./UI/ImageContainer";
 
 import { useContext } from "react";
 import iconWifi from "../assets/icons/icon-wifi.webp";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useTranslate } from "../translations/useTranslate";
 import { Button } from "./UI/Button";
 
 export const TableCard = ({ tableData, onClick, selectedTable }) => {
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     return (
         <div
@@ -28,17 +28,16 @@ export const TableCard = ({ tableData, onClick, selectedTable }) => {
                 <div className="flex flex-col flex-1 gap-2">
                     <div className="flex flex-col flex-1">
                         <small>
-                            {getText("booking_page.booking_max_capacity_table_title")}{" "}
+                            {t("booking_page.booking_max_capacity_table_title")}{" "}
                             <span>{tableData.maxCapacity}</span>
                         </small>
                         <small>
-                            {getText("booking_page.booking_table_type_title")}{" "}
-                            <span>{getText(tableData.tableForm)}</span>
+                            {t("booking_page.booking_table_type_title")} <span>{t(tableData.tableForm)}</span>
                         </small>
                     </div>
                     {tableData.hasWifi && (
                         <div className="flex items-center gap-4">
-                            <small>{getText("booking_page.booking_table_wifi_text")}</small>
+                            <small>{t("booking_page.booking_table_wifi_text")}</small>
                             <ImageContainer className="w-8">
                                 <Image src={iconWifi} />
                             </ImageContainer>
@@ -47,7 +46,7 @@ export const TableCard = ({ tableData, onClick, selectedTable }) => {
                 </div>
                 <div className="perfect-center">
                     <Button size="sm" variant={"secondary"} onClick={onClick}>
-                        {getText("booking_page.booking_select_table_button")}
+                        {t("booking_page.booking_select_table_button")}
                     </Button>
                 </div>
             </div>

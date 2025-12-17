@@ -6,13 +6,13 @@ import { FormInput } from "../components/FormInput";
 import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { ToastContainer } from "../components/ToastContainer";
 import { AuthContext } from "../contexts/AuthContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { LoginVerificationFields } from "../helpers/FieldsVerificator";
 import { useDevice } from "../hooks/useDevice";
 import { usePasswordVisibility } from "../hooks/usePasswordVisibility";
 import { useToast } from "../hooks/useToast";
+import { useTranslate } from "../translations/useTranslate";
 
 const INITIAL_FORM = { email: "", password: "" };
 
@@ -27,7 +27,7 @@ function LoginPage() {
     const { theme } = useContext(ThemeContext);
     const { isMobile2Xs, isMobileXs, isMobileSm, isMobile, isTablet, isDesktop } = useDevice();
     const { visible, toggleVisible } = usePasswordVisibility();
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const location = useLocation();
 
@@ -46,13 +46,13 @@ function LoginPage() {
             input: {
                 name: "email",
                 type: "email",
-                placeholder: getText("register_page.email_placeholder_field_text"),
+                placeholder: t("register_page.email_placeholder_field_text"),
                 label: "Email",
                 required: true,
                 className: "flex-1",
             },
             label: {
-                text: getText("user_data.email_field_text"),
+                text: t("user_data.email_field_text"),
                 className: "",
             },
         },
@@ -61,12 +61,12 @@ function LoginPage() {
             input: {
                 name: "password",
                 type: "password",
-                placeholder: getText("register_page.password_placeholder_field_text"),
+                placeholder: t("register_page.password_placeholder_field_text"),
                 required: true,
                 className: "rounded-r-none flex-1",
             },
             label: {
-                text: getText("user_data.password_field_text"),
+                text: t("user_data.password_field_text"),
                 className: "",
             },
         },
@@ -93,7 +93,7 @@ function LoginPage() {
                 setForm(INITIAL_FORM);
             } catch (error) {
                 setForm(INITIAL_FORM);
-                showToast(getText("login_page.toast_login_error"), "error", 1000);
+                showToast(t("login_page.toast_login_error"), "error", 1000);
             } finally {
                 setIsloading(false);
             }
@@ -122,7 +122,7 @@ function LoginPage() {
                 //     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                 // } rounded-2xl shadow-md xs:p-6 2xs:py-6 2xs:px-2 sm:p-8 md:p-10 max-w-[800px] mx-auto`}
             >
-                <h1>{getText("login_page.h1_login_page")}</h1>
+                <h1>{t("login_page.h1_login_page")}</h1>
                 <form className="flex flex-col gap-5" onSubmit={onLoginSubmit}>
                     {LOGIN_FIELDS.map(({ label, input, containerClass }) => {
                         const inputText = visible && input.name === "password" ? "text" : input.type;
@@ -149,16 +149,16 @@ function LoginPage() {
                             />
                         );
                     })}
-                    {error && <span className="italic font-semibold text-error-600">{getText(error)}</span>}
+                    {error && <span className="italic font-semibold text-error-600">{t(error)}</span>}
 
                     <LoadingButton
                         loading={isLoading}
                         type="submit"
                         variant="primary"
                         size={isMobile ? "md" : "lg"}
-                        loadingText={getText("login_page.loading_login_button_text")}
+                        loadingText={t("login_page.loading_login_button_text")}
                     >
-                        {getText("navigation_bar.login_button")}
+                        {t("navigation_bar.login_button")}
                     </LoadingButton>
                 </form>
                 <div className="flex items-center gap-2">

@@ -6,7 +6,6 @@ import { Spinner } from "../../components/Spinner/Spinner";
 import { ToastContainer } from "../../components/ToastContainer";
 import { BackButton } from "../../components/UI/BackButton";
 import { BookingsContext } from "../../contexts/BookingsContext";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import {
     removeBookingDetailsFromLocalStorage,
@@ -16,6 +15,7 @@ import { useBookings } from "../../core/bookings/useBookings";
 import { useDevice } from "../../hooks/useDevice";
 import { useLoading } from "../../hooks/useLoading";
 import { useToast } from "../../hooks/useToast";
+import { useTranslate } from "../../translations/useTranslate";
 import { AdminButton } from "../components/UI/AdminButton";
 import { useAdminData } from "../hooks/useAdminData";
 
@@ -39,7 +39,7 @@ function AdminBookingDetail({
     const { bookingDetails, setBookingDetails } = useContext(BookingsContext);
     const { getBookingsById, postCancelBookingById, isLoading } = useBookings();
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { toasts, showToast, dismissToast } = useToast();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
@@ -61,11 +61,11 @@ function AdminBookingDetail({
 
     const getBookingStatusName = () => {
         if (bookingDetails?.status === "pending")
-            return getText("admin_booking_detail.admin_booking_detail_pending_status_text");
+            return t("admin_booking_detail.admin_booking_detail_pending_status_text");
         if (bookingDetails?.status === "completed")
-            return getText("admin_booking_detail.admin_booking_detail_completed_status_text");
+            return t("admin_booking_detail.admin_booking_detail_completed_status_text");
         if (bookingDetails?.status === "cancelled")
-            return getText("admin_booking_detail.admin_booking_detail_cancelled_status_text");
+            return t("admin_booking_detail.admin_booking_detail_cancelled_status_text");
         return null;
     };
 
@@ -139,13 +139,9 @@ function AdminBookingDetail({
             loaderCancelBooking.setIsLoading(true);
             const cancelledBooking = await postCancelBookingById(bookingDetails?.id || bookingDetails?._id);
             if (!cancelledBooking) throw new Error("ERROR CANCELLING BOOKING");
-            showToast(
-                getText("admin_booking_detail.admin_booking_detail_success_cancel_toast"),
-                "success",
-                1000
-            );
+            showToast(t("admin_booking_detail.admin_booking_detail_success_cancel_toast"), "success", 1000);
         } catch (err) {
-            showToast(getText("admin_booking_detail.admin_booking_detail_error_cancel_toast"), "error", 1000);
+            showToast(t("admin_booking_detail.admin_booking_detail_error_cancel_toast"), "error", 1000);
         } finally {
             loaderCancelBooking.setIsLoading(false);
             setShowDeleteModal(false);
@@ -344,15 +340,15 @@ function AdminBookingDetail({
                 isOpen={showDeleteModal}
                 onClose={handleDeleteModal}
                 onConfirm={handleCancelBooking}
-                title={getText("admin_booking_detail.admin_booking_detail_cancel_modal_title_text")}
-                message={`${getText("admin_booking_detail.admin_booking_detail_cancel_modal_message_text")} ${
+                title={t("admin_booking_detail.admin_booking_detail_cancel_modal_title_text")}
+                message={`${t("admin_booking_detail.admin_booking_detail_cancel_modal_message_text")} ${
                     ownerDetails?.name
                 } ?`}
-                confirmText={getText("admin_booking_detail.admin_booking_detail_cancel_confirm_button_text")}
-                loadingText={getText(
+                confirmText={t("admin_booking_detail.admin_booking_detail_cancel_confirm_button_text")}
+                loadingText={t(
                     "admin_booking_detail.loading_admin_booking_detail_cancel_confirm_button_text"
                 )}
-                cancelText={getText("admin_booking_detail.admin_booking_detail_cancel_cancel_button_text")}
+                cancelText={t("admin_booking_detail.admin_booking_detail_cancel_cancel_button_text")}
                 showCloseButton={false}
                 variantButton="danger"
                 loading={loaderCancelBooking.isLoading}
@@ -365,11 +361,11 @@ function AdminBookingDetail({
             <div className={currentCardContainer}>
                 <h6>{bookingTime}</h6>
                 <p>
-                    {getText("admin_booking_card.admin_booking_card_booked_by_text")}{" "}
+                    {t("admin_booking_card.admin_booking_card_booked_by_text")}{" "}
                     <span>{handleGetBookingOwner}</span>
                 </p>
                 <p>
-                    {getText("admin_booking_detail.admin_booking_detail_booked_on_text")}{" "}
+                    {t("admin_booking_detail.admin_booking_detail_booked_on_text")}{" "}
                     <span>{bookingMadeTime}</span>
                 </p>
                 {bookingDetails?.notes && (
@@ -381,7 +377,7 @@ function AdminBookingDetail({
                                 variantsElementsGap.default
                         )}
                     >
-                        <p>{getText("admin_booking_detail.admin_booking_detail_additinoal_message_text")}</p>
+                        <p>{t("admin_booking_detail.admin_booking_detail_additinoal_message_text")}</p>
                         <p>{bookingDetails?.notes}</p>
                     </div>
                 )}
@@ -394,29 +390,29 @@ function AdminBookingDetail({
                                 variantsElementsGap.default
                         )}
                     >
-                        <p>{getText("admin_booking_detail.admin_booking_detail_extras_text")}</p>
-                        <p>{getText("admin_booking_detail.admin_booking_detail_high_chair_extra_text")}</p>
+                        <p>{t("admin_booking_detail.admin_booking_detail_extras_text")}</p>
+                        <p>{t("admin_booking_detail.admin_booking_detail_high_chair_extra_text")}</p>
                     </div>
                 )}
                 <p>
-                    {getText("admin_booking_detail.admin_booking_detail_status_text")}{" "}
+                    {t("admin_booking_detail.admin_booking_detail_status_text")}{" "}
                     <span>{getBookingStatusName()}</span>
                 </p>
 
                 <div className={currentButtonsContainerClasses}>
                     <div className={currentContactButtonsContainerClasses}>
                         <AdminButton onClick={handleSendEmailToOwner} variant={"primary"}>
-                            {getText("admin_user_details.admin_user_detail_mail_button_text")}
+                            {t("admin_user_details.admin_user_detail_mail_button_text")}
                         </AdminButton>
                         {ownerDetails?.phoneNumber && (
                             <AdminButton variant={"secondary"} onClick={handleCallOwner}>
-                                {getText("admin_user_details.admin_user_detail_confirm_modal_button_text")}
+                                {t("admin_user_details.admin_user_detail_confirm_modal_button_text")}
                             </AdminButton>
                         )}
                     </div>
                     {bookingDetails?.status !== "cancelled" && (
                         <AdminButton onClick={handleDeleteModal} variant={"danger"}>
-                            {getText("admin_booking_detail.admin_booking_detail_cancel_booking_button_text")}
+                            {t("admin_booking_detail.admin_booking_detail_cancel_booking_button_text")}
                         </AdminButton>
                     )}
                 </div>

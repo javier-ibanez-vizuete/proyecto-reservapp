@@ -1,12 +1,12 @@
-import { useCallback, useContext, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "../components/ToastContainer";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { AdminBentoGrid } from "../dashboard/components/AdminBentoGrid";
 import { AdminBentoGridItem } from "../dashboard/components/AdminBentoGridItem";
 import { useAdminData } from "../dashboard/hooks/useAdminData";
 import { getDataFromSessionStorage, removeFromSessionStorage } from "../helpers/storage";
 import { useToast } from "../hooks/useToast";
+import { useTranslate } from "../translations/useTranslate";
 import {
     calculateCompletedOrdersPercentage,
     getCancelledOrders,
@@ -26,7 +26,7 @@ function DashboardPage() {
     const location = useLocation();
 
     const { toasts, showToast, dismissToast } = useToast();
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const {
         users,
@@ -59,7 +59,7 @@ function DashboardPage() {
 
         if (!fromLogin) return;
 
-        showToast(getText("home_page.toast_login_success"), "success", 2000, "top-center");
+        showToast(t("home_page.toast_login_success"), "success", 2000, "top-center");
         removeFromSessionStorage("fromLogin");
         navigate(location.pathname, { replace: true, state: {} });
     }, [location.state]);

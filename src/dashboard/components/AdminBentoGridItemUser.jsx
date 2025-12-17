@@ -1,12 +1,12 @@
 import classNames from "classnames";
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import { Avatar } from "../../components/Avatar";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 
 export const AdminBentoGridItemUser = ({ user }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const baseClasses = "flex flex-1 gap-sm flex-col overflow-hidden justify-between items-center";
 
@@ -35,7 +35,7 @@ export const AdminBentoGridItemUser = ({ user }) => {
             <h6 className="text-[9px] whitespace-nowrap">{shortenUserName || user.name}</h6>
             <div className="perfect-center gap-xs">
                 <small className="text-[10px] font-normal">
-                    {getText("dashboard_items.bento_grid_user_role_text")}
+                    {t("dashboard_items.bento_grid_user_role_text")}
                 </small>
                 <small className="text-[10px]">{user?.role}</small>
             </div>

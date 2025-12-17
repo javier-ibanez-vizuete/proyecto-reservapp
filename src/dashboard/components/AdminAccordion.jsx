@@ -3,9 +3,9 @@ import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Image } from "../../components/UI/Image";
 import { ImageContainer } from "../../components/UI/ImageContainer";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 import { ARROW_DOWN_BLACK, ARROW_DOWN_WHITE } from "../../utils/ICONS_DATA";
 
 export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false }) => {
@@ -14,7 +14,7 @@ export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false
 
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const location = useLocation();
 
@@ -68,7 +68,7 @@ export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false
     return (
         <article>
             <header className={baseHeaderClasses} onClick={onToggleOpen}>
-                <h6>{getText(title)}</h6>
+                <h6>{t(title)}</h6>
                 <ImageContainer
                     size={autoAdminAccordionItemConfig.iconSize}
                     className={currentImageContainerConfig}
@@ -92,7 +92,7 @@ export const AdminAccordionItem = ({ title = "", links = [], defaultOpen = false
                                     autoAdminAccordionItemConfig.link
                                 )}
                             >
-                                {getText(label)}
+                                {t(label)}
                             </Link>
                         </li>
                     ))}

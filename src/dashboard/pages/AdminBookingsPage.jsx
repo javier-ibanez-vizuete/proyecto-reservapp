@@ -1,13 +1,13 @@
 import classNames from "classnames";
-import { memo, useContext, useMemo } from "react";
+import { memo, useMemo } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { BackButton } from "../../components/UI/BackButton";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 import { AdminButton } from "../components/UI/AdminButton";
 
 function AdminBookingsPage({ padding, gap }) {
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { pathname } = useLocation();
 
@@ -65,15 +65,15 @@ function AdminBookingsPage({ padding, gap }) {
 
     const LINKS_DATA = [
         {
-            text: getText("admin_bookings_page.admin_bookings_all_link_text"),
+            text: t("admin_bookings_page.admin_bookings_all_link_text"),
             href: "/dashboard/bookings/all",
         },
         {
-            text: getText("admin_bookings_page.admin_bookings_todays_link_text"),
+            text: t("admin_bookings_page.admin_bookings_todays_link_text"),
             href: "/dashboard/bookings/today",
         },
         {
-            text: getText("admin_bookings_page.admin_bookings_select_date_text"),
+            text: t("admin_bookings_page.admin_bookings_select_date_text"),
             href: "/dashboard/bookings/date",
         },
     ];
@@ -83,7 +83,7 @@ function AdminBookingsPage({ padding, gap }) {
             <div className="perfect-center self-start lg:self-center">
                 <BackButton />
             </div>
-            <h1 className="break-all break-words">{getText("admin_bookings_page.h1_admin_bookings_page")}</h1>
+            <h1 className="break-all break-words">{t("admin_bookings_page.h1_admin_bookings_page")}</h1>
             <div className={currentLinksContainerClasses}>
                 {LINKS_DATA.map((link) => (
                     <AdminButton key={link.text} variant={link.href === pathname ? "active" : "inactive"}>

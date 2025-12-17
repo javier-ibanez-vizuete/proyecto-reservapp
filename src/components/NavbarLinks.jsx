@@ -2,21 +2,21 @@ import classNames from "classnames";
 import { memo, useContext, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useDevice } from "../hooks/useDevice";
+import { useTranslate } from "../translations/useTranslate";
 
 export const NavbarLinks = memo(({ handleLinkClick }) => {
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { user } = useContext(AuthContext);
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const NAV_LINKS = [
-        { to: "/bookings", label: getText("navigation_bar.booking_page_nav_label") },
-        { to: "/orders", label: getText("navigation_bar.orders_page_nav_label") },
-        { to: "/menu", label: getText("navigation_bar.menus_page_nav_label") },
-        { to: "/cart", label: getText("navigation_bar.cart_page_nav_label") },
+        { to: "/bookings", label: t("navigation_bar.booking_page_nav_label") },
+        { to: "/orders", label: t("navigation_bar.orders_page_nav_label") },
+        { to: "/menu", label: t("navigation_bar.menus_page_nav_label") },
+        { to: "/cart", label: t("navigation_bar.cart_page_nav_label") },
     ];
 
     const linksBaseClasses = `flex-1 relative transition-all  duration-500 ease-in-out active:scale-95 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2`;

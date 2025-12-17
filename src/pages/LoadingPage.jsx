@@ -1,13 +1,13 @@
 import classNames from "classnames";
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import { useErrorBoundary } from "../components/ErrorBoundary/useErrorBoundary";
 import { Spinner } from "../components/Spinner/Spinner";
 import { Button } from "../components/UI/Button";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { useDevice } from "../hooks/useDevice";
+import { useTranslate } from "../translations/useTranslate";
 
 export function LoadingPage() {
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const { onErrorReset } = useErrorBoundary();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
@@ -31,10 +31,10 @@ export function LoadingPage() {
     );
     return (
         <div className={currentLoadingPageClasses}>
-            <h2>{getText("app.on_loading_page_text")}</h2>
+            <h2>{t("app.on_loading_page_text")}</h2>
             <Spinner size="xl" />
             <Button variant="danger" onClick={onErrorReset}>
-                {getText("app.on_reload_page_text")}
+                {t("app.on_reload_page_text")}
             </Button>
         </div>
     );

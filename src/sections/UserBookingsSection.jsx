@@ -1,13 +1,13 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { BookingDateItem } from "../components/BookingDateItem";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { getUserBookingsFromStorage } from "../core/bookings/bookings.service";
+import { useTranslate } from "../translations/useTranslate";
 
 const actualDate = new Date(new Date());
 
 export const UserBookingsSection = ({ userBookingsData }) => {
     const [userBookings, setUserBookings] = useState(userBookingsData || []);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const pendingBookings = useMemo(
         () =>
@@ -35,12 +35,12 @@ export const UserBookingsSection = ({ userBookingsData }) => {
     return (
         <div>
             <BookingDateItem
-                title={getText("booking_data.booking_data_title1")}
+                title={t("booking_data.booking_data_title1")}
                 content={pendingBookings}
                 areOldBooking={false}
             />
             <BookingDateItem
-                title={getText("booking_data.booking_data_title2")}
+                title={t("booking_data.booking_data_title2")}
                 content={oldBookings}
                 areOldBooking={true}
             />

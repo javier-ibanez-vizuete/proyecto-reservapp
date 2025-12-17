@@ -5,12 +5,11 @@ import { PageError } from "../components/ErrorBoundary/PageError";
 import { useErrorBoundary } from "../components/ErrorBoundary/useErrorBoundary";
 import { UnderConstruction } from "../components/UnderConstruction";
 import { AuthContext } from "../contexts/AuthContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { useAuth } from "../core/auth/useAuth";
 import { AdminPrivateRoute } from "../dashboard/components/AdminPrivateRoute";
 import { AdminContainer } from "../dashboard/components/UI/AdminContainer";
-import { AdminProductsPage } from "../dashboard/pages/AdminProductsPage";
 import { LoadingPage } from "../pages/LoadingPage";
+import { useTranslate } from "../translations/useTranslate";
 
 const DashboardPage = lazy(() => import("../pages/DashboardPage"));
 const AdminUsersPage = lazy(() => import("../dashboard/pages/AdminUsersPage"));
@@ -27,7 +26,7 @@ export const AdminRouter = () => {
     const { getErrorLocationName } = useErrorBoundary();
 
     const { user } = useContext(AuthContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     if (user && user?.role === "user") return navigate("/", { replace: true });
 
@@ -40,9 +39,7 @@ export const AdminRouter = () => {
             fallback={
                 <AdminContainer className="flex-1">
                     <PageError
-                        title={`${getText(
-                            "error_sentences.on_error_base_sentence"
-                        )} ${getErrorLocationName()}`}
+                        title={`${t("error_sentences.on_error_base_sentence")} ${getErrorLocationName()}`}
                     />
                 </AdminContainer>
             }
@@ -68,11 +65,11 @@ export const AdminRouter = () => {
                             element={<UnderConstruction pageName="Orders Page" />}
                         />
 
-                        {/* <Route
+                        <Route
                             path="/dashboard/products"
                             element={<UnderConstruction pageName="Products Page" />}
-                        /> */}
-                        <Route path="/dashboard/products" element={<AdminProductsPage />} />
+                        />
+                        {/* <Route path="/dashboard/products" element={<AdminProductsPage />} /> */}
                     </Route>
 
                     <Route path="*" element={<Navigate to={user?.role === "admin" ? "/dashboard" : "/"} />} />

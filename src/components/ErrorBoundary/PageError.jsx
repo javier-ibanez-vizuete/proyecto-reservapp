@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import { memo, useContext, useMemo } from "react";
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { memo, useMemo } from "react";
 import { imageErrorData } from "../../data/IMAGES_DATA";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 import { Button } from "../UI/Button";
 import { Image } from "../UI/Image";
 import { ImageContainer } from "../UI/ImageContainer";
@@ -19,7 +19,7 @@ export const PageError = memo(
     }) => {
         const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
         const { onErrorRetry, onErrorReset } = useErrorBoundary();
-        const { getText } = useContext(LanguageContext);
+        const { t } = useTranslate();
 
         const baseContainerClasses = "flex flex-1 flex-col justify-center";
         const baseContentClasses = "flex flex-col items-center";
@@ -64,11 +64,11 @@ export const PageError = memo(
                     {message && <p>{message}</p>}
 
                     <Button variant="primary" onClick={onErrorRetry}>
-                        {retryText ? retryText : getText("error_sentences.on_error_retry_button_text")}
+                        {retryText ? retryText : t("error_sentences.on_error_retry_button_text")}
                     </Button>
 
                     <Button variant="danger" onClick={onErrorReset}>
-                        {getText("error_sentences.on_error_back_to_home_button_text")}
+                        {t("error_sentences.on_error_back_to_home_button_text")}
                     </Button>
                 </div>
             </div>

@@ -10,6 +10,7 @@ import { ProductsProvider } from "./contexts/ProductsContext.jsx";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 import { UsersProvider } from "./contexts/UsersContext.jsx";
 import "./styles/index.css";
+import "./translations/i18n.js";
 
 createRoot(document.getElementById("root")).render(
     // PONER ERROR BOUNDARY

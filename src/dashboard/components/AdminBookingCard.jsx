@@ -2,7 +2,6 @@ import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { Image } from "../../components/UI/Image";
 import { ImageContainer } from "../../components/UI/ImageContainer";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { UsersContext } from "../../contexts/UsersContext";
 import {
@@ -12,6 +11,7 @@ import {
     ICON_NOTES_INACTIVE,
 } from "../../data/ICONS_DATA";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 
 export const AdminBookingCard = ({
     bookingData,
@@ -28,7 +28,7 @@ export const AdminBookingCard = ({
 }) => {
     const { users } = useContext(UsersContext);
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
 
@@ -239,12 +239,11 @@ export const AdminBookingCard = ({
             <p className="font-bold">{formatTime}</p>
             <div className={currentContentContainerClasses}>
                 <p>
-                    {getText("admin_booking_card.admin_booking_card_customers_text")}{" "}
+                    {t("admin_booking_card.admin_booking_card_customers_text")}{" "}
                     <span>{bookingData?.partySize}</span>
                 </p>
                 <p className="lg:flex lg:flex-col">
-                    {getText("admin_booking_card.admin_booking_card_booked_by_text")}{" "}
-                    <span>{bookingName}</span>
+                    {t("admin_booking_card.admin_booking_card_booked_by_text")} <span>{bookingName}</span>
                 </p>
             </div>
 

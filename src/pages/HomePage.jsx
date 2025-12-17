@@ -3,18 +3,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { CTACard } from "../components/CTACard/CTACard";
 import { ToastContainer } from "../components/ToastContainer";
 import { AuthContext } from "../contexts/AuthContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { getDataFromSessionStorage, removeFromSessionStorage } from "../helpers/storage";
 import { useToast } from "../hooks/useToast";
 
 import { ctaCardsData } from "../components/CTACard/ctaCardsData";
 import { Container } from "../components/Container";
 import { ConfirmModal } from "../components/Modal";
+import { useTranslate } from "../translations/useTranslate";
 
 function HomePage() {
     const [showNotFoundModal, setShowNotFoundModal] = useState(false);
     const [notFoundRoute, setNotFoundRoute] = useState("");
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const location = useLocation();
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
@@ -36,14 +36,14 @@ function HomePage() {
         if (!fromLogin && !fromRegister && !fromLogout && !fromNotFound) return;
 
         if (fromLogin) {
-            showToast(getText("home_page.toast_login_success"), "success", 2000, "top-center");
+            showToast(t("home_page.toast_login_success"), "success", 2000, "top-center");
             removeFromSessionStorage("fromLogin");
             navigate(location.pathname, { replace: true, state: {} });
         }
         if (fromRegister) {
             showToast(
-                `${getText("home_page.toast_welcome_register")} ${
-                    user?.name || getText("navigation_bar.user_replace_name")
+                `${t("home_page.toast_welcome_register")} ${
+                    user?.name || t("navigation_bar.user_replace_name")
                 }.`,
                 "success",
                 2000,
@@ -53,7 +53,7 @@ function HomePage() {
             navigate(location.pathname, { replace: true, state: {} });
         }
         if (fromLogout) {
-            showToast(getText("home_page.toast_logout_success"), "success");
+            showToast(t("home_page.toast_logout_success"), "success");
             removeFromSessionStorage("logoutSuccess");
             navigate(location.pathname, { replace: true, state: {} });
         }
@@ -77,7 +77,7 @@ function HomePage() {
 
     return (
         <Container className="flex flex-col flex-1 gap-2 lg:gap-4 py-4">
-            <h1>{getText("home_page.h1_home_page")}</h1>
+            <h1>{t("home_page.h1_home_page")}</h1>
 
             <div className="flex flex-col gap-4 lg:gap-8">
                 {ctaCardsData.map(

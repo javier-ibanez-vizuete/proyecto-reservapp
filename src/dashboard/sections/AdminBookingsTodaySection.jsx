@@ -1,10 +1,10 @@
 import classNames from "classnames";
-import { memo, useCallback, useContext, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
 import { useErrorBoundary } from "../../components/ErrorBoundary/useErrorBoundary";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 import { AdminBookingCard } from "../components/AdminBookingCard";
 import { AdminBookingsContainer } from "../components/AdminBookingsContainer";
 import { AdminSkeleton } from "../components/AdminSkeleton";
@@ -13,7 +13,7 @@ import { useAdminData } from "../hooks/useAdminData";
 function AdminBookingsTodaySection({ padding, gap }) {
     const { bookings, isLoadingBookings } = useAdminData({ enablePolling: true, pollingInterval: 120000 });
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const navigate = useNavigate();
@@ -221,27 +221,23 @@ function AdminBookingsTodaySection({ padding, gap }) {
         return (
             <div className={currentSectionClasses}>
                 <h5>
-                    {getText("admin_bookings_today_section.h5_admin_bookings_today_section")} {todayDate}
+                    {t("admin_bookings_today_section.h5_admin_bookings_today_section")} {todayDate}
                 </h5>
 
                 <div className="flex flex-col gap-xs">
-                    <h6>
-                        {getText("admin_bookings_today_section.admin_bookings_today_section_pending_title")}
-                    </h6>
+                    <h6>{t("admin_bookings_today_section.admin_bookings_today_section_pending_title")}</h6>
                     <small className="italic opacity-60">
-                        {getText(
+                        {t(
                             "admin_bookings_today_section.admin_bookings_today_section_not_pending_bookings_text"
                         )}
                     </small>
                 </div>
                 <div className="flex flex-col gap-xs">
                     <h6>
-                        {getText(
-                            "admin_bookings_today_section.admin_bookings_today_section_late_arrivals_title"
-                        )}
+                        {t("admin_bookings_today_section.admin_bookings_today_section_late_arrivals_title")}
                     </h6>
                     <small className="italic opacity-60">
-                        {getText(
+                        {t(
                             "admin_bookings_today_section.admin_bookings_today_section_not_late_bookings_text"
                         )}
                     </small>
@@ -254,19 +250,19 @@ function AdminBookingsTodaySection({ padding, gap }) {
             <ErrorBoundary
                 fallback={
                     <AdminContainer className="flex-1">
-                        <PageError title={getText("error_sentences.on_error_todays_booking_title")} />
+                        <PageError title={t("error_sentences.on_error_todays_booking_title")} />
                     </AdminContainer>
                 }
             >
                 <h5>
-                    {getText("admin_bookings_today_section.h5_admin_bookings_today_section")} {todayDate}
+                    {t("admin_bookings_today_section.h5_admin_bookings_today_section")} {todayDate}
                 </h5>
                 <AdminBookingsContainer
-                    title={getText("admin_bookings_today_section.admin_bookings_today_section_pending_title")}
+                    title={t("admin_bookings_today_section.admin_bookings_today_section_pending_title")}
                 >
                     {notPendingBookings && (
                         <small className="italic opacity-60">
-                            {getText(
+                            {t(
                                 "admin_bookings_today_section.admin_bookings_today_section_not_pending_bookings_text"
                             )}
                         </small>
@@ -289,13 +285,11 @@ function AdminBookingsTodaySection({ padding, gap }) {
                     })}
                 </AdminBookingsContainer>
                 <AdminBookingsContainer
-                    title={getText(
-                        "admin_bookings_today_section.admin_bookings_today_section_late_arrivals_title"
-                    )}
+                    title={t("admin_bookings_today_section.admin_bookings_today_section_late_arrivals_title")}
                 >
                     {notDelayedBookings && (
                         <small className="italic opacity-60">
-                            {getText(
+                            {t(
                                 "admin_bookings_today_section.admin_bookings_today_section_not_late_bookings_text"
                             )}
                         </small>
