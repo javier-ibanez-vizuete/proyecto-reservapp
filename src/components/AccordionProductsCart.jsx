@@ -95,9 +95,14 @@ const AccordionProductsCartItem = memo(({ id, qty, defaultOpen = false }) => {
         try {
             const newQty = { qty: qty + 1 };
             const updatedCart = await patchCartItem(id, newQty);
-            if (updatedCart) return showToast(getText("toastQuantityProductUpdatedToCart"), "success", 1000);
+            if (updatedCart)
+                return showToast(
+                    getText("orders_page.toast_quantity_product_updated_to_cart"),
+                    "success",
+                    1000
+                );
         } catch (err) {
-            showToast(getText("toastErrorQuantityProductUpdatedToCart"), "error", 1000);
+            showToast(getText("orders_page.toast_error_quantity_product_updated_to_cart"), "error", 1000);
             console.error("no se ha modificado el producto", err);
         } finally {
             isLoading2.setIsLoading(false);
@@ -111,9 +116,15 @@ const AccordionProductsCartItem = memo(({ id, qty, defaultOpen = false }) => {
             if (qty === 1) return;
             const newQty = { qty: qty - 1 };
             const updatedCart = await patchCartItem(id, newQty);
-            if (updatedCart) return showToast(getText("toastQuantityProductUpdatedToCart"), "success", 1000);
+            if (updatedCart)
+                return showToast(
+                    getText("orders_page.toast_quantity_product_updated_to_cart"),
+                    "success",
+                    1000
+                );
         } catch (err) {
-            if (qty > 1) showToast(getText("toastErrorQuantityProductUpdatedToCart"), "error", 1000);
+            if (qty > 1)
+                showToast(getText("orders_page.toast_error_quantity_product_updated_to_cart"), "error", 1000);
             console.error("No se ha Modificado el producto", err);
         } finally {
             isLoading3.setIsLoading(false);
@@ -126,10 +137,11 @@ const AccordionProductsCartItem = memo(({ id, qty, defaultOpen = false }) => {
         try {
             const updatedCart = await deleteCartItem(id);
 
-            if (updatedCart) return showToast(getText("toastRemovedProductFromCart"), "success", 1000);
+            if (updatedCart)
+                return showToast(getText("orders_page.toast_removed_product_from_cart"), "success", 1000);
         } catch (err) {
             console.error("No se ha elimnado el producto", err);
-            showToast(getText("toastErrorRemovingProductFromCart"), "error", 1000);
+            showToast(getText("orders_page.toast_error_removing_product_from_cart"), "error", 1000);
         } finally {
             isLoading4.setIsLoading(false);
         }
@@ -169,18 +181,18 @@ const AccordionProductsCartItem = memo(({ id, qty, defaultOpen = false }) => {
             <div className={containerClasses}>
                 <div className="flex flex-col gap-3 min-w-0 overflow-hidden">
                     <div className="flex items-center gap-1">
-                        <h6>{getText("accordionQtyText")}</h6>
+                        <h6>{getText("cart_page.accordion_qty_text")}</h6>
                         <p>{product.qty}</p>
                     </div>
 
                     {!isMobile && (
                         <div className="flex items-center gap-1">
-                            <h6>{getText("accordionDescriptionText")}</h6>
+                            <h6>{getText("cart_page.accordion_description_text")}</h6>
                             <p>{getText(product.description)}</p>
                         </div>
                     )}
                     <div className="flex items-center gap-1">
-                        <h6>{getText("accordionPriceText")}</h6>
+                        <h6>{getText("cart_page.accordion_price_text")}</h6>
                         <p>{product.deliveryPrice}</p>
                     </div>
                     <div className="flex flex-col gap-1">
@@ -190,21 +202,25 @@ const AccordionProductsCartItem = memo(({ id, qty, defaultOpen = false }) => {
                                 variant="primary"
                                 onClick={handleIncreaseProduct}
                                 loading={isLoading2.isLoading}
-                                loadingText={getText("loadingTextAddingProductsToCartButton")}
+                                loadingText={getText(
+                                    "orders_page.loading_text_adding_products_to_cart_button"
+                                )}
                                 size={isMobileSm ? "sm" : "md"}
                             >
-                                {getText("addOneMoreProductToCartButton")}
+                                {getText("orders_page.add_one_more_product_to_cart_button")}
                             </LoadingButton>
                             {qty > 1 && (
                                 <LoadingButton
                                     className="flex-1"
                                     variant="primary"
                                     loading={isLoading3.isLoading}
-                                    loadingText={getText("loadingTextRemovingProductsFromCartButton")}
+                                    loadingText={getText(
+                                        "orders_page.loading_text_removing_products_from_cart_button"
+                                    )}
                                     size={isMobileSm ? "sm" : "md"}
                                     onClick={handleDecreaseProduct}
                                 >
-                                    {getText("removeOneMoreProductFromCartButton")}
+                                    {getText("orders_page.remove_one_more_product_from_cart_button")}
                                 </LoadingButton>
                             )}
                         </div>
@@ -212,10 +228,12 @@ const AccordionProductsCartItem = memo(({ id, qty, defaultOpen = false }) => {
                             variant="danger"
                             onClick={handleRemoveProduct}
                             loading={isLoading4.isLoading}
-                            loadingText={getText("loadingTextRemovingProductsFromCartButton")}
+                            loadingText={getText(
+                                "orders_page.loading_text_removing_products_from_cart_button"
+                            )}
                             size={isMobileSm ? "sm" : "md"}
                         >
-                            {getText("removeProductToCartButton")}
+                            {getText("orders_page.remove_product_to_cart_button")}
                         </LoadingButton>
                     </div>
                 </div>
@@ -239,7 +257,7 @@ export const AccordionProductsCart = ({ products = [], defaultOpen = 0 }) => {
         );
     };
 
-    if (!products?.length) return <h3 className="text-gray-400">{getText("noProductsTitle")}</h3>;
+    if (!products?.length) return <h3 className="text-gray-400">{getText("cart_page.no_products_title")}</h3>;
 
     return <div className="flex flex-col gap-3">{products.map(renderAccordionProductsCartItem)}</div>;
 };

@@ -1,11 +1,11 @@
 import { memo, useContext } from "react";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { Dropdown } from "./Dropdown/Dropdown";
 import { DropdownTrigger } from "./Dropdown/DropdownTrigger";
 import { Image } from "./UI/Image";
 import { ImageContainer } from "./UI/ImageContainer";
 
 import classNames from "classnames";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { useDevice } from "../hooks/useDevice";
 import { FLAGS_URL_DATA } from "../utils/FLAGS_URL_DATA";
 import { DropdownItem } from "./Dropdown/DropdownItem";

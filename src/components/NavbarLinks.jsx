@@ -13,10 +13,10 @@ export const NavbarLinks = memo(({ handleLinkClick }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const NAV_LINKS = [
-        { to: "/bookings", label: getText("bookingPageNavLabel") },
-        { to: "/orders", label: getText("ordersPageNavLabel") },
-        { to: "/menu", label: getText("menusPageNavLabel") },
-        { to: "/cart", label: getText("cartPageNavLabel") },
+        { to: "/bookings", label: getText("navigation_bar.booking_page_nav_label") },
+        { to: "/orders", label: getText("navigation_bar.orders_page_nav_label") },
+        { to: "/menu", label: getText("navigation_bar.menus_page_nav_label") },
+        { to: "/cart", label: getText("navigation_bar.cart_page_nav_label") },
     ];
 
     const linksBaseClasses = `flex-1 relative transition-all  duration-500 ease-in-out active:scale-95 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2`;

@@ -191,14 +191,14 @@ export const Navbar = memo(({ isLoggedIn = false, user = null, height, padding, 
                         {!isLoggedIn && (
                             <div className="perfect-center self-center gap-2">
                                 <Button onClick={handleLogin} variant="primary">
-                                    {getText("loginButton")}
+                                    {getText("navigation_bar.login_button")}
                                 </Button>
                                 <Button
                                     onClick={handleRegister}
                                     size={isMobile ? "sm" : "md"}
                                     variant="secondary"
                                 >
-                                    {getText("registerButton")}
+                                    {getText("navigation_bar.register_button")}
                                 </Button>
                             </div>
                         )}

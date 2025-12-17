@@ -44,19 +44,22 @@ function UserPage() {
     const { isMobile, isTablet, isDesktop } = useDevice();
 
     const USER_DATA = [
-        { title: getText("userDataSectionTitle"), content: <UserDataSection userData={userProfile} /> },
+        {
+            title: getText("profile_page.user_data_section_title"),
+            content: <UserDataSection userData={userProfile} />,
+        },
     ];
 
     const BOOKINGS_DATA = [
         {
-            title: getText("bookingsDataSectionTitle"),
+            title: getText("profile_page.bookings_data_section_title"),
             content: <UserBookingsSection userBookingsData={userProfile?.bookings} />,
         },
     ];
 
     const ORDERS_DATA = [
         {
-            title: getText("ordersDataSectionTitle"),
+            title: getText("profile_page.orders_data_section_title"),
             content: <UserOrdersSection userOrdersData={userProfile?.orders} />,
         },
     ];
@@ -110,7 +113,7 @@ function UserPage() {
             await logout();
         } catch (err) {
             console.error("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
-            showToast(getText("toastLogoutError"), "error", 2000);
+            showToast(getText("navigation_bar.toast_logout_error"), "error", 2000);
         } finally {
             loaderLogout.setIsLoading(false);
         }
@@ -159,7 +162,7 @@ function UserPage() {
                 </Modal>
 
                 <div>
-                    <h1>{`${getText("h1ProfilePage")} ${userProfile.name}`}</h1>
+                    <h1>{`${getText("profile_page.h1_profile_page")} ${userProfile.name}`}</h1>
                 </div>
 
                 <div className="flex flex-col items-center gap-1">
@@ -189,7 +192,7 @@ function UserPage() {
                                     theme === "light" ? "btn-outline" : "btn-outline-dark"
                                 } px-3 py-1.5`}
                             >
-                                {getText("buttonChangeAvatar")}
+                                {getText("profile_page.button_change_avatar")}
                             </DropdownTrigger>
                             <DropdownMenu gap="gap-2">
                                 {AVATAR_DATA.map((avatar) => (
@@ -231,7 +234,7 @@ function UserPage() {
                     <div className="flex flex-col items-center">
                         <LoadingButton
                             loading={loaderLogout.isLoading}
-                            loadingText={getText("loadingTextLogoutButton")}
+                            loadingText={getText("navigation_bar.loading_text_logout_button")}
                             disabled={loaderLogout.isLoading}
                             variant="danger"
                             onClick={handleLogout}

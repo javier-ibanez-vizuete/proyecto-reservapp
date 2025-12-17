@@ -344,7 +344,7 @@ function AdminUserDetail({ padding, gap }) {
                     />
                 </div>
                 <div className={currentDetailsClasses}>
-                    <p className={baseDetailsLabelClasses}>{getText("emailFieldText")}:</p>
+                    <p className={baseDetailsLabelClasses}>{getText("user_data.email_field_text")}:</p>
                     <div className="flex justify-between items-center gap-2 md:flex-1">
                         <p>{userDetails?.email}</p>
                         <AdminButton variant={"primary"} onClick={handleContactModal}>
@@ -354,7 +354,9 @@ function AdminUserDetail({ padding, gap }) {
                 </div>
                 {userDetails?.phoneNumber && (
                     <div className={currentDetailsClasses}>
-                        <p className={baseDetailsLabelClasses}>{getText("phoneNumberFieldText")}:</p>
+                        <p className={baseDetailsLabelClasses}>
+                            {getText("user_data.phone_number_field_text")}:
+                        </p>
                         <div className="flex justify-between items-center gap-2 md:flex-1">
                             <p>{userDetails?.phoneNumber}</p>
                             {!isDesktop && (
@@ -366,7 +368,7 @@ function AdminUserDetail({ padding, gap }) {
                     </div>
                 )}
                 <div className={currentDetailsClasses}>
-                    <p className={baseDetailsLabelClasses}>{getText("addressFieldText")}:</p>
+                    <p className={baseDetailsLabelClasses}>{getText("user_data.address_field_text")}:</p>
                     <p>{userDetails?.address}</p>
                 </div>
                 <div className={currentDetailsClasses}>

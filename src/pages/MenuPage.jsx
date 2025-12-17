@@ -74,7 +74,7 @@ function MenuPage() {
             <Container className="flex-1 gap-4">
                 <BackToTopButton iconSize={"w-5"} showAt={1000} placement="top-right" variant="secondary" />
                 <div className="lg:flex lg:justify-center">
-                    <h1>{getText("h1MenuPage")}</h1>
+                    <h1>{getText("menu_page.h1_menu_page")}</h1>
                 </div>
                 {!loadingProducts && !products.length && (
                     <div className="flex flex-col justify-center items-center gap-4">
@@ -82,10 +82,10 @@ function MenuPage() {
                             variant="danger"
                             size="lg"
                             loading={loadingProducts}
-                            loadingText={getText("loadingTextRefreshProductsButton")}
+                            loadingText={getText("menu_page.loading_text_refresh_products_button")}
                             onClick={handleRefreshProduct}
                         >
-                            {getText("textRefreshProductsButton")}
+                            {getText("menu_page.text_refresh_products_button")}
                         </LoadingButton>
                         <h2 className="text-error-500">Error Al Cargar Products</h2>
                     </div>
@@ -143,7 +143,7 @@ function MenuPage() {
                                     variant="danger"
                                     size="sm"
                                 >
-                                    {getText("clearFilterButton")}
+                                    {getText("menu_page.clear_filter_button")}
                                 </Button>
                             )}
                         </div>

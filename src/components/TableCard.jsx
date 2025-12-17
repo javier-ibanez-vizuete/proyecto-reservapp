@@ -28,15 +28,17 @@ export const TableCard = ({ tableData, onClick, selectedTable }) => {
                 <div className="flex flex-col flex-1 gap-2">
                     <div className="flex flex-col flex-1">
                         <small>
-                            {getText("bookingMaxCapacityTableTitle")} <span>{tableData.maxCapacity}</span>
+                            {getText("booking_page.booking_max_capacity_table_title")}{" "}
+                            <span>{tableData.maxCapacity}</span>
                         </small>
                         <small>
-                            {getText("bookingTableTypeTitle")} <span>{getText(tableData.tableForm)}</span>
+                            {getText("booking_page.booking_table_type_title")}{" "}
+                            <span>{getText(tableData.tableForm)}</span>
                         </small>
                     </div>
                     {tableData.hasWifi && (
                         <div className="flex items-center gap-4">
-                            <small>{getText("bookingTableWifiText")}</small>
+                            <small>{getText("booking_page.booking_table_wifi_text")}</small>
                             <ImageContainer className="w-8">
                                 <Image src={iconWifi} />
                             </ImageContainer>
@@ -45,7 +47,7 @@ export const TableCard = ({ tableData, onClick, selectedTable }) => {
                 </div>
                 <div className="perfect-center">
                     <Button size="sm" variant={"secondary"} onClick={onClick}>
-                        {getText("bookingSelectTableButton")}
+                        {getText("booking_page.booking_select_table_button")}
                     </Button>
                 </div>
             </div>

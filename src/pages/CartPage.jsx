@@ -63,10 +63,10 @@ function CartPage() {
                 productId = product.productId;
                 await deleteCartItem(product.productId);
             }
-            showToast(getText("toastCartRemovedSuccess"), "success", 1000);
+            showToast(getText("cart_page.toast_cart_removed_success"), "success", 1000);
         } catch (err) {
             console.error("No se ha podido eliminar el producto con id", productId);
-            showToast(getText("toastCartRemovedError"), "error", 1000);
+            showToast(getText("cart_page.toast_cart_removed_error"), "error", 1000);
         } finally {
             loadingDelete.setIsLoading(false);
         }
@@ -109,11 +109,11 @@ function CartPage() {
                     isOpen={showModal}
                     onConfirm={handleConfirmCart}
                     onClose={handleCloseModal}
-                    title={getText("confirmModalCartTitle")}
-                    message={getText("confirmModalCartMessage")}
-                    loadingText={getText("loadingConfirmButtonCartModal")}
-                    confirmText={getText("confirmButtonCartModal")}
-                    cancelText={getText("cancelButtonCartModal")}
+                    title={getText("cart_page.confirm_modal_cart_title")}
+                    message={getText("cart_page.confirm_modal_cart_message")}
+                    loadingText={getText("cart_page.loading_confirm_button_cart_modal")}
+                    confirmText={getText("cart_page.confirm_button_cart_modal")}
+                    cancelText={getText("cart_page.cancel_button_cart_modal")}
                     variant="accent"
                     variantButton="primary"
                     showCloseButton={false}
@@ -121,7 +121,7 @@ function CartPage() {
                     className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
                 />
                 <div>
-                    <h1>{getText("h1CartPage")}</h1>
+                    <h1>{getText("cart_page.h1_cart_page")}</h1>
                 </div>
 
                 <div
@@ -144,7 +144,7 @@ function CartPage() {
                     {cart?.items?.length <= 0 && (
                         <div className="flex flex-col md:mx-auto">
                             <Button variant="primary" onClick={() => Navigate("/orders")}>
-                                {getText("goToOrdersCartButton")}
+                                {getText("cart_page.go_to_orders_cart_button")}
                             </Button>
                         </div>
                     )}

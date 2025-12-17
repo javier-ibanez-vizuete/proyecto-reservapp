@@ -72,13 +72,13 @@ function RegisterPage() {
                     id: "name",
                     name: "name",
                     type: "text",
-                    placeholder: getText("namePlaceholderFieldText"),
+                    placeholder: getText("register_page.name_placeholder_field_text"),
                     label: "Campo nombre completo",
                     required: true,
                     className: "flex-1",
                 },
                 label: {
-                    text: getText("fullNameFieldText"),
+                    text: getText("user_data.full_name_field_text"),
                     className: "",
                 },
             },
@@ -88,13 +88,13 @@ function RegisterPage() {
                     id: "email",
                     name: "email",
                     type: "email",
-                    placeholder: getText("emailPlaceholderFieldText"),
+                    placeholder: getText("register_page.email_placeholder_field_text"),
                     label: "Campo Correo Electrónico",
                     required: true,
                     className: "flex-1",
                 },
                 label: {
-                    text: getText("emailFieldText"),
+                    text: getText("user_data.email_field_text"),
                     className: "",
                 },
             },
@@ -104,13 +104,13 @@ function RegisterPage() {
                     id: "address",
                     name: "address",
                     type: "text",
-                    placeholder: getText("addressPlaceholderFieldText"),
+                    placeholder: getText("register_page.address_placeholder_field_text"),
                     label: "Campo Direccion Personal",
                     required: true,
                     className: "flex-1",
                 },
                 label: {
-                    text: getText("addressFieldText"),
+                    text: getText("user_data.address_field_text"),
                     className: "",
                 },
             },
@@ -120,13 +120,13 @@ function RegisterPage() {
                     id: "password",
                     name: "password",
                     type: "password",
-                    placeholder: getText("passwordPlaceholderFieldText"),
+                    placeholder: getText("register_page.password_placeholder_field_text"),
                     label: "Campo contraseña",
                     required: true,
                     className: "rounded-r-none flex-1",
                 },
                 label: {
-                    text: getText("passwordFieldText"),
+                    text: getText("user_data.password_field_text"),
                     className: "",
                 },
             },
@@ -136,13 +136,13 @@ function RegisterPage() {
                     id: "repassword",
                     name: "repassword",
                     type: "password",
-                    placeholder: getText("confirmPasswordPlaceholderFieldText"),
+                    placeholder: getText("register_page.confirm_password_placeholder_field_text"),
                     label: "Campo Confirmar Contraseña",
                     required: true,
                     className: "rounded-r-none flex-1",
                 },
                 label: {
-                    text: getText("confirmPasswordFieldText"),
+                    text: getText("user_data.confirm_password_field_text"),
                     className: "",
                 },
             },
@@ -175,7 +175,7 @@ function RegisterPage() {
                 setForm(INITIAL_FORM_DATA);
             } catch (err) {
                 setForm(INITIAL_FORM_DATA);
-                showToast(getText("toastRegisterError"), "error", 1000);
+                showToast(getText("register_page.toast_register_error"), "error", 1000);
             } finally {
                 setIsLoading(false);
             }
@@ -199,7 +199,7 @@ function RegisterPage() {
                     }
                 )}
             >
-                <h1>{getText("h1RegisterPage")}</h1>
+                <h1>{getText("register_page.h1_register_page")}</h1>
 
                 <form className="flex flex-col gap-sm" onSubmit={onRegisterSubmit}>
                     <Dropdown placement="bottom-full">
@@ -267,9 +267,9 @@ function RegisterPage() {
                         loading={isLoading}
                         variant={"secondary"}
                         className="justify-center rounded-full py-sm px-md mt-2"
-                        loadingText={getText("loadingRegisterButtonText")}
+                        loadingText={getText("register_page.loading_register_button_text")}
                     >
-                        {getText("registerButtonText")}
+                        {getText("register_page.register_button_text")}
                     </LoadingButton>
                 </form>
             </div>

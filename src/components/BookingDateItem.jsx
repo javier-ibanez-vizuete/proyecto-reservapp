@@ -124,9 +124,11 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                     className="flex items-center justify-between gap-2"
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <p className="flex-1 opacity-80">{getText("bookingDataNoPendingBookingsFound")}</p>
+                    <p className="flex-1 opacity-80">
+                        {getText("booking_data.booking_data_no_pending_bookings_found")}
+                    </p>
                     <Button variant="primary" size="sm" onClick={() => navigate("/bookings")}>
-                        {getText("buttonBookingDataMakeABook")}
+                        {getText("booking_data.button_booking_data_make_a_book")}
                     </Button>
                 </div>
             </div>
@@ -136,7 +138,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
         return (
             <div className="flex flex-col gap-1">
                 <h5>{title}</h5>
-                <p className="opacity-80">{getText("bookingDataNoPastVisitsFound")}</p>
+                <p className="opacity-80">{getText("booking_data.booking_data_no_past_visits_found")}</p>
             </div>
         );
 
@@ -147,13 +149,13 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                 isOpen={showModalDelete}
                 onClose={handleShowModal}
                 onConfirm={() => handleDeleteBooking(bookingId)}
-                title={getText("bookingDataModalDeletingTitle")}
+                title={getText("booking_data.booking_data_modal_deleting_title")}
                 message={messageModal}
-                confirmText={getText("bookingDataModalDeletingbutton")}
+                confirmText={getText("booking_data.booking_data_modal_deletingbutton")}
                 showCloseButton={false}
                 variant="accent"
                 variantButton="danger"
-                loadingText={getText("loadingBookingDataModalDeletingbutton")}
+                loadingText={getText("booking_data.loading_booking_data_modal_deletingbutton")}
                 loading={isLoading}
             />
             <Modal
@@ -183,7 +185,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                 </ModalBody>
                 <ModalFooter>
                     <Button variant="danger" onClick={handleShowModalInfo}>
-                        {getText("buttonBookingDataCloseModalInfo")}
+                        {getText("booking_data.button_booking_data_close_modal_info")}
                     </Button>
                 </ModalFooter>
             </Modal>
@@ -202,7 +204,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
 
                             {!areOldBooking && (
                                 <Button size="sm" variant="danger" onClick={() => handleShowModal(booking)}>
-                                    {getText("buttonBookingDataCancelReservation")}
+                                    {getText("booking_data.button_booking_data_cancel_reservation")}
                                 </Button>
                             )}
                         </div>

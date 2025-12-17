@@ -59,7 +59,7 @@ function DashboardPage() {
 
         if (!fromLogin) return;
 
-        showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
+        showToast(getText("home_page.toast_login_success"), "success", 2000, "top-center");
         removeFromSessionStorage("fromLogin");
         navigate(location.pathname, { replace: true, state: {} });
     }, [location.state]);

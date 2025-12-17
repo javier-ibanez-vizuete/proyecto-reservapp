@@ -31,10 +31,10 @@ export const DeliveryProductItem = ({
         loading1.setIsLoading(true);
         try {
             const updatedCart = await postCartItem(productData.id);
-            if (updatedCart) showToast(getText("toastAddedProductToCart"), "success", 1000);
+            if (updatedCart) showToast(getText("orders_page.toast_added_product_to_cart"), "success", 1000);
         } catch (err) {
             console.error("No se ha añadido el producto", err);
-            showToast(getText("toastErrorAddingProductToCart"), "error", 1000);
+            showToast(getText("orders_page.toast_error_adding_product_to_cart"), "error", 1000);
         } finally {
             loading1.setIsLoading(false);
         }
@@ -45,9 +45,14 @@ export const DeliveryProductItem = ({
         try {
             const newQty = { qty: productQty + 1 };
             const updatedCart = await patchCartItem(productsId, newQty);
-            if (updatedCart) return showToast(getText("toastQuantityProductUpdatedToCart"), "success", 1000);
+            if (updatedCart)
+                return showToast(
+                    getText("orders_page.toast_quantity_product_updated_to_cart"),
+                    "success",
+                    1000
+                );
         } catch (err) {
-            showToast(getText("toastErrorQuantityProductUpdatedToCart"), "error");
+            showToast(getText("orders_page.toast_error_quantity_product_updated_to_cart"), "error");
             console.error("no se ha modificado el producto", err);
         } finally {
             loading1.setIsLoading(false);
@@ -59,17 +64,24 @@ export const DeliveryProductItem = ({
         try {
             if (productQty === 1) {
                 const updatedCart = await deleteCartItem(productId);
-                if (updatedCart) return showToast(getText("toastRemovedProductFromCart"), "success", 1000);
+                if (updatedCart)
+                    return showToast(getText("orders_page.toast_removed_product_from_cart"), "success", 1000);
             }
             if (productQty !== 1) {
                 const newQty = { qty: productQty - 1 };
                 const updatedCart = await patchCartItem(productId, newQty);
                 if (updatedCart)
-                    return showToast(getText("toastQuantityProductUpdatedToCart"), "success", 1000);
+                    return showToast(
+                        getText("orders_page.toast_quantity_product_updated_to_cart"),
+                        "success",
+                        1000
+                    );
             }
         } catch (err) {
-            if (productQty === 1) showToast(getText("toastErrorRemovingProductFromCart", "error"));
-            if (productQty > 1) showToast(getText("toastErrorQuantityProductUpdatedToCart", "error"));
+            if (productQty === 1)
+                showToast(getText("orders_page.toast_error_removing_product_from_cart", "error"));
+            if (productQty > 1)
+                showToast(getText("orders_page.toast_error_quantity_product_updated_to_cart", "error"));
             console.error("No se ha Modificado el producto", err);
         } finally {
             loading2.setIsLoading(false);
@@ -103,10 +115,12 @@ export const DeliveryProductItem = ({
                             <LoadingButton
                                 variant="primary"
                                 loading={loading1.isLoading}
-                                loadingText={getText("loadingTextAddingProductsToCartButton")}
+                                loadingText={getText(
+                                    "orders_page.loading_text_adding_products_to_cart_button"
+                                )}
                                 onClick={() => handleAddProduct(productData)}
                             >
-                                {getText("addProductToCartButton")}
+                                {getText("orders_page.add_product_to_cart_button")}
                             </LoadingButton>
                         </div>
                     )}
@@ -118,22 +132,26 @@ export const DeliveryProductItem = ({
                             <LoadingButton
                                 variant="primary"
                                 loading={loading1.isLoading}
-                                loadingText={getText("loadingTextAddingProductsToCartButton")}
+                                loadingText={getText(
+                                    "orders_page.loading_text_adding_products_to_cart_button"
+                                )}
                                 onClick={() => handleIncreaseProduct(productData.id, qty)}
                                 className="flex-1"
                             >
-                                {getText("addOneMoreProductToCartButton")}
+                                {getText("orders_page.add_one_more_product_to_cart_button")}
                             </LoadingButton>
                             <LoadingButton
                                 variant="secondary"
                                 loading={loading2.isLoading}
-                                loadingText={getText("loadingTextRemovingProductsFromCartButton")}
+                                loadingText={getText(
+                                    "orders_page.loading_text_removing_products_from_cart_button"
+                                )}
                                 onClick={() => handleDecreaseProduct(productData.id, qty)}
                                 className="flex-1"
                             >
                                 {qty === 1
-                                    ? getText("removeProductToCartButton")
-                                    : getText("removeOneMoreProductFromCartButton")}
+                                    ? getText("orders_page.remove_product_to_cart_button")
+                                    : getText("orders_page.remove_one_more_product_from_cart_button")}
                             </LoadingButton>
                         </div>
                     )}

@@ -31,10 +31,10 @@ export function LoadingPage() {
     );
     return (
         <div className={currentLoadingPageClasses}>
-            <h2>{getText("onLoadingPageText")}</h2>
+            <h2>{getText("app.on_loading_page_text")}</h2>
             <Spinner size="xl" />
             <Button variant="danger" onClick={onErrorReset}>
-                {getText("onReloadPageText")}
+                {getText("app.on_reload_page_text")}
             </Button>
         </div>
     );

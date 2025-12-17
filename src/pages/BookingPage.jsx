@@ -177,14 +177,14 @@ function BookingPage() {
             const booked = await postBookings(newFormValue);
             if (booked) {
                 resetForm();
-                showToast(getText("toastBookingSuccess"), "success");
+                showToast(getText("booking_page.toast_booking_success"), "success");
             }
         } catch (err) {
             if (err?.status === 409) {
                 resetForm();
-                return showToast(getText("toastBookingUnavailable"), "error");
+                return showToast(getText("booking_page.toast_booking_unavailable"), "error");
             }
-            showToast(getText("toastBookingError"), "error");
+            showToast(getText("booking_page.toast_booking_error"), "error");
         }
     }, [form, user?.id]);
 
@@ -203,7 +203,7 @@ function BookingPage() {
     return (
         <div className="flex flex-1 flex-col py-4">
             <Container className="flex-1 gap-2">
-                <h1>{getText("h1BookingPage")}</h1>
+                <h1>{getText("booking_page.h1_booking_page")}</h1>
 
                 <Modal
                     isOpen={showModal}
@@ -211,28 +211,28 @@ function BookingPage() {
                     onClose={onCloseModal}
                     className={theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}
                 >
-                    <ModalHeader>{getText("confirmBookingTitle")}</ModalHeader>
+                    <ModalHeader>{getText("booking_page.confirm_booking_title")}</ModalHeader>
                     <ModalBody>
                         <ul className="flex flex-col gap-3">
                             <li className="flex flex-col gap-1">
-                                <p>{getText("userNameConfirmText")}:</p>
+                                <p>{getText("booking_page.user_name_confirm_text")}:</p>
                                 <h6>{user?.name}</h6>
                             </li>
                             <li className="flex flex-col gap-1">
-                                <p>{getText("dateConfirmText")}:</p>
+                                <p>{getText("booking_page.date_confirm_text")}:</p>
                                 <h6>{form?.date}</h6>
                             </li>
                             <li className="flex flex-col gap-1">
-                                <p>{getText("timeConfirmText")}:</p>
+                                <p>{getText("booking_page.time_confirm_text")}:</p>
                                 <h6>{form?.time}</h6>
                             </li>
                             <li className="flex flex-col gap-1">
-                                <p>{getText("customersConfirmText")}:</p>
+                                <p>{getText("booking_page.customers_confirm_text")}:</p>
                                 <h6>{form?.partySize}</h6>
                             </li>
                             {form.extras?.highChair && (
                                 <li className="flex flex-col gap-1">
-                                    <p>{getText("highChairConfirmText")}</p>
+                                    <p>{getText("booking_page.high_chair_confirm_text")}</p>
                                     <h6>
                                         {form.extras.highChair
                                             ? getText("affirmationText")
@@ -242,7 +242,7 @@ function BookingPage() {
                             )}
                             {form?.notes && (
                                 <li className="flex flex-col gap-1">
-                                    <p>{getText("aditionalMessageConfirmText")}:</p>
+                                    <p>{getText("booking_page.aditional_message_confirm_text")}:</p>
                                     <h6 className="break-all">{form.notes}</h6>
                                 </li>
                             )}
@@ -253,10 +253,10 @@ function BookingPage() {
                             variant="primary"
                             onClick={onConfirmSubmit}
                             loading={isLoading}
-                            loadingText={getText("loadingTextConfirmButtonModal")}
+                            loadingText={getText("booking_page.loading_text_confirm_button_modal")}
                             disabled={isLoading ? true : false}
                         >
-                            {getText("confirmButtonModal")}
+                            {getText("booking_page.confirm_button_modal")}
                         </LoadingButton>
                     </ModalFooter>
                 </Modal>
@@ -277,8 +277,9 @@ function BookingPage() {
                                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                                 }`}
                             >
-                                {(form?.time && `${getText("bookingTimeText")}: ${form?.time}`) ||
-                                    getText("bookingTimeText")}
+                                {(form?.time &&
+                                    `${getText("booking_page.booking_time_text")}: ${form?.time}`) ||
+                                    getText("booking_page.booking_time_text")}
                             </DropdownTrigger>
                             <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
@@ -289,7 +290,7 @@ function BookingPage() {
                                     }`}
                                     onClick={() => onChangeTime("")}
                                 >
-                                    {getText("bookingTimePlaceholder")}
+                                    {getText("booking_page.booking_time_placeholder")}
                                 </DropdownItem>
                                 {DATE_TIMES_POSIBILITIES.map((time) => {
                                     const currentDate = new Date().toISOString().split("T")[0];
@@ -326,8 +327,10 @@ function BookingPage() {
                                 }`}
                             >
                                 {(form?.partySize &&
-                                    `${getText("bookingCustomersText")}: ${form?.partySize}`) ||
-                                    getText("bookingCustomersText")}
+                                    `${getText("booking_page.booking_customers_text")}: ${
+                                        form?.partySize
+                                    }`) ||
+                                    getText("booking_page.booking_customers_text")}
                             </DropdownTrigger>
                             <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
@@ -338,7 +341,9 @@ function BookingPage() {
                                     key={"defaultOption"}
                                     onClick={() => onChangeCustomer("")}
                                 >
-                                    <span className="text-sm">{getText("bookingCustomersPlaceholder")}</span>
+                                    <span className="text-sm">
+                                        {getText("booking_page.booking_customers_placeholder")}
+                                    </span>
                                 </DropdownItem>
                                 {Array.from({ length: 8 }, (_, index) => (
                                     <DropdownItem
@@ -360,8 +365,8 @@ function BookingPage() {
                         <CustomCheckbox
                             onChange={onInputChange}
                             checked={form.extras.highChair}
-                            title={getText("bookingHighChairTitle")}
-                            description={getText("bookingHighChairDescription")}
+                            title={getText("booking_page.booking_high_chair_title")}
+                            description={getText("booking_page.booking_high_chair_description")}
                         />
                     </div>
                 </div>
@@ -377,7 +382,7 @@ function BookingPage() {
                             cols={10}
                             rows={3}
                             className={`bg-white rounded-lg p-2 focus:outline-primary-color focus-visible:ring-primary-color text-text-color placeholder:text-text-color/50`}
-                            placeholder={getText("bookingAditionalMessagePlaceholder")}
+                            placeholder={getText("booking_page.booking_aditional_message_placeholder")}
                             maxLength={100}
                             value={form.notes}
                             onChange={(event) => onInputChange(event)}
@@ -403,10 +408,10 @@ function BookingPage() {
                 )}
                 <div className="flex flex-col gap-2 md:flex-row lg:justify-center lg:gap-4">
                     <Button onClick={onBookingSubmit} variant="primary" className="flex-1 lg:flex-none">
-                        {getText("bookingButtonConfirmText")}
+                        {getText("booking_page.booking_button_confirm_text")}
                     </Button>
                     <Button onClick={resetForm} variant="danger" className="flex-1 lg:flex-none">
-                        {getText("bookingButtonResetForm")}
+                        {getText("booking_page.booking_button_reset_form")}
                     </Button>
                 </div>
                 <ToastContainer toasts={toasts} onClose={dismissToast} />

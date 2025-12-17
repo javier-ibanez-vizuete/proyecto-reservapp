@@ -322,7 +322,7 @@ function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
                         />
                         {hasActiveFilters && (
                             <AdminButton onClick={handleResetFilters} variant={"danger"}>
-                                {getText("clearFilterButton")}
+                                {getText("menu_page.clear_filter_button")}
                             </AdminButton>
                         )}
                     </div>

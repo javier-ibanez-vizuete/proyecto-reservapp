@@ -67,7 +67,7 @@ const EditableField = ({
                         size="sm"
                         onClick={(event) => handleShowInput(event, fieldName)}
                     >
-                        {getText("userDataEditButtonText")}
+                        {getText("user_data.user_data_edit_button_text")}
                     </Button>
                 )}
                 {isEditing && (
@@ -77,7 +77,7 @@ const EditableField = ({
                             variant="danger"
                             onClick={(event) => handleHideInput(event, fieldName)}
                         >
-                            {getText("userDataModalCancelText")}
+                            {getText("user_data.user_data_modal_cancel_text")}
                         </Button>
                         {hasValue && (
                             <Button
@@ -85,7 +85,7 @@ const EditableField = ({
                                 variant="secondary"
                                 onClick={(event) => handleShowModal(event, fieldName)}
                             >
-                                {getText("userDataChangeButtonText")}
+                                {getText("user_data.user_data_change_button_text")}
                             </Button>
                         )}
                     </>
@@ -135,9 +135,9 @@ export const UserDataSection = ({ userData }) => {
     );
 
     const FIELD_CONFIG = {
-        name: { label: getText("nameFieldText"), type: "text" },
-        email: { label: getText("emailFieldText"), type: "email" },
-        address: { label: getText("addressFieldText"), type: "text" },
+        name: { label: getText("user_data.name_field_text"), type: "text" },
+        email: { label: getText("user_data.email_field_text"), type: "email" },
+        address: { label: getText("user_data.address_field_text"), type: "text" },
     };
 
     useEffect(() => {
@@ -147,7 +147,7 @@ export const UserDataSection = ({ userData }) => {
             location.state?.fromPatchUSer === true || getDataFromSessionStorage("fromPatchUser") === true;
 
         if (fromPatchUSer) {
-            showToast(getText("toastUserDataChangeSuccess"), "success", 1000);
+            showToast(getText("user_data.toast_user_data_change_success"), "success", 1000);
             navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromPatchUser");
         }
@@ -199,9 +199,9 @@ export const UserDataSection = ({ userData }) => {
                 return;
             }
 
-            const newModalMessage = `${getText("userDataModalMessage")} ${userData[fieldToChange]} ${getText(
-                "userDataModalMessageNexo"
-            )} ${form[fieldToChange]} ?`;
+            const newModalMessage = `${getText("user_data.user_data_modal_message")} ${
+                userData[fieldToChange]
+            } ${getText("user_data.user_data_modal_message_nexo")} ${form[fieldToChange]} ?`;
             setModalMessage(newModalMessage);
             setShowModal(true);
         },
@@ -252,7 +252,7 @@ export const UserDataSection = ({ userData }) => {
                 await patchUser(form);
             } catch (err) {
                 console.error("User Data is not Updated");
-                showToast(getText("toastUserDataChangeError"), "error", 1000);
+                showToast(getText("user_data.toast_user_data_change_error"), "error", 1000);
                 resetFormState();
                 setShowModal(false);
             } finally {
@@ -266,16 +266,16 @@ export const UserDataSection = ({ userData }) => {
         <div className="flex flex-1 flex-col">
             <ConfirmModal
                 isOpen={showModal}
-                title={getText("userDataModalTitle")}
+                title={getText("user_data.user_data_modal_title")}
                 message={modalMessage}
                 onConfirm={handleConfirmChangeData}
                 onClose={handleCloseModal}
                 loading={isLoading}
                 variant="accent"
                 variantButton="primary"
-                confirmText={getText("userDataModalConfirmText")}
-                loadingText={getText("loadingUserDataModalConfirmText")}
-                cancelText={getText("userDataModalCancelText")}
+                confirmText={getText("user_data.user_data_modal_confirm_text")}
+                loadingText={getText("user_data.loading_user_data_modal_confirm_text")}
+                cancelText={getText("user_data.user_data_modal_cancel_text")}
                 showCloseButton={false}
             />
             <div className="flex flex-col gap-3">

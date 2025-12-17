@@ -87,12 +87,12 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
                 <AdminAccordion contents={ASIDE_DATA} defaultOpen={null} />
                 <LoadingButton
                     variant="danger"
-                    loadingText={getText("loadingTextLogoutButton")}
+                    loadingText={getText("navigation_bar.loading_text_logout_button")}
                     loading={loaderLogout.isLoading}
                     onClick={handleLogout}
                     className="m-1"
                 >
-                    {getText("logoutButton")}
+                    {getText("navigation_bar.logout_button")}
                 </LoadingButton>
             </div>
         </aside>

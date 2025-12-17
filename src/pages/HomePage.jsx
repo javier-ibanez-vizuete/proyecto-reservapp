@@ -36,13 +36,15 @@ function HomePage() {
         if (!fromLogin && !fromRegister && !fromLogout && !fromNotFound) return;
 
         if (fromLogin) {
-            showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
+            showToast(getText("home_page.toast_login_success"), "success", 2000, "top-center");
             removeFromSessionStorage("fromLogin");
             navigate(location.pathname, { replace: true, state: {} });
         }
         if (fromRegister) {
             showToast(
-                `${getText("toastWelcomeRegister")} ${user?.name || getText("userReplaceName")}.`,
+                `${getText("home_page.toast_welcome_register")} ${
+                    user?.name || getText("navigation_bar.user_replace_name")
+                }.`,
                 "success",
                 2000,
                 "top-center"
@@ -51,7 +53,7 @@ function HomePage() {
             navigate(location.pathname, { replace: true, state: {} });
         }
         if (fromLogout) {
-            showToast(getText("toastLogoutSuccess"), "success");
+            showToast(getText("home_page.toast_logout_success"), "success");
             removeFromSessionStorage("logoutSuccess");
             navigate(location.pathname, { replace: true, state: {} });
         }
@@ -75,7 +77,7 @@ function HomePage() {
 
     return (
         <Container className="flex flex-col flex-1 gap-2 lg:gap-4 py-4">
-            <h1>{getText("h1HomePage")}</h1>
+            <h1>{getText("home_page.h1_home_page")}</h1>
 
             <div className="flex flex-col gap-4 lg:gap-8">
                 {ctaCardsData.map(

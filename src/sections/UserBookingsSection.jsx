@@ -35,12 +35,12 @@ export const UserBookingsSection = ({ userBookingsData }) => {
     return (
         <div>
             <BookingDateItem
-                title={getText("bookingDataTitle1")}
+                title={getText("booking_data.booking_data_title1")}
                 content={pendingBookings}
                 areOldBooking={false}
             />
             <BookingDateItem
-                title={getText("bookingDataTitle2")}
+                title={getText("booking_data.booking_data_title2")}
                 content={oldBookings}
                 areOldBooking={true}
             />
