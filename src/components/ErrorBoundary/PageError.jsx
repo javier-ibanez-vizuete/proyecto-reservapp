@@ -9,14 +9,7 @@ import { ImageContainer } from "../UI/ImageContainer";
 import { useErrorBoundary } from "./useErrorBoundary";
 
 export const PageError = memo(
-    ({
-        title = "Error Loading Data",
-        message,
-        icon,
-        retryText = "Retry",
-        className = "",
-        containerClassName = "",
-    }) => {
+    ({ title, message, icon, retryText, className = "", containerClassName = "" }) => {
         const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
         const { onErrorRetry, onErrorReset } = useErrorBoundary();
         const { t } = useTranslate();
@@ -59,7 +52,7 @@ export const PageError = memo(
 
                     {icon && <h3>{icon}</h3>}
 
-                    <h4>{title}</h4>
+                    <h4>{title ? title : "Ha surgido un Problemilla"}</h4>
 
                     {message && <p>{message}</p>}
 
