@@ -58,11 +58,14 @@ export const BackToTopButton = ({
         currentPlacement
     );
 
-    const handleClick = useCallback((event) => {
-        event.preventDefault();
-        scrollToTop();
-        onClick?.();
-    }, []);
+    const handleClick = useCallback(
+        (event) => {
+            event.preventDefault();
+            scrollToTop();
+            onClick?.();
+        },
+        [scrollToTop]
+    );
 
     return (
         <div className={containerClasses}>

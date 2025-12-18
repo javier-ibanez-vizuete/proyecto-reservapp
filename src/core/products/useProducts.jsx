@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { ProductsContext } from "../../contexts/ProductsContext";
-import { getCategoriesApi, getProductsApi, getProductsByIdApi } from "./products.api";
+import { deleteProductByIdApi, getCategoriesApi, getProductsApi, getProductsByIdApi } from "./products.api";
 import { saveCategoriesInLocalStorage, saveProductsInLocalStorage } from "./Products.service";
 
 export const useProducts = () => {
@@ -53,5 +53,31 @@ export const useProducts = () => {
         }
     }, [getCategoriesApi]);
 
-    return { getProducts, getProductsById, getCategories, loadingProducts, loadingCategories };
+    const deleteProductById = useCallback(
+        async (id) => {
+            try {
+                const product = await deleteProductByIdApi(id);
+                if (product.ok)
+                    setProducts((prevValue) => {
+                        if (!prevValue || prevValue?.length < 1) return;
+                        const restProducts = prevValue.filter((product) => product.id !== id);
+                        saveProductsInLocalStorage(restProducts);
+                        return restProducts;
+                    });
+                return product.removed;
+            } catch (err) {
+                console.error("Algo ha salido mal eliminando el producto");
+            }
+        },
+        [deleteProductByIdApi]
+    );
+
+    return {
+        getProducts,
+        getProductsById,
+        getCategories,
+        deleteProductById,
+        loadingProducts,
+        loadingCategories,
+    };
 };

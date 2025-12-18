@@ -12,7 +12,7 @@ export const ThemeProvider = ({ children }) => {
             saveDataInSessionStorage("theme", newThemeValue);
             return newThemeValue;
         });
-    }, []);
+    }, [theme]);
 
     useEffect(() => {
         const themeFromStorage = getDataFromSessionStorage("theme");

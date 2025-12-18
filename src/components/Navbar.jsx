@@ -15,13 +15,13 @@ import logoReservappDark from "../assets/logos/reservapp-logo/logo-reservapp-dar
 
 import classNames from "classnames";
 import { CartsContext } from "../contexts/CartsContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useDevice } from "../hooks/useDevice";
 import { useWindowWidth } from "../hooks/useWindowWidth";
+import { LanguagesSelector } from "../translations/LanguagesSelector.jsx";
+import { useTranslate } from "../translations/useTranslate";
 import { BurgerButton } from "./BurgerButton";
 import { Container } from "./Container";
-import { LanguagesSelector } from "./LanguagesSelector";
 import { NavbarLinks } from "./NavbarLinks";
 import { ProfileButton } from "./ProfileButton";
 import { TrollyButton } from "./TrollyButton";
@@ -55,7 +55,7 @@ export const Navbar = memo(({ isLoggedIn = false, user = null, height, padding, 
 
     const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
@@ -191,14 +191,14 @@ export const Navbar = memo(({ isLoggedIn = false, user = null, height, padding, 
                         {!isLoggedIn && (
                             <div className="perfect-center self-center gap-2">
                                 <Button onClick={handleLogin} variant="primary">
-                                    {getText("loginButton")}
+                                    {t("navigation_bar.login_button")}
                                 </Button>
                                 <Button
                                     onClick={handleRegister}
                                     size={isMobile ? "sm" : "md"}
                                     variant="secondary"
                                 >
-                                    {getText("registerButton")}
+                                    {t("navigation_bar.register_button")}
                                 </Button>
                             </div>
                         )}

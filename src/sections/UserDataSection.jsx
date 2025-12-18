@@ -1,15 +1,14 @@
-import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ConfirmModal } from "../components/Modal/ConfirmModal";
 import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
-import { LanguageContext } from "../contexts/LanguageContext";
-import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
 import { ProfileDataChangingVerification } from "../helpers/FieldsVerificator";
 import { getDataFromSessionStorage, removeFromSessionStorage } from "../helpers/storage";
 import { useLoading } from "../hooks/useLoading";
 import { useToast } from "../hooks/useToast";
+import { useTranslate } from "../translations/useTranslate";
 
 const INITIAL_INPUTS_SHOWS_FIELDS = {
     name: false,
@@ -32,7 +31,7 @@ const EditableField = ({
     handleHideInput,
     handleShowModal,
 }) => {
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const isEditing = inputShows[fieldName];
     const hasValue = form[fieldName]?.length > 0;
@@ -67,7 +66,7 @@ const EditableField = ({
                         size="sm"
                         onClick={(event) => handleShowInput(event, fieldName)}
                     >
-                        {getText("userDataEditButtonText")}
+                        {t("user_data.user_data_edit_button_text")}
                     </Button>
                 )}
                 {isEditing && (
@@ -77,7 +76,7 @@ const EditableField = ({
                             variant="danger"
                             onClick={(event) => handleHideInput(event, fieldName)}
                         >
-                            {getText("userDataModalCancelText")}
+                            {t("user_data.user_data_modal_cancel_text")}
                         </Button>
                         {hasValue && (
                             <Button
@@ -85,13 +84,13 @@ const EditableField = ({
                                 variant="secondary"
                                 onClick={(event) => handleShowModal(event, fieldName)}
                             >
-                                {getText("userDataChangeButtonText")}
+                                {t("user_data.user_data_change_button_text")}
                             </Button>
                         )}
                     </>
                 )}
             </div>
-            {error && isEditing && <p className="italic text-error-500/70">{getText(error)}</p>}
+            {error && isEditing && <p className="italic text-error-500/70">{t(error)}</p>}
         </div>
     );
 };
@@ -114,9 +113,9 @@ export const UserDataSection = ({ userData }) => {
 
     const { isLoading, setIsLoading } = useLoading();
     const { patchUser } = useAuth();
-    const { theme } = useContext(ThemeContext);
+
     const { toasts, showToast, dismissToast } = useToast();
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -135,9 +134,9 @@ export const UserDataSection = ({ userData }) => {
     );
 
     const FIELD_CONFIG = {
-        name: { label: getText("nameFieldText"), type: "text" },
-        email: { label: getText("emailFieldText"), type: "email" },
-        address: { label: getText("addressFieldText"), type: "text" },
+        name: { label: t("user_data.name_field_text"), type: "text" },
+        email: { label: t("user_data.email_field_text"), type: "email" },
+        address: { label: t("user_data.address_field_text"), type: "text" },
     };
 
     useEffect(() => {
@@ -147,7 +146,7 @@ export const UserDataSection = ({ userData }) => {
             location.state?.fromPatchUSer === true || getDataFromSessionStorage("fromPatchUser") === true;
 
         if (fromPatchUSer) {
-            showToast(getText("toastUserDataChangeSuccess"), "success", 1000);
+            showToast(t("user_data.toast_user_data_change_success"), "success", 1000);
             navigate(location.pathname, { replace: true, state: {} });
             removeFromSessionStorage("fromPatchUser");
         }
@@ -199,8 +198,8 @@ export const UserDataSection = ({ userData }) => {
                 return;
             }
 
-            const newModalMessage = `${getText("userDataModalMessage")} ${userData[fieldToChange]} ${getText(
-                "userDataModalMessageNexo"
+            const newModalMessage = `${t("user_data.user_data_modal_message")} ${userData[fieldToChange]} ${t(
+                "user_data.user_data_modal_message_nexo"
             )} ${form[fieldToChange]} ?`;
             setModalMessage(newModalMessage);
             setShowModal(true);
@@ -252,7 +251,7 @@ export const UserDataSection = ({ userData }) => {
                 await patchUser(form);
             } catch (err) {
                 console.error("User Data is not Updated");
-                showToast(getText("toastUserDataChangeError"), "error", 1000);
+                showToast(t("user_data.toast_user_data_change_error"), "error", 1000);
                 resetFormState();
                 setShowModal(false);
             } finally {
@@ -266,16 +265,16 @@ export const UserDataSection = ({ userData }) => {
         <div className="flex flex-1 flex-col">
             <ConfirmModal
                 isOpen={showModal}
-                title={getText("userDataModalTitle")}
+                title={t("user_data.user_data_modal_title")}
                 message={modalMessage}
                 onConfirm={handleConfirmChangeData}
                 onClose={handleCloseModal}
                 loading={isLoading}
                 variant="accent"
                 variantButton="primary"
-                confirmText={getText("userDataModalConfirmText")}
-                loadingText={getText("loadingUserDataModalConfirmText")}
-                cancelText={getText("userDataModalCancelText")}
+                confirmText={t("user_data.user_data_modal_confirm_text")}
+                loadingText={t("user_data.loading_user_data_modal_confirm_text")}
+                cancelText={t("user_data.user_data_modal_cancel_text")}
                 showCloseButton={false}
             />
             <div className="flex flex-col gap-3">

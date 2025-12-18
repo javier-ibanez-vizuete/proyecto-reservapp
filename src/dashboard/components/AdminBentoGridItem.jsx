@@ -2,9 +2,9 @@ import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Spinner } from "../../components/Spinner/Spinner";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 import { AdminBentoGridItemUser } from "./AdminBentoGridItemUser";
 
 export const AdminBentoGridItem = ({
@@ -27,7 +27,7 @@ export const AdminBentoGridItem = ({
 
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const baseClasses =
         "group flex flex-col relative overflow-hidden shadow-md transition-all duration-500 ease-in-out";
@@ -160,7 +160,16 @@ export const AdminBentoGridItem = ({
                 variantsColSpan[colSpan] || variantsColSpan.default,
                 variantsRowSpan[rowSpan] || variantsRowSpan.default
             ),
-        [gradient, borderVariant, padding, colSpan, rowSpan]
+        [
+            gradient,
+            borderVariant,
+            padding,
+            colSpan,
+            rowSpan,
+            baseClasses,
+            hoverClasses,
+            autoBentoGridItemConfig,
+        ]
     );
 
     const usersBentoDisplay = useMemo(
@@ -184,7 +193,7 @@ export const AdminBentoGridItem = ({
                             <article className="flex flex-1 flex-col justify-center items-center">
                                 {hasTitle && <h6>{title}</h6>}
                                 {isLoadingTitle && <Spinner size="sm" color="warning" />}
-                                {description && <small className="font-medium">{getText(description)}</small>}
+                                {description && <small className="font-medium">{t(description)}</small>}
                             </article>
                         )}
                     </>

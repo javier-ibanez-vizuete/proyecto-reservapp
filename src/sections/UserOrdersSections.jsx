@@ -1,11 +1,11 @@
-import { useCallback, useContext, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { OrdersDateItem } from "../components/OrdersDateItem";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { useOrders } from "../core/orders/useOrders";
 import { normalizeId } from "../helpers/normalizeId";
+import { useTranslate } from "../translations/useTranslate";
 export const UserOrdersSection = ({ userOrdersData = [] }) => {
     const { patchOrderDelivered } = useOrders();
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const pendingOrders = useMemo(
         () => userOrdersData.filter((order) => order?.status === "pending"),
@@ -38,12 +38,12 @@ export const UserOrdersSection = ({ userOrdersData = [] }) => {
     return (
         <div className="flex flex-col gap-3">
             <OrdersDateItem
-                title={getText("ordersDataTitle1")}
+                title={t("orders_data.orders_data_title1")}
                 content={pendingOrders}
                 isPendingOrders={true}
             />
             <OrdersDateItem
-                title={getText("ordersDataTitle2")}
+                title={t("orders_data.orders_data_title2")}
                 content={userOrdersData}
                 isPendingOrders={false}
             />

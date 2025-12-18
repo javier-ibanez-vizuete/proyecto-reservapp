@@ -1,11 +1,11 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useBookings } from "../core/bookings/useBookings";
 import { getDataFromSessionStorage, removeFromSessionStorage } from "../helpers/storage";
 import { useLoading } from "../hooks/useLoading";
 import { useToast } from "../hooks/useToast";
+import { useTranslate } from "../translations/useTranslate";
 import { ConfirmModal } from "./Modal/ConfirmModal";
 import { Modal } from "./Modal/Modal";
 import { ModalBody } from "./Modal/ModalBody";
@@ -34,7 +34,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
     const { deleteBookingById } = useBookings();
 
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -56,12 +56,12 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
         (bookingData) => {
             if (!bookingData) setBookingId("");
             if (bookingData) {
-                const modalMessage = `${getText("bookingDataModalInfoMessageText1")} ${
+                const modalMessage = `${t("booking_data.booking_data_modal_info_message_text1")} ${
                     bookingData?.partySize
                 } ${
                     bookingData?.partySize === 1
-                        ? getText("bookingDataModalInfoMessageCustomer1")
-                        : getText("bookingDataModalInfoMessageCustomer2")
+                        ? t("booking_data.booking_data_modal_info_message_customer1")
+                        : t("booking_data.booking_data_modal_info_message_customer2")
                 } ?`;
                 setBookingId(bookingData.id || bookingData._id);
                 setMessageModal(modalMessage);
@@ -96,7 +96,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
             try {
                 await deleteBookingById(bookingId);
             } catch (err) {
-                showToast(getText("toastBookingDataDeltingBookingError"), "error", 1000);
+                showToast(t("booking_data.toast_booking_data_delting_booking_error"), "error", 1000);
             } finally {
                 setIsLoading(false);
                 setShowModalDelete(false);
@@ -124,9 +124,11 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                     className="flex items-center justify-between gap-2"
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <p className="flex-1 opacity-80">{getText("bookingDataNoPendingBookingsFound")}</p>
+                    <p className="flex-1 opacity-80">
+                        {t("booking_data.booking_data_no_pending_bookings_found")}
+                    </p>
                     <Button variant="primary" size="sm" onClick={() => navigate("/bookings")}>
-                        {getText("buttonBookingDataMakeABook")}
+                        {t("booking_data.button_booking_data_make_a_book")}
                     </Button>
                 </div>
             </div>
@@ -136,7 +138,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
         return (
             <div className="flex flex-col gap-1">
                 <h5>{title}</h5>
-                <p className="opacity-80">{getText("bookingDataNoPastVisitsFound")}</p>
+                <p className="opacity-80">{t("booking_data.booking_data_no_past_visits_found")}</p>
             </div>
         );
 
@@ -147,13 +149,13 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                 isOpen={showModalDelete}
                 onClose={handleShowModal}
                 onConfirm={() => handleDeleteBooking(bookingId)}
-                title={getText("bookingDataModalDeletingTitle")}
+                title={t("booking_data.booking_data_modal_deleting_title")}
                 message={messageModal}
-                confirmText={getText("bookingDataModalDeletingbutton")}
+                confirmText={t("booking_data.booking_data_modal_deletingbutton")}
                 showCloseButton={false}
                 variant="accent"
                 variantButton="danger"
-                loadingText={getText("loadingBookingDataModalDeletingbutton")}
+                loadingText={t("booking_data.loading_booking_data_modal_deletingbutton")}
                 loading={isLoading}
             />
             <Modal
@@ -162,28 +164,28 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
                 closeOnEscape={true}
                 className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
             >
-                <ModalHeader>{getText("bookingDataModalInfotitle")}</ModalHeader>
+                <ModalHeader>{t("booking_data.booking_data_modal_infotitle")}</ModalHeader>
                 <ModalBody className="flex flex-col gap-2">
                     <div className="flex items-center gap-2">
-                        <p>{getText("bookingDataModalInfoDateText")}</p>
+                        <p>{t("booking_data.booking_data_modal_info_date_text")}</p>
                         <p>{modalInfo.date}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <p>{getText("bookingDataModalInfoTimeText")}</p>
+                        <p>{t("booking_data.booking_data_modal_info_time_text")}</p>
                         <p>{modalInfo.time}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <p>{getText("bookingDataModalInfoPartySizeText")}</p>
+                        <p>{t("booking_data.booking_data_modal_info_party_size_text")}</p>
                         <p>{modalInfo.customerNumber}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <p>{getText("bookingDataModalInfoHighChairText")}</p>
+                        <p>{t("booking_data.booking_data_modal_info_high_chair_text")}</p>
                         <p>{modalInfo.extras.highChair ? "Yes" : "No"}</p>
                     </div>
                 </ModalBody>
                 <ModalFooter>
                     <Button variant="danger" onClick={handleShowModalInfo}>
-                        {getText("buttonBookingDataCloseModalInfo")}
+                        {t("booking_data.button_booking_data_close_modal_info")}
                     </Button>
                 </ModalFooter>
             </Modal>
@@ -202,7 +204,7 @@ export const BookingDateItem = ({ title = "", content = [], areOldBooking = fals
 
                             {!areOldBooking && (
                                 <Button size="sm" variant="danger" onClick={() => handleShowModal(booking)}>
-                                    {getText("buttonBookingDataCancelReservation")}
+                                    {t("booking_data.button_booking_data_cancel_reservation")}
                                 </Button>
                             )}
                         </div>

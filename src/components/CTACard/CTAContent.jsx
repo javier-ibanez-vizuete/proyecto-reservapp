@@ -1,16 +1,16 @@
-import { memo, useContext } from "react";
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { memo } from "react";
+import { useTranslate } from "../../translations/useTranslate";
 import { CTAButton } from "./CTAButton";
 
 export const CTAContent = memo(({ title, description, buttonText, buttonHref, onButtonClick, className }) => {
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     return (
         <div className={`flex flex-col justify-center p-8 md:p-12 gap-2 ${className}`}>
-            <h2 className="leading-tight">{getText(title)}</h2>
+            <h2 className="leading-tight">{t(title)}</h2>
 
-            <p className="leading-relaxed">{getText(description)}</p>
+            <p className="leading-relaxed">{t(description)}</p>
 
-            <CTAButton text={getText(buttonText)} href={buttonHref} onClick={onButtonClick} />
+            <CTAButton text={t(buttonText)} href={buttonHref} onClick={onButtonClick} />
         </div>
     );
 });

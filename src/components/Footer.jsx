@@ -1,11 +1,11 @@
 import { memo, useContext } from "react";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useTranslate } from "../translations/useTranslate";
 import { Container } from "./Container";
 
 export const Footer = memo(() => {
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     return (
         <footer
@@ -16,7 +16,7 @@ export const Footer = memo(() => {
             <Container>
                 <div className="flex flex-1 justify-center items-center text-center text-sm text-gray-500">
                     <p>
-                        © {new Date().getFullYear()} {getText("copyrightText")}
+                        © {new Date().getFullYear()} {t("footer.copyright_text")}
                     </p>
                 </div>
             </Container>

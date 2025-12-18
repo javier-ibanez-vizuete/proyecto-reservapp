@@ -1,13 +1,13 @@
 import classNames from "classnames";
-import { useContext, useMemo } from "react";
+import { memo, useMemo } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { BackButton } from "../../components/UI/BackButton";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 import { AdminButton } from "../components/UI/AdminButton";
 
-export const AdminBookingsPage = ({ padding, gap }) => {
-    const { getText } = useContext(LanguageContext);
+function AdminBookingsPage({ padding, gap }) {
+    const { t } = useTranslate();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { pathname } = useLocation();
 
@@ -64,9 +64,18 @@ export const AdminBookingsPage = ({ padding, gap }) => {
     );
 
     const LINKS_DATA = [
-        { text: getText("adminBookingsAllLinkText"), href: "/dashboard/bookings/all" },
-        { text: getText("adminBookingsTodaysLinkText"), href: "/dashboard/bookings/today" },
-        { text: getText("adminBookingsSelectDateText"), href: "/dashboard/bookings/date" },
+        {
+            text: t("admin_bookings_page.admin_bookings_all_link_text"),
+            href: "/dashboard/bookings/all",
+        },
+        {
+            text: t("admin_bookings_page.admin_bookings_todays_link_text"),
+            href: "/dashboard/bookings/today",
+        },
+        {
+            text: t("admin_bookings_page.admin_bookings_select_date_text"),
+            href: "/dashboard/bookings/date",
+        },
     ];
 
     return (
@@ -74,7 +83,7 @@ export const AdminBookingsPage = ({ padding, gap }) => {
             <div className="perfect-center self-start lg:self-center">
                 <BackButton />
             </div>
-            <h1 className="break-all break-words">{getText("h1AdminBookingsPage")}</h1>
+            <h1 className="break-all break-words">{t("admin_bookings_page.h1_admin_bookings_page")}</h1>
             <div className={currentLinksContainerClasses}>
                 {LINKS_DATA.map((link) => (
                     <AdminButton key={link.text} variant={link.href === pathname ? "active" : "inactive"}>
@@ -87,4 +96,5 @@ export const AdminBookingsPage = ({ padding, gap }) => {
             <Outlet />
         </section>
     );
-};
+}
+export default memo(AdminBookingsPage);

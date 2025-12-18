@@ -64,7 +64,7 @@ export const DropdownTrigger = memo(
                         triggerClasses,
                         variantsPadding[padding] || autoConfig.padding || variantsPadding.default
                     ),
-                [padding]
+                [padding, triggerClasses, autoConfig]
             );
 
             return (

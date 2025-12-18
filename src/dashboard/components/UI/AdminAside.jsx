@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { LoadingButton } from "../../../components/Spinner/LoadingButton";
-import { LanguageContext } from "../../../contexts/LanguageContext";
 import { ThemeContext } from "../../../contexts/ThemeContext";
 import { useAuth } from "../../../core/auth/useAuth";
 import { ASIDE_DATA } from "../../../data/ASIDE_DATA";
 import { useDevice } from "../../../hooks/useDevice";
 import { useLoading } from "../../../hooks/useLoading";
 import { useWindowWidth } from "../../../hooks/useWindowWidth";
+import { useTranslate } from "../../../translations/useTranslate";
 import { AdminAccordion } from "../AdminAccordion";
 
 export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
@@ -15,7 +15,7 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const width = useWindowWidth();
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { theme } = useContext(ThemeContext);
     const { logout } = useAuth();
 
@@ -87,12 +87,12 @@ export const AdminAside = ({ isAsideOpen, bgColor, className = "" }) => {
                 <AdminAccordion contents={ASIDE_DATA} defaultOpen={null} />
                 <LoadingButton
                     variant="danger"
-                    loadingText={getText("loadingTextLogoutButton")}
+                    loadingText={t("navigation_bar.loading_text_logout_button")}
                     loading={loaderLogout.isLoading}
                     onClick={handleLogout}
                     className="m-1"
                 >
-                    {getText("logoutButton")}
+                    {t("navigation_bar.logout_button")}
                 </LoadingButton>
             </div>
         </aside>

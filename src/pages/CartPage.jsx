@@ -8,20 +8,20 @@ import { SkeletonCard } from "../components/Skeleton";
 import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
 import { CartsContext } from "../contexts/CartsContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useCart } from "../core/cart/useCart";
 import { useLoading } from "../hooks/useLoading";
 import { useToast } from "../hooks/useToast";
+import { useTranslate } from "../translations/useTranslate";
 
-export const CartPage = () => {
+function CartPage() {
     const [showModal, setShowModal] = useState(false);
     const { getCartSummary, deleteCartItem, postCartCheckout } = useCart();
 
     const { cart, cartSummary } = useContext(CartsContext);
 
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const location = useLocation();
 
     const { isLoading, setIsLoading } = useLoading();
@@ -63,10 +63,10 @@ export const CartPage = () => {
                 productId = product.productId;
                 await deleteCartItem(product.productId);
             }
-            showToast(getText("toastCartRemovedSuccess"), "success", 1000);
+            showToast(t("cart_page.toast_cart_removed_success"), "success", 1000);
         } catch (err) {
             console.error("No se ha podido eliminar el producto con id", productId);
-            showToast(getText("toastCartRemovedError"), "error", 1000);
+            showToast(t("cart_page.toast_cart_removed_error"), "error", 1000);
         } finally {
             loadingDelete.setIsLoading(false);
         }
@@ -109,11 +109,11 @@ export const CartPage = () => {
                     isOpen={showModal}
                     onConfirm={handleConfirmCart}
                     onClose={handleCloseModal}
-                    title={getText("confirmModalCartTitle")}
-                    message={getText("confirmModalCartMessage")}
-                    loadingText={getText("loadingConfirmButtonCartModal")}
-                    confirmText={getText("confirmButtonCartModal")}
-                    cancelText={getText("cancelButtonCartModal")}
+                    title={t("cart_page.confirm_modal_cart_title")}
+                    message={t("cart_page.confirm_modal_cart_message")}
+                    loadingText={t("cart_page.loading_confirm_button_cart_modal")}
+                    confirmText={t("cart_page.confirm_button_cart_modal")}
+                    cancelText={t("cart_page.cancel_button_cart_modal")}
                     variant="accent"
                     variantButton="primary"
                     showCloseButton={false}
@@ -121,7 +121,7 @@ export const CartPage = () => {
                     className={`${theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}`}
                 />
                 <div>
-                    <h1>{getText("h1CartPage")}</h1>
+                    <h1>{t("cart_page.h1_cart_page")}</h1>
                 </div>
 
                 <div
@@ -144,7 +144,7 @@ export const CartPage = () => {
                     {cart?.items?.length <= 0 && (
                         <div className="flex flex-col md:mx-auto">
                             <Button variant="primary" onClick={() => Navigate("/orders")}>
-                                {getText("goToOrdersCartButton")}
+                                {t("cart_page.go_to_orders_cart_button")}
                             </Button>
                         </div>
                     )}
@@ -153,4 +153,6 @@ export const CartPage = () => {
             </Container>
         </div>
     );
-};
+}
+
+export default CartPage;

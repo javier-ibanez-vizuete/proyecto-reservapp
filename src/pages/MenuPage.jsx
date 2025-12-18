@@ -10,17 +10,17 @@ import { ProductsContainer } from "../components/Products/ProductsContainer";
 import { LoadingButton } from "../components/Spinner/LoadingButton";
 import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Button } from "../components/UI/Button";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
 import { getDataFromSessionStorage, saveDataInSessionStorage } from "../helpers/storage";
+import { useTranslate } from "../translations/useTranslate";
 
-export const MenuPage = () => {
+function MenuPage() {
     const { products, categories } = useContext(ProductsContext);
 
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { getProducts, loadingProducts } = useProducts();
 
     const [categorySelected, setCategorySelected] = useState(() => {
@@ -74,7 +74,7 @@ export const MenuPage = () => {
             <Container className="flex-1 gap-4">
                 <BackToTopButton iconSize={"w-5"} showAt={1000} placement="top-right" variant="secondary" />
                 <div className="lg:flex lg:justify-center">
-                    <h1>{getText("h1MenuPage")}</h1>
+                    <h1>{t("menu_page.h1_menu_page")}</h1>
                 </div>
                 {!loadingProducts && !products.length && (
                     <div className="flex flex-col justify-center items-center gap-4">
@@ -82,10 +82,10 @@ export const MenuPage = () => {
                             variant="danger"
                             size="lg"
                             loading={loadingProducts}
-                            loadingText={getText("loadingTextRefreshProductsButton")}
+                            loadingText={t("menu_page.loading_text_refresh_products_button")}
                             onClick={handleRefreshProduct}
                         >
-                            {getText("textRefreshProductsButton")}
+                            {t("menu_page.text_refresh_products_button")}
                         </LoadingButton>
                         <h2 className="text-error-500">Error Al Cargar Products</h2>
                     </div>
@@ -143,7 +143,7 @@ export const MenuPage = () => {
                                     variant="danger"
                                     size="sm"
                                 >
-                                    {getText("clearFilterButton")}
+                                    {t("menu_page.clear_filter_button")}
                                 </Button>
                             )}
                         </div>
@@ -158,4 +158,6 @@ export const MenuPage = () => {
             </Container>
         </div>
     );
-};
+}
+
+export default MenuPage;

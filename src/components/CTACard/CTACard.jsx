@@ -32,8 +32,8 @@ export const CTACard = memo(
                 }`,
                 accent: `${
                     theme === "light"
-                        ? "bg-accent-background border-accent-background/50"
-                        : "bg-accent-background-dark border-accent-background/50"
+                        ? "bg-accent-background border-accent-background/50 text-text-color"
+                        : "bg-accent-background-dark border-accent-background/50 text-text-color"
                 }`,
             }),
             [theme]

@@ -13,7 +13,6 @@ import { TableCard } from "../components/TableCard";
 import { ToastContainer } from "../components/ToastContainer";
 import { Button } from "../components/UI/Button";
 import { AuthContext } from "../contexts/AuthContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {
     getBookingFormFromLocalStorage,
@@ -29,6 +28,7 @@ import {
     saveDataInSessionStorage,
 } from "../helpers/storage";
 import { useToast } from "../hooks/useToast";
+import { useTranslate } from "../translations/useTranslate";
 
 const INITIAL_BOOKING_DATA = {
     tableId: "",
@@ -54,7 +54,7 @@ const DATE_TIMES_POSIBILITIES = [
     { time: "22:00", label: "22:00" },
 ];
 
-export const BookingPage = () => {
+function BookingPage() {
     const [form, setForm] = useState(() => {
         const formFromStorage = getBookingFormFromLocalStorage();
         return formFromStorage || INITIAL_BOOKING_DATA;
@@ -76,7 +76,7 @@ export const BookingPage = () => {
 
     const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { toasts, showToast, dismissToast } = useToast();
 
     const onChangeDate = useCallback((selectedDate) => {
@@ -177,14 +177,14 @@ export const BookingPage = () => {
             const booked = await postBookings(newFormValue);
             if (booked) {
                 resetForm();
-                showToast(getText("toastBookingSuccess"), "success");
+                showToast(t("booking_page.toast_booking_success"), "success");
             }
         } catch (err) {
             if (err?.status === 409) {
                 resetForm();
-                return showToast(getText("toastBookingUnavailable"), "error");
+                return showToast(t("booking_page.toast_booking_unavailable"), "error");
             }
-            showToast(getText("toastBookingError"), "error");
+            showToast(t("booking_page.toast_booking_error"), "error");
         }
     }, [form, user?.id]);
 
@@ -203,45 +203,46 @@ export const BookingPage = () => {
     return (
         <div className="flex flex-1 flex-col py-4">
             <Container className="flex-1 gap-2">
-                <h1>{getText("h1BookingPage")}</h1>
+                <h1>{t("booking_page.h1_booking_page")}</h1>
+
                 <Modal
                     isOpen={showModal}
                     size="lg"
                     onClose={onCloseModal}
                     className={theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"}
                 >
-                    <ModalHeader>{getText("confirmBookingTitle")}</ModalHeader>
+                    <ModalHeader>{t("booking_page.confirm_booking_title")}</ModalHeader>
                     <ModalBody>
                         <ul className="flex flex-col gap-3">
                             <li className="flex flex-col gap-1">
-                                <p>{getText("userNameConfirmText")}:</p>
+                                <p>{t("booking_page.user_name_confirm_text")}:</p>
                                 <h6>{user?.name}</h6>
                             </li>
                             <li className="flex flex-col gap-1">
-                                <p>{getText("dateConfirmText")}:</p>
+                                <p>{t("booking_page.date_confirm_text")}:</p>
                                 <h6>{form?.date}</h6>
                             </li>
                             <li className="flex flex-col gap-1">
-                                <p>{getText("timeConfirmText")}:</p>
+                                <p>{t("booking_page.time_confirm_text")}:</p>
                                 <h6>{form?.time}</h6>
                             </li>
                             <li className="flex flex-col gap-1">
-                                <p>{getText("customersConfirmText")}:</p>
+                                <p>{t("booking_page.customers_confirm_text")}:</p>
                                 <h6>{form?.partySize}</h6>
                             </li>
                             {form.extras?.highChair && (
                                 <li className="flex flex-col gap-1">
-                                    <p>{getText("highChairConfirmText")}</p>
+                                    <p>{t("booking_page.high_chair_confirm_text")}</p>
                                     <h6>
                                         {form.extras.highChair
-                                            ? getText("affirmationText")
-                                            : getText("NegationText")}
+                                            ? t("general_messages.affirmation_text")
+                                            : t("general_messages.negation_text")}
                                     </h6>
                                 </li>
                             )}
                             {form?.notes && (
                                 <li className="flex flex-col gap-1">
-                                    <p>{getText("aditionalMessageConfirmText")}:</p>
+                                    <p>{t("booking_page.aditional_message_confirm_text")}:</p>
                                     <h6 className="break-all">{form.notes}</h6>
                                 </li>
                             )}
@@ -252,10 +253,10 @@ export const BookingPage = () => {
                             variant="primary"
                             onClick={onConfirmSubmit}
                             loading={isLoading}
-                            loadingText={getText("loadingTextConfirmButtonModal")}
+                            loadingText={t("booking_page.loading_text_confirm_button_modal")}
                             disabled={isLoading ? true : false}
                         >
-                            {getText("confirmButtonModal")}
+                            {t("booking_page.confirm_button_modal")}
                         </LoadingButton>
                     </ModalFooter>
                 </Modal>
@@ -276,8 +277,8 @@ export const BookingPage = () => {
                                     theme === "light" ? "bg-accent-background" : "bg-accent-background-dark"
                                 }`}
                             >
-                                {(form?.time && `${getText("bookingTimeText")}: ${form?.time}`) ||
-                                    getText("bookingTimeText")}
+                                {(form?.time && `${t("booking_page.booking_time_text")}: ${form?.time}`) ||
+                                    t("booking_page.booking_time_text")}
                             </DropdownTrigger>
                             <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
@@ -288,7 +289,7 @@ export const BookingPage = () => {
                                     }`}
                                     onClick={() => onChangeTime("")}
                                 >
-                                    {getText("bookingTimePlaceholder")}
+                                    {t("booking_page.booking_time_placeholder")}
                                 </DropdownItem>
                                 {DATE_TIMES_POSIBILITIES.map((time) => {
                                     const currentDate = new Date().toISOString().split("T")[0];
@@ -325,8 +326,8 @@ export const BookingPage = () => {
                                 }`}
                             >
                                 {(form?.partySize &&
-                                    `${getText("bookingCustomersText")}: ${form?.partySize}`) ||
-                                    getText("bookingCustomersText")}
+                                    `${t("booking_page.booking_customers_text")}: ${form?.partySize}`) ||
+                                    t("booking_page.booking_customers_text")}
                             </DropdownTrigger>
                             <DropdownMenu classNameMenuContainer="flex-col">
                                 <DropdownItem
@@ -337,7 +338,9 @@ export const BookingPage = () => {
                                     key={"defaultOption"}
                                     onClick={() => onChangeCustomer("")}
                                 >
-                                    <span className="text-sm">{getText("bookingCustomersPlaceholder")}</span>
+                                    <span className="text-sm">
+                                        {t("booking_page.booking_customers_placeholder")}
+                                    </span>
                                 </DropdownItem>
                                 {Array.from({ length: 8 }, (_, index) => (
                                     <DropdownItem
@@ -359,8 +362,8 @@ export const BookingPage = () => {
                         <CustomCheckbox
                             onChange={onInputChange}
                             checked={form.extras.highChair}
-                            title={getText("bookingHighChairTitle")}
-                            description={getText("bookingHighChairDescription")}
+                            title={t("booking_page.booking_high_chair_title")}
+                            description={t("booking_page.booking_high_chair_description")}
                         />
                     </div>
                 </div>
@@ -376,7 +379,7 @@ export const BookingPage = () => {
                             cols={10}
                             rows={3}
                             className={`bg-white rounded-lg p-2 focus:outline-primary-color focus-visible:ring-primary-color text-text-color placeholder:text-text-color/50`}
-                            placeholder={getText("bookingAditionalMessagePlaceholder")}
+                            placeholder={t("booking_page.booking_aditional_message_placeholder")}
                             maxLength={100}
                             value={form.notes}
                             onChange={(event) => onInputChange(event)}
@@ -402,14 +405,16 @@ export const BookingPage = () => {
                 )}
                 <div className="flex flex-col gap-2 md:flex-row lg:justify-center lg:gap-4">
                     <Button onClick={onBookingSubmit} variant="primary" className="flex-1 lg:flex-none">
-                        {getText("bookingButtonConfirmText")}
+                        {t("booking_page.booking_button_confirm_text")}
                     </Button>
                     <Button onClick={resetForm} variant="danger" className="flex-1 lg:flex-none">
-                        {getText("bookingButtonResetForm")}
+                        {t("booking_page.booking_button_reset_form")}
                     </Button>
                 </div>
                 <ToastContainer toasts={toasts} onClose={dismissToast} />
             </Container>
         </div>
     );
-};
+}
+
+export default BookingPage;
