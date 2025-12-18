@@ -1,5 +1,4 @@
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
 import iconCloseWhite from "../assets/icons/icon-equis-white.webp";
 import iconClose from "../assets/icons/icon-equis.webp";
 import iconSearchWhite from "../assets/icons/icon-search-white.webp";
@@ -19,7 +18,6 @@ import { BackToTopButton } from "../components/UI/BackToTopButton";
 import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
 import { CartsContext } from "../contexts/CartsContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
@@ -34,9 +32,7 @@ function OrdersPage() {
 
     const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
-    const { lang, TEXTS } = useContext(LanguageContext);
     const { t, i18n } = useTranslate();
-    const location = useLocation();
 
     const [categorySelected, setCategorySelected] = useState(null);
     const [productSearch, setProductSearch] = useState("");
@@ -87,38 +83,28 @@ function OrdersPage() {
     };
 
     const filteredProducts = useMemo(() => {
-        if (!categorySelected && !productSearch) return products;
-        if (categorySelected && !productSearch)
-            return products.filter(
-                (product) => product.categories && product.categories.includes(categorySelected)
-            );
-        if (productSearch && !categorySelected) {
-            // Aqui lo quiero Aplicar
-            const normalizedSearch = productSearch.toLowerCase().trim();
-            const productsTranslations = Object.entries(TEXTS[lang]).filter(([property, value]) => {
-                const isProduct = property.startsWith("product") && property.endsWith("name");
-                const normalizedValue = value.toLowerCase().trim();
-                return normalizedValue.includes(normalizedSearch) && isProduct;
-            });
+        if (!productSearch && !categorySelected) return products;
 
-            const productsKeys = productsTranslations.map(([key]) => key);
-            return products.filter((product) => productsKeys.includes(product.name));
-        }
+        const normalizedSearch = productSearch?.toLowerCase()?.trim();
+
+        const productTranslations = i18n.getResourceBundle(i18n?.language)?.products || {};
+
         return products.filter((product) => {
-            const normalizedSearch = productSearch.toLowerCase().trim();
-            const productsTranslations = Object.entries(TEXTS[lang]).filter(([property, value]) => {
-                const isProduct = property.startsWith("product") && property.endsWith("Name");
-                const normalizedValue = value.toLowerCase().trim();
-                return normalizedValue.includes(normalizedSearch) && isProduct;
-            });
+            const matchesCategory = !categorySelected || product?.categories?.includes(categorySelected);
 
-            const productsKeys = productsTranslations.map(([key]) => key);
-            const sameName = productsKeys.includes(product.name);
-            const sameCategory = product.categories && product.categories.includes(categorySelected);
+            let matchesSearch = !normalizedSearch;
 
-            return sameCategory && sameName;
+            if (normalizedSearch) {
+                const productKey = product?.name?.split(".")?.[1];
+
+                const translatedName = productTranslations[productKey]?.toLowerCase() || "";
+
+                matchesSearch = translatedName?.includes(normalizedSearch);
+            }
+
+            return matchesCategory && matchesSearch;
         });
-    }, [productSearch, categorySelected, products]);
+    }, [productSearch, categorySelected, products, i18n?.language]);
 
     if (loadingProducts)
         return (
@@ -137,7 +123,6 @@ function OrdersPage() {
                 </div>
             </Container>
         );
-
     return (
         <div className="flex flex-1 flex-col py-6">
             <Container className="gap-4">
