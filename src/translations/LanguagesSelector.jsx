@@ -1,15 +1,15 @@
 import { memo } from "react";
-import { Dropdown } from "./Dropdown/Dropdown";
-import { DropdownTrigger } from "./Dropdown/DropdownTrigger";
-import { Image } from "./UI/Image";
-import { ImageContainer } from "./UI/ImageContainer";
+import { Dropdown } from "../components/Dropdown/Dropdown";
+import { DropdownTrigger } from "../components/Dropdown/DropdownTrigger";
+import { Image } from "../components/UI/Image";
+import { ImageContainer } from "../components/UI/ImageContainer";
 
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
+import { DropdownItem } from "../components/Dropdown/DropdownItem";
+import { DropdownMenu } from "../components/Dropdown/DropdownMenu";
 import { useDevice } from "../hooks/useDevice";
 import { FLAGS_URL_DATA } from "../utils/FLAGS_URL_DATA";
-import { DropdownItem } from "./Dropdown/DropdownItem";
-import { DropdownMenu } from "./Dropdown/DropdownMenu";
 
 export const LanguagesSelector = memo(({ placement = "bottom-start", onClick = () => {} }) => {
     const { i18n } = useTranslation();
@@ -20,7 +20,8 @@ export const LanguagesSelector = memo(({ placement = "bottom-start", onClick = (
         es: "Español",
         en: "English",
         fr: "François",
-        zh: "Chinese",
+        de: "Deutsch",
+        zh: "中文",
     };
 
     const iconsSizeConfig = classNames({

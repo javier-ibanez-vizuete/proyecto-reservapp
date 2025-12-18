@@ -2,7 +2,6 @@ import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { BurgerButton } from "../../components/BurgerButton";
-import { LanguagesSelector } from "../../components/LanguagesSelector";
 import { Image } from "../../components/UI/Image";
 import { ImageContainer } from "../../components/UI/ImageContainer";
 import { ThemeButton } from "../../components/UI/ThemeButton";
@@ -10,6 +9,7 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import { LOGO_DARK, LOGO_LIGHT } from "../../data/LOGO_DATA";
 import { useDevice } from "../../hooks/useDevice";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
+import { LanguagesSelector } from "../../translations/LanguagesSelector.jsx";
 import { AdminContainer } from "./UI/AdminContainer";
 
 export const AdminNavbar = ({
