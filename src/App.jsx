@@ -32,7 +32,6 @@ export const App = () => {
 
     if (!user || user?.role === "user")
         return (
-            // <LoadingPage />
             <MainLayout>
                 <ErrorBoundary
                     fallback={
