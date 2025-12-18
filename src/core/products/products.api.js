@@ -29,3 +29,13 @@ export const getProductsByIdApi = async (id) => {
         throw err;
     }
 };
+
+export const deleteProductByIdApi = async (id) => {
+    try {
+        const response = await api.delete(`products/${id}`);
+        return response.data;
+    } catch (err) {
+        console.error("Error al Eliminar Producto");
+        throw err;
+    }
+};

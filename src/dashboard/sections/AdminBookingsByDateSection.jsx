@@ -1,12 +1,12 @@
 import classNames from "classnames";
-import { memo, useCallback, useContext, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookingCalendar } from "../../components/BookingCalendar";
 import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
 import { PageError } from "../../components/ErrorBoundary/PageError";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { dateVerificator } from "../../helpers/dateVerificator";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 import { AdminBookingCard } from "../components/AdminBookingCard";
 import { AdminBookingsContainer } from "../components/AdminBookingsContainer";
 import { AdminSkeleton } from "../components/AdminSkeleton";
@@ -21,7 +21,7 @@ function AdminBookingsByDateSection({ padding, gap }) {
 
     const { bookings, isLoadingBookings } = useAdminData({ enablePolling: true, pollingInterval: 120000 });
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const navigate = useNavigate();
@@ -125,7 +125,7 @@ function AdminBookingsByDateSection({ padding, gap }) {
             <ErrorBoundary
                 fallback={
                     <AdminContainer className="flex-1">
-                        <PageError title={getText("onErrorBookingByDateTitle")} />
+                        <PageError title={t("error_sentences.on_error_booking_by_date_title")} />
                     </AdminContainer>
                 }
             >
@@ -137,14 +137,14 @@ function AdminBookingsByDateSection({ padding, gap }) {
                         onClick={handleNavigateToTodayBookings}
                         className={`${selectedDate === CURRENT_DATE && "invisible"}`}
                     >
-                        {getText("adminBookingsByDateButtonText")}
+                        {t("admin_bookings_by_date.admin_bookings_by_date_button_text")}
                     </AdminButton>
 
                     {filteredBookings?.length > 0 && (
                         <p>{`${filteredBookings?.length} ${
                             filteredBookings?.length === 1
-                                ? getText("adminBookingsByDateLabelText1")
-                                : getText("adminBookingsByDateLabelText2")
+                                ? t("admin_bookings_by_date.admin_bookings_by_date_label_text1")
+                                : t("admin_bookings_by_date.admin_bookings_by_date_label_text2")
                         }`}</p>
                     )}
                 </div>
@@ -205,7 +205,9 @@ function AdminBookingsByDateSection({ padding, gap }) {
 
                 {!isLoadingBookings && !filteredBookings?.length > 0 && (
                     <div>
-                        <p className="italic opacity-50">{getText("adminBookingsByDateNotBookingsText")}</p>
+                        <p className="italic opacity-50">
+                            {t("admin_bookings_by_date.admin_bookings_by_date_not_bookings_text")}
+                        </p>
                     </div>
                 )}
 

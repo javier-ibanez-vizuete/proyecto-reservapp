@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { useContext, useMemo } from "react";
 import { Avatar } from "../../components/Avatar";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 
 export const AdminUserCard = ({
     userData,
@@ -19,7 +19,7 @@ export const AdminUserCard = ({
 }) => {
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
     const { theme } = useContext(ThemeContext);
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const handleClick = () => {
         if (!userData) return;
@@ -173,7 +173,7 @@ export const AdminUserCard = ({
 
             <small className="font-medium whitespace-nowrap">{userData?.name}</small>
             <small>
-                {getText("adminUserPageUserRoleText")}
+                {t("admin_users_page.admin_user_page_user_role_text")}
                 <span>{userData?.role}</span>
             </small>
         </article>

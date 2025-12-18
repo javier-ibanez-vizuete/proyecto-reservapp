@@ -14,7 +14,6 @@ import { Image } from "../components/UI/Image";
 import { ImageContainer } from "../components/UI/ImageContainer";
 import { AuthContext } from "../contexts/AuthContext";
 import { BookingsContext } from "../contexts/BookingsContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { OrdersContext } from "../contexts/OrdersContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../core/auth/useAuth";
@@ -25,6 +24,7 @@ import { useToast } from "../hooks/useToast";
 import { UserBookingsSection } from "../sections/UserBookingsSection";
 import { UserDataSection } from "../sections/UserDataSection";
 import { UserOrdersSection } from "../sections/UserOrdersSections";
+import { useTranslate } from "../translations/useTranslate";
 import { AVATAR_DATA } from "../utils/AVATAR_DATA";
 
 function UserPage() {
@@ -39,24 +39,27 @@ function UserPage() {
     const loaderLogout = useLoading();
     const { toasts, showToast, dismissToast } = useToast();
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { theme } = useContext(ThemeContext);
     const { isMobile, isTablet, isDesktop } = useDevice();
 
     const USER_DATA = [
-        { title: getText("userDataSectionTitle"), content: <UserDataSection userData={userProfile} /> },
+        {
+            title: t("profile_page.user_data_section_title"),
+            content: <UserDataSection userData={userProfile} />,
+        },
     ];
 
     const BOOKINGS_DATA = [
         {
-            title: getText("bookingsDataSectionTitle"),
+            title: t("profile_page.bookings_data_section_title"),
             content: <UserBookingsSection userBookingsData={userProfile?.bookings} />,
         },
     ];
 
     const ORDERS_DATA = [
         {
-            title: getText("ordersDataSectionTitle"),
+            title: t("profile_page.orders_data_section_title"),
             content: <UserOrdersSection userOrdersData={userProfile?.orders} />,
         },
     ];
@@ -110,7 +113,7 @@ function UserPage() {
             await logout();
         } catch (err) {
             console.error("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
-            showToast(getText("toastLogoutError"), "error", 2000);
+            showToast(t("navigation_bar.toast_logout_error"), "error", 2000);
         } finally {
             loaderLogout.setIsLoading(false);
         }
@@ -159,7 +162,7 @@ function UserPage() {
                 </Modal>
 
                 <div>
-                    <h1>{`${getText("h1ProfilePage")} ${userProfile.name}`}</h1>
+                    <h1>{`${t("profile_page.h1_profile_page")} ${userProfile.name}`}</h1>
                 </div>
 
                 <div className="flex flex-col items-center gap-1">
@@ -189,7 +192,7 @@ function UserPage() {
                                     theme === "light" ? "btn-outline" : "btn-outline-dark"
                                 } px-3 py-1.5`}
                             >
-                                {getText("buttonChangeAvatar")}
+                                {t("profile_page.button_change_avatar")}
                             </DropdownTrigger>
                             <DropdownMenu gap="gap-2">
                                 {AVATAR_DATA.map((avatar) => (
@@ -231,12 +234,12 @@ function UserPage() {
                     <div className="flex flex-col items-center">
                         <LoadingButton
                             loading={loaderLogout.isLoading}
-                            loadingText={getText("loadingTextLogoutButton")}
+                            loadingText={t("navigation_bar.loading_text_logout_button")}
                             disabled={loaderLogout.isLoading}
                             variant="danger"
                             onClick={handleLogout}
                         >
-                            {getText("logoutButton")}
+                            {t("logoutButton")}
                         </LoadingButton>
                     </div>
                 </div>

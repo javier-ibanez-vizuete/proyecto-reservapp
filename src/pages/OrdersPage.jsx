@@ -24,6 +24,7 @@ import { ProductsContext } from "../contexts/ProductsContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useProducts } from "../core/products/useProducts";
 import { useDevice } from "../hooks/useDevice";
+import { useTranslate } from "../translations/useTranslate";
 
 function OrdersPage() {
     const { products, categories } = useContext(ProductsContext);
@@ -33,7 +34,8 @@ function OrdersPage() {
 
     const { cart } = useContext(CartsContext);
     const { theme } = useContext(ThemeContext);
-    const { lang, TEXTS, getText } = useContext(LanguageContext);
+    const { lang, TEXTS } = useContext(LanguageContext);
+    const { t, i18n } = useTranslate();
     const location = useLocation();
 
     const [categorySelected, setCategorySelected] = useState(null);
@@ -94,13 +96,12 @@ function OrdersPage() {
             // Aqui lo quiero Aplicar
             const normalizedSearch = productSearch.toLowerCase().trim();
             const productsTranslations = Object.entries(TEXTS[lang]).filter(([property, value]) => {
-                const isProduct = property.startsWith("product") && property.endsWith("Name");
+                const isProduct = property.startsWith("product") && property.endsWith("name");
                 const normalizedValue = value.toLowerCase().trim();
                 return normalizedValue.includes(normalizedSearch) && isProduct;
             });
 
             const productsKeys = productsTranslations.map(([key]) => key);
-
             return products.filter((product) => productsKeys.includes(product.name));
         }
         return products.filter((product) => {
@@ -122,7 +123,7 @@ function OrdersPage() {
     if (loadingProducts)
         return (
             <Container className="flex flex-col gap-6 py-6">
-                <h1>{getText("h1OrdersPage")}</h1>
+                <h1>{t("orders_page.h1_orders_page")}</h1>
                 <div>
                     <SkeletonText lines={3} className="bg-white p-4" />
                 </div>
@@ -144,8 +145,10 @@ function OrdersPage() {
                     <BackToTopButton iconSize="w-5" showAt={1000} placement="top-right" variant="secondary" />
 
                     <div className="flex flex-col">
-                        <h1>{getText("h1OrdersPage")}</h1>
-                        <small className="lg:self-center">{getText("smallOrdersPageSubtitle")}</small>
+                        <h1>{t("orders_page.h1_orders_page")}</h1>
+                        <small className="lg:self-center">
+                            {t("orders_page.small_orders_page_subtitle")}
+                        </small>
                     </div>
 
                     {products?.length > 0 && filteredProducts?.length > 0 && (
@@ -172,7 +175,9 @@ function OrdersPage() {
                                     }`}
                                 >
                                     <span>
-                                        {categorySelected ? categorySelected : getText("allCategoriesFilter")}
+                                        {categorySelected
+                                            ? categorySelected
+                                            : t("menu_page.all_categories_filter")}
                                     </span>
                                 </DropdownTrigger>
                                 <DropdownMenu classNameMenuContainer="flex-col">
@@ -208,7 +213,7 @@ function OrdersPage() {
                                     ref={inputRef}
                                     type="text"
                                     name="name"
-                                    placeholder={getText("ordersPageInputPlaceholder")}
+                                    placeholder={t("orders_page.orders_page_input_placeholder")}
                                     className={`bg-white flex-1 text-text-color placeholder:text-text-color/50 rounded-lg ${
                                         showInput ? "py-1 px-2" : ""
                                     }`}

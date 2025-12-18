@@ -1,13 +1,13 @@
-import { lazy, Suspense, useContext, useMemo } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Container } from "../components/Container";
 import { ErrorBoundary } from "../components/ErrorBoundary/ErrorBoundary";
 import { PageError } from "../components/ErrorBoundary/PageError";
 import { useErrorBoundary } from "../components/ErrorBoundary/useErrorBoundary";
 import { PrivateRoute } from "../components/PrivateRoute";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { useAuth } from "../core/auth/useAuth";
 import { LoadingPage } from "../pages/LoadingPage";
+import { useTranslate } from "../translations/useTranslate";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const MenuPage = lazy(() => import("../pages/MenuPage"));
@@ -23,7 +23,7 @@ export const AppRouter = () => {
 
     const location = useLocation();
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const { getErrorLocationName } = useErrorBoundary();
 
@@ -46,7 +46,9 @@ export const AppRouter = () => {
         <ErrorBoundary
             fallback={
                 <Container className="flex-1">
-                    <PageError title={`${getText("onErrorBaseSentence")} ${getErrorLocationName()}`} />
+                    <PageError
+                        title={`${t("error_sentences.on_error_base_sentence")} ${getErrorLocationName()}`}
+                    />
                 </Container>
             }
         >

@@ -1,12 +1,12 @@
-import { useCallback, useContext, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "../components/ToastContainer";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { AdminBentoGrid } from "../dashboard/components/AdminBentoGrid";
 import { AdminBentoGridItem } from "../dashboard/components/AdminBentoGridItem";
 import { useAdminData } from "../dashboard/hooks/useAdminData";
 import { getDataFromSessionStorage, removeFromSessionStorage } from "../helpers/storage";
 import { useToast } from "../hooks/useToast";
+import { useTranslate } from "../translations/useTranslate";
 import {
     calculateCompletedOrdersPercentage,
     getCancelledOrders,
@@ -26,7 +26,7 @@ function DashboardPage() {
     const location = useLocation();
 
     const { toasts, showToast, dismissToast } = useToast();
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const {
         users,
@@ -59,7 +59,7 @@ function DashboardPage() {
 
         if (!fromLogin) return;
 
-        showToast(getText("toastLoginSuccess"), "success", 2000, "top-center");
+        showToast(t("home_page.toast_login_success"), "success", 2000, "top-center");
         removeFromSessionStorage("fromLogin");
         navigate(location.pathname, { replace: true, state: {} });
     }, [location.state]);
@@ -68,7 +68,7 @@ function DashboardPage() {
         () => [
             {
                 title: isLoadingUsers ? isLoadingUsers : getTotalUsers(users),
-                description: "dashboardTotalUsersDescriptionLabel",
+                description: "admin_layout.dashboard_total_users_description_label",
                 icon: "",
                 to: "/dashboard/users",
                 colSpan: 1,
@@ -87,7 +87,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingUsers ? isLoadingUsers : getConnectedUsers(users),
-                description: "dashboardConnectedUsersDescriptionLabel",
+                description: "admin_layout.dashboard_connected_users_description_label",
                 icon: "",
                 to: "/dashboard/users",
                 colSpan: 1,
@@ -96,7 +96,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingBookings ? isLoadingBookings : getTotalBookings(bookings),
-                description: "dashboardTotalBookingsDescriptionLabel",
+                description: "admin_layout.dashboard_total_bookings_description_label",
                 icon: "",
                 to: "/dashboard/bookings/date",
                 colSpan: 1,
@@ -105,7 +105,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingBookings ? isLoadingBookings : getTodaysBookings(bookings),
-                description: "dashboardPendingBookingsDescriptionLabel",
+                description: "admin_layout.dashboard_pending_bookings_description_label",
                 icon: "",
                 to: "/dashboard/bookings/today",
                 colSpan: 2,
@@ -114,7 +114,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingBookings ? isLoadingBookings : getDelayedBookings(bookings),
-                description: "dashboardDelayedBookingsDescriptionLabel",
+                description: "admin_layout.dashboard_delayed_bookings_description_label",
                 icon: "",
                 to: "/dashboard/bookings/today",
                 colSpan: 1,
@@ -123,7 +123,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingOrders ? isLoadingOrders : getTotalOrders(orders),
-                description: "dashboardTotalOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_total_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 1,
@@ -132,7 +132,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingOrders ? isLoadingOrders : getCompletedOrders(orders),
-                description: "dashboardCompletedOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_completed_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 1,
@@ -141,7 +141,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingOrders ? isLoadingOrders : getPendingOrders(orders),
-                description: "dashboardPendingOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_pending_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 1,
@@ -150,7 +150,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingOrders ? isLoadingOrders : getCancelledOrders(orders),
-                description: "dashboardCancelledOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_cancelled_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 1,
@@ -161,7 +161,7 @@ function DashboardPage() {
                 title: isLoadingOrders
                     ? isLoadingOrders
                     : `${calculateCompletedOrdersPercentage(orders).toFixed(0)}%`,
-                description: "dashboardSuccesfulAverageOrdersDescriptionLabel",
+                description: "admin_layout.dashboard_succesful_average_orders_description_label",
                 icon: "",
                 to: "/dashboard/orders",
                 colSpan: 2,
@@ -170,7 +170,7 @@ function DashboardPage() {
             },
             {
                 title: isLoadingProducts ? isLoadingProducts : getTotalProducts(products),
-                description: "dashboardTotalProductsDescriptionLabel",
+                description: "admin_layout.dashboard_total_products_description_label",
                 icon: "",
                 to: "/dashboard/products",
                 colSpan: 1,

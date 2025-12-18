@@ -1,10 +1,10 @@
 import { memo, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { useAuth } from "../core/auth/useAuth";
 import { useLoading } from "../hooks/useLoading";
 import { useToast } from "../hooks/useToast";
+import { useTranslate } from "../translations/useTranslate";
 import { Avatar } from "./Avatar";
 import { Dropdown } from "./Dropdown/Dropdown";
 import { DropdownMenu } from "./Dropdown/DropdownMenu";
@@ -21,7 +21,7 @@ export const ProfileButton = memo(({ onClick }) => {
     const { toasts, showToast, dismissToast } = useToast();
     const navigate = useNavigate();
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
 
     const handleGoProfile = useCallback(() => navigate("/user"), [navigate]);
 
@@ -31,7 +31,7 @@ export const ProfileButton = memo(({ onClick }) => {
             await logout();
         } catch (err) {
             console.error("Hubo un problema con el Logouut 'Navbar-handleLogout()'", err);
-            showToast(getText("toastLogoutError"), "error", 2000);
+            showToast(t("navigation_bar.toast_logout_error"), "error", 2000);
         } finally {
             setIsLoading(false);
         }
@@ -50,15 +50,15 @@ export const ProfileButton = memo(({ onClick }) => {
             </DropdownTrigger>
             <DropdownMenu gap="gap-2" classNameMenuContainer="flex-col">
                 <Button className="flex-1" variant="primary" onClick={handleGoProfile}>
-                    {getText("profilePageButton")}
+                    {t("navigation_bar.profile_page_button")}
                 </Button>
                 <LoadingButton
                     loading={isLoading}
-                    loadingText={getText("loadingTextLogoutButton")}
+                    loadingText={t("navigation_bar.loading_text_logout_button")}
                     variant="danger"
                     onClick={handleLogout}
                 >
-                    {getText("logoutButton")}
+                    {t("navigation_bar.logout_button")}
                 </LoadingButton>
             </DropdownMenu>
             <ToastContainer toasts={toasts} onClose={dismissToast} />

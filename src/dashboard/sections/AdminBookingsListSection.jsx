@@ -1,15 +1,15 @@
 import classNames from "classnames";
-import { memo, useCallback, useContext, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
 import { PageError } from "../../components/ErrorBoundary/PageError";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import {
     getDataFromSessionStorage,
     removeFromSessionStorage,
     saveDataInSessionStorage,
 } from "../../helpers/storage";
 import { useDevice } from "../../hooks/useDevice";
+import { useTranslate } from "../../translations/useTranslate";
 import { AdminBookingCard } from "../components/AdminBookingCard";
 import { AdminBookingsContainer } from "../components/AdminBookingsContainer";
 import { AdminCheckbox } from "../components/AdminCheckbox";
@@ -34,7 +34,7 @@ function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
         () => getDataFromSessionStorage("allBookingsFilters") || INITIAL_FILTER_STATES
     );
 
-    const { getText } = useContext(LanguageContext);
+    const { t } = useTranslate();
     const { isMobile2Xs, isMobileXs, isMobileSm, isTablet, isDesktop } = useDevice();
 
     const navigate = useNavigate();
@@ -225,9 +225,15 @@ function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
 
     const guestsOptions = [1, 2, 3, 4, 5, 6, 7, 8];
     const statusOptions = [
-        { value: "completed", label: getText("adminBookingsAllCompletedStatusLabel") },
-        { value: "pending", label: getText("adminBookingsAllPendingStatusLabel") },
-        { value: "cancelled", label: getText("adminBookingsAllCancelledStatusLabel") },
+        {
+            value: "completed",
+            label: t("admin_bookings_all.admin_bookings_all_completed_status_label"),
+        },
+        { value: "pending", label: t("admin_bookings_all.admin_bookings_all_pending_status_label") },
+        {
+            value: "cancelled",
+            label: t("admin_bookings_all.admin_bookings_all_cancelled_status_label"),
+        },
     ];
 
     return (
@@ -235,12 +241,12 @@ function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
             <ErrorBoundary
                 fallback={
                     <AdminContainer className="flex-1">
-                        <PageError title={getText("onErrorAllBookingTitle")} />
+                        <PageError title={t("error_sentences.on_error_all_booking_title")} />
                     </AdminContainer>
                 }
             >
                 <h5>
-                    {getText("h5AdminBookingsAll")} (
+                    {t("admin_bookings_all.h5_admin_bookings_all")} (
                     <span>{`${filteredBookings?.length} / ${bookings?.length}`}</span>)
                 </h5>
 
@@ -253,7 +259,7 @@ function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
                             name={"ownerName"}
                             id={"ownerName"}
                             value={filters?.ownerName}
-                            placeholder={getText("adminBookingsAllInputPlaceholder")}
+                            placeholder={t("admin_bookings_all.admin_bookings_all_input_placeholder")}
                             onChange={onInputChange}
                             onRemove={onInputRemove}
                             variant="outline"
@@ -264,17 +270,17 @@ function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
                         <AdminDropdown variant={"accent"} placement="right-center">
                             <AdminDropdownTrigger variant={filters?.guestsNumber ? "active" : "inactive"}>
                                 {filters.guestsNumber
-                                    ? `${filters.guestsNumber} ${getText(
-                                          "adminBookingsAllGuestNumberSelected"
+                                    ? `${filters.guestsNumber} ${t(
+                                          "admin_bookings_all.admin_bookings_all_guest_number_selected"
                                       )}`
-                                    : getText("adminBookingsAllGuestNumberUnselected")}
+                                    : t("admin_bookings_all.admin_bookings_all_guest_number_unselected")}
                             </AdminDropdownTrigger>
                             <AdminDropdownMenu>
                                 <AdminDropdownItem
                                     onClick={() => handleGuestNumberFilter()}
                                     disabled={!filters?.guestsNumber}
                                 >
-                                    {getText("adminBookingsAllNotSpecifiedText")}
+                                    {t("admin_bookings_all.admin_bookings_all_not_specified_text")}
                                 </AdminDropdownItem>
 
                                 {guestsOptions.map((option) => (
@@ -293,14 +299,14 @@ function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
                             <AdminDropdownTrigger variant={filters?.bookingStatus ? "active" : "inactive"}>
                                 {filters?.bookingStatus
                                     ? filters?.bookingStatus
-                                    : getText("adminBookingsAllStatusTriggerText")}
+                                    : t("admin_bookings_all.admin_bookings_all_status_trigger_text")}
                             </AdminDropdownTrigger>
                             <AdminDropdownMenu>
                                 <AdminDropdownItem
                                     onClick={() => handleStatusFilter()}
                                     disabled={!filters?.bookingStatus}
                                 >
-                                    {getText("adminBookingsAllNotStatusSpecifiedText")}
+                                    {t("admin_bookings_all.admin_bookings_all_not_status_specified_text")}
                                 </AdminDropdownItem>
                                 {statusOptions.map((option) => (
                                     <AdminDropdownItem
@@ -317,19 +323,21 @@ function AdminBookingsListSection({ padding, sectionGap, filtersGap }) {
                             variant={filters?.highChair ? "active" : "inactive"}
                             isChecked={filters?.highChair}
                             onClick={onToggleHighchair}
-                            label={getText("adminBookingsAllHighchairLabelText")}
+                            label={t("admin_bookings_all.admin_bookings_all_highchair_label_text")}
                             padding={"none"}
                         />
                         {hasActiveFilters && (
                             <AdminButton onClick={handleResetFilters} variant={"danger"}>
-                                {getText("clearFilterButton")}
+                                {t("menu_page.clear_filter_button")}
                             </AdminButton>
                         )}
                     </div>
                 </div>
 
                 {!filteredBookings?.length > 0 && (
-                    <span className="italic opacity-80">{getText("adminBookingsAllNoBookingMatchText")}</span>
+                    <span className="italic opacity-80">
+                        {t("admin_bookings_all.admin_bookings_all_no_booking_match_text")}
+                    </span>
                 )}
                 {filteredBookings?.length > 0 && (
                     <AdminBookingsContainer>
